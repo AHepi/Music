@@ -1,0 +1,77 @@
+===== Camera rule: still, at most 3 named moves per shot
+how_found: Decisions item 25 (the user's words) and lesson 57: most pages crept for their whole length (page 1: one 20 s push), which reads as restless on a phone. The rule was built into the engine and a checker was added.
+final_value_or_rule: kit.stillShot holds still and allows only named moves (zoom in or out, pan left, right, up or down, move up or down; focus doesn't count), at most 3 per shot, never overlapping. camera_audit.py: moving = turning faster than 0.6 deg/s, or travelling more than 1.2% of the distance to the focus per second, or lens change over 1.2%/s. Moves less than 0.35 s apart count as one. A cut = a jump over a quarter of that distance or a turn over 8 deg. The audit must end '0 problem(s)'.
+evidence: Lessons.md:229-233; Decisions.md:390-402; film-kit/paper-film/scenes/cinema-kit.js stillShot (lines 342-356); paper-film/tools/camera_audit.py
+proposed_calculation: Already computed. Add: fail when a single move lasts longer than its page's spoken sentence (a creep), or when a shot holds no still part at all.
+already_automatic: Yes, stillShot and camera_audit.py are in the plugin kit.
+llm_tip: Name every move by why it happens; if a page needs a fourth move, cut to a new shot.
+===== Camera rule: still unless essential, at most three moves a shot
+how_found: The user's rule (log 20). Before it, 9 shots broke it: page 1 crept for 20 seconds; pages 3 and 8 never held still. The engine now refuses a fourth move, and a checker measures every shot in about 10 seconds. After: 21 shots, 0 problems; page 6 was split into two shots.
+final_value_or_rule: At most 3 named moves a shot (zoom in or out, pan left, right, up or down, move up or down). Audit limits: the camera counts as moving above 0.6 degrees/s of turn, 1.2%/s of travel (as a share of its distance to the subject) or 1.2%/s of lens change. Moves less than 0.35 s apart count as one. A jump of more than 0.25 of the distance, or a turn of more than 8 degrees, is a cut.
+evidence: story L633-637, L681-682 (log 20); film-kit/paper-film/scenes/cinema-kit.js line 356; paper-film/tools/camera_audit.py lines 13-26
+proposed_calculation: Already automatic. Run camera_audit automatically after every page build.
+already_automatic: Yes: the cinema-kit stillShot refusal and camera_audit.py, both in the plugin kit (the plugin's cinema-kit.js is an older copy).
+llm_tip: Plan each shot as a stillShot with named moves. If you need a fourth move, cut to a new shot.
+===== Camera-move detector thresholds (camera_audit.py)
+how_found: Log 20 (round 20): written after the viewer's camera rule ('3 movements per frame, max'); tuned on chapter 2's 21 shots until the audit agreed with the planned stillShot moves (0 problems).
+final_value_or_rule: A sample counts as moving when the aim turns >0.6 deg/s, or the camera travels >1.2% of its focus distance per s, or the lens changes >1.2%/s; moving stretches <0.35 s apart are one move; a cut is a jump >0.25 of the distance or a turn >8 deg (or a change of stillShot name). Naming: pan if heading/pitch change >2.5 deg; zoom in/out if forward travel >8% of distance or lens change >6%; move up/down >8%; slide >12%. PROBLEM if >3 moves in a shot or the camera is still <25% of the shot.
+evidence: austerity-explainer/film-kit/paper-film/tools/camera_audit.py lines 13-31 (constants), describe() and audit() (verdict lines); identical copy in plugins/explainer-film/kit/paper-film/tools/camera_audit.py
+proposed_calculation: Keep the thresholds; make the --window automatic: for page N use [firstWordAt(N) - 0.8, lastWordEnd(N) + 1.3] read from the timeline, so a helper never types it. Add a built-set mode (below: no turn during a slide).
+already_automatic: Yes, camera_audit.py computes it; it is in the plugin kit (identical). The page window is still typed by hand.
+llm_tip: Run render-paper-film.mjs --camera then camera_audit.py on every page you touch and treat any PROBLEM line as a must-fix; never judge camera moves from stills.
+===== Measure camera moves against the focus distance
+how_found: Lesson 58: in a painted room the camera aims at a point 30 units away, so a real one-unit move looked tiny to the first checker. Using the focus distance fixed it.
+final_value_or_rule: Measure travel as a share of the distance to the thing in focus, not to the aim point.
+evidence: Lessons.md:234-236; camera_audit.py header
+proposed_calculation: Already: travel per second / focus distance > 1.2%.
+already_automatic: Yes (camera_audit.py, plugin kit).
+llm_tip: Always give stillShot a focus point on the subject; the checker uses it.
+===== No turn during a slide: where the lines meet may drift at most 0.02 of the frame width
+how_found: Log 29 clip felt odd; log 30 critics (two rounds) found the move turned and slid the vanishing point to the colliery door; log 31/32 rebuilt with a slide that never turns; '07 Composing a shot' rule 11. The doc says rule 11 is NOT checked by any tool (judge first, middle and last frames by eye).
+final_value_or_rule: In built-and-painted sets the camera never turns while it moves; the vanishing point of the street direction moves <= 0.02 of the frame width between first, middle and last frames. In Blender only position is keyframed. A slide is written as kind 'zoom in' in kit.stillShot with the same target direction.
+evidence: film-kit/07 Composing a shot.md rule 11 and 'It does not check ... rule 11'; Lessons 99, 106; project story log 30 ('Why our camera move felt odd')
+proposed_calculation: For each sample: fwd, right, up from position/target; d = street direction; vp_x = 0.5 + 0.5*(d.right)/(d.fwd)/(tan(fov/2)*1080/1920), vp_y = 0.5 - 0.5*(d.up)/(d.fwd)/tan(fov/2). Within each move, drift = max-min of vp_x; PROBLEM if > 0.02. Also PROBLEM if heading or pitch changes > 0.1 deg during a move in a page marked as a projected set.
+already_automatic: No. camera_audit.py only names a pan above 2.5 deg; check_shot.py measures one frame only.
+llm_tip: In a painted 3D set, aim the camera with the turn once, then only slide it; if you need a different angle, cut to a new held shot instead of turning.
+===== Move without turning (slide toward the subject)
+how_found: Log 29's clip turned while it moved. Both rounds of critics in log 30 found the turn slid where the lines meet toward the colliery door, and slid the pithead out of frame. Seedance's draft showed the better move: one approach, barely turning, a long slowdown. Log 32: a 1.5 m slide that stops by 8.4 s of 13; helpers confirmed the camera never turns.
+final_value_or_rule: Only the position changes during a move, never the direction. Where the lines meet drifts no more than 0.02 of the frame's width between the first, middle and last frames. Ease in and out (smoother step) with a long slowdown, then hold.
+evidence: story L1022-1025 (log 30), L1056-1060 (log 30), L1221-1226 (log 32); film-kit/07 Composing a shot.md rule 11 (lines 125-134)
+proposed_calculation: For every move, take the rotation between the first, middle and last frames. Drift = tan(change of facing angle) / (2 tan(hfov/2)) in frame widths; flag above 0.02. Also check that position and target move by the same vector.
+already_automatic: No. check_shot.py states it does not check rule 11; camera_audit names turns but doesn't apply this limit.
+llm_tip: Move the camera and its target together by the same vector. Never animate the target alone during a slide.
+===== Painted rooms tear when the camera rises during a pan
+how_found: Log 26 found that the petrol station's tear in chapter 2 came from the camera rising during a 'pan down'. Pure turns and pure zooms never tear a painted room. Logs 22 to 24 saw the same tearing on pushes and side steps.
+final_value_or_rule: In a painting with depth, a pan is a pure turn about the camera's own centre and a zoom is a lens change. Camera travel is kept to a minimum.
+evidence: story L846-847 (log 26), L742 (log 22), L784-787 and L796-798 (log 24)
+proposed_calculation: In painted-room scenes, measure the camera's travel during each move. Parallax shift in pixels = f_px × travel × (1/z_near - 1/z_far); flag above about 8 px (calibrate on the station test).
+already_automatic: No.
+llm_tip: In a painted room, pan by turning and push by zooming. Keep camera travel for real 3D sets.
+===== Small camera moves inside a painted relief room
+how_found: Lesson 48: moving far inside a painted room tears it: thin near things (pillars, cables) smear and the camera sees past the painting's bottom edge. Fix: moves of 1 to 2 units, a softer distance picture, and past the edge the painting is mirrored. Lesson 77: even a short move bends near upright posts and edges.
+final_value_or_rule: Keep moves inside a relief room to 1-2 units at chapter 2's room depths. Depth picture smoothed (prepare_relief.py --blur 3). Past the edge, mirror the painting.
+evidence: Lessons.md:194-197, 303-304; Workflows.md:94-97
+proposed_calculation: Parallax limit: f_px = 960 / tan(fov_v / 2). For a sideways or forward step t, the near-far shift is f_px x t x (1/z_near - 1/z_far), where z_near is the 5th-percentile depth inside the frame. Work out this number once for chapter 2's accepted 1-2 unit moves and use the largest as the cap for new rooms. Also project the frame's corners each sample and fail if any leaves the relief's edge.
+already_automatic: No; the 1-2 units is prose.
+llm_tip: In a painted relief room, push in with the lens rather than travelling, and keep travel small.
+===== Weights view: blue at the frame edge
+how_found: Lesson 90 and the traps: a seam of plain surfaces showed where the camera had left the painting. Found by looking at the weights view (orange = painting, green = behind painting, blue = own surface).
+final_value_or_rule: No blue at any frame edge at the end of any move.
+evidence: Lessons.md:347-350, 516; Workflows.md:194-197; film-kit/paper-film/scenes/projected-set.js:460-461
+proposed_calculation: Render the weights view at every move's end and middle. Count pixels within 2% of each frame edge whose colour is nearest the blue code (0.05, 0.12, 0.5). Fail if more than 0.1% of the edge band is blue, and print the edge and the time.
+already_automatic: No; the view exists, but it is judged by eye.
+llm_tip: Never judge a projected-set move from the painted still; read the weights view.
+===== Painted-room relief settings
+how_found: Chapter 2 (logs 19-20): thin near things tore; edges streaked; models looked white at reflections 1.
+final_value_or_rule: kit.relief near 5 far 60 fov 40 (examples near 6 far 70), columns 150 rows 266, margin 0.08 mirrored, lit 0.35; prepare_relief --blur 3 (default 2); lightRig reflections 0.3, keyShare 0.6-0.8, fillShare 0.2; camera moves 1-2 units; clearance >= 0.05 standing, >= 0.15 in the air.
+evidence: film-kit/paper-film/scenes/cinema-kit.js relief() and clearance(); plugins/explainer-film/skills/build-cinema-page/guide.md section 4, camera-and-framing.md section 3
+proposed_calculation: Max move before tearing could be computed from the depth map's largest near-far jump next to thin objects; today judged by stills.
+already_automatic: Constants in the kit (plugin has them).
+llm_tip: In painted rooms keep moves to 1-2 units and measure clearance with room.clearance(); prefer built sets for anything near and upright.
+===== Rules the checker does not test yet (rule 7 columns, rule 9, rule 11, 3D poking)
+how_found: Listed in every report's 'Not checked' section (logs 31-32); round 4 critic: 'The shot checker's main rule passes everywhere. It does not measure any of the above.'
+final_value_or_rule: Rule 7: each column has something in the top, middle and bottom thirds, lined up within about 0.07 of the width; rule 9: chair under the notice, seat visible, lantern lit; rule 11: the meeting point moves no more than 0.02 of the width over the move; props must not poke into each other in 3D.
+evidence: check_shot.py NOT_CHECKED lines 1802-1808; 07 Composing a shot.md rules 7, 9, 11
+proposed_calculation: Rule 7: cluster story and landmark groups by centre across (gap 0.07), require each cluster to span all three thirds; rule 11: from camera keyframes, require constant rotation; poking: BVHTree.overlap between groups' evaluated meshes.
+already_automatic: No.
+llm_tip: Until these exist, look at columns, the empty-prop story and the first, middle and last frames yourself.

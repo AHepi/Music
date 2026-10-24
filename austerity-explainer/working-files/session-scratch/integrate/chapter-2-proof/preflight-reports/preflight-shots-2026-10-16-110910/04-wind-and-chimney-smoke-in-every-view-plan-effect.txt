@@ -1,0 +1,82 @@
+Views that see a chimney: w3, w1, w2. The level direction most across all of them is at least 90.0 degrees off every view. Tracing both signs (the across part 0.85, away from w3 0.5, down 0.12):
+Smoke kinds from film-settings.json effects.wind_three_axes and effects.smoke_kinds; traced every 0.25 s of a puff's life.
+Fire smoke (effects.js Smoke, film-settings.json effects_planner.fire_smoke):
+  w3 held brazier fire: smoke stronger than 0.2 crosses no-1-worker-1 (a man in smoke reads as a grey ghost; round 1)
+  w1 slide start brazier fire: smoke stronger than 0.2 crosses man-2 (a man in smoke reads as a grey ghost; round 1)
+  w1 composed brazier fire: smoke stronger than 0.2 crosses man-2 (a man in smoke reads as a grey ghost; round 1)
+  w2 slide start brazier fire: never in the frame: drop it from this view
+  w2 composed brazier fire: never in the frame: drop it from this view
+  w4 slide start brazier fire: never in the frame: drop it from this view
+  w4 composed brazier fire: never in the frame: drop it from this view
+
+Wind plus (0.856, -0.121, -0.503): passes in every view.
+  w3 held        no-1-chimney (heavy): travels 0.188 of the width while seen, from 0.381 to 0.568 across; middles 0.224-0.253 down, top edges from 0.209 down; fades 0.056 short of no-2-chimney-a; fades 0.123 short of no-2-chimney-b
+  w3 held        no-2-chimney-a (heavy): travels 0.171 of the width while seen, from 0.629 to 0.800 across; middles 0.238-0.265 down, top edges from 0.221 down
+  w3 held        no-2-chimney-b (heavy): travels 0.158 of the width while seen, from 0.696 to 0.854 across; middles 0.276-0.300 down, top edges from 0.259 down
+  w1 slide start no-1-chimney (heavy): travels 0.256 of the width while seen, from 0.453 to 0.709 across; middles 0.028-0.087 down, top edges from 0.008 down; fades 0.097 short of no-2-chimney-a; fades 0.178 short of no-2-chimney-b
+  w1 slide start no-2-chimney-a (heavy): travels 0.221 of the width while seen, from 0.812 to 1.033 across; middles 0.047-0.104 down, top edges from 0.027 down
+  w1 slide start no-2-chimney-b (heavy): travels 0.199 of the width while seen, from 0.893 to 1.092 across; middles 0.115-0.162 down, top edges from 0.097 down
+  w1 composed    no-1-chimney (heavy): travels 0.262 of the width while seen, from 0.452 to 0.714 across; middles 0.015-0.077 down, top edges from -0.005 down; fades 0.100 short of no-2-chimney-a; fades 0.183 short of no-2-chimney-b
+  w1 composed    no-2-chimney-a (heavy): travels 0.226 of the width while seen, from 0.820 to 1.046 across; middles 0.035-0.094 down, top edges from 0.014 down
+  w1 composed    no-2-chimney-b (heavy): travels 0.203 of the width while seen, from 0.903 to 1.106 across; middles 0.105-0.154 down, top edges from 0.086 down
+  w2 slide start no-1-chimney (heavy): travels 0.280 of the width while seen, from 0.203 to 0.483 across; middles 0.028-0.087 down, top edges from 0.008 down; fades 0.072 short of no-2-chimney-a; fades 0.172 short of no-2-chimney-b
+  w2 slide start no-2-chimney-a (heavy): travels 0.245 of the width while seen, from 0.561 to 0.807 across; middles 0.047-0.104 down, top edges from 0.027 down
+  w2 slide start no-2-chimney-b (heavy): travels 0.220 of the width while seen, from 0.661 to 0.881 across; middles 0.115-0.162 down, top edges from 0.097 down
+  w2 composed    no-1-chimney (heavy): travels 0.288 of the width while seen, from 0.194 to 0.482 across; middles 0.015-0.077 down, top edges from -0.005 down; fades 0.074 short of no-2-chimney-a; fades 0.176 short of no-2-chimney-b
+  w2 composed    no-2-chimney-a (heavy): travels 0.251 of the width while seen, from 0.563 to 0.814 across; middles 0.035-0.094 down, top edges from 0.014 down
+  w2 composed    no-2-chimney-b (heavy): travels 0.225 of the width while seen, from 0.665 to 0.890 across; middles 0.105-0.154 down, top edges from 0.086 down
+  note: in w1 no-1-chimney's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w1: give them with --card w1:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w1 no-2-chimney-a's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w1: give them with --card w1:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w1 no-2-chimney-b's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w1: give them with --card w1:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w2 no-1-chimney's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w2: give them with --card w2:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w2 no-2-chimney-a's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w2: give them with --card w2:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w2 no-2-chimney-b's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w2: give them with --card w2:NAME=l,t,r,b, or draw a soft band behind the words
+  w4: drop no-1-chimney's smoke from this view (its plume never enters the frame, or its chimney top is out of the frame where the shot holds: smoke from nowhere)
+  w4: drop no-2-chimney-a's smoke from this view (its plume never enters the frame, or its chimney top is out of the frame where the shot holds: smoke from nowhere)
+  w4: drop no-2-chimney-b's smoke from this view (its plume never enters the frame, or its chimney top is out of the frame where the shot holds: smoke from nowhere)
+
+Wind minus (-0.856, -0.121, -0.503): passes in every view.
+  w3 held        no-1-chimney (heavy): travels 0.171 of the width while seen, from 0.371 to 0.200 across; middles 0.224-0.253 down, top edges from 0.209 down
+  w3 held        no-2-chimney-a (heavy): travels 0.188 of the width while seen, from 0.619 to 0.432 across; middles 0.238-0.265 down, top edges from 0.221 down; fades 0.056 short of no-1-chimney
+  w3 held        no-2-chimney-b (heavy): travels 0.183 of the width while seen, from 0.687 to 0.504 across; middles 0.276-0.300 down, top edges from 0.259 down; fades 0.128 short of no-1-chimney
+  w1 slide start no-1-chimney (heavy): travels 0.245 of the width while seen, from 0.439 to 0.193 across; middles 0.028-0.087 down, top edges from 0.008 down
+  w1 slide start no-2-chimney-a (heavy): travels 0.280 of the width while seen, from 0.797 to 0.517 across; middles 0.047-0.104 down, top edges from 0.027 down; fades 0.072 short of no-1-chimney
+  w1 slide start no-2-chimney-b (heavy): travels 0.269 of the width while seen, from 0.880 to 0.611 across; middles 0.115-0.162 down, top edges from 0.097 down; fades 0.165 short of no-1-chimney
+  w1 composed    no-1-chimney (heavy): travels 0.251 of the width while seen, from 0.437 to 0.186 across; middles 0.015-0.077 down, top edges from -0.005 down
+  w1 composed    no-2-chimney-a (heavy): travels 0.288 of the width while seen, from 0.806 to 0.518 across; middles 0.035-0.094 down, top edges from 0.014 down; fades 0.074 short of no-1-chimney
+  w1 composed    no-2-chimney-b (heavy): travels 0.276 of the width while seen, from 0.889 to 0.613 across; middles 0.105-0.154 down, top edges from 0.086 down; fades 0.169 short of no-1-chimney
+  w2 slide start no-1-chimney (heavy): travels 0.221 of the width while seen, from 0.188 to -0.033 across; middles 0.028-0.087 down, top edges from 0.008 down
+  w2 slide start no-2-chimney-a (heavy): travels 0.256 of the width while seen, from 0.547 to 0.291 across; middles 0.047-0.104 down, top edges from 0.027 down; fades 0.097 short of no-1-chimney
+  w2 slide start no-2-chimney-b (heavy): travels 0.248 of the width while seen, from 0.647 to 0.399 across; middles 0.115-0.162 down, top edges from 0.097 down; fades 0.205 short of no-1-chimney
+  w2 composed    no-1-chimney (heavy): travels 0.226 of the width while seen, from 0.180 to -0.046 across; middles 0.015-0.077 down, top edges from -0.005 down
+  w2 composed    no-2-chimney-a (heavy): travels 0.262 of the width while seen, from 0.548 to 0.286 across; middles 0.035-0.094 down, top edges from 0.014 down; fades 0.100 short of no-1-chimney
+  w2 composed    no-2-chimney-b (heavy): travels 0.254 of the width while seen, from 0.651 to 0.397 across; middles 0.105-0.154 down, top edges from 0.086 down; fades 0.211 short of no-1-chimney
+  note: in w1 no-1-chimney's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w1: give them with --card w1:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w1 no-2-chimney-a's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w1: give them with --card w1:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w1 no-2-chimney-b's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w1: give them with --card w1:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w2 no-1-chimney's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w2: give them with --card w2:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w2 no-2-chimney-a's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w2: give them with --card w2:NAME=l,t,r,b, or draw a soft band behind the words
+  note: in w2 no-2-chimney-b's plume runs in the title band (0.05-0.22 down) and no word boxes were given for w2: give them with --card w2:NAME=l,t,r,b, or draw a soft band behind the words
+  w4: drop no-1-chimney's smoke from this view (its plume never enters the frame, or its chimney top is out of the frame where the shot holds: smoke from nowhere)
+  w4: drop no-2-chimney-a's smoke from this view (its plume never enters the frame, or its chimney top is out of the frame where the shot holds: smoke from nowhere)
+  w4: drop no-2-chimney-b's smoke from this view (its plume never enters the frame, or its chimney top is out of the frame where the shot holds: smoke from nowhere)
+
+Use wind (-0.856, -0.121, -0.503) (the minus sign): it passes in every view. Both signs pass; this one is listed first.
+Plumes that start on a word take their life (7 s) to reach full length; ChimneySmoke depends only on time, so filming needs no pre-roll for it (0 s).
+
+Settings used (film-settings.json):
+  effects_planner.mouth_seconds_default = 2 seconds a puff stays at the mouth's size (judged)
+  effects.wind_three_axes = [-0.85, -0.12, -0.5] direction (three.js axes, normalised in use) (judged)
+  effects.smoke_kinds = {"heavy": {"count": 44, "life": 7, "rise": 0.6, "drift": 16, "mouth_seconds": 2, "mouth_size": 1.9, "size": [3.4, 9], "opacity": 0.95, "fade": 1.8, "colour": [100, 92, 84]}, "working": {"count": 36, "life": 7, "rise": 0.6, "drift": 15, "mouth_size": 1.7, "size": [3.0, 8], "opacity": 0.93, "fade": 1.8, "colour": [104, 96, 88]}, "thin": {"count": 14, "life": 7, "rise": 0.5, "drift": 14, "mouth_size": 1.3, "size": [1.8, 6], "opacity": 0.5, "fade": 1.9}} puffs, seconds, metres, levels (judged)
+  effects_planner.trace_step_seconds = 0.25 seconds between traced puff ages (judged)
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  effects_planner.fire_smoke = {"life": 3.6, "scale": 0.75, "wind": 0.9, "above_coals_metres": 0.51, "follows_wind": false} seconds, scale, wind (metres a life, times scale), metres above the coals, and whether it leans along the chimneys' wind (else along +x) for the brazier's live smoke (judged)
+  effects_planner.edge_strength_min = 0.2 puff strength (opacity, 0 to 1): a puff this strong counts at its edges (the card test) and over a figure (invented)
+  effects_planner.figure_box_width_metres = 0.5 metres (a figure's width, for its box on the frame) (judged)
+  effects_planner.wind_mix = {"across": 0.85, "away": 0.5, "down": 0.12} parts of the wind (across every view, away from the main camera, downward), normalised in use (judged)
+  effects_planner.visible_strength_min = 0.1 puff strength (opacity, 0 to 1) (judged)
+  effects_planner.travel_min_share_of_width = 0.15 share of the frame's width a plume travels while seen (judged)
+  effects_planner.other_chimney_clearance_share = 0.05 share of the frame's width a plume must fade short of another factory's chimney (invented)
+  safe_area.title_band_down = [0.05, 0.22] down the frame (judged)
+  effects_planner.smoke_preroll_note = 0 seconds of pre-roll needed by smoke that depends only on time (ChimneySmoke, Smoke) (judged)

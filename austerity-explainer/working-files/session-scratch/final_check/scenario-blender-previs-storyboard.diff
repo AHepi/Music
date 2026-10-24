@@ -1,0 +1,117 @@
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-previs-storyboard/SKILL.md /home/user/Music/.claude/skills/scenario-blender-previs-storyboard/SKILL.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-previs-storyboard/SKILL.md	2026-10-21 05:16:03.122756404 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-previs-storyboard/SKILL.md	2026-10-21 06:00:24.433414502 +0000
+@@ -9,13 +9,12 @@
+ Expert previs conveys an idea well enough to be judged, as cheaply as possible: one fact per beat,
+ every shot designed for what the audience must feel, timing found in the edit from stills. The
+ camera is the audience's body; where it stands, how high and through which lens decides the emotion,
+-so every non-neutral choice needs a stated reason. If a sibling skill named here is missing from
+-your available skills, ask the user to install it
+-(`npx skills add scenario-labs/skills --skill <name>`); unattended, proceed from tool schemas and
+-flag the gap.
++so every non-neutral choice needs a stated reason. If a sibling skill is missing, do not install anything: tell the person which skill is missing and carry on without it.
+ 
+ **REQUIRED BACKGROUND:** scenario-blender-expert (execution channel, review loop, 5.2 API changes).
+ 
++**Local rules (this machine):** run only in a fresh `-b --factory-startup --disable-autoexec` session, never inside the film's own .blend. Give every scene, object, collection, camera, marker and shot id a new previs-only name: the helpers reuse and overwrite same-named ones. Always pass a new `edit_name` to `P.animatic` (it deletes the strips of the scene it finds). Write only into a new folder under the scratch area, and delete scratch outputs when done.
++
+ Toolkit: [`scripts/bx_previs.py`](scripts/bx_previs.py) (tested on 5.2.1):
+ `import sys; sys.path += ["<this skill>/scripts", "<scenario-blender-expert>/scripts"]; import bx_previs as P`.
+ 
+@@ -23,10 +22,10 @@
+ scope: a playblast that guides a render-to-real video model (Seedance). It follows other rules
+ (saturated color identities, no lens jump on a cut, eased moves, a hand-off sheet) that the workflow
+ and `P.audit` below do not apply or check, so do not hand a director's animatic to a video model as
+-is: rebuild it with scenario-blender-blockout, where characters usually become colored capsules the
++is: rebuild it with scenario-blender-blockout (deliberately not installed here, since it uses outside video services: do not install or use it), where characters usually become colored capsules the
+ video model animates itself. Shared: metric Z-up, roots at the feet, one camera per shot bound to a
+-marker, `to_track_quat('-Z','Y')` look-at. Strokes: scenario-blender-grease-pencil. Animation after
+-layout: scenario-blender-animation. Real rigs: scenario-blender-rigging.
++marker, `to_track_quat('-Z','Y')` look-at. Strokes: scenario-blender-grease-pencil (not installed here). Animation after
++layout: scenario-blender-animation (not installed here). Real rigs: scenario-blender-rigging (not installed here).
+ 
+ ## Stance (the expert delta)
+ 
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-previs-storyboard/references/procedures.md /home/user/Music/.claude/skills/scenario-blender-previs-storyboard/references/procedures.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-previs-storyboard/references/procedures.md	2026-10-21 05:16:03.126290897 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-previs-storyboard/references/procedures.md	2026-10-21 06:00:24.433586334 +0000
+@@ -9,7 +9,7 @@
+ checks). Run any of them with:
+ 
+ ```
+-blender --background --factory-startup --python-exit-code 1 --python tests/code/blender-previs-storyboard/<test>.py
++<full path to blender> -b --factory-startup --disable-autoexec --python-exit-code 1 --python <your script>.py
+ ```
+ 
+ The example is S6 cut down: a keeper, a small robot, a snack, three cinematic shots.
+@@ -21,7 +21,7 @@
+ ```python
+ import math, os, sys
+ SKILLS = "/abs/path/to/skills"      # folder holding scenario-blender-previs-storyboard and scenario-blender-expert
+-OUT = "/abs/path/to/output"         # any writable folder
++OUT = "/abs/path/to/output"         # a NEW empty folder under the scratch area; REPLACE this placeholder first (makedirs would otherwise create /abs/path/to/output on the disk)
+ sys.path += [os.path.join(SKILLS, "scenario-blender-previs-storyboard", "scripts"),
+              os.path.join(SKILLS, "scenario-blender-expert", "scripts")]
+ import bpy
+@@ -329,7 +329,7 @@
+ 
+ A Grease Pencil drawing rides a 3D proxy (Spitfire, Renato, Pablo) or a pivot over the subject with
+ the camera ("drawing on glass", BouncyBrain). Flag frames where the carrier turns the flat drawing
+-more than 70 degrees from the camera [added threshold]. Strokes: scenario-blender-grease-pencil;
++more than 70 degrees from the camera [added threshold]. Strokes: scenario-blender-grease-pencil (not installed here);
+ `gp_polyline` is only for guides. Drawing-plane settings for a live session:
+ `ts.gpencil_stroke_placement_view3d = 'ORIGIN'`, `ts.gpencil_sculpt.lock_axis = 'VIEW'` (Spitfire's
+ default). Verified on 5.2.1: test_03 block 14; test_02 section 11 (strokes render headless in
+@@ -488,7 +488,7 @@
+ (no weights, Charge), deletes the metarig, and adds a `layout` bone collection (torso, chest, head,
+ IK hands and feet [added]) that `key_block` keys and `pose(bones=...)` sets (quaternion controls
+ converted). Mannequins stay the cheaper default; use this only when the brief asks for Rigify rigs.
+-Full rigging: scenario-blender-rigging. Verified on 5.2.1: test_03 block 19; test_04 section 5
++Full rigging: scenario-blender-rigging (not installed here). Verified on 5.2.1: test_03 block 19; test_04 section 5
+ (operator missing before, audit and still work with the proxy).
+ 
+ ```python
+@@ -535,17 +535,17 @@
+ bpy.data.objects.remove(lamp)
+ ```
+ 
+-## P21. Storyboarding app template (replaces the open file, run last)
++## P21. Storyboarding app template (replaces the open file, run last). DO NOT RUN unless the person asks for this template: it wipes the open Blender session
+ 
+ Ships an `Edit` scene (1 to 240, 24 fps) with scene strips of `Shot.001` and `Shot.002`, three shot
+ scenes each with a Grease Pencil object and a 50 mm camera, the Storyboarding workspace on Edit with
+ sync on (pin off there, on in Video Editing), auto-key on in shots and off in Edit. From the command
+-line: `blender --app-template Storyboarding`. Verified on 5.2.1: test_03 block 21; test_02
++line: `blender --app-template Storyboarding` (this opens a Blender window: never run it here). Verified on 5.2.1: test_03 block 21; test_02
+ section 13.
+ 
+ ```python
+ bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT, "procedures.blend"), copy=True)
+-bpy.ops.wm.read_homefile(app_template="Storyboarding")
++raise RuntimeError("P21 is disabled on this machine: read_homefile would replace the open Blender session")
+ ws = bpy.data.workspaces["Storyboarding"]
+ assert ws.sequencer_scene.name == "Edit" and ws.use_scene_time_sync
+ assert not bpy.data.scenes["Edit"].tool_settings.use_keyframe_insert_auto
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-previs-storyboard/references/sources.md /home/user/Music/.claude/skills/scenario-blender-previs-storyboard/references/sources.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-previs-storyboard/references/sources.md	2026-10-21 05:16:03.126290897 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-previs-storyboard/references/sources.md	2026-10-21 06:00:24.433649980 +0000
+@@ -1,6 +1,6 @@
+ # Sources
+ 
+-Seven videos, distilled in `notes/previs/` (digest `_digest_previs_storyboard.md`). Blender versions
++Citations only: never fetch or open these links. Seven videos, distilled in `notes/previs/` (digest `_digest_previs_storyboard.md`). Blender versions
+ on screen range from 2.8x (Spitfire) to 5.0 alpha (Story Tools); every API fact used in this skill
+ was re-checked on 5.2.1.
+ 
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-previs-storyboard/scripts/bx_previs.py /home/user/Music/.claude/skills/scenario-blender-previs-storyboard/scripts/bx_previs.py
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-previs-storyboard/scripts/bx_previs.py	2026-10-21 05:16:03.126290897 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-previs-storyboard/scripts/bx_previs.py	2026-10-21 06:00:24.433712506 +0000
+@@ -853,6 +853,8 @@
+     fps = sc.render.fps
+     ed = bpy.data.scenes.get(edit_name or sc.name.replace("_blend", "_edit")) or \
+         bpy.data.scenes.new(edit_name or sc.name.replace("_blend", "_edit"))
++    if ed == sc:
++        raise ValueError("animatic: the edit scene would be the previs scene itself (no '_blend' in its name); pass edit_name")
+     r = ed.render
+     r.resolution_x, r.resolution_y = sc.render.resolution_x, sc.render.resolution_y
+     r.resolution_percentage = res_pct or sc.render.resolution_percentage

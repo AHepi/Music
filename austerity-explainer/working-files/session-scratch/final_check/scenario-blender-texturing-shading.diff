@@ -1,0 +1,90 @@
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-texturing-shading/SKILL.md /home/user/Music/.claude/skills/scenario-blender-texturing-shading/SKILL.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-texturing-shading/SKILL.md	2026-10-21 05:16:03.139477631 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-texturing-shading/SKILL.md	2026-10-21 06:00:24.431481018 +0000
+@@ -9,11 +9,10 @@
+ Expert shading is layered masks feeding physically plausible values: a clean base (scanned set or
+ flat colors), then contrasty black/white masks that place color, roughness, height and subsurface,
+ all editable in nodes. Values are judged under honest light in both engines, and baking comes last,
+-for portability. If a sibling skill named here is missing from your available skills, ask the user
+-to install it (`npx skills add scenario-labs/skills --skill <name>`); unattended, proceed from tool
+-schemas and flag the gap.
++for portability. If a sibling skill is missing, do not install anything: tell the person which skill is missing and carry
++on without it.
+ 
+-**REQUIRED BACKGROUND:** scenario-blender-expert (execution channel, review loop, 5.2 API changes).
++**REQUIRED BACKGROUND:** scenario-blender-expert (execution channel, review loop, 5.2 API changes; here use only its headless channel, never an MCP bridge, add-on or live window).
+ Baking maps: scenario-blender-uv-baking. Lighting and final renders:
+ scenario-blender-lighting-rendering.
+ 
+@@ -21,6 +20,8 @@
+ exercised by `tests/code/blender-texturing-shading/`).
+ `sys.path.append("<this skill>/scripts"); import bx_materials as M`.
+ 
++On this shared computer: call `M.preview` only with `engines=("BLENDER_EEVEE",)`, `res=256`, `samples=8` and an `out_dir` inside the scratch folder (its default also renders Cycles at 64 samples on the CPU, which is slow here). `M.value_report` is cheap (six small renders) but also needs a scratch `out_dir`. The Cycles half of every check runs on the rented machine. Never pass the film project's folder as `out_dir` or as a `save_image` path.
++
+ ## Stance (the expert delta)
+ 
+ - **Data maps are Non-Color, "not what looks better, what's correct"** (Price). Only base color and
+@@ -51,7 +52,7 @@
+ 
+ | Input                                    | Changes                                                              | Default when silent                      |
+ | ---------------------------------------- | -------------------------------------------------------------------- | ---------------------------------------- |
+-| Target: Cycles still, EEVEE, game engine | live Cycles-only nodes vs baked; AO in albedo (render) vs ORM (game) | Cycles finals, EEVEE side by side        |
++| Target: Cycles still, EEVEE, game engine | live Cycles-only nodes vs baked; AO in albedo (render) vs ORM (game) | EEVEE finals (our plate renderer), Cycles as a check        |
+ | Style: realistic or stylized             | scanned set + grime vs procedural or hand-painted light              | stylized restraint (Kaspar)              |
+ | UVs and deformation                      | UV images vs box projection vs Object procedurals                    | rigid, no UVs: box; deforming: UV only   |
+ | Scale                                    | tile size, bump/displacement meters                                  | real meters, scale applied (all experts) |
+@@ -91,7 +92,7 @@
+ 6. **Stylized hand-painted light** (Abbitt): lighter top, darker bottom, Multiply in crevices,
+    Screen on extremities. Headless: `M.painted_light(mat, obj)` from a curvature attribute, bake
+    Emit, judge with `rigs=("unlit",)`.
+-7. **Painting, where masks cannot place it.** GUI: brushes are assets (`Paint Hard/Soft`,
++7. **Painting, where masks cannot place it.** GUI (needs a live window: not available here, use the Headless route below): brushes are assets (`Paint Hard/Soft`,
+    `Airbrush`, `Blur`, `Smear`, `Fill`, `Mask`); a factory 5.2 session paints BLACK until the brush
+    and unified color are set; strokes project from the screen, so face the surface (Abbitt); Erase
+    needs an alpha channel; bleed 8 to 12 px (Kaspar, Abbitt). Use `M.gui_texture_stroke()`: it
+@@ -100,7 +101,7 @@
+    coverage in another) and resamples dabs. Headless: `M.TexelMap` + `M.paint_stroke` paints by
+    world distance, seams included; `M.dilate`, then `M.save_image` (images are never saved with the
+    .blend by a script). GATE: renders from views crossing seams.
+-8. **Lookdev check and bake.** `M.preview` (EEVEE and Cycles, studio, backlit, roughness),
++8. **Lookdev check and bake.** `M.preview` (EEVEE and Cycles, studio, backlit, roughness; on the shared computer pass `engines=("BLENDER_EEVEE",)`, `res=256`, `samples=8` and leave the Cycles half to the rented machine),
+    `M.value_report`, labeled frames and node groups (Kaspar, Price). Bake procedural channels via
+    Emission, 30+ samples, validate by rebuilding from the maps (scenario-blender-uv-baking).
+ 
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-texturing-shading/references/critique.md /home/user/Music/.claude/skills/scenario-blender-texturing-shading/references/critique.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-texturing-shading/references/critique.md	2026-10-21 05:16:03.142431600 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-texturing-shading/references/critique.md	2026-10-21 06:00:24.431566245 +0000
+@@ -1,7 +1,7 @@
+ # Critique rubric: judging your own materials
+ 
+ Use after every stage gate. Render first
+-(`M.preview(objs, out, rigs=("studio", "backlit", "roughness"))`, EEVEE and Cycles), open the sheet,
++(`M.preview(objs, out, rigs=("studio", "backlit", "roughness"))`, EEVEE only here via `engines=("BLENDER_EEVEE",), res=256, samples=8`; the Cycles half runs on the rented machine), open the sheet,
+ then walk the list. Each item says what an expert looks at and how to check it in code where
+ possible. Score each section pass / fix; fix before moving on.
+ 
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-texturing-shading/references/expert-notes.md /home/user/Music/.claude/skills/scenario-blender-texturing-shading/references/expert-notes.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-texturing-shading/references/expert-notes.md	2026-10-21 05:16:03.142591575 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-texturing-shading/references/expert-notes.md	2026-10-21 06:00:24.431603337 +0000
+@@ -356,7 +356,7 @@
+ 
+ - Texture Slots mode Material, not Single Image: paints every channel of every material [00:05:07].
+ - Most failures are state: wrong object holds the paint icon, missing UVs or image, a brush texture
+-  or texture mask, stroke settings; Load Factory Settings when lost [00:03:08], [00:28:21],
++  or texture mask, stroke settings; Load Factory Settings when lost (a GUI habit from the video; never do it here, it wipes the open session) [00:03:08], [00:28:21],
+   [00:42:03].
+ - Face-selection paint masks stored as vertex groups give clean region borders
+   [00:16:32]-[00:18:49].
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-texturing-shading/references/procedures.md /home/user/Music/.claude/skills/scenario-blender-texturing-shading/references/procedures.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-texturing-shading/references/procedures.md	2026-10-21 05:16:03.142591575 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-texturing-shading/references/procedures.md	2026-10-21 06:00:24.431657053 +0000
+@@ -295,7 +295,7 @@
+ `visible_shadow = False` is honored by both engines (iris region brightness 0.59 to 0.76 in Cycles,
+ 0.53 to 0.67 in EEVEE).
+ 
+-## P9. Anisotropic hair or brushed metal (Cycles only)
++## P9. Anisotropic hair or brushed metal (Cycles only; not for our EEVEE plates: it aims the Material Output at CYCLES, so EEVEE ignores that output)
+ 
+ Verified on 5.2.1. Test: `test_skin.py` (aniso sheet): EEVEE renders the same material isotropic in
+ 5.2, Cycles shows the stretched highlight. Kaspar kept a fake-anisotropy node group for EEVEE and a

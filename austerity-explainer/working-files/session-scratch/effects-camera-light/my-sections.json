@@ -1,0 +1,227 @@
+{
+ "effects_planner": {
+  "about": "The effects planner (calculators/plan_effects.py): the wind chosen against every view, the chimney plume traced on each view's frame, plume colour and mouth, contact shadows for props the behind painting removes, the window-change check and the fire's glow and flames. The smoke kinds and wind themselves are in the effects section. Added by the effects-camera-light helper (log 35).",
+  "wind_mix": {
+   "value": {
+    "across": 0.85,
+    "away": 0.5,
+    "down": 0.12
+   },
+   "unit": "parts of the wind (across every view, away from the main camera, downward), normalised in use",
+   "kind": "judged",
+   "source": "film-kit works-effects.js WIND (-0.85, -0.12, -0.5), round 5 of log 34: across the views, a little away up the works, sinking a little"
+  },
+  "trace_step_seconds": {
+   "value": 0.25,
+   "unit": "seconds between traced puff ages",
+   "kind": "judged",
+   "source": "scratchpad plugin-calculators/verify_test_cases.py (the trace that gave round 4's 0.044 and round 5's 0.188); a finer step moves the travel by under 0.005"
+  },
+  "visible_strength_min": {
+   "value": 0.1,
+   "unit": "puff strength (opacity, 0 to 1)",
+   "kind": "judged",
+   "source": "Design (log 35): a puff counts as seen while its strength is 0.1 or more. Judged against round 5's eye: with this cut No. 2's plume is last seen at 0.432 across in W3, where the round 5 helper saw it fade ('fading out by about 0.45 across', works-effects.js WIND comment)"
+  },
+  "edge_strength_min": {
+   "value": 0.2,
+   "unit": "puff strength (opacity, 0 to 1): a puff this strong counts at its edges (the card test) and over a figure",
+   "kind": "invented",
+   "source": "Skeptic (log 35): test puff top edges where the opacity is 0.2 or more; inventory (log 35) 'Keep figures out of live smoke': flag a figure crossed by puffs above 0.2 (round 1: a man in the brazier smoke read as a grey ghost). Untested by eye"
+  },
+  "travel_min_share_of_width": {
+   "value": 0.15,
+   "unit": "share of the frame's width a plume travels while seen",
+   "kind": "judged",
+   "source": "Judged between two recorded cases: round 4's 0.044 of the width was rejected (round4-result.json finding 4: the puffs piled up as rings and a hook) and round 5's 0.188 kept (smoke-final.json, works-effects.js); the design (log 35) put the line at 0.15. Nothing in between was looked at"
+  },
+  "other_chimney_clearance_share": {
+   "value": 0.05,
+   "unit": "share of the frame's width a plume must fade short of another factory's chimney",
+   "kind": "invented",
+   "source": "Design (log 35); round 5 kept a plume fading 0.057 short of No. 1's chimney (works-effects.js: longer plumes ran on behind it and read as its smoke)"
+  },
+  "plume_lighter_than_sky_max_levels": {
+   "value": 30,
+   "unit": "levels (0 to 255) the plume's brightness may exceed the sky's behind it",
+   "kind": "judged",
+   "source": "Judged between two recorded cases, measured by plan_effects.py colour on the round 5 W3 plate: round 5's brownish smoke at +9 to +15 levels was kept, round 4's pale grey at +50 to +64 was seen as glow by the critic (round4-result.json finding 4). Nothing in between was looked at"
+  },
+  "mouth_seconds_default": {
+   "value": 2,
+   "unit": "seconds a puff stays at the mouth's size",
+   "kind": "judged",
+   "source": "film-kit works-effects.js SMOKE: all three kinds use mouth seconds 2 (effects.smoke_kinds records it only for heavy)"
+  },
+  "figure_box_width_metres": {
+   "value": 0.5,
+   "unit": "metres (a figure's width, for its box on the frame)",
+   "kind": "judged",
+   "source": "A rule of thumb: a man's shoulders are about 0.45 to 0.5 m across; used only to box figures for the smoke test"
+  },
+  "contact_shadow_size_per_footprint_diagonal": {
+   "value": 1.2,
+   "unit": "contact shadow side over the base footprint's diagonal",
+   "kind": "judged",
+   "source": "Design (log 35): the notice corner's hand-set shadows (drum 1.0, chair 0.75, pail 0.55 m; notice-corner.js lines 129-135) come within 0.15 m of 1.2 x the base diagonal"
+  },
+  "glow_pulse_setting_max_share": {
+   "value": 0.016,
+   "unit": "share of the glow's size its pulse may swing (amplitude over base, in the page's settings)",
+   "kind": "judged",
+   "source": "notice-corner.js fireGlow 1.25 + 0.02 sin (kept by the user, log 32; the filmed swing measured 1.2%); the earlier 1.25 + 0.1 sin (8%) slid the glow's rim 20 px on the road (filmed swing 2.8%)"
+  },
+  "flame_variety_min": {
+   "value": {
+    "size_share": 0.25,
+    "lean_degrees": 10
+   },
+   "unit": "how far flame tongues must differ from each other in size (share, each way) and lean (degrees, each way)",
+   "kind": "judged",
+   "source": "Judged between two recorded cases: log 29 rejected flames like a neat row of identical cartoon teardrops (no variety); the kept pit-village-effects.js Flames vary size by 0.7 to 1.3 (+-30%) and lean by +-14 degrees. The minimum sits a little under the kept variety"
+  },
+  "window_change_after_word_seconds": {
+   "value": 0.6,
+   "unit": "seconds after the word for the second still",
+   "kind": "judged",
+   "source": "Round 4 critic (round4-result.json finding 8): 'Check stills at 79.0 and 79.8 s' for 'busy' at about 79.2 s"
+  },
+  "window_mask": {
+   "value": {
+    "brightness_min": 120,
+    "red_over_blue_min": 15
+   },
+   "unit": "levels (0 to 255): a lit window pixel is brighter than this and this much redder than blue",
+   "kind": "judged",
+   "source": "scratchpad redesign/round5-pages/tools/window_change.py (round 5 of log 34)"
+  },
+  "smoke_preroll_note": {
+   "value": 0,
+   "unit": "seconds of pre-roll needed by smoke that depends only on time (ChimneySmoke, Smoke)",
+   "kind": "judged",
+   "source": "works-effects.js ChimneySmoke and effects.js Smoke place each puff from t alone (fixed seeds), so filming can start anywhere; a smoke started on a word takes its life (7 s) to reach full length"
+  },
+  "fire_smoke": {
+   "value": {
+    "life": 3.6,
+    "scale": 0.75,
+    "wind": 0.9,
+    "above_coals_metres": 0.51,
+    "follows_wind": false
+   },
+   "unit": "seconds, scale, wind (metres a life, times scale), metres above the coals, and whether it leans along the chimneys' wind (else along +x) for the brazier's live smoke",
+   "kind": "judged",
+   "source": "film-kit works-effects.js lines 643 and 815 and notice-corner.js (effects.js Smoke: count 14, life 3.6; set with scale 0.75, wind 0.9, origin 0.16 + 0.35 m above the coals; it leans along +x). Round 6 (in progress) makes the Works' brazier smoke follow WIND (BrazierSmoke): set follows_wind true when that reaches the kit"
+  }
+ },
+ "camera_audit_built_set": {
+  "about": "The camera audit's built-set mode and page window (paper-film/tools/camera_audit.py --built-set, --timeline): no turn during a slide, the street's meeting point, slide magnification at the nearest painted surface, the frame staying inside the painted plate. The audit's own move limits are in the camera section (camera.audit_*). Added by the effects-camera-light helper (log 35).",
+  "plate_check_every_seconds": {
+   "value": 0.1,
+   "unit": "seconds between camera samples checked against the plate",
+   "kind": "judged",
+   "source": "Design (log 35): every 0.1 s"
+  }
+ },
+ "light_planner": {
+  "about": "The light planner (calculators/plan_lights.py): starting watts by inverse square, reach, cone, links, shadow casters, EEVEE shadow settings, the render-log check, lamps near the subject or the meeting point, lights brighter on a wall than on the subject, the dark-subject plan and exposure per view. Measured light values are in the light section. Added by the effects-camera-light helper (log 35).",
+  "reach_margin_metres": {
+   "value": 0.2,
+   "unit": "metres past the farthest lit part of the target",
+   "kind": "judged",
+   "source": "Design (log 35): the notice glow's custom distance 1.4 m = its lit part about 1.2 m away + 0.2 (assemble_notice_corner.py lines 156-178)"
+  },
+  "cone_blend": {
+   "value": 0.9,
+   "unit": "Blender spot blend",
+   "kind": "judged",
+   "source": "assemble_notice_corner.py notice glow (blend 0.9)"
+  },
+  "colours": {
+   "value": {
+    "fire_key": [
+     1.0,
+     0.42,
+     0.12
+    ],
+    "lamp_above": [
+     1.0,
+     0.97,
+     0.94
+    ],
+    "cool_rim": [
+     0.55,
+     0.68,
+     1.0
+    ],
+    "warm_rim": [
+     1.0,
+     0.72,
+     0.45
+    ]
+   },
+   "unit": "Blender light colour (red, green, blue)",
+   "kind": "judged",
+   "source": "assemble_notice_corner.py (notice glow, corner lamp); assemble_works.py lines 1195-1214 (the men's rim lights)"
+  },
+  "container_skip_within_metres": {
+   "value": 0.6,
+   "unit": "metres: a fire's light skips every prop this close (the container it burns in, the chair beside it); other lights get a note for props this close",
+   "kind": "judged",
+   "source": "Judged to reproduce log 32's links: the notice corner's fire light skips the drum it burns in (0.41 m from the light) and the chair (0.30 m), but not the lantern (0.68 m) or the pail (0.83 m) (story log 32; lesson 120); the design (log 35) said 0.6 m"
+  },
+  "near_surface_within_metres": {
+   "value": 1.0,
+   "unit": "metres: a camera-facing surface this close to a light is checked against the subject (a lamp lights the face it hangs on)",
+   "kind": "judged",
+   "source": "Judged between recorded cases: round 4's gate lamp hung 0.21 m in front of the pier's lane face and made it the brightest thing in W1 (round4-result.json finding 5); round 5's lamp is 0.6 m from the pier's inner face; the cottage window lights stand metres from any prop and no fault was seen from them"
+  },
+  "shadow_casting_kinds": {
+   "value": [
+    "key",
+    "fire",
+    "doorway",
+    "sky"
+   ],
+   "unit": "kinds of light that cast shadows (every other light casts none)",
+   "kind": "judged",
+   "source": "Round 3 (round3-result.json works.summary 'Speed'): a Works plate took about 25 min with every light casting and about 6 min with only the fire, the lit doorways and the sky; state-picture masks fell from 42% to 5-9%"
+  },
+  "foot_patch_metres": {
+   "value": [
+    0.5,
+    0.35
+   ],
+   "unit": "metres (width, depth) of the soft shadow under a figure that casts no shadow",
+   "kind": "judged",
+   "source": "assemble_works.py lines 984-1047 (two see-through ovals under each man)"
+  },
+  "lamp_clear_of_subject_pixels": {
+   "value": 18,
+   "unit": "pixels on the film frame between a lamp and the subject's outline box",
+   "kind": "judged",
+   "source": "assemble_notice_corner.py lines 93-101 (log 31: the far street lamp touched the board's post where the lines meet; lamps moved or removed)"
+  },
+  "near_ground_light_max": {
+   "value": 0.025,
+   "unit": "W/m2 a light behind the camera may put on the ground at the frame's bottom edge",
+   "kind": "judged",
+   "source": "Judged between two recorded states of the notice corner's street lamp behind the camera (worked out by plan_lights.py from street.blend's gas_lamp_0 and the composed camera): 260 W puts 0.050 W/m2 on the ground at the frame's bottom edge and 'flooded the near road' (log 31); turned down to 70 W (0.0135) it was kept"
+  },
+  "subject_light_over_key_max": {
+   "value": 3.0,
+   "unit": "times the light the subject's own key gives it (all lights reaching it together)",
+   "kind": "judged",
+   "source": "Judged between two recorded cases, worked out by plan_lights.py: the notice corner's notice gets 1.4 times its key in all and was kept with no burnt colour; checkout C1's bill gets about 62 times (mostly an area light 0.6 m below it, counted face-on) and its check 10 found 23% of the bill burnt white (scratchpad redesign/round5-checkout/check10/report.md)"
+  },
+  "exposure_range": {
+   "value": [
+    1.0,
+    1.8
+   ],
+   "unit": "stage exposure",
+   "kind": "judged",
+   "source": "page-3.js LOOK_W1 1.6 (the darkest view; others 1.0); the inventory's clamp 1.0 to 1.8"
+  }
+ }
+}

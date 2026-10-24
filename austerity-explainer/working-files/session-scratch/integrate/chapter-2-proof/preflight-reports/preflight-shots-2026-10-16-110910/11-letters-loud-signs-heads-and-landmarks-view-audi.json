@@ -1,0 +1,248 @@
+{
+ "place": "checkout",
+ "views": {
+  "c1": {
+   "kind_of_shot": [
+    "interior"
+   ],
+   "reading_spot": "composed",
+   "signs": {
+    "bill": {
+     "composed": {
+      "across": 0.6578,
+      "down": 0.5286,
+      "depth": 3.0,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 3.0176,
+      "facing": 0.9942,
+      "across_facing": 0.9947,
+      "back_shows": false,
+      "letter_pixels": null,
+      "letter_width_pixels": null,
+      "face_on_pixels": null,
+      "needed_by_page": true,
+      "verdict": "letter height not known"
+     }
+    },
+    "bread label": {
+     "composed": {
+      "across": 0.5386,
+      "down": 0.6422,
+      "depth": 2.411,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 2.4446,
+      "facing": 0.9863,
+      "across_facing": 0.9997,
+      "back_shows": false,
+      "letter_pixels": null,
+      "letter_width_pixels": null,
+      "face_on_pixels": null,
+      "needed_by_page": true,
+      "verdict": "letter height not known"
+     }
+    },
+    "milk label": {
+     "composed": {
+      "across": 0.647,
+      "down": 0.6452,
+      "depth": 2.431,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 2.4766,
+      "facing": 0.9816,
+      "across_facing": 0.9954,
+      "back_shows": false,
+      "letter_pixels": null,
+      "letter_width_pixels": null,
+      "face_on_pixels": null,
+      "needed_by_page": true,
+      "verdict": "letter height not known"
+     }
+    },
+    "butter label": {
+     "composed": {
+      "across": 0.5665,
+      "down": 0.6812,
+      "depth": 2.295,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 2.3476,
+      "facing": 0.9776,
+      "across_facing": 0.9991,
+      "back_shows": false,
+      "letter_pixels": null,
+      "letter_width_pixels": null,
+      "face_on_pixels": null,
+      "needed_by_page": true,
+      "verdict": "letter height not known"
+     }
+    },
+    "cheese label": {
+     "composed": {
+      "across": 0.6655,
+      "down": 0.6832,
+      "depth": 2.279,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 2.3433,
+      "facing": 0.9726,
+      "across_facing": 0.9942,
+      "back_shows": false,
+      "letter_pixels": null,
+      "letter_width_pixels": null,
+      "face_on_pixels": null,
+      "needed_by_page": true,
+      "verdict": "letter height not known"
+     }
+    },
+    "checkout sign": {
+     "composed": {
+      "across": 0.6305,
+      "down": 0.2995,
+      "depth": 4.8,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 4.946,
+      "facing": 0.9705,
+      "across_facing": 0.9964,
+      "back_shows": false,
+      "letter_pixels": null,
+      "letter_width_pixels": null,
+      "face_on_pixels": null,
+      "needed_by_page": true,
+      "verdict": "letter height not known"
+     }
+    },
+    "petrol fascia": {
+     "composed": {
+      "across": 0.2888,
+      "down": 0.4097,
+      "depth": 31.388,
+      "in_front": true,
+      "in_frame": true,
+      "distance": 31.858,
+      "facing": 0.9852,
+      "across_facing": 0.9906,
+      "back_shows": false,
+      "letter_pixels": null,
+      "letter_width_pixels": null,
+      "face_on_pixels": null,
+      "needed_by_page": true,
+      "verdict": "letter height not known"
+     }
+    }
+   }
+  }
+ },
+ "stencil_turns": [],
+ "loud_signs": [],
+ "landmarks": [],
+ "figures": [],
+ "continuity": {
+  "c1/all": {
+   "total": 0,
+   "by_group": {}
+  }
+ },
+ "problems": [],
+ "warnings": [],
+ "notes": [
+  "bill in c1 (composed spot): its letter height is not in the place facts; not judged.",
+  "bread label in c1 (composed spot): its letter height is not in the place facts; not judged.",
+  "milk label in c1 (composed spot): its letter height is not in the place facts; not judged.",
+  "butter label in c1 (composed spot): its letter height is not in the place facts; not judged.",
+  "cheese label in c1 (composed spot): its letter height is not in the place facts; not judged.",
+  "checkout sign in c1 (composed spot): its letter height is not in the place facts; not judged.",
+  "petrol fascia in c1 (composed spot): its letter height is not in the place facts; not judged.",
+  "Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says)."
+ ],
+ "calculator": "view_audit audit",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "lettering.must_read_min_pixels": {
+   "value": 20,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "lettering.must_read_comfortable_pixels": {
+   "value": 25,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "lettering.not_meant_to_read_max_pixels": {
+   "value": 14,
+   "unit": "pixels tall",
+   "kind": "judged"
+  },
+  "views_and_models.view_audit.must_read_facing_min_cos": {
+   "value": 0.85,
+   "unit": "cosine between the sign's face and the way to the camera, across (the width of the letters)",
+   "kind": "invented"
+  },
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "safe_area.title_band_down": {
+   "value": [
+    0.05,
+    0.22
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "safe_area.landmark_top_min_down": {
+   "value": 0.24,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "safe_area.text_left_pixels": {
+   "value": 65,
+   "unit": "pixels (0.06 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.text_right_pixels": {
+   "value": 972,
+   "unit": "pixels (0.90 of the width)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share": {
+   "value": 0.85,
+   "unit": "share of the title zone that is sky",
+   "kind": "judged"
+  },
+  "people.head_height_metres": {
+   "value": 0.23,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "people.facing_head_max_pixels": {
+   "value": 24,
+   "unit": "pixels tall",
+   "kind": "invented"
+  },
+  "people.backs_to_camera_min_distance_metres": {
+   "value": 6.0,
+   "unit": "metres from every camera spot along a slide",
+   "kind": "judged"
+  },
+  "views_and_models.view_audit.face_shows_within_degrees": {
+   "value": 100,
+   "unit": "degrees between a figure's facing and the way to the camera",
+   "kind": "invented"
+  },
+  "views_and_models.view_audit.figure_half_width_metres": {
+   "value": 0.25,
+   "unit": "metres either side of a figure's feet",
+   "kind": "judged"
+  }
+ }
+}

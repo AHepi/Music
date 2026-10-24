@@ -1,0 +1,229 @@
+=================== metal VERIFIER
+surface: metal (rusted riveted steel)
+claims_hold: False
+audit_ok: True
+generator_reads_reference: False
+rescored:
+  -
+    class_name: S0 (fresh Blender bake, verify/S0)
+    tier: none
+    colour_ssim: 0.6555
+    colour_mean_delta_e: 8.6
+    texture_compare_overall: 0.197
+  -
+    class_name: S (fresh bake, verify/S)
+    tier: none
+    colour_ssim: 0.4788
+    colour_mean_delta_e: 12.18
+    texture_compare_overall: 0.523
+  -
+    class_name: M (fresh bake, verify/M)
+    tier: layout
+    colour_ssim: 0.6917
+    colour_mean_delta_e: 6.44
+    texture_compare_overall: 0.296
+  -
+    class_name: L (fresh bake, verify/L; edge skill 0.581, height 16.62, normal 10.62)
+    tier: close
+    colour_ssim: 0.7556
+    colour_mean_delta_e: 4.9
+    texture_compare_overall: 0.498
+  -
+    class_name: variation seed 3 (re-sampled and re-baked, verify/var3)
+    tier: none
+    colour_ssim: 0.4174
+    colour_mean_delta_e: 12.95
+    texture_compare_overall: 0.581
+  -
+    class_name: CEILING TEST: reference colour pushed through the generator's own derive_maps rule (verify/ceiling)
+    tier: exact
+    colour_ssim: 1
+    colour_mean_delta_e: 0
+discrepancies:
+  - REFUTED - derivation ceiling and 'tier exact is unreachable through derived maps'. I fed the REFERENCE colour through the generator's own generator/derive_maps.py (maps_rule.json) and ran lib/pixel_compare.py: height best-fit error 4.93 (needs <6), normal angle 3.71 degrees (needs <4), colour perfect -> tier 'exact'. The builder's 5.7 / 6.7 degree normal 'ceiling' (analysis/derivation_ceiling.py, final report, both guides) is an artefact: the script takes arccos of a dot product with the 8-bit reference normal vectors without re-normalising them (their mean length is 0.9957, which alone gives about 5 degrees). With normalised vectors, as pixel_compare does: 2.06 degrees from the uploaded 8-bit height, 3.71 degrees from the predicted height (strength 6 gives 2.72). So 'exact' is out of reach for L only because of the COLOUR (SSIM 0.76 vs 0.92, edge skill 0.58 vs 0.85, Delta E 4.9 vs 3), not because of the derived maps. The height ceiling 5.0 levels is correct.
+  - Every other headline number reproduces exactly. Fresh bakes of S0, S, M, L into verify/ (fresh Blender processes, 8 samples, colour only; height and normal derived) re-scored with lib/pixel_compare.py and lib/texture_compare.py give identical values to the builder's for every measure (tier, SSIM, Delta E, edge skill, height error, normal angle, texture groups). Variation seeds 1, 3, 8 re-sampled and re-baked are byte-identical to the stored colour pictures (mean difference 0.0). The 8 stored variation descriptions are identical to sample_description(seed) output. The area description is identical to sample_description(21, 2). A fresh bake of it at 1254 dots matches the stored 2508 picture shrunk (mean difference 0.91, nothing over 40). Geometry route reproduced: correlation of real-geometry height with reference height 0.072 (derived S0 height 0.576). Their summary tables match scores/*.json.
+  - The guide's explanation of the half-tile test result for S (3.2 mean difference 'because float rounding in the noise flips dots at a colour threshold') is wrong. My seed 3 variation gives the same 3.2; with grain set to 0 it drops to 0.71 (0% over 40 levels either way). The 3.2 is the per-dot grain white noise (sampled at pixel-filter jitter positions, 8 samples), not the colour-ladder thresholds. The test still passes. I also ran it myself: L 0.56 mean difference, 0.0% over 40 levels (control 16.2, 17.4% over 40); seed 3 3.2, 0.0% (control 17.0, 14.4%); hull plates 2.52, 0.0% (the builder never ran it on the hull plates).
+  - Guide dead-end item 13 says variation tiles baked before and after the grain fix are 'mixed in variations/'. Timestamps (bakes 21:20-21:25, generator fixed 21:08) and my re-bakes of seeds 1, 3 and 8 (all identical to stored) show they were all baked with the final generator.
+  - Guide dead-end item 14 says the two long thin scratches are 'not reproduced'. In class L the upper-right scratch is clearly there as broken thin traced segments (visible in my verify/L/colour.png, verify/scratch_crop.png and scores/L_diff.png). True only for S0, S and M.
+  - Recipe section 1 says 'Nothing was copied from the reference picture' about class L. Section 4 and lessons say the M/L regions are a traced copy of the reference's own rust (9155 outlines, 150k numbers, 408 KB of the 413 KB). The generator itself is honest (see generator_reads_reference); the description L is a vector trace, and the opening sentence overstates.
+  - Audit: all claimed class files pass (S0, S, layout_v0, layerA, layerB, hull_plates and all 8 variation descriptions under 8 KB or the class limit; M under 64 KB; R16k, R32k under 64 KB; R128k, R256k, L under 512 KB; area_seed21.json 9.2 KB passes at 16 KB). Only description/S_v3_uncal.json (8312 B) fails the 8 KB limit; it is an unclaimed intermediate. Caveat the builder discloses: M and L pass the grid rule only because outlines are stored in chunks of 60 and capped at 120 corners (max 118 corners, longest list 237 numbers); the rule is met by its letter, the content is a vector trace of the colour regions.
+  - Sweep strips (the six full-tile ones) were baked at 21:00-21:02, before the final S.json (21:13) and the grain fix (generator 21:08). Re-baking the same sweeps with the current files differs by 1.46-1.55 mean levels (0.3% of dots over 40): cosmetic, but they are not from the final description. The 'ONE number' claim is false for the wear_size sweep (it changes both the across and the up scale, up = 0.68 x across), sweeps use 4 samples (not stated), and rust offset -0.10 is 'much less rust' (crude rust-colour share 3.3% vs 11.5% at the fitted setting), not 'almost no rust'.
+  - Resolution section says 'at 512 dots the scores fall'. For S the dot-for-dot scores do not fall (SSIM 0.549 at 512 vs 0.479 at 1254, Delta E 11.82 vs 12.18); only S's same-kind score and L's SSIM / edge skill fall.
+  - Area: only colour.png and bake.json were kept in area/seed21; the height, normal, roughness and metallic pictures and the 'all maps' claim cannot be re-checked from files, and the seam numbers are for colour only. My seam numbers by my own measure (wrap 1.10 and 0.97, middle lines 0.95 and 0.91) differ slightly from theirs (1.016; 0.985 and 0.863) but also show no seam.
+  - Hull plates: the stored bake (20:57) predates the final generator fixes (21:08). 'Generator unchanged' holds for the transfer itself; re-baking the same description with the current generator differs by mean 2.94 levels (grain), 0% over 40 levels.
+  - Honest-gap list is fair: variation tiles lack the reference's clumping and long drips (checked in the contact sheet); hull picture has wavy tone, sparse rust (checked by eye, matches their own note).
+guide_problems:
+  - Wrong statement in both guides (recipe section 3.1 and lessons step 1, repeated in the builder's report): ceiling 'normal 6.7 degrees, tier exact unreachable through derived maps, metal: close, never exact'. Refuted by my run (see discrepancies). Lessons step 1 teaches readers to read the wrong ceiling off their own surface.
+  - Recipe section 1: 'Nothing was copied from the reference picture' contradicts section 4 / lessons section 2 ('a coded copy of this tile's rust'). Say plainly in section 1 that L is a traced copy.
+  - Recipe section 7.4: wrong cause given for the 3.2 half-tile difference (it is grain, see discrepancies). Dead-end items 13 and 14 are inaccurate (see discrepancies).
+  - Section 5.6 sweeps: 'changes ONE number' is false for wear_size; sample count (4) not stated; six strips are from before the final description; -0.10 'almost no rust' overstated. Strips edge_attraction.png and grain.png exist but are not mentioned (only the zoom ones are). Otherwise the sweep settings listed (15-140, -0.10 to +0.10, 8-110, 0-1.0, 0-0.3) match make_sweeps.py and sweep.json, and the pictures do show the described direction of change.
+  - Section 7.3 resolution sentence about scores falling at 512 is only true for some columns.
+  - Not plain language for a non-programmer: 'Delta E' is never explained in words (used in the tier rules and every table); 'SSIM' appears from section 1 on but is only glossed in section 6; 'Sobel', 'k-means in the Lab colour space', 'autocorrelation length', 'tone curve', 'template matching', 'Hough circles', 'quantiles', 'gain per byte' and 'rate-distortion' (lessons section 2 title) are used without a one-sentence plain explanation first. Lessons section 1 is a list of abstract rules without a concrete example before each rule.
+  - One word per thing is not kept: the same thing is called patch, region, outline, traced region and traced patch (JSON key is 'regions', guide says 'patches'); bar / strap / brace / band (JSON key 'bands'); 'layer' means three different things (description layers layer A/B, the five wear layers, rows of the strips_layers picture); tile / picture / area; a setting is named 'rust up-scale', which is not self-explanatory (it is the number of noise features up the tile).
+  - Code style rule ('full plain-word names') is broken in several scripts that do have the plain note at the top: generator/bake_and_score.py, run_variations.py, final_tests.py and analysis/height_routes.py are one-line-style code with names like r, d, t0, ch, ss, pt, pc.
+  - What is accurate and checked: the Section 9 and lessons rate-distortion tables match scores/*.json to the digit; description part sizes in section 4 match (profiles 2.3 KB, bands 1.5 KB, rivet 0.4 KB, procedural 1.45 KB, regions 408 KB in L); the 'Run it' command works as written; tier rules match lib/pixel_compare.py; the strap/brace/rivet measurements match the S0 description; every script has a 'What this does' note at the top; the guides say what was not tested.
+area_really_unique: Yes. The 2 x 2 area (area/seed21/colour.png, 2508 dots) is new unique content, not a repeated tile. Quadrant pairs differ by mean 13.8-16.2 levels (21-25% of dots differ by more than 30); max circular cross-correlation between quadrants 0.15-0.27; autocorrelation at exactly 1254 dots is 0.10 (x), 0.155 (y), -0.004 (diagonal); strongest repeat anywhere beyond 60 dots is 0.231 (a vertical shift of 61 dots, i.e. the full-height straps and rivet rows), and the 1254 reference tile itself has 0.177; random 300 x 300 crops matched against the whole picture best-match at only 0.26-0.43 and only along the straps, no copied area (a copy would be above 0.9). Seams: my adjacent-column/row jump ratios are wrap 1.10 / 0.97 and middle lines 0.95 / 0.91 (1.0 = none), no seam. The description regenerates identically from sample_description(21, tile_multiple=2) and a fresh 1254-dot bake matches the stored picture. Looking at it: new layout with long full-height straps, some braces that look alike because their panels are of similar size, rust sparse and evenly peppered. Not tested by me or them: bigger than 2 x 2, and the area's height/normal.
+variation_really_different: Yes, different pictures, same visual family. All 8 stored descriptions are exactly what sample_description(seed 1..8) returns; re-baked seeds 1, 3, 8 are byte-identical to stored pictures. Against the reference: mean difference 18.4-19.9 levels, 35-41% of dots differ by more than 30 levels, max circular cross-correlation with the reference only 0.09-0.19 (no rolled copy), 0-1 of 27-40 rivets within 8 dots of a reference rivet, bars in new places and counts (6-8 bars, 27-40 rivets), tier none for all. Between each other: pair mean difference 17.4-19.7 (mean 18.7), max circular cross-correlation about 0.10-0.16. Scores reproduce: SSIM 0.387-0.417, edge skill 0.000-0.021, Delta E 12.95-14.14, same-kind 0.525-0.603 (mean 0.569). Caveat visible in the contact sheet: all share the same six edge profiles, the same rivet picture and the same wear colour ramps, rust is evenly peppered with few long drips, layouts a little busier than the reference; the builder states these gaps honestly.
+overall: The builder's work is real and honest where it counts: the generator (generator/metal_generator.py, metal_shapes.py, derive_maps.py) reads only the description (source grep plus a strace of a full L bake: no file under reference/ and no picture other than its own outputs is opened), every claimed description passes lib/description_audit.py at its class limit, and every measured number I re-ran (fresh Blender bakes of S0, S, M, L, a re-sampled variation, half-tile shift tests, area, hull plates, geometry route) reproduces the builder's value exactly or within a grain-level 1 to 3 colour levels. Variations are genuinely different pictures, the area is genuinely unique, the transfer picture is a believable riveted hull. Problems: (1) the 'derivation ceiling' claim is wrong: the 6.7 degree normal ceiling and 'exact is unreachable through derived maps' come from un-normalised 8-bit normals, and the reference colour through the generator's own rule reaches tier exact on pixel_compare (normal 3.71 degrees, height 4.93); (2) the guides overstate or misstate several things (section 1 'nothing was copied' for a traced L, wrong cause of the S seam difference, the 'mixed grain versions' and 'scratches not reproduced' dead-end notes, 'ONE number' in sweeps, resolution sentence, strips older than the final description); (3) the guides use undefined jargon (Delta E, SSIM early, Sobel, k-means, autocorrelation, rate-distortion) and swap words (patch/region/outline, layer used three ways) against the plain-language rules; some scripts use short names. Also worth knowing: M and L are a vector trace of the reference's colour regions (the builder labels this), and they pass the audit only through chunking and corner caps. Fix the ceiling statement, the section 1 sentence and the three wrong explanations; then the result stands as reported. I wrote only into recipes/metal/verify/ (and removed the __pycache__ my own runs made in generator/)."
+=================== mud VERIFIER
+surface: mud
+claims_hold: True
+audit_ok: True
+generator_reads_reference: False
+rescored:
+  -
+    class_name: S (layout numbers + ruts + clods)
+    tier: none
+    colour_ssim: 0.3672
+    colour_mean_delta_e: 12.52
+    texture_compare_overall: 0.267
+  -
+    class_name: M (puddle tones, 590 stones with faces)
+    tier: none
+    colour_ssim: 0.4027
+    colour_mean_delta_e: 9.75
+    texture_compare_overall: 0.362
+  -
+    class_name: L smaller (2000 patches)
+    tier: layout
+    colour_ssim: 0.6327
+    colour_mean_delta_e: 5.8
+    texture_compare_overall: 0.383
+  -
+    class_name: L first (5000 patches)
+    tier: layout
+    colour_ssim: 0.6884
+    colour_mean_delta_e: 5.26
+    texture_compare_overall: 0.44
+  -
+    class_name: L final (5000 + correction layer)
+    tier: layout
+    colour_ssim: 0.6976
+    colour_mean_delta_e: 5
+    texture_compare_overall: 0.483
+  -
+    class_name: golden S (colour only)
+    tier: none
+    colour_ssim: 0.2719
+    colour_mean_delta_e: 16.57
+    texture_compare_overall: 0.366
+  -
+    class_name: golden M (colour only)
+    tier: none
+    colour_ssim: 0.3122
+    colour_mean_delta_e: 13.07
+    texture_compare_overall: 0.425
+  -
+    class_name: golden L final (colour only)
+    tier: close
+    colour_ssim: 0.6038
+    colour_mean_delta_e: 6.84
+    texture_compare_overall: 0.503
+  -
+    class_name: variation tile 103 (sampled, seed 103)
+    tier: none
+    colour_ssim: 0.2879
+    colour_mean_delta_e: 18.41
+    texture_compare_overall: 0.353
+discrepancies:
+  - NUMBERS: none of the builder's reported scores failed to reproduce. I re-baked S, M, L2, L first, L final, golden S, golden M, golden L final, variation 103 and the 2508 area in fresh Blender processes (verify/). Every colour.png, height.png and normal.png is byte-identical (max pixel difference 0) to the builder's files, and lib/pixel_compare.py plus lib/texture_compare.py give the same numbers to the last digit (for example L final: SSIM 0.6976, delta E 5.0, edge skill 0.685, height 17.57, normal 18.59, kind 0.483, tier layout). Bake times vary with load (area 289 s against 227.7 s reported; Geometry Nodes stones 13.4 s against 8.4 s).
+  - GOLDEN TIER IS AN ARTEFACT OF MISSING MEASURES: golden L final reaches 'close' only because mud_golden has no height or normal map, so pixel_compare skips those two measures. I built a proxy by deriving height and normal from the golden reference colour with the same rule: the proxy normal angle is 23.5 degrees and the height error 22.5 levels, which are worse than the mud L final (18.6, 17.6, tier layout), so the golden L would be 'layout' if the maps could be measured. Golden SSIM 0.6038 is also only just over the 0.60 threshold. The report and guide do say 'colour measures only', but the table cell 'close' and the final_report.json tier field read as an achievement and are not comparable to the mud rows.
+  - KIND SCORE DOES NOT SEPARATE THE SAMPLED TILES FROM OTHER SURFACES: variation 103 scores 0.353 against mud but 0.283 against gravel, 0.306 against brick and 0.247 against wood. Variation 101 scores 0.407 against mud and 0.375 against slate, 0.344 against gravel. The M class scores 0.426 against slate but 0.362 against mud. Only the traced L final is clearly mud-specific (0.483 against mud, 0.29 against slate). So 'same kind of surface' for the sampled tiles rests on my eyes and the builder's eyes, not on texture_compare. The guide admits the scores are low (0.35 to 0.42) but never mentions this overlap.
+  - L CLASS IS A VECTOR TRACE: the L descriptions pass the audit, but they hold 76,058 polygon corners (45,388 + 15,298 traced ground corners, 13,282 stone corners, 2,090 puddle corners) cut out of the reference label map; the golden L holds 78,821. The audit tool only checks bytes, flat lists over 4000 and grids, so it cannot see this. The guide does say plainly that patches are 'tracing the picture, not describing mud' and gives corner counts (about 60,000 traced corners). The audit tool should print the corner count, as the builder asks.
+  - Guide row for the golden S class says '6 puddles, 16 stones, 22 ruts'. That is the mud S row copied across. The golden S description actually has 7 puddles, 24 stones and 19 ruts.
+  - Guide says for Number of ruts that with 0 'the picture has no direction'. The sampler has max(...,2) in random_ruts, so rut_scale 0.0 still draws 3 ruts (seed 2). Counts for scales 0, 0.5, 1.0, 1.6, 2.4 are 3, 10, 19, 35, 54. The sampled tiles also carry only about 19 ruts against 34 in the reference at scale 1.0.
+  - Guide section 7.2 says 'SSIM between two unrelated mud tiles is about 0.4'. Its own table and my run give 0.343 mean (max 0.352).
+  - Guide section 1 and the snow transfer claim 'only numbers changed'. The sampler got a new option (maps) for it (disclosed in 9.1 and in the lessons, but not in the one-page summary). The snow result is mud-shaped: rut ends fade like claws and the rocks have mud-style faces, as the guide admits.
+  - Derivation numbers differ slightly in the builder's favour or against it: my own fit (straight line 20..128, blur 0.5, strength 9) gives height error 3.19 levels (reported 3.32), correlation 0.9973, normal 0.345 degrees from the uploaded height (matches) and 4.42 degrees from the colour-derived height (the guide says the best plain-slope figure is 4.76 at strength 8). Flat normal 23.495 matches. Palette-only ceiling: my nearest-colour snap to the builder's 16-colour palette gives SSIM 0.937, delta E 3.47, edge skill 0.879, height 7.5, normal 8.8 (tier close) against the reported 0.916, 3.29, 0.854, 8.9, 9.8. Same conclusion, slightly different numbers.
+  - Area quadrant scores I got (TL 0.295, BR 0.308; normal group 0.162 and 0.261) are within 0.005 and 0.024 of the reported ones (0.292, 0.303; 0.144, 0.237): the crop method differs slightly. The reported 'strongest repeat 0.176 at shift (24,32)' I get as 0.171 at shifts of 40 dots or more. Not material.
+  - Not re-run by me (not verified): the analysis chain itself (palette statistics, element finder, stone and puddle counts, ruts finder, ground blur table in section 3.6, trace ladder tables in section 6 other than the rows I re-baked, the edge-strength figures 3.6/4.5/5.1/6.8 for the clod count). I only checked the byte shares per layer (M: puddles 9.0, stones 48.6, ruts 4.5, clod numbers 1.4 KB; L: puddles 12.5, stones 88.1, traced ground 288.3, corrections 113.4 KB: all match) and the element counts (8 puddles, 830 stones, 5157 + 3988 patches, golden 16 puddles and 1085 stones).
+  - Geometry route: re-run reproduces 1090 flat shapes and 7080 Geometry Nodes vertices. The guide calls the result 'smooth, low-contrast round lumps'. My render shows low-poly faceted rocks with visible flat facets on the big ones and dark round dots for the small ones: the conclusion (does not match the painted look) holds, the wording is a little off.
+guide_problems:
+  - PLAIN LANGUAGE FAILS: the Recipe guide uses SSIM 27 times and never says what it is. 'Edge skill', 'colour difference', 'height error', 'normal angle' and 'seam ratio' are used from section 1 on without a plain one-sentence meaning (only 'pixel scores' and 'kind score' are defined in the word list). The tier thresholds (what 'layout' and 'close' need) are never listed; 'close needs normal angle under 12' appears once in passing. The notes asked for a plain sentence before every tool and measure.
+  - Unexplained jargon in the Recipe: Hessian, watershed (used three times, explained only by 'distance-to-edge picture'), Ward's rule, solidity (explained in one clause), Gaussian, log-normal spread, sRGB-to-linear, box filter, Lab 'b', median filter. The Lessons guide repeats SSIM, watershed, Hessian and Ward with no explanation and also writes 'delta E' (a Greek-letter symbol) where the Recipe says 'colour difference': two words for one thing, against the one-word rule.
+  - Mixed units: 'KB' is 1000 bytes in the golden row note but the 512 KB limit is 512 x 1024 bytes in the audit tool, so the golden L (513.7 KB) is called an L class while being over 512,000 bytes. The guide explains this but the report's class label 'L final' for golden hides it.
+  - Section 1 'the same generator and sampler with only numbers changed' is not exactly true (the sampler got a new option); section 9.1 says so, section 1 does not.
+  - Sweep pictures match what was run: clods 0/4000/9000/14000/28000, zone weight 0/0.3/0.6/0.85/0.97, ruts 0..2.4, rut width 0.4..2.2, stones 0..3, puddles 0..2.4, normal strength 2/5/9/14, all at 384 dots from seed 2, exactly as in generator/sweeps_for_guide.py and the strips. The 4000 / 9000 / 14000 clod panels are very hard to tell apart by eye, and the 'no direction' statement for zero ruts is wrong (see discrepancies). No other mismatch found between settings stated and settings run. Every image link and every script named in both guides exists.
+  - The guide says the generator 'never reads the reference'. That is true (see audit), but the sampler's defaults were calibrated on the reference (36,000 clods, 0.35 smaller, chosen to match the fine-edge density), and its stone sizes come from the reference's own measured size list: honest as 'distributions fitted to the reference', and the guide says so.
+  - The one-page summary leads with the L result (SSIM 0.698) which is a trace; the plain statement that the L class is a trace is in section 4, not on the first page.
+area_really_unique: Yes. My own bake of the area description (sampler seed 201, tile 2508) is byte-identical to the builder's. Periodic autocorrelation of the 2508 picture at shifts of 40 dots or more peaks at 0.171 (control: the reference tiled 2 x 2 gives exactly 1.0 at shift 1254, so the test would catch a repeat). Shift-invariant correlation between the four 1254 quadrants is 0.060 to 0.085 for all six pairs, and mean absolute colour difference between quadrants is 26.6 to 28.7 levels, so no quadrant is a copy of another. The wrap jump ratios are 0.872 (left/right) and 1.036 (top/bottom) and the jump across the middle line is 0.946 of a normal neighbour jump, so no seam. By eye (area_2508_small.png) there are no visible repeats, but it shows the same sparse confetti ground and scratch ruts as the single sampled tiles.
+variation_really_different: Yes. Re-running the sampler for seeds 101 to 108 reproduces the builder's description files exactly (same bytes) and my re-bake of seed 103 is byte-identical to theirs. Between the eight tiles the mean absolute colour difference is 28.05 levels (minimum 27.13) and the best shift-invariant correlation between any two is 0.089; against the reference the difference is 29.3 to 29.9 levels and the best shift-invariant correlation is at most 0.063. They are not shifted or recoloured copies. By eye (contact_sheet.png) they are clearly the same family, but visibly poorer than the reference: pale mottled puddles, many uniform hexagon-like stones and black round blobs, scratchy rather than flowing ruts, and flat confetti ground. The texture_compare kind scores (0.35 to 0.42) are not far above what the same tiles score against gravel, brick, slate or wood (0.25 to 0.38), so the tool alone does not prove the tiles are mud-like.
+overall: The builder's reported numbers are honest and reproducible. The generator (generator/mud_generator.py and mud_layers.py) does not read the reference. A grep of the generator and everything it imports finds no image loads, and strace of two full bakes shows the only files opened are the generator, the library files, the description and its own outputs, with nothing from reference/. A hand-written 6-shape description also bakes correctly and wraps across the edge. All 27 description files pass lib/description_audit.py at their size-class limit (S 8 KB, M 64 KB, L 512 KB; the golden L is 513,735 bytes, which passes only because the tool counts 1024 bytes per KB). I re-baked 10 descriptions plus the 2508 area in fresh Blender processes and every output picture is byte-identical to the builder's, with identical scores from lib/pixel_compare.py and lib/texture_compare.py. The half-tile test on variation 101 gives 0.757 mean difference and 0.977 per cent of dots over 8 levels, spread evenly with no seam band. Resolution results (512 vs 2508 shrunk: 1.22 and 0.62 mean difference) reproduce. Caveats that matter: (1) the L class that reaches SSIM 0.70 is a vector trace with about 76,000 polygon corners, labelled as tracing in the guide; (2) the golden 'close' tier exists only because height and normal cannot be measured for the golden, and a proxy derivation says it would be 'layout'; (3) the texture_compare kind score does not separate the sampled tiles from other surfaces, so 'same kind' for the 8 variations is a judgement by eye (they are different from each other and from the reference, loosely mud-like, and clearly poorer than the reference); (4) the guides leave SSIM, edge skill, colour difference, height error, normal angle and the tier thresholds unexplained and use jargon, which fails the plain-language rule; (5) small factual slips (golden S counts, 'zero ruts', 'about 0.4' SSIM). I did not re-run the analysis chain. I wrote only into /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/verify/, and removed a stray generator/__pycache__ that my first Blender run created."
+=================== gravel VERIFIER
+surface: gravel
+claims_hold: True
+audit_ok: True
+generator_reads_reference: False
+rescored:
+  -
+    class_name: S_v4
+    tier: none
+    colour_ssim: 0.2128
+    colour_mean_delta_e: 20.93
+    texture_compare_overall: 0.362
+  -
+    class_name: M_a600_s120
+    tier: none
+    colour_ssim: 0.4308
+    colour_mean_delta_e: 11.93
+    texture_compare_overall: 0.208
+  -
+    class_name: TS_k24_a300
+    tier: none
+    colour_ssim: 0.3791
+    colour_mean_delta_e: 13.78
+    texture_compare_overall: 0.215
+  -
+    class_name: T_k24_a250
+    tier: none
+    colour_ssim: 0.4528
+    colour_mean_delta_e: 11.37
+    texture_compare_overall: 0.245
+  -
+    class_name: T_k24_a100
+    tier: none
+    colour_ssim: 0.5126
+    colour_mean_delta_e: 8.51
+    texture_compare_overall: 0.279
+  -
+    class_name: T_k24_a50
+    tier: layout
+    colour_ssim: 0.584
+    colour_mean_delta_e: 6.83
+    texture_compare_overall: 0.404
+  -
+    class_name: L_a250_s12
+    tier: layout
+    colour_ssim: 0.588
+    colour_mean_delta_e: 6.49
+    texture_compare_overall: 0.533
+  -
+    class_name: L_a100_s8
+    tier: layout
+    colour_ssim: 0.6662
+    colour_mean_delta_e: 5.29
+    texture_compare_overall: 0.603
+area_really_unique: Yes. I checked the 2508 x 2508 area picture myself: seam jump ratios 1.06/1.10 at the middle lines and 0.95/1.05 at the wrap edge. The four quadrants have a cross-correlation peak of 0.034-0.039, where a repeat would give 1.0. The whole picture's autocorrelation outside +-60 dots of zero shift peaks at 0.02. Rolled by half a picture it correlates 0.00 with itself. A bake of the same 2.5 KB description (area/descriptions/sample_101.json) in a fresh Blender process is byte-identical to the builder's colour, height and normal pictures. So the picture is 2508 dots of new content with no seam and no repeat. Its stones are the same size in dots as in the 1254 tile, so they look half as big at the 1254 preview.
+variation_really_different: Different as pictures, not as looks. The 8 descriptions are exactly what sampler.py gives from S_v4 with seeds 1-8 (byte-identical when I re-ran it). They have different random seeds and counts (about 7%), radii (5%), packing and tones (+-2). A fresh bake of sample_03 is byte-identical to the builder's. Mean dot difference between variants is 33.3-35.6 (mean 34.6). A variant differs from the reference by 33-34.6, so a variant is no closer to the reference than to another variant. Best shifted correlation between any two variants is 0.044 (against the reference 0.046), so none are copies. Stone share varies 4.7% relative across variants, close to the reference's window spread of 4.5%. The recipe numbers are the same in all of them, so they are the same kind of gravel with a different arrangement, not different looks. They also all share one systematic gap from the reference: stone share about 0.61 against 0.68, and far fewer big stones (stone surviving an opening of radius 12: 0.28-0.38 against 0.516; radius 24: about 0.04 against 0.32). By eye the stones are small flat kite-shaped polygons on flat darker soil, not the chunky faceted blocks of the reference. The soil shows as a spike in the brightness curve. This agrees with the builder's own caveat, but 'as good as the fitted tile' only holds because the fitted tile has the same gap.
+discrepancies:
+  - Every number I could re-run reproduces exactly. I baked 8 classes at 1254 in fresh Blender processes and scored them with lib/pixel_compare.py and lib/texture_compare.py, with a smoothed-height view written independently of the builder's score_folder.py. S_v4, M_a600_s120, TS_k24_a300, T_k24_a250, T_k24_a100, T_k24_a50, L_a250_s12 and L_a100_s8 all match to the third decimal (SSIM, Delta E, edge skill, height error, normal angle, texture score, tier). My S_v4 colour PNG is byte-identical to the builder's.
+  - Description bytes in the claim differ from the audit's file sizes by 1-5 bytes for the traced files (for example 49766 against 49771, 436388 against 436391). Immaterial. S_v4 is 2364 bytes compact, but the file on disk is 4637 bytes because it is indented. It is under 8 KB either way.
+  - NOT DONE: the two plain-language gravel guides (04 Recipe and 04 Lessons) do not exist on disk. recipes/gravel/final_report.json honest_notes says the harness refused to write .md files and that the content is in the structured answer. analysis/analysis_findings.md is also missing. No gravel guide text could be verified from disk. Only the guide pictures, sweep strips and script headers exist.
+  - WRONG ATTRIBUTION: 'baked in 173 s' for the area picture. The area folder's own bake.json says total_s 252.6. The 173 s figure is the resolution test (S_v4 baked at 2508 pixels from a 1254-dot description), which has about a quarter of the shapes of the area picture. My re-bake of the area description took 204.9 s under load about 8-11 on 4 cores.
+  - WRONG SIZE: the half-tile test numbers (1.29 / 0 % over 40 / wrong roll 31 / 28 %) were measured on a 512-dot bake. analysis/half_tile_test.py hard-codes size = 512, but the claim says 'on the 1254 tile'. At 1254 I get 0.78 mean difference and 0 % over 40, with a wrong roll giving 27.9 and 25.0 %. Height 2.05 and normal 3.9 also pass. The tile is truly seamless, but the quoted numbers belong to 512. The pebbles half-tile numbers (1.54) are also from the 512 test.
+  - Bake times in the resolution table (19 / 100 / 173 s) are inflated by machine load. My own bakes took 20.8 s at 512 and 61 s at 1254. The python shape list + mesh column (9 / 23 / 9 s) should be about equal at all sizes, so it is load noise. The builder did call these upper bounds. All other resolution numbers reproduce (SSIM 0.99, 1.65 and 1.68 levels, mean slope 0.374 / 0.367 / 0.352).
+  - The dot-for-dot goal is NOT met by any procedural description. S_v4 is tier none (SSIM 0.21, Delta E 20.9, height correlation about 0) and scores worse than a flat ground colour (stage 0 of their own ladder: SSIM 0.444, Delta E 21.0). In the procedural ladder, every layer added lowers SSIM and raises Delta E. Only the same-kind score rises (0.17 to 0.44). The ladder is therefore not a rate-distortion curve for pixel accuracy. The only classes reaching tier layout are traced vector copies.
+  - The M, T and L classes are tracing. Their descriptions are posterised, k=24 colour label maps vectorised into 2479-5431 outlines (about 121,000 outline numbers in T_k24_a50), plus about 22,900 disc stamps (x, y, r) at the reference's own speck positions in L_a100_s8. L_a100_s8 is 138,857 numbers, 9.3 % of the picture's raw byte count, and its diff sheet shows a near copy of the reference. The audit passes only because each list stays under 4000 numbers (the biggest stamp list is 3450; L_a150_s7 has 3963). The builder labels them 'traced'. Treat their scores as vector-trace quality, not procedural accuracy.
+  - 'Close' tier missed only on the normal angle (22.3 against a 12 degree limit) at L_a100_s8; the other four measures pass. The builder says this plainly.
+  - Where Blender is used: the generator builds the flat polygon list in numpy (gravel_layers.py), meshes it with from_pydata and photographs it with an emission material. Blender is the rasteriser; the only shader-node procedural bit is the optional 'grain' noise. The tried Geometry Nodes route is a separate dead end: its texture score is 0.173 against 0.362 for the painter, and hybrids give 0.203-0.257.
+  - The main generator never reads a picture. The only reference access is generator/geometry_route.py, via gn_tools.photograph_geometry(normal_reference='gravel'), which reads reference/gravel/normal.png to fit one normal strength number. It is a dead-end script. The scripts under analysis/ read the reference on purpose, which is allowed. Leftover files: generator/_gg_body.txt still imports slate_layers, and gravel_layers_v1_backup.py is a stale copy.
+  - TRANSFER: 'numbers only' is true. Keys added in the pebbles description (rim_rgb, lit_shift, shade_shift, notes) are all read through .get() by existing code, and the generator files were last edited at 22:31, before the transfer description (23:12). But the '21 description keys' count understates the change: 60 leaf values differ, one stone class and one speck layer were dropped, and the light and height stretch were changed. The pebbles look like a pebble beach and the 2 x 2 tiling is seamless, and a fresh bake of the pebbles description is byte-identical to theirs. The 12-minute work time is not checkable. The light direction for the pebbles ([-0.5, -0.85]) only affects stones; soil lump tops are hard-coded to light from the top in gravel_layers.soil_shapes.
+  - SWEEP LABELS vs what was run (sweeps_for_guide.py and the strips): (a) strip_stone_chip labels '0.12 (used)' but S_v4's chip is 0.10 and there is no 0.10 tile; (b) strip_stone_packing labels '0.65 (used)' but S_v4's spacings are 0.585 and 0.65 by class, and the sweep sets all classes to one value; (c) strip_layers_stage labels tile 3 '+ tiny + small stones' but it holds only the tiny class (radius 3-6.5), and tile 4 '+ medium stones' actually holds three classes; (d) strip_height_filter_width labels 'width 2 (used)', but the sweep renders the 1254-dot tile at 640 pixels, so the real used width at that size is about 1, not 2; (e) the light-direction strip moves stone light only, not the soil lumps; (f) the comment says the tile is photographed at 640 dots, but it is the whole 1254-dot tile shrunk to 640 pixels with the top-left 320 pixels kept. The first sweeps run (scores/flags/sweeps.txt) crashed with a TypeError at soil_lumps; the strips came from later partial runs (sweeps_big.log and sweeps_part2.log, which ends with a Blender argument error). The script as saved was edited after the failed run.
+  - The builder admits one broad pkill by script name that may have stopped another builder's run_everything.sh. metal/ and slate/ both have a run_everything.sh, so their jobs may have been cut short. I did not check.
+  - Reference vs S_v4 by eye (texture sheet and contact sheet): stones are smaller and flatter, the soil is a flat dark orange-brown with a sharp spike in the brightness curve (the reference is smoothly spread), and the generated mean colour is redder and less blue (RGB 66, 55, 48 against 64, 58, 53). The builder notes this.
+  - No lib/ or reference/ files were changed. I wrote only into recipes/gravel/verify/.
+guide_problems:
+  - The two guide files do not exist (recipes/gravel has no '04 Recipe - gravel - how it is made.md' or '04 Lessons - gravel - what carries over to other surfaces.md'), so plain-language, accuracy and settings-match could not be checked against any text.
+  - Guide pictures exist but several labels do not match what was run: stone_chip '0.12 (used)' (real 0.10, not in the sweep); stone_packing '0.65 (used)' (real mixed 0.585 and 0.65); layers_stage tile 3 '+ tiny + small stones' (really only the tiny class) and tile 4 '+ medium stones' (really three classes); height_filter_width 'width 2 (used)' (the used blur is about width 1 at the sweep's 640-pixel size); the light-direction strip moves only stone light.
+  - Whoever writes the guides should not describe the height blur width, normal strength or any other setting as 'used' without re-checking against S_v4.json. They should state plainly that M, T and L are tracing and that the procedural S class reaches tier none dot for dot, and they must quote the half-tile numbers as 512-dot results (my 1254 result: 0.78, 0 % over 40) and the area bake time as 205-253 s, not 173 s.
+overall: The gravel numbers hold up under my own runs. All 8 claimed classes re-baked in fresh Blender processes and re-scored with lib/pixel_compare.py and lib/texture_compare.py reproduce the builder's figures exactly (SSIM, Delta E, edge skill, height error, normal angle, texture score, tier). The audit passes on every claimed description at its claimed class limit. The main generator (gravel_generator.py with gravel_layers.py and the lib helpers) reads no pictures, and a fresh S_v4, sample_03, pebbles and area bake are byte-identical to the builder's. Variations, area, resolution and transfer all check out in substance: the variants are not copies, the 2508 picture has no seam and no repeat, the same picture appears at three sizes, and the pebbles are made from numbers alone. Four caveats matter. (1) Dot-for-dot accuracy is not achieved procedurally. S_v4 is tier none and is worse than a flat colour on SSIM and Delta E. The only classes reaching tier layout (SSIM up to 0.67) are vector traces of the reference, about 359-436 KB, with the stamp lists kept just under the audit's 4000-number list limit. These are honestly labelled traced but should not be sold as procedural, and 'close' is missed only by the normal angle (22.3 against 12). (2) The two gravel guides were never written, so nothing could be checked on that side. The strips and sweep scripts have several mislabelled '(used)' values. (3) Two quoted measurements are mis-stated: the half-tile test was run at 512 dots, not 1254 (1254 gives 0.78 mean difference, 0 % over 40), and the area bake time of 173 s belongs to the resolution test (the area's own bake.json says 252.6 s). (4) The generated tiles systematically lack large stones: stone surviving an opening of radius 12 is about 0.31 against the reference's 0.52, and the stones are flat kite shapes, so 'as good as the fitted tile' means 'as far from the reference as the fitted tile'. All my files are in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/gravel/verify/ (bakes, scores, and the checking scripts score_my_way.py, variation_check.py, area_check.py, half_tile_1254.py).

@@ -1,0 +1,74 @@
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-lighting-rendering/SKILL.md /home/user/Music/.claude/skills/scenario-blender-lighting-rendering/SKILL.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-lighting-rendering/SKILL.md	2026-10-21 05:16:03.120270000 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-lighting-rendering/SKILL.md	2026-10-21 06:00:24.432684763 +0000
+@@ -10,16 +10,18 @@
+ from its surroundings by value (checked desaturated), every light has a source and a purpose, and
+ every decision is measured on the render, not on lamp values. Work from a controlled base, change
+ one thing at a time, and compare. If a sibling skill named here is missing from your available
+-skills, ask the user to install it (`npx skills add scenario-labs/skills --skill <name>`);
++skills, do not install anything: tell the person which skill is missing and carry on without it;
+ unattended, proceed from tool schemas and flag the gap.
+ 
+ **REQUIRED BACKGROUND:** scenario-blender-expert (execution channel, review loop, 5.2 API changes).
+ Related: scenario-blender-texturing-shading (materials, skin SSS),
+ scenario-blender-previs-storyboard (shot planning, cameras).
+ 
++**Local rules for this install (added by the person who installed it):** run Blender only headless (`-b --disable-autoexec`); never open a window and never use a live or bridge session. The `BL.*` helpers that set things (`aim_camera_at_frame_point`, `preset_eevee`, `preset_cycles`, `color_setup`, `working_space`, `outdoor_sun_sky`, `split_world`, `world_gradient`, `haze`, `comp_tree`, `comp_finish`, `light_groups`, `lightgroup_mix`, `register_aovs`, `freestyle`, `outline_hull`) change the open scene in memory: use them on a scratch copy, never on the film project's own files, and do not save over a scene that must stay as it was. Write every picture, EXR and sheet into the scratchpad folder (never into the film project, and never a made-up path such as `/abs/out`), keep them small (`pct=25`, `exr=False`) and delete the big ones afterwards. Cycles renders, `bake_probes` and `light_contributions` are slow on the shared computer: do them on the rented machine or skip them. Never run npx, npm or pip, and never open or download the video links in `references/sources.md`.
++
+ Toolkit: [`scripts/bx_light.py`](scripts/bx_light.py) (tested on 5.2.1): rigs placed relative to
+ subject and camera, EEVEE/Cycles presets, color setup and audit, 5.x compositor helpers, render
+-analysis. Import: `sys.path.append("<this skill>/scripts"); import bx_light as BL`.
++analysis. Import: `import sys; sys.dont_write_bytecode = True; sys.path.append("<this skill>/scripts"); import bx_light as BL` (the first statement stops Python writing a `__pycache__` folder into the skill).
+ 
+ ## Stance (the expert delta)
+ 
+@@ -72,7 +74,7 @@
+ ## Workflow
+ 
+ 1. **Compose, then lock the camera.** Lighting is view dependent (Andrew). Use `BL.screen_xy` and
+-   `BL.aim_camera_at_frame_point(head, 1/3 or 2/3, 0.62)` for look room, and 80 mm for boxy
++   `BL.aim_camera_at_frame_point(head, 1/3 or 2/3, 0.62)` for look room (it ROTATES the scene camera: use it only on a scratch copy, and skip it when the camera is already fixed), and 80 mm for boxy
+    products. GATE: one focal element; subject near a thirds point or a deliberate symmetry, pyramid
+    or full frame.
+ 2. **Controlled base.** For a studio: world strength 0 and a near-black rough ground (Andrew). For
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-lighting-rendering/references/procedures.md /home/user/Music/.claude/skills/scenario-blender-lighting-rendering/references/procedures.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-lighting-rendering/references/procedures.md	2026-10-21 05:16:03.122756404 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-lighting-rendering/references/procedures.md	2026-10-21 06:00:24.432822043 +0000
+@@ -10,7 +10,7 @@
+ import sys; sys.path.append("<skills>/scenario-blender-lighting-rendering/scripts"); import bx_light as BL
+ ```
+ 
+-It works in a live GUI session too (object mode). Tests: `test_01` to `test_13` (172 checks, all
++Here it is always run headless (never open a Blender window). Paths such as `/abs/out/...` in the examples are placeholders: replace them with a folder in the scratchpad. Tests: `test_01` to `test_13` (172 checks, all
+ pass on 5.2.1). Raw bpy is given where it is short, so a session without the module can still do it.
+ 
+ ---
+@@ -38,7 +38,7 @@
+   `BL.eevee_softness(light, dist)` sets it on every rig light.
+ 
+ ```python
+-L = BL.new_light("Key", "AREA")                 # get-or-create in collection BX_Lights
++L = BL.new_light("BX_TestKey", "AREA")                 # get-or-create in collection BX_Lights
+ d = BL.place(L, head, 40, 35, 2.2, cam)         # returns the distance actually used
+ L.data.energy = BL.energy_for("AREA", 1.0, d)   # white card at the head would read 1.0
+ BL.eevee_softness(L, d)                          # custom distance + jitter if >= 3 deg apparent size
+@@ -371,7 +371,7 @@
+ BL.enable_beauty_passes()                    # diffuse/glossy/transmission direct+indirect+color, emit, env
+ tree, rl, out = BL.comp_tree()
+ rebuilt = BL.back_to_beauty(tree, rl)        # mean abs diff to Image 7.6e-7 (Cycles, no denoise)
+-BL.file_output(tree, "//exr/", {"rebuilt": rebuilt, "image": rl.outputs["Image"]}, depth="32")
++BL.file_output(tree, OUT_DIR + "/exr/", {"rebuilt": rebuilt, "image": rl.outputs["Image"]}, depth="32")  # set OUT_DIR first, to a folder in the scratchpad
+ ```
+ 
+ View layers (Robin Ruud): `bpy.ops.scene.view_layer_add(type='COPY')`; per layer
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-lighting-rendering/references/sources.md /home/user/Music/.claude/skills/scenario-blender-lighting-rendering/references/sources.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-lighting-rendering/references/sources.md	2026-10-21 05:16:03.122756404 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-lighting-rendering/references/sources.md	2026-10-21 06:00:24.432867809 +0000
+@@ -1,6 +1,6 @@
+ # Sources
+ 
+-Fifteen videos, distilled into `notes/lighting/` (one note each) and two digests
++Reference list only: do not open, fetch or download any link or video named here. Fifteen videos, distilled into `notes/lighting/` (one note each) and two digests
+ (`_digest_lighting_color.md`, `_digest_render_composite_composition.md`). Timestamps are
+ `[hh:mm:ss]` into the video. No frame sheets exist for these videos: everything comes from the
+ audio. Expert claims marked "measured" in this skill were re-tested on Blender 5.2.1

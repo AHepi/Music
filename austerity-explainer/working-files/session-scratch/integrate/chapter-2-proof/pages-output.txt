@@ -1,0 +1,41 @@
+Preflight pages (while building pages): FAIL. 9 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.4 s.
+Next step BLOCKED: filming these pages (run the film stage next). First fix the failures below (or accept them, with who and when), then run this stage again.
+
+Made 2026-10-16 11:09:11 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911.
+
+## To fix (these block the next step)
+
+- lookups [page 3]: workers kit.at('workers') (inflation-chapter-2-newcomers/page-3.js:57:74) leaves out which time: "workers" is said 3 times on page 3 (52.67, 57.93, 66.82); it takes the first, 52.67. (plan_page_timing.py)
+  Fix: write kit.at('workers', N) with the time you mean (1 for the first).
+- lookups [page 3]: machines kit.at('machines') (inflation-chapter-2-newcomers/page-3.js:57:135) leaves out which time: "machines" is said 3 times on page 3 (54.15, 56.35, 68.28); it takes the first, 54.15. (plan_page_timing.py)
+  Fix: write kit.at('machines', N) with the time you mean (1 for the first).
+- lookups [page 3]: In kit.at('In') (inflation-chapter-2-newcomers/page-3.js:58:14) leaves out which time: "In" is said 2 times on page 3 (55.10, 67.40); it takes the first, 55.10. (plan_page_timing.py)
+  Fix: write kit.at('In', N) with the time you mean (1 for the first).
+- lookups [page 3]: More kit.at('More') (inflation-chapter-2-newcomers/page-3.js:59:57) leaves out which time: "More" is said 2 times on page 3 (69.55, 70.91); it takes the first, 69.55. (plan_page_timing.py)
+  Fix: write kit.at('More', N) with the time you mean (1 for the first).
+- lookups [page 5]: spare kit.at('spare') (inflation-chapter-2-newcomers/page-5.js:45:40) leaves out which time: "spare" is said 3 times on page 5 (95.92, 112.06, 117.90); it takes the first, 95.92. (plan_page_timing.py)
+  Fix: write kit.at('spare', N) with the time you mean (1 for the first).
+- lookups [page 5]: More kit.at('More') (inflation-chapter-2-newcomers/page-5.js:45:63) leaves out which time: "More" is said 3 times on page 5 (100.67, 104.91, 115.67); it takes the first, 100.67. (plan_page_timing.py)
+  Fix: write kit.at('More', N) with the time you mean (1 for the first).
+- lookups [page 5]: prices kit.at('prices') (inflation-chapter-2-newcomers/page-5.js:45:109) leaves out which time: "prices" is said 2 times on page 5 (105.96, 119.67); it takes the first, 105.96. (plan_page_timing.py)
+  Fix: write kit.at('prices', N) with the time you mean (1 for the first).
+- lookups [page 5]: up kit.at('up') (inflation-chapter-2-newcomers/page-5.js:45:131) leaves out which time: "up" is said 2 times on page 5 (106.48, 120.03); it takes the first, 106.48. (plan_page_timing.py)
+  Fix: write kit.at('up', N) with the time you mean (1 for the first).
+- readable [page 3]: MACHINES readable 0.84 s at full strength (measured 0.83 s) before it is cut at 55.10 s; at least 1.0 s (plan_page_timing.py)
+  Fix: start it on "and" (53.93 s): readable 1.05 s; or move the cut one word later
+
+## Checks run
+
+- FAIL  timing and words on screen (plan_page_timing.py check) [pages 3 to 5]: 9 fail, 0 look, 0 known, 135 pass, 12 info; exit 1, 0.2 s; calculators/plan_page_timing.py version fe521ade
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_page_timing.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/01-timing-and-words-on-screen-plan-page-timing-py-c.json
+- PASS  pops, effects, held shots and overlaps (check_page_layout.mjs) [pages 3 to 5]: 0 fail, 0 look, 0 known, 6 pass, 0 info; exit 0, 0.1 s; paper-film/tools/check_page_layout.mjs version 780b006a
+  node /home/user/Music/plugins/explainer-film/kit/paper-film/tools/check_page_layout.mjs /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/02-pops-effects-held-shots-and-overlaps-check-page-.json
+- PASS  the camera rule and the built-set slide (camera_audit.py) [pages 3 to 5]: 0 fail, 0 look, 0 known, 0 pass, 3 info; exit 0, 0.1 s; paper-film/tools/camera_audit.py version effcfa68
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/paper-film/tools/camera_audit.py /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/effects-camera-light/round4-film-camera-pages-3-4.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/03-the-camera-rule-and-the-built-set-slide-camera-a.json
+
+## Inputs (sha1 when the run ended)
+
+- cf1bcb4d90864df7c78d137f9da851c59fd2c89b  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/effects-camera-light/round4-film-camera-pages-3-4.json
+- c2a6092782c6cd0fc8fb7c75ca7b96e510d482da  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911.json

@@ -1,0 +1,54 @@
+Preflight plates (before paying for paintings): INPUTS MISSING. 2 to fix, 5 to look at, 0 known and accepted, 2 input(s) missing; 3 check(s) in 13.3 s.
+Paid step BLOCKED: asking the painter for these paintings (about US$0.84: an estimate: 4.8 c a megapixel (read 2026-10-16) x the megapixels returned and sent; US$19.15 left of the allowance "full redesign"). First make the missing inputs listed below, then run this stage again.
+
+Made 2026-10-16 11:09:11 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-plates-2026-10-16-110911.
+
+## Inputs missing (the stage cannot pass without them)
+
+- --render-log RENDER_LOG: the log Blender wrote while drawing the plate. Needed by plan_lights.py render-log and paint_request.py (a paid repaint needs a clean render).
+  Make it: render the plate with its output kept: blender -b ... > plate.log 2>&1
+- --shot-report SHOT_REPORT: the shot checker's report.md for this view (with known.json beside it). Needed by paint_request.py (a paid repaint needs the shot checker's light rules passed).
+  Make it: BLEND=SCENE.blend paper-film/tools/check-shot.sh SHOT_SCRIPT CHECK_FILE OUT_FOLDER PLATE
+
+## To fix (these block the next step)
+
+- glow inside a hollow [the people test]: brazier: 8.0% of the top is lit (limit 2%): the painter lifts a glowing hollow into a bright band (lesson 138). Darken the glow inside it in the plate first. (paint_request.py)
+  Fix: Lower the coals' glow or hide it behind the front rim, then draw the plate again.
+- figures casting long shadows [the people test]: Removing the figures changes 42.3% of the frame against 7.5% for the figures themselves (5.6 times; limit 3): they cast long shadows or block light. Asked to remove them, the painter leaves the shadows (lesson 135). (paint_request.py)
+  Fix: Draw the plates with the figures casting no long shadows (a small soft patch at their feet), as the Works do.
+
+## To look at (they do not block; a person decides)
+
+- render log [the people test]: No render log given (--render-log). (paint_request.py)
+- light rules [the people test]: No shot-check report given (--shot-report): run check_shot.py on the plate first. (paint_request.py)
+- figures against their surround [the people test]: man hand on bar and man leaning are barely darker than what surrounds them in the plate (over 0.5 of its brightness); the painter lifts figures about three times toward their surround (people test 0.15 to 0.50), so these will read pale. (paint_request.py)
+  Fix: Darken their cloth or stand them against a lighter background.
+- hidden figures [the people test]: walker 6 do not show in the plate at all; the prompt does not count them. (paint_request.py)
+- real people [the people test]: No list of real people given (--real-names). (paint_request.py)
+
+## Cost and time
+
+- painting the people test and its behind painting: US$0.84 (an estimate: 4.8 c a megapixel (read 2026-10-16) x the megapixels returned and sent)
+- the allowance "full redesign": US$19.15 left; this step (US$0.84) fits.
+- this preflight: 13.3 s
+
+## Checks run
+
+- FAIL  the plate is ready to paint (paint_request.py preflight) [the people test]: 2 fail, 5 look, 0 known, 5 pass, 0 info; exit 1, 13.0 s; calculators/paint_request.py version aef5911c
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/paint_request.py preflight --check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-paint-check.json --facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/plate-facts --plate /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg --work-folder /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-plates-2026-10-16-110911/paint-work --helper-plate /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-helper-plate.jpg --brief /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-brief.json --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/people-test/people-test-place-facts.json --view still --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-plates-2026-10-16-110911/01-the-plate-is-ready-to-paint-paint-request-py-pre.json
+- PASS  the painting's price (paint_request.py price) [the people test]: 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.3 s; calculators/paint_request.py version aef5911c
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/paint_request.py price --behind --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-plates-2026-10-16-110911/02-the-painting-s-price-paint-request-py-price.json
+- PASS  the allowance left (plan_budget.py ledger): 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_budget.py version bdcb5933
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_budget.py ledger /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/budget/spend-ledger-logs-10-to-34.json --next-cost 0.84 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-plates-2026-10-16-110911/03-the-allowance-left-plan-budget-py-ledger.json
+
+## Inputs (sha1 when the run ended)
+
+- a79f81e49c3dccbe0eb6854cbf1838f245b5e40e  /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-helper-plate.jpg
+- 4b7693247f825d779a165259e2457c97019d8ae0  /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg
+- 1e9e8590e5b164667dd6129270cea3fb84db2518  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/budget/spend-ledger-logs-10-to-34.json
+- 3ede925f3c3e6b73b1c07c8915c964d7afa5f53a  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-brief.json
+- 6bef7584707c4b83a90a09e36a3be7e942fbab72  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-paint-check.json
+- 971987b5c9aab628b1b6359ad9da1807e7da3e85  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/people-test/people-test-place-facts.json
+- 8ccc610588650dc9b9917badcb80aee729c4a300  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/plate-facts
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-plates-2026-10-16-110911.json

@@ -1,0 +1,16 @@
+<!doctype html><html><body style="margin:0"><canvas id="c" width="540" height="960"></canvas>
+<script type="module">
+import * as THREE from '/paper-film/node_modules/three/build/three.module.js';
+const r = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true, preserveDrawingBuffer: true });
+r.setSize(540, 960, false); r.shadowMap.enabled = true; r.shadowMap.type = THREE.PCFSoftShadowMap;
+const s = new THREE.Scene(); const cam = new THREE.PerspectiveCamera(34, 540/960, 0.5, 200); cam.position.set(0, 8, 26); cam.lookAt(0, 8, 0);
+s.add(new THREE.AmbientLight(0xffffff, 0.6));
+const L = new THREE.DirectionalLight(0xffffff, 2.5); L.position.set(-16.8, 28.8, 29.7); L.target.position.set(0, 8, 0); s.add(L.target);
+L.castShadow = true; L.shadow.mapSize.set(2048, 2048); Object.assign(L.shadow.camera, { left: -17, right: 17, top: 17, bottom: -17, near: 1, far: 90 }); s.add(L);
+const wall = new THREE.Mesh(new THREE.PlaneGeometry(10.4, 18.5), new THREE.MeshLambertMaterial({ color: 0xbbbbbb })); wall.position.set(0, 8, 0); wall.receiveShadow = true; s.add(wall);
+const card = new THREE.Mesh(new THREE.PlaneGeometry(4, 3), new THREE.MeshLambertMaterial({ color: 0xcc4444, shadowSide: THREE.DoubleSide })); card.position.set(0, 8, 1.0); card.castShadow = true; s.add(card);
+const mode = new URLSearchParams(location.search).get('mode');
+if (mode === 'wallcasts') { wall.castShadow = true; }
+r.render(s, cam);
+window.out = r.domElement.toDataURL('image/png');
+</script></body></html>

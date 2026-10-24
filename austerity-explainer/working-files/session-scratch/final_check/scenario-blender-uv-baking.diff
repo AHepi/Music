@@ -1,0 +1,54 @@
+diff -r -u '--exclude=LICENSE' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-uv-baking/SKILL.md /home/user/Music/.claude/skills/scenario-blender-uv-baking/SKILL.md
+--- /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/downloads/scenario-skills/skills/dcc/blender/scenario-blender-uv-baking/SKILL.md	2026-10-21 05:16:03.142591575 +0000
++++ /home/user/Music/.claude/skills/scenario-blender-uv-baking/SKILL.md	2026-10-21 06:00:24.431913646 +0000
+@@ -10,9 +10,7 @@
+ texture size, and pack with pixel-true padding. Expert bakes measure their projection distances
+ instead of guessing, and are judged in pixels and under a raking light, never eyeballed once. Every
+ stage below has a measurable gate that [`scripts/bx_uvbake.py`](scripts/bx_uvbake.py) computes. If a
+-sibling skill named here is missing from your available skills, ask the user to install it
+-(`npx skills add scenario-labs/skills --skill <name>`); unattended, proceed from tool schemas and
+-flag the gap.
++sibling skill is missing, do not install anything: tell the person which skill is missing and carry on without it.
+ 
+ **REQUIRED BACKGROUND:** scenario-blender-expert (execution channel, review loop, 5.2 API changes).
+ 
+@@ -121,7 +119,7 @@
+ | angle error p95 at most 15 deg organic, 3 deg flat                                     | per corner                                       | [added] from 5.2.1 measurements               |
+ | Blender packer on an organic character: 55-62%                                         | 16 px gap at 2K                                  | measured on the sheep (several runs)          |
+ | inverted texels: single pass 7.3-7.8%, adaptive 2.2% (sculpt) / 1.2% (consistent high) | selected to active, sheep                        | measured                                      |
+-| 2048 bake, 186k-face high: one pass normal + AO 4.4 s, adaptive 25 s                   | Metal GPU, headless                              | measured                                      |
++| 2048 bake, 186k-face high: one pass normal + AO 4.4 s, adaptive 25 s                   | Metal GPU on a Mac, headless (CPU-only: far slower)                              | measured                                      |
+ 
+ ## Quality gates
+ 
+@@ -183,3 +181,30 @@
+ - [`references/sources.md`](references/sources.md): videos, credentials, URLs, best timestamps, web
+   references.
+ - `scripts/bx_uvbake.py`: the module (docstrings list every function).
++
++## Local setup notes (this project, added after reading)
++
++- Blender 5.2.2, headless only (`-b --disable-autoexec`); nothing here needs a window. The module was
++  tested on 5.2.1, so check the first run on 5.2.2.
++- The four picture-review functions (`checker_review`, `distortion_review`, `map_problem_review`,
++  `bake_review`) import `bx_review` from the `scenario-blender-expert` folder next to this one. Keep
++  the folders side by side, also when copying them to the rented machine, and install nothing.
++- Baking needs Cycles (EEVEE cannot bake). `bake_high_to_low` switches the scene to Cycles and puts
++  the engine back afterwards; the film's plate renderer stays EEVEE. In a background run it also
++  switches Blender's Cycles graphics-card setting in memory (nothing here saves preferences).
++- This computer is shared and slow. Test bakes at `res=512` with `adaptive=False` (the adaptive bake
++  repeats every map five times). `bake_review` makes 12 EEVEE pictures: pass `views=("threequarter",)`
++  and a small `res`, or ask the person whether to run it on the rented machine.
++- Work on a duplicate object or a new UV map (`uv_map=`), never on the film's own objects.
++  `unwrap`, `pack`, `prepare_low` and `hookup_maps` change the object, or its materials (which other
++  objects may share), in place. `unwrap` overwrites the UV map with a placeholder first and restores
++  it only when it succeeds, so an error halfway leaves the UVs ruined. Call `explode` once and
++  `unexplode` after the bake.
++- Every bake leaves its image in the open Blender session (about 64 MB each at 2048) and may add a
++  material or a World if the scene had none. Use a throwaway scene or a fresh Blender process per
++  bake, and do not save the film's .blend afterwards.
++- `bake_id` picks colours with Python's `hash()`, which changes from run to run: read the colours back
++  from the map each time.
++- Run the raw snippets in `references/procedures.md` only in a scratch session, never in the film
++  project: they add demo objects, some switch the engine to Cycles or hide other objects from render
++  without restoring, and `s2a_bake` writes a small PNG into Blender's temp folder.

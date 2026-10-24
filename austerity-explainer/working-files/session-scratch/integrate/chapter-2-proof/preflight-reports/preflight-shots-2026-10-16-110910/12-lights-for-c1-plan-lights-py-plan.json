@@ -1,0 +1,428 @@
+{
+ "place": "checkout",
+ "view": "c1",
+ "subject": "bill",
+ "dark_subject": false,
+ "lights": [
+  {
+   "light": "ceiling-light-17",
+   "kind": "AREA",
+   "watts": 40.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "ceiling-light-18",
+   "kind": "AREA",
+   "watts": 40.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "ceiling-light-19",
+   "kind": "AREA",
+   "watts": 40.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "ceiling-light-20",
+   "kind": "AREA",
+   "watts": 40.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "street-light-1--4.5",
+   "kind": "POINT",
+   "watts": 900.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "street-light-1--12",
+   "kind": "POINT",
+   "watts": 900.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "street-light-1-13",
+   "kind": "POINT",
+   "watts": 900.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "warm-lamp",
+   "kind": "SPOT",
+   "watts": 290.0,
+   "role": "lamp",
+   "role_because": "its name says \"lamp\"",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": [],
+   "nearest_lit": "bill stand",
+   "nearest_lit_metres": 1.7855529255667557,
+   "start_watts": 52.649161926605515
+  },
+  {
+   "light": "bill-cool",
+   "kind": "SPOT",
+   "watts": 90.0,
+   "role": "accent",
+   "role_because": "reaches only bill (the subject's own light)",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": [],
+   "reach": {
+    "farthest_target_metres": 2.1936316130616724,
+    "nearest_other_metres": 3.504761864808919,
+    "nearest_other": "story surface",
+    "reach_metres": 2.3936316130616726,
+    "clear": true,
+    "source": "the place facts' boxes (rough: walls are not in them; use set_measurements.py beam)"
+   },
+   "cones": {
+    "even_cone_degrees": 22.00841537123517,
+    "even_aim": [
+     0.15,
+     2.6,
+     1.5
+    ],
+    "from_below_cone_degrees": 13.627029288855987,
+    "from_below_aim": [
+     0.15,
+     2.6,
+     1.1400000000000001
+    ],
+    "from_below_leaves_top_unlit": true
+   }
+  },
+  {
+   "light": "bill-warm-bounce",
+   "kind": "AREA",
+   "watts": 30.0,
+   "role": "accent",
+   "role_because": "reaches only bill (the subject's own light)",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": [],
+   "housing": [
+    "basket"
+   ],
+   "near": [
+    "milk label",
+    "bread label",
+    "cheese label",
+    "divider",
+    "butter label"
+   ]
+  },
+  {
+   "light": "ceiling-fill",
+   "kind": "AREA",
+   "watts": 50.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  },
+  {
+   "light": "bounce-to-ceiling",
+   "kind": "AREA",
+   "watts": 18.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [
+    "lights basket (its housing; lesson 120, log 32): skip them"
+   ],
+   "notes": [
+    "close to divider, cheese label, butter label, bread label, milk label: skip them if they come out as bright as the subject"
+   ],
+   "housing": [
+    "basket"
+   ],
+   "near": [
+    "divider",
+    "cheese label",
+    "butter label",
+    "bread label",
+    "milk label"
+   ]
+  },
+  {
+   "light": "canopy-light",
+   "kind": "AREA",
+   "watts": 300.0,
+   "role": "fill",
+   "role_because": "none of the above",
+   "casts_shadow": false,
+   "problems": [],
+   "notes": []
+  }
+ ],
+ "subject_light": {
+  "points": 28,
+  "by_light": {
+   "bill-cool": 1.306859799078252,
+   "bill-warm-bounce": 72.8879751591215,
+   "ceiling-fill": 1.7168917093303084,
+   "bounce-to-ceiling": 4.49838678064371
+  }
+ },
+ "subject_light_over_key": 61.52925777110003,
+ "lamps": [
+  {
+   "lamp": "ceiling-light-17",
+   "box": [
+    -0.40737450903851946,
+    0.31175909396338886,
+    -0.40737450903851946,
+    0.31175909396338886
+   ],
+   "depth": 6.800000000000001,
+   "problems": []
+  },
+  {
+   "lamp": "ceiling-light-18",
+   "box": [
+    0.13165985276654157,
+    0.31175909396338886,
+    0.13165985276654157,
+    0.31175909396338886
+   ],
+   "depth": 6.800000000000001,
+   "problems": []
+  },
+  {
+   "lamp": "ceiling-light-19",
+   "box": [
+    0.6706942145716026,
+    0.31175909396338886,
+    0.6706942145716026,
+    0.31175909396338886
+   ],
+   "depth": 6.800000000000001,
+   "problems": []
+  },
+  {
+   "lamp": "ceiling-light-20",
+   "box": [
+    1.2097285763766639,
+    0.31175909396338886,
+    1.2097285763766639,
+    0.31175909396338886
+   ],
+   "depth": 6.800000000000001,
+   "problems": []
+  },
+  {
+   "lamp": "street-light-1--4.5",
+   "box": [
+    0.06392592967130034,
+    0.2145799755697091,
+    0.06392592967130034,
+    0.2145799755697091
+   ],
+   "depth": 15.200000000000001,
+   "problems": []
+  },
+  {
+   "lamp": "street-light-1--12",
+   "box": [
+    -0.37780611928901875,
+    0.2685472146405907,
+    -0.37780611928901875,
+    0.2685472146405907
+   ],
+   "depth": 20.599999999999998,
+   "problems": []
+  },
+  {
+   "lamp": "street-light-1-13",
+   "box": [
+    1.475669639344889,
+    0.2685472146405907,
+    1.475669639344889,
+    0.2685472146405907
+   ],
+   "depth": 20.599999999999998,
+   "problems": []
+  },
+  {
+   "lamp": "warm-lamp",
+   "box": [
+    0.8797521359743763,
+    -0.3126489322821234,
+    0.8797521359743763,
+    -0.3126489322821234
+   ],
+   "depth": 1.85,
+   "problems": []
+  },
+  {
+   "lamp": "bill-cool",
+   "box": [
+    0.8641937290657271,
+    -0.4912530932232494,
+    0.8641937290657271,
+    -0.4912530932232494
+   ],
+   "depth": 1.3,
+   "problems": []
+  },
+  {
+   "lamp": "ceiling-fill",
+   "box": [
+    -0.03454240879001891,
+    -0.1085192600064947,
+    -0.03454240879001891,
+    -0.1085192600064947
+   ],
+   "depth": 2.4,
+   "problems": []
+  },
+  {
+   "lamp": "bounce-to-ceiling",
+   "box": [
+    0.6286117073780497,
+    0.7712903202505735,
+    0.6286117073780497,
+    0.7712903202505735
+   ],
+   "depth": 1.9,
+   "problems": []
+  },
+  {
+   "lamp": "canopy-light",
+   "box": [
+    0.31275915624304423,
+    0.4332630921229168,
+    0.31275915624304423,
+    0.4332630921229168
+   ],
+   "depth": 35.4,
+   "problems": []
+  }
+ ],
+ "shadow_casters": [],
+ "eevee": {
+  "shadow_pool_size": "1024",
+  "shadow_resolution_scale": 0.703125
+ },
+ "problems": [
+  "bounce-to-ceiling: lights basket (its housing; lesson 120, log 32): skip them",
+  "the subject gets 62 times its key light (at most 3.0), mostly from bill-warm-bounce: its colour will burn out (rule 5); turn that light down or move it away"
+ ],
+ "calculator": "plan_lights plan",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light_planner.shadow_casting_kinds": {
+   "value": [
+    "key",
+    "fire",
+    "doorway",
+    "sky"
+   ],
+   "unit": "kinds of light that cast shadows (every other light casts none)",
+   "kind": "judged"
+  },
+  "light_planner.foot_patch_metres": {
+   "value": [
+    0.5,
+    0.35
+   ],
+   "unit": "metres (width, depth) of the soft shadow under a figure that casts no shadow",
+   "kind": "judged"
+  },
+  "light_planner.container_skip_within_metres": {
+   "value": 0.6,
+   "unit": "metres: a fire's light skips every prop this close (the container it burns in, the chair beside it); other lights get a note for props this close",
+   "kind": "judged"
+  },
+  "light_planner.near_surface_within_metres": {
+   "value": 1.0,
+   "unit": "metres: a camera-facing surface this close to a light is checked against the subject (a lamp lights the face it hangs on)",
+   "kind": "judged"
+  },
+  "light_planner.reach_margin_metres": {
+   "value": 0.2,
+   "unit": "metres past the farthest lit part of the target",
+   "kind": "judged"
+  },
+  "light_planner.cone_blend": {
+   "value": 0.9,
+   "unit": "Blender spot blend",
+   "kind": "judged"
+  },
+  "light_planner.subject_light_over_key_max": {
+   "value": 3.0,
+   "unit": "times the light the subject's own key gives it (all lights reaching it together)",
+   "kind": "judged"
+  },
+  "light_planner.lamp_clear_of_subject_pixels": {
+   "value": 18,
+   "unit": "pixels on the film frame between a lamp and the subject's outline box",
+   "kind": "judged"
+  },
+  "camera.meeting_point_gap_share_of_width": {
+   "value": 0.03,
+   "unit": "share of the frame width",
+   "kind": "judged"
+  },
+  "light_planner.near_ground_light_max": {
+   "value": 0.025,
+   "unit": "W/m2 a light behind the camera may put on the ground at the frame's bottom edge",
+   "kind": "judged"
+  },
+  "frame.plate_width_pixels": {
+   "value": 1536,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light.shadow_resolution_reference_width": {
+   "value": 1080,
+   "unit": "pixels (scale = min(1, 1080 / width))",
+   "kind": "judged"
+  },
+  "light.shadow_pool_size": {
+   "value": "1024",
+   "unit": "EEVEE setting",
+   "kind": "measured"
+  }
+ }
+}

@@ -1,0 +1,1403 @@
+{
+ "stage": "pages",
+ "stage_means": "while building pages",
+ "verdict": "fail",
+ "counts": {
+  "fail": 9,
+  "warn": 0,
+  "known": 0,
+  "info": 15,
+  "pass": 141
+ },
+ "guarded_step": "filming these pages (run the film stage next)",
+ "step_kind": null,
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.4,
+ "changed_inputs": [],
+ "started": "2026-10-16 11:09:11",
+ "first_lines": [
+  "Preflight pages (while building pages): FAIL. 9 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 0.4 s.",
+  "Next step BLOCKED: filming these pages (run the film stage next). First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "d836d994",
+ "plan": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-plan.json",
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/effects-camera-light/round4-film-camera-pages-3-4.json": "cf1bcb4d90864df7c78d137f9da851c59fd2c89b",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz": "c2a6092782c6cd0fc8fb7c75ca7b96e510d482da"
+ },
+ "missing": [],
+ "checks": [
+  {
+   "title": "timing and words on screen (plan_page_timing.py check)",
+   "tool": "calculators/plan_page_timing.py",
+   "version": "fe521ade",
+   "where": "pages 3 to 5",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_page_timing.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/01-timing-and-words-on-screen-plan-page-timing-py-c.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/01-timing-and-words-on-screen-plan-page-timing-py-c.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/01-timing-and-words-on-screen-plan-page-timing-py-c.txt",
+   "seconds": 0.16,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "fail",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "workers kit.at('workers') (inflation-chapter-2-newcomers/page-3.js:57:74) leaves out which time: \"workers\" is said 3 times on page 3 (52.67, 57.93, 66.82); it takes the first, 52.67.",
+     "fix": "write kit.at('workers', N) with the time you mean (1 for the first).",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "machines kit.at('machines') (inflation-chapter-2-newcomers/page-3.js:57:135) leaves out which time: \"machines\" is said 3 times on page 3 (54.15, 56.35, 68.28); it takes the first, 54.15.",
+     "fix": "write kit.at('machines', N) with the time you mean (1 for the first).",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "In kit.at('In') (inflation-chapter-2-newcomers/page-3.js:58:14) leaves out which time: \"In\" is said 2 times on page 3 (55.10, 67.40); it takes the first, 55.10.",
+     "fix": "write kit.at('In', N) with the time you mean (1 for the first).",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "More kit.at('More') (inflation-chapter-2-newcomers/page-3.js:59:57) leaves out which time: \"More\" is said 2 times on page 3 (69.55, 70.91); it takes the first, 69.55.",
+     "fix": "write kit.at('More', N) with the time you mean (1 for the first).",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "spare kit.at('spare') (inflation-chapter-2-newcomers/page-5.js:45:40) leaves out which time: \"spare\" is said 3 times on page 5 (95.92, 112.06, 117.90); it takes the first, 95.92.",
+     "fix": "write kit.at('spare', N) with the time you mean (1 for the first).",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "More kit.at('More') (inflation-chapter-2-newcomers/page-5.js:45:63) leaves out which time: \"More\" is said 3 times on page 5 (100.67, 104.91, 115.67); it takes the first, 100.67.",
+     "fix": "write kit.at('More', N) with the time you mean (1 for the first).",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "prices kit.at('prices') (inflation-chapter-2-newcomers/page-5.js:45:109) leaves out which time: \"prices\" is said 2 times on page 5 (105.96, 119.67); it takes the first, 105.96.",
+     "fix": "write kit.at('prices', N) with the time you mean (1 for the first).",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "up kit.at('up') (inflation-chapter-2-newcomers/page-5.js:45:131) leaves out which time: \"up\" is said 2 times on page 5 (106.48, 120.03); it takes the first, 106.48.",
+     "fix": "write kit.at('up', N) with the time you mean (1 for the first).",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "readable",
+     "where": "page 3",
+     "text": "MACHINES readable 0.84 s at full strength (measured 0.83 s) before it is cut at 55.10 s; at least 1.0 s",
+     "fix": "start it on \"and\" (53.93 s): readable 1.05 s; or move the cut one word later",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "margins",
+     "where": "page 3",
+     "text": "page 3 longest line ends 0.845 across (PICTURE TWO FACTORIES); highest letters 0.0615 down (THE QUIET FACTORY)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "margins",
+     "where": "page 4",
+     "text": "page 4 longest line ends 0.897 across (WHAT HAPPENS TO PRICES?); highest letters 0.0630 down (THE FLAT-OUT FACTORY)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "margins",
+     "where": "page 5",
+     "text": "page 5 longest line ends 0.897 across (WHAT HAPPENS TO PRICES?); highest letters 0.0604 down (MOST ECONOMISTS AGREE)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "pauses",
+     "where": "page 2",
+     "text": "page 2 -> 3 pause 1.50 s is 0.55 s longer than this join needs (0.95 s: dissolve 0.30 s after the last word, 0.50 s long, + 0.15 s to settle); the extra time is a rest before the next page",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "pauses",
+     "where": "page 5",
+     "text": "page 5 -> 6 pause 3.50 s is 0.50 s longer than this join needs (3.00 s: peel 2.00 s after the last word, 0.85 s long, + 0.15 s to settle); the extra time is a rest before the next page",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "readable",
+     "where": "page 3",
+     "text": "PRICES (word on an arrow) readable 0.90 s (it names the arrow; not counted)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "readable",
+     "where": "page 5",
+     "text": "PRICES (word on an arrow) readable 0.90 s (it names the arrow; not counted)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "WHAT HAPPENS TO PRICES? \"WHAT\" was said on page 4; \"HAPPENS\" was said on page 4; \"TO\" was said on page 4; \"PRICES?\" was said on page 4 (carried over)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "HAVE A GUESS \"HAVE\" was said on page 4; \"A\" was said on page 4; \"GUESS\" was said on page 4 (carried over)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "QUIET \"QUIET\" was said on page 3",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "FLAT OUT \"FLAT\" was said on page 4; \"OUT\" was said on page 4",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "info",
+     "check": "word groups",
+     "where": "pages 3 to 5",
+     "text": "these pages 20 groups in 67 s: one every 3.4 s (plan 34 aims at about one every 6 s over the chapter)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 3",
+     "text": "PICTURE TWO FACTORIES whole until the cut at 55.10 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 3",
+     "text": "EACH ONE = A WHOLE COUNTRY whole until the cut at 55.10 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 3",
+     "text": "WORKERS whole until the cut at 55.10 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 3",
+     "text": "MATERIALS whole until the cut at 55.10 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 3",
+     "text": "MACHINES whole until the cut at 55.10 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 5",
+     "text": "NO SPARE whole until the cut at 107.17 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 5",
+     "text": "MORE MONEY whole until the cut at 107.17 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 5",
+     "text": "+ SAME THINGS TO BUY whole until the cut at 107.17 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 5",
+     "text": "\u2192 PRICES UP whole until the cut at 107.17 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "fade at cut",
+     "where": "page 5",
+     "text": "PRICES whole until the cut at 107.17 s (fadeOut 0)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "frozen",
+     "where": "page 3",
+     "text": "page 3 longest stretch with nothing changing while she speaks: 0.00 s (limit 1.7 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "frozen",
+     "where": "page 4",
+     "text": "page 4 longest stretch with nothing changing while she speaks: 0.00 s (limit 1.7 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "frozen",
+     "where": "page 5",
+     "text": "page 5 longest stretch with nothing changing while she speaks: 0.00 s (limit 1.7 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "joins",
+     "where": "page 3",
+     "text": "page 3 -> 4 join peel; a new view",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "joins",
+     "where": "page 4",
+     "text": "page 4 -> 5 join run-on; the same view runs on",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "joins",
+     "where": "page 5",
+     "text": "page 5 -> 6 join peel; a new view",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "Picture kit.at('Picture') -> 48.07 (inflation-chapter-2-newcomers/page-3.js:57:18)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "country kit.at('country') -> 51.26 (inflation-chapter-2-newcomers/page-3.js:57:46)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "materials kit.at('materials') -> 53.42 (inflation-chapter-2-newcomers/page-3.js:57:104)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "Workers kit.at('Workers', 2) -> 57.93 (inflation-chapter-2-newcomers/page-3.js:58:39)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "Call kit.at('Call') -> 61.00 (inflation-chapter-2-newcomers/page-3.js:58:70)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "quiet kit.at('quiet') -> 61.64 (inflation-chapter-2-newcomers/page-3.js:58:93)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "spends kit.at('spends') -> 63.85 (inflation-chapter-2-newcomers/page-3.js:58:118)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "go kit.at('go') -> 67.23 (inflation-chapter-2-newcomers/page-3.js:59:13)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "start kit.at('start') -> 68.74 (inflation-chapter-2-newcomers/page-3.js:59:34)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "things kit.at('things') -> 71.17 (inflation-chapter-2-newcomers/page-3.js:59:81)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 3",
+     "text": "barely kit.at('barely') -> 72.94 (inflation-chapter-2-newcomers/page-3.js:59:107)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 4",
+     "text": "busy kit.at('busy') -> 79.16 (inflation-chapter-2-newcomers/page-4.js:44:15)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 4",
+     "text": "No kit.at('No') -> 81.98 (inflation-chapter-2-newcomers/page-4.js:44:35)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 4",
+     "text": "flat-out kit.at('flat-out') -> 84.46 (inflation-chapter-2-newcomers/page-4.js:44:58)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 4",
+     "text": "factory kit.at('factory', 2) -> 84.87 (inflation-chapter-2-newcomers/page-4.js:44:87)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 4",
+     "text": "spent kit.at('spent') -> 86.95 (inflation-chapter-2-newcomers/page-4.js:44:116)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 4",
+     "text": "prices kit.at('prices') -> 90.02 (inflation-chapter-2-newcomers/page-4.js:45:17)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 4",
+     "text": "guess kit.at('guess') -> 91.03 (inflation-chapter-2-newcomers/page-4.js:45:42)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "same kit.at('same') -> 102.25 (inflation-chapter-2-newcomers/page-5.js:45:85)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "Most kit.at('Most') -> 107.15 (inflation-chapter-2-newcomers/page-5.js:46:15)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "agree kit.at('agree') -> 107.97 (inflation-chapter-2-newcomers/page-5.js:46:38)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "spent kit.at('spent') -> 110.43 (inflation-chapter-2-newcomers/page-5.js:46:62)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "spare kit.at('spare', 2) -> 112.06 (inflation-chapter-2-newcomers/page-5.js:46:87)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "made kit.at('made', 2) -> 116.30 (inflation-chapter-2-newcomers/page-5.js:46:114)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "nothing kit.at('nothing') -> 117.32 (inflation-chapter-2-newcomers/page-5.js:47:18)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lookups",
+     "where": "page 5",
+     "text": "up kit.at('up', 2) -> 120.03 (inflation-chapter-2-newcomers/page-5.js:47:42)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "PICTURE TWO FACTORIES 0.845 across at most, top 0.064 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "EACH ONE = A WHOLE COUNTRY 0.756 across at most, top 0.113 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "WORKERS 0.414 across at most, top 0.681 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "MATERIALS 0.603 across at most, top 0.743 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "MACHINES 0.535 across at most, top 0.458 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "THE QUIET FACTORY 0.747 across at most, top 0.061 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "NEW MONEY SPENT 0.526 across at most, top 0.111 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "MORE MONEY 0.386 across at most, top 0.111 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "+ MORE THINGS TO BUY 0.615 across at most, top 0.143 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 3",
+     "text": "\u2192 PRICES BARELY MOVE 0.617 across at most, top 0.174 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 4",
+     "text": "THE FLAT-OUT FACTORY 0.837 across at most, top 0.063 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 4",
+     "text": "FLAT OUT = WORKING AS HARD AS THEY CAN 0.863 across at most, top 0.107 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 4",
+     "text": "NEW MONEY SPENT 0.526 across at most, top 0.140 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 4",
+     "text": "WHAT HAPPENS TO PRICES? 0.897 across at most, top 0.065 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 4",
+     "text": "HAVE A GUESS 0.348 across at most, top 0.108 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "WHAT HAPPENS TO PRICES? 0.897 across at most, top 0.065 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "HAVE A GUESS 0.348 across at most, top 0.108 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "NO SPARE 0.392 across at most, top 0.061 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "MORE MONEY 0.386 across at most, top 0.111 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "+ SAME THINGS TO BUY 0.614 across at most, top 0.143 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "\u2192 PRICES UP 0.348 across at most, top 0.174 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "QUIET 0.445 across at most, top 0.337 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "FLAT OUT 0.761 across at most, top 0.337 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "MOST ECONOMISTS AGREE 0.491 across at most, top 0.060 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "NEW MONEY SPENT + SPARE \u2192 MOSTLY MORE THINGS MADE 0.900 across at most, top 0.082 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "NEW MONEY SPENT 0.516 across at most, top 0.091 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "+ SPARE 0.702 across at most, top 0.091 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "\u2192 MOSTLY MORE THINGS MADE 0.762 across at most, top 0.120 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "NOTHING SPARE \u2192 MOSTLY PRICES UP 0.900 across at most, top 0.164 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "NOTHING SPARE 0.436 across at most, top 0.173 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "margins",
+     "where": "page 5",
+     "text": "\u2192 MOSTLY PRICES UP 0.543 across at most, top 0.201 down",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "numbers",
+     "where": "pages 3 to 5",
+     "text": "no numbers no number is shown on these pages",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "pauses",
+     "where": "page 3",
+     "text": "page 3 -> 4 pause 1.50 s; needs 1.30 s (peel 0.30 s after the last word, 0.85 s long, + 0.15 s to settle; a plain peel, kept within 1.1-1.7 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "pauses",
+     "where": "page 4",
+     "text": "page 4 -> 5 pause 4.00 s; needs 4.00 s (run-on 3.50 s after the last word, 0.20 s long, + 0.15 s to settle; guess hold 4.0 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "PICTURE TWO FACTORIES readable 6.89 s (measured 6.87 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "EACH ONE = A WHOLE COUNTRY readable 3.70 s (measured 3.70 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "WORKERS readable 2.31 s (measured 2.30 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "MATERIALS readable 1.56 s (measured 1.53 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "THE QUIET FACTORY readable 12.49 s (measured 12.50 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "NEW MONEY SPENT readable 5.25 s (measured 5.27 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "MORE MONEY readable 4.59 s (measured 4.60 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "+ MORE THINGS TO BUY readable 2.96 s (measured 2.97 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 3",
+     "text": "\u2192 PRICES BARELY MOVE readable 1.19 s (measured 1.20 s); a conclusion, up 1.33 s before the cut",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 4",
+     "text": "THE FLAT-OUT FACTORY readable 5.12 s (measured 5.13 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 4",
+     "text": "FLAT OUT = WORKING AS HARD AS THEY CAN readable 4.87 s (measured 4.87 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 4",
+     "text": "NEW MONEY SPENT readable 2.63 s (measured 2.63 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 4",
+     "text": "WHAT HAPPENS TO PRICES? up from 90.16 s until the page leaves",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 4",
+     "text": "HAVE A GUESS up from 91.17 s until the page leaves",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "NO SPARE readable 10.94 s (measured 10.93 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "MORE MONEY readable 6.34 s (measured 6.33 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "+ SAME THINGS TO BUY readable 4.76 s (measured 4.77 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "\u2192 PRICES UP readable 1.05 s (measured 1.07 s); a conclusion, up 1.21 s before the cut",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "QUIET readable 15.21 s (measured 15.23 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "FLAT OUT readable 15.06 s (measured 15.07 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "MOST ECONOMISTS AGREE readable 14.50 s (measured 14.50 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "NEW MONEY SPENT readable 12.04 s (measured 12.03 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "+ SPARE readable 10.41 s (measured 10.43 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "\u2192 MOSTLY MORE THINGS MADE readable 6.17 s (measured 6.17 s); a conclusion, up 6.31 s before the cut",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "NOTHING SPARE readable 5.15 s (measured 5.17 s)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "readable",
+     "where": "page 5",
+     "text": "\u2192 MOSTLY PRICES UP readable 2.44 s (measured 2.43 s); a conclusion, up 2.58 s before the cut",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "same place",
+     "where": "pages 3 to 5",
+     "text": "all lines no two lines showing in the same place at once (31 things with words)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "slides",
+     "where": "page 3",
+     "text": "3b the quiet gate: zoom in from \"Workers\" (57.93) to \"Call\" (61.00), 3.07 s",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "slides",
+     "where": "page 4",
+     "text": "4a the flat-out gate: zoom in from \"No\" (81.98) to \"factory.\" (84.87), 2.89 s",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "PICTURE TWO FACTORIES every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "EACH ONE = A WHOLE COUNTRY every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "WORKERS every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "MATERIALS every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "MACHINES every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "THE QUIET FACTORY every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "NEW MONEY SPENT every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "MORE MONEY every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "+ MORE THINGS TO BUY every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "\u2192 PRICES BARELY MOVE every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 3",
+     "text": "PRICES every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 4",
+     "text": "THE FLAT-OUT FACTORY every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 4",
+     "text": "FLAT OUT = WORKING AS HARD AS THEY CAN every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 4",
+     "text": "NEW MONEY SPENT every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 4",
+     "text": "WHAT HAPPENS TO PRICES? every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 4",
+     "text": "HAVE A GUESS every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "NO SPARE every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "MORE MONEY every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "+ SAME THINGS TO BUY every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "\u2192 PRICES UP every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "PRICES every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "MOST ECONOMISTS AGREE every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "NEW MONEY SPENT every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "+ SPARE every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "\u2192 MOSTLY MORE THINGS MADE every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "NOTHING SPARE every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "typed words",
+     "where": "page 5",
+     "text": "\u2192 MOSTLY PRICES UP every word is said on the page near its moment",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "word groups",
+     "where": "page 3",
+     "text": "page 3 8 groups of words in 25.9 s (5 lines, 0 cards, 3 labels and tags, 0 other); limit 8 (the larger of 5 and one every 6 s, plus 0 figures and 3 placements)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "word groups",
+     "where": "page 4",
+     "text": "page 4 5 groups of words in 16.3 s (5 lines, 0 cards, 0 labels and tags, 0 other); limit 5 (the larger of 5 and one every 6 s, plus 0 figures and 0 placements)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "word groups",
+     "where": "page 5",
+     "text": "page 5 7 groups of words in 24.9 s (3 lines, 2 cards, 2 labels and tags, 0 other); limit 7 (the larger of 5 and one every 6 s, plus 0 figures and 2 placements)",
+     "fix": "",
+     "tool": "plan_page_timing.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "pops, effects, held shots and overlaps (check_page_layout.mjs)",
+   "tool": "paper-film/tools/check_page_layout.mjs",
+   "version": "780b006a",
+   "where": "pages 3 to 5",
+   "command": "node /home/user/Music/plugins/explainer-film/kit/paper-film/tools/check_page_layout.mjs /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/02-pops-effects-held-shots-and-overlaps-check-page-.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/02-pops-effects-held-shots-and-overlaps-check-page-.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/02-pops-effects-held-shots-and-overlaps-check-page-.txt",
+   "seconds": 0.14,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "effects after their moment",
+     "where": "pages 3 to 5",
+     "text": "all about 154 moments drawn again out of order came out the same; no live thing is shared between pages",
+     "fix": "",
+     "tool": "check_page_layout.mjs"
+    },
+    {
+     "verdict": "pass",
+     "check": "held shots",
+     "where": "page 3",
+     "text": "page 3 held-shot keys only while the camera holds, and every hold has one",
+     "fix": "",
+     "tool": "check_page_layout.mjs"
+    },
+    {
+     "verdict": "pass",
+     "check": "held shots",
+     "where": "page 4",
+     "text": "page 4 held-shot keys only while the camera holds, and every hold has one",
+     "fix": "",
+     "tool": "check_page_layout.mjs"
+    },
+    {
+     "verdict": "pass",
+     "check": "held shots",
+     "where": "page 5",
+     "text": "page 5 held-shot keys only while the camera holds, and every hold has one",
+     "fix": "",
+     "tool": "check_page_layout.mjs"
+    },
+    {
+     "verdict": "pass",
+     "check": "overlaps at events",
+     "where": "pages 3 to 5",
+     "text": "all no two drawn things in the same place at 80 event moments",
+     "fix": "",
+     "tool": "check_page_layout.mjs"
+    },
+    {
+     "verdict": "pass",
+     "check": "pops",
+     "where": "pages 3 to 5",
+     "text": "all nothing comes or goes in 2 frames or fewer outside a planned cut (36 drawn things, 449 live things)",
+     "fix": "",
+     "tool": "check_page_layout.mjs"
+    }
+   ],
+   "verdict": "pass"
+  },
+  {
+   "title": "the camera rule and the built-set slide (camera_audit.py)",
+   "tool": "paper-film/tools/camera_audit.py",
+   "version": "effcfa68",
+   "where": "pages 3 to 5",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/paper-film/tools/camera_audit.py /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/effects-camera-light/round4-film-camera-pages-3-4.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/03-the-camera-rule-and-the-built-set-slide-camera-a.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/03-the-camera-rule-and-the-built-set-slide-camera-a.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911/03-the-camera-rule-and-the-built-set-slide-camera-a.txt",
+   "seconds": 0.05,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "info",
+     "check": "3a both gates",
+     "where": "pages 3 to 5",
+     "text": "{\"name\": \"3a both gates\", \"from\": 47.4, \"to\": 55, \"moves\": [], \"still\": 7.6, \"verdict\": \"\"}",
+     "fix": "",
+     "tool": "camera_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "3b the quiet gate",
+     "where": "pages 3 to 5",
+     "text": "{\"name\": \"3b the quiet gate\", \"from\": 55.1, \"to\": 75.1, \"moves\": [{\"from\": 58.3, \"to\": 60.6, \"words\": \"zoom in\"}], \"still\": 17.7, \"verdict\": \"\"}",
+     "fix": "",
+     "tool": "camera_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "4a the flat-out gate",
+     "where": "pages 3 to 5",
+     "text": "{\"name\": \"4a the flat-out gate\", \"from\": 75.2, \"to\": 95.4, \"moves\": [{\"from\": 82.4, \"to\": 84.5, \"words\": \"zoom in\"}], \"still\": 18.1, \"verdict\": \"\"}",
+     "fix": "",
+     "tool": "camera_audit.py"
+    }
+   ],
+   "verdict": "pass"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-pages-2026-10-16-110911.md"
+}

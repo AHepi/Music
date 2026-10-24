@@ -1,0 +1,25 @@
+{
+ "object_count": 5,
+ "triangle_count": 158164,
+ "uses_real_displacement": [
+  "Chimney brick shaft (four tall faces, brick height map, adaptive, 2 px)"
+ ],
+ "build_seconds": 1.49,
+ "known_flaws": [
+  "The smoke is smooth-shaded lumps (about 500 blobs, 160k triangles with the chimney): it reads as soft cauliflower-like painted clumps, not wispy or textured; the far puffs are still rather round.",
+  "Smoke greys (linear 0.035 charcoal to 0.27 mid grey) were judged only under the neutral preview sun; they may need to be scaled once the dusk lighting exists.",
+  "In the standard tall camera the plume crosses BEHIND the headframe wheels on screen and runs off the top and right edges; in space it never touches them (smallest gap 8 m, plume 12 m further back and 6 m above the wheel tops).",
+  "Only the four big shaft faces have real displacement; the corbel, flue stub and stone are normal-map or plain materials. The four faces are separate quads, so brick joints do not interlock round the corners (no cracks seen in close views).",
+  "The stone plinth is a plain procedural stone material (not a supplied picture); the flue opening is rectangular with a flat lintel, not arched; the soot stain above it is a see-through sheet 3 cm off the wall, not painted into the brick.",
+  "The flue stub sinks 8 cm into the engine-house left wall at x = -3.9 and sits at y 6.45 to 7.55: it depends on that wall being where the plan says.",
+  "Previews use grey stand-ins for the engine house and headframe; nothing was checked against the real parts or the real dusk light."
+ ],
+ "objects": [
+  "Chimney brick shaft",
+  "Chimney stonework and iron",
+  "Chimney corbel and flue stub",
+  "Chimney soot stains",
+  "Chimney smoke"
+ ],
+ "notes": "Chimney centred at (-6.0, 7.0), 17.0 m to the top of the coping. Brick shaft 1.95 m wide at the stone base tapering to 1.25 m under the cap, real displacement (adaptive subdivision, 2 px). Stone plinth 0-1.15 m of separate blocks with a flue recess on the front (-Y) face; pale stone band course at 13.55-13.9 m; iron bands at [3.6, 6.8, 10.0, 12.2, 15.1] m; corbelled brick cap and stone coping with an open flue mouth. A low brick flue stub joins the chimney to the engine-house left wall (x = -3.9), 1.5 m high. SMOKE: 501 puffs in one object called Chimney smoke, rising from the flue mouth at z = 17.2, leaning right (+X) and rising. It passes x = 0 at y = 8.3, z = 24.9 (so about 12 m BEHIND the headframe wheels and 6 m above their top) and ends near x = 26, y = 12, z = 30. Smallest gap between any puff and a headframe wheel disc: 8.1 m. In a camera that looks along +Y the smoke can still cross behind the wheels on screen; it never touches them in space."
+}

@@ -1,0 +1,336 @@
+===== Warm light kept to 3% of the frame; subject lit from below
+how_found: Lessons 111-112: brightness hid warmth, so warmth is measured as a share of red against blue. A deeper orange fire spread warm light over 6.3% of the frame (limit 3%). FIRE_WATTS went 900 > 300 (4.4%) > 220 deep orange (6.3%) > 140 (4.5%) > 70. A separate narrow deep-orange spot lights only the notice.
+final_value_or_rule: Warm area: pixels with (R-B)/255 x grey > 0.18 must cover <= 3% of the frame. Lit from below: (R-B)/(R+B) of the subject's bottom 15% minus its top 15% >= 0.10 (the liked picture measures 0.17). Fire 70 W; notice spot 200 W, 50 deg, blend 0.9, no shadow, cutoff 1.4 m.
+evidence: Lessons.md:421-426; film-kit/paper-film/tools/check_shot.py:1523-1572; pit-village/assemble_notice_corner.py:59-70, 150-169
+proposed_calculation: Auto-tune each warm light by bisection on energy (EEVEE, 16 samples, 540 px wide): lower until warm share <= 3% and no burnt pixels on the subject; raise the subject's own spot until lit-from-below >= 0.10. Start from the inverse square: E = target irradiance x d^2. Cutoff distance = farthest target surface + 0.2 m, and below the nearest non-target surface in the beam (ray-cast along the cone).
+already_automatic: The measurements are automatic (check_shot). The wattages were found by hand over 5+ renders.
+llm_tip: Light the subject with its own narrow, linked spot and keep the fire's own light low; measure warmth as red against blue, not brightness.
+===== A wide strong light burns white; small lamps near props
+how_found: Lesson 118: 700 W in a 50-deg beam turned 8% of the notice pure white, and its bottom measured less warm (0.04 vs 0.09). Fix: spread wide only with power cut (200 W). The notice-corner script records the lantern going 60 > 15 > 5 > 3 > 2 > 1 W, because the seat right under it was the brightest thing in the frame.
+final_value_or_rule: Notice spot 200 W at 50 deg. Lantern 1 W (its flicker added live).
+evidence: Lessons.md:441-443; film-kit/paper-film/blender/pit-village/assemble_notice_corner.py:59-70 (LANTERN_WATTS, NOTICE_GLOW_WATTS comments)
+proposed_calculation: Keeping the same light per area when a cone widens: E2 = E1 x (1 - cos(c2/2)) / (1 - cos(c1/2)). A lamp close to a prop: E_lamp <= E_subjectlight x (d_lamp_to_prop / d_subjectlight_to_subject)^2. For the lantern: 200 x (0.15/1.1)^2 ≈ 3.7 W, so start at 2-3 W, not 60. check_shot's burnt-colour rule (> 0.02% of the frame and > 3% of a group) is the stop test.
+already_automatic: The burnt check is automatic (check_shot); the starting wattages are not computed.
+llm_tip: Work out a lamp's watts from distances before rendering; a lamp 15 cm from a seat needs only a few watts.
+===== Light linking: a light reaches only its target
+how_found: Lesson 120: the warm light meant for the notice lit the chair's top rail as brightly as the notice, and the lantern lit its own brass frame. Fix: Blender light linking (light_reaches). In Blender 5.2 a collection's light-linking entries don't name their object: pair them with the collection's objects in order.
+final_value_or_rule: light_reaches(light, objects, only) for every accent light.
+evidence: Lessons.md:447-451; film-kit/paper-film/blender/pit-village/set_dressing.py:157; assemble_notice_corner.py:169-203
+proposed_calculation: Every light named for a group in the check file ('lights': {'fire_glow_on_notice': ['notice', 'board']}) gets light_reaches automatically when the shot is dressed.
+already_automatic: The helper exists (film kit only); it is called by hand.
+llm_tip: Give each accent light an explicit list of what it may reach.
+===== Light linking (which light reaches what)
+how_found: Log 32: the warm notice light lit the chair's top rail as bright as the notice; the lantern's light lit its own brass frame and made the glass milky; the fire's light, 0.4 m over the rim, made the rim and chair back as bright as the notice. The live flames light the drum in the film instead.
+final_value_or_rule: The warm key reaches only the notice and its board. The lantern's light skips the lantern. The fire's light skips the drum and the chair.
+evidence: story L1162-1166, L1194-1197 (log 32); L340 (word list); 07 lines 194-197
+proposed_calculation: A light inside, or within 0.2 m of, an object's outline box skips that object. A key light named for a subject reaches only the subject's group and its support.
+already_automatic: set_dressing.py light_reaches exists (film kit pit-village only, not in the plugin), and the checker reads it. Nothing chooses the links by itself.
+llm_tip: Every practical light must skip its own housing.
+===== Lights reach only what they are for (light linking)
+how_found: Round 5: the brazier standing against the gate lit the inner pier's face into the brightest patch in W1; fire made to skip its own drum and the works wall. Round 4 had 110 W against the outer pier.
+final_value_or_rule: Brazier fire 80 W, linked to skip its drum and the works wall; rim lights reach only the men; doorway spill lights skip the workers inside.
+evidence: assemble_works.py lines 856, 877-880, 1195-1212
+proposed_calculation: For each light, list the 3 surfaces it lights most from the camera's view; if any is outside the check file's story and subject groups and brighter than the subject, add it to that light's skip list.
+already_automatic: Partly: dressing.light_reaches exists; choosing what to skip is by hand.
+llm_tip: Give every story light a list of what it may light; the commonest fault is a warm light turning a nearby wall into the brightest thing.
+===== Light linking and shadow memory settings in Blender
+how_found: Log 31: 'Shadow buffer full' drew a false black wedge that three critics blamed on lighting; '2048' could not be allocated; log 32: lights lit things they were not aimed at. Lessons 110, 120.
+final_value_or_rule: shadow_pool_size '1024' and shadow_resolution_scale = min(1, 1080/width); scan render logs for both faults; light_reaches(light, objects, only) for each story light (Blender 5.2 collection entries need pairing by order).
+evidence: film-kit/paper-film/blender/pit-village/set_dressing.py render() lines 208-217 and light_reaches(); check_shot.py RENDER_FAULTS; build_works.sh grep
+proposed_calculation: Already computed for shadow scale; add automatic linking: each light named '<group>-light' reaches only its group unless listed otherwise.
+already_automatic: Yes in set_dressing.py (film kit only; pit-village folder not in plugin). check_shot's render-fault scan is in the plugin.
+llm_tip: Read the render log before judging any light; aim each lamp at one thing with light linking.
+===== Blender light wattages for the notice corner and the Works
+how_found: Logs 31-32: 26 lighting rounds checked by the shot checker; fire 900 W burnt the notice white, 300 W spread warm light over 4.4% (limit 3), deep orange 220 W 6.3%, 160 W lit the chair back as bright as the notice; lantern 60/15/5/3/2/1 W; notice spot 700 W wide burnt 8% white. Works rounds 4-5: gate lamp 14 W lit the pier face, halved.
+final_value_or_rule: Notice corner: FIRE 70 W (light 0.55 m over coals), LANTERN 1 W, NOTICE_GLOW 200 W narrow spot from just over the coals, ROAD_GLOW 450 W, SKY 1.96, board timber x0.5. Works: FIRE 80 W, GATE_LAMP 7 W on the outer pier's inner face, sky 1.6, men rim 220/90 W, doorway spills 900/420/260/700/300 W, room 160 W. Rule: widen a light only with its strength cut; light aimed at a thing must fall on it, not on facing brick.
+evidence: film-kit/paper-film/blender/pit-village/assemble_notice_corner.py lines 58-71; inflation-chapter-2-newcomers/works/assemble_works.py lines 856-859, 1214-1219; Lessons 112, 118, 120
+proposed_calculation: tune_lights.py: bisection per light on watts, after each preview run the light rules; stop when subject >= 1.8x mean, subject holds >= 40% of brightest parts, warm share 1.5-3%, lit-from-below >= 0.10 and no story prop as bright as the subject; log every try.
+already_automatic: No (each value was found by hand over many renders).
+llm_tip: Light the subject from the people's own lights with narrow, weak lamps, and let the checker's light numbers decide the watts.
+===== Power of practical lights and the overall exposure
+how_found: Log 31 critics: everything near white (notice, board, chair seat, drum top). The fire went from 900 to 160 W and was raised, the lantern from 60 to 5 W, and the board's timber was darkened by half. Log 32: the frame was a third darker than the reference, so the dusk sky went from 1.4 to 1.96; the chair's paint was lightened to 0.25 (legs had been darker than the pavement), still darker than the notice.
+final_value_or_rule: Fire 160 W, lantern 5 W, timber albedo halved, sky strength 1.96, chair paint 0.25. The subject is the brightest thing, at about 3.1 times the frame's average.
+evidence: story L1122-1125 (log 31), L1177-1179 (log 32), L1071 (log 30, spotless white chair)
+proposed_calculation: An exposure loop on small renders (270 × 480). For each practical light, find the brightest non-subject surface it lights; if that is brighter than 0.8 × the subject, scale the light by (0.8 × subject / that). Scale the sky so the frame's average matches the reference, keeping the top third under 0.6 × the subject. Clamp near props' albedo between 1.1 × the ground under them and 0.8 × the subject. 2 or 3 rounds.
+already_automatic: No.
+llm_tip: When near props go white, cut the practical light and lift it away; don't darken the whole frame.
+===== Subject lit from below by the story's own light
+how_found: Log 31: a narrow warm light just over the coals, aimed at the notice's lower part; it reached 0.07 warmer at the bottom (needs 0.10; the reference 0.17). Log 32: 0.08 on the still. On the film page, with a copy of the warm light under the notice, it reached 0.23.
+final_value_or_rule: The subject's bottom is at least 0.10 warmer than its top; aim about 0.17. A notice that keeps its own surface needs its own copy of the warm light in the film page.
+evidence: story L1122-1125, L1142-1143 (log 31), L1200-1202, L1215-1217 (log 32)
+proposed_calculation: Measure the warmth gradient. If it is below 0.10, raise the linked under-light by 0.17/measured and re-render. In the stage, add the same light under any own-surface sign.
+already_automatic: Measured by check_shot. Not adjusted automatically.
+llm_tip: Signs that keep sharp lettering are not painted, so give them the warm light separately in the film page.
+===== Subject lit from below: warm bottom, cool top
+how_found: Log 30: liked notice warms steadily from top to bottom (+0.17 on the share measure). Log 31: red minus blue misjudged white parts; the share (r - b)/(r + b) told tests apart (lesson 111). 700 W in a 50-degree beam burnt 8% of the notice white (lesson 118); a 20-degree cone warmed only a patch behind the chair back; the beam went through the board onto the wall until a reach of 1.4 m was set.
+final_value_or_rule: Hue (r - b)/(r + b) in the subject's bottom 15% minus its top 15% >= 0.10 (reference 0.17). Notice glow: spot from 0.25 m over the coals, colour (1.0, 0.42, 0.12), 200 W, 50-degree cone, blend 0.9, no shadow, custom distance 1.4 m (notice 1.0 to 1.2 m away, wall 2.1 m), aimed 0.46 x scale below the notice centre (its bottom edge), linked to the notice and board only; corner lamp pale (1.0, 0.97, 0.94) 12 W.
+evidence: check_shot.py lines 1560-1573; assemble_notice_corner.py lines 156-178, 225-228
+proposed_calculation: aim = subject bottom edge centre; cutoff = midpoint between the subject's farthest point and the first surface behind it along the beam (ray cast); cone = 2*atan(subject half-diagonal / distance) + 10 degrees; link it to subject + support; energy by bisection on lift >= 0.12 with no clipped pixels.
+already_automatic: Measured after rendering; set by hand. The film page gets a copy of the light from notice-corner-shot.json automatically.
+llm_tip: Light the subject from below with a narrow deep-orange spot that reaches only the subject; keep the light above it pale.
+===== Amount and place of warm light
+how_found: Log 30: the liked picture had 2.3% warm, clip 29 had 0.5%. Log 31: 2.9%, nearly all round the story props. Log 32: in the painted end frame, lamps and lit windows spread it (43% round the story props).
+final_value_or_rule: Warm light covers 1.5 to 3% of the frame, most of it round the story props.
+evidence: story L1139-1140 (log 31), L1218-1219 (log 32); 07 rule 6
+proposed_calculation: Measured already. Add: scale the warm practical lights by target share / measured share.
+already_automatic: Measured by check_shot.py.
+llm_tip: Painted lamps and windows spread warm light: check the painted frame too, not only the plate.
+===== Warm light share and where it falls
+how_found: Round 4 critic W4: warm light covered 23.6% (guide 3%), top third 0.47 to 0.51 (limit 0.36). Round 4 set W2's new beam made 4.9%; round 5 W2 6.6%, W1 0.2%.
+final_value_or_rule: Warm light 1.5 to 3% of the frame, most of it round the story props; top third brightness at most 0.36; turn yard lights down to one pool.
+evidence: round4-result.json critique.findings[9]; round4-result.json set.not_done 'Warm light covers 4.9%'; round5-set/checks/w2-quiet-c/light/report.md line 25
+proposed_calculation: Already measured by check_shot.py rule 6; add an auto-fix: scale each warm light's custom distance (not strength) by sqrt(3% / measured share) for the light that lights the largest off-story patch.
+already_automatic: Yes as a check (check_shot.py rule 5 and 6, in both kits); the fix is by hand.
+llm_tip: Shorten a warm light's reach rather than its strength when it spreads; keep warm light to 1.5 to 3% of the frame.
+===== Warm light share and where it lies (rule 6)
+how_found: Log 30: liked 2.2 to 2.3% warm, clip 29 0.5%. Log 31: fire light cut 900 W (white notice) to 300 (4.4%), deep orange 220 W (6.3%) and 140 W (4.5%), 160 W made the chair back as bright as the notice; settled at 70 W with light linking (lesson 112).
+final_value_or_rule: Warm = (red - blue)/255 times brightness > 0.18; share 1.5 to 3% of the frame; at least 50% of it within the story box widened by 6% of the width. FIRE_WATTS 70, light 0.55 m over the coals (0.4 m over the rim), ROAD_GLOW 450 W spot 40 degrees blend 0.8 aimed at (1.4, 25.0).
+evidence: check_shot.py lines 1521-1559; assemble_notice_corner.py lines 59-69 and 274-283
+proposed_calculation: Bisection on the fire's energy (and on each spot's custom distance) until the share is 2.0 to 2.5% and inside >= 70%; name lights for stray patches by energy/distance^2 within cone and reach (warm_lights_near).
+already_automatic: Measured after rendering; lights named automatically; tuning by hand.
+llm_tip: Shorten a warm light's reach (custom distance) before cutting its strength, so the subject keeps its glow.
+===== Subject is the biggest bright thing (rule 5)
+how_found: Log 30 measurements: liked picture's notice 0.61 against an average of 0.32, about half to two thirds of the brightest 3% on it, about 80% in the group; clip 29 about a fifth. Notice corner final: 60 to 68% on the notice, 79 to 90% in the box, 3.07 to 3.13 times the average.
+final_value_or_rule: Brightest parts = the top 3% of the picture blurred by 1% of the width. At least 40% of them on the subject (its mask widened 9 x 9 px) and at least 75% in the story props' box; subject mean at least 1.8 times the frame's mean.
+evidence: check_shot.py check_light lines 1494-1516; measure_composition.py lines 96-104
+proposed_calculation: Automatic light-tuning loop: render small, measure, raise the subject's linked key light (or dim the patch's owner light) by bisection until both shares and the 1.8 ratio pass; stop on burnt-out pixels.
+already_automatic: Measured after rendering; tuned by hand over 29 lighting rounds.
+llm_tip: Give the subject its own warm key light linked only to it, then tune by measurement, not by eye.
+===== Dim sky and the frame's overall brightness
+how_found: Log 30: liked top-centre sky 0.35, clip 29 0.49 (a cloud was the brightest thing). Log 32: cutting the fire's light left the frame a third darker than the liked picture (0.21 against 0.32), fixed with sky strength 1.4 to 1.96.
+final_value_or_rule: Each third of the top third <= 0.36 mean brightness; frame average near the reference's (about 0.30); notice corner SKY_STRENGTH 1.96 (street.blend 1.4); top row measured 0.24 to 0.26.
+evidence: check_shot.py lines 1517-1520; assemble_notice_corner.py line 70 and 311-316
+proposed_calculation: Bisection on world strength between 1.0 and 2.5 to bring the frame average to the target while keeping every top-third cell <= 0.36.
+already_automatic: Measured after rendering only.
+llm_tip: Dim the sky rather than brightening everything else; tune its strength by measurement.
+===== No story prop as bright as the subject; lamps' glass and flames
+how_found: Log 31-32: the chair's seat and top rail, the lantern's brass and glass, the drum's rim and inside wall each came out as bright as the notice. Lantern watts 60, 15, 5, 3, 2 then 1. Chair paint 0.18 made its legs darker than the pavement; 0.25 kept. Light linking added (lesson 120).
+final_value_or_rule: A story prop's 95th-percentile brightness must stay under the subject's median - 0.05 (props of at least 400 px). A prop that is a light (lights_in_story) may outshine it only over 10% of itself (a small flame lights about 6%, a glowing glass 18 to 22%). Chair tint 0.25; lantern 1 W, glass emission 0.3, see-through 0.45; the lantern's light skips the lantern; the fire's light skips the drum and the chair; lamp mantle emission 8, glass 0.3 see-through 0.5.
+evidence: check_shot.py lines 1574-1603; assemble_notice_corner.py lines 64-65, 182-207, 216-224; Lessons.md 120
+proposed_calculation: Automatic default links: every light skips the object it sits in; a container's own light skips the container and props within 0.6 m; a subject key light reaches only subject + support. Then bisection on tint (0.18 to 0.35) and lamp energies against the rule.
+already_automatic: Light linking helper exists (set_dressing.light_reaches, not in plugin kit); choices made by hand.
+llm_tip: Link lights so they never light their own housing; a lamp's flame may be the brightest point but its glass may not.
+===== A lit prop must not outshine the subject
+how_found: Log 32: a flame lights about 6% of the lantern as bright as the notice; a glowing glass lights 18 to 22%. Log 27: the miners' lamps glared over their faces.
+final_value_or_rule: Flag a light-prop when more than 10% of it is as bright as the subject.
+evidence: story L1195-1197 (log 32), L882 (log 27); 07 lines 191-193
+proposed_calculation: Already computed.
+already_automatic: Yes, check_shot lights_in_story.
+llm_tip: A small bright flame is fine; a bright glass or body is not.
+===== No burnt-out colour
+how_found: Log 31-32: notice, board, chair seat and drum top near white under the first 900 W fire.
+final_value_or_rule: Pixels with any channel >= 254 must cover no more than 0.02% of the frame and 3% of any prop, and no more than 0.1% of the frame on the set.
+evidence: check_shot.py lines 1604-1619
+proposed_calculation: Stop condition for every light-tuning loop.
+already_automatic: Measured after rendering.
+llm_tip: White has no warmth: cap lights before the subject clips.
+===== Stray warm patches named by light
+how_found: Log 31-32: an orange oval on the house wall from the notice glow's beam passing the board; fire glow on the road.
+final_value_or_rule: Warm patches with hue > 0.25 and brightness > 0.25 outside all props, opened 9 x 9, over 0.2% of the frame (top 3) are listed with the lights reaching them most (energy / distance^2, respecting spot cone, custom reach and light linking).
+evidence: check_shot.py lines 1620-1636, light_reaching 1425-1443
+proposed_calculation: Already a calculation; make it feed the tuning loop (shorten that light's reach).
+already_automatic: Yes after rendering, as a note.
+llm_tip: Give every spot a custom distance just past its target so it can't paint the wall behind.
+===== Quiet side weight (rule 10)
+how_found: Log 30: liked 43/57, clip 29 46/54 (needed by both, not decisive). Notice corner 34% (log 31), 36%, 38% (log 32), 46% on the film page. A left fill of 500 W moved it only 36 to 37%; detail and small lights work better.
+final_value_or_rule: The half away from the subject holds 40 to 48% of the weight (Laplacian of the blurred picture, blurred 25 px, plus distance from mean grey, each normalised); ranked at 0.8 of other faults; no light there as bright as the subject; no non-story prop there over 2%. Fixes used: a second gas lamp on the left kerb (10 W, pale), a cool area fill 350 W (3 x 18 m, colour 0.62, 0.72, 1.0, houses at about 0.6 of the sky's brightness), two dim lit windows.
+evidence: check_shot.py lines 1637-1666; assemble_notice_corner.py lines 231-272; experiments/31 .../tools/quiet_weight.py
+proposed_calculation: Automatic: if under 40%, light 1 to 3 more windows in the quiet half (picked as light_left_windows does) and re-measure; do not raise fill light energy beyond the houses at 0.6 of the sky.
+already_automatic: light_left_windows() picks windows automatically (0.05 to 0.42 across, 0.25 to 0.48 down, every other one, emission 1.2) in the notice corner script only.
+llm_tip: Balance the quiet side with small details and dim lights, not a big fill light; it is the weakest rule.
+===== Weight of the quiet side
+how_found: Log 30: an even weight is not the reason the liked picture works (clip 29 is 46 to 54, the liked picture 43 to 57). Log 31: the quiet left half held 34% (aim 40), so a soft cool light was put on the left-hand houses (about 0.6 of the sky's brightness), sacks and bins moved into view and a dim lit window added. Log 32: 38%; then 46% on the film's end frame.
+final_value_or_rule: The quiet side holds 40 to 48% of the weight; none of its lights is as bright as the subject; no prop there covers more than 2% of the frame.
+evidence: story L1049-1051, L1132-1134, L1141-1142, L1199, L1217; 07 rule 10
+proposed_calculation: If the quiet weight w is below 0.40, multiply the quiet side's fill-light energy by 0.40/w and/or light one more window; re-render small and re-measure (1 or 2 rounds).
+already_automatic: Measured by check_shot. The size of the fix is not computed.
+llm_tip: Fill the quiet side with fine dim detail and one or two small lights, never a second bright place.
+===== Lamps and lights that land on the subject or the meeting point
+how_found: Log 31: the far street lamp touched the board's post right where the lines meet; the street's own lamp behind the camera flooded the near road. Lamps at y 39 and 64.5 removed; lamp at y 11 dimmed to 70 W.
+final_value_or_rule: No lamp head or post within a clear gap (18 px) of the subject's outline or the meeting point; lights behind the camera that reach the near-left ground are dimmed.
+evidence: assemble_notice_corner.py lines 93-101
+proposed_calculation: Project every set lamp; remove or move those within 18 px of the subject's silhouette or within 0.03 of the frame of the meeting point; dim lights within 15 m behind the camera.
+already_automatic: No.
+llm_tip: Check the set's own lamps from the composed spot; the street builder put them there, not you.
+===== Gate lamp off the pier's face
+how_found: Round 3 flagged and round 4 critic measured: the gate lamp on the pier's front made the quiet side's pier the brightest thing (0.75 to 0.82 at 0.31 across, 0.52 down); gate held 0% of the brightest parts, 0.88 x average (rule 1.8); lit-from-below -0.02 (need 0.10). Round 5 moved and halved it.
+final_value_or_rule: Lamp bracket on the pier's inner face 0.1 m in from its front edge, foot 2.2 m (glass about 3.3 m), 7 W (half of 14 W); light 0.2 m toward the lane from the glass. Round 5 check: lit-from-below 0.25 (pass).
+evidence: assemble_works.py lines 856-859 and 843-846; round4-result.json critique.findings[4]; round5-set/checks/w1-quiet-d/light/report.md line 79
+proposed_calculation: For each light: irradiance on camera-facing surfaces = P x cos(theta) / r^2; flag if any non-subject surface facing the camera receives more than the subject; propose moving the light behind the plane of the surface it over-lights (inner face) and scaling P by (subject target / current).
+already_automatic: Partly: check_shot.py names the light that most lights an over-bright prop, after a render; nothing moves lights.
+llm_tip: A lamp on the face of a wall lights the wall, not the subject; mount it on the inner face or above the subject.
+===== A dark subject stands against a pale background
+how_found: Round 3 check: the shut, chained gate hardly showed (dark bars on a dark doorway). Round 4 added a faint cool yard light; round 5 raised it from 260 to 900 W. Round 5 checks still found the gate 0.87 x average brightness and 8% of the brightest parts (need 1.8 and 40%): the 'subject is brightest' rule cannot hold for a dark iron gate.
+final_value_or_rule: No. 1's yard: a cool light 900 W (0.55/0.68/1.0), no shadows, at 3.6 m behind the wall, 5.2 m up, reaching only the yard's mill front, doors and setts; doorway dark until 'go'. Judge a dark subject by its silhouette contrast, not its brightness.
+evidence: assemble_works.py lines 1148 and 1220-1221; round3-result.json checked.findings[9]; round5-set/checks/w1-quiet-d/light/report.md lines 21-23
+proposed_calculation: If the subject's own albedo is dark (iron, silhouettes), mark it 'subject_dark' in the check file and replace rule 5's brightness test with: mean luminance of a 30 px band behind the subject >= 2.5 x the subject's mean; place a backlight until it holds.
+already_automatic: No; the checker still reports a failure that cannot be fixed by brightening.
+llm_tip: Dark iron, dark coats and silhouettes are shown by lighting what is behind them, not by lighting them.
+===== Only a few lights cast shadows
+how_found: Round 3: with every light casting shadows a Works plate took about 25 minutes; men's long shadows made the state-picture mask 42%. Turning off shadows except the fire, the lit doorways and the sky light cut it to about 6 minutes and the mask to 5 to 9%.
+final_value_or_rule: Shadows only from the fire, the yards' lit doorways and the sky; lamps and lantern no shadows; figures cast no long shadows (visible_shadow False) and each has a small soft foot patch (two see-through ovals).
+evidence: assemble_works.py lines 984-1047 and 1504; round3-result.json works.summary 'Speed' and 'State pictures'
+proposed_calculation: Default every light to no shadows except those named as the shot's key light(s); set figures' visible_shadow off and add a foot patch sized 0.5 x 0.35 m under each.
+already_automatic: No.
+llm_tip: Let only the key light cast shadows and give people foot shadows instead of long ones; plates draw four times faster and state changes stay small.
+===== Edge light so dark figures separate
+how_found: Round 4 critic: the waiting men were pure black with no edge light, so neither viewer nor painter could separate them. Round 5 added rim lights reaching only the men. People test (painted, log 34): figure-to-surround contrast ratio about 2.2 painted, 2.98 as silhouettes.
+final_value_or_rule: Two rim lights per crowd, linked to the men only, no shadows: a cool yard light 220 W (colour 0.55/0.68/1.0) 1.2 m to the side and 1.6 m behind the gate, 2.4 m up; a warm lamp light 90 W (1.0/0.72/0.45) 1.9 m to the other side, 2.9 m up.
+evidence: assemble_works.py lines 1195-1214; round4-result.json critique.findings[1]; SCRATCH/redesign/people-paint/check-figures/film-figure-contrast.json
+proposed_calculation: For each figure, measure the edge contrast (mean gradient across its outline) and the luminance ratio to a 20 px ring around it; require ratio >= 2 and a visible light edge on at least one side; if not, place a rim light behind the figure relative to the camera with light linking to the figures only.
+already_automatic: No.
+llm_tip: Dark people against a dark street need a thin rim of light from behind, linked so it lights only them.
+===== Blender shadow memory (EEVEE)
+how_found: Lesson 110: at '1024' the 1,536-wide plate ran out ('Shadow buffer full') and drew a false hard black wedge, which three critics blamed on the lighting. At '2048' this machine couldn't set it up ('Could not allocate shadow atlas') and drew no shadows.
+final_value_or_rule: shadow_pool_size '1024' and shadow_resolution_scale = min(1, 1080 / width). Read the render log before judging light.
+evidence: Lessons.md:417-420, 518; film-kit/paper-film/blender/pit-village/set_dressing.py:212-217; check_shot.py RENDER_FAULTS
+proposed_calculation: Already computed in set_dressing.render(). Make the render wrapper grep its own log and fail on either message.
+already_automatic: Yes in set_dressing.py and check_shot (with RENDER_LOG), film kit only. pit-village/ is NOT in the plugin kit.
+llm_tip: Before blaming the lights, read the render log for shadow-memory errors.
+===== Render shadow memory
+how_found: Log 31: a hard black wedge across the road turned out to be a render fault, not the lighting: Blender had run out of shadow memory ('Shadow buffer full' in its log). The checker now reads the render log.
+final_value_or_rule: No 'Shadow buffer full' or 'Could not allocate shadow atlas' in the render log; otherwise the light rules are not judged.
+evidence: story L1120-1121 (log 31); 07 lines 198-200; check_shot.py RENDER_FAULTS (line 1811)
+proposed_calculation: Before rendering, raise EEVEE's shadow pool when there are many lights. After rendering, read the log; if a fault is found, double the pool and render again.
+already_automatic: Found, yes (check_shot.py with RENDER_LOG). Fixed by itself, no.
+llm_tip: Always keep the render log. A black wedge is often a renderer fault, not your lighting.
+===== Render shadow memory and reading the render log
+how_found: Log 31: a hard black wedge across the road, blamed on the lighting by three critics, was 'Shadow buffer full'; '2048' could not be set up ('Could not allocate shadow atlas') (lesson 110).
+final_value_or_rule: EEVEE shadow_pool_size '1024' and shadow_resolution_scale = min(1, 1080/width); the checker refuses the light rules when the log has either message.
+evidence: set_dressing.py render lines 232-246; check_shot.py RENDER_FAULTS line 1811 and main 1924-1931
+proposed_calculation: Always write the log beside every plate and still, and pass it to check_shot automatically (check-shot.sh only does it if RENDER_LOG is set).
+already_automatic: The render setting is automatic in set_dressing.render (not in the plugin kit); the log check runs only when given.
+llm_tip: Before judging light, grep the render log for 'Shadow buffer full' and 'Could not allocate shadow atlas'.
+===== Glowing things and flames
+how_found: Lesson 89: the brazier's flames under the fire's lamp rendered as pale paper cones. Give glowing things a black base colour; better, leave flames out of the plate (painted, they read as cut-outs) and draw them live in the film. Workflows: tell the painter never to add flames, smoke, glows or new shadows round near props.
+final_value_or_rule: Emissive materials get a black base colour. Flames, smoke and glows are drawn live in the film, never in the plate or painting.
+evidence: Lessons.md:344-346; Workflows.md:182-184
+proposed_calculation: Lint: any material with emission > 0 and base colour luminance > 0.05 is set to black base automatically (glow_material in set_dressing). Plate scripts hide objects tagged 'flame' before rendering.
+already_automatic: Partly: set_dressing has glow_material/make_glow (film kit). Nothing enforces it.
+llm_tip: Fire is a live effect, not a painted one.
+===== Glowing things and see-through glass in the plate
+how_found: Log 29: flames lit by their own lamp rendered as white paper cones (lesson 89). Log 32: setting glass alpha was ignored because the glTF glass reads it from its picture.
+final_value_or_rule: Glow materials have a black base (glow_material); see_through() unhooks the alpha link first; drum soot glows 0.6 at the coals fading to 0 under the rim.
+evidence: set_dressing.py glow_material and see_through; assemble_notice_corner.py lines 136-148
+proposed_calculation: Automatic pass over imported props: any material named *glass* or *_bulb* gets make_glow/see_through with the place's lamp colours.
+already_automatic: Helpers exist (not in plugin kit); applied by hand per prop.
+llm_tip: Give glowing parts a black base colour and leave flames out of the plate entirely.
+===== Lit glass glows warm, not white
+how_found: Round 2 factories helper: lit glass glowed white, dark glass caught lamps and looked lit; lowered glow and dulled the dark glass. Round 3 check: open doorway's inside read near white.
+final_value_or_rule: LIT_GLOW = 1.4 for lit window glass (pit village's 4 used much darker pictures); dark glass dull, showing the dusk sky.
+evidence: works_kit.py lines 59-60 and 194-213; round2-result.json factories.tested 'Earlier fixes'
+proposed_calculation: Measure each lit window group's mean colour; flag if luminance > 230 or saturation < 0.25 (white); flag dark glass brighter than 1.5 x the wall around it.
+already_automatic: No.
+llm_tip: Lit windows should read warm amber, never white; check the brightest pane in the plate.
+===== Exposure per view from how dark its plate is
+how_found: Round 3 pages: W1 is the darkest view and the stage's tone curve halves a dark picture: 18 levels on screen against 37 to 43 for the other views; the waiting men were near-black on near-black. Raised exposure for the whole shot. Round 3 check warned the brick near the lamp turned bright orange at the cut from W3.
+final_value_or_rule: W1 exposure 1.6 (others 1.0), constant across the shot; to be re-judged once the painting replaces the plate (the notice corner's painting came out brighter than its plate).
+evidence: KIT/paper-film/scenes/inflation-chapter-2-newcomers/page-3.js lines 46-52; round3-result.json pages.summary item 3; round3-result.json checked.findings[15]
+proposed_calculation: exposure = clamp(target_mean / graded_mean(plate), 1.0, 1.8) with target about 38 levels on screen (the other views' mean), computed per view from the actual picture in use; recompute when the painting arrives.
+already_automatic: No.
+llm_tip: Measure each view's on-screen mean brightness after the grade; a view under about 25 levels needs more exposure, set for the whole shot.
+===== Exposure per view from the plate's brightness
+how_found: Log 34 round 3: W1's plate averaged 35 levels against 49 (W2) and 59 (W3); the filmic curve roughly halves so dark a picture; the men were 18 on screen; exposure 1.6 gave 28 (50 once windows lit). Flagged as a stand-in to judge again with the painting.
+final_value_or_rule: LOOK_W1 = exposure 1.6; other Works views 1.0.
+evidence: film-kit/paper-film/scenes/inflation-chapter-2-newcomers/page-3.js LOOK_W1 comment
+proposed_calculation: Render one still per view at exposure 1.0, measure frame mean and subject mean (inside its mask); exposure = clamp(target/measured, 0.8, 1.8) with target frame mean about 45-55 levels; iterate once because the curve is not linear.
+already_automatic: No.
+llm_tip: Match view brightness numerically across cuts instead of eyeballing; dark plates lose dark figures entirely.
+===== Look settings for projected-set pages
+how_found: Logs 29-34: the painting must stay sharp; the notice corner and Works pages settled on small blur.
+final_value_or_rule: look { exposure 1.0, aperture 4.0, maxBlur 2, glowThreshold 0.9, glowStrength 0.6, contrast 1.04, vignette 0.3 }; lightRig reflections 0.2, key castShadow false, hazeDensity 0.008. Plugin guide still says aperture 7-9 (relief pages).
+evidence: film-kit/paper-film/scenes/notice-corner.js line ~180 and lightRig call line 44-46; inflation-chapter-2-newcomers/page-3.js LOOK
+proposed_calculation: Default look by page type in the kit (PROJECTED_LOOK constant) so helpers don't copy numbers.
+already_automatic: No; not in plugin.
+llm_tip: On painted 3D sets keep focus blur tiny (maxBlur 2): the painting carries the depth.
+===== Distance picture and lens blur
+how_found: Log 16: a too-coarse distance picture and a blur that ate the detail. Log 19: the cinema look uses lens blur with focus falling off.
+final_value_or_rule: The distance picture at frame resolution; blur modest enough that detail survives; focus point given (finish_one_page_still --focus).
+evidence: story L519-521 (log 16), L566-572 (log 19); Status L59
+proposed_calculation: Blur in pixels from the circle of confusion, proportional to |1/z - 1/z_focus|, capped at about 6 px. Distance picture at the same resolution as the frame.
+already_automatic: Partly (the stage's lens blur).
+llm_tip: Check close-ups of fine detail after adding lens blur.
+===== Blender lights copied into the stage
+how_found: Log 31/32: the notice wears its own surface in the film, so it was lit evenly; a copy of Blender's notice spot was added; strength scaled against the fire light.
+final_value_or_rule: noticeGlowStrength = 4 * watts / fire_watts; fire PointLight(0xff9a50, 4, 9, 2) at the Blender fire light position; lantern PointLight(0xffa860, 0.8, 3, 2); positions from the shot json (fromBlender: (x, y, z) -> (x, z, -y)).
+evidence: film-kit/paper-film/scenes/notice-corner.js lines ~80-104
+proposed_calculation: Export every story light into the shot json; a kit helper builds three.js lights with intensity = 4 * W / W_reference so own-surface things are lit like the plate.
+already_automatic: Inline in notice-corner.js only.
+llm_tip: Things that keep their own surface (signs) need copies of the plate's lights in the page, or they look flat.
+===== Shadows from both faces, and the lamp-only check
+how_found: Lesson 20: no shadows in the first paper test; flat sheets facing the lamp cast nothing (three.js draws shadows from back faces only). Found by lighting with the lamp alone and by a bare one-card test.
+final_value_or_rule: Every sheet casts from both faces (shadowSide DoubleSide). Check with the lamp alone (check-shadows.mjs).
+evidence: Lessons.md:86-90, 496; film-kit/paper-film/stage/paper-stage.js:96-122; paper-film/tools/check-shadows.mjs
+proposed_calculation: Automatic test: render lamp-only and normal stills at one moment. Inside each piece's shadow zone (offset along the lamp direction), the lamp-only still must be at least 30% darker than the normal one; fail if any piece casts nothing.
+already_automatic: The stage setting is automatic; check-shadows.mjs is in the plugin, but it is judged by eye.
+llm_tip: A scene can look fine with no shadows at all; prove shadows with the lamp alone.
+===== Soft shadow kind in the software renderer
+how_found: Lesson 21: the smoothest soft shadows (VSM) need half-float filtering that the hidden browser's software renderer lacks; it failed silently.
+final_value_or_rule: Use PCFShadowMap with shadow.radius 5 (paper stage); 2048 map, radius 6, normalBias 0.02 (cinema kit).
+evidence: Lessons.md:91-93; Workflows.md:277-278; paper-stage.js:37-54; cinema-kit.js:95-106
+proposed_calculation: At stage start, test for OES_texture_half_float_linear; if it is missing and VSM was asked for, switch to PCF and print a warning instead of failing silently.
+already_automatic: PCF is the fixed default.
+llm_tip: Don't change the shadow type; the software renderer can't do VSM.
+===== How far pieces stand from the page so shadows show
+how_found: Lesson 22: at 0.5 units the shadows hid behind each piece's paper margin and the dark cobbles. Pieces moved out (soldiers 0.7, back crowd 1.25, tank 1.95, front crowd 2.7, miner 1.6) and the lamp got a larger share of the light. Then the words' shadows read as a ghostly second word, so words moved in to 0.55. Lesson 32: falling words also at 0.55, with dust behind them.
+final_value_or_rule: Pieces 0.7 to 2.7 units out (bigger pieces further). Words 0.55, including falling words.
+evidence: Lessons.md:94-98, 141-143
+proposed_calculation: Shadow offset on the page = d x tan(a), where a is the angle between the lamp and the page's normal. For pieces choose d so the offset >= margin + 0.1 x piece height: d_min = (margin + 0.1h) / tan(a). For words cap d so the offset <= 0.3 x letter height: d_max = 0.3 x h_letter / tan(a). Calibrate a from chapter 1's accepted values (words 0.55, pieces 0.7-2.7).
+already_automatic: No; the values are typed in each page.
+llm_tip: Words close to the page, pieces further out; a word's shadow must never read as a second word.
+===== Shadows on the paper stage
+how_found: Log 11: no shadows at all until sheets cast from both faces; the smoothest soft shadows don't work in the hidden browser, so softened plain ones are used; shadows too small to see, then word shadows so big they read as a second word. Log 15: the trees came out almost black from shading themselves (fixed by changing how shadows are kept off a surface). Log 16: rings and criss-crossing shadows.
+final_value_or_rule: Sheets cast shadows from both faces; softened plain shadows; a small shadow offset for words; a shadow bias that stops self-shadowing.
+evidence: story L446-449 (log 11), L505-507 (log 15), L519-521 (log 16)
+proposed_calculation: Bias = 1.5 × (shadow camera width / shadow map size). Word shadow offset at most 15% of the letter height.
+already_automatic: The settings are fixed in the stage; check-shadows.mjs exists.
+llm_tip: If a surface goes black, suspect it shading itself before changing the light.
+===== Shadow ripple rings and second-light shadows
+how_found: Lesson 40: faint rings rippled across the pages (lamp shadow set too tight), and the moon's shadows criss-crossed the lamp's.
+final_value_or_rule: A larger shadow margin (bias). Only one shadow-casting light; secondary lights (moon, fills) cast none.
+evidence: Lessons.md:173-175
+proposed_calculation: Lint: if more than one light has castShadow, warn and keep it only on the key light. Pick the bias from shadow texel size: bias ≈ 1.5 x (shadow camera width / mapSize) / depth range.
+already_automatic: No.
+llm_tip: One lamp casts shadows; the others only light.
+===== Folded props shading themselves dark
+how_found: Lesson 36: folded-paper trees came out almost black. With shadows off they were lit, so they were shading themselves: the shadow push along the surface direction went into the tree, because faces were built facing inward.
+final_value_or_rule: No push along the surface (normalBias 0) for folded props; a slightly larger plain bias instead.
+evidence: Lessons.md:157-161, 507-508; Workflows.md:283-284
+proposed_calculation: For each mesh, count faces whose normal points toward the mesh's centre. If more than 10% do (mixed winding), set normalBias = 0 and bias = -0.0005 x scene scale automatically, and print it.
+already_automatic: No.
+llm_tip: If a lit object stays dark, switch its shadows off once: if it brightens, it is shading itself.
+===== Reflections turned down inside paintings
+how_found: Lesson 49: banknotes inside a dark painting came out as white bricks; the soft grey reflection room lit them far more than the painting's own light. Fix: a reflections setting, 0.3 inside paintings, and banknote edges printed as fine green lines.
+final_value_or_rule: kit reflections (scene.environmentIntensity) = 0.3 inside painted rooms; default 1.
+evidence: Lessons.md:198-201, 513; film-kit/paper-film/scenes/cinema-kit.js:90-96
+proposed_calculation: reflections = clamp(mean luminance of the painting around the models / mean luminance of RoomEnvironment (≈0.5), 0.1, 1). A dark painting gives about 0.3.
+already_automatic: The option exists (plugin kit), but the default is 1 and it is set by hand.
+llm_tip: Models inside a dark painting look white unless reflections come down.
+===== Rooms by their own glow; dark rooms darken cut-outs
+how_found: Lesson 81: each room shows its walls and cut-outs by their own light, scaled by a light level, instead of a dozen lamps: about 1.8 s a frame filming two at a time, and lights go out on a beat. Lesson 82: moonlight kept white paper edges glowing; scale colour as well as glow by the room's light.
+final_value_or_rule: Room light level scales both emissive and base colour of everything in the room.
+evidence: Lessons.md:315-319
+proposed_calculation: One setRoomLight(level) applies level to emissiveIntensity and multiplies base colour by (0.15 + 0.85 x level).
+already_automatic: In the house sample only, not the shared kit.
+llm_tip: Use self-lit rooms instead of many lamps; dim the cut-outs with the room.
+===== Street needs its own light; solid back walls
+how_found: Lesson 84: people just in front of lit rooms looked as if they were inside them; a lit pavement and a lamp pool separate the street. Lesson 42: light leaked out of the cottage's back windows onto the cypresses.
+final_value_or_rule: Give exteriors their own light pool on the ground; close the backs of lit buildings.
+evidence: Lessons.md:323-324, 180-181
+proposed_calculation: Measure the pavement band's luminance in front of a lit room; warn if it is under 0.35 x the room's interior luminance.
+already_automatic: No.
+llm_tip: Separate inside and outside with light on the ground.
+===== Factories page: start wide, on a diagonal, lower exposure, labels inside
+how_found: Lesson 47: the first factories page was too close and too bright and cut its labels off (white boxes filled the frame). Fix: factories on a diagonal, camera starts wide, brick and panes printed on the card, lower exposure, every label keeps itself inside the frame.
+final_value_or_rule: Place big boxy models on a diagonal, open wide, and print detail on plain faces. Labels flip to the other side when they would run off the frame.
+evidence: Lessons.md:190-193; film-kit/paper-film/scenes/graphics.js:126 ('keep the words inside the frame: flip')
+proposed_calculation: Labels: already automatic. Exposure: measure the share of the frame above 0.95 luminance in a still; if it is over 2%, lower exposure by log2(p99 / 0.92).
+already_automatic: Label flipping is automatic (graphics.js, plugin kit). Exposure is hand-tuned.
+llm_tip: Large flat faces near the camera blow out; open wide and add printed detail.
+===== Dark masses where the eye enters (bottom left)
+how_found: Log 32: the gutter was first a pale stripe, then joined the drum's shadow into one dark pool where the eye enters, then plain stone just under the road. The painted end frame's gutter covered 2.1% (limit 1%) but was kept as a narrow lead-in line.
+final_value_or_rule: Nothing in the bottom-left quarter covers more than 1%, except thin lead-in lines.
+evidence: story L1180-1181, L1218-1220 (log 32); 07 rule 8
+proposed_calculation: Find connected dark areas (below half the frame's mean brightness) in the bottom-left quarter. Ignore those longer than 6 times their width (thin lines). Flag the rest above 1%.
+already_automatic: check_shot has the 1% test, but it also flags thin lines.
+llm_tip: A thin dark line leading in is fine; a dark lump is not.

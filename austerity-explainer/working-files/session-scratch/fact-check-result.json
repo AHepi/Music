@@ -1,0 +1,907 @@
+{
+ "checks": [
+  {
+   "group": "p1-3",
+   "sentences": [
+    {
+     "page": 1,
+     "sentence": "So... won't creating money just cause inflation?",
+     "verdict": "no fact",
+     "problem": "",
+     "suggested_wording": "",
+     "sources_opened": [],
+     "ledger_ids": []
+    },
+    {
+     "page": 1,
+     "sentence": "You've felt it at the checkout.",
+     "verdict": "no fact",
+     "problem": "",
+     "suggested_wording": "",
+     "sources_opened": [],
+     "ledger_ids": []
+    },
+    {
+     "page": 1,
+     "sentence": "The same basket of shopping costs more than it did a year ago.",
+     "verdict": "supported",
+     "problem": "True for NZ now. Annual CPI inflation was 4.1% in the year to the June 2026 quarter (Infometrics, 21 July 2026, reporting the Stats NZ release). Fuel drove most of it; excluding fuel it was about 2.9%. Still true as worded. If the September 2026 quarter CPI comes out before the film is released, re-check it, but it would have to be negative for this line to fail.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://economics.infometrics.co.nz/economic-update/2026-07-fuel-price-spike-sends-annual"
+     ],
+     "ledger_ids": [
+      "C2-XA05"
+     ]
+    },
+    {
+     "page": 1,
+     "sentence": "That's inflation... prices in general, going up.",
+     "verdict": "supported",
+     "problem": "Bank of England: 'Inflation is when prices rise'. It is measured on a basket of about 700 items whose overall price is the CPI.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.bankofengland.co.uk/explainers/what-is-inflation"
+     ],
+     "ledger_ids": [
+      "C2-XA04"
+     ]
+    },
+    {
+     "page": 1,
+     "sentence": "Not one price tag. The whole basket.",
+     "verdict": "supported",
+     "problem": "Matches the Bank of England's basket explanation, where the CPI is the basket's overall price.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.bankofengland.co.uk/explainers/what-is-inflation"
+     ],
+     "ledger_ids": [
+      "C2-XA04"
+     ]
+    },
+    {
+     "page": 1,
+     "sentence": "To see what drives it, go back to the shell factory.",
+     "verdict": "no fact",
+     "problem": "",
+     "suggested_wording": "",
+     "sources_opened": [],
+     "ledger_ids": []
+    },
+    {
+     "page": 2,
+     "sentence": "Britain, 1915. Fewer than one in a hundred people are out of work.",
+     "verdict": "supported with change",
+     "problem": "The number is right: the Bank of England series (FRED UNRTUKA) gives 0.95% for 1915 as an annual average, down from 3.16% in 1914. But the rate is a share of the workforce, not of 'people'. 'One in a hundred people' reads as one in a hundred of the whole population. The figure is also low partly because millions were in uniform.",
+     "suggested_wording": "Britain, 1915. Fewer than one in a hundred workers is out of work.",
+     "sources_opened": [
+      "https://fred.stlouisfed.org/data/UNRTUKA.txt"
+     ],
+     "ledger_ids": [
+      "C2-H02"
+     ]
+    },
+    {
+     "page": 2,
+     "sentence": "The war is paid for partly with new money.",
+     "verdict": "supported",
+     "problem": "I read the NBER chapter in full (Higgins 1949). Taxes covered only 25% of the government's resources from April 1914 to March 1919. 'Monetary expansion and borrowing from the public were the chief forms of war finance.' Treasury currency notes reached £323 million in circulation by 31 Dec 1918, and the Bank of England secretly bought the unsold part of the 1914 War Loan (Bank Underground). 'Partly' is accurate. The ledger's C2-H03 can now be upgraded from 'seen in search summary' to read.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.nber.org/system/files/chapters/c5171/c5171.pdf",
+      "https://bankunderground.co.uk/2017/08/08/your-country-needs-funds-the-extraordinary-story-of-britains-early-efforts-to-finance-the-first-world-war/",
+      "https://www.natwestgroupremembers.com/banking-in-wartime/banking-business/gold-banknotes-and-money-supply-in-the-first-world-war.html"
+     ],
+     "ledger_ids": [
+      "C2-H03",
+      "C2-XA01"
+     ]
+    },
+    {
+     "page": 2,
+     "sentence": "And submarines are sinking ships full of food and materials.",
+     "verdict": "supported",
+     "problem": "Accurate for 1915. Germany declared a war zone around Britain from 18 February 1915, and U-boats sank about 1.3 million gross tons of Allied and neutral shipping that year, at nearly 1.9 ships a day at the peak. The 1915 campaign was largely called off in September 1915, and the heaviest losses came in 1917, at about 6.2 million tons. Don't let the visuals suggest that 1915 was the worst year. 'Full of food and materials' is a fair generalisation, since Britain imported much of both, but no source here gives cargo breakdowns.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://en.wikipedia.org/wiki/U-boat_campaign"
+     ],
+     "ledger_ids": [
+      "C2-H03",
+      "C2-XA02"
+     ]
+    },
+    {
+     "page": 2,
+     "sentence": "So more money is chasing fewer things to buy...",
+     "verdict": "supported with change",
+     "problem": "This is a simplification, and the ledger flags it as one. As worded, 'So' makes submarines and new money the only reasons goods were scarce. A bigger cause was that workers, factories and materials were switched to war production, which is the point page 3 makes. A small change keeps the line honest and sets up the two factories.",
+     "suggested_wording": "With ships sunk and factories turned to war work... more money is chasing fewer things to buy...",
+     "sources_opened": [
+      "https://www.nber.org/system/files/chapters/c5171/c5171.pdf",
+      "https://en.wikipedia.org/wiki/Shell_Crisis_of_1915"
+     ],
+     "ledger_ids": [
+      "C2-H03"
+     ]
+    },
+    {
+     "page": 2,
+     "sentence": "...and by the end of the war, prices have roughly doubled.",
+     "verdict": "supported with change",
+     "problem": "The figure checks out. Bank of England CPI annual averages (FRED CPIUKA) go from 1.28 in 1914 to 2.59 in 1918, about 2.02 times. But the line opens with 'Britain, 1915', so 'doubled' has no stated baseline and could be heard as doubled since 1915. In fact prices had already risen about 12% between 1914 and 1915. Name the baseline.",
+     "suggested_wording": "...and by the end of the war, prices have roughly doubled since it began.",
+     "sources_opened": [
+      "https://fred.stlouisfed.org/data/CPIUKA.txt"
+     ],
+     "ledger_ids": [
+      "C2-H01"
+     ]
+    },
+    {
+     "page": 3,
+     "sentence": "Now picture two factories.",
+     "verdict": "no fact",
+     "problem": "",
+     "suggested_wording": "",
+     "sources_opened": [],
+     "ledger_ids": []
+    },
+    {
+     "page": 3,
+     "sentence": "In the first, the machines stand idle, and workers wait at the gate. New money arrives... the workers go in, and more shells come out. The price tag barely moves.",
+     "verdict": "supported",
+     "problem": "This is the mainstream output-gap idea. In the IMF's words, a negative gap 'means that there is spare capacity, or slack, in the economy due to weak demand', and price pressure is low. 'Barely moves' is suitably hedged; in practice some prices can still rise because of bottlenecks before full capacity is reached. As a picture, it is fine.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.imf.org/external/pubs/ft/fandd/2013/09/basics.htm"
+     ],
+     "ledger_ids": [
+      "C2-XA03"
+     ]
+    },
+    {
+     "page": 3,
+     "sentence": "In the second, every machine is already running flat out. The same money arrives... but no more shells can be made. So buyers bid against each other, and the price tag climbs.",
+     "verdict": "supported",
+     "problem": "IMF: when output runs above full capacity, 'prices will begin to rise in response to demand pressure in key markets'. The bidding-up picture is a fair plain-language version.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.imf.org/external/pubs/ft/fandd/2013/09/basics.htm"
+     ],
+     "ledger_ids": [
+      "C2-XA03"
+     ]
+    },
+    {
+     "page": 3,
+     "sentence": "Britain at war was the second factory. It had run out of workers, materials and machines.",
+     "verdict": "supported with change",
+     "problem": "This overstates the case. Britain was short of workers (unemployment under 1%), of shells (the 1915 Shell Crisis) and of shipping. But 'run out' and 'was the second factory' mean output couldn't rise at all, and it did. After 1915 the Ministry of Munitions built new factories, and women and 'dilution' of labour expanded output enormously ('the output was prodigious'). So the economy was near full capacity and strained, not completely fixed. Soften to 'close to' and 'running short'.",
+     "suggested_wording": "Britain at war was close to the second factory. It was running short of workers, materials and machines.",
+     "sources_opened": [
+      "https://fred.stlouisfed.org/data/UNRTUKA.txt",
+      "https://en.wikipedia.org/wiki/Shell_Crisis_of_1915",
+      "https://en.wikipedia.org/wiki/U-boat_campaign"
+     ],
+     "ledger_ids": [
+      "C2-H02",
+      "C2-H03",
+      "C2-XA02"
+     ]
+    }
+   ],
+   "new_ledger_entries": [
+    {
+     "id": "C2-XA01",
+     "claim": "British WWI finance: in the five fiscal years April 1914 to March 1919, 25% of the government's financial resources came from taxes. 'Monetary expansion and borrowing from the public were the chief forms of war finance.' The 1914 emergency measures 'set the stage for credit inflation'. Treasury currency notes (Currency and Bank Notes Act, August 1914) reached £323 million in circulation by 31 December 1918, and joint stock bank deposits doubled during the war. The Bank of England secretly bought the unsold part of the 1914 War Loan.",
+     "plain": "Only about a quarter of Britain's war was paid for with taxes. Much of the rest came from newly created money and bank credit.",
+     "sources": [
+      "https://www.nber.org/system/files/chapters/c5171/c5171.pdf (Higgins, Lombard Street in War and Reconstruction, NBER 1949, ch. 2, read in full)",
+      "https://bankunderground.co.uk/2017/08/08/your-country-needs-funds-the-extraordinary-story-of-britains-early-efforts-to-finance-the-first-world-war/ (Bank of England staff blog)"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "Higgins puts monetary expansion together with borrowing from the public. The exact share that was 'new money' is not split out, so say 'partly'."
+    },
+    {
+     "id": "C2-XA02",
+     "claim": "Germany's 1915 U-boat campaign against shipping round the British Isles began 18 February 1915 and was essentially abandoned on 1 September 1915 after the Arabic sinking. Allied and neutral losses in 1915 were about 1.31 million gross tons, against about 6.24 million in 1917, the worst year.",
+     "plain": "In 1915 German submarines were sinking ships bound for Britain, but the worst losses came two years later.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/U-boat_campaign"
+     ],
+     "confidence": "medium-high",
+     "contested_or_simplified": "A single encyclopedic source. I found no breakdown of how much of the sunk cargo was food."
+    },
+    {
+     "id": "C2-XA03",
+     "claim": "IMF (Jahan and Mahmud, F&D Sept 2013): 'A negative gap means that there is spare capacity, or slack, in the economy due to weak demand.' When output exceeds full capacity, 'prices will begin to rise in response to demand pressure in key markets'. 'The output gap measures the degree of inflation pressure in the economy.'",
+     "plain": "With idle workers and machines, extra spending mostly raises output. When everything is already running flat out, it mostly raises prices.",
+     "sources": [
+      "https://www.imf.org/external/pubs/ft/fandd/2013/09/basics.htm"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "Mainstream textbook framing. Output gaps can't be observed directly and are hard to estimate, and prices can rise before full capacity because of bottlenecks."
+    },
+    {
+     "id": "C2-XA04",
+     "claim": "Bank of England: 'Inflation is when prices rise and how quickly they do so is called the rate of inflation.' The ONS tracks about 700 items in a basket, and 'The basket's overall price is known as the Consumer Price Index.'",
+     "plain": "Inflation means prices in general going up, measured on a basket of everyday things.",
+     "sources": [
+      "https://www.bankofengland.co.uk/explainers/what-is-inflation"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "None. For an NZ audience, Stats NZ's CPI uses the same basket method."
+    },
+    {
+     "id": "C2-XA05",
+     "claim": "NZ annual CPI inflation was 4.1% in the year to the June 2026 quarter, up from 3.1% in March 2026, driven largely by fuel. Excluding fuel it was about 2.9%.",
+     "plain": "In New Zealand the same basket costs about four percent more than a year earlier.",
+     "sources": [
+      "https://economics.infometrics.co.nz/economic-update/2026-07-fuel-price-spike-sends-annual (Infometrics, 21 July 2026)"
+     ],
+     "confidence": "medium-high",
+     "contested_or_simplified": "The Stats NZ release itself was not opened, and the fuel breakdown comes only from search summaries. The September 2026 quarter CPI is due later in October 2026, so re-check before release."
+    }
+   ]
+  },
+  {
+   "group": "p4-5",
+   "sentences": [
+    {
+     "page": 4,
+     "sentence": "And some things can't be made more of in a hurry... like homes.",
+     "verdict": "no fact",
+     "problem": "This is a general framing claim, not a sourced fact. It is uncontroversial and fits Gray (2018): an influx of war workers made a housing crisis that was already acute even worse.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf"
+     ],
+     "ledger_ids": [
+      "C2-XB01"
+     ]
+    },
+    {
+     "page": 4,
+     "sentence": "In 1915, workers poured into Glasgow for war work, and landlords tried to push rents up by a quarter.",
+     "verdict": "supported with change",
+     "problem": "The influx is supported. Gray (2018, OU/Rowman intro) says 'a massive influx of people to work in Glasgow's munitions industry' made an already acute housing crisis worse; shipyard workers also backed the strike. The Wikipedia ledger source has nothing on the influx. The 'quarter' is overstated as a flat rise. Wikipedia says landlords announced a 25% rise in February 1915. Gray, citing Damer 1980, says there were 'several recent rent hikes, up to 25 percent in some districts'. So 25% was the top of the range, not the rise everywhere.",
+     "suggested_wording": "In 1915, workers poured into Glasgow for war work, and landlords tried to push rents up... by as much as a quarter.",
+     "sources_opened": [
+      "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf",
+      "https://en.wikipedia.org/wiki/1915_Glasgow_rent_strikes"
+     ],
+     "ledger_ids": [
+      "C2-H04",
+      "C2-XB01"
+     ]
+    },
+    {
+     "page": 4,
+     "sentence": "About twenty thousand households refused to pay.",
+     "verdict": "supported with change",
+     "problem": "The number is fine with 'about'. Wikipedia gives 'around 20,000 families' at the peak and 20,000-25,000 households in its infobox. Gray gives 'around 20,000 people' by November 1915, and Melling's estimate of 25,000 tenants. Two fixes are needed. First, the number is the November 1915 peak, not the whole year. Second, tenants refused the increase, not all rent: Gray says strikers kept paying their old rent. 'Refused to pay' overstates this. Naming November also fixes the start point for 'within weeks' in the next sentence.",
+     "suggested_wording": "By November, about twenty thousand households were refusing to pay the rise.",
+     "sources_opened": [
+      "https://en.wikipedia.org/wiki/1915_Glasgow_rent_strikes",
+      "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf"
+     ],
+     "ledger_ids": [
+      "C2-H04",
+      "C2-XB01"
+     ]
+    },
+    {
+     "page": 4,
+     "sentence": "Within weeks, Parliament froze rents.",
+     "verdict": "supported with change",
+     "problem": "This is true only if the weeks are counted from the November 1915 peak and the 17 November court protest. Royal Assent to the Increase of Rent and Mortgage Interest (War Restrictions) Act 1915 (5 & 6 Geo. 5 c. 97) came on 23 December 1915, about five weeks after 17 November. The Act capped rents for rent falling due from 25 November 1915, held to pre-war (August 1914) levels. The script as drafted has no time anchor, and the strike began in spring 1915, so from that start it was months, not weeks. The fix is the 'By November' anchor in the previous sentence; this sentence then works unchanged. The ledger's C2-H04 date for the Act, 27 November 1915, is wrong as an enactment date: Royal Assent was 23 December 1915. Gray's '25 December' also looks like an error. On screen, use 'December 1915'.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://en.wikipedia.org/wiki/Increase_of_Rent_and_Mortgage_Interest_(War_Restrictions)_Act_1915",
+      "https://vlex.co.uk/vid/861205758",
+      "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf"
+     ],
+     "ledger_ids": [
+      "C2-H04",
+      "C2-XB02"
+     ]
+    },
+    {
+     "page": 5,
+     "sentence": "So let's test the rule.",
+     "verdict": "no fact",
+     "problem": "",
+     "suggested_wording": "",
+     "sources_opened": [],
+     "ledger_ids": []
+    },
+    {
+     "page": 5,
+     "sentence": "Japan, 2013. Its central bank, the bank that issues the yen, sets out to double the money it has created, in two years.",
+     "verdict": "supported",
+     "problem": "The BIS Quarterly Review (June 2013) says the BoJ's April 2013 framework 'calls for doubling the monetary base' within two years, to ¥270 trillion by end-2014. The monetary base is currency plus bank reserves, the money the central bank itself creates, so 'the money it has created' is a fair plain-language gloss. The historic present tense is fine.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.bis.org/publ/qtrpdf/r_qt1306x.htm"
+     ],
+     "ledger_ids": [
+      "C2-C06",
+      "C2-XB03"
+     ]
+    },
+    {
+     "page": 5,
+     "sentence": "If new money alone pushed prices up, they'd soar.",
+     "verdict": "no fact",
+     "problem": "This is a rhetorical counterfactual, not a sourced fact. 'Soar' slightly caricatures the quantity theory: monetarists predicted higher inflation, not a soaring one, and argue inflation would have been even lower without QQE (C2-C06 caveat). Softening it keeps the argument fair.",
+     "suggested_wording": "If new money alone pushed prices up, you'd expect them to take off.",
+     "sources_opened": [],
+     "ledger_ids": [
+      "C2-C06"
+     ]
+    },
+    {
+     "page": 5,
+     "sentence": "They barely move... about half a percent a year.",
+     "verdict": "supported with change",
+     "problem": "The figure is right, but the sentence has no time span, so 'a year' floats. Uchida (BoJ Deputy Governor, May 2024) says that after QQE in 2013 and negative rates/YCC in 2016, 'the average inflation rate was 0.5%'. The speech gives no window or measure. World Bank headline CPI for Japan averages about 0.6% over 2013-2021 (0.3, 2.8, 0.8, -0.1, 0.5, 1.0, 0.5, 0.0, -0.2). That includes the 2014 consumption-tax jump, which is most of the 2.8% that year; without it the average is lower, roughly 0.3-0.4%. Either way, 'about half a percent' is fair and 'barely move' is fair. Inflation only rose to 2.5% in 2022 and 3.3% in 2023, after the global price shock. Say it covers roughly 2013-2021 and that it is the central bank's own figure.",
+     "suggested_wording": "For the next eight years, they barely move... about half a percent a year, by the bank's own count.",
+     "sources_opened": [
+      "https://www.bis.org/review/r240527d.htm",
+      "https://fred.stlouisfed.org/data/FPCPITOTLZGJPN.txt"
+     ],
+     "ledger_ids": [
+      "C2-C06",
+      "C2-XB04"
+     ]
+    },
+    {
+     "page": 5,
+     "sentence": "Britain's central bank created hundreds of billions of pounds.",
+     "verdict": "supported with change",
+     "problem": "Supported: the Bank of England bought £895 billion of bonds with QE from March 2009, with the last increase announced in November 2020. But this sits on a 'flat prices' page. About £450 billion of the total came in 2020, and UK inflation of up to about 11% followed in 2021-23; CPI also reached about 5% in 2011. To avoid implying that all of it came with flat prices, and to match the 2012 study in the next sentence, anchor it to the post-2008 round. By May 2012 the total was £325 billion, rising to £375 billion later that year.",
+     "suggested_wording": "After the 2008 crash, Britain's central bank created hundreds of billions of pounds.",
+     "sources_opened": [
+      "https://www.bankofengland.co.uk/monetary-policy/quantitative-easing"
+     ],
+     "ledger_ids": [
+      "C2-C08",
+      "C2-XB06"
+     ]
+    },
+    {
+     "page": 5,
+     "sentence": "Its own study found the new money pushed up the prices of things people own, like shares... and the biggest gains went to the richest households.",
+     "verdict": "supported with change",
+     "problem": "The first half is supported. The 2012 Quarterly Bulletin paper says the purchases 'increased the prices of a wide range of assets', and that they pushed up equities 'by at least as much as' gilts. Its scope is financial assets, so 'things people own' should not suggest houses. The second half overstates the finding. The paper says the benefits 'will accrue to those households holding most financial assets'. It notes the top 5% of households held about 40% of those assets (average £175,000, against a median of about £1,500). But it says it 'is difficult to assess the size of the boost to wealth provided by QE across these groups'. So it did not measure or find that 'the biggest gains went to the richest'. Attribute the 40% fact instead. The paper also argues most people would have been worse off without QE; that is the Bank's counterfactual and need not be voiced.",
+     "suggested_wording": "Its own study found the new money pushed up the prices of shares and bonds... and the gains went to whoever owned the most. The richest five percent of households held about forty percent of those assets.",
+     "sources_opened": [
+      "https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2012/the-distributional-effects-of-asset-purchases.pdf",
+      "https://www.bankofengland.co.uk/news/2012/august/the-distributional-effects-of-asset-purchases"
+     ],
+     "ledger_ids": [
+      "C2-C10",
+      "C2-XB05"
+     ]
+    }
+   ],
+   "new_ledger_entries": [
+    {
+     "id": "C2-XB01",
+     "claim": "Gray (2018), introduction to 'Rent Unrest: From the 1915 Rent Strikes to Contemporary Housing Struggles': 'The First World War generated a massive influx of people to work in Glasgow's munitions industry, exacerbating an already acute ... housing crisis.' In spring 1915, after 'several recent rent hikes, up to 25 percent in some districts', Govan tenants refused the increases. By November 1915 'around 20,000 people' were on rent strike; Melling (1983) estimates 25,000 tenants. On 17 November 1915 eighteen rent-striking munitions workers were tried at the Small Debts Court, with 10,000-15,000 demonstrating outside. Strikers paid their old rent and refused the increase. Workers in the shipyards and munitions industries supported the strike.",
+     "plain": "War work drew crowds of workers into Glasgow, where homes were already short. Landlords raised rents, by as much as a quarter. By November about twenty thousand were refusing to pay the rise.",
+     "sources": [
+      "https://www.open.edu/openlearn/pluginfile.php/3278826/tool_ocwmanage/article/1/introduction_rent_unrest_from_the_1915_r.pdf (Neil Gray, Rowman & Littlefield 2018, via OpenLearn)",
+      "https://en.wikipedia.org/wiki/1915_Glasgow_rent_strikes"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "The 25% was the top of a range ('up to ... in some districts'); Wikipedia says landlords announced a 25% rise in February 1915. Counts are given as people, families or tenants (20,000-25,000), and 'households' is an approximation. Strikers withheld the increase, not all rent."
+    },
+    {
+     "id": "C2-XB02",
+     "claim": "The Increase of Rent and Mortgage Interest (War Restrictions) Act 1915 (5 & 6 Geo. 5 c. 97) received Royal Assent on 23 December 1915, about five weeks after the 17 November court protest. Its restrictions applied to rent accruing due from 25 November 1915 and held rents of small dwelling-houses at pre-war (August 1914) levels. It was meant to be temporary, until six months after the war, and was weakened after 1915.",
+     "plain": "About five weeks after the big court protest, Parliament passed a law freezing rents at pre-war levels.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Increase_of_Rent_and_Mortgage_Interest_(War_Restrictions)_Act_1915",
+      "https://vlex.co.uk/vid/861205758 (statute text)"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "Ledger C2-H04's '27 November 1915' is the date Wikipedia gives for Parliament passing the bill; Royal Assent was 23 December. Gray (2018) gives the bill's introduction as 28 November and Royal Assent as 25 December, which appears to be wrong. 'Within weeks' is true only counted from the November peak or protest."
+    },
+    {
+     "id": "C2-XB03",
+     "claim": "BIS Quarterly Review (June 2013): the Bank of Japan's April 2013 QQE framework 'calls for doubling the monetary base' within two years, to ¥270 trillion by the end of 2014, with a 2% price stability target to be reached 'with a horizon of about two years'.",
+     "plain": "In 2013 Japan's central bank set out to double the money it had created, within two years.",
+     "sources": [
+      "https://www.bis.org/publ/qtrpdf/r_qt1306x.htm"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "The monetary base is currency plus bank reserves; most of the new money sat as reserves."
+    },
+    {
+     "id": "C2-XB04",
+     "claim": "Japan's annual headline CPI inflation (World Bank, via FRED): 2013 0.34, 2014 2.76, 2015 0.80, 2016 -0.13, 2017 0.48, 2018 0.99, 2019 0.47, 2020 -0.02, 2021 -0.23, 2022 2.50, 2023 3.27, 2024 2.74. The 2013-2021 average is about 0.6% including the April 2014 consumption-tax rise, and lower (roughly 0.3-0.4%) without it. Uchida's 0.5% (May 2024) gives no window or measure.",
+     "plain": "From 2013 to 2021, Japan's prices rose about half a percent a year on average.",
+     "sources": [
+      "https://fred.stlouisfed.org/data/FPCPITOTLZGJPN.txt",
+      "https://www.bis.org/review/r240527d.htm"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "The averages are computed by us. Uchida's 0.5% window and CPI measure are unstated. The ex-tax estimate is approximate."
+    },
+    {
+     "id": "C2-XB05",
+     "claim": "Bank of England Quarterly Bulletin 2012 Q3, 'The distributional effects of asset purchases': purchases 'increased the prices of a wide range of assets, not just gilts' and pushed up equities 'by at least as much as' gilts. They boosted households' financial wealth held outside pensions, but holdings are 'heavily skewed with the top 5% of households holding 40%'. The median household held about £1,500 of gross assets; the top 5% held an average of £175,000. The £325 billion of purchases to May 2012 raised household wealth by just over £600 billion. 'The benefits from these wealth effects will accrue to those households holding most financial assets', but 'it is difficult to assess the size of the boost to wealth provided by QE across these groups'. The Bank says most people would have been worse off without QE.",
+     "plain": "The Bank of England's own study found its new money pushed up the prices of shares and bonds, and that those gains went to whoever owned the most. The richest five percent held about forty percent of those assets.",
+     "sources": [
+      "https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2012/the-distributional-effects-of-asset-purchases.pdf"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "The paper covers financial assets only, not houses. It does not measure gains by wealth group, so 'the biggest gains went to the richest' is an inference, not its finding. The 'worse off without QE' line is the Bank's counterfactual judgement."
+    },
+    {
+     "id": "C2-XB06",
+     "claim": "Bank of England QE: began March 2009; £895 billion of bonds in total (£875 billion gilts, £20 billion corporate); last increase announced November 2020; quantitative tightening decided February 2022.",
+     "plain": "After 2008, Britain's central bank created hundreds of billions of pounds to buy bonds.",
+     "sources": [
+      "https://www.bankofengland.co.uk/monetary-policy/quantitative-easing"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "About £450 billion came in 2020 and was followed by high inflation in 2021-23, so tie 'flat prices' framing to the post-2008 round only."
+    }
+   ]
+  },
+  {
+   "group": "p6-8",
+   "sentences": [
+    {
+     "page": 6,
+     "sentence": "Germany, 1923. Prices are already rising fast.",
+     "verdict": "supported",
+     "problem": "Supported. In the first half of 1922 the mark held at about 320 to the dollar, then fell to 7,400 by December 1922. Hyperinflation had already started before the Ruhr. The present tense works because the scene is set in 1923.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic"
+     ],
+     "ledger_ids": [
+      "C2-C02",
+      "C2-XC02"
+     ]
+    },
+    {
+     "page": 6,
+     "sentence": "Then French and Belgian soldiers march into the Ruhr, Germany's coal and steel heartland.",
+     "verdict": "supported",
+     "problem": "Supported. Wikipedia says 'in January 1923 French and Belgian troops occupied the Ruhr valley, Germany's main industrial region'. 'Coal and steel heartland' rests on Rosenberg's 1936 figures (about 80% of steel, 71% of coal), which is fine as a description. Optionally show 'January 1923' on screen.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic"
+     ],
+     "ledger_ids": [
+      "C2-C02"
+     ]
+    },
+    {
+     "page": 6,
+     "sentence": "Workers down tools, and the government keeps paying them... with new money.",
+     "verdict": "supported with change",
+     "problem": "The substance is supported: the government ordered passive resistance and 'paid these workers by printing more and more banknotes'. But 'workers down tools' on its own makes it sound like a strike the workers chose. Passive resistance was government policy, and Berlin also subsidised the firms and owners. 'Keeps paying' is fine.",
+     "suggested_wording": "The government tells workers to down tools in protest... and keeps paying them, with new money.",
+     "sources_opened": [
+      "https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic"
+     ],
+     "ledger_ids": [
+      "C2-C02"
+     ]
+    },
+    {
+     "page": 6,
+     "sentence": "By November, one US dollar costs more than four trillion marks.",
+     "verdict": "supported",
+     "problem": "Supported. Wikipedia: 'By November 1923, one US dollar was worth 4,210,500,000,000 marks' (4.2 trillion). 'More than four trillion' rounds the right way.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic"
+     ],
+     "ledger_ids": [
+      "C2-C03"
+     ]
+    },
+    {
+     "page": 6,
+     "sentence": "This time, new money really did push prices up... while less and less was being made.",
+     "verdict": "supported",
+     "problem": "Supported in general. Wikipedia says the printing worsened the hyperinflation and 'The occupation of the Ruhr also caused German output to fall.' No source gives a size or a month-by-month path for the fall in output, so 'less and less' is a reasonable reading, not a measured trend; don't put an output figure on screen. The ledger notes historians disagree on how much each cause mattered, but the money printing during the Ruhr strike is the standard account.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic"
+     ],
+     "ledger_ids": [
+      "C2-C02",
+      "C2-XC02"
+     ]
+    },
+    {
+     "page": 7,
+     "sentence": "Sometimes the cause isn't spending. It's costs.",
+     "verdict": "supported",
+     "problem": "This is the cost-push idea in plain words (IMF 2019; Federal Reserve History calls the oil-driven rise cost-push inflation). The Fed's history also says loose monetary policy helped higher oil costs spread to other prices. 'Sometimes' and 'with prices already climbing' in the next line keep this honest.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.federalreservehistory.org/essays/great_inflation"
+     ],
+     "ledger_ids": [
+      "C2-M06",
+      "C2-C14"
+     ]
+    },
+    {
+     "page": 7,
+     "sentence": "In 1973, with prices already climbing, the price of oil nearly quadrupled in three months, and everything made or moved with fuel got dearer.",
+     "verdict": "supported with change",
+     "problem": "The oil figures are supported. Federal Reserve History: 'nearly quadrupled the price of oil from $2.90 a barrel before the embargo to $11.65 a barrel in January 1974'. The embargo began 19 October 1973, so about three months. 'Prices already climbing' is supported: US CPI (FRED CPIAUCNS) rose 3.4% in the year to December 1972 and 7.4% in the year to September 1973, and Burns said industrial wholesale prices were already rising at over 10% a year in mid-1973. Two small problems. 'In 1973' wrongly suggests the whole jump happened in 1973, when the peak price came in January 1974. And 'everything ... got dearer' is a bit sweeping and has no specific source.",
+     "suggested_wording": "In late 1973, with prices already climbing, the price of oil nearly quadrupled in about three months... and almost everything made or moved with fuel got dearer.",
+     "sources_opened": [
+      "https://www.federalreservehistory.org/essays/oil-shock-of-1973-74",
+      "https://www.federalreservehistory.org/essays/great_inflation",
+      "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCNS"
+     ],
+     "ledger_ids": [
+      "C2-C14",
+      "C2-XC01"
+     ]
+    },
+    {
+     "page": 7,
+     "sentence": "And here, now? Prices rose four point one percent in the year to June.",
+     "verdict": "supported with change",
+     "problem": "The figure is supported. Westpac: 'The annual inflation rate rose to 4.1% in the June quarter, up from 3.1% in the year to March' (Stats NZ CPI, released 21 July 2026). But 'now' is shaky on timing. On 12 October the June figure is already three and a half months old, and the September quarter comes out on 22 October 2026. If recording or release is after that date, this figure will be out of date. Say 'latest' and re-check the number on the day.",
+     "suggested_wording": "And here? The latest figures say prices rose four point one percent in the year to June.",
+     "sources_opened": [
+      "https://www.westpaciq.com.au/economics/2026/07/first-impressions-nz-consumer-prices-june-quarter-2026"
+     ],
+     "ledger_ids": [
+      "C2-N05",
+      "C2-M04"
+     ]
+    },
+    {
+     "page": 7,
+     "sentence": "Take fuel out... and it's two point nine.",
+     "verdict": "supported",
+     "problem": "Supported. Westpac: 'CPI ex-fuel inflation: +2.9% yr (vs +3.2% previously)'. Stats NZ reported petrol up 27.5% and other vehicle fuels up 71.0%. I could not open the Stats NZ release itself (the repost returned 403), so 2.9% is Westpac's ex-fuel figure. 'Fuel' (not 'petrol') matches the measure. Re-check after 22 October.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.westpaciq.com.au/economics/2026/07/first-impressions-nz-consumer-prices-june-quarter-2026"
+     ],
+     "ledger_ids": [
+      "C2-N05",
+      "C2-M04",
+      "C2-XC05"
+     ]
+    },
+    {
+     "page": 8,
+     "sentence": "So yes... creating money can push prices up, when it's spent where workers are already flat out, or on things we can't make more of in a hurry.",
+     "verdict": "supported",
+     "problem": "This sums up the chapter's own argument, built on the demand-pull idea (IMF 2019) and Keynes's 'true inflation' point. 'Can' keeps it from overstating. It is a general claim, not a measured one.",
+     "suggested_wording": "",
+     "sources_opened": [],
+     "ledger_ids": [
+      "C2-M05",
+      "C2-M09"
+     ]
+    },
+    {
+     "page": 8,
+     "sentence": "In 2021, our unemployment hit a record low, and house prices jumped about thirty percent in a year.",
+     "verdict": "supported with change",
+     "problem": "Two problems. (1) 'Record low' really means the lowest since the Household Labour Force Survey began in 1986: 3.2% in the December 2021 quarter (1News, Newshub, Stats NZ's Becky Collett). Older measures from the 1950s-70s showed lower joblessness, so a bare 'record low' overstates a little. (2) The 'about thirty percent' is the REINZ House Price Index peak: up 29.8% in the year to May 2021 and 30.6% in the year to July 2021, the highest since records began. Over calendar 2021 the rise was smaller (index +27.2% to November; median price +21.5% to December). So the thirty percent year ended in mid-2021, not 'in 2021' as a whole. Also, putting this right after 'creating money can push prices up' implies money creation caused the house-price jump. The Royal Commission says only 'in part attributable' to the pandemic economic response. And house prices are not in the CPI, so they shouldn't be presented as 'inflation'.",
+     "suggested_wording": "In 2021, our unemployment fell to its lowest since records began in the eighties... and by the middle of the year, house prices were up about thirty percent in twelve months.",
+     "sources_opened": [
+      "https://www.scoop.co.nz/stories/BU2106/S00259.htm",
+      "https://www.interest.co.nz/public-policy/140361/government-commissioned-independent-review-rbnzs-covid-19-response-says-it"
+     ],
+     "ledger_ids": [
+      "C2-N08",
+      "C2-N09",
+      "C2-M10",
+      "C2-XC03"
+     ]
+    },
+    {
+     "page": 8,
+     "sentence": "An independent review says the pandemic support was right at first... but too strong, for too long.",
+     "verdict": "supported with change",
+     "problem": "Supported as a paraphrase. The Orphanides-Archer review (released 22 September 2026), in a passage on 'monetary and fiscal policy interactions', says 'the combined stimulus, while appropriate in the early stages, was too strong for too long', adding 'with the benefit of hindsight'. 'Combined' covers both the Reserve Bank and the government. But the review's remit was the Reserve Bank, and it did not judge the government's budget. A bare 'pandemic support' leaves it unclear whose support was meant. Naming both, and that it was a review of the Reserve Bank, keeps it exact. The review also called the 3.2% unemployment an 'unsustainable historic low', which fits the line before. It does not mention house prices, so don't present the review as backing the house-price point.",
+     "suggested_wording": "An independent review of the Reserve Bank says the support, from the bank and the government together, was right at first... but too strong, for too long.",
+     "sources_opened": [
+      "https://www.interest.co.nz/public-policy/140361/government-commissioned-independent-review-rbnzs-covid-19-response-says-it"
+     ],
+     "ledger_ids": [
+      "C2-N15",
+      "C2-XC04"
+     ]
+    }
+   ],
+   "new_ledger_entries": [
+    {
+     "id": "C2-XC01",
+     "claim": "US consumer prices were already rising faster before the October 1973 oil embargo: CPI-U (not seasonally adjusted) rose 3.4% in the year to December 1972 (41.1 to 42.5) and 7.4% in the year to September 1973 (42.1 to 45.2). Arthur Burns, quoted by Federal Reserve History, said wholesale prices of industrial commodities were already rising at an annual rate of more than 10% in mid-1973, with industry near full capacity.",
+     "plain": "Even before the oil shock, prices in America were climbing faster: about three percent a year at the end of 1972, about seven by the autumn of 1973.",
+     "sources": [
+      "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCNS (FRED, BLS CPI-U)",
+      "https://www.federalreservehistory.org/essays/oil-shock-of-1973-74 (Federal Reserve History)"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "Percentages computed by us from monthly index levels. Inflation outside the US also rose before the embargo but was not checked here."
+    },
+    {
+     "id": "C2-XC02",
+     "claim": "Wikipedia (Hyperinflation in the Weimar Republic): 'In the first half of 1922, the mark stabilized at about 320 marks per dollar'; then 'the mark falling to 7,400 marks per US dollar by December 1922'. 'The occupation of the Ruhr also caused German output to fall.' The government 'paid these workers by printing more and more banknotes'.",
+     "plain": "Germany's prices were already racing in 1922. Then the Ruhr occupation cut output, and printing money to pay idle workers made things far worse.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic"
+     ],
+     "confidence": "medium-high",
+     "contested_or_simplified": "No figure for the size of the fall in output. Wikipedia is a secondary source."
+    },
+    {
+     "id": "C2-XC03",
+     "claim": "REINZ House Price Index annual rise peaked mid-2021: 29.8% in the year to May 2021 (to 3,812; median +32.3% to $820,000) and 30.6% in the year to July 2021 (some reprints say 30.5%). Over calendar 2021 the rise was smaller: HPI +27.2% to November 2021; national median +21.5% to $905,000 in the year to December 2021.",
+     "plain": "House prices rose about thirty percent in the twelve months to mid-2021. Across calendar 2021 the rise was nearer a quarter.",
+     "sources": [
+      "https://www.scoop.co.nz/stories/BU2106/S00259.htm (REINZ May 2021 release)",
+      "https://newshub.co.nz/home/money/2021/08/new-zealand-median-house-prices-skyrocket-25-percent-in-a-single-year-to-new-record-high.html (Newshub, search result)",
+      "https://www.scoop.co.nz/stories/BU2201/S00155.htm (REINZ December 2021, search result)"
+     ],
+     "confidence": "high for May/July HPI; medium for December figures (search summary)",
+     "contested_or_simplified": "The index and the median price give different rises. 'About thirty percent' fits the HPI only, and only for the year to mid-2021."
+    },
+    {
+     "id": "C2-XC04",
+     "claim": "interest.co.nz (22 Sep 2026) on the Orphanides-Archer review: in a passage on 'monetary and fiscal policy interactions', 'with the benefit of hindsight', 'the combined stimulus, while appropriate in the early stages, was too strong for too long'; unemployment fell to an 'unsustainable historic low' of 3.2% in late 2021. The review does not discuss house prices.",
+     "plain": "The review said the support from the Reserve Bank and the government together was right at first, but in hindsight too strong for too long.",
+     "sources": [
+      "https://www.interest.co.nz/public-policy/140361/government-commissioned-independent-review-rbnzs-covid-19-response-says-it"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "The review's remit was the Reserve Bank. It was commissioned by the government in an election year (timing questioned by Labour). It did not judge fiscal policy in detail."
+    },
+    {
+     "id": "C2-XC05",
+     "claim": "Westpac first impressions, June quarter 2026: 'CPI ex-fuel inflation: +2.9% yr (vs +3.2% previously)'; tradables 4.9% (from 2.5%), non-tradables 3.4% (from 3.5%).",
+     "plain": "Without fuel, prices rose 2.9% in the year to June 2026, actually a little slower than the quarter before.",
+     "sources": [
+      "https://www.westpaciq.com.au/economics/2026/07/first-impressions-nz-consumer-prices-june-quarter-2026"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "A bank's calculation, not shown on a Stats NZ page I opened. Superseded by the September quarter release due 22 October 2026."
+    }
+   ]
+  },
+  {
+   "group": "p9-10",
+   "sentences": [
+    {
+     "page": 9,
+     "sentence": "So what's the usual cure?",
+     "verdict": "supported",
+     "problem": "Framing claim that raising interest rates is the standard central-bank response to inflation. Supported by the Bank of England's own explainer and the ledger (C2-M17).",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.bankofengland.co.uk/explainers/why-are-interest-rates-in-the-uk-going-up"
+     ],
+     "ledger_ids": [
+      "C2-M17",
+      "C2-XD01"
+     ]
+    },
+    {
+     "page": 9,
+     "sentence": "Britain, 1920. The Bank of England pushes its interest rate up to seven percent.",
+     "verdict": "supported",
+     "problem": "Confirmed in the Bank of England archive chronological table ('April ... 15 Bank Rate 7%', 1920). It was raised from 6%. The present tense works because the scene is set in 1920. If a date goes on screen, use 15 April 1920.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.bankofengland.co.uk/-/media/boe/files/archive/ww/boe-1914-1921-vol1-introduction.pdf"
+     ],
+     "ledger_ids": [
+      "C2-H07"
+     ]
+    },
+    {
+     "page": 9,
+     "sentence": "Loans cost more, and people spend less.",
+     "verdict": "supported",
+     "problem": "The Bank of England's explainer gives this general mechanism: 'Higher interest rates lead to higher charges on many mortgages and loans, meaning people must spend more on them and less on other things.' In her Spectre interview, Mattei says that in 1920 the effect worked mainly through businesses cutting borrowing for investment. 'People' is a fair simplification, but on-screen visuals could show firms as well as households. Note that the RBA explainer cited in C2-M17 only says that higher rates have 'the opposite effect' to lower ones, so cite the Bank of England page for this line instead.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://www.bankofengland.co.uk/explainers/why-are-interest-rates-in-the-uk-going-up",
+      "https://www.rba.gov.au/education/resources/explainers/the-transmission-of-monetary-policy.html",
+      "https://spectrejournal.com/austerity-fascism-and-the-order-of-capital/"
+     ],
+     "ledger_ids": [
+      "C2-M17",
+      "C2-XD01"
+     ]
+    },
+    {
+     "page": 9,
+     "sentence": "Within a year, unemployment jumps from about two in a hundred to more than one in ten.",
+     "verdict": "supported",
+     "problem": "The Bank of England 'Millennium of Macroeconomic Data' annual series (FRED UNRTUKA) gives 1.95% for 1920 and 11.02% for 1921, so 'about two' and 'more than one in ten' are rounded correctly. These are annual averages, so 'within a year' is a looser match than calendar dates, but it is fair: other estimates put the 1921 peak at about 17%, so the line if anything understates. Placed straight after the rate rise, the line implies the rise caused the jump. Mattei says so ('led to mass unemployment in 1921'), but the post-war boom was also collapsing and exports were falling worldwide, so historians debate how much was the rate rise. That is acceptable because the next lines frame it through Mattei. If on screen, label it 'UK unemployment rate, annual average (Bank of England series)'.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://fred.stlouisfed.org/data/UNRTUKA.txt",
+      "https://en.wikipedia.org/wiki/Depression_of_1920%E2%80%931921",
+      "https://spectrejournal.com/austerity-fascism-and-the-order-of-capital/"
+     ],
+     "ledger_ids": [
+      "C2-H08"
+     ]
+    },
+    {
+     "page": 9,
+     "sentence": "Prices do fall... but people pay with their jobs.",
+     "verdict": "supported",
+     "problem": "UK CPI annual averages (FRED CPIUKA, Bank of England) were 3.29 in 1920, 3.01 in 1921 and 2.58 in 1922: about 9% down in a year and about 22% (a fifth) in two years. The script gives no number, so the line is fine. If a figure is shown, say 'about a fifth, 1920 to 1922' and not 'within a year'.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://fred.stlouisfed.org/data/CPIUKA.txt"
+     ],
+     "ledger_ids": [
+      "C2-H09"
+     ]
+    },
+    {
+     "page": 9,
+     "sentence": "/məˈteɪi/ argues that was part of the point.",
+     "verdict": "opinion marked as such",
+     "problem": "It is correctly attributed. Mattei's own words, in her Spectre Journal interview (22 Oct 2025), say Treasury officials and central bankers were 'deliberately engineering unemployment and insecurity to subdue the labor movement', and that 'In April 1920, the Bank of England and the British Treasury raised interest rates dramatically', leading to 'mass unemployment in 1921'. This is a stronger source than the Phenomenal World paraphrase in C2-H17. The interpretation is contested (Glasner, for example). If this is her first mention in the chapter, give her full name or show a name card.",
+     "suggested_wording": "",
+     "sources_opened": [
+      "https://spectrejournal.com/austerity-fascism-and-the-order-of-capital/",
+      "https://revdem.ceu.edu/2023/04/27/clara-mattei-why-is-austerity-so-persistent/"
+     ],
+     "ledger_ids": [
+      "C2-H17",
+      "C2-H18",
+      "C2-XD02"
+     ]
+    },
+    {
+     "page": 9,
+     "sentence": "With fewer jobs, workers can't ask for more.",
+     "verdict": "supported with change",
+     "problem": "Read alone, this sentence sounds like the narrator stating a fact, not Mattei's view. It also overstates her words. She says 'Fewer job openings and higher unemployment diminish the bargaining power of workers' (The Nation, 2023) and calls unemployment 'the best disciplinary device to suppress wages' (RevDem, 2023). That is weakened bargaining power, not 'can't'. Mark it as hers and soften it.",
+     "suggested_wording": "With fewer jobs to go round, she says, workers lose the power to ask for more.",
+     "sources_opened": [
+      "https://www.thenation.com/article/economy/clara-mattei-austerity/tnamp/",
+      "https://revdem.ceu.edu/2023/04/27/clara-mattei-why-is-austerity-so-persistent/"
+     ],
+     "ledger_ids": [
+      "C2-H18"
+     ]
+    },
+    {
+     "page": 10,
+     "sentence": "Here, our central bank, the Reserve Bank, pushed its interest rate from a quarter of a percent to five and a half.",
+     "verdict": "supported with change",
+     "problem": "The figures are right. The Official Cash Rate (OCR) was cut to 0.25% on 16 March 2020 (an emergency 75-point cut from 1%), first raised in October 2021, and reached 5.5% on 24 May 2023 (25-point rise, vote 5-2). 'Our central bank, the Reserve Bank' is accurate (formally the Reserve Bank of New Zealand). Without dates, though, the next sentence makes it sound as if this happened just before the unemployment rise and the current hikes. Add the years so the timeline is clear.",
+     "suggested_wording": "Here, our central bank, the Reserve Bank, pushed its interest rate from a quarter of a percent... to five and a half, by 2023.",
+     "sources_opened": [
+      "https://www.1news.co.nz/2020/03/15/reserve-bank-slashes-ocr-as-economy-takes-hit-from-coronavirus-pandemic",
+      "https://www.business-standard.com/amp/article/international/coronavirus-impact-new-zealand-s-central-bank-cuts-interest-rate-to-0-25-120031600072_1.html",
+      "https://nbr.co.nz/economics/rbnz-hits-go-on-another-ocr-hike",
+      "https://www.focus-economics.com/countries/new-zealand/news/monetary-policy/rbnz-hikes-rate-in-may-signals-end-of-tightening-cycle/"
+     ],
+     "ledger_ids": [
+      "C2-N10",
+      "C2-XD03"
+     ]
+    },
+    {
+     "page": 10,
+     "sentence": "Unemployment has climbed from three point two percent to five point six.",
+     "verdict": "supported with change",
+     "problem": "Both numbers check out. 3.2% (seasonally adjusted, December 2021 quarter) was the lowest since the Household Labour Force Survey began in 1986. 5.6% (seasonally adjusted, June 2026 quarter, released 5 August 2026) is the latest figure before 12 October 2026, the highest since the September 2015 quarter (5.7%), up from a revised 5.4%. The next release is 4 November 2026. The problem is time: with no dates, the line implies the rate rise caused the whole climb. But unemployment kept rising through August 2024 to November 2025, while the Reserve Bank was cutting its rate to 2.25%. Give the start point and say 'latest' so the claim stays accurate. Re-check on 4 November if recording later.",
+     "suggested_wording": "Since the end of 2021, unemployment has climbed from three point two percent to five point six.",
+     "sources_opened": [
+      "https://www.1news.co.nz/2022/02/02/unemployment-in-nz-drops-to-32-lowest-it-has-ever-been/",
+      "https://www.1news.co.nz/2026/08/05/nzs-unemployment-rate-hits-11-year-high-in-june-quarter/"
+     ],
+     "ledger_ids": [
+      "C2-N09",
+      "C2-M18",
+      "C2-XD05"
+     ]
+    },
+    {
+     "page": 10,
+     "sentence": "And now, it's raising its interest rate again.",
+     "verdict": "supported with change",
+     "problem": "Two hikes this year are confirmed: 2.25% to 2.50% on 8 July 2026 and 2.50% to 2.75% on 2 September 2026. But on 3 September Governor Breman said the Bank 'can probably take some time to assess' the two hikes, and markets expect a hold at the next review on 28 October. 'Now, it's raising' implies a rise is under way at the time of speaking. The listener has also not been told the rate was cut back first, so 'again' needs context. Use past or perfect tense.",
+     "suggested_wording": "And this year, after cutting it back, it's started raising its interest rate again.",
+     "sources_opened": [
+      "https://indiannewslink.co.nz/reserve-bank-raises-ocr-as-inflation-vigilance-returns",
+      "https://www.interest.co.nz/economy/140096/rbnz-governor-anna-breman-hints-pause-ocr-hikes-keen-prevent-giving-businesses"
+     ],
+     "ledger_ids": [
+      "C2-N12",
+      "C2-M18",
+      "C2-XD04"
+     ]
+    },
+    {
+     "page": 10,
+     "sentence": "So next time someone tells you creating money causes inflation... ask them. Spent on what? And who pays to stop it?",
+     "verdict": "no fact",
+     "problem": "A rhetorical close with no factual claim.",
+     "suggested_wording": "",
+     "sources_opened": [],
+     "ledger_ids": []
+    }
+   ],
+   "new_ledger_entries": [
+    {
+     "id": "C2-XD01",
+     "claim": "Bank of England explainer on why rates go up: 'Higher interest rates lead to higher charges on many mortgages and loans, meaning people must spend more on them and less on other things'; 'When people spend less, businesses are less willing or able to raise their prices'; 'When prices do not go up so quickly, inflation falls.'",
+     "plain": "When interest rates go up, loans cost more, people spend less, and prices rise more slowly.",
+     "sources": [
+      "https://www.bankofengland.co.uk/explainers/why-are-interest-rates-in-the-uk-going-up"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "Central bank's own account of the mainstream mechanism. It works with a lag. Mattei reads the job losses as intended, which is her view."
+    },
+    {
+     "id": "C2-XD02",
+     "claim": "Mattei, Spectre Journal interview with David McNally (22 Oct 2025), her own answers: 'In April 1920, the Bank of England and the British Treasury raised interest rates dramatically', leading to mass unemployment in 1921 as businesses stopped borrowing for investment; Treasury officials and central bankers were 'deliberately engineering unemployment and insecurity to subdue the labor movement'; 'Unemployment had succeeded in disempowering the majority.'",
+     "plain": "Mattei argues the 1920 rate rise threw people out of work on purpose, to weaken workers.",
+     "sources": [
+      "https://spectrejournal.com/austerity-fascism-and-the-order-of-capital/"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "High confidence that she says it. It is her interpretation, contested (e.g. Glasner, uneasymoney.com). Historians also cite the collapse of the post-war boom and world trade as causes of the 1921 slump."
+    },
+    {
+     "id": "C2-XD03",
+     "claim": "The Reserve Bank of New Zealand cut the OCR by 75 basis points, from 1% to 0.25%, in an unscheduled decision on 16 March 2020 (announced the evening of 15 March per some reports), and cancelled the 25 March review. It raised the OCR to 5.5% on 24 May 2023 (from 5.25%, vote 5-2), signalling the peak.",
+     "plain": "The Reserve Bank cut its rate to a quarter of a percent in March 2020, then raised it to five and a half percent by May 2023.",
+     "sources": [
+      "https://www.1news.co.nz/2020/03/15/reserve-bank-slashes-ocr-as-economy-takes-hit-from-coronavirus-pandemic",
+      "https://www.business-standard.com/amp/article/international/coronavirus-impact-new-zealand-s-central-bank-cuts-interest-rate-to-0-25-120031600072_1.html",
+      "https://nbr.co.nz/economics/rbnz-hits-go-on-another-ocr-hike",
+      "https://www.focus-economics.com/countries/new-zealand/news/monetary-policy/rbnz-hikes-rate-in-may-signals-end-of-tightening-cycle/"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "Search summaries of news reports. The RBNZ decisions page returns 403. Not contested."
+    },
+    {
+     "id": "C2-XD04",
+     "claim": "The 2026 OCR hikes were 2.25% to 2.50% on 8 July 2026 and 2.50% to 2.75% on 2 September 2026. On 3 September 2026 Governor Anna Breman told Parliament's Finance and Expenditure Committee the Bank 'can probably take some time to assess' the two hikes, while another hike remains possible. The next review is 28 October 2026, and markets expect a hold.",
+     "plain": "This year the Reserve Bank has raised its rate twice, in July and September, and has hinted it may pause before deciding on more.",
+     "sources": [
+      "https://indiannewslink.co.nz/reserve-bank-raises-ocr-as-inflation-vigilance-returns",
+      "https://www.interest.co.nz/economy/140096/rbnz-governor-anna-breman-hints-pause-ocr-hikes-keen-prevent-giving-businesses"
+     ],
+     "confidence": "medium-high",
+     "contested_or_simplified": "News sources only, RBNZ pages blocked. Use past or perfect tense ('has started raising'), not 'is raising now'. Re-check after 28 October."
+    },
+    {
+     "id": "C2-XD05",
+     "claim": "NZ unemployment (HLFS, seasonally adjusted) was 5.6% in the June 2026 quarter (released 5 August 2026), up from a revised 5.4% in March. It was the highest since the September 2015 quarter (5.7%); 1News called it an 11-year high. 171,000 people were unemployed. The next release is 4 November 2026.",
+     "plain": "Unemployment is now five point six percent, the highest in about ten years.",
+     "sources": [
+      "https://www.1news.co.nz/2026/08/05/nzs-unemployment-rate-hits-11-year-high-in-june-quarter/"
+     ],
+     "confidence": "high",
+     "contested_or_simplified": "Ledger C2-M18 says '10-year high'. Sources say highest since Sept 2015 (1News: '11-year high'; interest.co.nz: since March 2014). Say 'about ten years' or 'more than a decade'. Unemployment rose through 2024-25 while the OCR was being cut, so don't attribute the whole rise to rate hikes."
+    }
+   ]
+  }
+ ],
+ "rules": "**Narration check: chapter 2 draft against the rules file**\n\n1. **MMT never named:** passes. \"MMT\" and \"Modern Monetary Theory\" do not appear anywhere.\n\n2. **Mattei's interpretations marked as hers**\n   - Page 9: \"/məˈteɪi/ argues that was part of the point.\" This is marked correctly.\n   - Page 9: \"With fewer jobs, workers can't ask for more.\" This is the next sentence and is Mattei's reasoning, but it sounds like the narrator stating a fact. Rule: Mattei's interpretations are said as hers. Fix: \"With fewer jobs, she says, workers can't ask for more.\"\n   - No other Mattei claims appear. The Bank of England study (page 5) and the independent review (page 8) are each credited to their own source.\n\n3. **One plain name for each thing**\n   - **New money and creating money.** Two names are used for one thing:\n     - Page 1: \"creating money\"\n     - Page 2: \"new money\"\n     - Page 3: \"New money arrives\", then \"The same money arrives\"\n     - Page 5: \"double the money it has created\", \"If new money alone\", \"created hundreds of billions of pounds\", \"the new money pushed up\"\n     - Page 6: \"with new money\", \"new money really did push\"\n     - Page 8: \"creating money can push prices up\"\n     - Page 10: \"creating money causes inflation\"\n     \n     Fix: name the thing \"new money\" every time. Use \"create new money\" for the act, for example page 1 \"won't creating new money just cause inflation?\", page 5 \"double the new money it has created\", page 8 \"new money can push prices up\", page 10 \"new money causes inflation\". \"Printing\" is not used anywhere, which is good.\n   - **Interest rate:** consistent. \"its interest rate\" appears on page 9 and twice on page 10, and \"rate\" is never used on its own.\n   - **Central bank and Bank of England.** These are the same institution under two names, and the link is never made:\n     - Page 5: \"Britain's central bank\"\n     - Page 9: \"The Bank of England\"\n     \n     Fix, page 5: \"Britain's central bank, the Bank of England, created...\"\n   - **Central bank explained at first use:** yes, page 5: \"Its central bank, the bank that issues the yen\". But \"issues\" is jargon. Fix: \"the bank that creates Japan's money, the yen\". Page 10 (\"our central bank, the Reserve Bank\") is fine.\n   - **\"Flat out\".** It describes machines on page 3 (\"every machine is already running flat out\") but workers on page 8 (\"where workers are already flat out\"). Page 3 then sums up with a third phrase: \"It had run out of workers, materials and machines.\" Fix: give \"flat out\" one subject throughout. Page 3: \"every machine and every worker is already flat out ... Britain at war was the second factory... flat out.\" Page 8: \"where workers and machines are already flat out.\"\n   - **\"Price tag\".** Page 1 defines inflation as \"Not one price tag. The whole basket.\" Page 3 then uses \"The price tag barely moves\" and \"the price tag climbs\" for the price of shells. That is one price tag, which goes against the definition just given. Fix, page 3: \"Prices barely move\" and \"prices climb\".\n   - **Unemployment.** It goes by three different names:\n     - Page 2: \"out of work\"\n     - Pages 8, 9 and 10: \"unemployment\"\n     - Page 9: \"people pay with their jobs\" and \"fewer jobs\"\n     \n     It is also given in two number styles: \"one in a hundred\", \"two in a hundred\" and \"one in ten\" on pages 2 and 9, but \"three point two percent\" and \"five point six\" on page 10. Fix: explain it once (\"unemployment... the share of people who want work and can't find it\") and use one number style throughout.\n   - **\"The rule\" on page 5.** \"So let's test the rule.\" No rule has been stated by that point. Fix: say it first, for example \"So let's test the idea that new money on its own pushes prices up.\"\n   - **\"The shell factory\" on page 1.** \"go back to the shell factory\" uses \"the\", which needs chapter 1 to have shown a shell factory. Check that it did. Also, page 2 does not show a factory; the factories only appear on page 3. Fix: \"go back to Britain, 1915.\"\n   - **Fuel and oil.** Page 7 says \"oil\" for 1973 and \"fuel\" for today. This is acceptable, but \"fuel\" both times would be tighter.\n\n4. **A concrete case before each general idea**\n   - Page 4 breaks this: \"And some things can't be made more of in a hurry... like homes.\" The general idea comes before the Glasgow case. Fix: open with \"In 1915, workers poured into Glasgow for war work...\" and end with \"Homes can't be built in a hurry.\"\n   - Page 7 breaks this: \"Sometimes the cause isn't spending. It's costs.\" The idea comes before 1973. Fix: open with \"1973. With prices already climbing, the price of oil...\" and then give \"So sometimes the cause isn't spending. It's costs.\"\n   - Page 5 (\"If new money alone pushed prices up, they'd soar\") depends on the undefined \"rule\" (see item 3).\n   - Page 8 opens with the general summary. That is acceptable because it gathers up pages 2 to 6, but it would be stronger if the 2021 case came first.\n   - Pages 1, 2, 3, 6, 9 and 10 pass.\n\n5. **Every term explained at first use**\n   - \"unemployment\" (page 8): not explained. Fix as in item 3.\n   - \"interest rate\" (page 9): only hinted at by \"Loans cost more\". Fix: \"its interest rate, the price of borrowing from it\".\n   - \"marks\" (page 6): not explained. Fix: \"four trillion German marks\".\n   - \"the pandemic support\" (page 8): it is not said what support, or whose. Fix: name it, for example \"the government's and the Reserve Bank's pandemic support\".\n   - \"An independent review\" (page 8): whose review, and of what? Fix: name who wrote it.\n   - \"Take fuel out\" (page 7): unclear what fuel is being taken out of. Fix: \"Leave fuel out of the sums... and it's two point nine.\"\n   - \"issues the yen\" (page 5): see item 3.\n   - \"Workers down tools\" (page 6): an idiom that may be fine for New Zealand listeners. A safer version: \"Workers stop work\".\n   - Japan (page 5) never says where the new money went, which leaves \"spent on what?\" unanswered for the first test. Fix: add a clause such as \"...because most of it sat in the banks and wasn't spent.\"\n\n6. **No capitals for emphasis:** passes. But \"one US dollar\" on page 6 risks being read as \"us\". Fix: \"one American dollar\".\n\n7. **Pauses written as \"...\":** passes on every page. No dashes or [pause] cues.\n\n8. **Hard to read aloud (New Zealand voice)**\n   - \"Ruhr\" (page 6): risky. With no R after vowels, it may come out as \"roo-uh\" or Americanised. Fix: write it in sound symbols, as is done for Mattei, for example /rʊə/, or replace it with \"Germany's coal and steel heartland\" alone.\n   - \"nearly quadrupled in three months\" (page 7): a tongue-trip. Fix: \"nearly four times as dear in three months\".\n   - Years written as figures (\"1915\", \"1923\", \"1973\", \"1920\", \"2013\", \"2021\"): \"2013\" and \"2021\" may come out as \"two thousand and...\" Fix: write them as words, for example \"twenty thirteen\" and \"twenty twenty-one\", or check the take.\n   - \"sets out to double the money it has created, in two years\" (page 5): awkward. Fix: \"sets out to double the money it has created, within two years.\"\n   - \"from three point two percent to five point six\" (page 10): add \"percent\" after \"five point six\" so it scans. Same for \"a quarter of a percent to five and a half percent\".\n   - \"Fewer than one in a hundred people are out of work\" (page 2) is followed on page 3 by \"It had run out of workers\". The two \"out of work...\" phrases sound alike and could blur. This is minor.\n\n9. **Conversational and a little urgent, without shouting:** this mostly passes. There are no exclamation marks and no mood cues, and pages 1, 9 and 10 have good direct questions.\n   - Pages 5 to 7 lose \"you\" and read like a list of facts. A light fix is to add a \"you\" line or a question, for example on page 6: \"So what changed?\"\n   - Page 2's \"more money is chasing fewer things to buy\" is a stock phrase. Under the banality rule, keep it only if it is meant as the echo.\n\n10. **Does page 1 pick up cleanly from chapter 1's last line?** Mostly yes. \"So... won't creating money just cause inflation?\" repeats chapter 1's question almost word for word, and \"creating money\" matches chapter 1's \"creating it\". Two problems:\n    - Page 2 immediately switches the name to \"new money\" (see item 3).\n    - \"go back to the shell factory\" needs a factory in chapter 1 (see item 3).\n    \n    The near-verbatim repeat can sound like a rewind. Optional fix: \"So... back to that question. Won't creating new money just cause inflation?\"\n\n11. **Sentences that could read as taking a side in the 7 November 2026 New Zealand election**\n    - Page 7: \"And here, now? Prices rose four point one percent in the year to June. Take fuel out... and it's two point nine.\" This plays down current inflation by blaming fuel, which helps one side's argument.\n    - Page 8: \"In 2021, our unemployment hit a record low, and house prices jumped about thirty percent in a year. An independent review says the pandemic support was right at first... but too strong, for too long.\" This blames the previous government's and the Reserve Bank's pandemic response.\n    - Page 10: \"pushed its interest rate from a quarter of a percent to five and a half. Unemployment has climbed from three point two percent to five point six. And now, it's raising its interest rate again.\" Placed right after Mattei's claim on page 9 (\"that was part of the point... workers can't ask for more\"), this suggests today's rate rises are meant to cost jobs and hold down wages. That is the strongest case.\n    - Page 10: \"So next time someone tells you creating money causes inflation... ask them. Spent on what? And who pays to stop it?\" In campaign season this reads as a rebuttal aimed at candidates promising spending restraint.\n    - Suggested fix: keep Mattei's claim tied to Britain in 1920. On page 10, state New Zealand's figures without the \"And now, it's raising... again\" turn, or add the Reserve Bank's own stated reason. Give the page 8 review's full finding rather than one line. Attribute the page 7 fuel figure to Stats NZ and drop \"Take fuel out...\", or give both figures plainly."
+}

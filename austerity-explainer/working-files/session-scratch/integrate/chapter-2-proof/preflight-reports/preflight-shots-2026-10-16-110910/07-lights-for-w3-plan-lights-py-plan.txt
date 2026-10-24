@@ -1,0 +1,51 @@
+Lights of works for view w3 (subject: two gates and the wall between, DARK): 0 light(s).
+A dark subject: no starting watts from a light on the subject (see the dark-subject plan below; give --reference to start from a light anyway).
+
+Lamps on the frame (3 checked; the lines meet at 0.500 across, 0.500 down): none in the way.
+
+Shadows: only (none: name a key, fire, doorway or sky light) cast shadows; every other light none. Figures: visible_shadow off, each with a soft foot patch 0.5 x 0.35 m.
+EEVEE for a 1536-wide plate: shadow_pool_size '1024', shadow_resolution_scale 0.703. After every render run plan_lights.py render-log on its log; a shadow fault draws false black wedges (lesson 110).
+Plate time: measure and record it (round 3: about 25 minutes with every light casting, about 6 with three).
+
+Dark subject (two gates and the wall between): do not try to make it the brightest thing (round 5 raised the yard light 260 -> 900 W and the gate stayed at 0.85 times the frame's mean). Light what is behind it, rim-light the figures, and judge it by its silhouette contrast, at least 2.2 (plan_lights.py contrast on the plate or painting). Lights behind it now: none: add one (a cool yard or room light behind the subject, no shadow).
+
+0 problem(s).
+
+Settings used (film-settings.json):
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  light_planner.shadow_casting_kinds = ["key", "fire", "doorway", "sky"] kinds of light that cast shadows (every other light casts none) (judged)
+  light_planner.foot_patch_metres = [0.5, 0.35] metres (width, depth) of the soft shadow under a figure that casts no shadow (judged)
+  light_planner.lamp_clear_of_subject_pixels = 18 pixels on the film frame between a lamp and the subject's outline box (judged)
+  camera.meeting_point_gap_share_of_width = 0.03 share of the frame width (judged)
+  light_planner.near_ground_light_max = 0.025 W/m2 a light behind the camera may put on the ground at the frame's bottom edge (judged)
+  frame.plate_width_pixels = 1536 pixels (judged)
+  light.shadow_resolution_reference_width = 1080 pixels (scale = min(1, 1080 / width)) (judged)
+  light.shadow_pool_size = 1024 EEVEE setting (measured)
+  shot_kind_profiles.still_life.rules.main_rule_spot_box = [0.4, 0.5] share of width x height (measured)
+  shot_kind_profiles.dark_subject.rules.rule1_meeting_point_gap = 0.03 share of the width, across only (judged)
+  shot_kind_profiles.overview.rules.rule2_eye_height = [0.8, 7.0] metres above the surface the checker finds under the camera (judged)
+  shot_kind_profiles.overview.rules.rule3_story_box = [0.6, 0.5] share of width x height (judged)
+  shot_kind_profiles.crowd.rules.rule3_story_box = [0.8, 0.5] share of width x height (judged)
+  shot_kind_profiles.overview.rules.rule3_story_together_metres = 2.0 metres between footprints (judged)
+  shot_kind_profiles.still_life.rules.rule4_near_touch = {"overlap_min": 20, "gap_min": 25} pixels at 1536 wide (judged)
+  shot_kind_profiles.crowd.rules.rule4_between_figures = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_subject_brightness_ratio = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_brightest_share_on_subject = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_brightest_share_in_story_box = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_nothing_in_story_as_bright = None replaced (judged)
+  shot_kind_profiles.still_life.rules.rule5_top_third_brightness = 0.36 mean brightness (0 to 1) (measured)
+  shot_kind_profiles.still_life.rules.rule6_warm_share = [0.015, 0.03] share of the frame (measured)
+  shot_kind_profiles.dark_subject.rules.rule6_lit_from_below = None off (judged)
+  shot_kind_profiles.overview.rules.rule7_story_reaches_down = 0.7 down the frame (judged)
+  shot_kind_profiles.still_life.rules.rule8_work_prop_share = 0.02 share of the frame (measured)
+  shot_kind_profiles.crowd.rules.rule8_bottom_left_share = 0.02 share of the frame per story thing (the subject or a story prop) (judged)
+  shot_kind_profiles.overview.rules.rule10_quiet_side_weight = [0.4, 0.6] share of the weight (judged)
+  shot_kind_profiles.crowd.rules.rule10_quiet_side_weight = [0.4, 0.5] share of the weight (judged)
+  shot_kind_profiles.dark_subject.rules.rule10_nothing_on_quiet_side_outshines = None off (judged)
+  shot_kind_profiles.still_life.rules.rule12_must_read_right_edge = 0.9 share of the width (judged)
+  shot_kind_profiles.still_life.rules.rule12_story_right_edge = 0.95 share of the width (in 0.45-0.95 down) (judged)
+  shot_kind_profiles.crowd.rules.rule12_title_zone_sky_share = None replaced (judged)
+  shot_kind_profiles.still_life.rules.resting_on = the street (ground rays; "landed high" over 0.5 m) rule (judged)
+  shot_kind_profiles.still_life.rules.slide_magnification = painting limit times nearer at the nearest painted surface (measured)
+  shot_kind_profiles.dark_subject.rules.silhouette_contrast = 2.2 (surround + 0.05)/(subject + 0.05) over a band round the subject (measured)

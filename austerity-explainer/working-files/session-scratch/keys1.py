@@ -1,0 +1,14 @@
+[
+ dict(t=T['start'],position=[0.2,8.5,21],target=[0.1,1.6,-3.0],fov=40),
+ dict(t=T['two']+0.5,position=[0.5,5.6,14.5],target=[0.1,1.2,-2.2],fov=40),
+ dict(t=T['first']+1.5,position=[0.8,3.9,10.2],target=[-0.7,0.75,2.6],fov=38),
+ dict(t=T['money1'],position=[0.9,3.6,9.6],target=[-0.75,0.55,2.9],fov=38),
+ dict(t=T['shells']+0.6,position=[-0.4,3.4,10.9],target=[-1.3,0.5,3.2],fov=38),
+ dict(t=T['barely']+0.6,position=[0.1,2.9,9.8],target=[-0.85,0.8,3.4],fov=36),
+ dict(t=T['second']+1.4,position=[3.4,3.9,3.8],target=[1.9,0.75,-3.8],fov=38),
+ dict(t=T['money2'],position=[3.5,3.6,3.2],target=[1.9,0.55,-3.5],fov=38),
+ dict(t=T['bid'],position=[3.9,2.5,2.2],target=[2.6,0.85,-2.9],fov=36),
+ dict(t=T['climb']+1.0,position=[3.8,2.3,1.8],target=[2.7,0.95,-2.8],fov=34),
+ dict(t=T['britain']+0.8,position=[2.4,5.0,6.5],target=[1.7,0.9,-3.6],fov=38),
+ dict(t=T['end']+1.2,position=[1.9,3.0,5.4],target=[1.75,0.55,-1.8],fov=38),
+]

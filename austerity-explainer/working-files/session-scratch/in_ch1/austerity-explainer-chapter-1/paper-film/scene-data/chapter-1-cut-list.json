@@ -1,0 +1,647 @@
+{
+ "note": "What this is: the cut list for chapter 1's paper pieces. prepare_paper_pieces.py reads it and writes paper-film/pieces/chapter-1/. Paths are from the project folder. margin = width of the paper margin as a share of the source picture's longest side; grade = how strongly colours are nudged toward the page paintings (0 to 1); longest_side = largest size of the finished piece in pixels.",
+ "output_folder": "paper-film/pieces/chapter-1",
+ "backgrounds": {
+  "parliament": "downloads/fal/chapter-1-paper/101-bg-parliament.png",
+  "munitions-factory": "downloads/fal/chapter-1-paper/102-bg-munitions-factory.png",
+  "glasgow-square": "downloads/fal/page3-paper-test/1-glasgow-square.png",
+  "pithead": "downloads/fal/page3-paper-test/6-pithead.png",
+  "turin-street": "downloads/fal/chapter-1-paper/104-bg-turin-street.png",
+  "boardroom": "downloads/fal/chapter-1-paper/105-bg-boardroom.png",
+  "conference-hall": "downloads/fal/chapter-1-paper/106-bg-conference-hall.png",
+  "town-street": "downloads/fal/chapter-1-paper/107-bg-town-street.png",
+  "kitchen": "downloads/fal/chapter-1-paper/108-bg-kitchen.png",
+  "factory-gate": "downloads/fal/chapter-1-paper/109-bg-factory-gate.png"
+ },
+ "pieces": {
+  "crowd-back": {
+   "image": "downloads/fal/page3-paper-test/2-crowd-back.png",
+   "mask": "downloads/fal/page3-paper-test/cutouts/2-crowd-back-mask.png",
+   "margin": 0.0045,
+   "grade": 0.6
+  },
+  "crowd-front": {
+   "image": "downloads/fal/page3-paper-test/3-crowd-front.png",
+   "mask": "downloads/fal/page3-paper-test/cutouts/3-crowd-front-mask.png",
+   "margin": 0.0045,
+   "grade": 0.6
+  },
+  "soldiers": {
+   "image": "downloads/fal/page3-paper-test/4-soldiers.png",
+   "mask": "downloads/fal/page3-paper-test/cutouts/4-soldiers-mask.png",
+   "margin": 0.0045,
+   "grade": 0.6
+  },
+  "tank": {
+   "image": "downloads/fal/page3-paper-test/5-tank.png",
+   "mask": "downloads/fal/page3-paper-test/cutouts/5-tank-mask.png",
+   "margin": 0.006,
+   "grade": 0.25,
+   "leave_out_boxes": [
+    [
+     618,
+     470,
+     692,
+     614
+    ]
+   ],
+   "why": "the leave-out box removes a small pale fin on the roof that could read as a flag"
+  },
+  "miner": {
+   "image": "downloads/fal/page3-paper-test/7-miner.png",
+   "mask": "downloads/fal/page3-paper-test/cutouts/7-miner-mask.png",
+   "margin": 0.006,
+   "grade": 0.35,
+   "jaw": {
+    "jaw_polygon": [
+     [
+      790,
+      1264
+     ],
+     [
+      795,
+      1246
+     ],
+     [
+      810,
+      1237
+     ],
+     [
+      900,
+      1234
+     ],
+     [
+      990,
+      1237
+     ],
+     [
+      1005,
+      1246
+     ],
+     [
+      1010,
+      1264
+     ],
+     [
+      1010,
+      1470
+     ],
+     [
+      985,
+      1515
+     ],
+     [
+      940,
+      1545
+     ],
+     [
+      900,
+      1552
+     ],
+     [
+      860,
+      1545
+     ],
+     [
+      815,
+      1515
+     ],
+     [
+      790,
+      1470
+     ]
+    ],
+    "mouth_polygon": [
+     [
+      784,
+      1262
+     ],
+     [
+      790,
+      1240
+     ],
+     [
+      808,
+      1228
+     ],
+     [
+      900,
+      1225
+     ],
+     [
+      992,
+      1228
+     ],
+     [
+      1010,
+      1240
+     ],
+     [
+      1016,
+      1262
+     ],
+     [
+      1012,
+      1300
+     ],
+     [
+      900,
+      1310
+     ],
+     [
+      788,
+      1300
+     ]
+    ]
+   }
+  },
+  "report": {
+   "image": "downloads/fal/page3-paper-test/8-report.png",
+   "mask": "downloads/fal/page3-paper-test/cutouts/8-report-mask.png",
+   "margin": 0.008,
+   "grade": 0.3,
+   "labels": [
+    {
+     "lines": [
+      "ROYAL",
+      "COMMISSION"
+     ],
+     "font_share": 0.062,
+     "centre_x": 0.56,
+     "top_y": 0.25,
+     "colour": [
+      28,
+      34,
+      42,
+      235
+     ],
+     "line_gap": 1.45
+    }
+   ]
+  },
+  "politician": {
+   "image": "downloads/fal/chapter-1-paper/201-politician.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/201-politician-mask.png",
+   "margin": 0.006,
+   "grade": 0.35,
+   "add_polygons": [
+    [
+     [
+      140,
+      1972
+     ],
+     [
+      1692,
+      1972
+     ],
+     [
+      1692,
+      2034
+     ],
+     [
+      1660,
+      2034
+     ],
+     [
+      1660,
+      2288
+     ],
+     [
+      172,
+      2288
+     ],
+     [
+      172,
+      2034
+     ],
+     [
+      140,
+      2034
+     ]
+    ]
+   ],
+   "why": "the background remover dropped the wooden lectern; the polygon puts it back",
+   "jaw": {
+    "jaw_polygon": [
+     [
+      850,
+      838
+     ],
+     [
+      855,
+      826
+     ],
+     [
+      868,
+      821
+     ],
+     [
+      920,
+      820
+     ],
+     [
+      972,
+      821
+     ],
+     [
+      985,
+      826
+     ],
+     [
+      990,
+      838
+     ],
+     [
+      990,
+      925
+     ],
+     [
+      970,
+      950
+     ],
+     [
+      945,
+      962
+     ],
+     [
+      920,
+      966
+     ],
+     [
+      895,
+      962
+     ],
+     [
+      870,
+      950
+     ],
+     [
+      850,
+      925
+     ]
+    ],
+    "mouth_polygon": [
+     [
+      844,
+      836
+     ],
+     [
+      850,
+      822
+     ],
+     [
+      866,
+      815
+     ],
+     [
+      920,
+      813
+     ],
+     [
+      974,
+      815
+     ],
+     [
+      990,
+      822
+     ],
+     [
+      996,
+      836
+     ],
+     [
+      992,
+      880
+     ],
+     [
+      920,
+      888
+     ],
+     [
+      848,
+      880
+     ]
+    ]
+   }
+  },
+  "shell": {
+   "image": "downloads/fal/chapter-1-paper/209-shells-row.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/209-shells-row-mask.png",
+   "margin": 0.004,
+   "grade": 0.3,
+   "longest_side": 1024,
+   "split_shapes": true,
+   "why": "each shell becomes its own piece (shell-1 to shell-7, left to right) so they can pile up and run out one by one"
+  },
+  "munition-women": {
+   "image": "downloads/fal/chapter-1-paper/203-munition-women.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/203-munition-women-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "italian-strikers": {
+   "image": "downloads/fal/chapter-1-paper/204-italian-strikers.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/204-italian-strikers-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "owners": {
+   "image": "downloads/fal/chapter-1-paper/205-owners.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/205-owners-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "workers-queue": {
+   "image": "downloads/fal/chapter-1-paper/206-workers-queue.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/206-workers-queue-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "delegates": {
+   "image": "downloads/fal/chapter-1-paper/207-delegates.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/207-delegates-mask.png",
+   "margin": 0.0045,
+   "grade": 0.35
+  },
+  "scissors-chain": {
+   "image": "downloads/fal/chapter-1-paper/301-scissors-chain.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/301-scissors-chain-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "coins-arrow": {
+   "image": "downloads/fal/chapter-1-paper/302-coins-arrow.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/302-coins-arrow-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "iron-weight": {
+   "image": "downloads/fal/chapter-1-paper/303-iron-weight.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/303-iron-weight-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "cake": {
+   "image": "downloads/fal/chapter-1-paper/304-cake.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/304-cake-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "archive-boxes": {
+   "image": "downloads/fal/chapter-1-paper/305-archive-boxes.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/305-archive-boxes-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "book": {
+   "image": "downloads/fal/chapter-1-paper/306-book.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/306-book-mask.png",
+   "margin": 0.011,
+   "grade": 0.3,
+   "longest_side": 1024,
+   "labels": [
+    {
+     "lines": [
+      "THE CAPITAL",
+      "ORDER"
+     ],
+     "font_share": 0.092,
+     "centre_x": 0.545,
+     "top_y": 0.2,
+     "colour": [
+      222,
+      200,
+      140,
+      240
+     ],
+     "line_gap": 1.35
+    },
+    {
+     "lines": [
+      "CLARA E. MATTEI"
+     ],
+     "font_share": 0.058,
+     "centre_x": 0.545,
+     "top_y": 0.74,
+     "colour": [
+      222,
+      200,
+      140,
+      230
+     ],
+     "line_gap": 1.3
+    }
+   ]
+  },
+  "ledger": {
+   "image": "downloads/fal/chapter-1-paper/306-book.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/306-book-mask.png",
+   "margin": 0.011,
+   "grade": 0.3,
+   "longest_side": 1024,
+   "why": "the same plain book with no title: the government's account book on page 10"
+  },
+  "money-bag": {
+   "image": "downloads/fal/chapter-1-paper/307-money-bag.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/307-money-bag-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "rubber-stamp": {
+   "image": "downloads/fal/chapter-1-paper/308-rubber-stamp.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/308-rubber-stamp-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "factory-small": {
+   "image": "downloads/fal/chapter-1-paper/309-factory-small.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/309-factory-small-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1536
+  },
+  "price-tag": {
+   "image": "downloads/fal/chapter-1-paper/310-price-tag.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/310-price-tag-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "tax-tag": {
+   "image": "downloads/fal/chapter-1-paper/310-price-tag.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/310-price-tag-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024,
+   "labels": [
+    {
+     "lines": [
+      "TAX"
+     ],
+     "font_share": 0.16,
+     "colour": [
+      70,
+      30,
+      26,
+      235
+     ],
+     "along_long_side": true
+    }
+   ]
+  },
+  "pay-packet": {
+   "image": "downloads/fal/chapter-1-paper/311-pay-packet.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/311-pay-packet-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "italy-map": {
+   "image": "downloads/fal/chapter-1-paper/312-italy-map.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/312-italy-map-mask.png",
+   "grade": 0.3,
+   "longest_side": 1024,
+   "map_card": {
+    "background_tolerance": 16,
+    "padding_share": 0.07,
+    "corner_share": 0.035
+   },
+   "why": "printed on a small paper card: the islands (Sardinia, Sicily) cannot be cut as one paper piece, and the background remover made Sardinia faint"
+  },
+  "red-flag": {
+   "image": "downloads/fal/chapter-1-paper/313-red-flag.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/313-red-flag-mask.png",
+   "margin": 0.011,
+   "grade": 0.3,
+   "longest_side": 1024
+  },
+  "farmland": {
+   "image": "downloads/fal/chapter-1-paper/314-farmland.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/314-farmland-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "mine-small": {
+   "image": "downloads/fal/chapter-1-paper/315-mine-small.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/315-mine-small-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024,
+   "mask_threshold": 70,
+   "why": "the background remover left the coal heap half see-through; a lower threshold keeps it"
+  },
+  "worker-standing": {
+   "image": "downloads/fal/chapter-1-paper/316-worker-standing.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/316-worker-standing-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1360
+  },
+  "door": {
+   "image": "downloads/fal/chapter-1-paper/317-door.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/317-door-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1360
+  },
+  "gold-bars": {
+   "image": "downloads/fal/chapter-1-paper/318-gold-bars.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/318-gold-bars-mask.png",
+   "margin": 0.011,
+   "grade": 0.25,
+   "longest_side": 1024
+  },
+  "school": {
+   "image": "downloads/fal/chapter-1-paper/319-school.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/319-school-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "basket": {
+   "image": "downloads/fal/chapter-1-paper/320-basket.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/320-basket-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "bank": {
+   "image": "downloads/fal/chapter-1-paper/321-bank.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/321-bank-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "padlock": {
+   "image": "downloads/fal/chapter-1-paper/322-padlock.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/322-padlock-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "locomotive": {
+   "image": "downloads/fal/chapter-1-paper/323-locomotive.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/323-locomotive-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "banner": {
+   "image": "downloads/fal/chapter-1-paper/324-banner.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/324-banner-mask.png",
+   "margin": 0.009,
+   "grade": 0.3,
+   "longest_side": 1248
+  },
+  "kitchen-table": {
+   "image": "downloads/fal/chapter-1-paper/325-kitchen-table.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/325-kitchen-table-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "banknotes": {
+   "image": "downloads/fal/chapter-1-paper/326-banknotes.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/326-banknotes-mask.png",
+   "margin": 0.011,
+   "grade": 0.35,
+   "longest_side": 1024
+  },
+  "materials": {
+   "image": "downloads/fal/chapter-1-paper/327-materials.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/327-materials-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "lathe": {
+   "image": "downloads/fal/chapter-1-paper/328-lathe.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/328-lathe-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "council-houses": {
+   "image": "downloads/fal/chapter-1-paper/329-council-houses.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/329-council-houses-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  },
+  "dole-queue": {
+   "image": "downloads/fal/chapter-1-paper/330-dole-queue.png",
+   "mask": "downloads/fal/chapter-1-paper/masks/330-dole-queue-mask.png",
+   "margin": 0.009,
+   "grade": 0.35,
+   "longest_side": 1248
+  }
+ }
+}

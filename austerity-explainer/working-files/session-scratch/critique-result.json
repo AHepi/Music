@@ -1,0 +1,1113 @@
+{
+ "critics": [
+  {
+   "area": "pictures pages 1-3",
+   "overall": "Pages 1 and 2 mostly work. The painted checkout and the painted munitions hall have real depth, lamp-lit mood and focus fall-off, and most hooks are short versions of what Malina says at that moment (\"THE SAME BASKET\", \"COSTS MORE\", \"UNDER 1%\", \"MORE MONEY / FEWER THINGS\", the 1914/1918 bars). The ledger confirms \"x2\" is fair for \"roughly doubled\".\n\nPage 3 is the weak page, and it is the centre of the chapter. The painted world gives way to plain, clean CG boxes on an untextured brown floor under a backdrop that hangs like a billboard, with a hard bottom edge and black gaps in the corners. The camera keeps cutting off the one thing the argument depends on, the price counter, at the right edge. Callout labels in light text vanish on the ivory walls. Nothing tells the viewer which factory is \"the first\" and which is \"the second\". The ending lists workers, materials and machines but does not show them as being in short supply.\n\nTwo faults repeat across pages:\n- Callout leader lines end on the middle of the price digits, so they read as strike-throughs: $100.00 and $104.10 on page 1, \u00a31.00 and \u00a31.60 on page 3.\n- The same rounded, bullet-like brass \"shell\" model is used on pages 1 and 3, while page 2's painting shows pointed artillery shells.\n\nPage 2's paper boats \"sink\" into a dry concrete floor. The relief paintings tear and mirror at their edges: a smeared card terminal on page 1, kaleidoscope floors and ceilings on pages 1 and 2.\n\nThe page peels at 20.03, 42.55 and 74.26 are clean, with no faults seen.\n\nWhich material I looked at: for 0\u201327 s, 41.5 s and 43\u201374 s, actual filmed frames from the chunks; for page 2 between 27 and 41 s, the latest stills (p2b, p2d). I wrote frames only into /home/user/work/chapter-2/stills/critique/ and rendered no new stills.",
+   "findings": [
+    {
+     "page": "3",
+     "time": "47.3-62.3 s and 72.9-73.4 s",
+     "category": "composition",
+     "severity": "must fix",
+     "what": "The price counter, the key readout on this page, is cut off at the right edge in nearly every factory close-up: 'GBP1.0' at 47.3 and 48.6, only 'GBP' at 52.4, off-frame at 53.8 (just as Malina says 'Prices barely move'), 'GBP1' at 57.3, 'GBP1.0' at 62.3, 'GBP2.0' at 73.4. It also sits inside the right 140 px phone-button zone.",
+     "why": "The whole lesson is 'factory 1: price stays the same; factory 2: price climbs'. If the viewer cannot read the price, the comparison does not land.",
+     "fix": "Frame each factory close-up so the board sits at x 600-900. Either move the camera targets about 0.6 units right in page-3.js's shot list, or move boardAt in two-factories-set.js from x+1.25 to about x+0.6 so it sits beside the door.",
+     "evidence": "critique/p3sheet-0.jpg and p3sheet-10.jpg (frames from chunks 01290-02241), critique/p-53.8.jpg, p-63.8.jpg, p3d/still-73.40.jpg, p3d/still-47.50.jpg"
+    },
+    {
+     "page": "3",
+     "time": "52.4-54.2 s, 63.8 s, 67.4 s",
+     "category": "legibility",
+     "severity": "must fix",
+     "what": "The page-3 callouts use light grey or white text with no backing, drawn over the ivory brick wall or the grey roof. 'MORE SHELLS' at 53.8 is effectively invisible: only its leader line shows, and the shell it points to is cut off at the left edge. 'NO MORE SHELLS' at 63.8 and 'PRICES CLIMB' at 67.4 are faint grey on a pale wall or roof.",
+     "why": "These words are the on-screen summary of Malina's key contrast (more shells vs no more shells, prices barely move vs prices climb). If the viewer cannot read them, the page carries no words at its most important moments.",
+     "fix": "In page-3's draw2D, give these callouts a dark pill behind the text (or the dark wash used on page 1). Place them over the dark ground or the dark sky band rather than the wall, for example dy +200 so they sit under the factory. Frame the shell row so the shells pointed at are fully in shot.",
+     "evidence": "critique/p-53.8.jpg, critique/p-63.8.jpg, critique/p-67.4.jpg; page-3.js lines 141-146"
+    },
+    {
+     "page": "1 and 3",
+     "time": "7.4-10.3 s (p1), 55.3 s and 67.4 s (p3)",
+     "category": "legibility",
+     "severity": "must fix",
+     "what": "Callout leader lines end at the centre of the number they label, so they cut through the digits like a strike-through. Examples: the line runs through the '0' of '$100.00' at 7.40 and through '$104.10' at 8.90; on page 3 it lands on the decimal point of 'GBP1.00' (55.3) and on 'GBP1.60' (67.4).",
+     "why": "A line through a price reads as 'crossed out / cancelled', which is the opposite of 'this is the price now'. It also makes the hero numbers harder to read.",
+     "fix": "Point the callouts at the tag or board edge rather than its centre. On page 1, use a point on the tag's upper rim instead of tagCentre(). On page 3, use boardAt with setY at the board's top edge (about 1.17 plus the half-height) so the line stops above the digits.",
+     "evidence": "p1-c/still-7.40.jpg, p1-c/still-8.90.jpg, critique/c-8.00.jpg, critique/c-9.73.jpg, critique/p-67.4.jpg, p3sheet-0 at 55.3; page-1.js callout(... point: tagPoint)"
+    },
+    {
+     "page": "3",
+     "time": "43.0-74 s (whole page)",
+     "category": "consistency",
+     "severity": "must fix",
+     "what": "Page 3 drops the chapter's painted look. The factories are plain untextured CG boxes on a flat brown floor with no texture. The painted skyline is a rectangle with a hard straight bottom edge at about y=600 (43.2 s) or y=205 (73.4 s), and black void shows past its corners at 63.8 and 67.4 s (top-left black blocks).",
+     "why": "Coming straight from page 2's rich painted munitions hall, it looks unfinished, like a pre-visualisation. That undercuts the 'cinematic' brief on the chapter's central page, and the black corners read as a rendering fault.",
+     "fix": "Fade the backdrop's bottom edge into haze: raise hazeDensity, or add a gradient fog card along the seam. Give the table a painted or card texture instead of plain 0x2e2c28. Scale the backdrop up (about 1.65 to 2.0) or lower it so it covers the frame on the close shots, which removes the black corners.",
+     "evidence": "p3d/still-43.20.jpg, p3d/still-73.40.jpg, critique/p-63.8.jpg, critique/p-67.4.jpg; two-factories-set.js backdrop setup"
+    },
+    {
+     "page": "3",
+     "time": "43.3-74 s",
+     "category": "clarity",
+     "severity": "should fix",
+     "what": "The two factories are never labelled. Malina says 'In the first...', 'In the second...' and 'Britain at war was close to the second factory', but nothing on screen names factory 1 and factory 2. At 69.6 s the shot shows a single factory with no marker of which one it is. 'IDLE' and 'FLAT OUT' are temporary callouts.",
+     "why": "The viewer has to remember which factory was which across 30 seconds of camera moves. The closing line ('close to the second factory') only works if the second factory is identifiable.",
+     "fix": "Add a permanent small card sign over each door ('1' and '2', or 'FACTORY 1' and 'FACTORY 2'), or keep a small persistent label under each factory. At 69.6 s, frame both factories with the second one picked out by light.",
+     "evidence": "critique/p3sheet-10.jpg (69.6 s), p3d/still-43.20.jpg"
+    },
+    {
+     "page": "3",
+     "time": "70.9-73.6 s",
+     "category": "clarity",
+     "severity": "should fix",
+     "what": "'Short of workers, materials and machines' is shown as one worker, a pile of materials and a lathe popping up, labelled WORKERS / MATERIALS / MACHINES. Nothing shows they are scarce. The pictures say 'here they are', not 'not enough of them'.",
+     "why": "The point of the line is the shortage, which is why prices climb. As drawn, it reads as an inventory.",
+     "fix": "Show each item with empty outline slots beside it (one worker and two dashed empty silhouettes, and so on), or put a small hook above them: 'SHORT OF'. That is a short form of what she says and stays within the on-screen rules.",
+     "evidence": "p3d/still-73.40.jpg, critique/p3sheet-10.jpg 71.6 and 72.9; page-3.js header comment"
+    },
+    {
+     "page": "3",
+     "time": "72.9-74.2 s",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "The labels are clipped and sit in the button zone: the 'W' of 'WORKERS' touches x=0, 'MACHINES' runs to about x=1070 (inside the right 140 px), and the lathe cut-out is cut by the right edge.",
+     "why": "Clipped labels look like mistakes, and the right zone is covered by phone buttons.",
+     "fix": "Bring the three items closer together, or ease the camera back about 10% so the row spans x 140-900.",
+     "evidence": "p3d/still-73.40.jpg, p3c sheet 73.40"
+    },
+    {
+     "page": "1, 2, 3",
+     "time": "18.7-20.5 s (p1), 21-42 s (p2), 52-74 s (p3)",
+     "category": "consistency",
+     "severity": "should fix",
+     "what": "The 3D 'shell' model is a rounded, bullet-like brass cartridge with a red band: it drops onto the conveyor at 18.70 and stands in rows outside the page-3 factories. The page-2 painting that follows shows pointed artillery shells.",
+     "why": "A non-expert sees a bullet, not a shell. The film's 'shell factory' object changes shape between pages, and the page-1 link into page 2 ('back to the shell factory') does not match what we then see.",
+     "fix": "In models.js shell(), give the nose a pointed ogive and a visible copper driving band, matching the painted shells on page 2.",
+     "evidence": "p1-c/still-18.70.jpg, critique/c-22.37.jpg, critique/p-63.8.jpg, p3d/still-73.40.jpg"
+    },
+    {
+     "page": "3",
+     "time": "49.9-67 s",
+     "category": "accuracy",
+     "severity": "should fix",
+     "what": "'New money' in Britain in 1915 is drawn as gold coins raining into the factory yards. Page 2 drew the same new money as banknote bundles.",
+     "why": "The wartime new money was paper (Treasury notes and bank credit; research C2-XA01). Gold coins suggest the opposite, hard money. The symbol for money also changes from page to page.",
+     "fix": "Use the page-2 banknote bundles (banknoteBundle) falling into the yards instead of CoinRain, or at least paper notes.",
+     "evidence": "critique/p-53.8.jpg, critique/p-67.4.jpg vs p2d/still-41.20.jpg; research ledger C2-XA01"
+    },
+    {
+     "page": "3",
+     "time": "43-74 s",
+     "category": "rules",
+     "severity": "should fix",
+     "what": "The price counters show GBP1.00, GBP1.60 and GBP2.00, figures Malina never says, with no 'Example prices' credit. Page 1 does carry that credit.",
+     "why": "Guide section 5: numbers must be the ones she says, or plainly illustrative. A viewer may take 'a shell cost GBP1, then GBP2' as historical fact.",
+     "fix": "Add credit(ctx, t, { text: 'Example prices', y: 1460, size: 28 }) for the page, as on page 1.",
+     "evidence": "page-3.js draw2D lines 141-147 (no credit), critique/p-67.4.jpg"
+    },
+    {
+     "page": "2",
+     "time": "30.2-33.0 s",
+     "category": "bug",
+     "severity": "should fix",
+     "what": "The three paper boats lie flat on the dry painted factory floor. On 'sinking' they tip and disappear into the floor. The page comment says 'on a puddle', but no water is visible. The boats are also already on screen under the 'NEW MONEY' hook at 30.5 s, before 'Submarines'.",
+     "why": "Boats sinking into concrete reads as a clipping fault. Showing them during 'new money' muddles two separate causes.",
+     "fix": "Give the puddle a visible dark reflective water disc with a ripple ring where the boats sink. Pop the boats up at T.submarines, not earlier.",
+     "evidence": "p2d/still-31.00.jpg, p2b/still-32.40.jpg, p2b/still-30.50.jpg; page-2.js header ('three paper boats on a puddle')"
+    },
+    {
+     "page": "2",
+     "time": "23.4-28.0 s",
+     "category": "clarity",
+     "severity": "should fix",
+     "what": "The heading 'OUT OF WORK' sits over the whole 100-dot grid, but 99 of the dots are filled amber, meaning in work. Only the hollow last dot means 'without a job', and the grid has no key.",
+     "why": "A quick reader can take the big amber mass as 'out of work', the reverse of the point (almost everyone had a job).",
+     "fix": "Change the heading to 'OUT OF WORK: 1 IN 100' or 'IN WORK / OUT OF WORK', or point a small callout 'OUT OF WORK' at the hollow dot, and keep UNDER 1% below.",
+     "evidence": "critique/c-26.97.jpg, p2b/still-26.00.jpg"
+    },
+    {
+     "page": "1 and 2",
+     "time": "15.3-17.6 s (p1), 26-42 s (p2)",
+     "category": "bug",
+     "severity": "should fix",
+     "what": "The relief paintings mirror at their edges. On page 1 (16.00) the floor-tile lines fold into big 'V' chevrons down the left side, under 'EXAMPLE PRICES', and the ceiling tiles fold into hexagons. On page 2 the bottom of the factory floor shows a symmetric kaleidoscope pattern (31.00, 41.20).",
+     "why": "These are visible rendering faults, mirror-padding beyond the painted area, and they sit in the frame's large empty areas where the eye drifts.",
+     "fix": "Keep the camera inside the painting: for p1 at 15-17.6 s reduce the shop shot's fov or pull-back, and for p2 raise the camera tilt slightly. Alternatively use clamp-to-edge plus a vignette on the relief texture instead of mirrored wrap.",
+     "evidence": "critique/mirror-check.jpg (crops of p1-c/still-16.00.jpg and p2d/still-31.00.jpg)"
+    },
+    {
+     "page": "1",
+     "time": "10.2-17.6 s",
+     "category": "bug",
+     "severity": "nice to have",
+     "what": "The top of the painted card terminal at the right is torn into a saw-tooth smear, a depth-relief stretch at a depth edge. It sits right next to the hero basket.",
+     "why": "It is a visible tear in the foreground, close to the main subject.",
+     "fix": "Blur or dilate the depth map of 401-bg-checkout around the terminal, or reduce the shop relief's parallax (near/far range) slightly.",
+     "evidence": "critique/terminal.jpg (crop of p1-c/still-11.80.jpg)"
+    },
+    {
+     "page": "1",
+     "time": "15.7-18.3 s",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "'THE WHOLE BASKET' (size 92) spans x of about 68-1010, entering the right 140 px button zone. Several shelf tags on the right are cut by the frame edge ('$4.8', bare '$'). Meanwhile the hero basket tag '$104.10' is out of focus and unreadable at 16.00.",
+     "why": "The title is partly covered by buttons on a phone. Cut-off tags read as errors rather than 'prices everywhere'. With focus off the hero, the eye has nowhere to land.",
+     "fix": "Use size 78 for the hook. Move the tag spots at u 0.86-0.94 inward to about 0.80 or less. Focus on the middle of the shelf tags only briefly, then pull focus back to the basket by 16.5 s.",
+     "evidence": "p1-c/still-16.00.jpg, p1-c/still-15.30.jpg; page-1.js shelfSpots and hook 'THE WHOLE BASKET'"
+    },
+    {
+     "page": "2",
+     "time": "35.3-42 s",
+     "category": "composition",
+     "severity": "nice to have",
+     "what": "The 'fewer things' basket and the growing money stack sit low in the frame (basket at about y 1580-1700, stack down to about y 1780), inside the bottom 380 px button and caption zone. The workers' row at 23-28 s also sits in that zone.",
+     "why": "On a phone the caption bar and buttons cover the bottom of the money-vs-basket comparison, the visual that carries 'more money chasing fewer things'.",
+     "fix": "Raise the camera target or the objects so the basket and stack sit between y 1100 and 1500.",
+     "evidence": "p2d/still-41.20.jpg, p2b/still-37.80.jpg, critique/c-26.97.jpg"
+    }
+   ]
+  },
+  {
+   "area": "pictures pages 4-6",
+   "findings": [
+    {
+     "page": "4",
+     "time": "92.6-93.4 s (\"Homes can't be built\")",
+     "category": "bug",
+     "severity": "must fix",
+     "what": "The change from the rent-strike set to the foundation is a messy frame. The signboard tips backwards on its own while the NOTICE RENT RAISED paper and the red RENTS FROZEN label hang detached in mid-air at top left. The women have sunk into the cobbles so only their heads show, and a corner of the cream foundation slab cuts in at bottom right.",
+     "why": "This is the moment the page lands its point. For about a second the viewer sees broken-looking debris (papers floating with no board, heads poking out of the road) instead of the idea. It looks like a rendering fault, not a choice.",
+     "fix": "Make the papers fall with the board (parent them to the board group), or fade them out before the board tips. Fade or slide the women out sideways instead of lowering them through the ground. Better still, cut on 'Homes' (92.20) with the existing 0.25 s look.fade dip, so the foundation shot starts clean.",
+     "evidence": "/home/user/work/chapter-2/stills/p4-j/still-92.90.jpg (full size); sheet.jpg frame 92.90"
+    },
+    {
+     "page": "5",
+     "time": "104.3-105 s (\"in two years\")",
+     "category": "legibility",
+     "severity": "must fix",
+     "what": "The subline IN TWO YEARS is orange text set right on the beige noren curtain. At 104.60 it is almost invisible, in both the p5-d and p5-r renders, and by 108.70 it has gone, so it never shows clearly in any still.",
+     "why": "'Double in two years' is the size of the experiment, and that size is what makes the flat-prices result surprising. On a phone the viewer only gets '\u00d72 MONEY' with no time frame.",
+     "fix": "Bring the subline in at full opacity on 'in' (104.26) and hold it until about 106. Make it white, or put it on the same dark translucent scrim the chart uses. Or move both lines down onto the dark kitchen wall (y about 700-800), where orange contrasts.",
+     "evidence": "/home/user/work/chapter-2/stills/p5-r/still-104.60.jpg; p5-d/sheet.jpg frame 104.60"
+    },
+    {
+     "page": "5",
+     "time": "125-128 s (\"the gains went to whoever owned the most\")",
+     "category": "accuracy",
+     "severity": "must fix",
+     "what": "Three Edwardian plutocrats in top hats and watch chains, one with a cigar and a smug face, stand in front of a 2008-2012 London of glass towers. The cut-out also ends in a hard straight edge at about y 1510, floating above the paving (it does not continue below the frame).",
+     "why": "It is anachronistic (a century out). It is an editorial caricature that adds a moral claim Malina doesn't make (guide section 5: 'Never add claims she doesn't make'), and it clashes with the measured Bank of England study credited at the top. The floating straight edge also looks unfinished.",
+     "fix": "Keep the information without the caricature. For example, show three modern piles (a small savings jar, a house, a tall stack of share certificates) and pour the falling coins mostly onto the biggest pile. Or use modern, neutral invented figures. Whatever stays, place the cut-out with its bottom edge below the frame, or standing on the floor point.",
+     "evidence": "/home/user/work/chapter-2/stills/p5-d/still-126.70.jpg; sheet frames 126.70 and 128.50"
+    },
+    {
+     "page": "6",
+     "time": "152.9-155.9 s (\"while less and less was being made\")",
+     "category": "clarity",
+     "severity": "must fix",
+     "what": "The only picture of 'less and less being made' is the small girder-and-timber pile in the bottom-right corner, shrinking. It sits inside both phone-button zones (right 140 px, bottom 380 px), partly cut by the frame edge, and by 155.90 it is a tiny scrap. The eye goes instead to the two big money stacks at left centre and the PRICES UP title.",
+     "why": "This sentence is the whole lesson of test two: new money pushed prices up only because output collapsed. If the shrinking output can't be seen, the viewer remembers 'money \u2192 prices up', the opposite of the chapter's argument.",
+     "fix": "Move the steel pile to centre-right (about x 600-850, y 1250-1450), level with the money stacks, and make it start bigger, so money grows on one side while goods shrink on the other. You could also tie each line of the hook to its pile: PRICES UP over the money, LESS AND LESS MADE over the steel.",
+     "evidence": "p6-d/sheet.jpg frames 151.90, 153.80, 155.90; /home/user/work/chapter-2/stills/p6-e/still-151.90.jpg"
+    },
+    {
+     "page": "6",
+     "time": "from about 146 s to the end of the page",
+     "category": "bug",
+     "severity": "should fix",
+     "what": "Flat tan-beige smears appear on the snow in front of the money stacks (about y 1560-1740 at full size). They are not in the painting at 127.70. page-6.js says these are the tumbling notes 'lying flat in the snow'. Seen edge-on and lit, they read as paint smudges, not banknotes.",
+     "why": "They look like a rendering fault, and they clutter the foreground right under the main props.",
+     "fix": "Tilt the fallen notes toward the camera (rotate them about 30-40 degrees), give them the same olive colour and gold band as the bundles, or drop them and let the stacks carry the idea.",
+     "evidence": "/home/user/work/chapter-2/stills/critique/p6-floor-compare.jpg (top: 127.70 clean; bottom: 148.40 with smears); p6-e/still-151.90.jpg"
+    },
+    {
+     "page": "6",
+     "time": "131.1-133 s (\"Prices are already racing\")",
+     "category": "rules",
+     "severity": "should fix",
+     "what": "The flip counter spins in with a crisp, readable, unlabelled number (for example '20,762' at 131.60) that is not a figure Malina says. The later counter at 146.50 shows '650,000' with no unit either.",
+     "why": "On a still frame or a pause, viewers will read it as a real statistic. Section 5 says numbers must be ones she says, or plainly illustrative.",
+     "fix": "Show motion-blurred or half-flipped digits during the racing phase, so no number settles legibly. Or show the caption MARKS FOR ONE DOLLAR from the first appearance, so the climb is clearly the same measure that ends at 4,200,000,000,000.",
+     "evidence": "p6-d/sheet.jpg frames 131.60 and 146.50"
+    },
+    {
+     "page": "4",
+     "time": "87.8 s (\"about twenty thousand households were refusing\")",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "The orange line HOUSEHOLDS REFUSING TO PAY sits right on the street-lamp glow, so 'HOUSEHOLDS' and the lamp merge. Above 20,000, 'BY NOVEMBER' and 'ABOUT' are two stacked grey labels of different sizes, the second barely separated from the number.",
+     "why": "20,000 means nothing without 'households refusing', and that is the line that gets lost. The stack of four type sizes looks cluttered.",
+     "fix": "Move the hook block up 60-80 px, or give it a soft dark scrim, so the orange is clear of the lamp. Merge the two small labels into one line, 'BY NOVEMBER, ABOUT', above the number.",
+     "evidence": "/home/user/work/chapter-2/stills/p4-j/still-87.80.jpg"
+    },
+    {
+     "page": "4",
+     "time": "90.3-91.9 s (\"Parliament froze rents\")",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "PARLIAMENT is a mid-grey label on the dark sandstone wall. At 90.95 it is faint, and at 91.90 it is nearly invisible as it fades out.",
+     "why": "Who froze the rents is part of the story, and the viewer sees a rubber stamp come down with no clear actor.",
+     "fix": "Make it white (like the other hooks) and hold it at full opacity from 'Parliament' (90.30) until the RENTS FROZEN stamp has landed.",
+     "evidence": "/home/user/work/chapter-2/stills/p4-j/still-91.90.jpg; sheet frame 90.95"
+    },
+    {
+     "page": "5",
+     "time": "101.5 s (\"the bank that creates the yen\")",
+     "category": "bug",
+     "severity": "should fix",
+     "what": "A thin orange callout leader runs from the top of the small money stack up to the right and ends in nothing. No label is attached at this moment.",
+     "why": "It reads as a stray mark, and it pulls the eye to an empty spot on the kitchen wall.",
+     "fix": "Make the label appear together with its leader line (same start time), or remove the callout if nothing is meant to sit there.",
+     "evidence": "/home/user/work/chapter-2/stills/p5-d/still-101.50.jpg (line from about x 555,y 1025 to x 700,y 785)"
+    },
+    {
+     "page": "6",
+     "time": "151-156 s",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "In the final hook, LESS AND LESS / MADE is orange set over the winding tower, and 'MADE' sits right on the tower's black lattice and the bright sky band.",
+     "why": "This is the second half of the key line and it is the harder half to read.",
+     "fix": "Move the hook block up about 100 px into the plain grey sky, or put the same dark translucent scrim behind both lines.",
+     "evidence": "p6-d/sheet.jpg frames 153.80 and 155.90"
+    },
+    {
+     "page": "5",
+     "time": "108.5-113 s (Japan chart)",
+     "category": "clarity",
+     "severity": "nice to have",
+     "what": "The chart's x-axis mixes a year and a duration ('2013' ... '8 YEARS'). The red 'IF MONEY ALONE' label runs into the dashed curve it names, and the 'E' touches the line.",
+     "why": "It is a small extra decoding step on a phone, at the moment the viewer needs to compare two lines quickly.",
+     "fix": "Label the axis ends '2013' and '2021'. Move IF MONEY ALONE left or down so it sits clear of the curve.",
+     "evidence": "/home/user/work/chapter-2/stills/p5-d/still-112.30.jpg"
+    },
+    {
+     "page": "6",
+     "time": "148.4 s",
+     "category": "bug",
+     "severity": "nice to have",
+     "what": "A single banknote hangs tilted in mid-air at left (about x 100-190, y 780-870) while every other note has already landed.",
+     "why": "It reads as a stuck or stray object next to the big counter.",
+     "fix": "Make sure the last tumbling note lands before about 146 s, or let it leave the frame.",
+     "evidence": "/home/user/work/chapter-2/stills/p6-r/still-148.40.jpg"
+    },
+    {
+     "page": "6",
+     "time": "128-156 s (whole page)",
+     "category": "cinematic quality",
+     "severity": "nice to have",
+     "what": "The framing barely changes across the whole 27 s page: the gate is centred with the tower behind it, and only small pushes in and out. Only the props and hooks change.",
+     "why": "This is the most dramatic story in the chapter (invasion, strike, hyperinflation), but it plays as one static postcard, and it is weaker than pages 4 and 5, which change shots.",
+     "fix": "Add one clear camera beat: for example, low and close on the soldiers' boots at 'march into the Ruhr' (135-137), then a slow pull-up and back from the padlocked gate to the full works at 'less and less was being made'. Keep moves within the guide's 1-2 units.",
+     "evidence": "p6-d/sheet.jpg (all 12 frames share nearly the same composition)"
+    },
+    {
+     "page": "4",
+     "time": "82-92 s",
+     "category": "consistency",
+     "severity": "nice to have",
+     "what": "The NOTICE RENT RAISED sign is a flat, untextured brown board on two posts in the middle of the road, with a modern sans-serif label. It looks like a modern estate-agent board next to the painterly 1915 tenement street and the paper cut-outs.",
+     "why": "It is the one prop that breaks the period look of an otherwise atmospheric page.",
+     "fix": "Give the board a wood or paper texture and a slab-serif, letterpress-style face, or turn it into a printed handbill pasted beside a close entrance.",
+     "evidence": "/home/user/work/chapter-2/stills/p4-j/still-84.00.jpg, still-91.90.jpg"
+    }
+   ],
+   "overall": "Pages 4-6 are well lit and mostly follow the narration word by word. Page 4's rainy Glasgow street with the rent-strike women and Page 5's ramen counter are cinematic and clear. The weak spots are where the picture should land the point. Page 4's payoff ('Homes can't be built in a hurry') opens on a broken-looking frame of floating papers and sinking heads. Page 5 hides 'in two years' in orange on a beige curtain, then ends on a top-hat caricature that is a century out of period and editorialises beyond the script. Page 6 gets its own lesson backwards visually: the shrinking-output prop that carries 'less and less was being made' is tiny and tucked in the button corner, while the money stacks dominate. Page 6 also has flat tan smears of fallen notes on the snow, an unlabelled racing counter, and an almost static camera for 27 s. Several hooks lose contrast against lamps or the curtain (HOUSEHOLDS, PARLIAMENT, LESS AND LESS MADE). None of these needs a redesign. Each fix is a timing, position, colour or prop swap."
+  },
+  {
+   "area": "pictures pages 7-10",
+   "findings": [
+    {
+     "page": "8",
+     "time": "193.3-195.0 s",
+     "category": "accuracy",
+     "severity": "must fix",
+     "what": "The unemployment caption now reads 'LOWEST SINCE 1986' under 3.2%. Malina says 'its lowest since records began'.",
+     "why": "In everyday English, 'lowest since 1986' means it was lower or equal in 1986, so the record was beaten only back to 1986. The real point is the reverse: 1986 is when the survey started (research C2-N09) and the rate in 1986 was higher. A viewer reading quickly gets the wrong fact. It also adds a year Malina never says.",
+     "fix": "Change the caption to 'LOWEST ON RECORD' (the wording in the fact-check ledger, row 280) or 'LOWEST SINCE RECORDS BEGAN'. If the year must stay, put it in a small credit: 'records began 1986'.",
+     "evidence": "/home/user/work/chapter-2/stills/p8-r/still-193.80.jpg; page-8.js line 279 (caption 'Lowest since 1986'); research ledger C2-N09 and row 280"
+    },
+    {
+     "page": "8",
+     "time": "195.3-198.6 s",
+     "category": "bug",
+     "severity": "should fix",
+     "what": "For 'house prices rose about thirty percent', the card house stands on a large flat, untextured cream box (the 'pop-up plinth'). The box is about 560 x 220 px, has no edges, texture or shadow, and floats in front of the painted fence and footpath with nothing tying it to the ground. The house is shown flat-on, so it reads as a cardboard cut-out pasted onto the painting.",
+     "why": "It looks like a rendering fault (a white block), not like 'prices rising'. It is the ugliest frame on page 8 and draws the eye away from +30%.",
+     "fix": "Remove the plinth and let the house rise on a short paper stack or a bar labelled +30%, with a contact shadow on the footpath. Or keep the plinth but give it the paper texture plus edge shading, sit it on the painted ground with a shadow, and turn the house about 25 degrees so it reads as 3D. The second '+30%' (on the tag) repeats the headline and can go.",
+     "evidence": "/home/user/work/chapter-2/stills/p8-d/still-197.90.jpg; page-8.js lines 120-129 and 235-243"
+    },
+    {
+     "page": "8",
+     "time": "180.0-187.5 s",
+     "category": "cinematic quality",
+     "severity": "should fix",
+     "what": "On the two-factories set, the brown table ends in a hard straight horizontal line at about y = 415. Above it a strip of the painted night town is visible, cut off sharply. At 187.30 the same seam shows top left, with a blue painted band behind the chimney.",
+     "why": "It shows the edge of the set and breaks the illusion of depth just as the page opens. The rest of the chapter hides its horizons in fog or blur.",
+     "fix": "Tilt the camera down 3-5 degrees so the table fills the frame, or fade the far edge of the table into the backdrop with fog or a gradient (the soft far edge used on page 3).",
+     "evidence": "/home/user/work/chapter-2/stills/p8-d/still-181.30.jpg; p8-d sheet cells 179.90 and 187.30"
+    },
+    {
+     "page": "8",
+     "time": "180.7-187.5 s",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "Factory B's price counter sits in the right phone-button zone. At 181.30 it runs from about x 915 to 1065 and touches the frame edge. At 187.30 ('\u00a31.70', after the flip at 'flat out') it ends at about x 1000. The 'FLAT OUT' callout is only about 30 px tall.",
+     "why": "The price going up at 'flat out' is the key information beat here, and on a phone the like and share buttons cover the right 140 px. The 'FLAT OUT' callout is hard to read at phone size.",
+     "fix": "Pan or frame the camera about 120 px to the left at 'flat out', or move the counter post to the factory's left side, so the counter ends before x = 920. Raise the 'FLAT OUT' callout to 40-44 px.",
+     "evidence": "/home/user/work/chapter-2/stills/p8-d/still-181.30.jpg; /home/user/work/chapter-2/stills/p8-e/sheet.jpg (187.30)"
+    },
+    {
+     "page": "8",
+     "time": "187.8-190.4 s",
+     "category": "composition",
+     "severity": "nice to have",
+     "what": "For 'things we can't make more of in a hurry', the card house sits alone on a featureless dark-brown void. A factory wall is cut off at the right edge and stray shells and coins sit beside it. The lower half of the frame is empty.",
+     "why": "It is the plainest moment on the page, and it has no clear link to the Glasgow homes the viewer saw on page 4.",
+     "fix": "Frame the house lower and closer so it fills the middle third, and crop out the factory edge. Or add two or three more card houses, one with a raised tag, to echo page 4.",
+     "evidence": "/home/user/work/chapter-2/stills/p8-e/still-188.60.jpg and 189.60"
+    },
+    {
+     "page": "9",
+     "time": "234.5-238.6 s",
+     "category": "clarity",
+     "severity": "should fix",
+     "what": "For 'workers lose the power to ask for more', the pay packet is a blank brown envelope with no label. It is on screen for about half a second, then the weight lands in front of it, not on it. The packet becomes a featureless tan slab that floats under the weight and the men's feet. There is also no headline from about 234.6 s to 235.6 s (only the faint credit), and a soft pink-red blur appears on the lower half of the book cover.",
+     "why": "Viewers will read a letter and a stray plank, not 'wages crushed'. Mattei's point, the emotional end of the page, is lost, and the slab looks like a rendering fault.",
+     "fix": "Print 'WAGES' or 'PAY' on the envelope, show it from 'workers' (234.67), and make the weight land squarely on it so it is visibly squashed. Give the flattened packet the envelope texture, not a plain colour. Move the dust burst off the book.",
+     "evidence": "Rendered /home/user/work/chapter-2/stills/critique/p9/still-234.90.jpg and still-235.40.jpg (pair.jpg); /home/user/work/chapter-2/stills/p9-e/still-235.60.jpg; page-9.js lines 108-110, 183-186 and 217-219"
+    },
+    {
+     "page": "9",
+     "time": "218.7-221.4 s",
+     "category": "clarity",
+     "severity": "should fix",
+     "what": "For 'Loans cost more, and people spend less', the stack of coins sits at the very bottom of the frame (about y 1700-1850), half cut off and inside the bottom button zone. Single coins fly beside the bank door, but it is not clear which way they move or what they mean.",
+     "why": "This is the mechanism of the cure, and the picture does not show it. The eye goes to an awkward half-coin at the bottom edge.",
+     "fix": "Put the coin stack on the pavement between the camera and the bank, around y 1100-1300, and let it shrink visibly as coins fly back into the bank door. Or replace the coins with a shop window whose light goes out. Keep everything above y 1540.",
+     "evidence": "/home/user/work/chapter-2/stills/p9-e/still-219.20.jpg and still-220.60.jpg; p9-d sheet cell 220.60"
+    },
+    {
+     "page": "10",
+     "time": "238.8-259.4 s",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "The New Zealand dial's printed word 'INTEREST RATE' runs straight into the 0 and 6 numbers, so it reads '0INTEREST RATE6'. The dial also sits partly in the right button zone (right edge at about x 1010 at 254.5 s, with the 5 and 6 marks at about x 980).",
+     "why": "The dial carries the 0.25 to 5.5 rise for this whole stretch, and the end of the scale would be under the phone buttons. The word collision looks careless next to the page 9 dial, which is drawn cleanly.",
+     "fix": "Set the dial label smaller or move it up inside the face, clear of the scale numbers (as on the page 9 dial), and move the dial post about 90 px left so it ends before x 930.",
+     "evidence": "/home/user/work/chapter-2/stills/p10-s/small.jpg (254.5 s); p10-d sheet cells 238.45-259.30"
+    },
+    {
+     "page": "10",
+     "time": "259.5-270 s",
+     "category": "consistency",
+     "severity": "should fix",
+     "what": "The final scene is an invented politician at a lectern in a debating chamber with a Gothic window, galleries and green benches, which reads as Westminster, not Wellington. The quote '\"New money causes inflation.\"' is small italic text (52 px). Malina says 'someone tells you'.",
+     "why": "The film's 'here' is New Zealand, and a British-looking chamber muddles that. Making a stern politician the speaker turns 'someone tells you' into 'politicians say', which reads as pointed and could be taken as partisan in an election period. The key quote is the least prominent text on the page. In the stills the figure's mouth is closed, so he is not visibly speaking.",
+     "fix": "Smallest fix: make the quote a real hook (around 72 px, upright, with a 'THEY SAY:' tag) and make sure the mouth visibly moves. Better: make the speaker everyday, such as a TV pundit on a screen, a newspaper headline or a neighbour at the fence, or use a chamber that does not look like Westminster.",
+     "evidence": "/home/user/work/chapter-2/stills/p10-d/still-261.60.jpg; page-10.js lines 11-13 and 91 (relief '101-bg-parliament'), quote drawn at lines 214-221"
+    },
+    {
+     "page": "7",
+     "time": "170.35-171.3 s",
+     "category": "timing",
+     "severity": "should fix",
+     "what": "COSTS, the page's key word, appears on 'costs' (170.35 s) and is gone by about 171.2 s, under a second, before the dip to black on 'And'. It also has to share the frame with the struck-through NOT SPENDING.",
+     "why": "'It's costs' is the lesson of test three. Under a second at that size is barely read before the picture dips.",
+     "fix": "Hold COSTS through the dip, fading with the picture rather than 0.2 s before the cut, or start the dip at 171.6 s ('here') so COSTS stays about 1.3 s.",
+     "evidence": "Rendered /home/user/work/chapter-2/stills/critique/p7/still-170.70.jpg; /home/user/work/chapter-2/stills/p7-c/still-171.30.jpg (no text); page-7.js line 248 (until: cut - 0.2) and line 57 (cut = T.and + 0.05)"
+    },
+    {
+     "page": "7",
+     "time": "161.3-163.8 s",
+     "category": "legibility",
+     "severity": "nice to have",
+     "what": "'A BARREL' is drawn onto the red barrel's body, under the lid, rather than next to the price. At 161.40 s it is pale pink on red and hard to read, and it looks like a printed barrel label. The split-flap counter also shows a thin white sliver on the blank flap left of the '$' (161.40, 169.60, 171.30).",
+     "why": "The unit belongs to the price ('$11.65 a barrel'). On the barrel it reads as the barrel's name. The sliver looks like a stray mark.",
+     "fix": "Draw 'A BARREL' just below or to the right of the counter, on the dark area. Hide the empty leading flap, or crop the counter to five flaps once it reads $x.xx.",
+     "evidence": "/home/user/work/chapter-2/stills/p7-c/still-161.40.jpg; rendered /home/user/work/chapter-2/stills/critique/p7/still-162.90.jpg; p7-c/still-169.60.jpg"
+    },
+    {
+     "page": "7",
+     "time": "164.6-171.3 s",
+     "category": "composition",
+     "severity": "nice to have",
+     "what": "The row of price tags sits at about y 1450-1580, so its bottom 40 px is in the bottom button zone. The tags overlap one another, and the leftmost one is cut by the frame edge at 164.6 s.",
+     "why": "These are the 'everything gets dearer' symbols; the parts the buttons cover lose detail.",
+     "fix": "Raise the tag row by about 60 px, or bring the camera's look point down slightly.",
+     "evidence": "/home/user/work/chapter-2/stills/p7-c/still-169.60.jpg; p7-r/still-164.60.jpg"
+    },
+    {
+     "page": "7",
+     "time": "171.7-180 s",
+     "category": "cinematic quality",
+     "severity": "nice to have",
+     "what": "The New Zealand half of the page is a flat, semi-transparent chart panel over a static painted street, about 8 s with no 3D action. Nothing visual shows fuel being taken out when Malina says 'Leave fuel out'; the white bar simply appears.",
+     "why": "It is the least cinematic stretch on pages 7-10, and the cause (fuel) is not shown as the thing removed.",
+     "fix": "Make the 4.1% bar a stack with an amber 'fuel' slice on top that slides off on 'leave fuel out', leaving 2.9%. Or put a small petrol-pump icon on the slice.",
+     "evidence": "/home/user/work/chapter-2/stills/p7-c/still-180.25.jpg; p7-c sheet 175.20"
+    },
+    {
+     "page": "10",
+     "time": "246-259 s; page 8 193 s",
+     "category": "rules",
+     "severity": "nice to have",
+     "what": "Some numbers on screen are ones Malina never says. Page 10 shows the rate going 2.25% to 2.5% to 2.75% under 'RISING AGAIN' (2.5% is caught at 257.90 s), and page 8 shows 3.2% where she only says 'lowest since records began'. Also on page 10, the dial needle drops from 5.5 to about 2.25 during the unemployment section (255.2 s) with no narration.",
+     "why": "Guide section 5 says the numbers on screen must be the ones she says. The 2.75% is correct (C2-M18), but the drop and the extra figures may make viewers wonder what they missed.",
+     "fix": "Either accept these as sourced (both are in the ledger) or keep only RISING AGAIN with the needle ticking up. Defocus or dim the dial during the unemployment section so its unexplained drop does not draw the eye.",
+     "evidence": "/home/user/work/chapter-2/stills/p10-d/sheet.jpg cells 255.20 and 257.90; page-10.js lines 207-211; p8-r/still-193.80.jpg"
+    },
+    {
+     "page": "10",
+     "time": "250.9-255.3 s",
+     "category": "clarity",
+     "severity": "nice to have",
+     "what": "The new hundred-dot panel has no key. The out-of-work dots are small hollow rings in the bottom-right corner (5 of 100 at 254.5 s), red-ringed for new ones and white-ringed for old ones, with nothing to explain the difference.",
+     "why": "Unless viewers remember page 2, they will not know a dot is one in a hundred workers, or what red versus white rings mean.",
+     "fix": "Add a small caption under the panel: '1 dot = 1 in 100 workers; \u25cb = out of work'. Or drop the red/white difference and make the empty dots red and slightly larger.",
+     "evidence": "/home/user/work/chapter-2/stills/p10-s/small.jpg; page-10.js lines 173-191"
+    }
+   ],
+   "overall": "I checked every still you listed and rendered 4 new ones (page 7 at 162.9 and 170.7 s, page 9 at 234.9 and 235.4 s), all saved in /home/user/work/chapter-2/stills/critique/. The finished chunks only go up to about 95 s, so I could not pull frames from the film for these pages.\n\nPages 7-10 mostly show what Malina is saying at each moment. Pages 7 and 9 are the strongest: the 1973 petrol station with the oil barrel and flip counter, and the wet 1920 street with the bank, dial and queue, have real depth, warm lamp light and clear headlines. The latest fixes work: the price tags are hidden until they flip up, the BANK OF ENGLAND label is clear, and the dot panel replaces the anachronistic 1920s queue on the 2020s New Zealand street.\n\nThe problems:\n- **Must fix, page 8:** the new caption 'LOWEST SINCE 1986' says the opposite of what Malina means ('lowest since records began').\n- **Rendering faults:** page 8 has a bare cream block under the +30% house and a visible table edge on the factory set. Page 9's pay packet is unlabelled and becomes a tan slab, so 'workers lose the power to ask for more' does not come across.\n- **Phone-button zones and legibility:**\n  - On page 8, factory B's price counter sits in the right button zone.\n  - On page 10, the dial is partly in the right button zone and its label runs into the scale numbers ('0INTEREST RATE6').\n  - On page 9, the coin stack is cut off at the bottom of the frame.\n- **Ending, page 10:** a stern politician in a chamber that looks like Westminster, with a small italic quote, is weak and off-location for 'someone tells you'.\n- **Smaller points:** COSTS is on screen for under a second, and the New Zealand chart on page 7 is static.\n\nThe review-document stretch on page 8 (200-208 s) is readable but plain: a cream card on a brown void. All on-screen text there is clear of the button zones."
+  },
+  {
+   "area": "content pages 1-5",
+   "findings": [
+    {
+     "page": "4",
+     "time": "83.7 s to 84.4 s (\"quarter\" to \"November\")",
+     "category": "accuracy",
+     "severity": "must fix",
+     "what": "Under the big UP TO +25% there is a second line, A QUARTER MORE, with no hedge.",
+     "why": "Today's fact check changed the bare +25% to UP TO +25% because official figures put actual rises at 5% to 23%, and a flat figure tells viewers all rents went up 25%. The unhedged second line brings that misreading straight back, and Malina says \"as much as a quarter\", not \"a quarter more\".",
+     "fix": "Line 258 of page-4.js: change the text to 'AS MUCH AS A QUARTER', or delete the line (UP TO +25% already says it).",
+     "evidence": "page-4.js lines 257-258; still a-083.80.jpg shows 'UP TO +25%' over 'A QUARTER MORE'; ledger second fact check, Glasgow row: 'A bare \"+25%\" on screen suggests that all rents rose 25%... Change made: On screen now UP TO +25%'."
+    },
+    {
+     "page": "2",
+     "time": "23.4 s to 29.4 s (\"Unemployment\" to \"new money\")",
+     "category": "clarity",
+     "severity": "must fix",
+     "what": "The heading OUT OF WORK sits directly over a block of 99 bright amber dots. The one dot that stands for the out-of-work share is a faint outline in the bottom-right corner, with no label on it.",
+     "why": "At a glance the lit block reads as the out-of-work people, the opposite of the point. Malina is saying the out-of-work share is under one percent, and only the small UNDER 1% further down rescues it. On a phone the near-empty dot can hardly be seen.",
+     "fix": "Change the heading to '100 WORKERS' (or 'IN WORK' in amber), and add a small callout on the last dot reading 'OUT OF WORK' that appears on \"under\". This needs one hook text change and one callout(...) pointing at the dot at (342+9*44, 360+9*44).",
+     "evidence": "page-2.js lines 156-158 and 147; stills a-024.50.jpg and a-027.60.jpg."
+    },
+    {
+     "page": "3",
+     "time": "71.0 s to 74.5 s (\"short of workers, materials and machines\")",
+     "category": "clarity",
+     "severity": "should fix",
+     "what": "BRITAIN AT WAR fades at 70.7 s (until: T.short - 0.2). The three 3D words WORKERS / MATERIALS / MACHINES then stand alone beside a worker, a pile of materials and a lathe, and nothing says SHORT OF.",
+     "why": "Without 'short of', the words and props read as what Britain had plenty of, which is the reverse of what she says. This is the payoff line of the chapter's central picture.",
+     "fix": "Add hook(ctx, t, { at: T.short, until: T.end + 1.2, text: 'SHORT OF', y: 330, size: 80 }), or extend BRITAIN AT WAR and add SHORT OF under it.",
+     "evidence": "page-3.js lines 59-67 and 147; still a-073.30.jpg shows only the three words and props."
+    },
+    {
+     "page": "3",
+     "time": "47.5 s to 64.5 s (IDLE, FLAT OUT, NO MORE SHELLS)",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "The callouts are 40 px white text placed over the pale grey roofs and cream walls of the card factories. FLAT OUT and NO MORE SHELLS can hardly be read even after fading in. NO MORE SHELLS also points at the left frame edge, where the row of shells is mostly cut off.",
+     "why": "These words carry the whole two-factory argument, and on a phone they disappear into the model.",
+     "fix": "Give callout labels a dark backing plate or text shadow on this page (or set size: 52), and point NO MORE SHELLS at b.shellAt(6) or shellAt(7), which stay in frame.",
+     "evidence": "page-3.js lines 141-146; full-size stills b-48.6.jpg (IDLE), b-61.0.jpg (FLAT OUT), b-63.7.jpg (NO MORE SHELLS)."
+    },
+    {
+     "page": "3",
+     "time": "47.8 s to 74.5 s",
+     "category": "composition",
+     "severity": "should fix",
+     "what": "The price flip counters, which carry the 'prices barely move / prices climb' numbers, are cut off by the right edge of the frame in most of the factory-A and factory-B shots ('\u00a31.0', '\u00a31.', '\u00a32.0'). The 3D word MACHINES also sits inside the right 140 px phone-button zone at the end.",
+     "why": "Partly hidden numbers read as broken. BARELY MOVE at 55.0 s points at a counter that is half off screen.",
+     "fix": "Move the counter post to the left of each door (boardAt x = at.x - 1.25 in two-factories-set.js; it is shared with page 8, so check there), or shift the camera targets about 0.4 units right in the shots at T.first+1.5, T.barely+0.6, T.second+1.4 and T.end+1.2. Move the lathe and MACHINES to FACTORY_B.x + 0.85.",
+     "evidence": "Stills a-047.80.jpg, a-055.00.jpg, a-060.20.jpg, a-063.00.jpg and a-073.30.jpg."
+    },
+    {
+     "page": "3",
+     "time": "43 s to 74.5 s",
+     "category": "rules",
+     "severity": "should fix",
+     "what": "The counters show sterling prices (\u00a31.00, rising through \u00a31.25 and \u00a31.60 to \u00a32.00 in factory B) with no 'Example prices' label. Pages 1 does label its example prices. The jump to \u00a32.00 also echoes page 2's real \u00d72 for 1914 to 1918.",
+     "why": "Section 5 lets illustrative prices on screen only if they are plainly illustrative. In a WWI setting, \u00a31.00 to \u00a32.00 for a shell can pass for a historical figure.",
+     "fix": "Add credit(ctx, t, { at: T.first, until: T.britain, text: 'Example prices', y: 1460, size: 28 }) to draw2D, the same as page 1.",
+     "evidence": "page-3.js lines 86-87; stills a-067.50.jpg (\u00a31.60) and a-069.20.jpg (\u00a32.00); guide section 5."
+    },
+    {
+     "page": "5",
+     "time": "123.9 s to 124.9 s (\"other investments\")",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "OTHER INVESTMENTS \u2191 is amber 58 px text over the amber-lit bank front and between the two khaki towers of notes. It almost vanishes. SHARES \u2191 above it also sits on the towers.",
+     "why": "This is the finding Malina attributes to the Bank's own study, and half of it cannot be read.",
+     "fix": "Draw it in INK.paper with a dark plate behind both lines, or move the two lines into the dark panel of the rising arrow (y about 700-760), clear of the towers.",
+     "evidence": "page-5.js lines 322-323; rendered still p5/still-124.00.jpg."
+    },
+    {
+     "page": "5",
+     "time": "125.1 s to 129 s (\"the gains went to whoever owned the most\")",
+     "category": "accuracy",
+     "severity": "should fix",
+     "what": "The 'owners' are three Victorian plutocrats in top hats, one with a cigar, standing under THE GAINS TO THE BIGGEST OWNERS and the credit BANK OF ENGLAND STUDY, 2012.",
+     "why": "Malina says only 'whoever owned the most'. The study's own figure is that the top 5% of households held 40% of financial assets, which takes in many ordinary well-off savers. A cigar-and-top-hat caricature adds a moral jab she does not make, and it belongs to 1900 rather than 2009-12. That weakens the film's careful tone at the point where the ledger already flags the claim as 'confirmed with nuance' and an inference.",
+     "fix": "Swap in a neutral modern 'owners' cut-out (or a plain bar: TOP 5% held 40% only if she said it, which she did not). The smallest change is to remove the cigar and top hats from the piece, or use the existing generic crowd at a smaller size.",
+     "evidence": "Rendered still p5/still-126.95.jpg; page-5.js lines 119-121; ledger C2-XB05 (note on 'inference, not its finding')."
+    },
+    {
+     "page": "5",
+     "time": "109.4 s to 113.5 s",
+     "category": "rules",
+     "severity": "nice to have",
+     "what": "The ramen bowl carries a fixed \u00a5800 tag with no 'Example price' label. The chart axis reads '2013' at the left and '8 YEARS' at the right, mixing a year with a length of time.",
+     "why": "Page 1 labels its example prices, so this page is inconsistent with it. A tag that never moves also suggests zero change, while the true level rose about 5% over the period. The axis reads oddly.",
+     "fix": "Add credit(..., text: 'Example price', y: 1460) during part A, and change the right-hand axis label to '2021'.",
+     "evidence": "page-5.js lines 92, 227-228 and 313; stills c5-98.5.jpg and p5/still-112.00.jpg."
+    },
+    {
+     "page": "5",
+     "time": "120.7 s to 129 s",
+     "category": "legibility",
+     "severity": "nice to have",
+     "what": "The attribution credit BANK OF ENGLAND STUDY, 2012 is 30 px muted grey on a grey-blue sky at y 180, and is barely visible.",
+     "why": "This credit is what makes the study's claim checkable. It should be readable without strain.",
+     "fix": "Draw it in INK.paper at size 34, or give it a dark strip.",
+     "evidence": "Rendered stills p5/still-124.00.jpg and p5/still-126.95.jpg; page-5.js line 320."
+    },
+    {
+     "page": "4 and 5",
+     "time": "92.2 s (page 4); 116.4 s (page 5)",
+     "category": "other",
+     "severity": "nice to have",
+     "what": "There are straight typewriter apostrophes in HOMES CAN'T BE BUILT (page 4) and BRITAIN'S CENTRAL BANK (page 5).",
+     "why": "This is a typography slip in an otherwise polished title style; Inter has the curly \u2019.",
+     "fix": "Use \"HOMES CAN\u2019T\" and \"BRITAIN\u2019S\" (page-4.js line 265, page-5.js line 317).",
+     "evidence": "Still a-093.80.jpg shows the straight apostrophe; source lines cited."
+    },
+    {
+     "page": "1",
+     "time": "7.15 s to 10.3 s",
+     "category": "timing",
+     "severity": "nice to have",
+     "what": "The A YEAR AGO callout appears on \"basket\" (7.15 s) and is replaced by NOW at 8.45 s. When Malina actually says \"a year ago\" (9.15 s), the screen reads NOW $104.10.",
+     "why": "Word and picture are briefly out of step, though the order of before and after is logical.",
+     "fix": "Run A YEAR AGO until T.costs + 0.6 and start the tag flip and NOW at T.yearAgo + 0.3, after 'ago'. Or accept it as it is.",
+     "evidence": "page-1.js lines 166 and 214-215; word times: basket 7.15, costs 8.15, a year ago 9.15-9.47; stills a-008.00.jpg and a-009.00.jpg."
+    },
+    {
+     "page": "4",
+     "time": "76.9 s to 79.3 s",
+     "category": "timing",
+     "severity": "nice to have",
+     "what": "The place title GLASGOW 1915 appears on \"1915\", 2.4 s before she says \"Glasgow\". PARLIAMENT (91 s) is a muted grey hook on grey stone and can hardly be read.",
+     "why": "These are minor sync and legibility issues.",
+     "fix": "Acceptable as it is for a place title. For PARLIAMENT, use INK.paper, or 'PARLIAMENT FREEZES RENTS' with a dark wash.",
+     "evidence": "page-4.js lines 255 and 264; stills a-078.00.jpg and a-091.60.jpg."
+    }
+   ],
+   "overall": "On pages 1 to 5, the numbers on screen match the narration and the ledger, including today's changes. Page 1 shows illustrative $100.00 \u2192 $104.10 tags (+4.1%, labelled 'Example prices'). Page 2 shows UNDER 1%, \u00d71/\u00d72 bars for 1914/1918, and the near-empty last dot from the fact check. Page 4 shows UP TO +25% and a count to 20,000 households. Page 5 shows \u00d72 MONEY / IN TWO YEARS, ABOUT \u00bd% A YEAR, HUNDREDS OF BILLIONS OF POUNDS and the credit 'Bank of England study, 2012'. Nearly every word appears on or within a second of the matching spoken word, keyed to word times. I found no MMT, no party, no real portraits, no capitals for emphasis inside sentences, and correct \u00d7, %, \u00a3, \u00a5 and \u00bd glyphs. The real problems are meaning and legibility, not wrong numbers. 1. Page 4's extra line A QUARTER MORE undoes the fact-check hedge. 2. Page 2's OUT OF WORK heading sits over 99 lit dots, so it reads backwards. 3. Page 3's finale never says SHORT OF. 4. Page 3's callouts are low-contrast white on pale card. 5. Page 3's price counters are cropped by the frame edge and carry unlabelled sterling 'prices'. 6. Page 5's OTHER INVESTMENTS \u2191 is amber on amber. 7. Page 5's owners are cigar-and-top-hat caricatures, which editorialise beyond 'whoever owned the most'. Each has a fix of one or two lines. I checked chunks to 103 s and rendered 4 stills for page 5 (112.0, 114.3, 124.0, 126.95 s). All stills are in /home/user/work/chapter-2/stills/critique/; the sheets are zs-1 to zs-6.jpg."
+  },
+  {
+   "area": "content pages 6-10",
+   "overall": "I read every on-screen string, 3D card, price tag, flip counter and dial on pages 6 to 10 and checked each one against the word times, the research ledger and today's second fact check. I also looked at the builders' final stills from 12:36 to 12:42, which are newer than or the same age as the page files. I did not render any new stills, because the filmed chunks only reach 103 s.\n\nMost of the text on these pages is good. It is short, cued to the right word, and the numbers match the ledger: 4,200,000,000,000 marks, $2.90 to $11.65, 4.1% and 2.9%, 3.2%, +30%, 7%, 2% and 11%, 0.25% to 5.5%, 3.2% to 5.6%, and 2.25% to 2.75%. Mattei is properly credited on page 9. I found no MMT, no party name and no capitals used for emphasis.\n\nThe real problems are on page 10, at the moment that matters most:\n- The 5.6% unemployment figure only reaches its final value as it starts to fade, so viewers barely see it.\n- In the same shot the interest-rate needle, which is clearly in frame, slides from 5.5 down to about 2.25. Nobody says the rate was cut, and you see the rate falling while she says unemployment is rising.\n- The dial's own \"INTEREST RATE\" label runs into its 0 and 6.\n- The invented politician wears a blue tie in a New Zealand debating chamber, which can read as a party colour.\n\nOn page 7, the \"NOT SPENDING / COSTS\" pair leaves out her \"sometimes\". The oil counter's $2.90 start is a mid-1973 price, which does not fit \"IN ABOUT 3 MONTHS\". The remaining points are small: numbers she doesn't say aloud (3.2% on page 8, the 2026 rates on page 10), missing source lines the fact check suggested, and one lowercase hook among all-capitals hooks.",
+   "findings": [
+    {
+     "page": "10",
+     "time": "253.68-255.6 s (\"to five point six\" -> \"And this year\")",
+     "category": "timing",
+     "severity": "must fix",
+     "what": "The unemployment counter only reaches 5.6% at about 255.04 s, after she has finished saying \"six\". It is then gone by 255.29 s plus a 0.35 s fade. While she says \"five point six\" (253.84-254.84), the screen shows numbers in between: 4.8% at 254.5 s. The final 5.6% appears already fading (p10-r still at 255.20).",
+     "why": "5.6% is the chapter's key fact: who pays. The viewer never sees it held steady, and sees 4.8% while hearing 5.6.",
+     "fix": "Line 203: make the count finish on her words, for example `lerp(3.2, 5.6, smooth(ramp(t, T.to2 - 0.1, T.five2 + 0.25)))`. Then hold the figure and the dots until about `T.thisYear + 0.2` instead of `T.and - 0.1`, so 5.6% sits still for about 1.3 s.",
+     "evidence": "page-10.js lines 203, 205-206 (ramp T.to2 to T.six+0.2, until T.and-0.1). page-words.txt: five@253.84, six@254.84, And@255.39. Stills /home/user/work/chapter-2/stills/p10-s/still-254.50.jpg (4.8%) and p10-r/sheet.jpg at 255.20 (5.6% fading)."
+    },
+    {
+     "page": "10",
+     "time": "251.5-255.6 s (\"unemployment has climbed from three point two percent to five point six\")",
+     "category": "accuracy",
+     "severity": "should fix",
+     "what": "`rateAt()` eases the 3D interest-rate needle from 5.5 down to 2.25 between `unemployment + 0.6` and `thisYear - 0.2`. The dial stays large and readable in frame next to the dot panel the whole time: the needle is at about 4.5 at 253.0 s and about 2.6 at 254.5 s. She never mentions rate cuts.",
+     "why": "This makes an unspoken claim (the 2024-25 cuts) and puts the rate falling right next to unemployment rising, which muddles the cause-and-effect she is building. A viewer can also read the needle at about 2.6 as the answer while she says 5.6.",
+     "fix": "Keep the needle at 5.5 while unemployment is on screen, or frame the dial out or defocus it fully during this beat. Then drop to 2.25 quickly under the 'this year' cut or a small whip, and tick up on 'raising ... again'. Smallest change: move the ease in line 117 to `ramp(t, T.thisYear - 0.05, T.raising - 0.05)`.",
+     "evidence": "page-10.js lines 114-121 and camera key at T.unemployment+0.5. Stills p10-r/sheet.jpg (251.5, 253.0, 255.2 s) and p10-s/still-254.50.jpg show the dial in frame with the needle sliding down."
+    },
+    {
+     "page": "10",
+     "time": "238.4-259.3 s (whole street part)",
+     "category": "legibility",
+     "severity": "should fix",
+     "what": "On the dial face, the label \"INTEREST RATE\" collides with the scale's end numbers, so it reads \"0INTEREST RATE6\". The '%' sits small underneath.",
+     "why": "This is the main 3D information object on the page and it looks like a typo in close-up. Page 9's dial (0-8, label \"INTEREST\") does not have this problem.",
+     "fix": "In page-10.js, use the shorter label 'INTEREST' (as page 9 does), or give the dial a wider range (max 7) so 0 and 6 move away from the label. The page can change these dial settings without editing models.js.",
+     "evidence": "Crop /home/user/work/chapter-2/stills/critique/p10-dial-crop.jpg from p10-s/still-254.50.jpg. page-10.js line 71 `dial({... min: 0, max: 6, label: 'INTEREST RATE'})`."
+    },
+    {
+     "page": "10",
+     "time": "259.5-270.2 s (\"So next time someone tells you...\" to the end)",
+     "category": "rules",
+     "severity": "should fix",
+     "what": "The invented politician at the lectern in the debating chamber wears a dark suit with a strong blue tie, and mouths the quoted \"New money causes inflation.\" Blue is a major New Zealand party's colour, and the scene is set in a parliament.",
+     "why": "Guide section 5 forbids party colours. A blue-tied MP voicing the line she pushes back on can read as aimed at one party, especially since the review on page 8 was commissioned by the current government.",
+     "fix": "Recolour the tie on the 'politician' piece to a neutral charcoal or grey, or apply a neutral tint to that area. Keep the figure otherwise. Optionally show the quote without tying it to the speaker so closely; she says only \"someone\".",
+     "evidence": "Stills /home/user/work/chapter-2/stills/p10-d/sheet.jpg at 260.20-269.40 s (blue tie clearly visible). page-10.js lines 91-93, 214-225."
+    },
+    {
+     "page": "7",
+     "time": "168.07-171.3 s (\"So sometimes the cause isn't spending. It's costs.\")",
+     "category": "accuracy",
+     "severity": "should fix",
+     "what": "The screen shows NOT SPENDING (struck through in red), then COSTS in large amber letters. Her qualifier \"sometimes\" is missing.",
+     "why": "Without \"sometimes\", the pair reads as a general rule that inflation is costs, not spending. That contradicts page 6 just before it and page 8 just after (\"new money can push prices up\"), and weakens the chapter's balanced point. The fact check accepted the line only because the narration says \"sometimes\".",
+     "fix": "Add a small muted 'SOMETIMES' line above NOT SPENDING (y about 220, size about 48), appearing at T.sometimes (168.07).",
+     "evidence": "page-7.js lines 536-537. page-words.txt: sometimes@168.07. Fact check verdicts/4/claims/1: 'Because the narration says sometimes, it is fine.'"
+    },
+    {
+     "page": "7",
+     "time": "161.0-163.8 s (\"nearly quadruples, in about three months\")",
+     "category": "accuracy",
+     "severity": "should fix",
+     "what": "The counter runs $2.90 to $11.65 with the hooks \u00d74 and IN ABOUT 3 MONTHS. $2.90 is the mid-1973 posted price and $11.65 took effect on 1 Jan 1974, so the counter's own numbers span about 6 months, not 3. The 3-month rise she describes is $3.01 (1 Oct 1973) to $11.65. Also, 11.65/2.90 is 4.02, while she says \"nearly\".",
+     "why": "The fact check marked this a should-fix and said either option needs a matching date label, and none was added. As it stands the screen pairs a 6-month span with '3 months'.",
+     "fix": "Start the counter at $3.01 and make the hook 'NEARLY \u00d74' (3.87\u00d7), so it matches the narration and '3 months'. Add the source line from the fact check: 'Gulf posted price, Oct 1973 - Jan 1974'.",
+     "evidence": "page-7.js lines 369-370, 533-534. Ledger, second fact check, page 7 oil row, and fact-recheck-2026-10-12.json critic.should_fix[0]. Still p7-r/sheet.jpg at 164.60 shows $11.65."
+    },
+    {
+     "page": "8",
+     "time": "193.2-195.0 s (\"lowest since records began\")",
+     "category": "rules",
+     "severity": "nice to have",
+     "what": "The figure 3.2% (with LOWEST SINCE 1986) appears on page 8, but she does not say 3.2 on this page. She says it 60 s later on page 10. 'Since 1986' is also not in the narration (deliberate, from the fact check).",
+     "why": "Section 5 says numbers must be the ones she says. The figure is accurate (C2-N09) and sets up page 10 well, so this is a judgement call rather than an error.",
+     "fix": "Either keep it and note it as an approved exception (it is correct and in the ledger), or let UNEMPLOYMENT / LOWEST SINCE 1986 carry the beat without the number. Adding 'STATS NZ' as a credit would also help.",
+     "evidence": "page-8.js line 279. Still /home/user/work/chapter-2/stills/p8-r/still-193.80.jpg. page-words.txt page 8 (no 'three point two')."
+    },
+    {
+     "page": "10",
+     "time": "255.56-259.4 s (\"this year ... raising its interest rate again\")",
+     "category": "accuracy",
+     "severity": "nice to have",
+     "what": "On screen: 2026, RISING AGAIN, and an amber figure counting 2.25% -> 2.5% -> 2.75%. She says no figures here. The present tense in RISING AGAIN is only safe until the 28 Oct 2026 decision (C2-XD04 says to prefer 'has raised').",
+     "why": "The numbers are correct (fact check row 'dial 2.25% -> 2.75%, confirmed'), but they go past the narration. The tense can go stale if the film is published after 28 October.",
+     "fix": "If kept, use 'RAISED AGAIN' (the fact check's suggested wording) so it stays true after 28 October. Otherwise drop the figure and let the needle tick carry it.",
+     "evidence": "page-10.js lines 208-211. fact-recheck JSON critic.should_fix (page 10 'this year'). Ledger C2-XD04."
+    },
+    {
+     "page": "8 / 9 / 10",
+     "time": "8: 195.2-198.6 s; 9: 223-226 s; 10: 249-255 s",
+     "category": "accuracy",
+     "severity": "nice to have",
+     "what": "The fact check suggested several source lines and none were added: '+30%' should be credited to the house price index (REINZ HPI, year to mid-2021); 2%/11% as 'Annual averages, Bank of England'; 5.6% as 'Stats NZ, June 2026 quarter'.",
+     "why": "These are the figures most open to dispute; the reviewer warned that the median price and insured-worker series give different numbers. A small credit protects them at almost no cost.",
+     "fix": "Add `credit(...)` lines (size about 26, above y 1540): 'REINZ House Price Index, year to July 2021', 'Annual averages, Bank of England', 'Stats NZ, June 2026 quarter'.",
+     "evidence": "page-8.js lines 280-282, page-9.js line 504, page-10.js line 205. Ledger C2-XC03 and the second fact check rows for page 8 house prices, page 9 unemployment and page 10."
+    },
+    {
+     "page": "10",
+     "time": "247.36-248.84 s (\"to bring prices down\")",
+     "category": "consistency",
+     "severity": "nice to have",
+     "what": "The hook 'to bring prices down' is set in lowercase muted 40 px. Every other hook on pages 6 to 10 is in capitals. The dot panel also has no key saying a dot is one worker in a hundred.",
+     "why": "A single lowercase hook looks like a leftover rather than a choice. Without a key, 3 and then 6 empty dots are hard to read in the 1.5 s they are on screen.",
+     "fix": "Set it as 'TO BRING PRICES DOWN', or as a small caption under the figure in the same style as 'INTEREST RATE'. Add a tiny 'EACH DOT = 1 IN 100 WORKERS' under the panel, as on page 2.",
+     "evidence": "page-10.js lines 201 and 175-192. Still p10-s/still-254.50.jpg (panel has no legend)."
+    }
+   ]
+  },
+  {
+   "area": "code",
+   "overall": "I checked every timing in the code against page-words.txt and found no problems that would change the picture from one stretch to the next. Every kit.at lookup hits the intended occurrence, including the repeated words: 'war',2 = 34.35; 'workers',3 = 71.22; 'machines',2 = 72.78; 'bank',3 = 115.38; 'and',2 = 171.34 on page 7 and 255.39 on page 10; 'in',2 = 190.50; 'with',2 = 232.39; 'to',3 = 253.68; 'five',2 = 253.84. All camera keys on all pages are in time order. Each page's first event starts after the previous page's peel ends, with at least 0.25 s to spare.\n\npose() and draw2D() depend only on t. The caches (priceTag print, the split-flap setHalf, textures) are keyed by value, so they give the same result whatever was drawn before. Nothing uses Math.random or Date. Every page uses seededRandom. The stage resets the overlay for each page, and every graphics helper pairs save with restore.\n\nI compared the last frame of chunk 02854-03104 (frame 3103) with the first frame of chunk 03104 (frame 3104). They join with no jump. Things left visible after a cut inside a page are handled: the partA/partB lists on pages 5, 7, 8, 9 and 10 cover everything.\n\nThe code faults that do reach the screen are of a different kind:\n1. On page 6 and page 9, paper cut-outs that \"lie flat\" fall face-down, so the viewer sees blank tan paper backs instead of banknotes or the pay packet. This shows in the existing stills.\n2. On page 7 the oil counter's starting price, $2.90, is on screen for about three frames, so it never reads.\n3. On pages 5 and 6 the darkening of the banknotes compounds, because the same side material appears five times in each bundle's material list.\n4. On page 10 the needle overshoots to the 6 mark at the moment \"five and a half\" is spoken.\n5. On page 2 the light beams face the previous frame's camera, one frame behind. This is harmless in practice.\n\nI confirmed that the quarter-turn fix for the dial face on pages 9 and 10 is mathematically correct: the scale ends up upright and lines up with the needle.",
+   "findings": [
+    {
+     "page": "6",
+     "time": "143.7 s to 156 s (notes land from about 144.0 s; bundles and loose notes in the snow up to the peel)",
+     "category": "bug",
+     "severity": "must fix",
+     "what": "The loose banknote cut-outs land face-down. Lying in the snow they show as plain tan paper shapes in the outline of a note, not as money. In CutOut, fold +PI/2 turns the front face to point down (Rx(+90\u00b0) sends +z to -y), and page-6.js line 216 sets fold: Math.PI / 2 - 0.02 for a note that has landed. Line 215 also eases the falling fold toward +1.5, so the note turns face-down as it lands.",
+     "why": "The beat is 'keeps paying them, with new money', and the snow should fill with banknotes. Instead the viewer sees blank beige scraps, and the 'new money' image on this page comes only from the bundle stacks.",
+     "fix": "Lay the notes face-up. Line 216: { fold: -(Math.PI / 2 - 0.02), dy: 0.01 }. Line 215: replace '+ 0.9 * k' with '- 2.1 * k' so the tumble ends at about -1.5. Check that dy clears the snow surface, since the card now folds backward from its hinge.",
+     "evidence": "page-6.js:213-216; cinema-kit.js:376-386 (hinge.rotation.x = fold, front material FrontSide, back material paints PAPER_BACK); still /home/user/work/chapter-2/stills/critique/p6-148-floor.jpg shows about a dozen flat tan note shapes in front of the bundles"
+    },
+    {
+     "page": "9",
+     "time": "235.31 s to 238.3 s (from when the weight lands until the page ends)",
+     "category": "bug",
+     "severity": "should fix",
+     "what": "The pay packet that the iron weight crushes slaps down face-down, so a blank tan card lies under the weight. slapFlat() ends at fold +PI/2, which turns the printed front downward (page-9.js line 183).",
+     "why": "The image is meant to read as 'workers lose the power to ask for more: their pay is crushed'. With the packet's print hidden, it reads as a weight sitting on a beige mat, and the meaning is lost at the closing beat of the page.",
+     "fix": "Fold it the other way: packet.set(t < WEIGHT_LANDS ? popUp(...) : { ...slapFlat(...), fold: -slapFlat(t, WEIGHT_LANDS - 0.04, 0.08).fold }). Move the weight's landing point back onto the flattened packet (weight at packetAt.z - 0.3 instead of + 0.45) so it still sits on top.",
+     "evidence": "page-9.js:183-185; paper-kit.js slapFlat (fold = PI/2*x^2 - settle); still /home/user/work/chapter-2/stills/critique/p9/still-235.40.jpg (blank tan rectangle under the weight)"
+    },
+    {
+     "page": "7",
+     "time": "161.02 s to 161.13 s",
+     "category": "timing",
+     "severity": "should fix",
+     "what": "The split-flap oil price never shows its starting value. The counter starts rising at flapUp = T.oil + 0.35 = 161.02 s, and '$2.90' is scheduled at 161.01 s. The countSchedule starts at T.nearly + 0.05 = 161.04 s, and after .slice(1) its first new value ($3.07) arrives at 161.13 s. So $2.90 is on screen for about 3 frames, while the counter is still springing up from scale-y 0 (about 0.5 at that point) and its flaps are mid-flip.",
+     "why": "'The price of oil nearly quadruples' needs a before and an after. The viewer only ever sees numbers already climbing and then $11.65 (still p7/still-162.90.jpg), so the factor of four rests only on the \u00d74 hook, not on the two real prices from the research (C2-C14).",
+     "fix": "Hold the starting price before counting: bring the counter in at T.oil + 0.05 and start the countSchedule at T.quadruples (161.35), finishing at T.months (163.07). $2.90 then reads cleanly for about 1 s. Alternatively, keep '$2.90' as a small caption under the counter until the count ends.",
+     "evidence": "page-7.js:79-81 (flapUp, priceSchedule), 147-152; models.js:457-460 countSchedule (linear t steps); page-words.txt: oil@160.67 nearly@160.99 quadruples@161.35 months@163.07"
+    },
+    {
+     "page": "10",
+     "time": "about 244.9 s to 245.4 s (on 'five and a half')",
+     "category": "accuracy",
+     "severity": "should fix",
+     "what": "The interest-rate needle overshoots to about 6.0 on a dial that runs 0 to 6, at exactly the moment Malina says 'five and a half'. rateAt uses spring((t - T.to) * 0.9, {stiffness: 9, damping: 0.6}), which overshoots by about 9.5%, so 0.25 + 5.25 \u00d7 1.095 \u2248 6.0. The peak falls at about 245.0 s. The figure underneath is clamped to 5.5% (line 198), so for that moment the number and the needle disagree.",
+     "why": "The dial is the data. A viewer looking at the needle sees it pinned at the top of the scale, 6, while hearing and reading 5.5. For a fact-checked figure (OCR peak 5.5%), the meter should not show a value that never happened.",
+     "fix": "Damp it, or cap it: v = Math.min(5.5, lerp(...)) on line 116. Or use damping 0.85, which overshoots by less than 1%. Keep the knock at T.half + 0.1 for the jolt.",
+     "evidence": "page-10.js:114-121, 133, 198; models.js dial angleOf/setValue (needle maps directly to the value)"
+    },
+    {
+     "page": "5 (and 6)",
+     "time": "page 5: 100.7 s to 127 s; page 6: 142.7 s to 156 s",
+     "category": "bug",
+     "severity": "nice to have",
+     "what": "The darkening applied to the banknote bundles compounds on the edges. banknoteBundle's block material is the array [side, side, top, side, side, side], with the same 'side' object five times. The traverse calls m.color.multiplyScalar(0.8) on page 5 (lines 79 and 107) and multiplyScalar(0.72) on page 6 (line 129) once per array entry. The top is darkened once, but the stack edges end up at 0.8^5 \u2248 0.33 on page 5 and 0.72^5 \u2248 0.19 on page 6 instead of 0.8 and 0.72.",
+     "why": "The comment says the aim is to tone the notes down to match the painting. Instead, the striped note edges, which give a bundle its read as a stack of notes, go olive-black: muddy in the noodle shop and almost black in the Ruhr snow. It is deterministic, so it does not differ between stretches.",
+     "fix": "Darken each material only once: new Set([].concat(o.material)).forEach((m) => m.color.multiplyScalar(0.8)), and the same with 0.72 on page 6.",
+     "evidence": "models.js:300-310 (shared 'side' material in the array); page-5.js:79,107; page-6.js:129; stills code-p5-yen-104.jpg and p6-148-floor.jpg (dark olive bundle sides)"
+    },
+    {
+     "page": "2",
+     "time": "19.61 s (first frame under the peel), then every frame by one frame",
+     "category": "bug",
+     "severity": "nice to have",
+     "what": "LightBeam.set(t, kit.camera) runs inside pose(t), before cinema-chapter.js aims the camera for that t (kit.aim runs after pose returns, cinema-chapter.js:474-475). Each beam therefore turns toward the previous frame's camera. On page 2's very first drawn frame (the start of the peel at 19.61 s), kit.camera is still at its default position, so the beams face the wrong way for that frame. The stretches do not differ, because the 3 warm-up frames supply the same previous camera, but the beam always lags by one frame.",
+     "why": "In practice it is invisible, because the camera moves slowly and the bad frame sits under the peel. But it is order-dependent state that the 'pose depends on t alone' rule forbids. If a stretch ever started without warm-up frames, its first beam frame would differ.",
+     "fix": "In page-2 pose, compute const cam = shot(t) first and orient the beams to cam.position (pass a {position} object to b.set). Return that same cam as the page's camera.",
+     "evidence": "page-2.js:100,129; effects.js:96-106; cinema-chapter.js:471-479"
+    }
+   ]
+  }
+ ],
+ "verdict": {
+  "confirmed": [
+   {
+    "page": "10",
+    "time": "253.7-255.6 s",
+    "severity": "must fix",
+    "what": "While Malina says 'five point six', the unemployment figure is still counting up (it shows 4.8% at 254.5 s). It only reaches 5.6% at about 255.0 s and starts fading at 255.29 s, so the chapter's key 'who pays' number is never held still on screen.",
+    "fix": "page-10.js line ~203: finish the count on her words, e.g. ramp(t, T.to2 - 0.1, T.five2 + 0.25). Keep the figure and dots on screen until about T.thisYear + 0.2 instead of T.and - 0.1 (lines ~204-206).",
+    "evidence": "page-10.js: jobless = lerp(3.2,5.6,smooth(ramp(t,T.to2,T.six+0.2))), until T.and-0.1. Word times: five 253.84, six 254.84, And 255.39. p10-s/still-254.50.jpg shows 4.8%.",
+    "from": "content 6-10"
+   },
+   {
+    "page": "3 (and 8, same set)",
+    "time": "47-74 s (page 3); 181 s (page 8)",
+    "severity": "must fix",
+    "what": "The price counter, which carries the whole 'prices barely move vs prices climb' contrast, is cut off by the right edge of the frame in most factory close-ups ('\u00a31.0' at 48.6 s, only '\u00a3' at 52.4 s, '\u00a31' at 57.3 s, '\u00a31.0' at 62.3 s, '\u00a32.0' at 72.9 s). It sits in the right phone-button zone. At 72.9-74.2 s the WORKERS label is also clipped at the left edge and MACHINES runs into the right zone.",
+    "fix": "Smallest change: in page-3.js's shot list, move the factory close-up camera targets about 0.4-0.6 units to the right (+x), and ease the last shot back about 10% so WORKERS/MATERIALS/MACHINES fit between x 140 and 940. Don't move boardAt in two-factories-set.js: that set is shared with page 8. If you do move it, check page 8 too.",
+    "evidence": "critique/p3sheet-0.jpg and p3sheet-10.jpg, frames pulled from the filmed chunks (48.6, 52.4, 53.8, 57.3, 62.3, 72.9 s).",
+    "from": "pictures 1-3, content 1-5, pictures 7-10"
+   },
+   {
+    "page": "3",
+    "time": "52.4-54.2 s, 59-67.5 s",
+    "severity": "must fix",
+    "what": "The page-3 callouts are thin light-grey text with nothing behind them, drawn over the ivory walls and grey roofs. MORE SHELLS at 53.8 s is invisible (only its leader line shows), NO MORE SHELLS at 63.8 s and PRICES CLIMB at 67.4 s are faint, and FLAT OUT is weak. These words are the on-screen summary of the central contrast.",
+    "fix": "page-3.js draw2D lines ~141-146: give these callouts a dark backing (the dark wash or pill used on page 1, or a strong text shadow) and set size to about 52. Point NO MORE SHELLS at b.shellAt(6) or shellAt(7), which stay in frame.",
+    "evidence": "p3sheet-0.jpg at 53.8 s (MORE SHELLS missing), p3sheet-10.jpg at 63.8 s and 67.4 s; page-3.js lines 141-146.",
+    "from": "pictures 1-3, content 1-5"
+   },
+   {
+    "page": "4",
+    "time": "92.2-93.4 s ('Homes can't be built')",
+    "severity": "must fix",
+    "what": "The change from the rent-strike street to the foundation looks broken. The board tips over while the NOTICE RENT RAISED paper hangs on its own in mid-air, the women sink into the cobbles so only their heads show, and a cream foundation slab cuts in at the bottom right, all under the payoff line.",
+    "fix": "page-4.js: fade the notice and the women out (opacity or a sideways slide) before the board tips, rather than lowering them through the ground. Or cut on 'Homes' with the page's existing short fade dip, so the foundation shot starts clean.",
+    "evidence": "p4-j/still-92.90.jpg (rendered 12:42, same time as the latest page-4.js).",
+    "from": "pictures 4-6"
+   },
+   {
+    "page": "2",
+    "time": "23.4-29.4 s",
+    "severity": "should fix",
+    "what": "The heading OUT OF WORK sits directly over 99 bright amber dots. The one dot that means 'out of work' is a faint ring in the corner with no label, so at a glance the lit block reads as the unemployed, which is backwards. The UNDER 1% below and the narration partly rescue it.",
+    "fix": "page-2.js line 156: change the heading text to '100 WORKERS', and add a small callout 'OUT OF WORK' pointing at the last dot (x 342+9*44, y 360+9*44) from T.under.",
+    "evidence": "critique/a-024.50.jpg and a-027.60.jpg; page-2.js lines 147 and 156.",
+    "from": "pictures 1-3, content 1-5"
+   },
+   {
+    "page": "5",
+    "time": "104.3-106 s",
+    "severity": "should fix",
+    "what": "The subline IN TWO YEARS is orange text on the beige curtain and is almost invisible, so the screen shows only '\u00d72 MONEY' (she does say it aloud).",
+    "fix": "page-5.js: draw it in INK.paper (white), or on the same dark scrim the chart uses, at full strength from 'two'.",
+    "evidence": "p5-r/still-104.60.jpg",
+    "from": "pictures 4-6"
+   },
+   {
+    "page": "5",
+    "time": "123.9-125 s",
+    "severity": "should fix",
+    "what": "OTHER INVESTMENTS \u2191 is amber text over the amber-lit bank and the stacks of notes, and it nearly disappears. It is half of the finding Malina credits to the Bank's study.",
+    "fix": "page-5.js line ~323: use INK.paper for the colour, or put one dark plate behind both SHARES and OTHER INVESTMENTS.",
+    "evidence": "critique/p5/still-124.00.jpg",
+    "from": "content 1-5"
+   },
+   {
+    "page": "5",
+    "time": "125-129 s",
+    "severity": "should fix",
+    "what": "'Whoever owned the most' is shown as three Edwardian plutocrats in top hats, one with a cigar, in front of 2010s London glass towers. It is a century out of period, editorialises beyond the script (guide section 5: add no claims she doesn't make), and the cut-out ends in a hard straight bottom edge that floats above the paving.",
+    "fix": "Swap the cut-out for a neutral modern one, or drop it and let the coins pour onto the taller of the two towers of notes. Whatever stays, push its bottom edge below the frame.",
+    "evidence": "p5-d/still-126.70.jpg, critique/p5/still-126.95.jpg; page-5.js lines ~119-121.",
+    "from": "pictures 4-6, content 1-5"
+   },
+   {
+    "page": "6",
+    "time": "151-156 s ('less and less was being made')",
+    "severity": "should fix",
+    "what": "The only picture of falling output is a small girder pile in the bottom-right corner, inside the button zones. By 155.9 s it is a scrap, while the two big money stacks dominate the frame, so the visual says 'money \u2192 prices up' (the hook text carries the rest).",
+    "fix": "page-6.js: move the steel pile to centre-right (about x 600-850, y 1250-1450 on screen), level with the stacks, and start it bigger so it visibly shrinks.",
+    "evidence": "p6-d/still-153.80.jpg and still-155.90.jpg",
+    "from": "pictures 4-6"
+   },
+   {
+    "page": "6",
+    "time": "about 144-156 s",
+    "severity": "should fix",
+    "what": "The fallen loose notes land face-down, so the snow in front of the stacks shows flat tan paper shapes that read as smudges, not money.",
+    "fix": "page-6.js lines 215-216: land the notes face-up (fold -(Math.PI/2 - 0.02), with the tumble easing toward a negative fold) and check that dy clears the snow. Or simply hide the landed notes.",
+    "evidence": "p6-d/still-148.40.jpg (tan shapes on the snow), critique/p6-floor-compare.jpg; page-6.js lines 213-216.",
+    "from": "pictures 4-6, code"
+   },
+   {
+    "page": "1 and 3",
+    "time": "7.4-10.3 s; 55.3 s; 67.4 s",
+    "severity": "should fix",
+    "what": "The callout leader lines end in the middle of the price digits, so they read like strike-throughs: through $100.00 and $104.10 on page 1, through \u00a31.00 at 55.3 s and \u00a31.60 at 67.4 s on page 3.",
+    "fix": "Aim the callouts at the tag or board's top rim instead of its centre: on page 1 a point on the tag's upper edge; on page 3 boardAt with setY at about 1.17 plus the board's half-height.",
+    "evidence": "critique/c-8.00.jpg, c-9.73.jpg; p3sheet-0.jpg at 55.3 s; p3sheet-10.jpg at 67.4 s.",
+    "from": "pictures 1-3"
+   },
+   {
+    "page": "3",
+    "time": "70.9-74.5 s",
+    "severity": "should fix",
+    "what": "BRITAIN AT WAR fades at 70.7 s, then WORKERS / MATERIALS / MACHINES appear with their props, but nothing says they are in short supply, so it reads as an inventory.",
+    "fix": "page-3.js draw2D: add hook(ctx, t, { at: T.short, until: T.end + 1.2, text: 'SHORT OF', y: 330, size: 80 }).",
+    "evidence": "p3sheet-10.jpg at 71.6 and 72.9 s; page-3.js line ~147.",
+    "from": "pictures 1-3, content 1-5"
+   },
+   {
+    "page": "3",
+    "time": "43-74 s",
+    "severity": "should fix",
+    "what": "The \u00a31.00 \u2192 \u00a32.00 shell prices carry no 'Example prices' label, unlike page 1. In a 1915 setting, with page 2's real \u00d72 just before, they can pass for historical figures.",
+    "fix": "page-3.js draw2D: add credit(ctx, t, { at: T.first, until: T.britain, text: 'Example prices', y: 1460, size: 28 }).",
+    "evidence": "page-3.js lines 139-148 (no credit call); p3sheet-10.jpg.",
+    "from": "pictures 1-3, content 1-5"
+   },
+   {
+    "page": "3",
+    "time": "63.8 s, 67.4 s (and the backdrop seam at 43-46 s)",
+    "severity": "should fix",
+    "what": "Black void shows in the top-left corner past the painted skyline on the close shots, and the skyline's hard bottom edge is visible. It reads as a rendering fault.",
+    "fix": "two-factories-set.js: raise backdrop.scale from 1.65 to about 2.0 (or lower it slightly) and check that page 8's wide shots still look right.",
+    "evidence": "p3sheet-10.jpg at 63.8 and 67.4 s (black block top left); p3sheet-0.jpg at 43.0 s.",
+    "from": "pictures 1-3"
+   },
+   {
+    "page": "4",
+    "time": "83.7-84.4 s",
+    "severity": "should fix",
+    "what": "Under the hedged UP TO +25% sits an unhedged second line, A QUARTER MORE. That partly undoes today's fact-check hedge (actual rises were up to 25% in some districts), and she says 'as much as a quarter'.",
+    "fix": "page-4.js line 258: change the text to 'AS MUCH AS A QUARTER', or delete the line.",
+    "evidence": "critique/a-083.80.jpg; page-4.js line 258; ledger row 264.",
+    "from": "content 1-5"
+   },
+   {
+    "page": "4",
+    "time": "90.3-92 s",
+    "severity": "should fix",
+    "what": "PARLIAMENT is a muted-grey hook on the dark stone wall and can hardly be read, so the stamp lands with no clear actor.",
+    "fix": "page-4.js line 264: change colour INK.muted to INK.paper.",
+    "evidence": "critique/a-091.60.jpg; p4-j/still-91.90.jpg",
+    "from": "pictures 4-6, content 1-5"
+   },
+   {
+    "page": "5",
+    "time": "about 101.5 s",
+    "severity": "should fix",
+    "what": "A thin orange callout leader runs up from the small money stack and ends on nothing. It is a stray mark on the kitchen wall.",
+    "fix": "page-5.js: start the callout's label together with its line, or remove that callout.",
+    "evidence": "p5-d/still-101.50.jpg",
+    "from": "pictures 4-6"
+   },
+   {
+    "page": "7",
+    "time": "170.35-171.2 s, and 168-171 s",
+    "severity": "should fix",
+    "what": "COSTS, the lesson of test three, is on screen for under a second (from 170.35 s until cut - 0.2 = 171.19 s). Also, without her 'sometimes', NOT SPENDING \u2192 COSTS reads as a general rule, which pages 6 and 8 contradict.",
+    "fix": "page-7.js lines ~247-248: change until: cut - 0.2 to until: cut + 0.1 for both, so the words fade with the dip. Add a small muted 'SOMETIMES' (size about 48, y about 220) at T.sometimes.",
+    "evidence": "page-7.js lines 57 and 247-248; word times: sometimes 168.07, costs 170.35, And 171.34; critique/p7/still-170.70.jpg.",
+    "from": "pictures 7-10, content 6-10"
+   },
+   {
+    "page": "7",
+    "time": "161.0-161.4 s",
+    "severity": "should fix",
+    "what": "The oil counter's starting price, $2.90, never reads. It is scheduled at 161.01 s while the counter is still springing up, and the count starts at 161.04 s. By 161.40 s it already shows $4.27, so '\u00d74' has no visible 'before'.",
+    "fix": "page-7.js lines 79-81: bring the counter up at T.oil + 0.05 and start the countSchedule at T.quadruples, so $2.90 holds for about 1 s.",
+    "evidence": "page-7.js lines 79-81; word times oil 160.67, nearly 160.99, quadruples 161.35; p7-c/still-161.40.jpg shows $4.27.",
+    "from": "code, content 6-10"
+   },
+   {
+    "page": "8",
+    "time": "193.2-195 s",
+    "severity": "should fix",
+    "what": "The caption 'LOWEST SINCE 1986' can be read as if 1986 was lower. In fact 1986 is when the survey began, and she says 'since records began'. The ledger's approved wording is LOWEST ON RECORD.",
+    "fix": "page-8.js line 279: set the caption to 'Lowest on record' (or 'Lowest since records began').",
+    "evidence": "p8-r/still-193.80.jpg; page-8.js line 279; ledger row 280.",
+    "from": "pictures 7-10"
+   },
+   {
+    "page": "8",
+    "time": "195.3-198.6 s",
+    "severity": "should fix",
+    "what": "The +30% house stands on a large flat, untextured grey-cream block with no shadow. It looks like a rendering fault, not 'prices rising'.",
+    "fix": "page-8.js lines ~120-129 and 235-243: remove the plinth, or give it the paper material plus a contact shadow. Drop the duplicate '+30%' tag.",
+    "evidence": "p8-d/still-197.90.jpg",
+    "from": "pictures 7-10"
+   },
+   {
+    "page": "9",
+    "time": "234.7-238.3 s",
+    "severity": "should fix",
+    "what": "The pay packet is an unlabelled envelope. Once the weight lands it becomes a blank tan slab (it lands face-down), so 'workers lose the power to ask for more' reads as a weight on a mat.",
+    "fix": "page-9.js: print 'WAGES' on the envelope, and flip the slapFlat fold sign (line ~183) so the printed face stays up. Check that the weight still sits on it.",
+    "evidence": "critique/p9/still-234.90.jpg and still-235.40.jpg; page-9.js lines 183-186.",
+    "from": "pictures 7-10, code"
+   },
+   {
+    "page": "9",
+    "time": "218.7-221.4 s",
+    "severity": "should fix",
+    "what": "For 'Loans cost more, people spend less', the coin stack sits at the very bottom edge, half cut off and in the bottom button zone, so the mechanism is not shown.",
+    "fix": "page-9.js: move the coin stack up onto the pavement (screen y about 1100-1400).",
+    "evidence": "p9-e/still-220.60.jpg",
+    "from": "pictures 7-10"
+   },
+   {
+    "page": "10",
+    "time": "244.9-245.4 s and 251.5-255.6 s",
+    "severity": "should fix",
+    "what": "The interest-rate needle overshoots to about 6 (the top of the dial) just as she says 'five and a half' (spring damping 0.6 gives about 9.5% overshoot). Later, while she says unemployment rose, it slides visibly from 5.5 to about 2.6, implying rate cuts nobody mentions, right beside the 5.6% figure.",
+    "fix": "page-10.js lines 114-118: cap the value at 5.5 (v = Math.min(5.5, ...)) and move the ease to ramp(t, T.thisYear - 0.05, T.raising - 0.05).",
+    "evidence": "page-10.js lines 114-118; p10-s/still-254.50.jpg and critique/p10-dial-crop.jpg (needle near 2.6 at 254.5 s).",
+    "from": "content 6-10, code"
+   },
+   {
+    "page": "10",
+    "time": "238.8-259.4 s",
+    "severity": "should fix",
+    "what": "The dial's printed label runs into its scale numbers and reads '0INTEREST RATE6'.",
+    "fix": "page-10.js line 71: label: 'INTEREST' (as on page 9), or max: 7.",
+    "evidence": "critique/p10-dial-crop.jpg; page-10.js line 71.",
+    "from": "pictures 7-10, content 6-10"
+   },
+   {
+    "page": "10",
+    "time": "259.5-270 s",
+    "severity": "should fix",
+    "what": "The 'someone' who says 'New money causes inflation' is a stern politician with a strong blue tie, in a chamber that looks like Westminster. Blue is a major New Zealand party colour (guide line 114: no party colours), it turns 'someone' into 'a politician', and the quote is small italic text.",
+    "fix": "Recolour the tie to charcoal (a tint on that area of the cut-out). Make the quote a proper hook of about 72 px, set upright rather than italic.",
+    "evidence": "p10-d/still-261.60.jpg; guide line 114; page-10.js lines 91-93 and 214-225.",
+    "from": "pictures 7-10, content 6-10"
+   },
+   {
+    "page": "6",
+    "time": "131-133 s",
+    "severity": "nice to have",
+    "what": "The racing counter settles on a crisp, unlabelled number (20,762) that she never says.",
+    "fix": "Show MARKS FOR ONE DOLLAR from the counter's first appearance, or blur the digits while they race.",
+    "evidence": "p6-d/still-131.60.jpg",
+    "from": "pictures 4-6"
+   },
+   {
+    "page": "2",
+    "time": "30.2-33 s",
+    "severity": "nice to have",
+    "what": "The paper boats are already on screen under NEW MONEY and then 'sink' into the dry floor.",
+    "fix": "page-2.js: pop the boats up at T.submarines and fade them rather than lowering them through the floor.",
+    "evidence": "p2b/still-30.50.jpg and still-32.40.jpg",
+    "from": "pictures 1-3"
+   },
+   {
+    "page": "1",
+    "time": "15.7-17.6 s",
+    "severity": "nice to have",
+    "what": "THE WHOLE BASKET spans to about x 1010, into the right button zone, and the shelf tags at the right edge are cut.",
+    "fix": "page-1.js: hook size 92 \u2192 78; move the shelf spots at u > 0.86 inward.",
+    "evidence": "p1-c/still-16.00.jpg",
+    "from": "pictures 1-3"
+   },
+   {
+    "page": "various",
+    "time": "various",
+    "severity": "nice to have",
+    "what": "Small legibility and polish points:\n- Page 5: the BANK OF ENGLAND STUDY credit is faint, and the chart axis reads 2013 \u2026 8 YEARS.\n- Page 4: HOUSEHOLDS sits on the lamp glow.\n- Page 6: LESS AND LESS MADE sits over the tower.\n- Page 10: 'to bring prices down' is the only lowercase hook, and the dot panel has no key.\n- Pages 4 and 5: straight apostrophes.\n- Page 7: A BARREL is printed on the red barrel.\n- Page 8: the table seam shows at 181 s.\n- Pages 8, 9 and 10: the fact check's suggested source credits were not added.",
+    "fix": "Fixes, in the same order:\n- Page 5 credit: draw it in INK.paper at about size 34. Chart: change the right axis label to '2021'.\n- Page 4: move the hook block up 60-80 px.\n- Page 6: move the hook block up about 100 px.\n- Page 10: set the hook in capitals, and add 'EACH DOT = 1 IN 100 WORKERS' under the panel.\n- Pages 4 and 5: use the curly \u2019.\n- Page 7: move A BARREL below the counter.\n- Page 8: tilt the camera down slightly.\n- Pages 8, 9 and 10: add small credit() lines.",
+    "evidence": "critique/p5/still-124.00.jpg, p5-d/still-112.30.jpg, p4-j/still-87.80.jpg, p6-d/still-153.80.jpg, p7-c/still-161.40.jpg, p8-d/still-181.30.jpg; page-10.js line 201.",
+    "from": "several"
+   }
+  ],
+  "rejected": [
+   {
+    "what": "Banknote darkening compounds (0.8^5) and makes bundle edges nearly black (pages 5 and 6)",
+    "reason": "This was listed as already fixed ('darkened banknotes'). The current stills show pale cream-green bundles, not black ones, so nothing visible is left to fix."
+   },
+   {
+    "what": "Page 3 factories are plain CG boxes on an untextured floor",
+    "reason": "Mostly a matter of taste, and re-texturing a set this late is risky. The real visible fault, the black corners and hard backdrop edge, is kept as its own finding."
+   },
+   {
+    "what": "Shell model is bullet-shaped, unlike the painted shells on page 2",
+    "reason": "True, but reshaping the shell in models.js changes already-filmed pages 1-3 and page 8. The cost to the viewer is small. Not worth the risk now."
+   },
+   {
+    "what": "Page 3 new money shown as gold coins instead of notes",
+    "reason": "Coins are a generic 'money' symbol. Swapping the props is a larger change with little gain for the viewer."
+   },
+   {
+    "what": "Page 3 factories never labelled 1 and 2",
+    "reason": "IDLE and FLAT OUT, plus the camera visiting each factory in turn, carry it. This is a nice idea rather than a fault, and adding signs to a shared set this late is not worth it."
+   },
+   {
+    "what": "Mirror tiling on the page 1 and 2 reliefs; torn card terminal on page 1",
+    "reason": "In the stills these areas are heavily blurred and hard to notice at phone size. The fix (relief wrap mode or a re-framed camera) carries risk for little gain."
+   },
+   {
+    "what": "Page 2 money stack and basket sit low in the frame",
+    "reason": "At 41.2 s the stack mostly sits above the bottom 380 px. The overlap with the button zone is minor."
+   },
+   {
+    "what": "Page 6 static camera; page 7 NZ chart static; page 4 signboard style; page 8 house on a plain void at 188 s",
+    "reason": "These are taste or cinematic preferences with no information lost, and new camera work this late is risky."
+   },
+   {
+    "what": "Page 6 single note in mid-air at 148.4 s; page 7 price tags touching the bottom zone",
+    "reason": "Minor and momentary, with little cost to the viewer."
+   },
+   {
+    "what": "Page 8 shows 3.2% that she does not say; page 10 shows 2.25-2.75% and RISING AGAIN",
+    "reason": "Both are sourced in the ledger. 3.2% sets up page 10, where she says it. RISING AGAIN matches her present-tense 'is raising'."
+   },
+   {
+    "what": "Page 7 $2.90 is a mid-1973 price that does not fit 'in about 3 months'",
+    "reason": "The ledger records the Fed History source wording ('nearly quadrupled from $2.90 ... to $11.65') as confirmed with nuance. The visible problem (the $2.90 never reads) is kept as a timing finding; changing the figure itself is optional."
+   },
+   {
+    "what": "Page 1 A YEAR AGO / NOW timing; GLASGOW 1915 title appearing before 'Glasgow'",
+    "reason": "Before-then-after is logical, and an early place title is standard. No viewer cost."
+   },
+   {
+    "what": "Page 2 light beams lag the camera by one frame",
+    "reason": "Invisible in practice: the first frame is under the peel, and the chunks join with no jump."
+   },
+   {
+    "what": "Page 5 \u00a5800 tag has no 'Example price' label",
+    "reason": "A ramen-bowl price is plainly illustrative and is never presented as data. Very low risk."
+   }
+  ],
+  "summary": "I checked every finding myself against the filmed frames, the latest stills, the code and the word times. Most were real. I merged duplicates and rejected about a dozen that were matters of taste, already fixed, or not worth the risk this late.\n\n**What is strong:** The painted pages work: the checkout, the munitions hall, Glasgow in the rain, the ramen bar, the Ruhr in snow, the 1973 petrol station, the 1920 bank street and the New Zealand street all have depth and mood. Almost every word on screen matches what Malina says, and the numbers agree with the research. Today's fixes are in place. The page peels and the joins between filmed stretches are clean.\n\n**What is weak:**\n- **Page 3, the two factories.** This is the heart of the argument and the weakest page:\n  - the price boards that carry 'prices barely move vs prices climb' are cut off at the right edge in most shots;\n  - the labels (MORE SHELLS, NO MORE SHELLS, PRICES CLIMB) are pale text on pale walls and largely unreadable;\n  - black gaps show at the top-left corner on two close shots;\n  - the ending never says 'SHORT OF', and the example \u00a3 prices carry no 'Example prices' note.\n- **Page 10, the ending.** The 5.6% unemployment figure is still counting while she says it and fades almost as soon as it arrives. The interest-rate dial beside it slides down as if rates were cut (and overshoots to 6 on 'five and a half'). Its label reads '0INTEREST RATE6'. The 'someone' at the end is a politician in a blue tie, which the guide's no-party-colours rule forbids.\n- **Page 4.** The switch to 'Homes can't be built' at 92-93 s looks broken: a notice floating in mid-air and women sinking into the road.\n\n**Smaller fixes worth making (each a line or two):**\n- Several hard-to-read labels: IN TWO YEARS, OTHER INVESTMENTS, PARLIAMENT.\n- The heading OUT OF WORK sits over the lit dots, which mean 'in work'.\n- The unhedged A QUARTER MORE.\n- The top-hat 'owners' caricature on page 5.\n- The fallen notes on page 6 and the pay packet on page 9 land face-down as blank tan shapes.\n- On page 7, COSTS is on screen for under a second and $2.90 never reads.\n- On page 8, the 'LOWEST SINCE 1986' wording and the plain block under the house.\n\n**Before release:** fix the four 'must fix' items (pages 3, 4 and 10) and as many 'should fix' items as time allows. Pages 1 to about 4 (up to 111.8 s) are already filmed, so any fix there means re-filming those stretches. Batch the page 1-4 fixes, especially page 3, into one re-film. The fixes on pages 5-10 can go in before those pages are filmed."
+ }
+}

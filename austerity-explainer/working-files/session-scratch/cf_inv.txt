@@ -1,0 +1,366 @@
+###### Check file generator
+{
+"name": "Check file is written by hand (groups, roles, zones)",
+"area": "checking and critique",
+"how_found": "Logs 31-34: each view needed a hand-written shot-check.json; round 1/3 checks found mistakes (missing must_read drums, men as one group, background pairs missed until pairs_also was added, Lesson 121).",
+"final_value_or_rule": "Keys: size [1080,1920]; groups (Blender name patterns); subject, support, story, work, pairs_also, on_ground, stands_on, must_read, lights_in_story, box_excludes; lines + lines_key; eye_height [1.5,1.9]; title_zone [0.06,0.05,0.90,0.22]; story_reaches_down 0.70; each waiting man his own group.",
+"evidence": "film-kit/examples/notice-corner/shot-check.json; film-kit/examples/inflation-chapter-2-newcomers/works-w*-shot-check.json; check_shot.py docstring",
+"computable_from": "Blender object names and collections (props/, signs/, figures), the shot list's subject and story props, materials named '*-lettering'/'*stencil*'/'*printing'",
+"proposed_calculation": "A generator make_check_file.py run inside Blender after the assemble script: groups from root empties (one per imported prop .glb), story = props within 1.5 m of the subject, work = other props, on_ground = props whose lowest point is within 0.05 m of the ground, must_read = any group containing a lettering material, lines from the street builder's settings, defaults for eye_height, title_zone, story_reaches_down; the author then edits only roles that differ.",
+"already_automatic": "No. The plugin also ships no example check file although its docs point to examples/notice-corner/shot-check.json.",
+"llm_tip": "Put every lettered prop in must_read and every background prop in pairs_also; a check limited to story props misses near-touches behind them.",
+"from": "tools-and-plugin-gap"
+}
+---
+{
+"name": "Lettered props in must_read so no fragments show",
+"area": "lettering and signs",
+"how_found": "Round 3 check: house fronts hid most drums ('SEL', 'DIE'; PETROL never showed). Round 4 critic: crates popped up behind the drums ('THI', 'UP'), W4 crate showed 'AY UP', W3 DIESEL read 'DIESE'. Drums and crates added to must_read; round 4 measured 0 to 2% of drum words hidden.",
+"final_value_or_rule": "Every lettered prop in a view goes in that view's must_read; 0% of a word's letters hidden or cut by the frame, at the plate spot and the composed spot; else move or turn it, or take it out of frame.",
+"evidence": "round3-result.json checked.findings[8]; round4-result.json critique.findings[5] and [9]; round4-result.json film.summary item 6; KIT/examples/inflation-chapter-2-newcomers/works-w1-working-shot-check.json must_read",
+"computable_from": "shot facts (ids render per lettering material), check file",
+"proposed_calculation": "Auto-fill must_read from every material named *-lettering / *-stencil visible in the view; occlusion share = hidden letter pixels / all letter pixels from the ids picture; fail above 0%; also test the plate frame edges.",
+"already_automatic": "Partly: check_shot.py measures must_read occlusion and the 0.90 limit, but must_read is filled by hand.",
+"llm_tip": "Put every lettered thing in must_read; a half-hidden word ('DIESE', 'AY UP') is worse than no word.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Fragments of words and hidden lettering",
+"area": "lettering and signs",
+"how_found": "Log 34 rounds 3-4: only 'SEL'/'DIE' of the drums showed; crates showed 'THI', 'UP'; W4 crate 'AY UP'.",
+"final_value_or_rule": "Every lettered prop in must_read; words hidden <= the bottom fifth (signature) allowed; nothing to read cut by the frame edge.",
+"evidence": "round3-result.json finding 39; round4-result.json findings 7, 10; check_shot.py 'rule 3: nothing hides the words' and 'rule 12: nothing important cut by the frame edge'",
+"computable_from": "shot_facts solo masks vs visible masks",
+"proposed_calculation": "Already measured when the group is in must_read; make the check-file generator add every lettered group to must_read.",
+"already_automatic": "Yes when listed (check_shot.py); listing is manual.",
+"llm_tip": "If a word shows only in part, move the prop or the camera; a fragment reads as a different word.",
+"from": "tools-and-plugin-gap"
+}
+---
+{
+"name": "Rule 7 check: some story thing reaches 0.70 down",
+"area": "checking and critique",
+"how_found": "Round 4 critic: 'the shot checker's main rule passes everywhere; it does not measure any of the above' (rule 7 never tested). Round 5 added it with a reach and a no-reach test file.",
+"final_value_or_rule": "check file key story_reaches_down = 0.70 in every Works check file; fails with a fix in metres.",
+"evidence": "KIT/paper-film/tools/check_shot.py lines 27-30 and 1201-1225; KIT/examples/inflation-chapter-2-newcomers/works-w1-shot-check.json; SCRATCH/redesign/round5-set/tools/test-reach.json, test-noreach.json",
+"computable_from": "check file plus shot facts",
+"proposed_calculation": "Turn it on by default (0.70) in every new check file; add a pre-render version using frame_geometry on the 3D bounding boxes.",
+"already_automatic": "Yes in the film kit's check_shot.py, opt-in only. The plugin kit's check_shot.py lacks it.",
+"llm_tip": "Always put story_reaches_down 0.70 into a new check file; passing the main rule alone does not mean the frame is full.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Title zone in dim, empty sky",
+"area": "timing and words on screen",
+"how_found": "Log 30: put titles in the dim top-left sky, away from the street lamp. Round 2 (log 34): from gate views the chimney tops fell at 0.07 to 0.14 down, inside the band for typed words.",
+"final_value_or_rule": "Title zone at least 85% sky, no story prop over 1% of it, mean brightness <= 0.36, and the frame's brightest light not within 5% of the frame of the zone. Notice corner zone [0.05, 0.02, 0.62, 0.12]; Works [0.06, 0.05, 0.90, 0.22] (the plan's top band 0.05 to 0.22 down).",
+"evidence": "check_shot.py check_titles lines 1303-1331; shot-check files title_zone; round2-result.json chimney note",
+"computable_from": "the projected skyline (roof edges, chimneys, lamps) from the camera; the sky flag in ids.png",
+"proposed_calculation": "From shot_facts' ids.png (black = sky), find the largest rectangle inside 0.05 to 0.90 across, 0.02 to 0.22 down that is at least 85% sky and holds no light; write it into the check file as title_zone instead of guessing.",
+"already_automatic": "Checked only for a zone written by hand.",
+"llm_tip": "Let the tool pick the title zone from the sky mask; never place words over a chimney or next to the brightest lamp.",
+"from": "notice-corner-and-checker"
+}
+---
+{
+"name": "Picture-match test misfires on dark alike figures and thin bars",
+"area": "checking and critique",
+"how_found": "Log 34 rounds 3-5: on dusk views the checker called correct pictures 'out of date' because dark men line up with their neighbours when slid and gate bars are thin; scratch wrappers check_dark_picture.py and check_film_frame.py relaxed it for those groups.",
+"final_value_or_rule": "Exclude waiting men and iron gates (and boards, handcart, drums on filmed frames) from 'the finished picture matches the scene'; draw outlines.jpg to check by eye.",
+"evidence": "/tmp/.../scratchpad/redesign/round5-set/tools/check_dark_picture.py; check-round-3/tools/check_film_frame.py",
+"computable_from": "check file (group roles), shot_facts masks",
+"proposed_calculation": "Add a check-file key 'match_excludes': [groups] (or auto-exclude groups whose mean luminance < 0.08 or whose mask is thinner than 6 px) to check_shot.py, instead of a wrapper script.",
+"already_automatic": "Only in scratch wrappers; not in film kit or plugin.",
+"llm_tip": "If the checker says a fresh render is 'out of date', look at outlines.jpg before re-rendering; dark repeated figures fool it.",
+"from": "tools-and-plugin-gap"
+}
+---
+{
+"name": "Checker false alarms on dark or thin things",
+"area": "checking and critique",
+"how_found": "Round 3: the checker's 'picture matches the scene' test called the picture out of date because the men are dark on dark, the gates thin bars and the boards' strongest edges their borders; ran a relaxed version (check_dark_picture.py). Round 4/5: 'man 2 rests on brazier' was a quarter-point ray starting 0.22 m inside the rim under his stooped reach.",
+"final_value_or_rule": "Leave dark figures, thin bars and bordered boards out of the picture-match test; a figure leaning over a prop needs its ray test from its feet, not its box.",
+"evidence": "round3-result.json works.tested 'Shot checker'; KIT/examples/inflation-chapter-2-newcomers/works-w1-shot-check.json man_2_note; SCRATCH/redesign/round5-set/tools/check_dark_picture.py",
+"computable_from": "check file groups",
+"proposed_calculation": "In check_shot.py: skip groups with mean luminance < 0.05 or width < 6 px from the picture-match test; cast 'on ground' rays from the lowest 10 cm of the figure's mesh only.",
+"already_automatic": "No.",
+"llm_tip": "If the checker says a dark or thin thing doesn't match, check by eye on the outlines picture before moving anything.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "shot_facts.py measurement limits",
+"area": "models and Blender",
+"how_found": "Logs 31-34.",
+"final_value_or_rule": "At most 20 groups (palette); colour match within 24 (sum of channel differences); solo picture threshold 8; sky objects 'sky_dome*' left out; with AUTO sensor fit on a tall frame Blender's angle is the vertical one (a verifier caught it being widened twice); metres per pixel = d/f; prop names imported twice get '.001' (lesson 119), rename them.",
+"evidence": "shot_facts.py lines 84-91, 125-131, 167-173, 219; check_shot.py lines 140-147; Lessons.md 119",
+"computable_from": "n/a",
+"proposed_calculation": "Warn automatically when a check file has more than 20 groups or two groups match the same object pattern.",
+"already_automatic": "Partly (it stops above 20 groups).",
+"llm_tip": "Give each figure and each prop its own group, rename second copies at import, and keep under 20 groups a view.",
+"from": "notice-corner-and-checker"
+}
+---
+{
+"name": "Second copy of a prop gets '.001' names",
+"area": "models and Blender",
+"how_found": "Lesson 119: importing a prop a second time gave its parts the first one's names with '.001', so the checker and the film page took the second gas lamp for the first.",
+"final_value_or_rule": "Rename a second copy's parts at once.",
+"evidence": "Lessons.md:444-446; assemble_notice_corner.py:229",
+"computable_from": "object names after import",
+"proposed_calculation": "place_prop(name=...) renames every imported child to '<instance>-<part>'; check_shot fails if a group's pattern matches objects from two imports.",
+"already_automatic": "Done by hand in one script.",
+"llm_tip": "Give every placed copy its own name prefix.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Story props touch; work props small and far; nothing dark where the eye enters",
+"area": "camera and composition",
+"how_found": "Lesson 101: props that touch read as a story, props apart read as a list. Never put a big dark prop where the eye enters the frame (bottom left). Lesson 121: a check limited to story props missed a background near-touch (lamp post just meeting the dustbins; handcart overlapping by only 11 px).",
+"final_value_or_rule": "Overlap story props clearly, or leave a clear gap; never let edges just touch. Work props small and far. No big dark prop at bottom left. Check background props for near-touches too.",
+"evidence": "Lessons.md:390-392, 452-454; check_shot.py rules 3, 4, 8 and check_dark_entry; 'pairs_also' in the check file",
+"computable_from": "shot_facts group pictures (ids.png, solo/*.png)",
+"proposed_calculation": "Rule 4 pairs check: make pairs_also default to ALL named groups (every pair within 40 px), not a hand list.",
+"already_automatic": "Rules 3, 4 and 8 and the dark-entry check are automatic in check_shot.py. The background pairs must be listed by hand.",
+"llm_tip": "Put every prop group in the check file, background ones included.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Lettering keeps its own surface; naming convention",
+"area": "lettering and signs",
+"how_found": "Logs 29-34: Flux garbled the notice's dates and small print (Lesson 92, 103); every sign then kept its own surface; Works LETTERING list maintained by hand.",
+"final_value_or_rule": "ownSurface for every lettered material (notice paper, colliery board, gate boards, bank sign, stencils, printing); a board can take the paper's tint ([name, sameTintAs]); era-correct lettering, names only, no figures the narrator does not say; every invented name searched first.",
+"evidence": "works-effects.js LETTERING (line ~121); notice-corner.js ownSurface list; 34 Plan 'The lettering rules'",
+"computable_from": "material names in the exported glb",
+"proposed_calculation": "Auto-collect ownSurface from materials whose names end in '-lettering', '-stencil', '-printing' or 'paper' within signs.glb; warn if a material with text in its texture is not in the list.",
+"already_automatic": "No (hand-listed).",
+"llm_tip": "Name every lettered material with a '-lettering' suffix so the page can keep it sharp automatically.",
+"from": "tools-and-plugin-gap"
+}
+---
+{
+"name": "Never use an image or video program's lettering",
+"area": "lettering and signs",
+"how_found": "Lessons 92 and 103: Flux turned the dates into nonsense. Nano Banana Pro wrote 'FITE WILL DE CLOSED' and '1756'; Seedance wrote 'PRIDAY' and '1828'. Decisions item 12: video models can't be trusted to spell or count. Decision 34: no blank signs.",
+"final_value_or_rule": "All lettering comes from our own 3D or 2D code. In projected sets, signs keep their own surface (ownSurface), colour-matched to the painting where they stand.",
+"evidence": "Lessons.md:355-357, 395-398; Decisions.md:131-132, 545; film-kit/paper-film/scenes/projected-set.js (ownSurface, calibrate)",
+"computable_from": "the set's material list (build scripts write lettering-sizes.json)",
+"proposed_calculation": "When a set is loaded, put every material whose texture comes from the lettering step (listed in lettering-sizes.json) into ownSurface automatically, with calibrate on. Warn if a group named sign, notice, placard or book has no lettered material.",
+"already_automatic": "ownSurface and calibrate exist in projected-set.js (film kit only; projected-set.js is NOT in the plugin kit). The list of lettered materials is written by hand.",
+"llm_tip": "Ask painters for blank boards and draw every word yourself; keep lettered materials off the projection.",
+"from": "lessons-and-notes"
+}
+---
+###### Model lint (Blender and .glb)
+{
+"name": "Stripe finder: squashed texture coordinates",
+"area": "checking and critique",
+"how_found": "Round 3 pages found the gate piers looked like orange curtains (works_kit bug); round 3 check wrote find_stripes.py and found 15, 27 and 33 striped parts still in the factories and far town (60 to 85% of No. 2's chimney brick). Round 4 rebuilt: 0, except 1.3 m2 on four roofs from the shared street builder.",
+"final_value_or_rule": "Every model passes the stripe finder with 0 striped parts before plates are drawn.",
+"evidence": "round3-result.json checked.findings[0]; round4-result.json critique.summary and set.summary; SCRATCH/redesign/check-round-3/tools/find_stripes.py",
+"computable_from": "the .glb files",
+"proposed_calculation": "For every textured face, area in UV space / area in 3D; flag faces with UV area near 0 (< 1e-6 of the median ratio) while 3D area is large; report square metres per part.",
+"already_automatic": "No (scratch tool only).",
+"llm_tip": "Run a stripe check on every built model; a squashed texture shows as streaks the painter will copy.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Coplanar surfaces flicker",
+"area": "models and Blender",
+"how_found": "Lesson 85: a room's ceiling sat exactly on the slab above and swapped colour in one frame at the start of a move.",
+"final_value_or_rule": "Keep built surfaces a hair apart (about 0.01 units).",
+"evidence": "Lessons.md:325-327; plugin/skills/build-cinema-page/guide.md",
+"computable_from": "model meshes",
+"proposed_calculation": "Scan each .glb for pairs of faces from different objects within 1e-4 of the same plane with overlapping area; report them and suggest a 0.01 offset.",
+"already_automatic": "No.",
+"llm_tip": "Never put two surfaces exactly on top of each other.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Coplanar surfaces flicker",
+"area": "models and Blender",
+"how_found": "Log 27 (Lesson 85): a ceiling exactly on the slab above swapped colour in one frame at the start of a move.",
+"final_value_or_rule": "Keep built surfaces about 0.01 units apart.",
+"evidence": "Lessons 85; plugin guide section 9",
+"computable_from": "exported geometry",
+"proposed_calculation": "glb_lint: find pairs of faces from different meshes with parallel normals, distance < 0.002 and overlapping footprints; report them.",
+"already_automatic": "No.",
+"llm_tip": "Leave a 1 cm gap between stacked surfaces.",
+"from": "tools-and-plugin-gap"
+}
+---
+{
+"name": "Two surfaces on the same plane flicker",
+"area": "models and Blender",
+"how_found": "Log 27: the kitchen ceiling changed colour in one frame. Each room's ceiling sat exactly on the slab above it, which flickers as the camera moves. Fixed by setting them a hair apart.",
+"final_value_or_rule": "Surfaces never share a plane; keep them a hair apart.",
+"evidence": "story L889-894 (log 27)",
+"computable_from": "the scene's geometry",
+"proposed_calculation": "Look for pairs of faces facing the same way, less than 0.1 mm apart and overlapping. Offset them by the larger of 1 mm and 0.0001 \u00d7 their distance from the camera.",
+"already_automatic": "No.",
+"llm_tip": "Never stack two surfaces on the same plane.",
+"from": "story-log"
+}
+---
+{
+"name": "Ground under raised areas",
+"area": "models and Blender",
+"how_found": "Round 2 check: odd dark patches across the yard setts (only 2 cm above ground 0) and a dark oval at No. 2's doorway: the lane's ground showing through. Round 3 lowered the ground under the yards.",
+"final_value_or_rule": "Lower or cut the base ground under any surface laid less than about 5 cm above it.",
+"evidence": "round2-result.json checked.findings[9]; round3-result.json works.summary 'The factories and the far town'",
+"computable_from": "scene meshes",
+"proposed_calculation": "Ray-cast a grid downward over every floor surface; flag where another ground surface lies within 5 cm below it.",
+"already_automatic": "No.",
+"llm_tip": "Don't lay a floor 2 cm over another ground; z-fighting and see-through patches follow.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Model facts measured from the saved file",
+"area": "models and Blender",
+"how_found": "Round 1 check: index.json sizes came from build constants and were wrong (jacket nail 0.846 vs 0.776 to 0.796 m; jacket 0.6 vs 0.516 m; bank letters 0.29 vs 0.2 m); eight props had a 'name.001' root; cloth pictures seeded with hash() differed each run.",
+"final_value_or_rule": "Sizes, letter heights, nail and loop positions measured from the saved model before writing index.json (match within 1.5 mm); one root named after the file (builder stops if a part already has the name); seeds from zlib.crc32; cached pictures named with a colour fingerprint.",
+"evidence": "round1-result.json checked.findings[2], [5], [6]; round2-result.json props_fixes.summary",
+"computable_from": "saved .glb",
+"proposed_calculation": "Already partly automatic; add a glb reader check to every build script's end.",
+"already_automatic": "Yes in the chapter 2 prop and figure builders (film kit); not in the plugin kit.",
+"llm_tip": "Measure a model after saving it; never trust a size written from build constants.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Model and prop library hygiene",
+"area": "models and Blender",
+"how_found": "Logs 31-34: a second imported lamp got '.001' names and was taken for the first (Lesson 119); prop roots named '<prop>.001' (round 1); index sizes wrong by 6 cm (round 1); a helper's drum-lining size not measured (Lesson 116); hash() seeds changed per run (round 1); striped UVs on 60-85% of chimney brick (round 3); Poly Haven maker's sticker (round 1).",
+"final_value_or_rule": "Rename a second copy's parts at once; one root empty per prop named after the file; sizes in index.json measured from the saved model; measure models before using any helper size; seeds from zlib.crc32(name); run a stripe finder on every glb; PAINT_OUT labels in the converter's choices.",
+"evidence": "Lessons 116, 119; round1-result.json findings 4, 7, 8; round3 finding 31; scratchpad/redesign/check-round-3/tools/find_stripes.py; film-kit/paper-film/blender/inspect_glb.py",
+"computable_from": "exported glb files",
+"proposed_calculation": "glb_lint.py: one root per file named as the file; no duplicate object names across a set; UV area / 3D area per face vs median < 1e-3 flagged as stripes; report measured sizes into index.json.",
+"already_automatic": "inspect_glb.py exists (plugin too); the stripe finder is scratch; the rest manual.",
+"llm_tip": "Lint every exported model for names, root, size and squashed textures before placing it.",
+"from": "tools-and-plugin-gap"
+}
+---
+{
+"name": "Measure the model before using a helper's size",
+"area": "models and Blender",
+"how_found": "Lesson 116: a sooty lining for the drum was 0.365 m radius; the drum is 0.296 m, so it stuck out as a flat orange band and brought the drum's edge to 9 px from the notice.",
+"final_value_or_rule": "Measure the model in Blender before using any size worked out from a picture.",
+"evidence": "Lessons.md:433-436, 520",
+"computable_from": "the .glb / Blender object bounds",
+"proposed_calculation": "Any part made to fit a model (lining, lid, cloth) takes its size from the model's measured bounds (inspect_glb.py or obj.dimensions), never from a typed number. Fail if a fitted part exceeds its host's bounds by more than 2%.",
+"already_automatic": "No; inspect_glb.py exists to measure.",
+"llm_tip": "Sizes from pictures are guesses; read the model's real dimensions.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Measure a model before using a size someone worked out from a picture",
+"area": "models and Blender",
+"how_found": "Log 32: the skeptic's sooty drum lining was 0.365 m radius; the drum is 0.296 m, so the lining stuck out as an orange band and brought the drum's edge 9 px from the notice (lesson 116). measure_drum.py found the wall's inner radius.",
+"final_value_or_rule": "Lining radius 0.255 m inside a 0.26 to 0.28 m inner wall (0.296 m outside).",
+"evidence": "assemble_notice_corner.py line 135; experiments/31 .../tools/measure_drum.py; Lessons.md 116",
+"computable_from": "the GLB's vertices",
+"proposed_calculation": "Read sizes (and inner radii at given heights) from the model automatically; never take sizes from a helper's picture estimate.",
+"already_automatic": "props/index.json has outer sizes; inner sizes are not recorded.",
+"llm_tip": "Measure the model in Blender before fitting anything inside or against it.",
+"from": "notice-corner-and-checker"
+}
+---
+{
+"name": "Parts sized to their parent model",
+"area": "models and Blender",
+"how_found": "Log 32: a critic asked for a sooty lining 0.365 m across inside a drum only 0.296 m in radius; it stuck out as a flat orange band (lesson 116). Log 31: putting the lantern back on its chair would have dropped it to the pavement. Log 29: the notice board's posts landed on top of it.",
+"final_value_or_rule": "Measure the model before adding parts to it.",
+"evidence": "story L1157-1161 (log 32), L1112-1113 (log 31), L943 (log 29)",
+"computable_from": "the models' outline boxes",
+"proposed_calculation": "Build helpers read the parent's size and clamp a child to fit inside it. After building, assert no child's box exceeds its parent's by more than 1 mm unless allowed.",
+"already_automatic": "No (check_shot sees only what shows on screen).",
+"llm_tip": "Read real dimensions from the model; never trust a size from a critic's note.",
+"from": "story-log"
+}
+---
+{
+"name": "Imported glass and lenses",
+"area": "models and Blender",
+"how_found": "Log 32: the gas lamps and the lantern looked like flat amber cards. The 'see-through' setting had been ignored because the imported glass takes that value from its picture; unhooked, the mantles and flame show. Log 20: dark lenses made reading glasses look like sunglasses.",
+"final_value_or_rule": "Unhook the alpha picture on glass and set see-through explicitly; keep lenses pale.",
+"evidence": "story L1173-1174 (log 32), L667 (log 20)",
+"computable_from": "the imported materials",
+"proposed_calculation": "On import, if a material named glass or lens has its alpha fed by a picture, unhook it and set see-through explicitly; report it.",
+"already_automatic": "No.",
+"llm_tip": "After importing models, check every glass material's see-through setting.",
+"from": "story-log"
+}
+---
+{
+"name": "Paint out baked labels in downloaded models",
+"area": "models and Blender",
+"how_found": "Round 1 check zoomed into the hand truck's texture: a modern maker's sticker baked in (pixels about 800-850 across, 985-1020 down). Round 2 added a paint-out step; also Poly Haven assets dropped for lettering (crate 01, generator, cash register, suitcase stickers).",
+"final_value_or_rule": "PAINT_OUT box per asset in the choices list, filled from nearby paint in colour, roughness and relief maps, saved lossless (0 pixels changed outside the patch).",
+"evidence": "round1-result.json checked.findings[4]; round2-result.json props_fixes.summary 'Hand truck'; PLAN lines 1417 (F11), 1177-1183",
+"computable_from": "downloaded texture maps",
+"proposed_calculation": "Run text detection (high-contrast small strokes, OCR) on every downloaded colour map; list candidate boxes for a paint-out; reject assets with lettering on large areas.",
+"already_automatic": "Partly: convert_poly_haven.py paints out a box given by hand (film kit only).",
+"llm_tip": "Open every downloaded texture at full size and look for stickers, brands and digits before using the model.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Baked corner shading settings",
+"area": "models and Blender",
+"how_found": "Lesson 61: Blender's default reach (10 units) darkened whole walls, and 2048 px at 48 samples took 12 minutes. Reach 0.6, 1024 px, 32 samples took 2 minutes and looks right. A part left out of the bake must not share a material with a baked part (the kerb turned dark brown).",
+"final_value_or_rule": "AO reach 0.6, 1024 px, 32 samples, margin 4. Unbaked parts get their own material.",
+"evidence": "Lessons.md:246-249; film-kit/paper-film/blender/model_kit.py:283 (bake_shading defaults)",
+"computable_from": "model size, on-screen size",
+"proposed_calculation": "Defaults are set. Add: texture size = next power of 2 above 2 x the model's largest on-screen size in px (cap 1024). Lint for unbaked parts sharing a material with baked ones.",
+"already_automatic": "Defaults in model_kit.py (plugin kit). The shared-material lint is missing.",
+"llm_tip": "Keep corner shading local; give skipped parts their own material.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Blender quality rules from the MCP guidance",
+"area": "models and Blender",
+"how_found": "Lesson 67: bevels shaded as hard facets (harden normals off), and cut brick walls had razor corners. Joining parts by material (232 to 19) made each works about 34,000 triangles. Sandbox refuses read_factory_settings (use read_homefile(use_empty=True, use_factory_startup=True)). Default renderer crashes without a graphics card (switch to Cycles before any render). Blender needs --online-mode for the add-on. Lesson 62: Blender adds '.glb' to any name not ending in it.",
+"final_value_or_rule": "Harden normals on bevels; join by material; about 22,000-34,000 triangles per detailed building; output names end in .glb.",
+"evidence": "Lessons.md:262-268, 250-251, 237-240; plugin/skills/make-3d-models/SKILL.md",
+"computable_from": "the .blend / .glb",
+"proposed_calculation": "model_lint: count objects per material (>1 = join); bevel modifiers without harden_normals; triangle count against the budget; any export path not ending in .glb fails.",
+"already_automatic": "Notes in the plugin skill; no lint.",
+"llm_tip": "Run a model lint before export; the MCP's own guidance catches real faults.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Hero props need full detail",
+"area": "models and Blender",
+"how_found": "Lesson 55: the card house looked unfinished ('sparse in detail'); rebuilt as a detailed villa after two critics. Lesson 59: plain card boxes look poor beside paintings. Decision 34: no blank signs, book covers or plain boxes.",
+"final_value_or_rule": "A hero prop needs as much detail as the paintings around it; every sign carries real lettering.",
+"evidence": "Lessons.md:218-223, 237-240; Decisions.md:545",
+"computable_from": "model stats",
+"proposed_calculation": "Warn when a model covering more than 10% of the frame has under about 5,000 triangles or one material.",
+"already_automatic": "No.",
+"llm_tip": "If a prop draws the eye, give it detail.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Refreshing the Blender scene after moving the camera",
+"area": "models and Blender",
+"how_found": "Log 32: an extra lit window landed off the frame because moving the camera never refreshed the scene, so the window picker used the old camera.",
+"final_value_or_rule": "Refresh the scene after any camera move before anything works from the camera.",
+"evidence": "story L1175-1176 (log 32)",
+"computable_from": "rule",
+"proposed_calculation": "Always call view_layer.update() after setting the camera. Assert the picked windows land inside the frame.",
+"already_automatic": "Fixed in the scene script only, not as a shared rule.",
+"llm_tip": "In Blender scripts, update the view layer after any move before working from it.",
+"from": "story-log"
+}
+---

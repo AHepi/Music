@@ -1,0 +1,43 @@
+Plate preflight: people-test-plate.jpg (2 failure(s); a failure stops the paid request)
+
+- NOT CHECKED  render log: No render log given (--render-log).
+- NOT CHECKED  light rules: No shot-check report given (--shot-report): run check_shot.py on the plate first.
+- PASS         thin parts: No story prop has much thin detail; the prompt names lamp post, gates and winding wheels as thin.
+- PASS         lettering: No lettered group shows in the plate.
+- PASS         even discs and dark holes: No even bright disc or near-black hole round the story.
+- FAIL         glow inside a hollow: brazier: 8.0% of the top is lit (limit 2%): the painter lifts a glowing hollow into a bright band (lesson 138). Darken the glow inside it in the plate first.
+               fix: Lower the coals' glow or hide it behind the front rim, then draw the plate again.
+- PASS         heads from behind: No near figure seen from behind has a pale head brighter than its coat (4 checked).
+- PASS         cloth through the film's finish: No figure's cloth turns red through the film's finish (exposure 1.0).
+- LOOK         figures against their surround: man hand on bar and man leaning are barely darker than what surrounds them in the plate (over 0.5 of its brightness); the painter lifts figures about three times toward their surround (people test 0.15 to 0.50), so these will read pale.
+               fix: Darken their cloth or stand them against a lighter background.
+- FAIL         figures casting long shadows: Removing the figures changes 42.3% of the frame against 7.5% for the figures themselves (5.6 times; limit 3): they cast long shadows or block light. Asked to remove them, the painter leaves the shadows (lesson 135).
+               fix: Draw the plates with the figures casting no long shadows (a small soft patch at their feet), as the Works do.
+- LOOK         hidden figures: walker 6 do not show in the plate at all; the prompt does not count them.
+- NOT CHECKED  real people: No list of real people given (--real-names).
+
+Settings used (film-settings.json):
+  light.render_faults = ["Shadow buffer full", "Could not allocate shadow atlas"] words in the render log (measured)
+  painting_tools.paint_request.thin_share_named = 0.03 share of a group's showing pixels that are thin (judged)
+  painting_tools.paint_request.thin_share_remove_or_thicken = 0.05 share of a story group's showing pixels that are thin (judged)
+  painting.plate_thin_parts_pixels_at_1080 = 6 pixels (judged)
+  painting_tools.paint_request.keep_min_frame_share = 0.0005 share of the frame (judged)
+  painting_tools.paint_request.even_disc = {"spread_levels_max": 2, "saturation_min": 0.5, "value_min": 0.25, "frame_share_min": 0.003, "window_pixels_at_1080": 7} levels, shares (0-1), share of the frame, pixels (judged)
+  painting_tools.paint_request.dark_hole_levels_max = 5 levels of 255 (judged)
+  painting_tools.paint_request.dark_hole_frame_share_min = 0.001 share of the frame (one connected near-black patch, anywhere) (judged)
+  painting_tools.paint_request.hollow_glow = {"top_share": 0.3, "brighter_than_body": 2.0, "share_max": 0.02} top share of the prop's height; times the prop's median brightness; share of that top (judged)
+  painting_tools.paint_request.near_figure_metres = 15 metres from the plate camera (judged)
+  people.head_height_metres = 0.23 metres (judged)
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  frame.film_vertical_fov_degrees = 60.4 degrees, top to bottom (measured)
+  painting_tools.paint_request.head_band_over_coat_max = 1.0 head band brightness over coat brightness (judged)
+  people.figure_height_metres = 1.75 metres (judged)
+  painting_tools.paint_request.coat_band_share_of_height = [0.2, 0.55] share of the figure's height from its top (invented)
+  painting_tools.paint_request.head_band_pale_min_levels = 40 levels of 255 (brightness of the band under the cap) (judged)
+  painting_tools.paint_request.film_look = {"exposure": 1.0, "contrast": 1.04, "saturation": 1.0, "shadow_tint": [0.44, 0.52, 0.56], "highlight_tint": [0.56, 0.5, 0.42], "tint_amount": 0.35, "lift": 0.015} the stage's finish settings (judged)
+  painting_tools.paint_request.red_hue_band_degrees = [345, 15] degrees of hue (judged)
+  painting_tools.paint_request.red_saturation_min = 0.5 saturation (0-1) of the colour as filmed (judged)
+  painting_tools.paint_request.figure_surround_ratio_max_plate = 0.5 a figure's brightness over its surround's, in the plate (judged)
+  painting_tools.after_painting.figure_ring_pixels_at_1536 = {"erode": 7, "ring_inner": 13, "ring_outer": 61} pixels on a plate 1536 wide (judged)
+  painting_tools.plan_states.come_and_go_mask_over_outline_max = 3.0 mask share over the changing things' outline share (judged)

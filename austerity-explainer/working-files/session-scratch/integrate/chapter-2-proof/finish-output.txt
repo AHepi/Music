@@ -1,0 +1,25 @@
+Preflight finish (after finishing): PASS. 0 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 3 check(s) in 5.1 s.
+Next step ready: sending or publishing the film.
+
+Made 2026-10-16 11:09:25 by preflight.py version d836d994; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-finish-2026-10-16-110925.
+
+## Notes
+
+- find_jumps.py was not run: it holds the whole film in memory (about 10.5 GB for this film, with 5.1 GB free). Run it on a machine with the memory, or add --jumps to try anyway.
+
+## Checks run
+
+- PASS  loudness and true peak of the film (sound_gates.py loudness) [old chapter 2]: 0 fail, 0 look, 0 known, 2 pass, 0 info; exit 0, 2.0 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py loudness '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-finish-2026-10-16-110925/01-loudness-and-true-peak-of-the-film-sound-gates-p.json
+- PASS  the film is as long as the timeline (sound_gates.py length) [old chapter 2]: 0 fail, 0 look, 0 known, 1 pass, 0 info; exit 0, 0.1 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py length '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' --expected 270.3333 --step finishing --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-finish-2026-10-16-110925/02-the-film-is-as-long-as-the-timeline-sound-gates-.json
+- PASS  the film's sound against the mix at every page (sound_gates.py alignment) [old chapter 2]: 0 fail, 0 look, 0 known, 1 pass, 0 info; exit 0, 2.7 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py alignment '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' /home/user/Music/austerity-explainer/chapter-2-inflation/mix/chapter-2-mix.flac /home/user/Music/austerity-explainer/chapter-2-inflation/narration/timeline.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-finish-2026-10-16-110925/03-the-film-s-sound-against-the-mix-at-every-page-s.json
+
+## Inputs (sha1 when the run ended)
+
+- 8154fd50aa5fdce97153553f0bacce5e5a2ed02f  /home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4
+- 4058fc094252cf32dd53a7049c37b7ac19806921  /home/user/Music/austerity-explainer/chapter-2-inflation/mix/chapter-2-mix.flac
+- a772cb61857c680d0d8d1f370df9f4fd681da8e4  /home/user/Music/austerity-explainer/chapter-2-inflation/narration/timeline.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-finish-2026-10-16-110925.json

@@ -1,0 +1,40 @@
+{
+ "integrated_lufs": -15.0,
+ "true_peak_dbtp": -1.6,
+ "loudness_range_lu": 3.3,
+ "file": "/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4",
+ "target_lufs": -15.0,
+ "tolerance_lu": 0.5,
+ "true_peak_max_dbtp": -1.0,
+ "loudness_passes": true,
+ "true_peak_passes": true,
+ "calculator": "sound_gates loudness",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "sound.mix_lufs": {
+   "value": -15.0,
+   "unit": "LUFS integrated",
+   "kind": "measured"
+  },
+  "sound_gates.loudness_tolerance_lu": {
+   "value": 0.5,
+   "unit": "LU either side of the target",
+   "kind": "judged"
+  },
+  "sound.true_peak_max_dbtp": {
+   "value": -1.0,
+   "unit": "dBTP",
+   "kind": "judged"
+  },
+  "sound.limiter": {
+   "value": {
+    "limit": 0.84,
+    "attack_ms": 5,
+    "release_ms": 60,
+    "latency": 1
+   },
+   "unit": "alimiter settings",
+   "kind": "judged"
+  }
+ }
+}

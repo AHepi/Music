@@ -1,0 +1,273 @@
+{
+ "place": "works",
+ "view": "w3",
+ "subject": "two gates and the wall between",
+ "dark_subject": true,
+ "lights": [],
+ "lamps": [
+  {
+   "lamp": "no-1 gate lamp",
+   "box": [
+    0.2734532677176509,
+    0.5714026754425617,
+    0.2734532677176509,
+    0.5714026754425617
+   ],
+   "depth": 29.73,
+   "problems": []
+  },
+  {
+   "lamp": "no-2 gate lamp",
+   "box": [
+    0.7265467322823491,
+    0.5714026754425617,
+    0.7265467322823491,
+    0.5714026754425617
+   ],
+   "depth": 29.73,
+   "problems": []
+  },
+  {
+   "lamp": "lantern",
+   "box": [
+    0.2627925063696287,
+    0.6464315980835978,
+    0.2627925063696287,
+    0.6464315980835978
+   ],
+   "depth": 27.75,
+   "problems": []
+  }
+ ],
+ "shadow_casters": [],
+ "eevee": {
+  "shadow_pool_size": "1024",
+  "shadow_resolution_scale": 0.703125
+ },
+ "dark_subject_plan": {
+  "silhouette_contrast_min": 2.2,
+  "lights_behind_subject": []
+ },
+ "problems": [],
+ "calculator": "plan_lights plan",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light_planner.shadow_casting_kinds": {
+   "value": [
+    "key",
+    "fire",
+    "doorway",
+    "sky"
+   ],
+   "unit": "kinds of light that cast shadows (every other light casts none)",
+   "kind": "judged"
+  },
+  "light_planner.foot_patch_metres": {
+   "value": [
+    0.5,
+    0.35
+   ],
+   "unit": "metres (width, depth) of the soft shadow under a figure that casts no shadow",
+   "kind": "judged"
+  },
+  "light_planner.lamp_clear_of_subject_pixels": {
+   "value": 18,
+   "unit": "pixels on the film frame between a lamp and the subject's outline box",
+   "kind": "judged"
+  },
+  "camera.meeting_point_gap_share_of_width": {
+   "value": 0.03,
+   "unit": "share of the frame width",
+   "kind": "judged"
+  },
+  "light_planner.near_ground_light_max": {
+   "value": 0.025,
+   "unit": "W/m2 a light behind the camera may put on the ground at the frame's bottom edge",
+   "kind": "judged"
+  },
+  "frame.plate_width_pixels": {
+   "value": 1536,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light.shadow_resolution_reference_width": {
+   "value": 1080,
+   "unit": "pixels (scale = min(1, 1080 / width))",
+   "kind": "judged"
+  },
+  "light.shadow_pool_size": {
+   "value": "1024",
+   "unit": "EEVEE setting",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.main_rule_spot_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule1_meeting_point_gap": {
+   "value": 0.03,
+   "unit": "share of the width, across only",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule2_eye_height": {
+   "value": [
+    0.8,
+    7.0
+   ],
+   "unit": "metres above the surface the checker finds under the camera",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule3_story_box": {
+   "value": [
+    0.6,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule3_story_box": {
+   "value": [
+    0.8,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule3_story_together_metres": {
+   "value": 2.0,
+   "unit": "metres between footprints",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_near_touch": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule4_between_figures": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_subject_brightness_ratio": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_brightest_share_on_subject": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_brightest_share_in_story_box": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_nothing_in_story_as_bright": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_top_third_brightness": {
+   "value": 0.36,
+   "unit": "mean brightness (0 to 1)",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_warm_share": {
+   "value": [
+    0.015,
+    0.03
+   ],
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule6_lit_from_below": {
+   "value": null,
+   "unit": "off",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule7_story_reaches_down": {
+   "value": 0.7,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_work_prop_share": {
+   "value": 0.02,
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.crowd.rules.rule8_bottom_left_share": {
+   "value": 0.02,
+   "unit": "share of the frame per story thing (the subject or a story prop)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule10_quiet_side_weight": {
+   "value": [
+    0.4,
+    0.6
+   ],
+   "unit": "share of the weight",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule10_quiet_side_weight": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of the weight",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule10_nothing_on_quiet_side_outshines": {
+   "value": null,
+   "unit": "off",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_must_read_right_edge": {
+   "value": 0.9,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_story_right_edge": {
+   "value": 0.95,
+   "unit": "share of the width (in 0.45-0.95 down)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule12_title_zone_sky_share": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.resting_on": {
+   "value": "the street (ground rays; \"landed high\" over 0.5 m)",
+   "unit": "rule",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.slide_magnification": {
+   "value": "painting limit",
+   "unit": "times nearer at the nearest painted surface",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.silhouette_contrast": {
+   "value": 2.2,
+   "unit": "(surround + 0.05)/(subject + 0.05) over a band round the subject",
+   "kind": "measured"
+  }
+ }
+}

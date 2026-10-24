@@ -1,0 +1,75 @@
+Lights of checkout for view c1 (subject: bill): 13 light(s).
+Reference: bill-cool (90.0 W, 2.33 m from the subject's middle): it gives the subject 1.3 W/m2.
+
+ceiling-light-17 (AREA, 40.0 W): fill (none of the above); no shadows
+  start: an area light (it shines from one face, not like a point): not planned by the inverse square
+
+ceiling-light-18 (AREA, 40.0 W): fill (none of the above); no shadows
+  start: an area light (it shines from one face, not like a point): not planned by the inverse square
+
+ceiling-light-19 (AREA, 40.0 W): fill (none of the above); no shadows
+  start: an area light (it shines from one face, not like a point): not planned by the inverse square
+
+ceiling-light-20 (AREA, 40.0 W): fill (none of the above); no shadows
+  start: an area light (it shines from one face, not like a point): not planned by the inverse square
+
+street-light-1--4.5 (POINT, 900.0 W): fill (none of the above); no shadows
+  start: not by the inverse square (its nearest lit surface, story surface (surface below), is 5.77 m away, farther than the reference's 2.33 m): set it by the light rules
+
+street-light-1--12 (POINT, 900.0 W): fill (none of the above); no shadows
+  start: not by the inverse square (its nearest lit surface, story surface (surface below), is 6.27 m away, farther than the reference's 2.33 m): set it by the light rules
+
+street-light-1-13 (POINT, 900.0 W): fill (none of the above); no shadows
+  start: not by the inverse square (its nearest lit surface, story surface (surface below), is 6.27 m away, farther than the reference's 2.33 m): set it by the light rules
+
+warm-lamp (SPOT, 290.0 W): lamp (its name says "lamp"); no shadows
+  start: 52.6 W (its nearest lit surface, bill stand, is 1.79 m away; so it lights that no more than the key lights the subject); it has 290.0 W (5.5 times that)
+
+bill-cool (SPOT, 90.0 W): accent (reaches only bill (the subject's own light)); no shadows
+  reach: 2.39 m (the farthest lit part of bill is 2.19 m away, from the place facts' boxes (rough: walls are not in them; use set_measurements.py beam))
+  first surface it should not light: story surface at 3.50 m (linked out: its reaches_only list keeps the light off it)
+  cone that just covers it: 22 degrees aimed at the subject's middle (even light), or 14 degrees aimed at its bottom edge (lit from below; its top stays outside the cone, warm bottom and cool top); blend 0.9; it has 20
+
+bill-warm-bounce (AREA, 30.0 W): accent (reaches only bill (the subject's own light)); no shadows
+  housing: basket (0.11 m) (linked out)
+  start: an area light (it shines from one face, not like a point): not planned by the inverse square
+
+ceiling-fill (AREA, 50.0 W): fill (none of the above); no shadows
+  start: an area light (it shines from one face, not like a point): not planned by the inverse square
+
+bounce-to-ceiling (AREA, 18.0 W): fill (none of the above); no shadows
+  housing: basket (0.31 m); it still lights basket: add them to its skips
+  close: divider (0.33 m), cheese label (0.39 m), butter label (0.40 m), bread label (0.53 m), milk label (0.55 m): skip them if they come out as bright as the subject
+  start: an area light (it shines from one face, not like a point): not planned by the inverse square
+  PROBLEM lights basket (its housing; lesson 120, log 32): skip them
+
+canopy-light (AREA, 300.0 W): fill (none of the above); no shadows
+  start: an area light (it shines from one face, not like a point): not planned by the inverse square
+
+Light on the subject (its brightest point for each light): 80.4 W/m2 in all, 61.5 times what its key (bill-cool) gives it; most from bill-warm-bounce 72.9, bounce-to-ceiling 4.5, ceiling-fill 1.7 (area lights counted at their face-on most).
+  PROBLEM the subject gets 62 times its key light (at most 3.0), mostly from bill-warm-bounce: its colour will burn out (rule 5); turn that light down or move it away
+
+Lamps on the frame (13 checked; the lines meet at 0.500 across, 0.500 down): none in the way.
+
+Shadows: only (none: name a key, fire, doorway or sky light) cast shadows; every other light none. Figures: visible_shadow off, each with a soft foot patch 0.5 x 0.35 m.
+EEVEE for a 1536-wide plate: shadow_pool_size '1024', shadow_resolution_scale 0.703. After every render run plan_lights.py render-log on its log; a shadow fault draws false black wedges (lesson 110).
+Plate time: measure and record it (round 3: about 25 minutes with every light casting, about 6 with three).
+
+2 problem(s). Tuning by small renders (tune_lights) is not built yet: change one named light at a time and re-run the shot checker.
+
+Settings used (film-settings.json):
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  light_planner.shadow_casting_kinds = ["key", "fire", "doorway", "sky"] kinds of light that cast shadows (every other light casts none) (judged)
+  light_planner.foot_patch_metres = [0.5, 0.35] metres (width, depth) of the soft shadow under a figure that casts no shadow (judged)
+  light_planner.container_skip_within_metres = 0.6 metres: a fire's light skips every prop this close (the container it burns in, the chair beside it); other lights get a note for props this close (judged)
+  light_planner.near_surface_within_metres = 1.0 metres: a camera-facing surface this close to a light is checked against the subject (a lamp lights the face it hangs on) (judged)
+  light_planner.reach_margin_metres = 0.2 metres past the farthest lit part of the target (judged)
+  light_planner.cone_blend = 0.9 Blender spot blend (judged)
+  light_planner.subject_light_over_key_max = 3.0 times the light the subject's own key gives it (all lights reaching it together) (judged)
+  light_planner.lamp_clear_of_subject_pixels = 18 pixels on the film frame between a lamp and the subject's outline box (judged)
+  camera.meeting_point_gap_share_of_width = 0.03 share of the frame width (judged)
+  light_planner.near_ground_light_max = 0.025 W/m2 a light behind the camera may put on the ground at the frame's bottom edge (judged)
+  frame.plate_width_pixels = 1536 pixels (judged)
+  light.shadow_resolution_reference_width = 1080 pixels (scale = min(1, 1080 / width)) (judged)
+  light.shadow_pool_size = 1024 EEVEE setting (measured)

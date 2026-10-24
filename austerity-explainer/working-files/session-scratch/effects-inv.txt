@@ -1,0 +1,182 @@
+===== Wind blows across the view
+{
+ "name": "Wind blows across the view",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Round 3 check: smoke hidden under words. Round 4: wind (0.3, -0.05, -0.95) blew almost straight away from all three cameras; worked out with smoke_path.py: over a puff's life No. 2's plume moved only from 0.625 across, 0.237 down to 0.748, 0.309; puffs up to 13 m wide piled up and read as rings and a hook. Round 5 drew it with and without focus blur (rings the same) and traced the new path with smoke_trace.py.",
+ "final_value_or_rule": "WIND = (-0.85, -0.12, -0.5) normalised (three.js axes), the same on every page: across the views, a little away, sinking. In W3 No. 2's plumes run left at 0.24 to 0.29 down, under the lower rule card (ends 0.236), fading by 0.45 across before No. 1's chimney (0.375 across); in W1/W2 they run along the top for about a quarter of the width.",
+ "evidence": "works-effects.js lines 92-113; round4-result.json critique.findings[3]; SCRATCH/redesign/round5-pages/tools/smoke_trace.py",
+ "computable_from": "chimney-top markers (works-shot.json), camera spots, title card boxes, smoke settings",
+ "proposed_calculation": "Wind horizontal direction = the unit vector most perpendicular to all views' look directions (sign toward the side with room); then trace puff centres p(age) = top + WIND x drift x k^1.25 + up x rise x k^0.75 (k = age/life) through the projector; require on-screen path length >= 0.15 of the frame width, path clear of title cards and >= 0.05 across short of any other factory's chimney; shorten drift or life until it holds.",
+ "already_automatic": "No (scratch smoke_path.py and smoke_trace.py).",
+ "llm_tip": "Never blow smoke along the camera's line of sight; trace the plume on screen in every view before filming.",
+ "from": "redesign-rounds"
+}
+===== Smoke wind across the view, not away from it
+{
+ "name": "Smoke wind across the view, not away from it",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Round 4 critic: wind (0.3, -0.05, -0.95) blew almost straight away from all three cameras, so puffs piled up as pale rings in a small patch.",
+ "final_value_or_rule": "Wind about (-0.85, 0, -0.5) in the stage's axes with a slight sink; smoke a brownish grey of about 90 to 100; puffs of the first 2 seconds smaller and denser; trace the path in each view before filming (round4-pages/tools/smoke_path.py).",
+ "evidence": "round4-result.json finding 4",
+ "computable_from": "each view's camera direction",
+ "proposed_calculation": "wind = normalise(cross(camera_ahead, up)) * 0.85 + down * small; check that a puff's screen path over its life spans at least 0.15 of the frame and stays out of the title band.",
+ "already_automatic": "No.",
+ "llm_tip": "Blow smoke across every camera's view; a plume blowing away from the camera looks like a fault.",
+ "from": "notice-corner-and-checker"
+}
+===== Chimney smoke settings and wind direction
+{
+ "name": "Chimney smoke settings and wind direction",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Log 34 round 4 critic: wind blowing away from cameras piled puffs into pale doughnuts and hooks; W2's smoke hidden under the words; round 5 blew it across the view and traced plumes with smoke_path.py / smoke_trace.py before filming. Lesson 134.",
+ "final_value_or_rule": "WIND (-0.85, -0.12, -0.5) normalised; heavy {count 44, life 7, rise 0.6, drift 16, mouth 2 s size 1.9, size [3.4, 9], opacity 0.95, fade 1.8, colour 100/92/84}; working {36, 7, 0.6, 15, mouth 1.7, [3.0, 8], 0.93, 1.8, 104/96/88}; thin {14, 7, 0.5, 14, mouth 1.3, [1.8, 6], 0.5, 1.9}; puff shades kept close (0.72-1.14 apart showed rings); plume under the lower rule card (0.236 down) and fading before the other chimney (0.375 across); fixed seeds per chimney.",
+ "evidence": "film-kit/paper-film/scenes/inflation-chapter-2-newcomers/works-effects.js lines 87-118; scratchpad/redesign/round5-pages/tools/smoke_trace.py; round4-result.json finding 4",
+ "computable_from": "camera views, chimney tops, rule-card boxes",
+ "proposed_calculation": "wind = normalize(cross(view_dir_of_main_view, up)) * 0.85 + away 0.5 + sink 0.12; then trace each puff's screen path with smoke_trace.py and adjust drift so the plume stays below the lowest word box and ends before the next chimney's x; fail if any puff centre lies inside a word box.",
+ "already_automatic": "Settings are fixed in a chapter-specific file; the tracer is a scratch tool. Neither is in the kit's shared files or the plugin.",
+ "llm_tip": "Blow smoke across the view, never away from the camera, and trace it on the frame before filming.",
+ "from": "tools-and-plugin-gap"
+}
+===== Smoke look: colour, mouth, thickness
+{
+ "name": "Smoke look: colour, mouth, thickness",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Round 3: smoke too pale (stills); round 4 critic: pale grey on dark sky read as glow, blob floating detached above No. 1's chimney; round 5 tuned.",
+ "final_value_or_rule": "heavy: count 44, life 7 s, rise 0.6 m, drift 16 m, mouth 2 s at 1.9 m, size 3.4 to 9 m, opacity 0.95, fade 1.8, colour 100/92/84; working: 36 puffs, drift 15, mouth 1.7, colour 104/96/88; thin: 14 puffs, opacity 0.5. Brownish grey about 90 to 100 levels.",
+ "evidence": "works-effects.js lines 92-108; round4-result.json critique.findings[3]",
+ "computable_from": "chimney mouth size from the model, sky colour in the plate",
+ "proposed_calculation": "mouth size = chimney top diameter x 1.0 to 1.1; colour = sky colour mixed toward warm grey so luminance difference to sky is 20 to 40 levels (dark against a light sky, light-brown against dusk); count = life x 6 for heavy.",
+ "already_automatic": "No.",
+ "llm_tip": "Start puffs at the chimney's own width for the first 2 seconds so the plume is attached, and use a brownish grey, not white.",
+ "from": "redesign-rounds"
+}
+===== Smoke and chimneys
+{
+ "name": "Smoke and chimneys",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Log 30: the liked picture's chimney pours smoke although the pit is closed. Log 32: two chimney smokes were dropped because both chimneys are out of frame. Log 34 round 4: the smoke looked like a fault (pale rings); round 5 blows it across the view.",
+ "final_value_or_rule": "Smoke only from emitters in frame and right for the story, blown across the view.",
+ "evidence": "story L1071 (log 30), L1233 (log 32), L1383, L1392 (log 34)",
+ "computable_from": "the emitters' positions, the camera and the story state",
+ "proposed_calculation": "Drop an emitter whose point is outside the frame for the whole shot. Set the wind across the screen, sideways to the view direction. Flag ring-like smoke by its round symmetry.",
+ "already_automatic": "No.",
+ "llm_tip": "Ask whether each smoke source is in frame and makes sense in the story; a closed pit has no smoke.",
+ "from": "story-log"
+}
+===== Keep figures out of live smoke and off props
+{
+ "name": "Keep figures out of live smoke and off props",
+ "area": "people and figures",
+ "how_found": "Round 1 check: the brazier's live smoke drifted in front of the hand-on-bar man, making him a see-through grey ghost. Round 2 moved him off the kerb line; smoke drift 0.9 kept. The stooped man's hands rested on the hot rim; lifted.",
+ "final_value_or_rule": "No figure inside a live smoke column's screen path; hands at least 10 to 15 cm off a hot rim; stooped figure 0.1 m further than his pose's reach.",
+ "evidence": "round1-result.json checked.findings[9]; round2-result.json figures.summary 'The hand-on-bar man'; assemble_works.py lines 919-921",
+ "computable_from": "smoke emitter positions and wind, figure boxes, camera",
+ "proposed_calculation": "Trace each smoke emitter's puff path on screen (see smoke calculator) and flag any figure box overlapped by puffs with opacity > 0.2.",
+ "already_automatic": "No.",
+ "llm_tip": "Trace where the live smoke goes on screen before placing people; a man inside the smoke reads as a ghost.",
+ "from": "redesign-rounds"
+}
+===== 'Busy' must change the windows by 15 levels or more
+{
+ "name": "'Busy' must change the windows by 15 levels or more",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Round 3 check measured 'busy' (75.6 to 79.8 s): doorway 169.5 vs 169.4; No. 2's mill windows were not even in W2's frame. Round 4: windows 130 to 133 levels. Round 4 critic set the target; round 5 added a burst and measured with window_change.py.",
+ "final_value_or_rule": "Target: at least 15 levels change over the windows. BUSY = length 2.0 s, rise 0.25, fall 0.6, boost 3.0, dips 0.55, reach 2.75 m, band 1.1 m, shadow 0.75, doorway pulse 0.35, doorway dips 0.3; a dark band passes across the panes left to right.",
+ "evidence": "works-effects.js lines 257-264; round3-result.json checked.findings[2]; round4-result.json critique.findings[8]; SCRATCH/redesign/round5-pages/tools/window_change.py",
+ "computable_from": "two stills (before and during the event), window group outlines",
+ "proposed_calculation": "For each 'brighter/busier' event, draw stills at the word and 0.6 s after; mean change over the window mask must be >= 15 levels; if not, raise boost by 15/measured.",
+ "already_automatic": "No (scratch window_change.py).",
+ "llm_tip": "Measure a visual event in two stills; under about 15 levels of change nobody sees it.",
+ "from": "redesign-rounds"
+}
+===== Visible 'busy' flicker on windows
+{
+ "name": "Visible 'busy' flicker on windows",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Log 34 round 4: 'busy' could not be seen (No. 2's windows 130 -> 133 levels); round 5 added a burst and measured with window_change.py.",
+ "final_value_or_rule": "BUSY { length 2.0 s, rise 0.25, fall 0.6, boost 3.0, dips 0.55, reach 2.75 m, band 1.1, shadow 0.75, doorway 0.35, doorwayDips 0.3 }; aim for >= 15 levels change over the windows.",
+ "evidence": "works-effects.js line ~105 (BUSY); scratchpad/redesign/round5-pages/tools/window_change.py; round4-result.json finding 9",
+ "computable_from": "stills at the word and 0.6 s after, window mask",
+ "proposed_calculation": "Render two stills, measure mean change inside the window mask; scale boost until change >= 15 levels.",
+ "already_automatic": "No (scratch tool; chapter file).",
+ "llm_tip": "Any change that teaches a word must change the picture by at least about 15 levels where the eye is; measure it.",
+ "from": "tools-and-plugin-gap"
+}
+===== Fire, flames and glow
+{
+ "name": "Fire, flames and glow",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Log 29: the brazier's flames drew as white paper cones (lit by the fire's own lamp); a paper-crown flame; a see-through flame; flames like a neat row of cartoon teardrops; smoke rising as a stiff sheet. Fixed with three ragged flames of different sizes and leans and drifting smoke. Log 32: the glow's size pulse made its rim slide on the road, calmed to a 1.2% swing (from 2.8%); flames still look like flat cut-outs and sparks rise in tidy strings.",
+ "final_value_or_rule": "Three ragged flame shapes with different sizes and leans; flames not lit by their own light; glow size swing about 1.2%; drifting smoke.",
+ "evidence": "story L943-944, L959-963, L971-974 (log 29), L1231-1232, L1241-1242, L1247 (log 32)",
+ "computable_from": "the effect's settings and the filmed frames",
+ "proposed_calculation": "A flame maker that varies count (3 to 5), size (\u00b130%) and lean (\u00b115 degrees). Glow pulse at most 1.5% of its radius. Sparks start from jittered places. Measure the glow's swing on the film and keep it under 1.5%.",
+ "already_automatic": "pit-village-effects.js is in the film kit only, not the plugin.",
+ "llm_tip": "Even, regular effects read as cartoons: vary size, lean and timing.",
+ "from": "story-log"
+}
+===== Live flames, glow and contact shadows
+{
+ "name": "Live flames, glow and contact shadows",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Logs 29 and 32: flames in plates read as paper cones; live flames first a neat row of teardrops; glow pulse slid its rim on the road (2.8% swing, calmed to 1.2%); the brazier lost its painted scorch ring and floated until it got a soft 3D shadow (Lesson 96).",
+ "final_value_or_rule": "Flames drawn live from three ragged seeded shapes; glow sprite additive; contact shadows under near props (drum 1.0 x 1.0, chair 0.75, pail 0.55 m), 0.012 m above ground, opacity 0.55 faded in over 0.8 s from the slide's start.",
+ "evidence": "film-kit/paper-film/scenes/pit-village-effects.js; notice-corner.js lines ~129-175",
+ "computable_from": "near props' footprints (shot json), slide start word",
+ "proposed_calculation": "Shadow size = footprint bounding box x 1.1; fade starts at the slide's 'from' time; generate for every near prop listed for the behind painting.",
+ "already_automatic": "No (hand sizes); pit-village-effects.js not in plugin.",
+ "llm_tip": "Every near prop the behind painting removes needs its own soft 3D shadow, faded in as the camera starts to move.",
+ "from": "tools-and-plugin-gap"
+}
+===== Hand-over angle to the behind painting, and contact shadows
+{
+ "name": "Hand-over angle to the behind painting, and contact shadows",
+ "area": "painting and alignment",
+ "how_found": "Lesson 96: round near props, the painting gave way to the props-removed painting only after the camera had swung 1.4 deg round a point; further up the road that took half the move, and ink lines showed meanwhile. Half a degree works. A soft 3D shadow faded in at the same time replaces the painted shadow the hand-over removes. The brazier floated until it had one.",
+ "final_value_or_rule": "Hand-over within about 0.5 deg (projected-set behind.quickMove = 0.00003). Every near prop gets a soft contact shadow, faded in as the camera starts to move.",
+ "evidence": "Lessons.md:369-373; film-kit/paper-film/scenes/projected-set.js:543, 605",
+ "computable_from": "camera path + near-prop list",
+ "proposed_calculation": "Already the default in projected-set.js. Add: for each prop in behind.hide, create its contact shadow automatically (an ellipse under its base, from shot_facts' bottom box) with its fade tied to the same quickMove amount.",
+ "already_automatic": "The hand-over default is automatic (film kit only; projected-set.js is missing from the plugin kit). Contact shadows are added by hand per prop.",
+ "llm_tip": "Every near prop that hides painted ground needs its own contact shadow.",
+ "from": "lessons-and-notes"
+}
+===== Dust and smoke placement
+{
+ "name": "Dust and smoke placement",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Lesson 25: the tank's landing dust burst behind the front crowd and was invisible; fix: it starts higher and in front of the tank, rising above the crowd's heads. Lesson 32: a falling word's dust burst in front of it; now it bursts behind.",
+ "final_value_or_rule": "Dust from a landing behind a crowd starts in front of the landing piece and above the crowd's top. Dust for words goes behind them.",
+ "evidence": "Lessons.md:107-108, 141-143",
+ "computable_from": "piece positions and sizes at the landing moment",
+ "proposed_calculation": "Auto-place the emitter: if a nearer piece's box covers the landing point on screen, set the dust z just in front of the landing piece and its start height = the covering piece's top + 0.1 units. For words, z = word z - 0.1.",
+ "already_automatic": "No.",
+ "llm_tip": "Check effects in the actual frame; dust behind a crowd is invisible.",
+ "from": "lessons-and-notes"
+}
+===== Dust, snow and particles in the right places
+{
+ "name": "Dust, snow and particles in the right places",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Log 11: dust hidden behind the crowd. Log 13: dust lingered after its page. Log 27: dust billowed upward and snow fell inside the rooms. The filming tool starts each chunk a few frames early so dust and smoke are already in place.",
+ "final_value_or_rule": "Particles stay inside their space, fall downward, and end with their page. Each chunk has a pre-roll.",
+ "evidence": "story L451 (log 11), L472 (log 13), L882-883 (log 27); render-paper-film.mjs line 137",
+ "computable_from": "the room volumes and the page times",
+ "proposed_calculation": "Keep emitters out of the room boxes. End particle lifetimes by the page's end. Set the pre-roll to the longest particle lifetime rather than a fixed few frames.",
+ "already_automatic": "A fixed pre-roll in the filming tool. Nothing else.",
+ "llm_tip": "Check effects in motion at the edges of rooms and pages.",
+ "from": "story-log"
+}
+===== Effects belong to their page
+{
+ "name": "Effects belong to their page",
+ "area": "effects (smoke, fire, weather)",
+ "how_found": "Lesson 29: drawing moments out of order showed page 8's dust on pages 9, 10 and the last blank page; dust and smoke weren't put away with their page.",
+ "final_value_or_rule": "Make dust and smoke only through kit.effect(...), so they are hidden with their page.",
+ "evidence": "Lessons.md:126-130, 505; Workflows.md:279-280",
+ "computable_from": "page source files",
+ "proposed_calculation": "Lint: any 'new Dust(' / 'new Smoke(' / emitter outside kit.effect in a page file fails. Runtime: when a page hides, assert no visible object registered to it remains.",
+ "already_automatic": "kit.effect exists (plugin kit); nothing stops direct use.",
+ "llm_tip": "Always create effects through kit.effect.",
+ "from": "lessons-and-notes"
+}

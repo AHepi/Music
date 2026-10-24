@@ -1,0 +1,420 @@
+[
+ {
+  "group": "pages 1-3",
+  "findings": [
+   {
+    "page": "1",
+    "finding": "[should fix] Callout leader lines end in the middle of $100.00 / $104.10 (7.4-10.3 s) and read as strike-throughs",
+    "status": "fixed",
+    "evidence": "page-1.js:77 adds tagRim() (tag width*0.5, height*0.47, i.e. the upper edge), used at line 216 for both callouts (217-218). fix-p1-c/still-7.60: the leader's dot sits on the tag's top rim at about (665,663), above '$100.00'. still-9.80: the dot is at about (650,765) on the rim above '$104.10'. Neither line crosses a digit.",
+    "remaining": "Nothing."
+   },
+   {
+    "page": "1",
+    "finding": "[nice to have] THE WHOLE BASKET runs to x ~1010 and the shelf tags on the right edge are cut (15.7-17.6 s)",
+    "status": "fixed",
+    "evidence": "page-1.js:227: the hook is now size 78, and still-15.80 shows it spanning x ~140-940. Lines 83-94: the spots with u > 0.85 hang their card inward (inner.position.x = -0.85*size). still-15.80 and 16.40: $12.00/$12.49, $7.50/$7.81, $3.60/$3.75 and $5.00 are whole, the rightmost ending at about x 965 (before, p1-c/still-16.00 showed cut '$', '$4.8(' and 'S').",
+    "remaining": "The right-hand cards still reach about 15-25 px into the 940+ button zone. They are props, not key words, so this is acceptable. See the overlap note under new problems."
+   },
+   {
+    "page": "2",
+    "finding": "[should fix] Heading OUT OF WORK sits over 99 lit dots, so the lit block reads as the unemployed (23.4-29.4 s)",
+    "status": "fixed",
+    "evidence": "page-2.js:160: the heading is now '100 WORKERS' (size 54, muted). Lines 164-165: a callout 'OUT OF WORK' on a plate points at the empty ring's lower-left edge (x 342+396-12, y 756+14), starting at T.under. fix-p2-a/still-27.20: '100 WORKERS' is above the grid; the ring at the bottom right carries a white leader to a plated 'OUT OF WORK' at about x 300-620, y 835-895, clear of 'UNDER 1%' at y 990. Everything fades together by 29.37 (still-29.20 shows the fade).",
+    "remaining": "Nothing. (Minor wording point under new problems.)"
+   },
+   {
+    "page": "2",
+    "finding": "[nice to have] Paper boats are on screen under NEW MONEY and then sink through the dry floor (30.2-33 s)",
+    "status": "fixed",
+    "evidence": "page-2.js:118-129: boats pop up from T.submarines (30.71) with appear/scale, tip (rotation.z), and fade by material opacity. Position y stays at home plus a 0.01 bob, so they never go through the floor. fix-p2-a/still-30.50: no boats under NEW MONEY. still-31.30: the boats have popped up. still-32.60: one boat tipped and fading.",
+    "remaining": "Nothing. The three boats overlap one another in a single cluster at 31.30, but they did that before too."
+   },
+   {
+    "page": "3",
+    "finding": "[must fix] Price counter cut by the right edge in factory close-ups (47-74 s); WORKERS clipped left and MACHINES in the right zone at 72.9-74.2 s",
+    "status": "fixed",
+    "evidence": "page-3.js:72-86: close-up camera targets reframed (comment lines 70-71). The board's right edge is at about x 920 at 47.60/48.60, 875 at 50.60, 885 at 52.40, 918 at 54.20, 830 at 55.60, 905 at 57.30, 855 at 60.50, 875 at 64.00, 870 at 65.80, 895 at 67.70, 885 at 69.30 and 72.90. All digits are visible in every still. still-72.90: WORKERS / MATERIALS / MACHINES span x ~145-842. still-74.50: x ~133-840.",
+    "remaining": "At 74.5 WORKERS starts at about x 133, a few px past the 140 guide, which is negligible. The reframing caused a new problem with the IDLE leader (see new problems)."
+   },
+   {
+    "page": "3",
+    "finding": "[must fix] Callouts are thin light-grey text with no backing over the ivory walls and roofs (MORE SHELLS invisible at 53.8 s, NO MORE SHELLS / PRICES CLIMB faint)",
+    "status": "fixed",
+    "evidence": "page-3.js:147: label = { plate: true, size: 52, margin: 140 }, spread into all six callouts (148-153). graphics.js:104-134: the plate option draws an rgba(12,16,18,0.72) rounded plate. Line 152: NO MORE SHELLS now points at b.shellAt(6). Stills: IDLE (48.60), MORE SHELLS (54.20), BARELY MOVE (55.60), FLAT OUT (60.50), NO MORE SHELLS (64.00, dot on a visible shell) and PRICES CLIMB (67.70) are all bold white on dark plates and read clearly over the walls and roofs.",
+    "remaining": "Nothing for readability. See the IDLE target problem below."
+   },
+   {
+    "page": "3",
+    "finding": "[should fix] Leader lines end in the middle of the price digits (\u00a31.00 at 55.3 s, \u00a31.60 at 67.4 s)",
+    "status": "fixed",
+    "evidence": "page-3.js:146 rim = setY(1.27) (boardAt.y is 1.05), used for BARELY MOVE (150) and PRICES CLIMB (153, offset +0.3 x). fix-p3-d/still-55.60: the dot is at about (693,900) on the board's top edge, above the digits. fix-p3-e/still-67.70: the red dot is at about (805,772) just above the board's top-right edge, and the line runs in from above without crossing '\u00a31.60'.",
+    "remaining": "Nothing."
+   },
+   {
+    "page": "3",
+    "finding": "[should fix] WORKERS / MATERIALS / MACHINES read as an inventory after BRITAIN AT WAR fades",
+    "status": "fixed",
+    "evidence": "page-3.js:155: hook 'SHORT OF' runs from T.short (70.90) to T.end+1.2, at y 330, size 80. Stills 71.60, 72.90 and 74.50 show SHORT OF above the factory with the three labelled items. It matches the narration 'short of workers, materials and machines'.",
+    "remaining": "Its right edge touches the chimney (see new problems)."
+   },
+   {
+    "page": "3",
+    "finding": "[should fix] \u00a31.00 to \u00a32.00 shell prices carry no 'Example prices' label",
+    "status": "fixed",
+    "evidence": "page-3.js:156: credit 'Example prices' from T.first (45.62) to T.britain (68.02), y 1460. It is visible in every still from 47.60 to 67.70.",
+    "remaining": "The \u00a32.00 board stays on screen from 68 to 74.7 s without the credit. That is acceptable, since the credit has been on screen for 22 s just before."
+   },
+   {
+    "page": "3",
+    "finding": "[should fix] Black void top-left past the painted skyline on close shots, and a hard skyline bottom edge",
+    "status": "fixed",
+    "evidence": "two-factories-set.js:24: backdrop.scale is now 2.1 (was 1.65). Lines 25-34 add a haze band at z -37.6 so the table edge melts into the painting. Stills 64.00, 65.80 and 67.70 show no black block; the top of the frame is the painted skyline or the table. still-42.80: the skyline fades into the table through a soft dark band, not a hard cut. Page 8 (fix-p3-p8-a): at 181.30 the skyline fills the top cleanly; 187.30 is fine.",
+    "remaining": "Nothing on pages 1-3. On page 8 at 187.3 s (not my page, its own code), the red leader to \u00a31.70 appears to end inside the board near the digits; page 8's checker should confirm."
+   }
+  ],
+  "new_problems": [
+   {
+    "page": "3",
+    "time": "about 47.6-49.6 s (IDLE callout runs 47.46-51.98)",
+    "severity": "should fix",
+    "what": "After the camera was moved to the right to fit the price board, the IDLE callout's target (the left window, at FACTORY_A.x - 0.8) is at or past the left edge of the frame. The leader line runs off-screen and the dot is either invisible or on a half-cut window. IDLE (on 'machines stand idle') therefore points at nothing. It only lands on a visible window by about 50.6 s.",
+    "fix": "page-3.js:148: point IDLE at something that stays in frame on this shot, such as the dark door (a.door) or the dark window just left of the board, around [FACTORY_A.x + 0.35, 0.95, FACTORY_A.z + 1.05], with dx about +60 and dy about -300 so the plate sits over the roof.",
+    "evidence": "fix-p3-d/still-47.60: the leader ends at x ~0 on the cut-off window. still-48.60: the line exits the left edge at y ~815 with no dot visible. verify-123/still-49.30: the dot sits at x ~5 on a window that is mostly off-frame. still-50.60: the dot is finally on a visible window at (60,828)."
+   },
+   {
+    "page": "3",
+    "time": "71.6-74.7 s (also BRITAIN AT WAR at 69.3 s)",
+    "severity": "minor",
+    "what": "The new SHORT OF hook (x ~340-740, y 330) has its 'F' touching the chimney top and smoke of factory B. BRITAIN AT WAR at 69.3 s has the same problem: its 'N' and 'R' sit against the chimney smoke. Both are still readable, but crowded.",
+    "fix": "Shift these hooks a little left (x about 500), or raise them to y about 270, so they clear the chimney.",
+    "evidence": "fix-p3-e/still-72.90 and still-74.50: the chimney top is at x ~730-780, directly beside 'F'. still-69.30: smoke behind 'BRITAIN' / 'AT WAR' at x ~700."
+   },
+   {
+    "page": "3",
+    "time": "55.2-56.4 s",
+    "severity": "minor",
+    "what": "On the BARELY MOVE close-up, A's new row of shells (the payoff of 'more shells come out') is half off the left edge: only about 3 of 6 are visible, and the left of the factory is cut.",
+    "fix": "Optional: ease the T.barely+0.6 key (page-3.js:78) back slightly, or target about 0.2 left, while keeping the board's right edge under 940 (it is at about 830 now, so there is room).",
+    "evidence": "fix-p3-d/still-55.60: shells at x 10-140 only; the board ends at x ~830."
+   },
+   {
+    "page": "1",
+    "time": "15.7-17.6 s",
+    "severity": "minor",
+    "what": "With the right-hand cards now hanging inward, the shelf tags crowd one another: $12.49 covers $2.29, $3.75 covers $5.62 (shown as '$5_2'), and '$1.98' / '$8.85' are partly hidden. The cluster reads as a mass of tags rather than individual prices. That fits 'the whole basket', but several prices are illegible.",
+    "fix": "Optional: spread the right-hand spots vertically (for example v 0.55 / 0.64 / 0.73 / 0.82) or shrink their size factor slightly, so the cards overlap less.",
+    "evidence": "fix-p1-c/still-15.80 and still-16.40."
+   },
+   {
+    "page": "2",
+    "time": "23.35-29.4 s",
+    "severity": "minor",
+    "what": "The heading '100 WORKERS' is a framing label that Malina does not say. Section 5 asks that on-screen words be short forms of what she says. As a unit label for the dot grid it adds no claim, so it is defensible, but strictly it is an unspoken number.",
+    "fix": "Acceptable as is. If a stricter reading is wanted, use 'EACH DOT = 1 WORKER' or drop the heading, since the callout already labels the empty dot.",
+    "evidence": "page-2.js:160; narration 23.35-27.43: 'Unemployment, the share of workers without a job, is under one percent.'"
+   }
+  ],
+  "verdict": "All 10 confirmed findings on pages 1-3 are fixed, in the stills and in the code: the page-1 tag leaders, THE WHOLE BASKET and its edge tags, the page-2 dot heading with its OUT OF WORK callout, the boats, the page-3 price board framing, the plated callouts, the rim-aimed leaders, SHORT OF, Example prices, and the backdrop (scale 2.1 plus a haze band; page 8's wide shot still looks right). The page turns at 20.03, 42.55 and 74.26 s look clean. One new problem should be fixed before sign-off: the camera reframing on page 3 pushed the IDLE callout's target window off the left edge. For about 47.6-49.6 s its leader points off-screen (page-3.js:148, retarget it to the door or the window beside the board). The other new issues are minor: SHORT OF and BRITAIN AT WAR touch the chimney, half of A's new shell row is off-frame at 55.6 s, the page-1 shelf tags overlap, and '100 WORKERS' is a label Malina doesn't say."
+ },
+ {
+  "group": "pages 4-6",
+  "findings": [
+   {
+    "page": "4",
+    "finding": "[must fix] 92.2-93.4 s: broken change to the foundation (board tips, notice floats, women sink, slab cuts in)",
+    "status": "fixed",
+    "evidence": "page-4.js lines 54-55 add T.cut = T.homes2 with a 0.22 s / 0.26 s dip; line 221 `const wall = t < T.cut` hides the board (222-223), notice (226), RENTS FROZEN (243), dust (245) and strikers (248) under the black, with no fold or lower; house.visible = !wall (250); fade at line 259; separate siteShot camera (199-204). Stills fix-p4-b: 92.00 is the intact wall, 92.15 is mid-dip, 92.30 is a clean site shot (slab and first course only), 92.50/92.90/93.40 show the courses rising. No floating notice, no sinking women, no slab cutting in.",
+    "remaining": "None. Small note: HOMES CAN\u2019T BE BUILT fades in under the black at 92.20, so the line arrives with the picture. That is acceptable."
+   },
+   {
+    "page": "4",
+    "finding": "[should fix] 83.7-84.4 s: unhedged A QUARTER MORE under UP TO +25%",
+    "status": "fixed",
+    "evidence": "page-4.js line 268 now reads 'AS MUCH AS A QUARTER' (comment on line 9 updated too). fix-p4-c/still-83.80 shows UP TO +25% / AS MUCH AS A QUARTER, which matches 'by as much as a quarter' at 82.68-83.42.",
+    "remaining": "None."
+   },
+   {
+    "page": "4",
+    "finding": "[should fix] 90.3-92 s: PARLIAMENT muted grey, unreadable",
+    "status": "fixed",
+    "evidence": "page-4.js line 274 colour INK.muted -> INK.paper. fix-p4-c/still-91.60 shows PARLIAMENT in clear white over the dark stone.",
+    "remaining": "None. It is still fairly small (56 px) but readable."
+   },
+   {
+    "page": "4",
+    "finding": "(nice to have) HOUSEHOLDS caption on the lamp glow; curly apostrophe in CAN\u2019T",
+    "status": "fixed",
+    "evidence": "Lines 270-273: counter y 420->350, ABOUT 255->205, BY NOVEMBER 190->150, HOUSEHOLDS/REFUSING block 555->480 (75 px up). Line 275 uses \u2019. fix-p4-c/still-87.80: the caption block ends at about y 525, just above the lamp head (about y 530). still-94.00 shows CAN\u2019T with the curly apostrophe.",
+    "remaining": "'PAY' still sits right on the top edge of the lamp's glow at 87.80. It reads, but another 20-30 px up would clear it fully."
+   },
+   {
+    "page": "5",
+    "finding": "[should fix] 104.3-106 s: IN TWO YEARS orange on beige curtain, near invisible",
+    "status": "fixed",
+    "evidence": "page-5.js line 372 drops the amber colour (default INK.paper). Line 370 adds a dark plate (x 540, y 355, 680x260) from 'double'. My render verify-456/still-104.60 and fix-p5-c/still-104.60 show \u00d72 MONEY / IN TWO YEARS in white on the dark plate, clearly readable.",
+    "remaining": "None."
+   },
+   {
+    "page": "5",
+    "finding": "[should fix] 123.9-125 s: OTHER INVESTMENTS \u2191 amber over amber bank",
+    "status": "fixed",
+    "evidence": "page-5.js line 383 adds one plate behind SHARES and OTHER INVESTMENTS (y 890, 820x220). Line 385 moves it to INK.paper and 0.12 s earlier (it now starts at 123.82, just before 'investments' at 123.94). fix-p5-d/still-124.00 shows both lines in white on the dark plate, fully legible. (fix-p5-c/still-124.00 predates the last page-5.js save at 14:49:20 and shows it mid-fade; it is stale.)",
+    "remaining": "The plate covers the tops of both towers of notes for about 1.3 s. This is minor."
+   },
+   {
+    "page": "5",
+    "finding": "[should fix] 125-129 s: Edwardian top-hat plutocrats cut-out (out of period, editorialising, hard bottom edge); lead DECISION: coins pour onto one tower which grows taller, no figure",
+    "status": "fixed",
+    "evidence": "page-5.js: the owners cut-out, towerEnds slide and CoinRain are removed. Lines 120-137 add 11 extra bundles to towers[1], landing from T.went-0.05 (125.49) every 0.13 s. Lines 140-151 add 64 coins poured from T.gains+0.05. Lines 223-240 place them. Camera lines 169-170 frame the rich tower. fix-p5-d/still-126.90 and verify-456/still-127.90 show no figure, and the right tower is clearly about 1.6x the left one, under THE GAINS / TO THE BIGGEST OWNERS.",
+    "remaining": "See new problems: the coins never visibly come to rest on the tower. The camera is below the tower top, so coins lying on it are hidden, and early coins are buried by later bundles. On screen they only fall past the tower."
+   },
+   {
+    "page": "5",
+    "finding": "[should fix] ~101.5 s: callout leader runs up from the small stack and ends on nothing",
+    "status": "partly fixed",
+    "evidence": "page-5.js line 369: the callout now starts at T.yen-0.5 (100.72) with plate:true, so the YEN label is up by about 101.0-101.3 and still-101.50 is clean. But graphics.js callout (lines 105-139) still draws the line first and the label only from age 0.3 s. My render verify-456/still-100.85 shows a bare orange leader with no label. Its dot sits on the red cloth on the back counter, because the point is stackTop(5) and the 5th bundle only lands at about 101.23. Two bundles are still mid-air above it.",
+    "remaining": "The stray-line moment was moved 0.5 s earlier, not removed. It is still about 0.3 s of a bare leader pointing at empty air or cloth. Start the callout at about T.yen-0.05, after the 5th bundle has landed (creates+0.05+4*0.13). Or point it at the current stack top. Or make the label appear together with the line."
+   },
+   {
+    "page": "5",
+    "finding": "(nice to have) faint BANK OF ENGLAND STUDY credit; chart axis '8 YEARS' -> '2021'; BRITAIN\u2019S curly apostrophe",
+    "status": "fixed",
+    "evidence": "Lines 353-362 add a new sourceCredit in INK.paper, 700 weight, size 34; it is used at line 381. Line 267 now reads '2021'. Line 378 reads 'BRITAIN\u2019S'. Stills fix-p5-c 112.30 (2013 \u2026 2021), 116.60 (BRITAIN\u2019S) and fix-p5-d 124.00/126.90 (clear white credit) confirm all three.",
+    "remaining": "None."
+   },
+   {
+    "page": "6",
+    "finding": "[should fix] 151-156 s: steel pile small in bottom-right button zone; falling output doesn't read",
+    "status": "fixed",
+    "evidence": "page-6.js line 106 places it at [0.82, -2.22, -8.75], width 1.4. Line 215 shrinks it 1 -> 0.6 (it was 0.3) from 'less' to 'made'+0.4. fix-p6-d/still-153.80: the pile is at x 620-970, y 1410-1590, level with the stacks. At 155.90 it is visibly smaller but still there.",
+    "remaining": "Lower and wider than the suggested box (x 600-850, y 1250-1450). At full size (still-144.00) it spans x 550-1055 and y 1320-1580, so it reaches into the right-hand 140 px button strip and the top of the bottom 380 px zone. It is a prop, not words, so this is acceptable, but it could sit about 0.2 further left."
+   },
+   {
+    "page": "6",
+    "finding": "[should fix] 144-156 s: landed notes face-down, read as tan smudges",
+    "status": "fixed",
+    "evidence": "page-6.js lines 227-229: the tumble now eases to a negative fold, rests at fold -(PI/2-0.02), and dy is raised 0.01->0.04. fix-p6-d/still-144.00, 148.40 and 153.80 show the landed notes as printed green-and-cream notes lying on the snow, readable as money and not clipping into it.",
+    "remaining": "None."
+   },
+   {
+    "page": "6",
+    "finding": "[nice to have] 131-133 s: racing counter settles on crisp unlabelled numbers (20,762)",
+    "status": "fixed",
+    "evidence": "page-6.js lines 144-163: 17 one-cell split-flaps, each on its own jittered 0.08 s schedule, plus a second half-transparent ghost layer. Line 252-254 poses them only during the race. PRICES RACING (line 264) was already on screen. Close crops of fix-p6-c 131.40/131.60/132.40/133.20 show no clean number at rest.",
+    "remaining": "Now it looks glitchy. See new problems."
+   },
+   {
+    "page": "6",
+    "finding": "(nice to have) LESS AND LESS MADE over the winding tower: move hook block up ~100 px",
+    "status": "fixed",
+    "evidence": "page-6.js lines 298-299: PRICES UP y 290->230 and LESS AND LESS MADE y 440->350. In fix-p6-d/still-153.80, MADE ends at about y 405, above the winding-tower headframe (about y 420).",
+    "remaining": "PRICES UP at y 230 is just above the guide's 250-450 band for big hooks. This is negligible."
+   }
+  ],
+  "new_problems": [
+   {
+    "page": "5",
+    "time": "125.2-129 s",
+    "severity": "should fix",
+    "what": "The coins that are meant to 'pour onto' the rich tower never visibly land on it. The camera (position y 0.05-0.05, lines 169-170) looks up at a tower whose top is about 3+ units high, so coins lying flat on the top surface are hidden. Coins landing before the last extra bundle (about 126.8 s) are also buried inside the tower (restY = topAt at their own land time, line 230). On screen the coins only stream down past the tower and vanish. At 127.90 its top shows no coins at all.",
+    "fix": "Start the coin pour after the last GROW bundle lands, or let restY follow topAt(rich, t). Let the coins pile and spill visibly: stand some on edge, let some slide off onto the paving beside the tower, or tilt them toward the camera. Or raise the camera or lower the target so the tower top is seen from above.",
+    "evidence": "verify-456/still-127.90.jpg (crop of the tower top: bare bundles, no coins); fix-p5-d/still-126.90.jpg (coins only in mid-air); page-5.js lines 139-151, 223-240."
+   },
+   {
+    "page": "5",
+    "time": "about 100.72-101.1 s",
+    "severity": "should fix",
+    "what": "The YEN callout leader is drawn with no label for about 0.3 s. It points at the red cloth on the back counter, because its anchor is the top of a 5-bundle stack that has not landed yet; two bundles are still falling above it. This is the same stray mark as the original finding, moved 0.5 s earlier.",
+    "fix": "Set at to after the 5th bundle lands (about T.creates + 0.6, which is about 101.26, right on 'yen' at 101.22). Or fade the label in with the line.",
+    "evidence": "verify-456/still-100.85.jpg; page-5.js line 369; graphics.js callout label alpha clamp01((age-0.3)/0.25)."
+   },
+   {
+    "page": "6",
+    "time": "131.1-134.3 s",
+    "severity": "minor",
+    "what": "The racing counter now reads as a rendering glitch rather than a blur. Doubled, offset digits are stacked over each other (the ghost layer is offset 0.012 up and 0.03 forward), black blank flap cells sit between digits, and stray glyphs appear ('\u00b0', '-'). Some frames still half-read as numbers (e.g. '61,788', '2,708').",
+    "fix": "Drop the ghost layer and rely on the per-cell staggered flips (already never at rest). Or blur or fade the digits instead of double-printing them. And keep the empty high-order cells blank rather than black.",
+    "evidence": "fix-p6-c/still-131.40, 131.60, 132.40, 133.20 (counter crops); page-6.js lines 148-163."
+   },
+   {
+    "page": "5",
+    "time": "125.1-126.5 s",
+    "severity": "minor",
+    "what": "Extra bundles and coins drop in from above the frame and briefly cross the BANK OF ENGLAND STUDY, 2012 credit and THE GAINS area. A coin sits right at the end of '2012' at 126.90, and a bundle is clipped at the top edge at 125.60.",
+    "fix": "Shorten the drop height (bundles drop 4 units, coins 3.2-4.4) so they enter from just above the tower and not through the credit line. Or keep the credit text a little further left.",
+    "evidence": "verify-456/still-125.60.jpg; fix-p5-d/still-126.90.jpg."
+   },
+   {
+    "page": "6",
+    "time": "140.9-152 s",
+    "severity": "minor",
+    "what": "At full size the moved steel pile reaches x\u22481055 and y\u22481580. It sits partly inside the right-hand 140 px phone-button strip and the bottom-380 px zone, so it can be hidden behind buttons until it shrinks.",
+    "fix": "Move it about 0.2 units left and slightly up (toward x 600-900, y 1300-1500 on screen), or start it at width 1.25.",
+    "evidence": "fix-p6-d/still-144.00.jpg, still-148.40.jpg; page-6.js line 106."
+   }
+  ],
+  "verdict": "Pages 4-6: 10 of the 13 findings are fully fixed and match the code changes. Two are fixed with small leftovers: page 4's caption block still grazes the lamp at 87.80, and page 6's steel pile still reaches into the right button strip at full size. One is only partly fixed: page 5's stray YEN callout leader was moved 0.5 s earlier, not removed. A render at 100.85 still shows a bare orange line ending on the red cloth before the stack has landed.\n\nThe page 4 must-fix is properly solved. A 0.22 s / 0.26 s dip on 'homes' (92.20) hides the board, notice, stamp and strikers, and the site shot opens clean.\n\nPage 5's top-hat cut-out is gone, and the right tower grows clearly taller, as the lead decided. But the coins never visibly come to rest on it. The camera is below the tower top and early coins are buried under later bundles, so they only fall past it and vanish.\n\nPage 6's notes now land face-up and read as money. The output pile sits centre-right and shrinks visibly. The racing counter no longer settles on a number, but its doubled 'ghost' digits look like a render glitch.\n\nPage turns at 94.70, 128.02 and 155.54 (joins-d) are clean. No words break the section 5 rules, and every hook matches the narration at its time.\n\nShould-fix before sign-off:\n1. Re-time the page 5 YEN callout to about T.creates+0.6.\n2. Make the page 5 coin pour visibly land and pile up.\n\nNote: fix-p5-c predates the final page-5.js save (14:49:20). I relied on fix-p5-d and my own renders in /home/user/work/chapter-2/stills/verify-456 (100.85, 104.60, 125.60, 127.90)."
+ },
+ {
+  "group": "pages 7-10",
+  "findings": [
+   {
+    "page": "7",
+    "finding": "[should fix] COSTS on screen under 1 s, and NOT SPENDING -> COSTS reads as a general rule without 'sometimes'",
+    "status": "fixed",
+    "evidence": "page-7.js:252-254: SOMETIMES hook added (at T.sometimes 168.07, y 220, size 48, muted), and NOT SPENDING and COSTS now run until cut+0.1. cut = T.and+0.2 = 171.54 (line 58), so COSTS shows from 170.35 until the dip, about 1.2 s, fading into the black. Stills fix-p7-c/still-168.60 and still-170.90 show SOMETIMES / struck NOT SPENDING / COSTS stacked.",
+    "remaining": "Only 0.2 s longer than before, because draw2D stops drawing part-A words at t >= cut (line 232). That is acceptable, since the dip covers it. See new problems for the SOMETIMES spacing."
+   },
+   {
+    "page": "7",
+    "finding": "[should fix] The $2.90 starting price never reads before the count",
+    "status": "fixed",
+    "evidence": "page-7.js:80-82: flapUp = T.oil+0.05 (160.72). The first schedule entry is $2.90, and countSchedule starts at T.quadruples+0.2 (161.55) and finishes at 162.35. My render verify-78910/still-161.45.jpg shows a large, still '$2.90' with \u00d74 just starting. fix-p7-c/still-160.95 also shows $2.90, and 162.60 shows $11.65.",
+    "remaining": "None. $2.90 holds for about 0.8 s after the counter has sprung up."
+   },
+   {
+    "page": "7",
+    "finding": "(nice to have) A BARREL printed over the red barrel; move it below the counter so it reads",
+    "status": "fixed",
+    "evidence": "page-7.js:236-248: hand-drawn dark plate (rgba 12,16,18,0.78) 40 px under the lid, from T.oil+0.6 until T.almost-0.1. verify-78910/still-161.45 and fix-p7-c/still-162.60 show 'A BARREL' readable on its plate just under the counter.",
+    "remaining": "It does not use the new shared callout plate option, but it works."
+   },
+   {
+    "page": "8",
+    "finding": "[must fix] Price counter cut off by the right edge in factory close-ups (page 3, 47-74 s; page 8 at 181 s)",
+    "status": "partly fixed",
+    "evidence": "Page 8 only: page-8.js:137 moves the opening camera (comment says 'board B clear of the right edge'). fix-p8-d/still-181.30 and joins-d/still-179.79 show factory B's \u00a31.00 board whole, although its right end is at about x 960-970, inside the 140 px right button zone. The flat-out close-up (lines 140-141, held to T.things+0.25) shows \u00a31.70 and \u00a32.00 whole and centred (fix-p8-lead3 187.30/187.90). However, as the camera pans to the house, the board is clipped at the right edge again: fix-p8-lead3/still-188.40 shows '\u00a32.' cut off, and my verify-78910/still-188.45 shows only a sliver of the board at the right edge. The page-3 part of this finding (47-74 s) is outside pages 7-10 and I did not check it here.",
+    "remaining": "There is a clipped board for about 0.5 s during the pan (188.2-188.8 s), and the board sits on the edge of the right-hand zone at 179-182 s. Page 3 still needs its own check."
+   },
+   {
+    "page": "8",
+    "finding": "[should fix] 'LOWEST SINCE 1986' misreadable; use LOWEST ON RECORD plus a small 'Records began in 1986' (lead decision)",
+    "status": "fixed",
+    "evidence": "page-8.js:276 has the caption 'Lowest on record'. Lines 278-287 add a muted 30 px note, 'Records began in 1986', on a dark plate at y 841, from T.lowest+0.25. fix-p8-d/still-193.80 shows 3.2% / LOWEST ON RECORD / Records began in 1986, all readable.",
+    "remaining": "None."
+   },
+   {
+    "page": "8",
+    "finding": "[should fix] +30% house on a flat untextured plinth; duplicate +30% tag",
+    "status": "fixed",
+    "evidence": "page-8.js:120-128: no plinth. The house stands on the pavement with contactShadow(2.0,1.5,0.55). The tag now shows only $/$$/$$$ (line 132; NZ dollars on line 124). fix-p8-lead/small.jpg and fix-p8-d/still-197.90 show the house sitting on the pavement with a shadow, the tag reading $$$, and +30% only as a word hook.",
+    "remaining": "fix-p8-d (14:49) still shows \u00a3\u00a3 / \u00a3\u00a3\u00a3. The lead's $ change (fix-p8-lead, after the edit) is correct, so the fix-p8-d stills for 196.5 and 197.9 are out of date."
+   },
+   {
+    "page": "8",
+    "finding": "(nice to have) Table seam at about 181 s; credits Stats NZ / REINZ",
+    "status": "partly fixed",
+    "evidence": "Credits added at page-8.js:291-292 ('Source: Stats NZ', 'Source: REINZ', y 1460, outside the bottom zone), and they are visible in the 193.80 and 196.50 stills. For the seam, the camera was raised and tilted (line 137), but a dark band of blurred background still fills the top ~150 px at 179.9 and 181.3 (fix-p8-d, joins-d 179.79).",
+    "remaining": "The table's far edge and background still show at the top of the opening shot. This is minor."
+   },
+   {
+    "page": "9",
+    "finding": "[should fix] Pay packet unlabelled and lands face-down as a blank slab",
+    "status": "fixed",
+    "evidence": "page-9.js:113-114 adds a WAGES card on packet.hinge. Line 194 adds faceUp(), which reverses the slapFlat fold and pins the packet at PACKET_SLOPE 0.38 so the face stays up and visible. The weight is raised by PIN_DY (line 197). fix-p9-d/still-234.90 shows the standing envelope with WAGES, and still-235.60 shows the weight sitting on the packet with WAGES still readable below it.",
+    "remaining": "See the new problem: the front queue figure hides most of the weight."
+   },
+   {
+    "page": "9",
+    "finding": "[should fix] Coin stack at the bottom edge, half cut off, in the bottom zone",
+    "status": "fixed",
+    "evidence": "page-9.js:84 stackAt = street.pointAt(0.645, 0.125), moved up from v 0.06. The loans camera key is on line 133. fix-p9-d/still-219.60 and still-220.60 show the stack whole on the pavement at about y 1400-1500 (above the 1540 bottom zone), with coins flying back to the bank.",
+    "remaining": "The stack overlaps the foot of the dial post, which is minor. By 220.6 s only one coin is left, so the stack is fully readable only around 219-220 s."
+   },
+   {
+    "page": "9",
+    "finding": "(nice to have) Credit for the 1920-21 figures",
+    "status": "fixed",
+    "evidence": "page-9.js:224 credit 'Source: Bank of England data' (x 300, y 800, size 22). fix-p9-e/still-225.60 shows 'SOURCE: BANK OF ENGLAND DATA' inside the bar panel, under 1920/1921.",
+    "remaining": "It is small (22 px) and sits close under the year labels, but it is readable."
+   },
+   {
+    "page": "10",
+    "finding": "[must fix] 5.6% still counting while she says 'five point six'; never held still",
+    "status": "fixed",
+    "evidence": "page-10.js:205-206: jobless = lerp(3.2,5.6,smooth(ramp(t, T.to2-0.1, T.five2+0.25))), so it lands at 5.6 at 254.09. joblessUntil = T.thisYear+0.2 (255.96) for the figure, dots and key (lines 208-210). fix-p10-b/still-254.30 shows a steady 5.6% with 6 empty dots (3 white, 3 red rings). It holds about 1.9 s.",
+    "remaining": "It lands about 0.75 s before she says 'six' (254.84), which is acceptable."
+   },
+   {
+    "page": "10",
+    "finding": "[should fix] Needle overshoots to 6 on 'five and a half' and slides to about 2.6 during the unemployment beat",
+    "status": "partly fixed",
+    "evidence": "page-10.js:117 caps the needle at Math.min(5.5, ...), and line 118 moves the ease to ramp(t, T.thisYear-0.05, T.raising-0.05). fix-p10-b/still-250.20 and still-254.30 show the needle holding at 5.5 beside 5.6%. My render verify-78910/still-256.60.jpg shows the needle at about 3 and still falling, with only '2026' on screen.",
+    "remaining": "The unexplained fall has moved to a worse moment. The needle now swings down from 5.5 to 2.25 over 255.5-257.2 s, while she says 'this year, the Reserve Bank is raising...'. A falling needle on 'raising' contradicts her. See new problems."
+   },
+   {
+    "page": "10",
+    "finding": "[should fix] Dial label reads '0INTEREST RATE6'",
+    "status": "fixed",
+    "evidence": "page-10.js:71 label: 'INTEREST'. fix-p10-b/still-254.30 shows 'INTEREST' clear of 0 and 6.",
+    "remaining": "None."
+   },
+   {
+    "page": "10",
+    "finding": "[should fix] Blue party-colour tie; quote small and italic",
+    "status": "fixed",
+    "evidence": "Tie: the shared piece was recoloured. Pixels sampled on the tie in fix-p10-b/still-262.20 are about (0-37, 0-15, 0-5), near-black with a faint warm cast and no blue. Quote: page-10.js:221 is now hook(), with lines ['\u201cNew money causes','inflation.\u201d'], size 72, weight 800, upright, at y 330. still-262.20 shows it large and upright.",
+    "remaining": "Under the warm grade the tie reads as very dark maroon rather than neutral charcoal. That is minor, but worth a glance, since red is also a party colour. The Westminster-like chamber (part of the original note) is unchanged."
+   },
+   {
+    "page": "10",
+    "finding": "(nice to have) Capitalise 'to bring prices down'; dot key; credit",
+    "status": "fixed",
+    "evidence": "page-10.js:202 'TO BRING PRICES DOWN'. Line 210 adds 'EACH DOT = 1 IN 100 WORKERS' (x 310, y 1095). Line 211 adds the credit 'Stats NZ; Reserve Bank of New Zealand'. All three are visible in fix-p10-b/still-254.30.",
+    "remaining": "None."
+   }
+  ],
+  "new_problems": [
+   {
+    "page": "8",
+    "time": "186.7-188.1 s",
+    "severity": "must fix",
+    "what": "The FLAT OUT callout no longer appears at all. The latest camera change (page-8.js:140-141, flat-out close-up target [3.0,0.85,-2.85], fov 36, held to T.things+0.25) puts its anchor point at([FACTORY_B.x-0.6,1.0,FACTORY_B.z+1.05]) (line 266) off the left of the frame. The callout keeps only the label end inside the frame, so the leader and the text are drawn off screen. The key phrase 'flat out' (186.70) now has no words on screen; only PRICES UP shows. In the earlier fix-p8-d (14:49) and joins-d (14:52) FLAT OUT was visible. It disappeared after the 14:53 edit.",
+    "fix": "Anchor FLAT OUT to a point that is in frame in this shot, such as the factory's roof ridge or front wall above the door (about FACTORY_B.x+0.2, 1.1, FACTORY_B.z+1.0), with dx +120. Alternatively, make it a hook at y about 300 for the flat-out beat. Re-render 186.9, 187.3 and 187.9.",
+    "evidence": "fix-p8-lead3/still-187.30 and still-187.90 (no FLAT OUT; only the PRICES UP leader and label); my verify-78910/still-186.95.jpg (no callout at all, only the \u00a31.30 board); compare joins-d/still-187.30, which shows FLAT OUT."
+   },
+   {
+    "page": "10",
+    "time": "255.5-257.2 s",
+    "severity": "should fix",
+    "what": "The interest needle now sweeps visibly down from 5.5 to 2.25 while she says 'And this year, the Reserve Bank is raising...'. The dial is in frame the whole time, and the camera is returning to it. A falling needle on the word 'raising' contradicts the narration and implies cuts she never mentions. Only '2026' is on screen. The 2.25% figure does not appear until 257.28.",
+    "fix": "Reset the needle while it cannot be seen. For example, fade the dial out over about 255.2-255.5 and back in at 2.25 by about 256.0 (opacity or scale pop), or hold 5.5 and snap to 2.25 under a quick pop as the 2026 hook lands. Show the 2.25% figure as soon as the needle sits there, so that the only visible motion is upward from 'raising'.",
+    "evidence": "page-10.js:118-119 (ease from T.thisYear-0.05 to T.raising-0.05); verify-78910/still-256.60.jpg shows the needle at about 3 heading down, with '2026'; fix-p10-b/still-256.20 sheet frame similar."
+   },
+   {
+    "page": "8",
+    "time": "188.2-188.8 s",
+    "severity": "should fix",
+    "what": "During the pan from the board to the card house, factory B's price board is cut off by the right edge, as '\u00a32.' and then a sliver. This is the same clipping the must-fix finding was about, now during the move.",
+    "fix": "Shorten the hold (T.things+0.25) or ease the T.make key so the board leaves frame quickly. Alternatively, fade the board's digits out as the camera turns.",
+    "evidence": "fix-p8-lead3/still-188.40 ('\u00a32.' at right edge); verify-78910/still-188.45.jpg (board sliver at x about 1050)."
+   },
+   {
+    "page": "9",
+    "time": "235.35-238.4 s",
+    "severity": "should fix",
+    "what": "Once the weight lands on the WAGES packet, the nearest queue cut-out (the old man) stands in front of it and hides most of the weight. His feet also overlap the packet, so the 'weight crushes wages' image is partly blocked. The packet also overlaps the book's left edge.",
+    "fix": "Move packetAt (page-9.js:110, u 0.52) a little right/forward, or shift queueSpots[2]/[3] left, so the weight and packet sit clear between the queue and the book. Alternatively, nudge the camera on the T.lose-0.3 key right.",
+    "evidence": "fix-p9-d/still-235.60 (weight largely behind the queue figure; WAGES visible as a strip); still-238.40 sheet frame."
+   },
+   {
+    "page": "7",
+    "time": "169.0-171.5 s",
+    "severity": "minor",
+    "what": "The new SOMETIMES (y 220, 48 px) sits only about 20 px above the struck NOT SPENDING (y 300, 84 px). The stack is cramped and reads as one block, 'SOMETIMES NOT SPENDING'. That is acceptable in meaning, but tight against the red strike line.",
+    "fix": "Move SOMETIMES to y about 200, or NOT SPENDING to about 315, to give about 40 px of air.",
+    "evidence": "fix-p7-c/still-170.90.jpg"
+   },
+   {
+    "page": "10",
+    "time": "238.8-259.4 s",
+    "severity": "minor",
+    "what": "The dial's right rim and its '5'/'6' numbers sit at about x 940-1010, inside the right 140 px phone-button zone in the unemployment-beat framing.",
+    "fix": "Move dialFoot slightly left (u 0.72 to about 0.68), or ease the camera targets on lines 100-101 a little right.",
+    "evidence": "fix-p10-b/still-254.30.jpg"
+   }
+  ],
+  "verdict": "Most findings on pages 7-10 are fixed, but not all of them, and the fixes caused two new problems. Fixed: COSTS and SOMETIMES on page 7, the $2.90 hold and the A BARREL plate; the 'lowest on record' caption, the house plinth and the $ tag on page 8; the WAGES packet and the coin stack on page 9; the 5.6% hold, the dial label, the upright quote, the capitalised words and the credits on page 10. New must-fix on page 8: the latest close-up camera pushes the FLAT OUT callout off screen, so 'flat out' (186.7 s) has no words on screen. My still at 186.95 and the lead's 187.3/187.9 stills confirm it. Partly fixed on page 10: the needle no longer slides during the unemployment beat, but it now visibly falls from 5.5 to 2.25 while she says 'the Reserve Bank is raising' (255.5-257.2 s, confirmed in my 256.60 still). Page 8's board still clips at the right edge during the 188.2-188.8 s pan. On page 9 the weight is partly hidden behind a queue figure. The page-3 half of the price-board finding was not checked here."
+ }
+]

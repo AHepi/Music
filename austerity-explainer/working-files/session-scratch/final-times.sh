@@ -1,0 +1,11 @@
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p1 --stills 0.3 2.5 4.7 6.9 9.1 11.3 13.5 15.7 17.9 20.1 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p2 --stills 20.8 23.22 25.64 28.07 30.49 32.91 35.33 37.76 40.18 42.6 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p3 --stills 43.3 46.74 50.19 53.63 57.08 60.52 63.97 67.41 70.86 74.3 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p4 --stills 75.0 77.2 79.4 81.6 83.8 86.0 88.2 90.4 92.6 94.8 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p5 --stills 95.5 99.12 102.74 106.37 109.99 113.61 117.23 120.86 124.48 128.1 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p6 --stills 128.8 131.78 134.76 137.73 140.71 143.69 146.67 149.64 152.62 155.6 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p7 --stills 156.3 158.92 161.54 164.17 166.79 169.41 172.03 174.66 177.28 179.9 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p8 --stills 180.6 183.63 186.67 189.7 192.73 195.77 198.8 201.83 204.87 207.9 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p9 --stills 208.6 211.87 215.13 218.4 221.67 224.93 228.2 231.47 234.73 238.0 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/p10 --stills 238.7 242.18 245.66 249.13 252.61 256.09 259.57 263.04 266.52 270.0 > /dev/null 2>&1
+timeout 1500 node paper-film/tools/render-paper-film.mjs inflation-chapter-2 /home/user/work/chapter-2/stills/r20-final/turns --stills 20.55 43.05 74.75 95.25 128.55 156.05 180.35 208.35 238.45 > /dev/null 2>&1

@@ -1,0 +1,78 @@
+[mine] ground plan ready in 2.5 s
+[mine] terrain mesh: 271 x 258 points = 69390 squares
+[mine] terrain heights worked out in 1.9 s
+[mine] built in 6.0 s: Terrain object "Ground terrain" (mud, real displacement; ground_mesh_object() returns it), "Ground puddles" (8 water sheets), "Yard coal and stones" (coal and stones, 2035 scattered + 3 heaps), "Yard props (timber, fence, barrels, cart, lamp)" (timber rack at x -9..-7 y -6..-3, fence x 10..20, 2 barrels, handcart, sleeper pile, lamp post). Lantern glass is at (7.4, -1.0, 4.13).
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/mine-work/previews/ground_and_yard_preview.py:65: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world.use_nodes = True
+00:32.278  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/mine-work/out/ground_and_yard_dev_px3_detail.png'
+[mine] photo detail: 26 s -> /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/mine-work/out/ground_and_yard_dev_px3_detail.png
+{
+ "object_names": [
+  "Ground terrain",
+  "Ground puddles",
+  "Yard coal and stones",
+  "Yard props (timber, fence, barrels, cart, lamp)"
+ ],
+ "triangles": {
+  "Ground terrain": 138780,
+  "Ground puddles": 348,
+  "Yard coal and stones": 73244,
+  "Yard props (timber, fence, barrels, cart, lamp)": 4118
+ },
+ "puddles": [
+  {
+   "name": "front left pool",
+   "water_level": -0.036,
+   "lowest_ground": -0.051,
+   "nearest_track_distance": 12.84
+  },
+  {
+   "name": "road E flooded",
+   "water_level": -0.038,
+   "lowest_ground": -0.053,
+   "nearest_track_distance": 11.62
+  },
+  {
+   "name": "road A flooded, middle",
+   "water_level": -0.067,
+   "lowest_ground": -0.082,
+   "nearest_track_distance": 5.55
+  },
+  {
+   "name": "middle pool",
+   "water_level": 0.005,
+   "lowest_ground": -0.01,
+   "nearest_track_distance": 1.95
+  },
+  {
+   "name": "far left pool",
+   "water_level": -0.066,
+   "lowest_ground": -0.081,
+   "nearest_track_distance": 10.93
+  },
+  {
+   "name": "back yard pool",
+   "water_level": -0.16,
+   "lowest_ground": -0.175,
+   "nearest_track_distance": 4.12
+  },
+  {
+   "name": "right yard pool",
+   "water_level": -0.089,
+   "lowest_ground": -0.104,
+   "nearest_track_distance": 4.46
+  },
+  {
+   "name": "road B flooded",
+   "water_level": -0.305,
+   "lowest_ground": -0.32,
+   "nearest_track_distance": 9.67
+  }
+ ],
+ "scattered_lumps": 2035,
+ "terrain_squares": 69390,
+ "build_seconds": 6.0
+}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

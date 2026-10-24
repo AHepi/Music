@@ -1,0 +1,27 @@
+MCP server started on 127.0.0.1:9876, press Ctrl+C to exit.
+05:03.779  cycles           | WARNING CUEW initialization failed: Error opening the library
+Fatal Python error: PyGILState_Release: thread state 0x7f2a1642a500 must be current when releasing
+Python runtime state: initialized
+
+Current thread 0x00007f2a36968680 (most recent call first):
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-control/scripts/common.py", line 954 in work
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-control/scripts/common.py", line 863 in work
+  File "/home/user/work/blender-app/blender-5.2.2-linux-x64/5.2/python/lib/python3.13/threading.py", line 995 in run
+  File "/home/user/work/blender-app/blender-5.2.2-linux-x64/5.2/python/lib/python3.13/threading.py", line 1044 in _bootstrap_inner
+  File "/home/user/work/blender-app/blender-5.2.2-linux-x64/5.2/python/lib/python3.13/threading.py", line 1015 in _bootstrap
+
+Thread 0x00007f2aa42d2080 (most recent call first):
+  File "/home/user/work/blender-app/blender-5.2.2-linux-x64/5.2/scripts/addons_core/cycles/engine.py", line 134 in reset
+  File "/home/user/work/blender-app/blender-5.2.2-linux-x64/5.2/scripts/addons_core/cycles/__init__.py", line 71 in update
+  File "<string>", line 17 in test
+  File "<string>", line 22 in <module>
+  File "/root/.config/blender/5.2/extensions/user_default/mcp/mcp_to_blender_server.py", line 252 in _execute_code
+  File "/root/.config/blender/5.2/extensions/user_default/mcp/mcp_to_blender_server.py", line 350 in _execute_code_from_request
+  File "/root/.config/blender/5.2/extensions/user_default/mcp/mcp_to_blender_server.py", line 598 in _handle_blocking_client
+  File "/root/.config/blender/5.2/extensions/user_default/mcp/mcp_to_blender_server.py", line 644 in poll_blocking
+  File "/root/.config/blender/5.2/extensions/user_default/mcp/execute_blocking.py", line 30 in run
+  File "/root/.config/blender/5.2/extensions/user_default/mcp/cli.py", line 55 in cli_execute
+  File "/root/.config/blender/5.2/extensions/user_default/mcp/__init__.py", line 310 in _cli_execute_handler
+
+Extension modules: _freestyle, bpy.props, bpy.app.icons, bpy.app.timers, bpy.utils.units, _bpy_path, bpy.types, mathutils.geometry, mathutils.interpolate, mathutils.noise, mathutils, idprop, bmesh.ops, bmesh.utils, bmesh.geometry, bmesh, zstandard.backend_c, _cycles, gpu.capabilities, gpu.matrix, gpu.platform, gpu.select, gpu.shader, gpu.state, gpu.texture, gpu.compute, gpu, numpy._core._multiarray_umath, numpy.linalg._umath_linalg, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._mt19937, numpy.random._generator, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand, bl_math (total: 39)
+Aborted

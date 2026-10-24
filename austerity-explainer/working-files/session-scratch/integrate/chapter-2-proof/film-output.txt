@@ -1,0 +1,40 @@
+Preflight film (before filming): INPUTS MISSING. 1 to fix, 0 to look at, 0 known and accepted, 1 input(s) missing; 2 check(s) in 0.1 s.
+Long step BLOCKED: filming the chapter (filming: about 43.8 min). First make the missing inputs listed below, then run this stage again.
+
+Made 2026-10-16 11:06:39 by preflight.py version 4a98659b; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-film-2026-10-16-110639.
+
+## Inputs missing (the stage cannot pass without them)
+
+- --critique CRITIQUE: the critique of the pages as JSON, newer than every page file (findings marked "status": "fixed" or "accepted" with "who" and "date" once dealt with). Needed by the critique gate (fresh critics before filming).
+  Make it: run the critique-film workflow on the stills of every page and save its result as JSON
+
+## To fix (these block the next step)
+
+- pages report passed: the newest pages report says FAIL (preflight-pages-2026-10-16-110539.json) (preflight.py)
+  Fix: fix what it lists (or accept it, with who and when), then run the pages stage again
+
+## Inputs not given (the stage runs without them, but checks less)
+
+- --rates RATES: this film's measured seconds a frame (rates.json); without this film's own measured rates the plan uses the table (round 4), which missed round 5 by 52%.
+  Make it: python3 calculators/plan_budget.py profile-commands EVENTS --scene S, film those short pieces, then plan_budget.py measure LOGS --events EVENTS --out rates.json
+
+## Cost and time
+
+- filming: about 43.8 min (2 worker(s), 1 stretch(es) under 2 hours; rates from the table (a fallback))
+- this preflight: 0.1 s
+
+## Checks run
+
+- FAIL  a passed pages report newer than every page file: 1 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.0 s; preflight.py version 4a98659b
+  (inside the preflight)
+- PASS  filming time, workers, pieces, memory and disk (plan_budget.py filming): 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; calculators/plan_budget.py version bdcb5933
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_budget.py filming /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz --scene inflation-chapter-2-newcomers --blender-running no --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-film-2026-10-16-110639/02-filming-time-workers-pieces-memory-and-disk-plan.json
+
+## Inputs (sha1 when the run ended)
+
+- 0a7cd04528bd7567e61c556bf1503e824ec39d05  /home/user/Music/austerity-explainer/film-kit/paper-film/scenes/inflation-chapter-2-newcomers/page-3.js
+- c8da3f920d9aa6cff050c168cfdc2aea46c8193e  /home/user/Music/austerity-explainer/film-kit/paper-film/scenes/inflation-chapter-2-newcomers/page-4.js
+- 3af07f257699e98e1a6c84ecad6484078a688389  /home/user/Music/austerity-explainer/film-kit/paper-film/scenes/inflation-chapter-2-newcomers/page-5.js
+- c2a6092782c6cd0fc8fb7c75ca7b96e510d482da  /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/integrate/chapter-2-proof/preflight-reports/preflight-film-2026-10-16-110639.json

@@ -1,0 +1,59 @@
+{
+ "about": "Chapter 2 for newcomers: the preflight proof of log 35 (fixtures and the project's own files).",
+ "reports": "preflight-reports",
+ "script": {
+  "script": "/home/user/Music/austerity-explainer/chapter-2-inflation/33 Narration script - chapter 2 for newcomers.json",
+  "word_times": "/home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2/word-times.json",
+  "spend_ledger": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/budget/spend-ledger-logs-10-to-34.json"
+ },
+ "shots": [
+  {
+   "name": "the Works",
+   "place_facts": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json",
+   "shot_list": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/works-shots.json",
+   "shot_names": [
+    "w1",
+    "w3"
+   ],
+   "views": [
+    "w1",
+    "w2",
+    "w3"
+   ],
+   "check_files": {
+    "w1": "/home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2-newcomers/works-w1-shot-check.json",
+    "w2": "/home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2-newcomers/works-w2-shot-check.json",
+    "w3": "/home/user/Music/plugins/explainer-film/kit/examples/inflation-chapter-2-newcomers/works-w3-shot-check.json"
+   }
+  },
+  {
+   "name": "the checkout",
+   "place_facts": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json",
+   "shot_list": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/shot-planner/checkout-c1-shots.json",
+   "shot_names": [
+    "c1"
+   ],
+   "check_files": {
+    "c1": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-shot-check.json"
+   }
+  }
+ ],
+ "pages": {
+  "name": "pages 3 to 5",
+  "events": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/page-timing/events-pages-3-5.json.gz",
+  "camera_log": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/effects-camera-light/round4-film-camera-pages-3-4.json"
+ },
+ "plates": [
+  {
+   "name": "the people test",
+   "view": "still",
+   "check": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-paint-check.json",
+   "plate": "/home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg",
+   "plate_facts": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/plate-facts",
+   "helper_plate": "/home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-helper-plate.jpg",
+   "place_facts": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/people-test/people-test-place-facts.json",
+   "brief": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-brief.json",
+   "spend_ledger": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/budget/spend-ledger-logs-10-to-34.json"
+  }
+ ]
+}
