@@ -1,0 +1,154 @@
+00:01.239  blend            | Read blend: "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/set_copy/street.blend"
+00:01.689  cycles           | WARNING CUEW initialization failed: Error opening the library
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/eevee_vs_cycles/tools/inspect_scene.py:34: DeprecationWarning: 'SunLight.use_nodes' is expected to be removed in Blender 6.0
+  print('  ', o.name, d.type, 'E', round(d.energy,2), 'col', tuple(round(x,3) for x in d.color), 'hide_render', o.hide_render, 'shadow', getattr(d,'use_shadow',None), 'soft', getattr(d,'shadow_soft_size',None), 'angle', getattr(d,'angle',None), 'size', getattr(d,'size',None), 'spot', getattr(d,'spot_size',None), 'loc', tuple(round(x,2) for x in o.location), 'diffuse', getattr(d,'diffuse_factor',None), 'spec', getattr(d,'specular_factor',None), 'vol', getattr(d,'volume_factor',None), 'use_nodes', getattr(d,'use_nodes',None))
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/eevee_vs_cycles/tools/inspect_scene.py:34: DeprecationWarning: 'PointLight.use_nodes' is expected to be removed in Blender 6.0
+  print('  ', o.name, d.type, 'E', round(d.energy,2), 'col', tuple(round(x,3) for x in d.color), 'hide_render', o.hide_render, 'shadow', getattr(d,'use_shadow',None), 'soft', getattr(d,'shadow_soft_size',None), 'angle', getattr(d,'angle',None), 'size', getattr(d,'size',None), 'spot', getattr(d,'spot_size',None), 'loc', tuple(round(x,2) for x in o.location), 'diffuse', getattr(d,'diffuse_factor',None), 'spec', getattr(d,'specular_factor',None), 'vol', getattr(d,'volume_factor',None), 'use_nodes', getattr(d,'use_nodes',None))
+FILE /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/set_copy/street.blend
+ENGINE BLENDER_EEVEE res 1080 1920 100
+VIEW AgX AgX - Medium High Contrast 0.6000000238418579 1.0 display sRGB seq sRGB
+FILM transparent False dither 1.0 filter 1.5
+EEVEE taa_render_samples 16
+EEVEE use_raytracing False
+EEVEE ray_tracing_method SCREEN
+EEVEE shadow_ray_count 1
+EEVEE shadow_step_count 6
+EEVEE use_shadows True
+EEVEE use_volumetric_shadows False
+EEVEE volumetric_tile_size 8
+EEVEE light_threshold 0.009999999776482582
+EEVEE shadow_pool_size 512
+EEVEE shadow_resolution_scale 1.0
+EEVEE use_fast_gi True
+EEVEE fast_gi_method GLOBAL_ILLUMINATION
+EEVEE clamp_surface_direct 0.0
+EEVEE clamp_surface_indirect 10.0
+EEVEE use_overscan False
+EEVEE fast_gi_ray_count 2
+EEVEE fast_gi_step_count 8
+EEVEE rt options {'backface_radiance_scale': 0.25, 'denoise_bilateral': True, 'denoise_spatial': True, 'denoise_temporal': True, 'resolution_scale': '2', 'screen_trace_quality': 0.25, 'screen_trace_thickness': 0.10000000149011612, 'trace_max_roughness': 0.5, 'use_backface_hit': True, 'use_denoise': True}
+CYCLES samples 4096
+CYCLES use_adaptive_sampling True
+CYCLES adaptive_threshold 0.009999999776482582
+CYCLES adaptive_min_samples 0
+CYCLES use_denoising True
+CYCLES denoiser OPENIMAGEDENOISE
+CYCLES denoising_input_passes RGB_ALBEDO_NORMAL
+CYCLES max_bounces 12
+CYCLES diffuse_bounces 4
+CYCLES glossy_bounces 4
+CYCLES transmission_bounces 12
+CYCLES volume_bounces 0
+CYCLES transparent_max_bounces 8
+CYCLES sample_clamp_direct 0.0
+CYCLES sample_clamp_indirect 10.0
+CYCLES caustics_reflective True
+CYCLES caustics_refractive True
+CYCLES device CPU
+CYCLES use_light_tree True
+CYCLES light_sampling_threshold 0.009999999776482582
+CYCLES film_exposure 1.0
+CYCLES blur_glossy 1.0
+CYCLES use_fast_gi False
+CYCLES pixel_filter_type BLACKMAN_HARRIS
+CYCLES filter_width 1.5
+CYCLES time_limit 0.0
+CYCLES tile_size 2048
+WORLD dusk_world
+  WORLD NODE BACKGROUND Background ((0.05000000074505806, 0.07500000298023224, 0.10000000149011612, 1.0), 1.399999976158142)
+  WORLD NODE OUTPUT_WORLD World Output 
+  world attr use_sun_shadow True
+  world attr sun_threshold 10.0
+  world attr sun_angle 0.009180432185530663
+  world attr probe_resolution 1024
+  world attr light_settings <bpy_struct, WorldLighting at 0x7ff6c2932220>
+LIGHTS
+   afterglow SUN E 0.25 col (1.0, 0.62, 0.36) hide_render False shadow True soft 0.0 angle 0.009180432185530663 size None spot None loc (0.0, 0.0, 0.0) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   dusk_skylight SUN E 0.35 col (0.62, 0.72, 0.9) hide_render False shadow True soft 0.0 angle 0.20943951606750488 size None spot None loc (0.0, 0.0, 0.0) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   engine_house_light_front POINT E 400.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.0 angle None size None spot None loc (-19.5, 89.8, 9.31) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   engine_house_light_side POINT E 400.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.0 angle None size None spot None loc (-9.8, 96.0, 9.31) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   gas_lamp_0_light POINT E 260.0 col (1.0, 0.72, 0.4) hide_render False shadow True soft 0.11999999731779099 angle None size None spot None loc (3.03, 11.0, 3.98) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   gas_lamp_1_light POINT E 260.0 col (1.0, 0.72, 0.4) hide_render False shadow True soft 0.11999999731779099 angle None size None spot None loc (-3.03, 25.0, 4.96) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   gas_lamp_2_light POINT E 260.0 col (1.0, 0.72, 0.4) hide_render False shadow True soft 0.11999999731779099 angle None size None spot None loc (3.03, 39.0, 5.94) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   gas_lamp_3_light POINT E 260.0 col (1.0, 0.72, 0.4) hide_render False shadow True soft 0.11999999731779099 angle None size None spot None loc (-3.03, 53.0, 6.92) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   gas_lamp_4_light POINT E 260.0 col (1.0, 0.72, 0.4) hide_render False shadow True soft 0.11999999731779099 angle None size None spot None loc (3.03, 64.5, 7.72) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_a_cottage_01_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 0.8, 2.18) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_a_cottage_01_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 2.9, 4.78) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_a_cottage_02_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 7.2, 2.5) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_a_cottage_03_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 11.9, 5.41) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_a_cottage_05_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 18.8, 3.44) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_a_cottage_06_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 23.1, 6.36) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_b_cottage_01_window_light_upper_1 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 40.8, 7.58) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_b_cottage_02_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 45.1, 7.9) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_b_cottage_03_window_light_upper_1 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 49.8, 8.21) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_b_cottage_04_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 54.1, 8.53) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   left_row_b_cottage_05_window_light_upper_1 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (-3.7, 58.8, 8.84) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_01_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 0.6, 4.78) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_02_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 5.3, 2.5) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_03_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 11.7, 2.81) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_03_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 9.6, 5.41) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_04_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 14.3, 3.13) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_05_window_light_upper_1 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 20.7, 6.04) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_06_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 25.4, 6.36) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_07_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/eevee_vs_cycles/tools/inspect_scene.py:42: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if m.use_nodes and m.node_tree:
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/eevee_vs_cycles/tools/inspect_scene.py:46: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if m.use_nodes and m.node_tree:
+ shadow True soft 0.5 angle None size None spot None loc (3.7, 29.7, 4.07) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_a_cottage_08_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 32.3, 4.39) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_b_cottage_01_window_light_upper_1 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 42.7, 7.58) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_b_cottage_03_window_light_ground POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 51.7, 5.61) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_b_cottage_03_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 49.6, 8.21) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+   right_row_b_cottage_05_window_light_upper_0 POINT E 45.0 col (1.0, 0.66, 0.34) hide_render False shadow True soft 0.5 angle None size None spot None loc (3.7, 58.6, 8.84) diffuse 1.0 spec 1.0 vol 1.0 use_nodes True
+MATERIALS
+   boarded_blue users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   boarded_green users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   brass users 7 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   cast_iron users 9 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   channel_stones users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   chimney_pot_clay users 4 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   chimney_pot_sooted users 4 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   colliery_brick users 5 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   colliery_yard users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   cottage_brick users 4 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   cottage_stone users 4 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   dark_dressed_stone users 5 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   dressed_stone users 12 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   engine_window_glow users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] [('PRINCIPLED emis', 1.600000023841858, 'alpha', 1.0, 'transmission', 0.0)]
+   fascia_board users 4 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   headframe_steel users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   interior_dark users 8 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   kerb_stone users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   lamp_glass_glow users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] [('PRINCIPLED emis', 8.0, 'alpha', 1.0, 'transmission', 0.0)]
+   moor users 2 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   paint_black users 4 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   paint_bottle_green users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   paint_brown users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   paint_cream users 2 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   paint_maroon users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   paint_navy users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   pavement_flags users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   plaster_dark users 4 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   ridge_clay users 5 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   roof_slate users 7 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   sky_dome_glow users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] [('PRINCIPLED emis', 1.0, 'alpha', 1.0, 'transmission', 0.0)]
+   spoil_heap users 2 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   street_setts users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   wheel_iron users 2 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   window_dark_0 users 24 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   window_dark_1 users 20 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   window_dark_2 users 18 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+   window_lit_glow_0 users 6 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] [('PRINCIPLED emis', 4.0, 'alpha', 1.0, 'transmission', 0.0)]
+   window_lit_glow_1 users 6 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] [('PRINCIPLED emis', 4.0, 'alpha', 1.0, 'transmission', 0.0)]
+   window_lit_glow_2 users 12 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] [('PRINCIPLED emis', 4.0, 'alpha', 1.0, 'transmission', 0.0)]
+   wire_rope users 1 [('method', 'DITHERED'), ('blend', 'HASHED'), ('cull', False)] []
+OBJECT COUNTS
+{'LIGHT': 33, 'EMPTY': 65, 'MESH': 373, 'CAMERA': 2}
+PROBES / VOLUMES / SPECIAL
+   sky_dome MESH display TEXTURED hide_render False vis cam/diff/gloss/trans/shadow True True True True False
+MODIFIERS
+CAMERA main_camera 32.969730377197266 36.0 VERTICAL 0.6981316804885864 False clip 0.10000000149011612 1500.0
+VIEWLAYER [('ViewLayer', True)]
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

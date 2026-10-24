@@ -1,0 +1,2142 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "today_street",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "today",
+   "scene": "street"
+  },
+  {
+   "name": "main_A_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_A_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_A_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_C_dry",
+   "camera": "main",
+   "light": "C",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_C_wet",
+   "camera": "main",
+   "light": "C",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_D_dry",
+   "camera": "main",
+   "light": "D",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_D_wet",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_E_dry",
+   "camera": "main",
+   "light": "E",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_E_wet",
+   "camera": "main",
+   "light": "E",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_E_heavy",
+   "camera": "main",
+   "light": "E",
+   "state": "heavy",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "close_A_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_A_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_A_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_C_wet",
+   "camera": "close_road",
+   "light": "C",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_D_wet",
+   "camera": "close_road",
+   "light": "D",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_E_wet",
+   "camera": "close_road",
+   "light": "E",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "time_base_1",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "time_base_2",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "time_base_3",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "main_A_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_A_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_A_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_C_dry",
+   "camera": "main",
+   "light": "C",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_C_wet",
+   "camera": "main",
+   "light": "C",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_D_dry",
+   "camera": "main",
+   "light": "D",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_D_wet",
+   "camera": "main",
+   "light": "D",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_E_dry",
+   "camera": "main",
+   "light": "E",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_E_wet",
+   "camera": "main",
+   "light": "E",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "main_E_heavy",
+   "camera": "main",
+   "light": "E",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "main",
+   "keep_png": true
+  },
+  {
+   "name": "close_A_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_A_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_A_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_C_wet",
+   "camera": "close_road",
+   "light": "C",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_D_wet",
+   "camera": "close_road",
+   "light": "D",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "close_E_wet",
+   "camera": "close_road",
+   "light": "E",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    640,
+    480,
+    24
+   ],
+   "group": "t22",
+   "label": "close",
+   "keep_png": true
+  },
+  {
+   "name": "layer_soot_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_main_dry",
+   "camera": "main",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_soot_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_main_wet",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_soot_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_main_heavy",
+   "camera": "main",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_soot_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_close_dry",
+   "camera": "close_road",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_soot_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_close_wet",
+   "camera": "close_road",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_soot_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_close_heavy",
+   "camera": "close_road",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    640,
+    480,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "time_kit_all_1",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "time_kit_all_2",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "time_kit_all_3",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_base_again",
+   "look": "base"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_kit_master0",
+   "look": "kit_all",
+   "master": 0.0
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_kit_all_amounts0",
+   "look": "kit_all",
+   "dials": {
+    "soot": {
+     "amount": 0.0
+    },
+    "runoff": {
+     "amount": 0.0
+    },
+    "foot": {
+     "amount": 0.0
+    },
+    "steps": {
+     "amount": 0.0
+    },
+    "wallgrowth": {
+     "amount": 0.0
+    },
+    "wallcracks": {
+     "amount": 0.0
+    },
+    "paint": {
+     "amount": 0.0
+    },
+    "dirt": {
+     "amount": 0.0
+    },
+    "groundcracks": {
+     "amount": 0.0
+    },
+    "groundmoss": {
+     "amount": 0.0
+    },
+    "iron": {
+     "amount": 0.0
+    },
+    "growth": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_soot_amount0",
+   "look": "solo:soot",
+   "dials": {
+    "soot": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_soot",
+   "look": "solo:soot"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_runoff_amount0",
+   "look": "solo:runoff",
+   "dials": {
+    "runoff": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_runoff",
+   "look": "solo:runoff"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_foot_amount0",
+   "look": "solo:foot",
+   "dials": {
+    "foot": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_foot",
+   "look": "solo:foot"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_steps_amount0",
+   "look": "solo:steps",
+   "dials": {
+    "steps": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_steps",
+   "look": "solo:steps"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_wallgrowth_amount0",
+   "look": "solo:wallgrowth",
+   "dials": {
+    "wallgrowth": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_wallgrowth",
+   "look": "solo:wallgrowth"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_wallcracks_amount0",
+   "look": "solo:wallcracks",
+   "dials": {
+    "wallcracks": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_wallcracks",
+   "look": "solo:wallcracks"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_paint_amount0",
+   "look": "solo:paint",
+   "dials": {
+    "paint": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_paint",
+   "look": "solo:paint"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_dirt_amount0",
+   "look": "solo:dirt",
+   "dials": {
+    "dirt": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_dirt",
+   "look": "solo:dirt"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_groundcracks_amount0",
+   "look": "solo:groundcracks",
+   "dials": {
+    "groundcracks": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_groundcracks",
+   "look": "solo:groundcracks"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_groundmoss_amount0",
+   "look": "solo:groundmoss",
+   "dials": {
+    "groundmoss": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_groundmoss",
+   "look": "solo:groundmoss"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_iron_amount0",
+   "look": "solo:iron",
+   "dials": {
+    "iron": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_iron",
+   "look": "solo:iron"
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_growth_amount0",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_growth",
+   "look": "solo:growth"
+  }
+ ]
+}

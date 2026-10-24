@@ -1,0 +1,877 @@
+{
+ "made": "2026-10-21 10:25",
+ "kit": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/kits/weathering",
+ "selftests": {
+  "courtyard@1200x800": {
+   "hook": {
+    "passed": true,
+    "materials_total": 134,
+    "hooked_plain": 82,
+    "hooked_adapted": 46,
+    "seconds": 1.1
+   },
+   "remove": {
+    "passed": true,
+    "seconds": 1.3
+   },
+   "nothing": {
+    "passed": true,
+    "identical_16bit": false,
+    "samples": 4,
+    "dots": 960000,
+    "max_diff": 0.021805137395858765,
+    "mean_diff": 5.327311737346463e-05,
+    "share_over_one_step": 1.1458333333333333e-05,
+    "share_changed": 0.5108375,
+    "seconds": 3.3
+   },
+   "dial_zero": {
+    "passed": true,
+    "identical_16bit": false,
+    "seconds": 2.6
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 48831,
+    "dots_acting_outside_roles": 0,
+    "mask_max": 1.0,
+    "seconds": 1.3
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 960000,
+    "max_diff": 0.00901806354522705,
+    "mean_diff": 0.00016644819697830826,
+    "share_over_one_step": 2.604166666666667e-05,
+    "share_changed": 0.7227177083333334,
+    "seconds": 1.4
+   },
+   "reuse": {
+    "passed": true,
+    "layers": {
+     "template_a": 120,
+     "template_b": 120,
+     "template_c": 120
+    },
+    "seconds": 1.1
+   },
+   "_seconds": 12.2
+  },
+  "lockout@135x240": {
+   "hook": {
+    "passed": true,
+    "materials_total": 86,
+    "hooked_plain": 85,
+    "hooked_adapted": 0,
+    "seconds": 0.7
+   },
+   "remove": {
+    "passed": true,
+    "seconds": 0.7
+   },
+   "nothing": {
+    "passed": true,
+    "identical_16bit": false,
+    "samples": 4,
+    "dots": 32400,
+    "max_diff": 0.000152587890625,
+    "mean_diff": 1.1146283007690272e-08,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0002469135802469136,
+    "seconds": 2.2
+   },
+   "legacy_nothing": {
+    "passed": true,
+    "identical_16bit": false,
+    "samples": 4,
+    "dots": 32400,
+    "max_diff": 0.00332646444439888,
+    "mean_diff": 1.3799059672692238e-07,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0011111111111111111,
+    "seconds": 4.1
+   },
+   "dial_zero": {
+    "passed": true,
+    "identical_16bit": false,
+    "seconds": 1.6
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 3233,
+    "dots_acting_outside_roles": 0,
+    "mask_max": 1.0,
+    "seconds": 0.9
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 32400,
+    "max_diff": 0.0001983642578125,
+    "mean_diff": 4.332773073656426e-08,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0008333333333333334,
+    "seconds": 0.8
+   },
+   "reuse": {
+    "passed": true,
+    "layers": {
+     "template_a": 81,
+     "template_b": 81,
+     "template_c": 81
+    },
+    "seconds": 0.7
+   },
+   "lighting": {
+    "passed": true,
+    "rigs": {
+     "A": {
+      "passed": true,
+      "share_over_one_step": 0.0,
+      "max_diff": 0.0009613186120986938
+     },
+     "C": {
+      "passed": true,
+      "share_over_one_step": 0.0,
+      "max_diff": 0.0001373291015625
+     },
+     "D": {
+      "passed": true,
+      "share_over_one_step": 0.0,
+      "max_diff": 0.0001220703125
+     },
+     "E": {
+      "passed": true,
+      "share_over_one_step": 0.0,
+      "max_diff": 0.0002899169921875
+     }
+    },
+    "samples": 8,
+    "seconds": 3.2
+   },
+   "_seconds": 14.9
+  },
+  "lockout@540x960": {
+   "nothing": {
+    "passed": true,
+    "identical_16bit": true,
+    "samples": 4,
+    "dots": 518400,
+    "max_diff": 0.0,
+    "mean_diff": 0.0,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0,
+    "seconds": 2.5
+   },
+   "legacy_nothing": {
+    "passed": true,
+    "identical_16bit": false,
+    "samples": 4,
+    "dots": 518400,
+    "max_diff": 0.0005645900964736938,
+    "mean_diff": 1.5207961556740202e-09,
+    "share_over_one_step": 0.0,
+    "share_changed": 1.3503086419753087e-05,
+    "seconds": 4.3
+   },
+   "dial_zero": {
+    "passed": true,
+    "identical_16bit": true,
+    "seconds": 2.1
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 50687,
+    "dots_acting_outside_roles": 0,
+    "mask_max": 1.0,
+    "seconds": 1.2
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": true,
+    "dots": 518400,
+    "max_diff": 0.0,
+    "mean_diff": 0.0,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0,
+    "seconds": 1.1
+   },
+   "_seconds": 11.2
+  },
+  "street@135x240": {
+   "hook": {
+    "passed": true,
+    "materials_total": 41,
+    "hooked_plain": 41,
+    "hooked_adapted": 0,
+    "seconds": 0.4
+   },
+   "remove": {
+    "passed": true,
+    "seconds": 0.3
+   },
+   "nothing": {
+    "passed": true,
+    "identical_16bit": false,
+    "samples": 4,
+    "dots": 32400,
+    "max_diff": 0.0003509521484375,
+    "mean_diff": 1.461543348568739e-07,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.002993827160493827,
+    "seconds": 1.6
+   },
+   "legacy_nothing": {
+    "passed": true,
+    "identical_16bit": false,
+    "samples": 4,
+    "dots": 32400,
+    "max_diff": 0.000244140625,
+    "mean_diff": 1.4269946291278757e-07,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0030555555555555557,
+    "seconds": 3.3
+   },
+   "dial_zero": {
+    "passed": true,
+    "identical_16bit": false,
+    "seconds": 1.0
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 3644,
+    "dots_acting_outside_roles": 0,
+    "mask_max": 1.0,
+    "seconds": 0.8
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": true,
+    "dots": 32400,
+    "max_diff": 0.0,
+    "mean_diff": 0.0,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0,
+    "seconds": 0.5
+   },
+   "reuse": {
+    "passed": true,
+    "layers": {
+     "template_a": 44,
+     "template_b": 44,
+     "template_c": 44
+    },
+    "seconds": 0.4
+   },
+   "lighting": {
+    "passed": true,
+    "rigs": {
+     "A": {
+      "passed": true,
+      "share_over_one_step": 0.0,
+      "max_diff": 0.0005340650677680969
+     },
+     "C": {
+      "passed": true,
+      "share_over_one_step": 0.0,
+      "max_diff": 0.0004882961511611938
+     },
+     "D": {
+      "passed": true,
+      "share_over_one_step": 0.0,
+      "max_diff": 0.0006256252527236938
+     },
+     "E": {
+      "passed": true,
+      "share_over_one_step": 0.0,
+      "max_diff": 0.0001983642578125
+     }
+    },
+    "samples": 8,
+    "seconds": 2.4
+   },
+   "_seconds": 10.8
+  },
+  "street@540x960": {
+   "nothing": {
+    "passed": true,
+    "identical_16bit": true,
+    "samples": 4,
+    "dots": 518400,
+    "max_diff": 0.0,
+    "mean_diff": 0.0,
+    "share_over_one_step": 0.0,
+    "share_changed": 0.0,
+    "seconds": 1.8
+   },
+   "legacy_nothing": {
+    "passed": true,
+    "identical_16bit": false,
+    "samples": 4,
+    "dots": 518400,
+    "max_diff": 0.0001678466796875,
+    "mean_diff": 2.0604075390284748e-10,
+    "share_over_one_step": 0.0,
+    "share_changed": 3.858024691358025e-06,
+    "seconds": 3.8
+   },
+   "dial_zero": {
+    "passed": true,
+    "identical_16bit": true,
+    "seconds": 1.6
+   },
+   "isolation": {
+    "passed": true,
+    "dots_acting": 58192,
+    "dots_acting_outside_roles": 0,
+    "mask_max": 1.0,
+    "seconds": 1.0
+   },
+   "determinism": {
+    "passed": true,
+    "identical_16bit": false,
+    "dots": 518400,
+    "max_diff": 0.0001678466796875,
+    "mean_diff": 2.0604075390284748e-10,
+    "share_over_one_step": 0.0,
+    "share_changed": 3.858024691358025e-06,
+    "seconds": 0.9
+   },
+   "_seconds": 9.0
+  }
+ },
+ "bus_tests": {
+  "courtyard": {
+   "ground": {
+    "passed": true,
+    "worst": 0.0012,
+    "tolerance": 0.00784313725490196,
+    "points": 200,
+    "seconds": 31.6
+   },
+   "walls": {
+    "passed": false,
+    "worst": 0.06458,
+    "tolerance": 0.00784313725490196,
+    "seconds": 11.6
+   }
+  },
+  "lockout": {
+   "ground": {
+    "passed": true,
+    "worst": 0.00112,
+    "tolerance": 0.00784313725490196,
+    "points": 200,
+    "seconds": 23.1
+   },
+   "walls": {
+    "passed": true,
+    "worst": 0.00266,
+    "tolerance": 0.00784313725490196,
+    "seconds": 11.6
+   }
+  },
+  "street": {
+   "ground": {
+    "passed": true,
+    "worst": 0.00112,
+    "tolerance": 0.00784313725490196,
+    "points": 200,
+    "seconds": 14.0
+   },
+   "walls": {
+    "passed": true,
+    "worst": 0.00266,
+    "tolerance": 0.00784313725490196,
+    "seconds": 8.8
+   },
+   "dots": {
+    "passed": true,
+    "worst_error_vs_arithmetic": "0.0102",
+    "worst_across_error_vs_table": "0.0303",
+    "worst_along_error_vs_table": "0.6087",
+    "painter_widen": 1.0,
+    "plate_height": 2730,
+    "note": "across: the plan table is rounded to two figures (1.6 against 1.554 is 3 %) and the helper agrees with arithmetic from the camera to 0.5 %. along: the helper uses the real surface normal; the plan table assumes flat ground, but the ground may rise (far dots then lean toward the camera) (far dots lean toward the camera), so the table's along column is too long beyond 15 m: arithmetic with the real normal agrees to 1 %",
+    "seconds": 0.4
+   },
+   "nodes": {
+    "passed": true,
+    "seconds": 0.8
+   }
+  }
+ },
+ "attribute_node": {
+  "result": {
+   "BLENDER_EEVEE": [
+    0.5552,
+    0.93,
+    0.0
+   ],
+   "CYCLES": [
+    0.5554,
+    0.9306,
+    0.0
+   ]
+  },
+  "meaning": "[picture value in EEVEE, in Cycles] for an object whose custom property is 0.5552: both engines read an object custom property through an Attribute node equally (difference 0.0002); a missing property reads 0.0"
+ },
+ "lint": {
+  "returncode": 0,
+  "output_tail": "LINT: CLEAN (0 hits)\n"
+ },
+ "measure_tests": {
+  "returncode": 0,
+  "summary": "28 of 28 passed []"
+ },
+ "packs": {
+  "japanese_courtyard/courtyard": {
+   "bytes": 929917,
+   "megabytes": 0.93,
+   "checks_passed": 4,
+   "checks_failed": {},
+   "reader_seconds": 17.1,
+   "sheets": 3,
+   "sheet_errors": {
+    "Right wall behind hall": "RuntimeError('no wall face points toward the ground plan')"
+   }
+  },
+  "pit_village_street/lockout": {
+   "bytes": 1249397,
+   "megabytes": 1.25,
+   "checks_passed": 20,
+   "checks_failed": {},
+   "reader_seconds": 61.7,
+   "sheets": 4,
+   "sheet_errors": {}
+  },
+  "pit_village_street/street": {
+   "bytes": 1172649,
+   "megabytes": 1.17,
+   "checks_passed": 20,
+   "checks_failed": {},
+   "reader_seconds": 59.1,
+   "sheets": 4,
+   "sheet_errors": {}
+  }
+ },
+ "shade_side": {
+  "japanese_courtyard/courtyard": {
+   "passed": null,
+   "note": "the set declares no sun direction or the scene has no wall sheets: nothing to compare"
+  },
+  "pit_village_street/lockout": {
+   "passed": true,
+   "shaded_fronts_mean": 0.706,
+   "lit_fronts_mean": 0.434,
+   "difference": 0.272,
+   "wanted": "at least 0.2",
+   "shaded_sheets": [
+    "left_row_a_cottage_01_walls",
+    "left_row_a_cottage_02_walls"
+   ],
+   "lit_sheets": [
+    "right_row_a_cottage_01_walls",
+    "right_row_a_cottage_02_walls"
+   ]
+  },
+  "pit_village_street/street": {
+   "passed": true,
+   "shaded_fronts_mean": 0.706,
+   "lit_fronts_mean": 0.434,
+   "difference": 0.272,
+   "wanted": "at least 0.2",
+   "shaded_sheets": [
+    "left_row_a_cottage_01_walls",
+    "left_row_a_cottage_02_walls"
+   ],
+   "lit_sheets": [
+    "right_row_a_cottage_01_walls",
+    "right_row_a_cottage_02_walls"
+   ]
+  }
+ },
+ "pack_acceptance": {
+  "japanese_courtyard/courtyard": {
+   "footfall_every_door": {
+    "passed": true,
+    "value": 0.8,
+    "wanted": "all 1 doors: footfall 0.7 or more within 1 m",
+    "note": ""
+   },
+   "keepclear_every_doorstep": {
+    "passed": true,
+    "value": 1.0,
+    "wanted": "all 1 doors: keepclear 0.5 or more within 0.6 m",
+    "note": ""
+   },
+   "entry_rand_one_value_per_door": {
+    "passed": true,
+    "value": 0.0,
+    "wanted": "spread of the entry number within 0.6 m of a door at most 0.05",
+    "note": ""
+   },
+   "existing_growth_patches": {
+    "passed": true,
+    "value": 9,
+    "wanted": "at least the 7 patches the set names",
+    "note": "separate patches at 0.5 or more (a patch may split in two, never vanish)"
+   },
+   "water_below_level_zero_distance": {
+    "passed": true,
+    "value": 0.0,
+    "wanted": "99 % of dots below the level at distance 0",
+    "note": ""
+   },
+   "water_above_level_positive": {
+    "passed": true,
+    "value": 0.247,
+    "wanted": "dots above the level have a positive distance",
+    "note": ""
+   }
+  },
+  "pit_village_street/lockout": {
+   "dampness_wall_feet": {
+    "passed": true,
+    "value": 0.647,
+    "wanted": "median above the set's expected minimum",
+    "note": "19302 dots touching a wall"
+   },
+   "dampness_pipe_feet": {
+    "passed": true,
+    "value": 0.796,
+    "wanted": "median above the set's expected minimum",
+    "note": "1327 dots"
+   },
+   "dampness_road_middle": {
+    "passed": true,
+    "value": 0.0,
+    "wanted": "95th percentile below 0.2",
+    "note": "56700 dots on the crown"
+   },
+   "footfall_crown": {
+    "passed": true,
+    "value": 0.902,
+    "wanted": "10th percentile at least 0.8",
+    "note": "crown dots"
+   },
+   "keepclear_road_middle": {
+    "passed": true,
+    "value": 1.0,
+    "wanted": "10th percentile at least 0.5",
+    "note": "crown dots"
+   },
+   "sheltered_under_sills": {
+    "passed": true,
+    "value": 1.0,
+    "wanted": "every sill: median of the band 3 to 15 cm below it is 0.8 or more",
+    "note": "6 sill sources"
+   },
+   "sheltered_on_sill_tops": {
+    "passed": false,
+    "value": 0.125,
+    "wanted": "every sill top (3 cm above): 0.1 or less",
+    "note": "6 sill sources; the window above shelters the top within the 1.2 m reach"
+   },
+   "footfall_every_door": {
+    "passed": true,
+    "value": 0.851,
+    "wanted": "all 28 doors: footfall 0.7 or more within 1 m",
+    "note": ""
+   },
+   "keepclear_every_doorstep": {
+    "passed": true,
+    "value": 1.0,
+    "wanted": "all 28 doors: keepclear 0.5 or more within 0.6 m",
+    "note": ""
+   },
+   "entry_rand_one_value_per_door": {
+    "passed": true,
+    "value": 0.0,
+    "wanted": "spread of the entry number within 0.6 m of a door at most 0.05",
+    "note": ""
+   }
+  },
+  "pit_village_street/street": {
+   "dampness_wall_feet": {
+    "passed": true,
+    "value": 0.647,
+    "wanted": "median above the set's expected minimum",
+    "note": "19302 dots touching a wall"
+   },
+   "dampness_pipe_feet": {
+    "passed": true,
+    "value": 0.796,
+    "wanted": "median above the set's expected minimum",
+    "note": "1327 dots"
+   },
+   "dampness_road_middle": {
+    "passed": true,
+    "value": 0.0,
+    "wanted": "95th percentile below 0.2",
+    "note": "56700 dots on the crown"
+   },
+   "footfall_crown": {
+    "passed": true,
+    "value": 0.902,
+    "wanted": "10th percentile at least 0.8",
+    "note": "crown dots"
+   },
+   "keepclear_road_middle": {
+    "passed": true,
+    "value": 1.0,
+    "wanted": "10th percentile at least 0.5",
+    "note": "crown dots"
+   },
+   "sheltered_under_sills": {
+    "passed": true,
+    "value": 1.0,
+    "wanted": "every sill: median of the band 3 to 15 cm below it is 0.8 or more",
+    "note": "6 sill sources"
+   },
+   "sheltered_on_sill_tops": {
+    "passed": false,
+    "value": 0.125,
+    "wanted": "every sill top (3 cm above): 0.1 or less",
+    "note": "6 sill sources; the window above shelters the top within the 1.2 m reach"
+   },
+   "footfall_every_door": {
+    "passed": true,
+    "value": 0.851,
+    "wanted": "all 28 doors: footfall 0.7 or more within 1 m",
+    "note": ""
+   },
+   "keepclear_every_doorstep": {
+    "passed": true,
+    "value": 1.0,
+    "wanted": "all 28 doors: keepclear 0.5 or more within 0.6 m",
+    "note": ""
+   },
+   "entry_rand_one_value_per_door": {
+    "passed": true,
+    "value": 0.0,
+    "wanted": "spread of the entry number within 0.6 m of a door at most 0.05",
+    "note": ""
+   }
+  }
+ },
+ "places_regression": {
+  "lockout": {
+   "wall_dist": {
+    "share_within_3_levels_all": 0.9581,
+    "share_within_3_levels_outside_road_middle": 1.0,
+    "mean_abs_difference_levels": 1.895,
+    "dots": 472500
+   },
+   "prop_dist": {
+    "share_within_3_levels_all": 0.9749,
+    "share_within_3_levels_outside_road_middle": 0.9838,
+    "mean_abs_difference_levels": 3.139,
+    "dots": 472500
+   },
+   "inside_corner": {
+    "share_within_3_levels_all": 1.0,
+    "share_within_3_levels_outside_road_middle": 1.0,
+    "mean_abs_difference_levels": 0.007,
+    "dots": 472500
+   },
+   "step_foot": {
+    "share_within_3_levels_all": 1.0,
+    "share_within_3_levels_outside_road_middle": 1.0,
+    "mean_abs_difference_levels": 0.0,
+    "dots": 472500
+   },
+   "vertical_foot": {
+    "share_within_3_levels_all": 0.9942,
+    "share_within_3_levels_outside_road_middle": 0.9881,
+    "mean_abs_difference_levels": 0.078,
+    "dots": 472500
+   }
+  },
+  "street": {
+   "wall_dist": {
+    "share_within_3_levels_all": 0.9581,
+    "share_within_3_levels_outside_road_middle": 1.0,
+    "mean_abs_difference_levels": 1.895,
+    "dots": 472500
+   },
+   "prop_dist": {
+    "share_within_3_levels_all": 1.0,
+    "share_within_3_levels_outside_road_middle": 1.0,
+    "mean_abs_difference_levels": 0.0,
+    "dots": 472500
+   },
+   "inside_corner": {
+    "share_within_3_levels_all": 1.0,
+    "share_within_3_levels_outside_road_middle": 1.0,
+    "mean_abs_difference_levels": 0.0,
+    "dots": 472500
+   },
+   "step_foot": {
+    "share_within_3_levels_all": 1.0,
+    "share_within_3_levels_outside_road_middle": 1.0,
+    "mean_abs_difference_levels": 0.0,
+    "dots": 472500
+   },
+   "vertical_foot": {
+    "share_within_3_levels_all": 0.9942,
+    "share_within_3_levels_outside_road_middle": 0.9881,
+    "mean_abs_difference_levels": 0.078,
+    "dots": 472500
+   }
+  }
+ },
+ "baseline": {
+  "joints_official": {
+   "passed": 20,
+   "of": 22,
+   "failing": [
+    "lockout_B_heavy",
+    "lockout_B_wet"
+   ]
+  },
+  "joints_all_dots": {
+   "passed": 18,
+   "of": 22,
+   "failing": [
+    "lockout_B_heavy",
+    "lockout_B_wet",
+    "lockout_E_wet",
+    "main_E_heavy"
+   ]
+  },
+  "joints_without_kit": {
+   "passed": 20,
+   "of": 22,
+   "failing": [
+    "lockout_B_heavy",
+    "lockout_B_wet"
+   ]
+  },
+  "grid_visible": {
+   "count": 19,
+   "of": 22
+  },
+  "repeat_agreement": {
+   "r2": {
+    "max_contrast_difference_vs_first": 0.0,
+    "same_pass_count": true
+   },
+   "r3": {
+    "max_contrast_difference_vs_first": 0.0,
+    "same_pass_count": true
+   }
+  },
+  "time": {
+   "lockout": {
+    "plates": [
+     "plate_lockout_B_wet"
+    ],
+    "plate_best_total": 2.25,
+    "plate_totals_per_run": [
+     2.25,
+     2.31,
+     2.26
+    ],
+    "first_picture_seconds": 2.47,
+    "first_pictures": [
+     {
+      "name": "lockout_B_dry",
+      "seconds": 2.65,
+      "draw": 0.96,
+      "look_change": 1.69
+     },
+     {
+      "name": "lockout_B_dry",
+      "seconds": 2.57,
+      "draw": 0.85,
+      "look_change": 1.72
+     },
+     {
+      "name": "lockout_B_dry",
+      "seconds": 2.47,
+      "draw": 0.83,
+      "look_change": 1.64
+     }
+    ],
+    "pieces_max": 7199,
+    "run_seconds": [
+     16.1,
+     16.1,
+     15.9
+    ],
+    "pictures": 19,
+    "blender_run_seconds": [
+     18.5,
+     18.6,
+     18.3
+    ],
+    "wall_seconds_incl_send_and_return": [
+     61.7,
+     63.9,
+     63.7
+    ],
+    "plate_best": {
+     "plate_lockout_B_wet": 2.25
+    }
+   },
+   "street": {
+    "plates": [
+     "plate_close_road_A_wet",
+     "plate_main_A_wet",
+     "plate_notice_A_wet"
+    ],
+    "plate_best_total": 5.92,
+    "plate_totals_per_run": [
+     5.93,
+     5.95,
+     5.94
+    ],
+    "first_picture_seconds": 2.26,
+    "first_pictures": [
+     {
+      "name": "main_A_dry",
+      "seconds": 2.42,
+      "draw": 0.67,
+      "look_change": 1.75
+     },
+     {
+      "name": "main_A_dry",
+      "seconds": 2.34,
+      "draw": 0.68,
+      "look_change": 1.66
+     },
+     {
+      "name": "main_A_dry",
+      "seconds": 2.26,
+      "draw": 0.68,
+      "look_change": 1.58
+     }
+    ],
+    "pieces_max": 6439,
+    "run_seconds": [
+     43.8,
+     42.7,
+     43.1
+    ],
+    "pictures": 74,
+    "blender_run_seconds": [
+     48.8,
+     47.5,
+     48.0
+    ],
+    "wall_seconds_incl_send_and_return": [
+     95.3,
+     86.9,
+     101.9
+    ],
+    "plate_best": {
+     "plate_close_road_A_wet": 1.9,
+     "plate_main_A_wet": 2.0,
+     "plate_notice_A_wet": 2.02
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,493 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "today_street",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "today",
+   "scene": "street"
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_base",
+   "look": "base"
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_default",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_weeds0",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 0.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_weeds2",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 2.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_cushions0",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 0.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_cushions2",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 2.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_size05",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 0.5,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_size2",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 2.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_dist10",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 10.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_wet",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_gain05",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 0.6,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_gain15",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.5,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_dead0",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.0,
+     "flower_share": 0.0,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_flowers",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.3,
+     "flower_share": 0.3,
+     "min_spacing": 0.15,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_spacing",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.3,
+     "weed_cover": 0.01,
+     "cushion_cover": 0.008,
+     "amount": 1.0
+    }
+   }
+  },
+  {
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "dials",
+   "plate_height": 2730,
+   "name": "dials_cover2",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "weeds_amount": 1.0,
+     "cushions_amount": 1.0,
+     "piece_size": 1.0,
+     "distance": 18.0,
+     "colour_gain": 1.0,
+     "dead_grass_share": 0.15,
+     "flower_share": 0.08,
+     "min_spacing": 0.15,
+     "weed_cover": 0.02,
+     "cushion_cover": 0.02,
+     "amount": 1.0
+    }
+   }
+  }
+ ]
+}

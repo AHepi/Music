@@ -1,0 +1,1318 @@
+{
+ "set": "pit_village_street",
+ "scene": "lockout",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "today_lockout",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "today",
+   "scene": "lockout"
+  },
+  {
+   "name": "lockout_B_dry",
+   "camera": "lockout",
+   "light": "B",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_B_wet",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_B_heavy",
+   "camera": "lockout",
+   "light": "B",
+   "state": "heavy",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_C_wet",
+   "camera": "lockout",
+   "light": "C",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_D_wet",
+   "camera": "lockout",
+   "light": "D",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_E_wet",
+   "camera": "lockout",
+   "light": "E",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "time_base_1",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "time_base_2",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "time_base_3",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "lockout_B_dry",
+   "camera": "lockout",
+   "light": "B",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_B_wet",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_B_heavy",
+   "camera": "lockout",
+   "light": "B",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_C_wet",
+   "camera": "lockout",
+   "light": "C",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_D_wet",
+   "camera": "lockout",
+   "light": "D",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_E_wet",
+   "camera": "lockout",
+   "light": "E",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "layer_soot_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_soot_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_soot_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:soot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_runoff_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:runoff",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_foot_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:foot",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_steps_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:steps",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallgrowth_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:wallgrowth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_wallcracks_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:wallcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_paint_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:paint",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_growth_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit_all",
+   "view": "layer:growth",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "time_kit_all_1",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "time_kit_all_2",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "name": "time_kit_all_3",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit_all",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "time",
+   "plate_height": 2730
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_base_again",
+   "look": "base"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_kit_master0",
+   "look": "kit_all",
+   "master": 0.0
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_kit_all_amounts0",
+   "look": "kit_all",
+   "dials": {
+    "soot": {
+     "amount": 0.0
+    },
+    "runoff": {
+     "amount": 0.0
+    },
+    "foot": {
+     "amount": 0.0
+    },
+    "steps": {
+     "amount": 0.0
+    },
+    "wallgrowth": {
+     "amount": 0.0
+    },
+    "wallcracks": {
+     "amount": 0.0
+    },
+    "paint": {
+     "amount": 0.0
+    },
+    "dirt": {
+     "amount": 0.0
+    },
+    "groundcracks": {
+     "amount": 0.0
+    },
+    "groundmoss": {
+     "amount": 0.0
+    },
+    "iron": {
+     "amount": 0.0
+    },
+    "growth": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_soot_amount0",
+   "look": "solo:soot",
+   "dials": {
+    "soot": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_soot",
+   "look": "solo:soot"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_runoff_amount0",
+   "look": "solo:runoff",
+   "dials": {
+    "runoff": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_runoff",
+   "look": "solo:runoff"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_foot_amount0",
+   "look": "solo:foot",
+   "dials": {
+    "foot": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_foot",
+   "look": "solo:foot"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_steps_amount0",
+   "look": "solo:steps",
+   "dials": {
+    "steps": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_steps",
+   "look": "solo:steps"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_wallgrowth_amount0",
+   "look": "solo:wallgrowth",
+   "dials": {
+    "wallgrowth": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_wallgrowth",
+   "look": "solo:wallgrowth"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_wallcracks_amount0",
+   "look": "solo:wallcracks",
+   "dials": {
+    "wallcracks": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_wallcracks",
+   "look": "solo:wallcracks"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_paint_amount0",
+   "look": "solo:paint",
+   "dials": {
+    "paint": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_paint",
+   "look": "solo:paint"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_dirt_amount0",
+   "look": "solo:dirt",
+   "dials": {
+    "dirt": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_dirt",
+   "look": "solo:dirt"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_groundcracks_amount0",
+   "look": "solo:groundcracks",
+   "dials": {
+    "groundcracks": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_groundcracks",
+   "look": "solo:groundcracks"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_groundmoss_amount0",
+   "look": "solo:groundmoss",
+   "dials": {
+    "groundmoss": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_groundmoss",
+   "look": "solo:groundmoss"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_iron_amount0",
+   "look": "solo:iron",
+   "dials": {
+    "iron": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_iron",
+   "look": "solo:iron"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "zero_solo_growth_amount0",
+   "look": "solo:growth",
+   "dials": {
+    "growth": {
+     "amount": 0.0
+    }
+   }
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "zero",
+   "keep_png": true,
+   "name": "on_solo_growth",
+   "look": "solo:growth"
+  }
+ ]
+}

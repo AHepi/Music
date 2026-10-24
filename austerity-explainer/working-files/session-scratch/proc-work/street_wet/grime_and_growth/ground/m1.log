@@ -1,0 +1,43 @@
+P1 official (kit dots in) 21 of 22 failing ['lockout_B_heavy']
+   all dots 20 | kit dots out 19 | max near contrast 0.622 | harsh []
+   verdict {'official_count_at_least_21': True, 'nothing_that_passed_now_fails': True, 'without_kit_equals_base': False, 'no_harsh_grid': True, 'all_dots_reported': 20, 'broke': [], 'ok': False}
+P2 ok False ground failures ['main_A_wet road wet/dry 1.763 vs base 1.832 (more than 0.05)', 'main_C_wet road wet/dry 2.315 vs base 2.435 (more than 0.05)', 'main_D_wet road wet/dry 1.392 vs base 1.448 (more than 0.05)', 'main_E_wet road wet/dry 3.334 vs base 3.665 (more than 0.05)', 'main_E_heavy road wet/dry 3.232 vs base 3.533 (more than 0.05)', 'close_A_wet road wet/dry 2.431 vs base 2.581 (more than 0.05)'] | all failures 46
+P3 cracks in flags (fine and broken)@main                         marks    0 good   0 lost   0 crushed   0 | FAIL 0 GOOD marks, need 3 | 0.40: good 0 fail
+P3 cracks in flags (fine and broken)@lockout                      marks    0 good   0 lost   0 crushed   0 | FAIL 0 GOOD marks, need 1.5 | 0.40: good 0 fail
+P3 cracks in flags (fine and broken)@notice                       marks   13 good   2 lost   1 crushed   0 | FAIL GOOD share 15% below 60 % | 0.40: good 1 fail
+P3 tilted flags and chipped corners@main                          marks    0 good   0 lost   0 crushed   0 | FAIL 0 GOOD marks, need 2 | 0.40: good 0 fail
+P3 tilted flags and chipped corners@lockout                       marks    0 good   0 lost   0 crushed   0 | FAIL 0 GOOD marks, need 1 | 0.40: good 0 fail
+P3 tilted flags and chipped corners@notice                        marks   14 good   0 lost  14 crushed   0 | FAIL 0 GOOD marks, need 1; GOOD share 0% below 60 % | 0.40: good 0 fail
+P3 kerb chips, open kerb joints and cracked kerbs@main            marks    0 good   0 lost   0 crushed   0 | FAIL 0 GOOD marks, need 3 | 0.40: good 0 fail
+P3 kerb chips, open kerb joints and cracked kerbs@lockout         marks   36 good   7 lost  23 crushed   0 | FAIL GOOD share 19% below 60 %; LOST share 64% above 15 % | 0.40: good 7 fail
+P3 kerb chips, open kerb joints and cracked kerbs@notice          marks  181 good 116 lost  17 crushed   0 | PASS | 0.40: good 107 fail
+P3 disturbed setts and open sett joints@main                      marks  110 good  27 lost  57 crushed   4 | FAIL GOOD share 24% below 60 %; LOST share 52% above 15 % | 0.40: good 27 fail
+P3 disturbed setts and open sett joints@lockout                   marks  122 good  16 lost  75 crushed   5 | FAIL GOOD share 13% below 60 %; LOST share 62% above 15 % | 0.40: good 16 fail
+P3 disturbed setts and open sett joints@notice                    marks  111 good  65 lost  32 crushed   8 | FAIL GOOD share 59% below 60 %; LOST share 29% above 15 % | 0.40: good 63 fail
+P3 tar patches@main                                               marks    2 good   1 lost   1 crushed   1 | FAIL GOOD share 50% below 60 %; LOST share 50% above 15 % | 0.40: good 1 fail
+P3 tar patches@lockout                                            marks    2 good   0 lost   1 crushed   1 | FAIL 0 GOOD marks, need 0.5; GOOD share 0% below 60 % | 0.40: good 0 fail
+P3 tar patches@notice                                             marks    1 good   1 lost   0 crushed   0 | PASS | 0.40: good 1 PASS
+P3 ground film, polish, water marks@main                          marks  680 good  59 lost 567 crushed   5 | FAIL GOOD share 9% below 60 %; LOST share 83% above 15 % | 0.40: good 59 fail
+P3 ground film, polish, water marks@lockout                       marks  571 good  60 lost 465 crushed   8 | FAIL GOOD share 10% below 60 %; LOST share 81% above 15 % | 0.40: good 57 fail
+P3 ground film, polish, water marks@notice                        marks  495 good  76 lost 331 crushed   6 | FAIL GOOD share 15% below 60 %; LOST share 67% above 15 % | 0.40: good 73 fail
+P3 rust halos, drum ring, scrubbed strips@main                    marks    3 good   0 lost   3 crushed   1 | FAIL 0 GOOD marks, need 4; GOOD share 0% below 60 % | 0.40: good 0 fail
+P3 rust halos, drum ring, scrubbed strips@lockout                 marks    6 good   3 lost   3 crushed   0 | FAIL GOOD share 50% below 60 %; LOST share 50% above 15 % | 0.40: good 3 fail
+P3 rust halos, drum ring, scrubbed strips@notice                  marks   10 good   2 lost   6 crushed   2 | FAIL GOOD share 20% below 60 %; LOST share 60% above 15 % | 0.40: good 2 fail
+P3 moss ribbons, algae fans, liverwort@main                       marks   59 good   4 lost  41 crushed   3 | FAIL 4 GOOD marks, need 8; GOOD share 7% below 60 % | 0.40: good 4 fail
+P3 moss ribbons, algae fans, liverwort@lockout                    marks   10 good   1 lost   8 crushed   0 | FAIL 1 GOOD marks, need 4; GOOD share 10% below 60 % | 0.40: good 1 fail
+P3 moss ribbons, algae fans, liverwort@notice                     marks   46 good   7 lost  33 crushed   7 | FAIL GOOD share 15% below 60 %; LOST share 72% above 15 % | 0.40: good 7 fail
+P3 rust on iron@main                                              marks    0 good   0 lost   0 crushed   0 | FAIL 0 GOOD marks, need 4 | 0.40: good 0 fail
+P3 rust on iron@lockout                                           marks    0 good   0 lost   0 crushed   0 | FAIL 0 GOOD marks, need 2 | 0.40: good 0 fail
+P3 rust on iron@notice                                            marks    2 good   0 lost   1 crushed   0 | FAIL 0 GOOD marks, need 2; GOOD share 0% below 60 % | 0.40: good 0 fail
+P5 plate_main_A_wet plate mean ratio 0.991 failures ["M5 road: band ratios {'5-10': 0.964, '10-20': 0.9953, '20-40': 1.0021} outside 0.80 to 1.00", "M5 iron: band ratios {'5-10': None, '10-20': 1.0041, '20-40': 1.0141} outside 0.80 to 1.00"]
+P5 plate_lockout_B_wet plate mean ratio 1.0034 failures ["M5 road: band ratios {'5-10': 1.0054, '10-20': 1.0132, '20-40': 1.0031} outside 0.80 to 1.00", "M5 kerb_gutter: band ratios {'5-10': None, '10-20': 1.0183, '20-40': 0.9947} outside 0.80 to 1.00", "M5 iron: band ratios {'5-10': None, '10-20': 1.0032, '20-40': 1.0111} outside 0.80 to 1.00"]
+P5 plate_notice_A_wet plate mean ratio 0.9879 failures ["M5 road: band ratios {'5-10': 0.9757, '10-20': 0.982, '20-40': 1.0005} outside 0.80 to 1.00", "M5 iron: band ratios {'5-10': 0.999, '10-20': 1.0125, '20-40': 1.0094} outside 0.80 to 1.00"]
+P5 plate_close_road_A_wet plate mean ratio 0.9765 failures ["M5 road: band ratios {'5-10': 0.9578, '10-20': 0.9816, '20-40': 1.0023} outside 0.80 to 1.00", "M5 iron: band ratios {'5-10': None, '10-20': 1.0233, '20-40': 1.0133} outside 0.80 to 1.00"]
+P6 lockout ok True {'groundmoss@lockout': 0.0}
+P6 street ok True {'groundmoss@main': 0.0, 'groundmoss@close': 0.0}
+P7 lockout {'plate_best_total': 2.92, 'base_plate_total': 2.25, 'first_picture_seconds': 2.53, 'base_first': 2.47, 'pieces_max': 7199, 'ok': True, 'failures': [], 'plate_best': {'plate_lockout_B_wet': 2.92, 'plate_lockout_B_wet_behind': 2.43}}
+P7 street {'plate_best_total': 7.08, 'base_plate_total': 5.92, 'first_picture_seconds': 2.68, 'base_first': 2.26, 'pieces_max': 6439, 'ok': True, 'failures': [], 'plate_best': {'plate_close_road_A_wet': 2.33, 'plate_main_A_wet': 2.32, 'plate_notice_A_wet': 2.43}}
+
+real	1m17.883s
+user	0m50.379s
+sys	0m28.373s

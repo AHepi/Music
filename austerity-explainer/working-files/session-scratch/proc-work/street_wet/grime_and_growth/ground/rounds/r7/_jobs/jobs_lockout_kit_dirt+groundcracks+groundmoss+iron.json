@@ -1,0 +1,1141 @@
+{
+ "set": "pit_village_street",
+ "scene": "lockout",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "lockout_B_dry",
+   "camera": "lockout",
+   "light": "B",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_B_wet",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_B_heavy",
+   "camera": "lockout",
+   "light": "B",
+   "state": "heavy",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_C_wet",
+   "camera": "lockout",
+   "light": "C",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_D_wet",
+   "camera": "lockout",
+   "light": "D",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "name": "lockout_E_wet",
+   "camera": "lockout",
+   "light": "E",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "t22",
+   "label": "lockout",
+   "keep_png": true
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "keep_png": true,
+   "name": "plate_lockout_B_wet",
+   "label": "lockout"
+  },
+  {
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "keep_png": true,
+   "name": "plate_lockout_B_wet_behind",
+   "hide_roles": [
+    "prop",
+    "fire",
+    "sign"
+   ],
+   "label": "lockout"
+  },
+  {
+   "name": "class_lockout_540x960",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "class",
+   "size": [
+    540,
+    960,
+    1
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "depth_lockout_540x960",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "depth",
+   "size": [
+    540,
+    960,
+    1
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "zones_lockout_540x960",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "mask:footfall+crown+keepclear",
+   "size": [
+    540,
+    960,
+    1
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_lockout_dry",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_lockout_wet",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_dirt_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundcracks_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_groundmoss_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "layer_iron_lockout_heavy",
+   "camera": "lockout",
+   "light": "A",
+   "state": "heavy",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    540,
+    960,
+    4
+   ],
+   "group": "mask"
+  },
+  {
+   "name": "class_lockout_1536x2730",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "class",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "mask",
+   "plate_height": 2730
+  },
+  {
+   "name": "depth_lockout_1536x2730",
+   "camera": "lockout",
+   "light": "A",
+   "state": "dry",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "depth",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "mask",
+   "plate_height": 2730
+  },
+  {
+   "name": "layer_dirt_plate_lockout",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "mask",
+   "plate_height": 2730
+  },
+  {
+   "name": "layer_groundcracks_plate_lockout",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "mask",
+   "plate_height": 2730
+  },
+  {
+   "name": "layer_groundmoss_plate_lockout",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "mask",
+   "plate_height": 2730
+  },
+  {
+   "name": "layer_iron_plate_lockout",
+   "camera": "lockout",
+   "light": "A",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "mask",
+   "plate_height": 2730
+  },
+  {
+   "name": "part_dirt_film_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "dirt": {
+     "show_part": 1
+    }
+   }
+  },
+  {
+   "name": "part_dirt_polish_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "dirt": {
+     "show_part": 2
+    }
+   }
+  },
+  {
+   "name": "part_dirt_marks_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "dirt": {
+     "show_part": 3
+    }
+   }
+  },
+  {
+   "name": "part_dirt_halo_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "dirt": {
+     "show_part": 4
+    }
+   }
+  },
+  {
+   "name": "part_dirt_drum_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "dirt": {
+     "show_part": 5
+    }
+   }
+  },
+  {
+   "name": "part_dirt_tar_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "dirt": {
+     "show_part": 6
+    }
+   }
+  },
+  {
+   "name": "part_dirt_splash_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "dirt": {
+     "show_part": 7
+    }
+   }
+  },
+  {
+   "name": "part_dirt_scrub_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:dirt",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "dirt": {
+     "show_part": 8
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_flag_fine_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 1
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_flag_broken_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 2
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_flag_tilt_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 3
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_flag_chip_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 4
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_kerb_chips_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 5
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_kerb_joints_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 6
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_kerb_scuffs_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 7
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_sett_disturbed_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 8
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_sett_joints_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 9
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_flag_fine_cells_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 10
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_flag_broken_cells_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 11
+    }
+   }
+  },
+  {
+   "name": "part_groundcracks_sett_joint_all_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundcracks",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundcracks": {
+     "show_part": 12
+    }
+   }
+  },
+  {
+   "name": "part_groundmoss_joint_moss_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundmoss": {
+     "show_part": 1
+    }
+   }
+  },
+  {
+   "name": "part_groundmoss_patch_moss_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundmoss": {
+     "show_part": 2
+    }
+   }
+  },
+  {
+   "name": "part_groundmoss_algae_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundmoss": {
+     "show_part": 3
+    }
+   }
+  },
+  {
+   "name": "part_groundmoss_liverwort_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundmoss": {
+     "show_part": 4
+    }
+   }
+  },
+  {
+   "name": "part_groundmoss_far_band_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundmoss": {
+     "show_part": 5
+    }
+   }
+  },
+  {
+   "name": "part_groundmoss_joint_all_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:groundmoss",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "groundmoss": {
+     "show_part": 6
+    }
+   }
+  },
+  {
+   "name": "part_iron_foot_rust_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "iron": {
+     "show_part": 1
+    }
+   }
+  },
+  {
+   "name": "part_iron_collars_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "iron": {
+     "show_part": 2
+    }
+   }
+  },
+  {
+   "name": "part_iron_shoe_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "iron": {
+     "show_part": 3
+    }
+   }
+  },
+  {
+   "name": "part_iron_base_ring_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "iron": {
+     "show_part": 4
+    }
+   }
+  },
+  {
+   "name": "part_iron_drum_rust_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "iron": {
+     "show_part": 5
+    }
+   }
+  },
+  {
+   "name": "part_iron_heat_scale_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "iron": {
+     "show_part": 6
+    }
+   }
+  },
+  {
+   "name": "part_iron_soot_lockout",
+   "camera": "lockout",
+   "light": "B",
+   "state": "wet",
+   "look": "kit:dirt,groundcracks,groundmoss,iron",
+   "view": "layer:iron",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "group": "part",
+   "plate_height": 2730,
+   "scene": "lockout",
+   "dials": {
+    "iron": {
+     "show_part": 7
+    }
+   }
+  }
+ ]
+}

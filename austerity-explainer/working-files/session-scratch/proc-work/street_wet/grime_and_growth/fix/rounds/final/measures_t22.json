@@ -1,0 +1,460 @@
+{
+ "round": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/fix/rounds/final",
+ "kit": "t22",
+ "base": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/fix/work/base_link",
+ "p1": {
+  "summary": {
+   "official": {
+    "passed": 5,
+    "of": 6,
+    "failing": [
+     "lockout_B_heavy"
+    ]
+   },
+   "all_dots": {
+    "passed": 3,
+    "of": 6,
+    "failing": [
+     "lockout_B_heavy",
+     "lockout_B_wet",
+     "lockout_E_wet"
+    ]
+   },
+   "without_kit": {
+    "passed": 5,
+    "of": 6,
+    "failing": [
+     "lockout_B_heavy"
+    ]
+   },
+   "grid_visible_near_and_middle": {
+    "count": 2,
+    "of": 6
+   },
+   "max_near_contrast": 0.486,
+   "harsh_grid": [],
+   "missing": [
+    "close_A_dry",
+    "close_A_heavy",
+    "close_A_wet",
+    "close_C_wet",
+    "close_D_wet",
+    "close_E_wet",
+    "main_A_dry",
+    "main_A_heavy",
+    "main_A_wet",
+    "main_C_dry",
+    "main_C_wet",
+    "main_D_dry",
+    "main_D_wet",
+    "main_E_dry",
+    "main_E_heavy",
+    "main_E_wet"
+   ]
+  },
+  "verdict": {
+   "official_count_at_least_21": false,
+   "nothing_that_passed_now_fails": true,
+   "without_kit_equals_base": false,
+   "no_harsh_grid": true,
+   "all_dots_reported": 3,
+   "broke": [],
+   "ok": false
+  },
+  "base_summary": {
+   "official": {
+    "passed": 20,
+    "of": 22,
+    "failing": [
+     "lockout_B_heavy",
+     "lockout_B_wet"
+    ]
+   },
+   "all_dots": {
+    "passed": 18,
+    "of": 22,
+    "failing": [
+     "lockout_B_heavy",
+     "lockout_B_wet",
+     "lockout_E_wet",
+     "main_E_heavy"
+    ]
+   },
+   "without_kit": {
+    "passed": 20,
+    "of": 22,
+    "failing": [
+     "lockout_B_heavy",
+     "lockout_B_wet"
+    ]
+   },
+   "grid_visible_near_and_middle": {
+    "count": 18,
+    "of": 22
+   },
+   "max_near_contrast": 0.619,
+   "harsh_grid": [],
+   "missing": []
+  },
+  "pictures": {
+   "lockout_B_dry": {
+    "near": {
+     "rows": [
+      836,
+      960
+     ],
+     "njoint": 3755,
+     "nstone": 47480,
+     "stone": 0.2162,
+     "contrast": 0.286,
+     "delta": 0.0581,
+     "seen": 0.747
+    },
+    "middle": {
+     "rows": [
+      712,
+      836
+     ],
+     "njoint": 1216,
+     "nstone": 21369,
+     "stone": 0.4396,
+     "contrast": 0.086,
+     "delta": 0.0346,
+     "seen": 0.344
+    },
+    "passed": true,
+    "reasons": [],
+    "all_dots": true,
+    "without_kit": true,
+    "kit_share": 0.0
+   },
+   "lockout_B_wet": {
+    "near": {
+     "rows": [
+      836,
+      960
+     ],
+     "njoint": 2531,
+     "nstone": 36760,
+     "stone": 0.471,
+     "contrast": 0.382,
+     "delta": 0.1545,
+     "seen": 0.811
+    },
+    "middle": {
+     "rows": [
+      712,
+      836
+     ],
+     "njoint": 334,
+     "nstone": 5424,
+     "stone": 0.4392,
+     "contrast": 0.076,
+     "delta": 0.019,
+     "seen": 0.311
+    },
+    "passed": true,
+    "reasons": [],
+    "all_dots": false,
+    "without_kit": true,
+    "kit_share": 0.0
+   },
+   "lockout_B_heavy": {
+    "near": {
+     "rows": [
+      836,
+      960
+     ],
+     "njoint": 1230,
+     "nstone": 20095,
+     "stone": 0.6607,
+     "contrast": 0.271,
+     "delta": 0.1766,
+     "seen": 0.637
+    },
+    "middle": {
+     "rows": [
+      712,
+      836
+     ],
+     "njoint": 261,
+     "nstone": 4453,
+     "stone": 0.451,
+     "contrast": 0.037,
+     "delta": 0.0037,
+     "seen": 0.222
+    },
+    "passed": false,
+    "reasons": [
+     "middle contrast 0.037 < 0.07",
+     "middle delta 0.004 < 0.015"
+    ],
+    "all_dots": false,
+    "without_kit": false,
+    "kit_share": 0.0
+   },
+   "lockout_C_wet": {
+    "near": {
+     "rows": [
+      836,
+      960
+     ],
+     "njoint": 2531,
+     "nstone": 36760,
+     "stone": 0.2023,
+     "contrast": 0.486,
+     "delta": 0.0996,
+     "seen": 0.977
+    },
+    "middle": {
+     "rows": [
+      712,
+      836
+     ],
+     "njoint": 334,
+     "nstone": 5424,
+     "stone": 0.1986,
+     "contrast": 0.28,
+     "delta": 0.0693,
+     "seen": 0.737
+    },
+    "passed": true,
+    "reasons": [],
+    "all_dots": true,
+    "without_kit": true,
+    "kit_share": 0.0
+   },
+   "lockout_D_wet": {
+    "near": {
+     "rows": [
+      836,
+      960
+     ],
+     "njoint": 2531,
+     "nstone": 36760,
+     "stone": 0.1882,
+     "contrast": 0.395,
+     "delta": 0.0834,
+     "seen": 0.951
+    },
+    "middle": {
+     "rows": [
+      712,
+      836
+     ],
+     "njoint": 334,
+     "nstone": 5424,
+     "stone": 0.1863,
+     "contrast": 0.172,
+     "delta": 0.0349,
+     "seen": 0.461
+    },
+    "passed": true,
+    "reasons": [],
+    "all_dots": true,
+    "without_kit": true,
+    "kit_share": 0.0
+   },
+   "lockout_E_wet": {
+    "near": {
+     "rows": [
+      836,
+      960
+     ],
+     "njoint": 2531,
+     "nstone": 36760,
+     "stone": 0.525,
+     "contrast": 0.408,
+     "delta": 0.1946,
+     "seen": 0.815
+    },
+    "middle": {
+     "rows": [
+      712,
+      836
+     ],
+     "njoint": 334,
+     "nstone": 5424,
+     "stone": 0.6826,
+     "contrast": 0.096,
+     "delta": 0.0652,
+     "seen": 0.335
+    },
+    "passed": true,
+    "reasons": [],
+    "all_dots": false,
+    "without_kit": true,
+    "kit_share": 0.0
+   }
+  }
+ },
+ "p2": {
+  "ok": true,
+  "failures": [],
+  "element_wet_dry_over_class": {},
+  "wet_to_dry": {
+   "lockout_B_wet": {
+    "walls": 0.8943,
+    "trims": 0.9196,
+    "road": 1.4062,
+    "pavement": 1.0271,
+    "kerb_gutter": 1.0897,
+    "iron": 0.9988,
+    "roofs": 1.1889,
+    "colliery": 1.0489,
+    "chimneys": 0.9707,
+    "paint": 0.999
+   },
+   "lockout_B_heavy": {
+    "walls": 0.8758,
+    "trims": 0.905,
+    "road": 1.3608,
+    "pavement": 0.9483,
+    "kerb_gutter": 1.0869,
+    "iron": 0.9988,
+    "roofs": 1.1988,
+    "colliery": 1.0559,
+    "chimneys": 0.9799,
+    "paint": 0.9986
+   }
+  },
+  "base_wet_to_dry": {
+   "main_A_wet": {
+    "walls": 0.8472,
+    "trims": 0.945,
+    "road": 1.8212,
+    "pavement": 1.1674,
+    "kerb_gutter": 1.9736,
+    "iron": 0.9975,
+    "roofs": 1.1539,
+    "colliery": 1.0467,
+    "chimneys": 1.0,
+    "paint": 0.9946
+   },
+   "main_A_heavy": {
+    "walls": 0.8217,
+    "trims": 0.9308,
+    "road": 1.7966,
+    "pavement": 0.9654,
+    "kerb_gutter": 1.8727,
+    "iron": 0.9962,
+    "roofs": 1.1532,
+    "colliery": 1.0522,
+    "chimneys": 1.0,
+    "paint": 0.9941
+   },
+   "main_C_wet": {
+    "walls": 0.8402,
+    "trims": 0.9463,
+    "road": 2.4489,
+    "pavement": 1.785,
+    "kerb_gutter": 2.1192,
+    "iron": 1.001,
+    "roofs": 1.0836,
+    "colliery": 1.0395,
+    "chimneys": 1.0004,
+    "paint": 0.9961
+   },
+   "main_D_wet": {
+    "walls": 0.806,
+    "trims": 0.9493,
+    "road": 1.4403,
+    "pavement": 1.0066,
+    "kerb_gutter": 1.538,
+    "iron": 1.0,
+    "roofs": 1.2344,
+    "colliery": 1.0465,
+    "chimneys": 1.0013,
+    "paint": 0.9943
+   },
+   "main_E_wet": {
+    "walls": 0.9371,
+    "trims": 1.2322,
+    "road": 3.7119,
+    "pavement": 1.3591,
+    "kerb_gutter": 3.0509,
+    "iron": 1.0189,
+    "roofs": 1.0333,
+    "colliery": 0.9911,
+    "chimneys": 1.0084,
+    "paint": 1.0171
+   },
+   "main_E_heavy": {
+    "walls": 0.9238,
+    "trims": 1.2557,
+    "road": 3.5763,
+    "pavement": 1.1101,
+    "kerb_gutter": 2.87,
+    "iron": 1.0189,
+    "roofs": 1.0259,
+    "colliery": 0.9939,
+    "chimneys": 1.0088,
+    "paint": 1.016
+   },
+   "close_A_wet": {
+    "walls": 0.7857,
+    "trims": 0.9173,
+    "road": 2.5748,
+    "pavement": 1.0951,
+    "kerb_gutter": 1.8032,
+    "iron": 0.9881,
+    "roofs": 1.1158,
+    "colliery": 1.0827,
+    "paint": 0.9956
+   },
+   "close_A_heavy": {
+    "walls": 0.753,
+    "trims": 0.9024,
+    "road": 2.5767,
+    "pavement": 0.9494,
+    "kerb_gutter": 1.7617,
+    "iron": 0.9851,
+    "roofs": 1.1173,
+    "colliery": 1.0931,
+    "paint": 0.9956
+   },
+   "lockout_B_wet": {
+    "walls": 0.8826,
+    "trims": 0.9311,
+    "road": 1.4005,
+    "pavement": 1.0165,
+    "kerb_gutter": 1.0938,
+    "iron": 0.9977,
+    "roofs": 1.1731,
+    "colliery": 1.0409,
+    "chimneys": 0.9721,
+    "paint": 0.9981
+   },
+   "lockout_B_heavy": {
+    "walls": 0.8627,
+    "trims": 0.9185,
+    "road": 1.354,
+    "pavement": 0.9353,
+    "kerb_gutter": 1.0877,
+    "iron": 0.9977,
+    "roofs": 1.182,
+    "colliery": 1.0454,
+    "chimneys": 0.9836,
+    "paint": 0.9976
+   }
+  },
+  "puddle_cover": {
+   "lockout_B_wet": 0.0609,
+   "lockout_B_heavy": 0.4197,
+   "lockout_C_wet": 0.0609,
+   "lockout_D_wet": 0.0609,
+   "lockout_E_wet": 0.0609
+  },
+  "speckle": {
+   "lockout_E_wet": 0.00091
+  },
+  "element_wet_dry": {},
+  "highlight": {
+   "lockout_B_wet": 0.0476,
+   "lockout_B_heavy": 0.0476,
+   "lockout_C_wet": 0.0482,
+   "lockout_D_wet": 0.0488,
+   "lockout_E_wet": 0.046
+  }
+ }
+}

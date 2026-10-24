@@ -1,0 +1,135 @@
+{
+ "set": "pit_village_street",
+ "scene": "street",
+ "pack": true,
+ "feature_dirs": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/ground",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/walls",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/growth",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/street_wet/grime_and_growth/integrator"
+ ],
+ "jobs": [
+  {
+   "name": "today_street",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "today",
+   "view": "beauty",
+   "size": [
+    540,
+    960,
+    16
+   ],
+   "group": "today",
+   "scene": "street"
+  },
+  {
+   "name": "plate_main_base",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "pieces_json": false
+  },
+  {
+   "name": "close_gutter_close_dry_base",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "close",
+   "pieces_json": false
+  },
+  {
+   "name": "close_gutter_close_wet_base",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "base",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "close",
+   "pieces_json": false
+  },
+  {
+   "name": "plate_main_growth",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    1536,
+    2730,
+    48
+   ],
+   "group": "plate",
+   "plate_height": 2730,
+   "pieces_json": true
+  },
+  {
+   "name": "close_gutter_close_dry_growth",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "dry",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "close",
+   "pieces_json": false
+  },
+  {
+   "name": "close_gutter_close_wet_growth",
+   "camera": "gutter_close",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:growth",
+   "view": "beauty",
+   "size": [
+    960,
+    720,
+    24
+   ],
+   "group": "close",
+   "pieces_json": false
+  },
+  {
+   "name": "layer_growth_plate_main",
+   "camera": "main",
+   "light": "A",
+   "state": "wet",
+   "look": "solo:growth",
+   "view": "layer:growth",
+   "size": [
+    1536,
+    2730,
+    1
+   ],
+   "plate_height": 2730,
+   "group": "layer"
+  }
+ ]
+}
