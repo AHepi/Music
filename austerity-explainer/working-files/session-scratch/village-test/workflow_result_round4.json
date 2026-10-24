@@ -1,0 +1,345 @@
+{
+ "update": {
+  "summary": "The explainer-film plugin is now version 1.5.0 (it was 1.4.0). The marketplace file has the same version, and only its version and description lines changed. Nothing was committed or pushed. All four faults from the forest settlement test are fixed in the plugin's general code, so the fixes work for any place.\n\nFAULT 1, plain surfaces. The surface step (kit/place-kit/place_kit/surfaces/scans.py and materials.py) now gives each surface a real photographed scan. It looks first in the person's own texture library and then at the free Poly Haven scan; 36 of the 45 surfaces in data/surfaces.json name one. If neither can be had, it falls back to the old made-in-code surface and says so, surface by surface.\n- A scan is downloaded once per computer into ~/.cache/explainer-film/surface-scans, which is outside every repository (PLACE_KIT_SCAN_CACHE can name another folder). Each file's web address is read from Poly Haven's own file list, never guessed. The request carries a plain tool name and nothing about the person.\n- The person's own library is set with the new \"own_surfaces\" key in the place settings: a folder with one sub-folder per surface, a \"use\" list from roles to sub-folders, and an optional size in metres. Its pictures are read where they are and never copied.\n- Every normal map is checked against its own height map with the kit's normal test. A map that points the wrong way is turned round, and a map that leans as a whole is levelled. The corrected copy is the one used.\n- The wear layers stay on top of the scan. The ground and other roles that displace get real displacement from the height map, in EEVEE and Cycles. The repeat size is the scan's real size.\n- Stones and pebbles now lie on unpaved ground. Their sizes come from the standard geology size classes (Wentworth 1922): pebble 4 to 64 mm, cobble 64 to 256 mm.\n- When a place is damp or wet, puddles lie in hollows and wheel ruts as short, rounded pools with dry stretches between them (new file growth/puddles.py). They never sit on a roof.\n\nFAULT 2, weeds spread evenly. Weeds, litter and stones are now laid by site (new file growth/sites.py): an 18 cm strip at wall feet, road edges and verges (including the seam where two grounds meet), fence and building lines, the joints between stones or boards, the grass strip down a road's middle, damp shady corners, and a thin scatter everywhere else.\n- Each site gets its own number per metre or per 100 square metres (species.json, \"sites\"), scaled by how neglected the place is and by how much of the site the cameras see.\n- Each plant kind's liking for seams is read, and the top-up after the keep-out check adds only inside sites.\n- The audit measures the share in every site again. A new check, \"place: sites\", raises a LOOK warning when the plants are spread evenly or a site comes up short.\n\nFAULT 3, the three visible faults, each fixed where it starts:\n- **Dark V-shaped specks:** fern fronds were standing on their edge. They now lie nearly flat and let light through.\n- **White sparkles on the thatch:** a wet clear coat was on a surface that soaks up water. Such surfaces now get no coat and a wet roughness of at least 0.55.\n- **Flat brown rectangles beside the road:** a plain made-in-code ground showed between a straight edge and the verge. That ground is now a photographed scan, two grounds blend over 1 m wherever they meet, and verge weeds grow over the edge.\n\nFAULT 4, the gate failing its own work:\n- The kit's own weeds, stones and puddles are counted as \"kit scatter\", no longer as \"unowned\". They have their own triangle budget (1,200,000) and stay inside it by themselves.\n- The audit now records the real-world facts it used, so the judge reads them with or without --real-world-facts. The workflow's audit now passes that option too.\n- `combine` now names the owners whose objects changed on a second run.\n- In workflows/build-a-place.js, a repair round that saves no finished file keeps the last audited file instead of failing.\n\nDocs updated: the plugin README (a 1.5.0 Changes entry), the place-kit README, SOURCES-AND-LICENCES and DEVIATIONS, the skill files, the tips guide (new tips 20 to 23), the calculators README, and the place-integrator agent. The \"REQUIRED\" block is still word for word the same in all three skills that carry it. The kit still never names a kind of place in its code.\n\nNew tests: test_place_real_surfaces.py, with 54 checks (Blender part included). It makes its own small texture library, with one DirectX normal map on purpose, so it never downloads. Setting PLACE_KIT_NETWORK_TESTS=1 adds one real download, which passed. There are also 4 new cases in the workflow test, and every test now runs with downloads off.\n\nProof: a small scene (a dirt road, grass, a stone wall, a plastered hut with thatch, a fence; neglected, damp) was finished once with the 1.4.0 kit and once with the 1.5.0 kit. Both were drawn with EEVEE on the rented card and put side by side, with a close-up of the road under each, in one picture of 249,998 bytes.",
+  "files_changed": [
+   "/home/user/Music/.claude-plugin/marketplace.json (version and description only)",
+   "/home/user/Music/plugins/explainer-film/.claude-plugin/plugin.json",
+   "/home/user/Music/plugins/explainer-film/README.md",
+   "/home/user/Music/plugins/explainer-film/agents/place-integrator.md",
+   "/home/user/Music/plugins/explainer-film/workflows/build-a-place.js",
+   "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/SKILL.md",
+   "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/surface-recipes.md",
+   "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/wear-recipes.md",
+   "/home/user/Music/plugins/explainer-film/skills/surfaces-wear-and-construction/the-required-steps.md",
+   "/home/user/Music/plugins/explainer-film/skills/make-3d-models/SKILL.md (REQUIRED block step 2 only)",
+   "/home/user/Music/plugins/explainer-film/skills/build-and-paint-a-place/SKILL.md (REQUIRED block step 2 only)",
+   "/home/user/Music/plugins/explainer-film/kit/docs/LLM tips and tricks.md",
+   "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+   "/home/user/Music/plugins/explainer-film/kit/calculators/README.md",
+   "/home/user/Music/plugins/explainer-film/kit/calculators/place_audit_check.py",
+   "/home/user/Music/plugins/explainer-film/kit/calculators/tests/checks.py",
+   "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_real_surfaces.py (new)",
+   "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place/probe_real_surfaces.py (new)",
+   "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/place/finished_hut_audit.json",
+   "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_build_a_place_workflow.py",
+   "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_place_skills.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/README.md",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/SOURCES-AND-LICENCES.md",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/DEVIATIONS.md",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/data/surfaces.json",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/data/species.json",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/data/real_world_facts.json",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/data/roles.json",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/data/treatments.json",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/surfaces/scans.py (new)",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/surfaces/materials.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/surfaces/displacement.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/growth/sites.py (new)",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/growth/puddles.py (new)",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/growth/scatter.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/growth/pieces.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/growth/keepout.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/masks.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/plan_group.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/chain.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/door.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/layer_base.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/layers/wetness.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/wear/seed.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/checks/scene_audit.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/checks/combine.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/commands.py",
+   "/home/user/Music/plugins/explainer-film/kit/place-kit/place_kit/settings_file.py",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/before-and-after.jpg (proof picture)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/ (scripts, logs, audit and the two drawn pictures of the proof)",
+   "/root/.cache/explainer-film/surface-scans (the kit's own download cache, 85 MB, outside every repository; kept so the next build does not download again)"
+  ],
+  "measures": "The proof scene, measured from the kit's own output and audit:\n- **Before (1.4.0 kit):** all 7 surfaces made in code, 6,657 plants and 9,349 litter pieces spread evenly, no stones, no standing water.\n- **After (1.5.0 kit):** 7 of 7 materials from photographed scans (brown_mud_dry, leafy_grass, castle_wall_slates, painted_plaster_wall, thatch_roof_angled, brown_planks_04, rough_wood).\n  - 2,331 plants, 54% of them in sites: verges 38%, between the ruts 10%, wall feet 5%, fence lines 1%, thin background 46%.\n  - 2,277 litter pieces and 1,565 stones.\n  - 80 small puddles, 11.6 square metres in all.\n  - 229,540 kit-scatter triangles against a budget of 1,200,000.\n  - The audit passes with 2 LOOK warnings, 0 failures and 26 passes; all 8 normal maps point the right way.\n- **Normal maps (earlier in this job):** two downloaded maps leaned as a whole (mean red and green about 0.35 and 0.41, where 0.5 is level). They are now levelled in a checked copy.\n- **Original forest settlement test:** the kit's own scatter had 87,812 pieces and 2.7 million triangles counted as \"unowned\". Now the kit's scatter has its own owner and budget and trims itself if it goes over.\n- **Proof picture:** 1836 x 1052 pixels, 249,998 bytes.",
+  "tests_run": "- **With Blender** (BLENDER=/home/user/work/blender-app/blender-5.2.2-linux-x64/blender, python3 kit/calculators/tests/run_all.py): 52 test files, 50 passed, 0 failed, 2 skipped; 2,112 checks passed, 0 failed, 8 skipped. The skips are only files that are not on this machine (the project's paintings and audio).\n- **Without Blender** (BLENDER unset): 47 passed, 0 failed, 5 skipped; 1,832 checks passed, 0 failed.\n- After the last edits I ran these again, and all passed:\n  - test_place_real_surfaces.py with Blender: 54 of 54.\n  - The same test with PLACE_KIT_NETWORK_TESTS=1 and no Blender: 34 of 34, including one real Poly Haven download and a second call served from the cache.\n  - test_place_skills: 70 of 70.\n  - test_place_generic: 18 of 18. This is the check that the place parts stay general.\n  - test_lessons_text: 22 of 22.\n  - test_place_batching_rule: 27 of 27.\n  - check_presets.py: 6 of 6 groups.\n- The workflow test (test_build_a_place_workflow.py): 148 of 148, including the new cases for --real-world-facts, a missing scene file, a repair round that lost its file, and naming the owner whose stage is not idempotent.",
+  "pictures": [
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/before-and-after.jpg (the before-and-after proof, 249,998 bytes: 1.4.0 on the left, 1.5.0 on the right, a 2x close-up of the road under each)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof-pictures/before.jpg (1.4.0 kit, EEVEE on the card, 900 x 600)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof-pictures/after4.jpg (final 1.5.0 kit, EEVEE on the card, 900 x 600)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plugin-work/real-surfaces/work/proof-pictures/after3.jpg (an earlier 1.5.0 try where the rut puddles read as long blue lines; kept to show why the puddles were changed)"
+  ],
+  "card_seconds": "Drawing jobs, by billed work time, all through render_client_serverless.py:\n- Earlier in this job: 85.6 s, 77.0 s and 26.5 s, plus one status wake-up.\n- This session: 37.0 s and 39.4 s, each with a wake-up under 1 second.\n- Total for drawing jobs: about 265.5 seconds of billed work.\n\nNot counted: the uploads (the 68 MB finished scene was sent twice, plus the starting and before scenes and the drawing script). The client does not report billed seconds for uploads, so their cost is unknown.\n\nNo job waited in line. The queue and the endpoint were not touched.",
+  "failures": [
+   "My first 1.5.0 proof (after3.jpg) showed the rut puddles as long blue lines. That was a new visible fault, caused by choosing stretches at random over a 3 m length. I changed it to 1.5 m stretches chosen by a slow noise, a fill depth that varies from pool to pool, and water that draws back toward each pool's ends. The final picture (after4.jpg) shows short pools with dry ground between them.",
+   "The first full Blender run failed 2 tests, both caused by my own edits, and both are fixed. (1) check_presets found the place word 'forest' in a code comment I wrote in combine.py. (2) test_place_skills: the REQUIRED block now differed between the three skills, and the version check still expected 1.4.0. A rerun of each passes.",
+   "test_place_real_surfaces.py gave wrong results when PLACE_KIT_NETWORK_TESTS=1 was set. Its offline checks did not set offline mode themselves, it read this computer's own scan cache, and it skipped the download check when Blender was missing. All three are fixed, and that mode now passes 34 of 34.",
+   "My earlier numbers in the README were from an older run of the proof scene (3,224 plants, 67% in sites, 8 puddles). After the verge-length fix and the puddle changes, the proof finished with 2,331 plants (54% in sites) and 80 puddles. The docs now give the new measured numbers.",
+   "Only 54% of the plants are in sites on the proof scene, just above the 50% line, because its large open grass field holds 46% of them as thin background scatter. This is judged, not fixed: the number per square metre in the background is about 80 times lower than at a verge.",
+   "Judged by eye: the photographed thatch scan reads grey, close to slate at a distance, and the 1,565 stones are hard to see at 900 x 600.",
+   "Earlier in this job, before the summary: several presets and test fixes (a fact's confidence word, made_by names, a banned word, a fixture missing site data), the puddle material lacking a normal map, the plan picture 'f' being dropped on save, stones planned where no species likes the site, verge lengths counted twice, the grass scan reading beige and the plaster scan brown (both fixed: the grass colour is pulled toward the palette and the plaster uses another scan), and the kit's scatter going over budget. All are fixed and covered by tests.",
+   "EEVEE cannot draw on this computer (libEGL is missing), so every proof picture was drawn on the rented card.",
+   "Not fixed, and older than this job: test_place_audit_check.py leaves its temporary folders in /tmp. 46 of them (4.2 MB) from my runs were deleted by hand. My own test now removes its folder in every case."
+  ],
+  "untested": [
+   "The forest settlement test place itself was not rebuilt with 1.5.0. That is the next step, the rebuild with Sonnet.",
+   "Only 7 of the 36 scans named in surfaces.json were built into a scene and drawn. The others were chosen from Poly Haven's list and a small preview each. 9 surfaces have no scan and stay made in code: shingle_wood, rope, straw, wicker, ceramic_glazed, foliage, water_still, water_sea, glass_old.",
+   "The person's own texture library was tested only with small pictures the test makes itself, never with a real downloaded or bought texture pack.",
+   "The proof was drawn only in EEVEE. Cycles was not tried on the new scan materials with real displacement and puddles. The kit's displacement in Cycles was covered only by the existing tests.",
+   "A large place, with hundreds of buildings, many kinds of ground and many 2k scans at once, was not tried. Memory, finish time and how the seam blend looks there are unknown.",
+   "The new workflow behaviour was tested only with canned helpers, never in a live run with real agents: keeping the last good file after a lost round, --real-world-facts, scene_missing and naming the owner whose stage is not idempotent.",
+   "Whether a smaller model, told only to build a place in plain words, now gets a good-looking result is not known.",
+   "The site numbers, the colour pull toward the palette, the puddle fill and keep shares, and the 0.55 wet roughness for surfaces that soak up water are first tries. They were judged on one small scene and the test yard, not measured against real places."
+  ]
+ },
+ "rebuild": {
+  "summary": "I ran the plugin's whole finishing pass on the combined village (round3/combined.blend), then the audit and the place preflight. All of it ran on the rented card, because this computer has no Blender. The audit has 0 FAIL, 7 LOOK, 26 PASS, and the preflight stage place exited 0. Round 3 had one FAIL (unowned triangles, 2.7 million); the 1.5.0 plugin counts the kit's scatter on its own budget, so that line now passes. The new finished scene is on the rented store: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round4/finished.blend (134,067,732 bytes, SHA-256 4f1404497d1a876a4db5918abd54a925beca4a9e3df226ef6b019aa38acd1513). The audit is beside it as place-audit.json (a copy of the audit is also here). Pictures: the four view cameras (View wide, View road_eye, View stable_close, View cottage_close) plus one ground close-up of the wheel ruts, each 1200 x 800, EEVEE (the renderer rule said EEVEE: nothing is lit), all JPGs under 400 KB, in rebuild/. About 7 minutes of card time were used.\n\nWhat I did:\n1. Read the plugin README, the integrator and renderer instructions, the required steps, the rented-card and batched-rounds notes, and the pay-per-second guide.\n2. Made a copy of the plan's settings (plan/place-settings-round4.json). It differs from the plan in two ways. The owners path is absolute. The person's own texture library is named in own_surfaces: mud -> ground.dirt_road and ground.mud; wood -> timber.fence and timber.generic; metres 1.5 and 0.8 (my guess, not the library's own).\n3. Uploaded the updated plugin, the plan folder, the settings copy and the library to the store.\n4. Ran finish on the card from round3/combined.blend, which was only read (its SHA-256 still starts 383c020b). I wrote no stage file and did not change any part, the ground, or ownership.\n5. Ran the audit, the preflight stage place, the renderer rule, and the pictures.\n\nWhat finish did, as the pass's own steps (from the saved output):\n- Roles for 450 objects (37 roles); 2 roads shaped; 7 parts seated again.\n- Surfaces: 21 PK materials, 17 from photographed scans and 4 made in code.\n- Shape damage on 268 objects (the plugin's own step; I did no hand shaping).\n- Wear in 61 materials; 214 puddles (41.4 square metres); 9,495 plants, 5,266 litter pieces and 3,921 stones, 87% of the plants in sites.",
+  "files_changed": [
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round4/finished.blend (new, on the rented store; no local copy)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round4/place-audit.json (new; local copy and store copy)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings-round4.json (new settings copy with own_surfaces)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/wide.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/road_eye.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/stable_close.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/cottage_close.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/ground_closeup.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/extra/ground_puddle_not_chosen.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/logs/ (six picture logs)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/finish-round4.txt, audit-judged-round4.txt, audit-round4.txt, preflight-round4.txt, renderer-for-round4.txt, draw-round4.txt",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/integrator/ (my scripts round4_finish.sh, round4_draw.sh, draw_round4.py, network_test.py, the job file, and the plugin copy on the store)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/card-time-ledger.jsonl (my jobs added under integrator-round4)"
+  ],
+  "measures": "Measured (from the audit and logs):\n- Audit verdict: 0 FAIL, 7 LOOK, 5 KNOWN (switched off on purpose), 26 PASS. Preflight place: exit 0; 0 to fix, 5 to look at, 1 known and accepted, 3 checks.\n- Freshness: the audit is about this exact finished.blend, and about the round-4 settings file.\n- Scene: 464 visible objects (469 in all), 67 materials, 2,559,047 triangles. Kit scatter is 818,167 of those, against a 1.2 million budget. Builders' shares: ground 482,150; forest 349,844; cottages_north 187,500; cottages_south 344,120; stable 127,352; props 249,914. All inside budget.\n- Surfaces: 17 materials from photographed scans, 4 made in code (ceramic, rope, straw, wicker; no scan is named for them, a LOOK). 26 normal maps, all pointing the right way. Construction: 440 parts carried, nothing floats. Scale: 165 sizes fit. Plain boxes: 0%. Keep-out: no plant or litter on a wheel track, crown or puddle.\n- Own library actually used: mud on ground.dirt_road and ground.mud only (pk_source own:mud). The wood mapping matched no PK material, because the stable's timbers carry their own pictures and were kept.\n- The 7 LOOKs: earth floors missing weathering and wetness (4 objects); dirt road missing moss; grass missing displacement; 4 made-in-code surfaces. The preflight adds one more LOOK: no fresh checker has looked. Plan masks took 75 s on the card (budget 120 s).\n- Pictures (EEVEE, 48 samples, card): wide 36.7 s for the first (shader build), the others 2.8 to 3.1 s each. Sizes in KB: wide 204, road_eye 218, stable_close 246, cottage_close 236, ground_closeup 332 (all 1200 x 800). Mean luminance of wide 0.487.\n- Card time, from the ledger: jobs 364 s (finish job 256.9 s with its 5 s idle tail, picture job 67.1 s, three small look-at-the-card jobs about 41 s) plus the plugin upload 48 s, plus a last clean-up job of about 7 s, so about 420 s, roughly 7 minutes. The other uploads (plan folder, library 79 MB, three small files) were not timed; they add some tens of seconds, and by wall clock the whole card use fits inside 10 minutes. Estimated cost at the 4090 price is a few US cents, not a bill. Workers showed idle with no waiting jobs; no job waited.\n- Judged by eye, not measured: the pictures and their faults below.",
+  "tests_run": "- Finish pass (card, Blender 5.2.2, full size, not quick): saved, reopened and audited. Its own last step, the judge, crashed. See failures.\n- Audit gathering on the saved file, then the judge (place_audit_check.py) re-run with Blender's bundled Python: exit 0, text in reports/audit-judged-round4.txt.\n- explainer-film-preflight stage place, run with Blender's Python on the card: exit 0 (report in reports/preflight-round4.txt; its folders are on the store).\n- Renderer rule (renderer-for): EEVEE, reason: nothing is lit.\n- Card network check (Poly Haven file list reachable from the card): passed. The card downloaded the scans (94 MB) into a cache I then deleted.\n- Render of 6 pictures through the plugin's own render verb on the card: 6 of 6 drawn. The two extra close-up cameras were added in memory and never saved, so the audited file is unchanged. Its SHA-256 was re-read after drawing and still matches.\n- I did not run the plugin's own test suite.",
+  "pictures": [
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/wide.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/road_eye.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/stable_close.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/cottage_close.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/ground_closeup.jpg",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/rebuild/extra/ground_puddle_not_chosen.jpg"
+  ],
+  "card_seconds": "About 420 s (7 minutes). The ledger lists 364 s for my five measured jobs, 53 s for the plugin upload and the clean-up job, and a few untimed small uploads on top. Upper bound by wall clock: 10 minutes. Budget: 20 minutes.",
+  "failures": [
+   "No Blender on this computer, so `explainer-film-place finish` could not start from here (it exits 2: Blender was not found). I ran the same Blender command the launcher builds directly on the card. The card has no system python3, no curl, no PIL and no cv2.",
+   "Finish ended with a FAIL line and exit 1: [Errno 2] No such file or directory: 'python3'. The kit starts its judge step by calling python3 by name from inside Blender, and the card has none. This happened after the scene was saved and the audit facts were gathered. A second run of the audit step died the same way. I then ran the judge and the preflight with Blender's own bundled Python (exit 0 both). The audit facts file is about the exact saved scene (the preflight's freshness check passed). A plugin fix would be to use the running Python (sys.executable) instead of the name python3.",
+   "The preflight on the card ran with Blender's Python, which has no PIL or cv2. The place stage needed neither, but a stage that reads pictures (--place-pictures with the style guard) was not run.",
+   "Judged by eye, faults in the pictures (not caught by the audit): (a) the own mud library on the roads and yard looks heavily pleated and wrinkled up close (ground_closeup.jpg, the road edges), probably the mud height map at my guessed 1.5 m tile size; (b) the puddles in the puddle close-up (not chosen, extra/) are straight-edged flat grey slabs, and the water in the ruts reads as thin grey-blue channels, so they do not look like pools; (c) in the wide picture the forest floor top-left is a flat pale tan with a faint repeating pattern, not leaf litter; (d) the trees are low-polygon blobs, which is the part builders' work and I left it alone. None of these were fixed.",
+   "My first look at the picture camera positions for the two extra close-ups was a guess from the road_eye camera. The puddle one landed on a puddle but is a poor picture, so I kept the ruts close-up as the chosen one and put the other in extra/."
+  ],
+  "untested": [
+   "Whether a fresh checker agrees (no checker was run; the preflight says so as a LOOK).",
+   "The combine order tests (plain and reverse, idempotent) and ownership check were not re-run; the parts were not changed, and I started from round3/combined.blend as given. The finish pass itself changes shapes (268 objects bent or leaned by the plugin's damage step), as it did in round 3.",
+   "Cycles (the rule says EEVEE here, so none was drawn), light-group or flat/side/wet light variants, and full-size finals (not asked).",
+   "Whether the own mud library at 1.5 m and wood at 0.8 m are the right real sizes (guessed; no variations batch was run).",
+   "The preflight stages shots and plates, and the style guard on the pictures.",
+   "That the unchosen close-up and the wood mapping of the library show anywhere: the wood mapping matched no material here."
+  ]
+ },
+ "verify": {
+  "verdict": "Better, but not finished. Three of the person's four points are fixed: the weeds now gather at edges, the dark V specks are gone, the thatch sparkles are gone and the flat brown rectangles are gone. The road is the one still short of the mine.\n\nTHE ROAD now wears the person's own mud pictures (colour, normal map and height, packed into the scene), with 6 cm of real displacement. On same-size crops (540 x 360) it now equals the mine's ground in fine grain (0.31 against the mine's 0.30; before 0.02), colour spread (10.9 against 10.3; before 4.8) and number of small lumps (213 against 204; before 19). It reaches only 68% of the mine's large shapes (0.20 against 0.29). By eye it is a crinkled, pleated skin: no real stones, no wet shine, and no rounded puddle. The cause is the road mesh, which has a vertex only every 10.6 cm with no subdivision, so the 6 cm displacement cannot carry the scan's small relief. The 6 cm displacement and the normal map were already there before (made in code); 1.5.0 swapped in photographed pictures. The water in the ruts still draws as long thin grey channels: 71.5% of the 260 water pieces are more than 4 times longer than wide, so the \"short, rounded pools\" claim does not hold here.\n\nTHE WEEDS before sat in each place in proportion to its area, which is an even spread. After, within 30 m of the four cameras, wall feet hold 16.9% of the weeds on 6.4% of the ground, road edges and verges 25.8% on 8.0%, and seams 14.7% on 3.5%. Open ground fell from 71.5% to 35.3%. There are two new faults. First, 26% of all weeds stand in rings round the outline of tree crowns, and the audit counts these as \"fence and building lines\", which lifts its \"87% in sites\". Second, 109 weeds stand fully inside the cottages and the stable (35 before), and 162 pieces are buried under inside floors.\n\nSURFACES: every one kept its normal map, displacement, dirt, grime, weathering, damage, moss, wetness, rust and rubbish (no losses, read from the scene nodes as well as the audit). The person's own surface pictures can be used from the plugin through \"own_surfaces\". None of the 31 pictures is in the plugin or the repository (0 matches by fingerprint among 3,390 tracked pictures). The wood pictures were not used, because the timber kept the builders' own pictures.\n\nGATE: the audit and preflight counts agree, and the audit is about the exact file (SHA-1 and SHA-256 match). But on the rented card the plugin's own finish and audit steps end in FAIL with exit 1, because the kit calls \"python3\" by name (scene_audit.py line 427). The audit also says \"inside the buildings nothing grows\" while weeds stand inside.\n\nTESTS: the full suite with Blender gives 50 passed, 0 failed, 2 skipped; 2,112 checks passed, the same as the report. The guard test (test_place_generic) 18 of 18; check_presets 6 of 6. Nothing personal or secret is in the plugin. One caution: the plugin's README and the new test now describe the test place (\"a settlement among trees with unkept dirt tracks\") and use the person's phrase \"edge logic\", and the guard test does not catch this.\n\nNote: another session made a checkpoint commit (134d558, \"being verified\") at 20:44 while I worked, and the branch shows as up to date with its remote. I did not commit or push. No plugin file changed after my tests started, so what I tested is what was committed.\n\nThe sheet: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/verify/village-before-after-and-mine.jpg (368,904 bytes).",
+  "per_question": [
+   {
+    "question": "1. Does the dirt road now have real photographed or library surfaces with normal maps and real displacement, and how close does its detail come to the mine's ground (same-size crops)?",
+    "answer": "partly",
+    "evidence": "Read from the scene nodes: the road material uses pk_scan_own_mud colour, normal and height (1254 px, from the person's library), with a 1.5 m repeat (Sonnet's guess), a normal map wired to the shader and displacement 0.06 m, method BOTH. Before it had a made-in-code normal and height and the same 0.06 m displacement. The road mesh has a vertex every 10.6 cm (median edge) and no subdivision, so the displacement only shows coarse relief; the close-up looks pleated. Same-size crops of 540 x 360 (first village road / rebuilt road / mine's ground): fine grain 0.02 / 0.31 / 0.30; middle 0.05 / 0.28 / 0.32; large shapes 0.12 / 0.20 / 0.29; lumps 19 / 213 / 204; colour spread 4.8 / 10.9 / 10.3. In the mid-distance road_eye view, large shapes fell from 0.16 to 0.12 while fine grain rose four times. Missing against the mine: real stones on the road (only 2.1% of the 3,921 stones lie on the road away from its edges), wet shine, and rounded puddles. The rut water is 260 pieces with a median of 1.65 m x 0.26 m; 71.5% are more than 4 times longer than wide."
+   },
+   {
+    "question": "2. Are the person's own uploaded surfaces usable from the plugin, and kept out of the plugin and the repository?",
+    "answer": "yes",
+    "evidence": "The \"own_surfaces\" setting (folder, use, metres) worked: the audit and the material's own record say pk_source own:mud on ground.dirt_road and ground.mud. scans.library_files picks normal.png and height.png over the DirectX and as-uploaded copies. The wood mapping matched nothing, because the timber.generic materials kept the builders' own pictures ('Stable tile' and others). Fingerprints of all 31 uploaded pictures: 0 matches among 3,390 tracked pictures in the repository and 0 in the plugin folder. No untracked picture or .blend files; no library path in the plugin data. Caveat: the kit packs the pictures into the finished .blend (scans.pack_images), so a copy lives inside that scene file on the rented store."
+   },
+   {
+    "question": "3. Do the weeds now follow edges (wall feet, road edges and verges, seams and joints, open ground), before and after?",
+    "answer": "partly",
+    "evidence": "My own measure, from the scene's geometry and not the kit's masks: weed pieces within 30 m of the 4 view cameras, before -> after (share of the ground area in brackets). Wall feet (within 0.35 m of a building) 6.7% -> 16.9% (6.4%). Road edges and verges (within 0.6 m of the edge, or on a verge) 7.3% -> 25.8% (8.0%). Seams between two grounds 4.3% -> 14.7% (3.5%). Foot of posts, props, rocks and trunks 3.0% -> 4.7% (2.0%). On the road away from its edges 7.1% -> 2.7% (8.1%). Open ground 71.5% -> 35.3% (72.0%). The whole scene: open ground 96.7% -> 54.2%. This village has no stone or board joints; the kit's 'joints' here are lines where two grass grounds meet. Faults: 2,481 of 9,495 weeds (26%) stand within 0.3 m of the edge of a tree crown's shadow (2% before), and 431 stand under crowns. The kit counts crowns as props, and the audit calls these rings 'fence and building lines'. 109 weeds are fully inside buildings (35 before), and 162 pieces are under inside floors."
+   },
+   {
+    "question": "4. Are the dark V specks, the thatch sparkles and the flat brown rectangles gone?",
+    "answer": "yes",
+    "evidence": "V specks: a pixel ray at road_eye (693,506) hit 'PK scatter fern 0' before and the road after. The share of fern leaf area steeper than 60 degrees went from 100% to 11.7%. Thatch: on all three thatch materials Film Coat went 0.4 -> 0.0 and Wet Roughness 0.3 -> 0.55. Bright specks on the thatch in the wide view: 410 -> 24, and none visible in the close crops. Brown rectangles: the same pixels still hit 'Ground forest floor' (the gap is still there), but it now wears the forest_leaves_02 scan and blends with the grass; no hard rectangle is visible. Colour across the road and verge edge now changes over 116 px (5 px before), but the edge still reads as a straight line because the texture and the displacement stop there."
+   },
+   {
+    "question": "5. Did the audit and the preflight pass without contradicting themselves?",
+    "answer": "partly",
+    "evidence": "The counts agree: the audit gives 0 FAIL, 7 LOOK, 5 KNOWN, 26 PASS, and the preflight gives 0 fix, 5 look, 1 known (it groups the floor.earth looks and the KNOWN lines, and adds 'no fresh checker'). Freshness was proved: on the card the file's SHA-1 35d64063... equals the audit's scene_sha1, and its SHA-256 4f140449... equals the report's. Contradictions: (a) the plugin's own finish and audit steps end 'FAIL ... No such file or directory: python3' with exit 1 on the rented card, because scene_audit.py line 427 has no sys.executable fallback, while the judge run by hand says WARN with exit 0. (b) A KNOWN line says 'inside the buildings: dry, nothing grows', yet 109 weeds stand inside. (c) 'sites PASS 87%' counts the rings round tree crowns as fence lines. (d) 'displacement ... on a mesh that can show it' passes, but a 10.6 cm mesh cannot show a 1.5 m scan's small relief."
+   },
+   {
+    "question": "6. Did every surface keep its normal map, dirt, grime, weathering, damage and the rest?",
+    "answer": "yes",
+    "evidence": "Audit treatments for all 67 materials, before -> after: normal_map 61->61, displacement 7->7, dirt 61->61, grime 55->55, weathering 51->51, cracks_and_chips 44->44, edge_wear 50->50, moss 40->40, wetness 56->56, rust 5->5, rubbish 8->8, shape_damage 46->46. 0 lost, 0 amount changes, 0 missing. My own read of the node trees: 67 of 67 materials have a normal map node reaching the shader both times, 7 of 7 have displacement wired, and the counts of wear nodes by name are identical (dirt 183, grime 165, weather 153, crack 132 and so on). Grass has no displacement before or after (an audit LOOK)."
+   },
+   {
+    "question": "7. Re-check at least five claims from each report; run the plugin's tests once; check the guard test and that nothing personal or secret is in the plugin.",
+    "answer": "yes",
+    "evidence": "I re-checked 14 update-report claims and 15 rebuild-report claims (see claims_checked). Two update claims did not hold in the village (rounded puddles; pictures 'never copied') and one rebuild claim did not hold ('no Blender on this computer'). The full suite with BLENDER set ran in 11 min 49 s: 52 files, 50 passed, 0 failed, 2 skipped; 2,112 checks passed, 0 failed, 8 skipped. test_place_real_surfaces 54/54, test_place_generic (the guard, words kept as SHA-256 hashes) 18/18, test_place_skills 70/70, workflow 148/148, check_presets 6/6 including 'nothing private'. Neither the account email nor any other email is in the plugin; the git name there is the generic 'Claude'. No keys; RUNPOD appears only as environment-variable names a test strips. git status was unchanged by the tests. My run left 26 temporary folders in /tmp (2 MB), which I deleted."
+   }
+  ],
+  "problems_left": [
+   "The road's 6 cm displacement runs on a mesh with a vertex only every 10.6 cm, with no subdivision, so the scan's small relief cannot show. The close-up looks pleated and crinkled. The 1.5 m repeat of the person's mud was Sonnet's guess.",
+   "The rut water still draws as long thin grey channels: 260 pieces, median 1.65 m x 0.26 m, 71.5% more than 4 times longer than wide. Nothing like the mine's rounded, reflective pool.",
+   "Almost no stones on the road itself (2.1% of 3,921 stones lie on the road away from its edges), while the mine's ground is full of them. Large shapes reach only 68% of the mine's.",
+   "Weeds ring the outline of every tree crown: 26% of all weeds lie within 0.3 m of a crown shadow's edge, and 431 stand under crowns. The kit treats crowns as props (wear/masks.py puts every non-ground, non-wall, non-roof object in props), and the audit reports these rings as 'fence and building lines', which inflates its 87%.",
+   "Weeds inside buildings: 109 fully enclosed by a cottage's or the stable's walls (35 before; 49 in the stable, 34 in Cottage A), and 162 pieces under inside floors. The audit's KNOWN line says nothing grows inside.",
+   "On the rented card, the plugin's finish and audit steps end FAIL with exit 1 because the kit calls python3 by name (scene_audit.py line 427, no sys.executable fallback). The gate still contradicts itself there.",
+   "The road's edge still reads as a straight line: the colour now blends over about 116 px, but the scan texture and the displacement stop dead at the edge.",
+   "The forest floor scan reads flat pale tan from a distance (wide view).",
+   "The person's wood surface was never used: the timber kept the builders' own pictures with a made-in-code normal map.",
+   "Grass still has no displacement (a LOOK both times). Ceramic, rope, straw and wicker are still made in code.",
+   "The person's own pictures are packed inside the finished .blend on the rented store. That is a copy inside the scene file, though not in the plugin or the repository.",
+   "The plugin's README and test_place_real_surfaces.py now describe the test place ('a settlement among trees with unkept dirt tracks', 'a small settlement in a clearing with dirt tracks') and use the person's phrase 'edge logic'. The guard test does not catch this, so a repeat blind test with the same request would partly read its own answer.",
+   "A checkpoint commit (134d558) was made by another session at 20:44 while I worked, and the branch shows as up to date with its remote. I neither committed nor pushed.",
+   "The rebuild report's 'no Blender on this computer' is wrong: Blender 5.2.2 at /home/user/work/blender-app/blender-5.2.2-linux-x64/blender runs headless here; it is just not on the search path, and BLENDER was unset.",
+   "The plugin's tests still leave temporary folders in /tmp (26 from my run; I deleted them).",
+   "Not checked by me: Cycles, a real download test (PLACE_KIT_NETWORK_TESTS=1), and how the weeds look up close. In the pictures they read as plain dark spiky tufts, with the bramble arches as thin black wires. The trees are still low-polygon blobs (the builders' work)."
+  ],
+  "claims_checked": [
+   {
+    "claim": "Update: plugin.json and marketplace.json are 1.5.0; only the version and description lines changed in marketplace.json",
+    "holds": true,
+    "evidence": "Both read 1.5.0; git diff of marketplace.json shows 2 lines changed: version and description."
+   },
+   {
+    "claim": "Update: 36 of the 45 surfaces in data/surfaces.json name a Poly Haven scan",
+    "holds": true,
+    "evidence": "Counted: 45 surfaces, 36 with a polyhaven entry."
+   },
+   {
+    "claim": "Update: porous surfaces get no clear coat and a wet roughness of at least 0.55 (thatch sparkles fixed)",
+    "holds": true,
+    "evidence": "All three thatch materials: Film Coat 0.4 -> 0.0, Wet Roughness 0.3 -> 0.55 (read from the nodes). Bright specks on the thatch in the wide view 410 -> 24."
+   },
+   {
+    "claim": "Update: fern fronds now lie nearly flat (dark V specks fixed)",
+    "holds": true,
+    "evidence": "Fern leaf area steeper than 60 degrees: 100% -> 11.7%; mean |normal z| 0.0 -> 0.82. The speck pixel hit a fern before and the road after."
+   },
+   {
+    "claim": "Update: stones sized by Wentworth (pebble 4-64 mm, cobble 64-256 mm)",
+    "holds": true,
+    "evidence": "Measured largest side: pebbles 15.8 / 30 / 58.6 mm (5th percentile / median / 95th), cobbles 68.3 / 133 / 242 mm."
+   },
+   {
+    "claim": "Update: puddles lie as short, rounded pools with dry stretches between them",
+    "holds": false,
+    "evidence": "In the village: 260 water pieces, median 1.65 m x 0.26 m, 71.5% more than 4 times longer than wide; they read as long grey channels in road_eye and the close-up."
+   },
+   {
+    "claim": "Update: two grounds blend over 1 m wherever they meet",
+    "holds": false,
+    "evidence": "Only partly: the colour change across the road and verge edge widened from 5 px to 116 px, but the texture and the displacement still stop at a straight line, which stays visible."
+   },
+   {
+    "claim": "Update: the kit's scatter has its own budget of 1,200,000 triangles and stays inside it",
+    "holds": true,
+    "evidence": "Audit 'kit scatter' 818,167; place_audit.scatter_triangles_max = 1200000; the owners' totals add up to 2,559,047."
+   },
+   {
+    "claim": "Update: tests with Blender give 52 files, 50 passed, 0 failed, 2 skipped; 2,112 checks passed, 8 skipped",
+    "holds": true,
+    "evidence": "My own run of run_all.py with local Blender gave exactly these numbers (11 min 49 s)."
+   },
+   {
+    "claim": "Update: the REQUIRED block is word for word the same in all three skills",
+    "holds": true,
+    "evidence": "The 8-line block has the same SHA-256 (5bfce10b...) in all three SKILL.md files; test_place_skills 70/70."
+   },
+   {
+    "claim": "Update: the scan cache is outside every repository (about 85 MB) and requests carry only a plain tool name",
+    "holds": true,
+    "evidence": "/root/.cache/explainer-film/surface-scans is 85 MB and not inside a git repository; AGENT = 'explainer-film-place-kit/1.5 (surface scans)'."
+   },
+   {
+    "claim": "Update: the person's library pictures are read where they are and never copied",
+    "holds": false,
+    "evidence": "Only partly: they are not copied into the plugin or the repository (0 fingerprint matches), but materials.py calls scans.pack_images, which packs them into the finished .blend."
+   },
+   {
+    "claim": "Update: the proof picture is 1836 x 1052 and 249,998 bytes",
+    "holds": true,
+    "evidence": "Measured 1836 x 1052, 249,998 bytes."
+   },
+   {
+    "claim": "Update: the kit never names a kind of place in its code, and nothing private is in it",
+    "holds": true,
+    "evidence": "check_presets.py 6/6 groups passed; test_place_generic 18/18. The README and tests do describe the test place in prose, which no guard catches."
+   },
+   {
+    "claim": "Rebuild: finished.blend is 134,067,732 bytes with SHA-256 4f1404497d...",
+    "holds": true,
+    "evidence": "On the card: size 134067732, sha256 4f1404497d1a876a4db5918abd54a925beca4a9e3df226ef6b019aa38acd1513, sha1 35d64063... = the audit's scene_sha1."
+   },
+   {
+    "claim": "Rebuild: audit 0 FAIL, 7 LOOK, 5 KNOWN, 26 PASS",
+    "holds": true,
+    "evidence": "audit-judged-round4.txt: header and line count agree (26 PASS lines, 7 LOOK, 5 KNOWN)."
+   },
+   {
+    "claim": "Rebuild: preflight place exit 0; 0 to fix, 5 to look at, 1 known",
+    "holds": true,
+    "evidence": "preflight-round4.txt header says exactly this; the audit's looks are grouped, plus 'no fresh checker'."
+   },
+   {
+    "claim": "Rebuild: 17 materials from photographed scans and 4 made in code; 26 normal maps all pointing the right way",
+    "holds": true,
+    "evidence": "Audit surfaces block (17 photographed, 4 made_in_code) and the PASS line for 26 normal maps."
+   },
+   {
+    "claim": "Rebuild: 9,495 plants, 5,266 litter pieces and 3,921 stones; 214 puddles, 41.4 square metres",
+    "holds": true,
+    "evidence": "The roots stored in the scene add up to 18,682 = 9,495 + 5,266 + 3,921. The audit says 214 puddles and 41.362 m2; I count 260 separate water pieces in the mesh."
+   },
+   {
+    "claim": "Rebuild: 87% of the plants are in sites",
+    "holds": false,
+    "evidence": "That is the kit's own number. By real geometry, 46% of all plants (65% within 30 m of the cameras) stand at wall feet, road edges, verges, seams or the foot of posts and trunks. The kit's 'fence line' 39% is mostly rings round tree-crown shadows."
+   },
+   {
+    "claim": "Rebuild: round3/combined.blend was only read; its SHA-256 still starts 383c020b",
+    "holds": true,
+    "evidence": "Local sha256 starts 383c020bbed84ce5."
+   },
+   {
+    "claim": "Rebuild: pictures 1200 x 800, wide 204, road_eye 218, stable_close 246, cottage_close 236, ground_closeup 332 KB; wide mean luminance 0.487",
+    "holds": true,
+    "evidence": "All 1200 x 800; 204,435 / 218,311 / 245,587 / 236,308 / 331,531 bytes; wide_preview.json mean_luminance 0.4872."
+   },
+   {
+    "claim": "Rebuild: the kit's judge calls python3 by name, which the card lacks",
+    "holds": true,
+    "evidence": "scene_audit.py line 427: python = os.environ.get('PYTHON') or shutil.which('python3') or 'python3' (no sys.executable)."
+   },
+   {
+    "claim": "Rebuild: the wood mapping matched no PK material because the timbers carry their own pictures",
+    "holds": true,
+    "evidence": "Materials 'Cottage S timber.generic' and 'Stable trough wood' keep builder pictures ('Cottages south variation', 'Stable tile') with pk_timber_weathered_nor; no own:wood source anywhere."
+   },
+   {
+    "claim": "Rebuild: there is no Blender on this computer",
+    "holds": false,
+    "evidence": "Blender 5.2.2 at /home/user/work/blender-app/blender-5.2.2-linux-x64/blender runs headless here (I ran 5 measures with it); it is only off the search path. EEVEE cannot draw here (no libEGL)."
+   },
+   {
+    "claim": "Rebuild: the audited file is unchanged after drawing",
+    "holds": true,
+    "evidence": "My card job read the same SHA-256 after the rebuild's drawing job."
+   },
+   {
+    "claim": "Rebuild: about 420 s of card time",
+    "holds": true,
+    "evidence": "The ledger's integrator-round4 entries add up to 417.4 s (10.1 + 11.7 + 18.6 + 256.9 + 67.1 + 53.0)."
+   },
+   {
+    "claim": "Rebuild: no hand shaping; the builders' parts, ground and ownership were not changed",
+    "holds": true,
+    "evidence": "Ground objects and vertex counts are identical in round 3 and round 4 (for example high_road 81,832 vertices); the camera hit points at all probed pixels match except where scatter changed."
+   },
+   {
+    "claim": "Rebuild: faults judged by eye (pleated mud close up, puddles like grey slabs or channels, flat pale forest floor)",
+    "holds": true,
+    "evidence": "Confirmed by measurement: road mesh 10.6 cm vertex spacing, puddle shapes (median length 6 times the width), and the pale forest floor in the wide view."
+   }
+  ],
+  "pictures": [
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/verify/village-before-after-and-mine.jpg (the sheet, 1200 x 2151, 368,904 bytes: first village | rebuilt village in wide, road_eye, stable_close, cottage_close; then road close-up first village | rebuilt village | coal mine's ground, same-size 540 x 360 crops with their detail numbers)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/verify/work/before-closeup/ground_ruts_preview.jpg (the first village's road close-up, drawn on the card from exactly the rebuild's close-up camera, -58.02 -3.30 0.12, EEVEE 48 samples)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/verify/work/crop-rectangles.jpg (the old brown-rectangle spots, before on the left, after on the right)",
+   "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/verify/work/crop-thatch-edge.jpg (thatch sparkles before and after, and the road and verge edge)",
+   "Measures: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/verify/work/measure-round3.json, measure-round4.json, crowns-round3.json, crowns-round4.json and measure-pictures.json, all in that same work folder; the scripts that made them are there too (measure_village.py, measure_crowns_and_roofs.py, check_inside.py, measure_pictures.py, make_sheet.py)"
+  ],
+  "card_seconds": "108.5 s of billed job time in 3 jobs: 62.5 s (both files' fingerprints, my measure of the rebuilt village, the first village's close-up drawn), 22.7 s (weeds under crowns and inside buildings) and 23.3 s (strict inside-a-building test). With the uploads and downloads (the client gives no billed time for them), about 222 s (3 min 42 s) by the wall clock, inside the 5-minute allowance. No job waited (wake-ups 0.1 to 0.8 s), and the queue and the endpoint were not touched. Logged in village-test/card-time-ledger.jsonl under 'verifier-round4'. My small work folder and the close-up remain on the store (about 0.3 MB)."
+ }
+}

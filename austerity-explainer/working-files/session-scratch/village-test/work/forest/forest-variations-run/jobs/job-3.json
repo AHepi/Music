@@ -1,0 +1,74 @@
+{
+ "job": 3,
+ "scene": "/workspace/place-jobs/scenes/7ebb7efe/part.blend",
+ "settings": "/workspace/place-jobs/scenes/7ebb7efe/settings-dd8b4f3b-e8bf066e/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3",
+ "cameras": [
+  "View wide",
+  "View road_eye",
+  "View stable_close",
+  "View cottage_close"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "dense-forest",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.16,
+    "crown_scale": 1.0,
+    "density": 1.7,
+    "tone_olive": 0.3,
+    "golden": 1,
+    "moss_scale": 0.6,
+    "lump_detail": 2,
+    "lean_share": 0.1
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  },
+  {
+   "name": "moss-heavy",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.1,
+    "crown_scale": 1.1,
+    "density": 1.2,
+    "tone_olive": 0.2,
+    "golden": 0,
+    "moss_scale": 1.9,
+    "lump_detail": 2,
+    "lean_share": 0.15
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  },
+  {
+   "name": "dark-compact",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.12,
+    "crown_scale": 0.85,
+    "density": 1.45,
+    "tone_olive": 0.0,
+    "golden": 0,
+    "moss_scale": 0.5,
+    "lump_detail": 2,
+    "lean_share": 0.0
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  }
+ ]
+}

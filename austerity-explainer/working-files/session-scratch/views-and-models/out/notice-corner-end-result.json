@@ -1,0 +1,1499 @@
+{
+ "check_file": "out/notice-corner-end-check.json",
+ "check": {
+  "about": "What this file is: the shot check for view end (still_life), written by make_check_file.py from the Blender scene and the shot list (subject, support, story and work are the author's; groups, must_read, pairs_also, on_ground, stands_on, lights_in_story, the title zone and the rest are measured). Used by shot_facts.py and check_shot.py.",
+  "size": [
+   1080,
+   1920
+  ],
+  "groups": {
+   "notice": [
+    "notice",
+    "notice.0*"
+   ],
+   "board": [
+    "notice-board*",
+    "tacks*"
+   ],
+   "winding wheels": [
+    "winding_wheel_*"
+   ],
+   "chimney": [
+    "colliery_chimney*"
+   ],
+   "drum": [
+    "brazier-drum*",
+    "brazier_coal_*",
+    "brazier_soot"
+   ],
+   "chair": [
+    "kitchen-chair*"
+   ],
+   "lantern": [
+    "hurricane-lantern*",
+    "lantern_flame"
+   ],
+   "pail": [
+    "wooden-pail*"
+   ],
+   "handcart": [
+    "handcart*"
+   ],
+   "sacks": [
+    "coal-sacks*"
+   ],
+   "barrel": [
+    "wooden-barrel*"
+   ],
+   "dustbins": [
+    "dustbins*"
+   ],
+   "lamp post": [
+    "gas-lamp-post*"
+   ],
+   "left lamp": [
+    "left-gas-lamp-post*"
+   ],
+   "gates": [
+    "iron-gates-pair*"
+   ],
+   "coal-tub-on-track": [
+    "coal-tub-on-track*"
+   ],
+   "colliery-name-board": [
+    "colliery-name-board*"
+   ]
+  },
+  "subject": "notice",
+  "support": "board",
+  "story": [
+   "board",
+   "drum",
+   "chair",
+   "lantern",
+   "pail"
+  ],
+  "lights_in_story": [
+   "lantern"
+  ],
+  "pairs_also": [
+   "winding wheels",
+   "chimney",
+   "handcart",
+   "sacks",
+   "barrel",
+   "dustbins",
+   "lamp post",
+   "left lamp",
+   "gates",
+   "coal-tub-on-track",
+   "colliery-name-board"
+  ],
+  "work": [
+   "handcart",
+   "sacks",
+   "barrel",
+   "dustbins"
+  ],
+  "on_ground": [
+   "board",
+   "drum",
+   "chair",
+   "pail",
+   "handcart",
+   "sacks",
+   "barrel",
+   "dustbins",
+   "lamp post",
+   "left lamp",
+   "coal-tub-on-track",
+   "colliery-name-board"
+  ],
+  "stands_on": {
+   "lantern": "chair"
+  },
+  "must_read": [
+   "notice"
+  ],
+  "box_excludes": [
+   "board"
+  ],
+  "lines": {
+   "street": [
+    0,
+    1,
+    0.069927
+   ],
+   "level": [
+    0,
+    1,
+    0
+   ]
+  },
+  "lines_key": "street",
+  "eye_height": [
+   1.5,
+   1.9
+  ],
+  "title_zone": [
+   0.06,
+   0.02,
+   0.69,
+   0.22
+  ],
+  "story_reaches_down": 0.7,
+  "kind_of_shot": [
+   "still_life"
+  ],
+  "figures": [],
+  "match_excludes": [
+   "notice",
+   "board",
+   "sacks",
+   "lamp post",
+   "left lamp",
+   "gates"
+  ],
+  "own_surface_materials": [
+   "notice-paper"
+  ],
+  "accepted": [
+   {
+    "rule": "rule6_lit_from_below",
+    "measured": 0.08,
+    "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+    "date": "2026-10-14",
+    "reason": "the finished still measured 0.08 (needs 0.10); the film page lights the notice's own surface with a copy of the warm light and reached 0.23 (log 32)"
+   },
+   {
+    "rule": "rule10_quiet_side_weight",
+    "measured": 0.38,
+    "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+    "date": "2026-10-14",
+    "reason": "the still's quiet side held 38% (aim 40-48%); the film page measured 46% (log 32)"
+   },
+   {
+    "rule": "rule8_bottom_left_share",
+    "measured": 0.021,
+    "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32); the gutter kept as a narrow lead-in line (log 32)",
+    "date": "2026-10-14",
+    "reason": "the painted end frame's gutter covered 2.1% of the bottom-left quarter (limit 1%): a thin lead-in line, not a dark lump"
+   },
+   {
+    "rule": "slide_magnification",
+    "measured": 1.45,
+    "who": "the user kept the shot: \"Wow that's incredible. Yes keep it.\" (notes/Decisions.md, decision 38, log 32)",
+    "date": "2026-10-14",
+    "reason": "the pail comes 1.45 times nearer during the 1.5 m slide (the painting allows about 1.29); the slide was made before plan 34's limit (F13) and the user kept the film"
+   }
+  ]
+ },
+ "facts": {
+  "kinds_of_shot": [
+   "still_life"
+  ],
+  "interior": false,
+  "resting": {
+   "notice": {
+    "lowest": 2.365312717342377,
+    "votes": [
+     [
+      "group",
+      "board",
+      0.117
+     ],
+     [
+      "group",
+      "board",
+      0.117
+     ],
+     [
+      "group",
+      "board",
+      0.117
+     ],
+     [
+      "group",
+      "board",
+      0.117
+     ],
+     [
+      "group",
+      "board",
+      0.117
+     ]
+    ]
+   },
+   "board": {
+    "lowest": 1.7325392365455627,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      -0.005
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.008
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.014
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.003
+     ]
+    ]
+   },
+   "drum": {
+    "lowest": 1.6684244871139526,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.002
+     ],
+     [
+      "set",
+      "street_channels",
+      0.134
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.02
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.006
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.02
+     ]
+    ]
+   },
+   "chair": {
+    "lowest": 1.6600064362578262,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.002
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.01
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.022
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.007
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.018
+     ]
+    ]
+   },
+   "lantern": {
+    "lowest": 2.127701749753943,
+    "votes": [
+     [
+      "group",
+      "chair",
+      -0.0
+     ],
+     [
+      "group",
+      "chair",
+      -0.002
+     ],
+     [
+      "group",
+      "chair",
+      -0.002
+     ],
+     [
+      "group",
+      "chair",
+      -0.002
+     ],
+     [
+      "group",
+      "chair",
+      -0.001
+     ]
+    ]
+   },
+   "pail": {
+    "lowest": 1.6182352371546447,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.0
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.002
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.009
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.002
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.009
+     ]
+    ]
+   },
+   "handcart": {
+    "lowest": 2.058247208595276,
+    "votes": [
+     [
+      "set",
+      "street_setts",
+      -0.018
+     ],
+     [
+      "set",
+      "street_setts",
+      -0.015
+     ],
+     [
+      "set",
+      "street_setts",
+      0.062
+     ],
+     [
+      "set",
+      "street_setts",
+      -0.019
+     ],
+     [
+      "set",
+      "street_setts",
+      -0.049
+     ]
+    ]
+   },
+   "sacks": {
+    "lowest": 2.533360359698619,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.03
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.018
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.044
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.045
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.016
+     ]
+    ]
+   },
+   "barrel": {
+    "lowest": 2.287182241678238,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      -0.0
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.021
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.005
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.022
+     ]
+    ]
+   },
+   "dustbins": {
+    "lowest": 2.693831429074635,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      -0.012
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.034
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.059
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.045
+     ],
+     [
+      "set",
+      "ground",
+      0.12
+     ]
+    ]
+   },
+   "lamp post": {
+    "lowest": 1.9305554628372192,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      -0.0
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.003
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.01
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.003
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.01
+     ]
+    ]
+   },
+   "left lamp": {
+    "lowest": 3.276186227798462,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      -0.0
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.003
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.01
+     ],
+     [
+      "set",
+      "street_kerbs",
+      -0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.01
+     ]
+    ]
+   },
+   "gates": {
+    "lowest": 5.042267014272511,
+    "votes": [
+     [
+      "set",
+      "street_setts",
+      -0.038
+     ],
+     [
+      "set",
+      "ground",
+      0.08
+     ],
+     [
+      "set",
+      "street_setts",
+      0.003
+     ],
+     [
+      "set",
+      "ground",
+      0.093
+     ],
+     [
+      "set",
+      "ground",
+      0.08
+     ]
+    ]
+   },
+   "coal-tub-on-track": {
+    "lowest": 5.259410887956619,
+    "votes": [
+     [
+      "set",
+      "ground",
+      -0.003
+     ],
+     [
+      "set",
+      "ground",
+      -0.015
+     ],
+     [
+      "set",
+      "ground",
+      0.053
+     ],
+     [
+      "set",
+      "ground",
+      -0.006
+     ],
+     [
+      "set",
+      "ground",
+      -0.015
+     ]
+    ]
+   },
+   "colliery-name-board": {
+    "lowest": 5.022701263427734,
+    "votes": [
+     [
+      "set",
+      "ground",
+      -0.0
+     ],
+     [
+      "set",
+      "ground",
+      0.008
+     ],
+     [
+      "set",
+      "ground",
+      0.008
+     ],
+     [
+      "set",
+      "ground",
+      0.008
+     ],
+     [
+      "set",
+      "ground",
+      -0.009
+     ]
+    ]
+   }
+  },
+  "surfaces": {
+   "notice": {
+    "area": 0.4314929330593027,
+    "glowing_share": 0.0,
+    "lettered_area": 0.4314929330593027,
+    "base_brightness": 0.41490352153778076,
+    "facing_area": 0.4233081499499091
+   },
+   "board": {
+    "area": 6.443380963785883,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.016332246363162994,
+    "facing_area": 4.813639267626387
+   },
+   "winding wheels": {
+    "area": 44.420318875088334,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": null,
+    "facing_area": 26.678696211129882
+   },
+   "chimney": {
+    "area": 809.2633781726815,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": null,
+    "facing_area": 321.99861116052045
+   },
+   "drum": {
+    "area": 4.246327387506272,
+    "glowing_share": 0.11313452680539496,
+    "lettered_area": 0.0,
+    "base_brightness": 0.13162969034695313,
+    "facing_area": 2.2611112893465632
+   },
+   "chair": {
+    "area": 1.4355659900871753,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": null,
+    "facing_area": 0.6601877091417672
+   },
+   "lantern": {
+    "area": 0.2210751244796517,
+    "glowing_share": 0.23037945266703697,
+    "lettered_area": 0.0,
+    "base_brightness": 0.06361248551006457,
+    "facing_area": 0.11111961615696545
+   },
+   "pail": {
+    "area": 0.6352157347718077,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.06708140671253204,
+    "facing_area": 0.32540548350529885
+   },
+   "handcart": {
+    "area": 14.904451995546156,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.06268903715322025,
+    "facing_area": 4.827231816164663
+   },
+   "sacks": {
+    "area": 5.457725740815105,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.050747399976159735,
+    "facing_area": 1.1998918867450938
+   },
+   "barrel": {
+    "area": 7.26805317235487,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.06967068463563919,
+    "facing_area": 3.8873669475071364
+   },
+   "dustbins": {
+    "area": 8.272003667494564,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.108349682766337,
+    "facing_area": 4.78677009443539
+   },
+   "lamp post": {
+    "area": 2.7914275714980255,
+    "glowing_share": 0.2846110957657614,
+    "lettered_area": 0.0,
+    "base_brightness": 0.051473066210746765,
+    "facing_area": 1.4324678439983232
+   },
+   "left lamp": {
+    "area": 2.791427571498033,
+    "glowing_share": 0.2846110957657617,
+    "lettered_area": 0.0,
+    "base_brightness": 0.051473066210746765,
+    "facing_area": 1.4324678018639476
+   },
+   "gates": {
+    "area": 14.561439902267905,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.014571244828402996,
+    "facing_area": 7.9161396163723605
+   },
+   "coal-tub-on-track": {
+    "area": 17.761603854258162,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.04528578401269229,
+    "facing_area": 6.105144892989841
+   },
+   "colliery-name-board": {
+    "area": 27.601830127534097,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.09592284609020155,
+    "facing_area": 19.02241903831214
+   }
+  },
+  "frame_boxes": {
+   "drum": [
+    0.535335898399353,
+    0.5884732902050018,
+    0.6922872066497803,
+    0.7275950014591217
+   ],
+   "chair": [
+    0.6502588987350464,
+    0.5729670524597168,
+    0.8447050452232361,
+    0.7461764812469482
+   ],
+   "lantern": [
+    0.7264294624328613,
+    0.6041035056114197,
+    0.7696477174758911,
+    0.6659311056137085
+   ],
+   "pail": [
+    0.7110061645507812,
+    0.7066983580589294,
+    0.8046808242797852,
+    0.7730357348918915
+   ],
+   "lamp post": [
+    0.727796733379364,
+    0.26315993070602417,
+    0.8451995253562927,
+    0.6139948666095734
+   ],
+   "left lamp": [
+    0.37100985646247864,
+    0.3912200927734375,
+    0.40827223658561707,
+    0.49762052297592163
+   ],
+   "handcart": [
+    0.16393592953681946,
+    0.5015988349914551,
+    0.40327969193458557,
+    0.581734836101532
+   ],
+   "sacks": [
+    -0.12784162163734436,
+    0.5034320056438446,
+    0.45734861493110657,
+    0.5437121391296387
+   ],
+   "barrel": [
+    0.7050190567970276,
+    0.5016315877437592,
+    0.7845166325569153,
+    0.5524584949016571
+   ],
+   "dustbins": [
+    0.1938452571630478,
+    0.4835283160209656,
+    0.26785895228385925,
+    0.5197738111019135
+   ],
+   "gates": [
+    0.5169457197189331,
+    0.4305829405784607,
+    0.6695951223373413,
+    0.4734814763069153
+   ],
+   "coal-tub-on-track": [
+    0.5601460337638855,
+    0.45538878440856934,
+    0.5906257033348083,
+    0.4733668565750122
+   ],
+   "colliery-name-board": [
+    0.54520183801651,
+    0.3884611129760742,
+    0.6431113481521606,
+    0.4741617441177368
+   ],
+   "notice": [
+    0.7109785676002502,
+    0.5056836605072021,
+    0.8366345167160034,
+    0.603708803653717
+   ],
+   "board": [
+    0.6614278554916382,
+    0.45513319969177246,
+    0.8920301795005798,
+    0.6896432936191559
+   ],
+   "winding wheels": [
+    0.5176695585250854,
+    0.22849959135055542,
+    0.6997242569923401,
+    0.287575364112854
+   ],
+   "chimney": [
+    0.4321974217891693,
+    0.11070704460144043,
+    0.5216207504272461,
+    0.48646169900894165
+   ]
+  },
+  "match_exclude_reasons": {
+   "notice": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "board": [
+    "dark (base colour 0.016)"
+   ],
+   "sacks": [
+    "bars (0.17 of its outline filled)"
+   ],
+   "lamp post": [
+    "bars (0.26 of its outline filled)"
+   ],
+   "left lamp": [
+    "bars (0.26 of its outline filled)"
+   ],
+   "gates": [
+    "bars (0.23 of its outline filled)",
+    "dark (base colour 0.015)"
+   ]
+  },
+  "declared_groups": [
+   "notice",
+   "board",
+   "winding wheels",
+   "chimney"
+  ],
+  "generated_groups": [
+   "drum",
+   "chair",
+   "lantern",
+   "pail",
+   "handcart",
+   "sacks",
+   "barrel",
+   "dustbins",
+   "lamp post",
+   "left lamp",
+   "gates",
+   "coal-tub-on-track",
+   "colliery-name-board"
+  ]
+ },
+ "notes": [
+  "title zone: the largest 85%-sky rectangle of the words band (79% of the band is sky)"
+ ],
+ "comparison": {
+  "groups": [
+   {
+    "hand": "drum",
+    "generated": "drum",
+    "same_objects_share": 1.0,
+    "hand_objects": 24,
+    "generated_objects": 24
+   },
+   {
+    "hand": "lantern",
+    "generated": "lantern",
+    "same_objects_share": 1.0,
+    "hand_objects": 3,
+    "generated_objects": 3
+   },
+   {
+    "hand": "winding wheels",
+    "generated": "winding wheels",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "chimney",
+    "generated": "chimney",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "chair",
+    "generated": "chair",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "pail",
+    "generated": "pail",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "lamp post",
+    "generated": "lamp post",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "left lamp",
+    "generated": "left lamp",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "handcart",
+    "generated": "handcart",
+    "same_objects_share": 1.0,
+    "hand_objects": 3,
+    "generated_objects": 3
+   },
+   {
+    "hand": "sacks",
+    "generated": "sacks",
+    "same_objects_share": 1.0,
+    "hand_objects": 10,
+    "generated_objects": 10
+   },
+   {
+    "hand": "barrel",
+    "generated": "barrel",
+    "same_objects_share": 1.0,
+    "hand_objects": 4,
+    "generated_objects": 4
+   },
+   {
+    "hand": "dustbins",
+    "generated": "dustbins",
+    "same_objects_share": 1.0,
+    "hand_objects": 8,
+    "generated_objects": 8
+   },
+   {
+    "hand": "gates",
+    "generated": "gates",
+    "same_objects_share": 1.0,
+    "hand_objects": 8,
+    "generated_objects": 8
+   },
+   {
+    "hand": "notice",
+    "generated": "notice",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "board",
+    "generated": "board",
+    "same_objects_share": 1.0,
+    "hand_objects": 4,
+    "generated_objects": 4
+   }
+  ],
+  "hand_groups_drawing_nothing": [],
+  "generated_only": [
+   "coal-tub-on-track",
+   "colliery-name-board"
+  ],
+  "roles": {
+   "subject": {
+    "hand": "notice",
+    "hand_as_generated": "notice",
+    "generated": "notice",
+    "same": true
+   },
+   "support": {
+    "hand": "board",
+    "hand_as_generated": "board",
+    "generated": "board",
+    "same": true
+   },
+   "story": {
+    "hand": [
+     "board",
+     "chair",
+     "drum",
+     "lantern",
+     "pail"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "work": {
+    "hand": [
+     "barrel",
+     "dustbins",
+     "handcart",
+     "sacks"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "pairs_also": {
+    "hand": [
+     "dustbins",
+     "handcart",
+     "lamp post",
+     "left lamp",
+     "sacks",
+     "winding wheels"
+    ],
+    "same": false,
+    "only_hand": [],
+    "only_generated": [
+     "barrel",
+     "chimney",
+     "coal-tub-on-track",
+     "colliery-name-board",
+     "gates"
+    ]
+   },
+   "on_ground": {
+    "hand": [
+     "barrel",
+     "board",
+     "chair",
+     "drum",
+     "dustbins",
+     "handcart",
+     "lamp post",
+     "left lamp",
+     "pail"
+    ],
+    "same": false,
+    "only_hand": [],
+    "only_generated": [
+     "coal-tub-on-track",
+     "colliery-name-board",
+     "sacks"
+    ]
+   },
+   "must_read": {
+    "hand": [
+     "notice"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "lights_in_story": {
+    "hand": [
+     "lantern"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "box_excludes": {
+    "hand": [
+     "board"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "stands_on": {
+    "hand": {
+     "lantern": "chair"
+    },
+    "generated": {
+     "lantern": "chair"
+    },
+    "hand_pairs_found": true
+   }
+  },
+  "keys": {
+   "size": {
+    "hand": [
+     1080,
+     1920
+    ],
+    "generated": [
+     1080,
+     1920
+    ],
+    "same": true
+   },
+   "lines": {
+    "hand": {
+     "street": [
+      0,
+      1,
+      0.069927
+     ],
+     "level": [
+      0,
+      1,
+      0
+     ]
+    },
+    "generated": {
+     "street": [
+      0,
+      1,
+      0.069927
+     ],
+     "level": [
+      0,
+      1,
+      0
+     ]
+    },
+    "same": true
+   },
+   "lines_key": {
+    "hand": "street",
+    "generated": "street",
+    "same": true
+   },
+   "eye_height": {
+    "hand": [
+     1.5,
+     1.9
+    ],
+    "generated": [
+     1.5,
+     1.9
+    ],
+    "same": true
+   },
+   "title_zone": {
+    "hand": [
+     0.05,
+     0.02,
+     0.62,
+     0.12
+    ],
+    "generated": [
+     0.06,
+     0.02,
+     0.69,
+     0.22
+    ],
+    "same": false
+   },
+   "story_reaches_down": {
+    "hand": null,
+    "generated": 0.7,
+    "same": false
+   },
+   "sky": {
+    "hand": "sky_dome*",
+    "generated": "sky_dome*",
+    "same": true
+   }
+  },
+  "mapping": {
+   "drum": "drum",
+   "lantern": "lantern",
+   "winding wheels": "winding wheels",
+   "chimney": "chimney",
+   "chair": "chair",
+   "pail": "pail",
+   "lamp post": "lamp post",
+   "left lamp": "left lamp",
+   "handcart": "handcart",
+   "sacks": "sacks",
+   "barrel": "barrel",
+   "dustbins": "dustbins",
+   "gates": "gates",
+   "notice": "notice",
+   "board": "board"
+  }
+ },
+ "calculator": "make_check_file",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.main_rule_spot_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule1_meeting_point_gap": {
+   "value": 0.03,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule2_eye_height": {
+   "value": [
+    1.5,
+    1.9
+   ],
+   "unit": "metres above the surface under the camera",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule3_story_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule3_story_together_metres": {
+   "value": 0.3,
+   "unit": "metres between footprints",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_near_touch": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_between_figures": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_subject_brightness_ratio": {
+   "value": 1.8,
+   "unit": "times the frame's mean",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_brightest_share_on_subject": {
+   "value": 0.4,
+   "unit": "share of the brightest 3%",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_brightest_share_in_story_box": {
+   "value": 0.75,
+   "unit": "share of the brightest 3%",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_nothing_in_story_as_bright": {
+   "value": 0.05,
+   "unit": "brightness below the subject's median",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_top_third_brightness": {
+   "value": 0.36,
+   "unit": "mean brightness (0 to 1)",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_warm_share": {
+   "value": [
+    0.015,
+    0.03
+   ],
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_lit_from_below": {
+   "value": 0.1,
+   "unit": "(r - b)/(r + b) bottom minus top",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule7_story_reaches_down": {
+   "value": 0.7,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_work_prop_share": {
+   "value": 0.02,
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_bottom_left_share": {
+   "value": 0.01,
+   "unit": "share of the frame per thing",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule10_quiet_side_weight": {
+   "value": [
+    0.4,
+    0.48
+   ],
+   "unit": "share of the weight",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule10_nothing_on_quiet_side_outshines": {
+   "value": 1.0,
+   "unit": "times the subject's brightness",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_must_read_right_edge": {
+   "value": 0.9,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_story_right_edge": {
+   "value": 0.95,
+   "unit": "share of the width (in 0.45-0.95 down)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share": {
+   "value": 0.85,
+   "unit": "share of the title zone that is sky",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.resting_on": {
+   "value": "the street (ground rays; \"landed high\" over 0.5 m)",
+   "unit": "rule",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.slide_magnification": {
+   "value": "painting limit",
+   "unit": "times nearer at the nearest painted surface",
+   "kind": "measured"
+  },
+  "views_and_models.check_file.prop_collections": {
+   "value": [
+    "props",
+    "signs",
+    "gates",
+    "pop-up",
+    "men*",
+    "workers*",
+    "figures*",
+    "people*",
+    "walkers*",
+    "checkout"
+   ],
+   "unit": "collection name patterns where a place's assemble script puts props and figures",
+   "kind": "judged"
+  },
+  "composing.shot_facts_groups_max": {
+   "value": 20,
+   "unit": "groups",
+   "kind": "measured"
+  },
+  "views_and_models.lettering_material_patterns": {
+   "value": [
+    "*-lettering",
+    "*-lettering.0*",
+    "*-stencil",
+    "*-stencil.0*",
+    "*-printing",
+    "*-printing.0*",
+    "*-paper",
+    "*-paper.0*"
+   ],
+   "unit": "material name patterns (lower case, * any letters)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.light_prop_glow_share": {
+   "value": 0.15,
+   "unit": "share of a story group's own surface that glows",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.on_ground_within_metres": {
+   "value": 0.05,
+   "unit": "metres between a group's lowest point and a declared ground (road, pavement, ground, floor)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.ground_kinds": {
+   "value": [
+    "ground",
+    "road",
+    "pavement",
+    "floor"
+   ],
+   "unit": "support surface kinds that count as the ground for check_shot's on_ground",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.sky_pattern_outdoors": {
+   "value": "sky_dome*",
+   "unit": "object name pattern",
+   "kind": "judged"
+  },
+  "safe_area.text_left_pixels": {
+   "value": 65,
+   "unit": "pixels (0.06 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.text_right_pixels": {
+   "value": 972,
+   "unit": "pixels (0.90 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.title_band_down": {
+   "value": [
+    0.05,
+    0.22
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.figure_collections": {
+   "value": [
+    "men*",
+    "workers*",
+    "figures*",
+    "people*",
+    "walkers*"
+   ],
+   "unit": "collection name patterns holding figures",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.thin_pixels": {
+   "value": 6,
+   "unit": "pixels across at the film frame (the group's narrow side)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.dark_base_brightness": {
+   "value": 0.02,
+   "unit": "area-weighted base colour brightness of a group's materials (linear, 0 to 1)",
+   "kind": "invented"
+  },
+  "views_and_models.check_file.thin_fill_share": {
+   "value": 0.3,
+   "unit": "share of a group's outline its faces fill, seen square on",
+   "kind": "invented"
+  }
+ }
+}

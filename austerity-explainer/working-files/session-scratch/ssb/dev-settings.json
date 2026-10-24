@@ -1,0 +1,4007 @@
+{
+ "about": "The film's house numbers, in one table that every calculator (kit/calculators) and tool reads, so the tools cannot drift apart. Read it with kit/calculators/settings.py (python3 settings.py show SECTION). Built from the inventory of 423 hand-found values (log 35, scratchpad plugin-calculators/inventory-and-design.json) and checked against the project's files. Sources name the austerity-explainer project's files: film-kit/... is the film kit, notes/... the project notes, \"scratchpad redesign/...\" the redesign rounds' working folder of log 34.",
+ "entry_format": "Every number is {\"value\", \"unit\", \"kind\", \"source\"} (some add \"note\"). A section may hold groups of entries. Keys read with dots: frame.width_pixels. Builders add their own section (with an \"about\" line); they never change another section's numbers without saying so.",
+ "kinds": {
+  "measured": "the project measured it (a recording, a render, a bill, a fit to a picture): change it only by measuring again",
+  "judged": "a person or a helper chose it by looking or by a rule of thumb: change it only after looking again",
+  "invented": "nobody has tested it yet: a starting point; say so whenever a result rests on it"
+ },
+ "frame": {
+  "about": "The film frame, the plate (the 3D picture the painter repaints) and the lenses.",
+  "width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "Decision for phone screens (a tall 9:16 frame); notes/Decisions.md chapter 1; every page and tool"
+  },
+  "height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "as width_pixels"
+  },
+  "frames_per_second": {
+   "value": 30,
+   "unit": "frames a second",
+   "kind": "judged",
+   "source": "film-kit/narration-tools/assemble_chapter_narration.py FRAMES_PER_SECOND; estimate_timeline.py"
+  },
+  "film_vertical_fov_degrees": {
+   "value": 60.4,
+   "unit": "degrees, top to bottom",
+   "kind": "measured",
+   "source": "Fitted to the liked picture's landmarks in log 31 (experiments/31 .../tools/match_camera.py), then kept as the house film lens: assemble_notice_corner.py, assemble_works.py FILM_FOV (line 176), assemble_people_test.py"
+  },
+  "plate_vertical_fov_degrees": {
+   "value": 64.4,
+   "unit": "degrees, top to bottom",
+   "kind": "judged",
+   "source": "Film lens + 4 degrees (log 30 plan; lesson 90): assemble_works.py PLATE_FOV, notice-corner-camera.json fov"
+  },
+  "plate_lens_extra_degrees": {
+   "value": 4.0,
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "Lesson 90 (a 44-degree plate over a 40-degree film lens allowed only about 1 degree of turn); log 30 plan"
+  },
+  "plate_width_pixels": {
+   "value": 1536,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "Notice corner and people test plates (1.42 times the film frame); notice-corner-paintings.json, people-test-paintings.json"
+  },
+  "plate_height_pixels": {
+   "value": 2730,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "as plate_width_pixels"
+  },
+  "painting_returned_size_pixels": {
+   "value": [
+    1504,
+    2672
+   ],
+   "unit": "pixels [width, height]",
+   "kind": "measured",
+   "source": "What Flux 3 edit returns at \"2k\" (people-test-paintings.json returned_size, 16 October 2026); resized up to the plate, so the painting's real detail is 2672 rows over the plate's view",
+   "note": "The slide-magnification limit is worked out from this height (skeptic, log 35), not from the plate's 2730."
+  },
+  "plate_frame_edge_fade_share": {
+   "value": 0.03,
+   "unit": "share of the frame",
+   "kind": "judged",
+   "source": "film-kit/paper-film/scenes/projected-set.js frameEdge default (line 562); log 29"
+  },
+  "blender_to_three_axes": {
+   "value": "three.js (x, y, z) = Blender (x, z, -y)",
+   "unit": "axes",
+   "kind": "judged",
+   "source": "Every camera file's \"about\" line (works-camera-w1.json); notice-corner.js fromBlender"
+  }
+ },
+ "camera": {
+  "about": "Where the camera stands, how it may move, and how a filmed camera path is judged (camera_audit.py).",
+  "eye_height_range_metres": {
+   "value": [
+    1.5,
+    1.9
+   ],
+   "unit": "metres above the surface under the camera",
+   "kind": "judged",
+   "source": "check_shot.py eye_height default (line 478); lessons 100, 105; rule 2",
+   "note": "A standing person. Overview views from a window measure from that floor (W3 check file eye_height_note)."
+  },
+  "eye_height_default_metres": {
+   "value": 1.7,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "assemble_works.py views (eye_height_metres 1.7); plan 34"
+  },
+  "eye_height_fix_margin_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "check_shot.py line 484 (a fix aims 0.05 inside the range)"
+  },
+  "level_tolerance_degrees": {
+   "value": 0.5,
+   "unit": "degrees of tilt or lean",
+   "kind": "judged",
+   "source": "check_shot.py line 200 (camera-level)"
+  },
+  "meeting_point_gap_share_of_width": {
+   "value": 0.03,
+   "unit": "share of the frame width",
+   "kind": "judged",
+   "source": "Rule 1; check_shot.py check_lines (line 940); lesson 98"
+  },
+  "meeting_point_drift_during_slide_share_of_width": {
+   "value": 0.02,
+   "unit": "share of the frame width",
+   "kind": "judged",
+   "source": "Rule 11 (07 Composing a shot.md lines 125-134); log 30"
+  },
+  "turn_during_a_slide_degrees": {
+   "value": 0.0,
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "Rule 11 and lessons 99, 106-107: a slide never turns; only position is keyframed"
+  },
+  "reference_lines_tolerance_share": {
+   "value": 0.03,
+   "unit": "share of the frame",
+   "kind": "judged",
+   "source": "check_shot.py check_reference_lines (lines 659-693); lesson 105"
+  },
+  "reference_match_tolerances": {
+   "value": {
+    "height_metres": 0.1,
+    "sideways_metres": 0.15,
+    "turn_degrees": 0.75,
+    "lens_degrees": 2.0
+   },
+   "unit": "metres and degrees",
+   "kind": "judged",
+   "source": "check_shot.py check_camera_match line 584"
+  },
+  "reference_match_search_steps": {
+   "value": {
+    "x_metres": 0.3,
+    "height_metres": 0.3,
+    "turn_degrees": 1.5,
+    "lens_degrees": 4.0
+   },
+   "unit": "metres and degrees",
+   "kind": "judged",
+   "source": "check_shot.py line 570 (Nelder-Mead start steps)"
+  },
+  "reference_landmarks_minimum": {
+   "value": 5,
+   "unit": "landmarks",
+   "kind": "judged",
+   "source": "Lesson 105 (fit the camera to 5 or more landmarks before moving any prop)"
+  },
+  "reference_size_ratio_tolerance": {
+   "value": 0.15,
+   "unit": "ratio",
+   "kind": "judged",
+   "source": "check_shot.py check_camera_distance lines 647-656 (needs 4 props, 75% agreeing)"
+  },
+  "moves_per_shot_max": {
+   "value": 3,
+   "unit": "named moves",
+   "kind": "judged",
+   "source": "The user's rule (decision 25, log 20); cinema-kit.js stillShot"
+  },
+  "audit_turn_limit_degrees_per_second": {
+   "value": 0.6,
+   "unit": "degrees a second",
+   "kind": "judged",
+   "source": "film-kit/paper-film/tools/camera_audit.py TURN_LIMIT (line 23); tuned on chapter 2's 21 shots"
+  },
+  "audit_travel_limit_share_per_second": {
+   "value": 0.012,
+   "unit": "share of the distance to the focus, a second",
+   "kind": "judged",
+   "source": "camera_audit.py TRAVEL_LIMIT (line 24); lesson 58"
+  },
+  "audit_lens_limit_share_per_second": {
+   "value": 0.012,
+   "unit": "share of the lens angle, a second",
+   "kind": "judged",
+   "source": "camera_audit.py LENS_LIMIT (line 25)"
+  },
+  "audit_join_gap_seconds": {
+   "value": 0.35,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "camera_audit.py JOIN_GAP (line 26)"
+  },
+  "audit_cut_jump_share": {
+   "value": 0.25,
+   "unit": "share of the distance to the target",
+   "kind": "judged",
+   "source": "camera_audit.py CUT_JUMP (line 27)"
+  },
+  "audit_cut_turn_degrees": {
+   "value": 8.0,
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "camera_audit.py CUT_TURN (line 28)"
+  },
+  "audit_naming_thresholds": {
+   "value": {
+    "pan_degrees": 2.5,
+    "zoom_travel_share": 0.08,
+    "zoom_lens_share": 0.06,
+    "move_up_down_share": 0.08,
+    "slide_share": 0.12,
+    "still_share_of_shot_min": 0.25
+   },
+   "unit": "degrees and shares",
+   "kind": "judged",
+   "source": "camera_audit.py describe() and audit()"
+  },
+  "slide_length_range_metres": {
+   "value": [
+    0.43,
+    1.5
+   ],
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Plan 34 moves table; notice corner 1.5 m; W1/W2 1.2 m"
+  },
+  "slide_seconds_range": {
+   "value": [
+    2.6,
+    4.1
+   ],
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Plan 34 lines 604-621 (slides start and stop on words)"
+  },
+  "slides_per_page_max": {
+   "value": 1,
+   "unit": "slides",
+   "kind": "judged",
+   "source": "Plan 34 (the user's limit is three moves a shot; built sets use one slide a page)"
+  },
+  "slide_magnification_borderline_share": {
+   "value": 0.01,
+   "unit": "share over the limit",
+   "kind": "invented",
+   "source": "Core helper (log 35): a slide within 1% of the limit is reported as \"on the limit: judge it\"",
+   "note": "The limit itself is worked out from the painting (frame_geometry.py slide_limit)."
+  },
+  "relief_room_moves_units": {
+   "value": [
+    1,
+    2
+   ],
+   "unit": "units",
+   "kind": "judged",
+   "source": "Lesson 48; Workflows.md 94-97 (moves inside a painted relief room)"
+  }
+ },
+ "composing": {
+  "about": "The shot checker's numbers that hold for every kind of shot. The limits that change with the kind of shot (story box, brightest parts, quiet side ...) are in shot_kind_profiles.",
+  "brightest_parts_share": {
+   "value": 0.03,
+   "unit": "share of the frame",
+   "kind": "judged",
+   "source": "check_shot.py check_light; measure_composition.py lines 96-104 (the brightest 3%)"
+  },
+  "brightest_parts_blur_share_of_width": {
+   "value": 0.01,
+   "unit": "share of the width",
+   "kind": "judged",
+   "source": "check_shot.py check_light"
+  },
+  "warm_pixel_threshold": {
+   "value": 0.18,
+   "unit": "(red - blue)/255 x brightness",
+   "kind": "judged",
+   "source": "measure_composition.py; check_shot.py line ~1524; lessons 111-112"
+  },
+  "warm_near_story_widen_share_of_width": {
+   "value": 0.06,
+   "unit": "share of the width",
+   "kind": "judged",
+   "source": "check_shot.py line ~1526"
+  },
+  "lit_from_below_reference": {
+   "value": 0.17,
+   "unit": "(r - b)/(r + b), bottom 15% minus top 15%",
+   "kind": "measured",
+   "source": "The liked picture's notice (log 30); check_shot.py rule 6 text"
+  },
+  "light_prop_outshine_share": {
+   "value": 0.1,
+   "unit": "share of the prop",
+   "kind": "measured",
+   "source": "Log 32: a flame lights about 6% of a lantern, a glowing glass 18 to 22%; check_shot.py line ~1586"
+  },
+  "story_prop_margin_below_subject": {
+   "value": 0.05,
+   "unit": "brightness (0 to 1)",
+   "kind": "judged",
+   "source": "check_shot.py line ~1585 (95th percentile under the subject's median - 0.05)"
+  },
+  "burnt_out_channel_level": {
+   "value": 254,
+   "unit": "levels of 255",
+   "kind": "judged",
+   "source": "check_shot.py line ~1605"
+  },
+  "burnt_out_limits": {
+   "value": {
+    "frame_share": 0.0002,
+    "prop_share": 0.03,
+    "set_share": 0.001
+   },
+   "unit": "shares",
+   "kind": "judged",
+   "source": "check_shot.py lines 1604-1619"
+  },
+  "stray_warm_patch": {
+   "value": {
+    "hue_min": 0.25,
+    "brightness_min": 0.25,
+    "frame_share_min": 0.002
+   },
+   "unit": "shares",
+   "kind": "judged",
+   "source": "check_shot.py lines 1620-1636"
+  },
+  "clear_overlap_pixels_at_1536": {
+   "value": 20,
+   "unit": "pixels on a frame 1536 wide (scaled to the frame)",
+   "kind": "judged",
+   "source": "Rule 4 (07 Composing a shot.md); check_shot.py line 966; log 30 liked picture near-touches 10 to 25 px"
+  },
+  "clear_gap_pixels_at_1536": {
+   "value": 25,
+   "unit": "pixels on a frame 1536 wide",
+   "kind": "judged",
+   "source": "as clear_overlap_pixels_at_1536"
+  },
+  "near_touch_fix_margin_pixels_at_1536": {
+   "value": 4,
+   "unit": "pixels on a frame 1536 wide",
+   "kind": "judged",
+   "source": "check_shot.py line 966"
+  },
+  "only_just_factor": {
+   "value": 1.3,
+   "unit": "times the limit",
+   "kind": "judged",
+   "source": "check_shot.py check_pairs (a pass under 1.3 times the limit is noted)"
+  },
+  "edge_run_pixels_at_1536": {
+   "value": 40,
+   "unit": "pixels on a frame 1536 wide",
+   "kind": "judged",
+   "source": "check_shot.py edge_run lines 316-364 (log 31-32 planted lamp post)"
+  },
+  "thin_parts_ignored_pixels_at_1080": {
+   "value": 6,
+   "unit": "pixels on a frame 1080 wide",
+   "kind": "judged",
+   "source": "check_shot.py without_wires lines 112-117 (a wire handle)"
+  },
+  "story_together_metres": {
+   "value": 0.3,
+   "unit": "metres between footprints",
+   "kind": "judged",
+   "source": "check_shot.py check_story_in_3d (lines 1065-1115); log 31 planted drum"
+  },
+  "story_depth_behind_support_metres": {
+   "value": 0.1,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "check_shot.py line 1072"
+  },
+  "reference_box_margin_share": {
+   "value": 0.02,
+   "unit": "share of the frame",
+   "kind": "judged",
+   "source": "check_shot.py lines 1163-1171 (the reference's own box + 0.02 when larger)"
+  },
+  "words_hidden_share_max": {
+   "value": 0.05,
+   "unit": "share of the upper four fifths",
+   "kind": "judged",
+   "source": "check_shot.py check_words_hidden line 854"
+  },
+  "words_bottom_share_may_hide": {
+   "value": 0.2,
+   "unit": "share of the words' height",
+   "kind": "judged",
+   "source": "check_shot.py (the bottom fifth, the signature, may be covered)"
+  },
+  "work_prop_middle_band_down": {
+   "value": [
+    0.45,
+    0.62
+   ],
+   "unit": "down the frame",
+   "kind": "measured",
+   "source": "Log 30: the liked picture's back props at 0.47 to 0.54 down; check_shot.py line 1348"
+  },
+  "work_prop_fix_band_down": {
+   "value": [
+    0.47,
+    0.6
+   ],
+   "unit": "down the frame",
+   "kind": "judged",
+   "source": "check_shot.py line 1358"
+  },
+  "dark_entry_shape": {
+   "value": {
+    "blur_share_of_width": 0.004,
+    "darker_than_quarter_75th_percentile": 0.6,
+    "open_share_of_width": 0.01,
+    "top_row_touch_share_max": 0.25
+   },
+   "unit": "shares",
+   "kind": "judged",
+   "source": "check_shot.py check_dark_entry lines 1382-1421 (log 31 verifier)"
+  },
+  "resting_floating_metres": {
+   "value": 0.03,
+   "unit": "metres of air",
+   "kind": "judged",
+   "source": "check_shot.py check_resting line 716"
+  },
+  "resting_sunk_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "check_shot.py line 712"
+  },
+  "resting_landed_high_metres": {
+   "value": 0.5,
+   "unit": "metres above the street",
+   "kind": "judged",
+   "source": "check_shot.py line 719 (a street rule: interiors use declared support surfaces)"
+  },
+  "resting_moved_apart_metres": {
+   "value": 0.1,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "check_shot.py line 765"
+  },
+  "resting_ray_start_above_base_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "shot_facts.py (five rays from 5 cm above the base; lesson 109)"
+  },
+  "picture_out_of_date": {
+   "value": {
+    "gain_min": 0.08,
+    "agreement_min": 0.45
+   },
+   "unit": "share of outline",
+   "kind": "measured",
+   "source": "check_shot.py picture_mismatch line 447 (log 31: up-to-date pictures gained 0, moved props 0.09 to 0.23)"
+  },
+  "picture_edges": {
+   "value": {
+    "lightness_canny": [
+     20,
+     60
+    ],
+    "colour_canny": [
+     10,
+     30
+    ],
+    "blur": 1.5,
+    "widen_pixels": 7
+   },
+   "unit": "Canny thresholds and pixels",
+   "kind": "judged",
+   "source": "check_shot.py line 423; lesson 117"
+  },
+  "bottom_fifth_darker_max_share": {
+   "value": 0.3,
+   "unit": "share darker than the middle band",
+   "kind": "judged",
+   "source": "Log 26 review (in about 70% of frames the bottom fifth was over 30% darker than the middle: the painting prompts asked for an empty floor); story log rule \"Fill the bottom of the tall frame\""
+  },
+  "subject_frame_share": {
+   "value": [
+    0.029,
+    0.033
+   ],
+   "unit": "share of the frame",
+   "kind": "measured",
+   "source": "Log 30 (the liked notice 3.3%; the rebuild aimed at 2.9%; clip 29 had 0.95%)"
+  },
+  "cut_by_frame_pixels": {
+   "value": 2,
+   "unit": "pixels from the left, top or bottom edge",
+   "kind": "judged",
+   "source": "check_shot.py check_cut_by_edge lines 897-917 (a fix brings the box to 0.03 / 0.97)"
+  },
+  "quiet_side_prop_share_max": {
+   "value": 0.02,
+   "unit": "share of the frame",
+   "kind": "judged",
+   "source": "Rule 10; check_shot.py line ~1657 (no non-story prop on the quiet side over 2%)"
+  },
+  "shot_facts_groups_max": {
+   "value": 20,
+   "unit": "groups",
+   "kind": "measured",
+   "source": "shot_facts.py PALETTE (20 colours)"
+  },
+  "shot_facts_colour_match": {
+   "value": 24,
+   "unit": "sum of channel differences",
+   "kind": "judged",
+   "source": "shot_facts.py / check_shot.py lines 140-147"
+  },
+  "shot_facts_solo_threshold": {
+   "value": 8,
+   "unit": "levels",
+   "kind": "judged",
+   "source": "shot_facts.py / check_shot.py"
+  },
+  "line_finder": {
+   "value": {
+    "min_length_share_of_height": 0.06,
+    "not_within_degrees_of_level": 8,
+    "not_within_degrees_of_upright": 10,
+    "vote_grid": [
+     40,
+     24
+    ],
+    "average_within_cells": 1.5,
+    "trust_min_lines": 15
+   },
+   "unit": "shares, degrees, cells, lines",
+   "kind": "measured",
+   "source": "measure_composition.py lines 48-112; lesson 104 (47 lines in the sharp picture, 4 to 7 in clip 29: wrong)"
+  }
+ },
+ "safe_area": {
+  "about": "Where typed words and things to read may sit on the 1080 x 1920 frame (phone apps put buttons on the right and bottom).",
+  "text_left_pixels": {
+   "value": 65,
+   "unit": "pixels (0.06 of the width)",
+   "kind": "judged",
+   "source": "film-kit/paper-film/scenes/graphics.js TEXT_LEFT (line 345)"
+  },
+  "text_right_pixels": {
+   "value": 972,
+   "unit": "pixels (0.90 of the width)",
+   "kind": "judged",
+   "source": "graphics.js TEXT_RIGHT (line 346); rule 12"
+  },
+  "must_read_right_edge_share": {
+   "value": 0.9,
+   "unit": "share of the width",
+   "kind": "judged",
+   "source": "Rule 12; check_shot.py check_right_edge (line 1232); log 30 (the liked notice reached 0.91)"
+  },
+  "story_right_edge_share": {
+   "value": 0.95,
+   "unit": "share of the width",
+   "kind": "judged",
+   "source": "Rule 12; check_shot.py line 1231"
+  },
+  "button_strip_down": {
+   "value": [
+    0.45,
+    0.95
+   ],
+   "unit": "down the frame",
+   "kind": "judged",
+   "source": "check_shot.py line 1235 (story props judged only in this strip)"
+  },
+  "title_band_down": {
+   "value": [
+    0.05,
+    0.22
+   ],
+   "unit": "down the frame",
+   "kind": "judged",
+   "source": "Plan 34 top band; Works check files title_zone [0.06, 0.05, 0.90, 0.22]"
+  },
+  "letter_top_min_down": {
+   "value": 0.06,
+   "unit": "down the frame",
+   "kind": "judged",
+   "source": "Round 3 check (a heading at 0.047 sat under a phone app's top bar; moved to 0.061)"
+  },
+  "nothing_to_read_below_down": {
+   "value": 0.8,
+   "unit": "down the frame (the bottom 380 pixels)",
+   "kind": "judged",
+   "source": "graphics.js header and frame_check.py (380 px at the bottom: buttons and captions)"
+  },
+  "rule_cards_down": {
+   "value": [
+    [
+     0.07,
+     0.15
+    ],
+    [
+     0.16,
+     0.24
+    ]
+   ],
+   "unit": "down the frame",
+   "kind": "judged",
+   "source": "page-5.js lines 36-40; works-effects.js (lower card ends 0.236)"
+  },
+  "top_shade": {
+   "value": {
+    "bottom_pixels": 470,
+    "strength": 0.62
+   },
+   "unit": "pixels and opacity",
+   "kind": "judged",
+   "source": "graphics.js topShade (line 349): the soft dark band behind words"
+  },
+  "callout_margin_pixels": {
+   "value": 70,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "graphics.js callout"
+  },
+  "old_frame_check_margins_pixels": {
+   "value": [
+    140,
+    140,
+    380
+   ],
+   "unit": "pixels [sides, top, bottom]",
+   "kind": "judged",
+   "source": "frame_check.py (lines 3-4) and the plugin's camera-and-framing.md",
+   "note": "Superseded: 140 px is 0.87 across, stricter than rule 12's 0.90. Tools should read the entries above instead."
+  },
+  "landmark_top_min_down": {
+   "value": 0.24,
+   "unit": "down the frame",
+   "kind": "judged",
+   "source": "Round 2-3 (chimney tops at 0.07 to 0.14 down sat in the words band; keep a top below 0.24 or put the words beside it)"
+  },
+  "heading_baselines_pixels": {
+   "value": [
+    172,
+    250
+   ],
+   "unit": "pixels from the top",
+   "kind": "judged",
+   "source": "graphics.js; page-3.js LINE_1 and LINE_2"
+  }
+ },
+ "lettering": {
+  "about": "How big lettering must be on the film frame to read on a phone, and how to quieten a sign the narration does not name.",
+  "reading_evidence_pixels": {
+   "value": {
+    "only_just": 11,
+    "tiny": 14,
+    "marginal": 16,
+    "readable": 22,
+    "easy": 29,
+    "readable_large": 60
+   },
+   "unit": "pixels tall on 1080 x 1920",
+   "kind": "measured",
+   "source": "Log 32 (PITS WILL BE CLOSED 11 px \"only just\"); rounds 3-4 (No. 1/No. 2 boards 14 px \"tiny\", BANK 15-17 px marginal, PETROL/DIESEL 22 px \"fully readable\", BANK 29 px \"easy\"); round 1 (60 px bill letters)"
+  },
+  "must_read_min_pixels": {
+   "value": 20,
+   "unit": "pixels tall",
+   "kind": "judged",
+   "source": "Skeptic (log 35) from the evidence: 22 px read, 14 px did not; fail under 20"
+  },
+  "must_read_comfortable_pixels": {
+   "value": 25,
+   "unit": "pixels tall",
+   "kind": "judged",
+   "source": "Skeptic (log 35): warn between 20 and 25 (25 was a critic's suggestion for WAGES)"
+  },
+  "headline_pixels": {
+   "value": [
+    40,
+    60
+   ],
+   "unit": "pixels tall",
+   "kind": "judged",
+   "source": "Plan 34 T12 (about 40 px the plan's test; 60 px bill letters read on a phone)"
+  },
+  "not_meant_to_read_max_pixels": {
+   "value": 14,
+   "unit": "pixels tall",
+   "kind": "judged",
+   "source": "notice-corner-and-checker inventory: words not meant to be read stay about 14 px or less, or are dimmed"
+  },
+  "unnamed_sign_dim": {
+   "value": 0.15,
+   "unit": "brightness factor until the word is said",
+   "kind": "judged",
+   "source": "works-effects.js BANK_SIGN.dim (lines 132-138): 0.3 was still read (round 4 critic), 0.15 chosen by eye"
+  },
+  "facing_lean_max_degrees": {
+   "value": 15,
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "Plan 34 lines 391-393; round 3 stood WAGES up leaning back 14 degrees"
+  },
+  "plank_joint_clear_metres": {
+   "value": 0.03,
+   "unit": "metres from any letter",
+   "kind": "judged",
+   "source": "Round 2 gate boards (joints 3 to 4 cm clear)"
+  },
+  "stencil_wrap_degrees": {
+   "value": 44,
+   "unit": "degrees either side of the front",
+   "kind": "measured",
+   "source": "props/index.json steel drums (word_reaches_degrees_either_side 43.8 and 43.9)"
+  },
+  "key_line_easy_pixels": {
+   "value": 18,
+   "unit": "pixels tall",
+   "kind": "judged",
+   "source": "Log 32 \"left for later\": PITS WILL BE CLOSED was 11 px; \"about 18 would read easily\" (a judgement, before the 20 px floor above)"
+  }
+ },
+ "people": {
+  "about": "Painted and built figures: sizes, distances, crowds, faces.",
+  "figure_height_metres": {
+   "value": 1.75,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Plan 34 People table; build_figures.py (men 1.69 to 1.83 m in works-shot.json)"
+  },
+  "head_height_metres": {
+   "value": 0.23,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Plan 34 (head_px = f x 0.23 / d); checker_formulas_check.py"
+  },
+  "backs_to_camera_min_distance_metres": {
+   "value": 6.0,
+   "unit": "metres from every camera spot along a slide",
+   "kind": "judged",
+   "source": "Plan 34 line 124 (a 1.75 m man at 6 m is a quarter of the frame height); round 3"
+  },
+  "facing_head_max_pixels": {
+   "value": 24,
+   "unit": "pixels tall",
+   "kind": "invented",
+   "source": "Plan 34 T8 and round 4 (doorway workers 20 to 24 px)",
+   "note": "Untested (skeptic, log 35): in the people test far walkers with about 10 px heads still got face dots, and the facing man at about 7 m (about 53 px) got none because the prompt said \"face lost in shadow\". Calibrate on the first Works painting."
+  },
+  "silhouettes_allowed": {
+   "value": false,
+   "unit": "yes or no",
+   "kind": "judged",
+   "source": "Lesson 137 (people test: own-surface silhouettes read as shadow puppets)"
+  },
+  "crowd_shoulder_gap_metres": {
+   "value": [
+    0.3,
+    0.5
+   ],
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Round 5 new_layout.txt; assemble_works.py lines 898-958"
+  },
+  "crowd_back_row_behind_metres": {
+   "value": 0.8,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "as crowd_shoulder_gap_metres"
+  },
+  "crowd_turn_degrees": {
+   "value": [
+    4,
+    16
+   ],
+   "unit": "degrees each way",
+   "kind": "judged",
+   "source": "as crowd_shoulder_gap_metres"
+  },
+  "crowd_scale_range": {
+   "value": [
+    0.96,
+    1.04
+   ],
+   "unit": "scale",
+   "kind": "judged",
+   "source": "as crowd_shoulder_gap_metres (so heads differ)"
+  },
+  "crowd_axis_min_angle_to_view_degrees": {
+   "value": 60,
+   "unit": "degrees",
+   "kind": "invented",
+   "source": "Design (log 35): never line figures up along a camera's ray (round 4 finding 2: single file read as one column)"
+  },
+  "crowd_head_spacing_head_widths": {
+   "value": 1.0,
+   "unit": "head widths between head centres on screen",
+   "kind": "judged",
+   "source": "Skeptic (log 35): replaces rule 4's 15/18 px between figures"
+  },
+  "crowd_figure_visible_share_min": {
+   "value": 0.5,
+   "unit": "share of each figure",
+   "kind": "judged",
+   "source": "Skeptic (log 35)"
+  },
+  "head_turn_from_strongest_light_degrees": {
+   "value": [
+    15,
+    24
+   ],
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "Rounds 2-4 (profile faces turned away from the fire)"
+  },
+  "hands_above_hot_rim_metres": {
+   "value": [
+    0.1,
+    0.15
+   ],
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Round 2; assemble_works.py lines 919-921"
+  },
+  "painted_figure_contrast": {
+   "value": 2.2,
+   "unit": "(surround + 0.05)/(figure + 0.05)",
+   "kind": "measured",
+   "source": "People test (scratchpad redesign/people-paint/check-figures/film-figure-contrast.json: painted 2.20, silhouettes 2.98)"
+  },
+  "tone_piece": {
+   "value": {
+    "saturation": 0.62,
+    "contrast": 0.9,
+    "lift": 0.03
+   },
+   "unit": "factors",
+   "kind": "judged",
+   "source": "film-kit/paper-film/tools/tone_piece.py header (a face 1.7 times as colourful as the others)"
+  },
+  "cloth_turns_black_below_levels": {
+   "value": 28,
+   "unit": "levels of 255 in the plate",
+   "kind": "measured",
+   "source": "Round 3: the film grade turns anything darker than about 28/255 black (tan coats came out crimson)"
+  }
+ },
+ "light": {
+  "about": "Lights in Blender and the stage that hold for every place, plus starting points that worked for one place.",
+  "shadow_pool_size": {
+   "value": "1024",
+   "unit": "EEVEE setting",
+   "kind": "measured",
+   "source": "Lesson 110: 1024 ran out on a 1536-wide plate unless scaled; 2048 could not be set up on this machine"
+  },
+  "shadow_resolution_reference_width": {
+   "value": 1080,
+   "unit": "pixels (scale = min(1, 1080 / width))",
+   "kind": "judged",
+   "source": "set_dressing.py render() lines 208-217"
+  },
+  "render_faults": {
+   "value": [
+    "Shadow buffer full",
+    "Could not allocate shadow atlas"
+   ],
+   "unit": "words in the render log",
+   "kind": "measured",
+   "source": "check_shot.py RENDER_FAULTS (line 1811); lesson 110"
+  },
+  "reflections_inside_paintings": {
+   "value": 0.3,
+   "unit": "scene.environmentIntensity",
+   "kind": "judged",
+   "source": "Lesson 49; cinema-kit.js lines 90-96 (default 1)"
+  },
+  "projected_page_look": {
+   "value": {
+    "exposure": 1.0,
+    "aperture": 4.0,
+    "maxBlur": 2,
+    "glowThreshold": 0.9,
+    "glowStrength": 0.6,
+    "contrast": 1.04,
+    "vignette": 0.3
+   },
+   "unit": "stage look settings",
+   "kind": "judged",
+   "source": "notice-corner.js line ~180; inflation-chapter-2-newcomers/page-3.js LOOK"
+  },
+  "projected_page_light_rig": {
+   "value": {
+    "reflections": 0.2,
+    "key_cast_shadow": false,
+    "haze_density": 0.008
+   },
+   "unit": "stage light rig",
+   "kind": "judged",
+   "source": "notice-corner.js lightRig call lines 44-46"
+  },
+  "lit_window_glow": {
+   "value": 1.4,
+   "unit": "emission strength",
+   "kind": "judged",
+   "source": "works_kit.py LIT_GLOW (lines 59-60; round 2: lit glass glowed white at higher values)"
+  },
+  "exposure_dark_view": {
+   "value": 1.6,
+   "unit": "stage exposure",
+   "kind": "judged",
+   "source": "page-3.js LOOK_W1 (W1 plate 35 levels against 49 and 59; men 18 levels on screen, 28 after)",
+   "note": "To be judged again once the painting replaces the plate."
+  },
+  "starting_points": {
+   "about": "Watts that passed the light rules at one place: a start for the next place, which retunes them.",
+   "notice_corner": {
+    "value": {
+     "fire_watts": 70,
+     "fire_light_above_coals_metres": 0.55,
+     "lantern_watts": 1,
+     "notice_glow_watts": 200,
+     "notice_glow_cone_degrees": 50,
+     "notice_glow_blend": 0.9,
+     "notice_glow_reach_metres": 1.4,
+     "road_glow_watts": 450,
+     "corner_lamp_watts": 12,
+     "sky_strength": 1.96
+    },
+    "unit": "watts and Blender settings",
+    "kind": "measured",
+    "source": "assemble_notice_corner.py lines 58-71; notice-corner-shot.json; logs 31-32 (26 lighting rounds)"
+   },
+   "works": {
+    "value": {
+     "fire_watts": 80,
+     "gate_lamp_watts": 7,
+     "men_rim_yard_watts": 220,
+     "men_rim_lamp_watts": 90,
+     "yard_dusk_watts": 900,
+     "room_watts": 160,
+     "sky_strength": 1.6
+    },
+    "unit": "watts and Blender settings",
+    "kind": "measured",
+    "source": "assemble_works.py lines 856-859, 1148, 1214-1221; round 5"
+   }
+  }
+ },
+ "effects": {
+  "about": "Live effects drawn in the film (never painted): smoke, flicker, glow, contact shadows.",
+  "wind_three_axes": {
+   "value": [
+    -0.85,
+    -0.12,
+    -0.5
+   ],
+   "unit": "direction (three.js axes, normalised in use)",
+   "kind": "judged",
+   "source": "works-effects.js lines 92-113 (round 5: across the views, a little away, sinking)"
+  },
+  "smoke_kinds": {
+   "value": {
+    "heavy": {
+     "count": 44,
+     "life": 7,
+     "rise": 0.6,
+     "drift": 16,
+     "mouth_seconds": 2,
+     "mouth_size": 1.9,
+     "size": [
+      3.4,
+      9
+     ],
+     "opacity": 0.95,
+     "fade": 1.8,
+     "colour": [
+      100,
+      92,
+      84
+     ]
+    },
+    "working": {
+     "count": 36,
+     "life": 7,
+     "rise": 0.6,
+     "drift": 15,
+     "mouth_size": 1.7,
+     "size": [
+      3.0,
+      8
+     ],
+     "opacity": 0.93,
+     "fade": 1.8,
+     "colour": [
+      104,
+      96,
+      88
+     ]
+    },
+    "thin": {
+     "count": 14,
+     "life": 7,
+     "rise": 0.5,
+     "drift": 14,
+     "mouth_size": 1.3,
+     "size": [
+      1.8,
+      6
+     ],
+     "opacity": 0.5,
+     "fade": 1.9
+    }
+   },
+   "unit": "puffs, seconds, metres, levels",
+   "kind": "judged",
+   "source": "works-effects.js lines 87-118; round 4 finding 4"
+  },
+  "busy_window_change_min_levels": {
+   "value": 15,
+   "unit": "levels",
+   "kind": "judged",
+   "source": "Round 4 critic target; round5-pages/tools/window_change.py"
+  },
+  "glow_size_swing_share": {
+   "value": 0.012,
+   "unit": "share",
+   "kind": "judged",
+   "source": "Log 32 (2.8% swing slid the glow's rim; calmed to 1.2%)"
+  },
+  "contact_shadow": {
+   "value": {
+    "height_above_ground_metres": 0.012,
+    "opacity": 0.55,
+    "fade_in_seconds": 0.8
+   },
+   "unit": "metres, opacity, seconds",
+   "kind": "judged",
+   "source": "notice-corner.js lines ~129-175 (faded in from the slide's start)"
+  }
+ },
+ "state_pictures": {
+  "about": "Changes on a held shot made by swapping only the part of the painting that changes (make_state_picture.py).",
+  "threshold_levels": {
+   "value": 6,
+   "unit": "levels (largest channel, after a 2 px blur)",
+   "kind": "measured",
+   "source": "make_state_picture.py lines 20-47; round 2 (6 alone left 6.8% of the frame over 3 levels)"
+  },
+  "faint_levels": {
+   "value": 3,
+   "unit": "levels (after a 10 px blur)",
+   "kind": "measured",
+   "source": "as threshold_levels (with it, under 4 levels everywhere but 0.04%)"
+  },
+  "blur_pixels": {
+   "value": 2,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "make_state_picture.py"
+  },
+  "faint_blur_pixels": {
+   "value": 10,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "make_state_picture.py"
+  },
+  "widen_pixels": {
+   "value": 12,
+   "unit": "pixels at 1536 wide (scaled by width)",
+   "kind": "judged",
+   "source": "make_state_picture.py"
+  },
+  "soften_pixels": {
+   "value": 5,
+   "unit": "pixels at 1536 wide",
+   "kind": "judged",
+   "source": "make_state_picture.py"
+  },
+  "outline_widen_pixels": {
+   "value": 6,
+   "unit": "pixels at 1536 wide",
+   "kind": "judged",
+   "source": "make_state_picture.py"
+  },
+  "speck_disc_pixels": {
+   "value": 1.5,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "make_state_picture.py"
+  },
+  "smallest_piece_square_pixels": {
+   "value": 60,
+   "unit": "square pixels",
+   "kind": "judged",
+   "source": "make_state_picture.py"
+  },
+  "close_disc_pixels": {
+   "value": 6,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "make_state_picture.py"
+  },
+  "reference_width_pixels": {
+   "value": 1536,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "make_state_picture.py (sizes are for a 1536-wide plate)"
+  },
+  "noise_factor_min": {
+   "value": 3,
+   "unit": "times the measured noise",
+   "kind": "judged",
+   "source": "make_state_picture.py (warns if a threshold is under 3 x noise)"
+  },
+  "residual_outside_mask_levels": {
+   "value": 0,
+   "unit": "levels",
+   "kind": "judged",
+   "source": "make_state_picture.py lines 41-46 (stops otherwise); round 2 (JPEG moved every pixel)"
+  },
+  "cut_when_mask_share_max": {
+   "value": 0.1,
+   "unit": "share of the frame",
+   "kind": "judged",
+   "source": "Rounds 3-4: a time cut where the swap is small (men going: 6.5 to 9.3%)"
+  },
+  "blend_when_mask_share_evidence": {
+   "value": [
+    0.41,
+    0.76
+   ],
+   "unit": "share of the frame",
+   "kind": "measured",
+   "source": "Rounds 3-4: windows lighting swapped 41 to 76%"
+  },
+  "flag_mask_share": {
+   "value": 0.15,
+   "unit": "share of the frame",
+   "kind": "judged",
+   "source": "make_state_picture.py docstring lines 44-46; round 4 finding 15"
+  },
+  "stepped_blend": {
+   "value": {
+    "seconds": 0.8,
+    "steps": 3
+   },
+   "unit": "seconds and steps",
+   "kind": "judged",
+   "source": "works-effects.js steppedBlend (first step on the word)"
+  },
+  "fallback_fade": {
+   "value": {
+    "gate_swing_seconds": 0.8,
+    "people_fade_seconds": 1.2
+   },
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Plan 34 T9; page-3.js GO swing fallback"
+  }
+ },
+ "painting": {
+  "about": "Asking the painter (fal) and lining the painting up with the plate. Prices are in money.",
+  "painter_model": {
+   "value": "blackforestlabs/flux-3/edit-image",
+   "unit": "fal model",
+   "kind": "judged",
+   "source": "people-test-paintings.json; notice-corner-paintings.json"
+  },
+  "painter_settings": {
+   "value": {
+    "resolution": "2k",
+    "aspect_ratio": "auto",
+    "output_format": "png",
+    "safety_tolerance": 2
+   },
+   "unit": "fal settings",
+   "kind": "judged",
+   "source": "people-test-paintings.json settings"
+  },
+  "style_picture_size_pixels": {
+   "value": [
+    768,
+    1368
+   ],
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "people-test-paintings.json images_sent (about 1 MP saves about 7 c)"
+  },
+  "align_search": {
+   "value": {
+    "stretch": [
+     0.985,
+     1.015
+    ],
+    "stretch_step": 0.0025,
+    "shift_pixels": [
+     -12,
+     12
+    ],
+    "shift_step": 2,
+    "fine_stretch": 0.002,
+    "fine_stretch_step": 0.0005,
+    "fine_shift_pixels": 2,
+    "fine_shift_step": 0.5
+   },
+   "unit": "scale and pixels (frame basis 1080 wide)",
+   "kind": "judged",
+   "source": "align_painting.py lines 29-33, 65-70"
+  },
+  "align_outline_agreement_aim": {
+   "value": 0.9,
+   "unit": "share of outlines on painting edges",
+   "kind": "judged",
+   "source": "align_painting.py docstring; Workflows.md"
+  },
+  "align_results": {
+   "value": {
+    "notice_corner": {
+     "stretch": 1.0065,
+     "shift": [
+      3,
+      3
+     ],
+     "before": 0.7,
+     "after": 0.96
+    },
+    "people_test": {
+     "stretch": 1.001,
+     "shift": [
+      1.0,
+      0.5
+     ],
+     "before": 0.874,
+     "after": 0.903
+    }
+   },
+   "unit": "stretch, pixels, shares",
+   "kind": "measured",
+   "source": "notice-corner-paintings.json; people-test-paintings.json lined_up"
+  },
+  "keep_painted_shadows_widen_pixels": {
+   "value": 10,
+   "unit": "pixels (painting pixels)",
+   "kind": "judged",
+   "source": "keep_painted_shadows.py WIDEN_PIXELS; lessons 122, 125"
+  },
+  "behind_fill": {
+   "value": {
+    "widen_pixels": 10,
+    "telea_radius": 9
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged",
+   "source": "make_behind_picture.py lines 1-31"
+  },
+  "projected_set": {
+   "value": {
+    "quickMove": 3e-05,
+    "behind_reach_share_of_height": 0.05,
+    "frontStretch": [
+     1.3,
+     1.9
+    ],
+    "edgeWidth": 0.006,
+    "stretch": [
+     2.5,
+     5
+    ],
+    "moveAngle": 0.01,
+    "frameEdge": 0.03,
+    "darken": 0.75,
+    "tint": 0.6,
+    "fill": 0.35,
+    "mapSize": 2048,
+    "bias": 0.004,
+    "jump": 0.03
+   },
+   "unit": "projected-set.js options",
+   "kind": "judged",
+   "source": "film-kit/paper-film/scenes/projected-set.js lines 510-563; lessons 91, 95, 96"
+  },
+  "sky_card": {
+   "value": {
+    "distance_metres": 300,
+    "height_factor": 1.6,
+    "width_to_height": 1.5
+   },
+   "unit": "metres and factors",
+   "kind": "judged",
+   "source": "notice-corner.js lines ~114-127; lesson 93"
+  },
+  "plate_thin_parts_pixels_at_1080": {
+   "value": 6,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "assemble_notice_corner.py lines 209-211 (parts thinner are removed, thickened or named \"stay thin\")"
+  },
+  "repaint_reserve_share": {
+   "value": 0.5,
+   "unit": "repaints per painting",
+   "kind": "judged",
+   "source": "Plan 34 money table (lesson 97: the painter's strength varies)"
+  },
+  "relief_room": {
+   "value": {
+    "near": 5,
+    "far": 60,
+    "fov_degrees": 40,
+    "blur_pixels": 3
+   },
+   "unit": "units, degrees, pixels",
+   "kind": "judged",
+   "source": "cinema-kit.js relief(); prepare_relief.py --blur 3"
+  },
+  "align_against": {
+   "value": {
+    "lightness_canny": [
+     40,
+     100
+    ],
+    "removed_props_widen_pixels": 25
+   },
+   "unit": "Canny thresholds and pixels",
+   "kind": "judged",
+   "source": "align_painting.py lines 35-45 (the behind painting against the main one)"
+  },
+  "stand_in_match": {
+   "value": {
+    "mean_levels": 4,
+    "share_over_12_levels": 0.064
+   },
+   "unit": "levels and share",
+   "kind": "measured",
+   "source": "Log 24 (3D stand-ins against the painting: the pass mark used)"
+  }
+ },
+ "timing": {
+  "about": "Page timing and words on screen. Both timeline tools must read these (today estimate_timeline.py keeps 1.5 s, assemble_chapter_narration.py 1.4 s for the default pause).",
+  "first_word_at_seconds": {
+   "value": 1.08,
+   "unit": "seconds of music before the first word",
+   "kind": "judged",
+   "source": "assemble_chapter_narration.py FIRST_WORD_AT (line 28); estimate_timeline.py line 18"
+  },
+  "tail_after_last_word_seconds": {
+   "value": 4.0,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "assemble_chapter_narration.py TAIL_AFTER_LAST_WORD (line 29); estimate_timeline.py line 19"
+  },
+  "default_page_pause_seconds": {
+   "value": 1.4,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "assemble_chapter_narration.py DEFAULT_PAUSE (line 31)",
+   "note": "estimate_timeline.py --default-pause still defaults to 1.5 (line 76): the drift this table ends."
+  },
+  "page_pause_range_seconds": {
+   "value": [
+    1.1,
+    1.7
+   ],
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Decisions.md lines 81-82 (chapter 1)"
+  },
+  "chapter_1_pauses_seconds": {
+   "value": [
+    1.7,
+    1.4,
+    1.1,
+    1.5,
+    1.5,
+    1.3,
+    1.5,
+    1.4,
+    1.6
+   ],
+   "unit": "seconds",
+   "kind": "measured",
+   "source": "Log 07 (chosen gap by gap, longer where the turn has more to do)"
+  },
+  "turn_after_last_word_seconds": {
+   "value": 0.3,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "cinema-chapter.js DEFAULT_JOIN (line 15); paper-chapter.js line 22"
+  },
+  "peel_length_seconds": {
+   "value": 0.85,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "cinema-chapter.js DEFAULT_JOIN"
+  },
+  "peel_shading_in_share": {
+   "value": 0.3,
+   "unit": "share of the peel",
+   "kind": "judged",
+   "source": "cinema-stage.js PEEL_SHADING_IN (line 364); round 3 (first peel frame 5.8 against 0.4)"
+  },
+  "guess_hold_seconds": {
+   "value": 4.0,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Lesson 129; estimate_timeline.py --pause-after PAGE=4.0"
+  },
+  "rule_hold_seconds": {
+   "value": 2.0,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Plan 34 lines 604-621"
+  },
+  "final_fade_seconds": {
+   "value": 4.0,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Plan 34; mix fade out 4 s"
+  },
+  "rest_without_change_max_seconds": {
+   "value": 1.7,
+   "unit": "seconds (2.5 on the end card)",
+   "kind": "judged",
+   "source": "Decisions.md lines 87-88; lesson 16"
+  },
+  "end_card_rest_max_seconds": {
+   "value": 2.5,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "as rest_without_change_max_seconds"
+  },
+  "key_number_hold_seconds": {
+   "value": 1.0,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Lesson 53; plugin guide \"Hold the key number still\""
+  },
+  "conclusion_full_strength_seconds": {
+   "value": 1.2,
+   "unit": "seconds before the cut",
+   "kind": "judged",
+   "source": "Round 3 check (PRICES UP 0.65 s could not be read; moved to 1.2 s)"
+  },
+  "label_readable_min_seconds": {
+   "value": 1.0,
+   "unit": "seconds at full strength",
+   "kind": "judged",
+   "source": "Round 4 finding 8 (MACHINES readable 0.38 to 0.45 s)"
+  },
+  "callout_words_delay_seconds": {
+   "value": 0.55,
+   "unit": "seconds after the line starts",
+   "kind": "judged",
+   "source": "graphics.js callout default (lines 105-118)"
+  },
+  "callout_words_with_line_seconds": {
+   "value": 0.12,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "graphics.js wordsWithLine (round 5)"
+  },
+  "presence_fades_seconds": {
+   "value": {
+    "in": 0.3,
+    "out": 0.35
+   },
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "graphics.js presence() (line 22)"
+  },
+  "word_group_every_seconds": {
+   "value": 6,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Plan 34 T6 (about 65 groups in 407 s)"
+  },
+  "word_groups_per_page": {
+   "value": [
+    3,
+    5
+   ],
+   "unit": "groups",
+   "kind": "judged",
+   "source": "Plan 34"
+  },
+  "words_per_minute": {
+   "value": 160,
+   "unit": "words a minute",
+   "kind": "measured",
+   "source": "Lesson 126 (Malina read 164; plan at about 160); estimate_timeline.py 252 s predicted against 251.7 s"
+  },
+  "thinking_pause_min_seconds": {
+   "value": 1.0,
+   "unit": "seconds for a \"...\"",
+   "kind": "judged",
+   "source": "Log 33 (each \"...\" gave under a second)"
+  },
+  "page_drawn_window_seconds": {
+   "value": {
+    "from_previous_last_word": 0.3,
+    "after_own_last_word": 1.2
+   },
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "cinema-chapter.js line 9"
+  },
+  "camera_plan_window_seconds": {
+   "value": {
+    "before_first_word": 0.8,
+    "after_last_word_end": 1.3
+   },
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Plan 34 part 2 \"Between pages\""
+  },
+  "page_turn_still_after_last_word_seconds": {
+   "value": 0.7,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Workflows.md lines 120-121 (check page turns in one run)"
+  },
+  "first_word_tolerance_seconds": {
+   "value": 0.03,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "extract_word_times.py FIRST_WORD_TOLERANCE (line 33); lesson 18"
+  },
+  "bracket_cue_max_seconds": {
+   "value": 0.2,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Log 07 (a cue read aloud lasts longer or shows in the transcript)"
+  },
+  "caption_max_letters": {
+   "value": 42,
+   "unit": "letters",
+   "kind": "judged",
+   "source": "make_captions.py MAX_LETTERS (line 20)"
+  },
+  "caption_hold_after_last_word_seconds": {
+   "value": 0.15,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "make_captions.py HOLD_AFTER_LAST_WORD (line 21)"
+  },
+  "caption_shortest_seconds": {
+   "value": 0.8,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "make_captions.py SHORTEST_CAPTION (line 22)"
+  },
+  "fade_out_at_cut_seconds": {
+   "value": 0.0,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "graphics.js presence(..., fadeOut = 0) for everything that ends on a cut (round 3: words faded a frame early)"
+  },
+  "new_words_after_old_frames": {
+   "value": 1,
+   "unit": "frames after the old words have gone",
+   "kind": "judged",
+   "source": "page-5.js lines 65-68 (round 3: NO SPARE drawn over the fading question)"
+  },
+  "run_on_join_dip": {
+   "value": 0.0,
+   "unit": "dip in the blend",
+   "kind": "judged",
+   "source": "cinema-stage.js \"run-on\" join (round 3: the normal dissolve dipped 4 levels)"
+  }
+ },
+ "sound": {
+  "about": "Loudness, the music under the voice, the limiter and the voice checks.",
+  "sample_rate": {
+   "value": 48000,
+   "unit": "samples a second",
+   "kind": "judged",
+   "source": "assemble_chapter_narration.py SAMPLE_RATE; lesson 5 (resample to 48,000 after every loudnorm)"
+  },
+  "length_tolerance_seconds": {
+   "value": 0.05,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Design (log 35) from lesson 5 (23 s asked, 23.04 s delivered)"
+  },
+  "voice_page_lufs": {
+   "value": -16.0,
+   "unit": "LUFS",
+   "kind": "judged",
+   "source": "assemble_chapter_narration.py VOICE_LOUDNESS (line 27); decisions"
+  },
+  "mix_lufs": {
+   "value": -15.0,
+   "unit": "LUFS integrated",
+   "kind": "measured",
+   "source": "mix_narration_over_music.sh target; measured -15.0 to -15.1 in logs 13, 19, 20"
+  },
+  "music_only_lufs": {
+   "value": -14.0,
+   "unit": "LUFS integrated",
+   "kind": "judged",
+   "source": "add_music_bed.sh LOUDNESS (log 32: -17.7 was faint on a phone)"
+  },
+  "true_peak_max_dbtp": {
+   "value": -1.0,
+   "unit": "dBTP",
+   "kind": "judged",
+   "source": "Decisions; measured -1.5 to -1.8 on the sent copies"
+  },
+  "limiter": {
+   "value": {
+    "limit": 0.84,
+    "attack_ms": 5,
+    "release_ms": 60,
+    "latency": 1
+   },
+   "unit": "alimiter settings",
+   "kind": "judged",
+   "source": "mix_narration_over_music.sh line 33; lessons 11, 15"
+  },
+  "music_level_db": {
+   "value": -11.0,
+   "unit": "dB",
+   "kind": "judged",
+   "source": "mix_narration_over_music.sh (the user asked for \"slightly\" louder: -14 to -11)"
+  },
+  "music_eq": {
+   "value": {
+    "frequency_hz": 2500,
+    "gain_db": -4,
+    "width_q": 1.2
+   },
+   "unit": "equalizer",
+   "kind": "judged",
+   "source": "mix_narration_over_music.sh line 26"
+  },
+  "duck": {
+   "value": {
+    "threshold": 0.08,
+    "ratio": 2.5,
+    "attack_ms": 30,
+    "release_ms": 1100,
+    "makeup": 1
+   },
+   "unit": "sidechaincompress",
+   "kind": "judged",
+   "source": "mix_narration_over_music.sh line 27; lesson 6"
+  },
+  "music_under_voice_db": {
+   "value": {
+    "while_speaking": 18,
+    "in_pauses": 12,
+    "tolerance": 1
+   },
+   "unit": "dB under the voice",
+   "kind": "measured",
+   "source": "Logs 04, 07, 10 (measured page by page)"
+  },
+  "music_fades_seconds": {
+   "value": {
+    "in": 0.8,
+    "out": 4.0
+   },
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "mix_narration_over_music.sh line 28"
+  },
+  "music_only_fades_seconds": {
+   "value": {
+    "in": 0.8,
+    "out": 1.5
+   },
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "add_music_bed.sh FADE_IN, FADE_OUT"
+  },
+  "sound_alignment_max_ms": {
+   "value": 0.0,
+   "unit": "milliseconds (a few tolerated)",
+   "kind": "measured",
+   "source": "check_sound_alignment.py; log 08 (5 ms late before latency=1), 0.00 ms since"
+  },
+  "loud_word_db": {
+   "value": 6,
+   "unit": "dB above the page's typical word",
+   "kind": "judged",
+   "source": "find_loud_words.py default"
+  },
+  "raised_voice_semitones": {
+   "value": 5,
+   "unit": "semitones above the page's typical pitch",
+   "kind": "judged",
+   "source": "find_raised_voice.py default"
+  },
+  "pitch_spread_across_pages": {
+   "value": {
+    "accepted": 2.2,
+    "not_accepted": 3.0
+   },
+   "unit": "semitones",
+   "kind": "measured",
+   "source": "Decisions item 20; compare_voice_steadiness.py"
+  },
+  "pitch_burst_semitones": {
+   "value": 7,
+   "unit": "semitones",
+   "kind": "judged",
+   "source": "compare_voice_steadiness.py"
+  },
+  "mouth": {
+   "value": {
+    "quiet_db": -25.0,
+    "loud_db": -11.0,
+    "slice_ms": 40,
+    "open_speed": 0.8,
+    "close_speed": 0.55
+   },
+   "unit": "dB, ms, factors",
+   "kind": "judged",
+   "source": "make_mouth_track.py QUIET_DB, LOUD_DB (lines 20-21); lesson 24"
+  }
+ },
+ "filming": {
+  "about": "What a frame costs to film, and how to cut a long filming run into pieces that survive restarts.",
+  "seconds_per_frame_held_live_effects": {
+   "value": 0.9,
+   "unit": "seconds a frame, one worker",
+   "kind": "measured",
+   "source": "scratchpad redesign/round4-film/film/frame-times.txt (round 4: 0.88 to 0.99 by view; W3 0.89, W2 0.91, W1 0.99)"
+  },
+  "seconds_per_frame_sliding": {
+   "value": 4.3,
+   "unit": "seconds a frame, one worker",
+   "kind": "measured",
+   "source": "scratchpad redesign/round4-film/film/frame-times.txt (W1 slide 4.31)"
+  },
+  "seconds_loading_a_piece": {
+   "value": 34,
+   "unit": "seconds a piece",
+   "kind": "measured",
+   "source": "scratchpad redesign/round4-film/film/frame-times.txt (first stretch of each piece minus the steady rate: 22 to 58 s, mean 34)"
+  },
+  "seconds_per_frame_held_nothing_live": {
+   "value": {
+    "one_worker": 0.8,
+    "two_workers": 0.57
+   },
+   "unit": "seconds a frame",
+   "kind": "measured",
+   "source": "Plan 34 F3 (notice corner measurements)"
+  },
+  "seconds_per_frame_paper": {
+   "value": 0.85,
+   "unit": "seconds a frame",
+   "kind": "measured",
+   "source": "Workflows.md (chapter 1, about 95 minutes for 6,641 frames; log 13 measured about 80)"
+  },
+  "seconds_per_frame_model_pages": {
+   "value": [
+    12,
+    15
+   ],
+   "unit": "seconds a frame",
+   "kind": "measured",
+   "source": "Lesson 70 (realistic materials of the works and town)"
+  },
+  "peel_frames_cost_factor": {
+   "value": 2,
+   "unit": "times a held frame",
+   "kind": "judged",
+   "source": "Plan 34 computer time table (page peels about double)"
+  },
+  "piece_frames": {
+   "value": {
+    "default": 60,
+    "lazy_chapter": 240
+   },
+   "unit": "frames",
+   "kind": "judged",
+   "source": "film-chapter-parallel.sh PIECE_FRAMES (line 70); Workflows.md (lazy chapters 240)"
+  },
+  "stretch_max_hours": {
+   "value": 2,
+   "unit": "hours",
+   "kind": "measured",
+   "source": "Lesson 69 (background jobs stop after 2 hours)"
+  },
+  "workers": {
+   "value": {
+    "two_processors": 1,
+    "four_processors": 2,
+    "two_workers_speed_gain": 0.17
+   },
+   "unit": "workers",
+   "kind": "measured",
+   "source": "Lesson 34; Workflows traps (1.44 against 1.68 s a frame)"
+  },
+  "memory_per_piece_gb": {
+   "value": [
+    2.6,
+    2.8
+   ],
+   "unit": "GB of browser memory",
+   "kind": "measured",
+   "source": "Plan 34 F1; log 34 (about 2.8 GB a piece)"
+  },
+  "free_memory_before_piece_gb": {
+   "value": 6,
+   "unit": "GB",
+   "kind": "judged",
+   "source": "Plan 34 computer time (when Blender runs alongside)"
+  },
+  "machine_memory_gb": {
+   "value": 16,
+   "unit": "GB (no swap)",
+   "kind": "measured",
+   "source": "Plan 34 F1"
+  },
+  "plate_render_minutes": {
+   "value": [
+    6,
+    11
+   ],
+   "unit": "minutes (EEVEE, 1536 x 2730)",
+   "kind": "measured",
+   "source": "Round 1 (11 min at 48 samples); round 3 (6 min with three shadowing lights)"
+  },
+  "preview_render_minutes": {
+   "value": 1,
+   "unit": "minutes (540 x 960)",
+   "kind": "measured",
+   "source": "Round 1-3 previews"
+  },
+  "checker_render": {
+   "value": {
+    "size": [
+     1080,
+     1920
+    ],
+    "samples": 16
+   },
+   "unit": "pixels and samples",
+   "kind": "judged",
+   "source": "Round 1-4 checker runs"
+  },
+  "pages_3_to_5_minutes": {
+   "value": {
+    "frames": 2283,
+    "round_3": 70,
+    "round_4": 53
+   },
+   "unit": "frames and minutes",
+   "kind": "measured",
+   "source": "round3-result.json, round4-result.json film.summary"
+  },
+  "film_with_grain_megabytes_per_second": {
+   "value": 3.5,
+   "unit": "MB a second",
+   "kind": "measured",
+   "source": "Plan 34 F2"
+  },
+  "msaa_samples": {
+   "value": 4,
+   "unit": "samples",
+   "kind": "judged",
+   "source": "cinema-stage.js (?samples=N; default 4)"
+  }
+ },
+ "money": {
+  "about": "Prices of paid services, with the date each was read. Nothing here spends money: every paid step asks the user first.",
+  "fal_flux_3_edit_cents_per_megapixel": {
+   "value": 4.8,
+   "unit": "US cents a megapixel (returned + every picture sent)",
+   "kind": "measured",
+   "source": "people-test-paintings.json note",
+   "date_read": "2026-10-16",
+   "note": "The plan had 2.4 c/MP from the price list (log 34 plan); the bill on the day was twice that. The people test came to about 85 c for two paintings, itself an estimate (fal shows no exact charge)."
+  },
+  "fal_price_list_cents_per_megapixel": {
+   "value": 2.4,
+   "unit": "US cents a megapixel",
+   "kind": "measured",
+   "source": "Plan 34 lines 1131-1133 (fal's price list)",
+   "date_read": "2026-10-15",
+   "note": "Superseded by the 4.8 c/MP charged on 2026-10-16."
+  },
+  "nano_banana_pro_cents": {
+   "value": 15,
+   "unit": "US cents a picture",
+   "kind": "measured",
+   "source": "Project story logs 30-34",
+   "date_read": "2026-10-14"
+  },
+  "seedance_10_second_draft_cents": {
+   "value": 206,
+   "unit": "US cents",
+   "kind": "measured",
+   "source": "Project story log 30",
+   "date_read": "2026-10-14"
+  },
+  "minimax_6_second_video_cents": {
+   "value": 18,
+   "unit": "US cents",
+   "kind": "measured",
+   "source": "Project story logs 10-19",
+   "date_read": "2026-10-12"
+  },
+  "sam_3d_cents": {
+   "value": 2,
+   "unit": "US cents an object",
+   "kind": "measured",
+   "source": "Project story logs 23-24",
+   "date_read": "2026-10-13"
+  },
+  "tripo_cents": {
+   "value": [
+    20,
+    40
+   ],
+   "unit": "US cents a model (never its free plan)",
+   "kind": "measured",
+   "source": "Project story",
+   "date_read": "2026-10-13"
+  },
+  "world_labs_cents": {
+   "value": {
+    "per_world": 126,
+    "minimum_purchase": 500
+   },
+   "unit": "US cents",
+   "kind": "measured",
+   "source": "Project story log 26",
+   "date_read": "2026-10-13"
+  },
+  "elevenlabs_credits_per_letter": {
+   "value": 1.0,
+   "unit": "credits a letter of page text (accent instruction included)",
+   "kind": "measured",
+   "source": "Logs 04, 07, 19, 33 (2,950 credits for pages 2-10; 4,300 for chapter 2)",
+   "date_read": "2026-10-13"
+  },
+  "elevenlabs_dollars_per_credit": {
+   "value": 0.000175,
+   "unit": "US dollars a credit",
+   "kind": "judged",
+   "source": "Status.md (about 75 c for 4,300 credits \"counted by text length\", not a bill)",
+   "date_read": "2026-10-13"
+  },
+  "painting_failure_share": {
+   "value": 0.04,
+   "unit": "share of paintings redone",
+   "kind": "measured",
+   "source": "Log 13: 2 failures in 47 paintings"
+  },
+  "user_allowance_dollars": {
+   "value": {
+    "allowance": 20,
+    "spending_line": 12
+   },
+   "unit": "US dollars",
+   "kind": "judged",
+   "source": "Decision 40 (a new US$20 from log 34); plan 34 money table",
+   "date_read": "2026-10-15"
+  },
+  "old_painting_prices_cents": {
+   "value": {
+    "flux_2k": 10,
+    "flux_1k": 2.5,
+    "cut_out_mask": 0.2,
+    "flux_edit_repaint": 10
+   },
+   "unit": "US cents a picture",
+   "kind": "measured",
+   "source": "Project story logs 10-34 (before the per-megapixel price)",
+   "date_read": "2026-10-12",
+   "note": "Superseded for paintings by the 4.8 c/MP charged on 2026-10-16; the plugin's paint-and-cut skill still says 10 c."
+  },
+  "sam_3d_cents_per_painting": {
+   "value": 12,
+   "unit": "US cents a painting's objects",
+   "kind": "measured",
+   "source": "Inventory \"Painting prices\" (plan 34)",
+   "date_read": "2026-10-15"
+  }
+ },
+ "delivery": {
+  "about": "The finished film: the sendable copy and the repository.",
+  "sendable_megabytes": {
+   "value": 28,
+   "unit": "MB",
+   "kind": "judged",
+   "source": "finish_film.sh (a file sent in chat must be under 30 MB; decision 16)"
+  },
+  "sendable_audio_kbps": {
+   "value": 128,
+   "unit": "kbps AAC",
+   "kind": "judged",
+   "source": "finish_film.sh"
+  },
+  "sendable_bitrate_factor": {
+   "value": 0.97,
+   "unit": "share kept for overhead",
+   "kind": "judged",
+   "source": "finish_film.sh: video kbps = (28 x 8000 x 0.97) / seconds - 128"
+  },
+  "master_audio_kbps": {
+   "value": 256,
+   "unit": "kbps AAC",
+   "kind": "judged",
+   "source": "finish_film.sh"
+  },
+  "repository_file_max_megabytes": {
+   "value": 90,
+   "unit": "MB (GitHub refuses 100)",
+   "kind": "judged",
+   "source": "Plan 34 \"The repository\"; decisions 27, 30"
+  },
+  "repository_batch_max_megabytes": {
+   "value": 400,
+   "unit": "MB a push",
+   "kind": "judged",
+   "source": "Decisions 27, 30"
+  },
+  "disk": {
+   "value": {
+    "chapter_copy_gb": [
+     1.4,
+     1.6
+    ],
+    "peak_gb": [
+     6.5,
+     7.5
+    ]
+   },
+   "unit": "GB",
+   "kind": "measured",
+   "source": "Plan 34 F2, F15"
+  }
+ },
+ "models": {
+  "about": "Building models and sets in Blender.",
+  "coplanar_gap_metres": {
+   "value": 0.01,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Lesson 85 (a ceiling on the slab above flickered)"
+  },
+  "contact_metres": {
+   "value": [
+    0.01,
+    0.03
+   ],
+   "unit": "metres",
+   "kind": "measured",
+   "source": "Log 22 (SAM models floated 0.5, then 0.01 to 0.03)"
+  },
+  "bake_shading": {
+   "value": {
+    "ao_reach": 0.6,
+    "size_pixels": 1024,
+    "samples": 32,
+    "margin": 4
+   },
+   "unit": "Blender bake settings",
+   "kind": "judged",
+   "source": "model_kit.py bake_shading (line 283); lesson 61"
+  },
+  "detailed_building_triangles": {
+   "value": [
+    22000,
+    34000
+   ],
+   "unit": "triangles",
+   "kind": "measured",
+   "source": "Lesson 67 (232 parts joined into 19)"
+  },
+  "held_frame_budget_seconds": {
+   "value": 1.5,
+   "unit": "seconds a frame",
+   "kind": "judged",
+   "source": "Plan 34 (budget by frame time, not triangles)"
+  },
+  "ground_under_raised_area_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Round 2 (setts only 2 cm above ground showed dark patches)"
+  },
+  "index_size_match_metres": {
+   "value": 0.0015,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Round 1-2 (sizes measured from the saved model)"
+  },
+  "place_prop_ray_start_above_pavement_metres": {
+   "value": 2.0,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "set_dressing.place_prop lines 56-79 (under the eaves); lesson 88"
+  },
+  "pit_village_street": {
+   "value": {
+    "carriageway": 5.0,
+    "pavement": 1.65,
+    "length": 72,
+    "slope_degrees": 4,
+    "eaves": 6.0
+   },
+   "unit": "metres and degrees",
+   "kind": "measured",
+   "source": "build_street.py lines 77-116 (as built)"
+  },
+  "striped_parts_allowed": {
+   "value": 0,
+   "unit": "parts",
+   "kind": "judged",
+   "source": "Round 3 (find_stripes.py found 15 to 33 striped parts; round 4 rebuilt to 0)"
+  },
+  "clearance_units": {
+   "value": {
+    "standing": 0.05,
+    "in_the_air": 0.15,
+    "tags_in_front_of_painted_room": 15
+   },
+   "unit": "units",
+   "kind": "judged",
+   "source": "cinema-kit.js clearance(); log 20 (price tags)"
+  },
+  "virtual_screen": {
+   "value": "Xvfb :96 -screen 0 1920x1080x24; DISPLAY=:96 blender -b ...",
+   "unit": "command",
+   "kind": "judged",
+   "source": "check-shot.sh lines 17-29; build_works.sh line 13 (plates and checks drawn with EEVEE)"
+  },
+  "painterly_library_slowdown": {
+   "value": {
+    "seconds_with": 223,
+    "seconds_without": 33
+   },
+   "unit": "seconds a render",
+   "kind": "measured",
+   "source": "Log 34 (the FOUNDRY painterly library: 7 times slower, nothing looked painted; rejected)"
+  }
+ },
+ "checking": {
+  "about": "Checking the film in motion and proving shared code changed nothing.",
+  "find_jumps": {
+   "value": {
+    "size": [
+     270,
+     480
+    ],
+    "jump_factor": 4.0,
+    "neighbours": 5,
+    "floor": 0.05,
+    "change_min": 1.0
+   },
+   "unit": "pixels and factors",
+   "kind": "judged",
+   "source": "find_jumps.py lines 17-35"
+  },
+  "frame_change_evidence": {
+   "value": {
+    "ordinary": [
+     0.39,
+     0.51
+    ],
+    "cut": [
+     42,
+     46
+    ],
+    "time_cut": [
+     8.4,
+     10.7
+    ]
+   },
+   "unit": "mean level change",
+   "kind": "measured",
+   "source": "Rounds 2-4 find_jumps runs"
+  },
+  "unplanned_change_fault": {
+   "value": 1.5,
+   "unit": "mean level change",
+   "kind": "judged",
+   "source": "Rounds 2-4 (anything above about 1.5 that is not a planned event)"
+  },
+  "regression_largest_difference_levels": {
+   "value": 5,
+   "unit": "levels of 255, on a few pixels",
+   "kind": "judged",
+   "source": "Status (drawing noise 4-5 levels); log 14, 21, 34"
+  },
+  "kept_shot_changed_pixels": {
+   "value": 0,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "Rounds 1-5 (the notice corner redrawn and all 518,400 pixels compared)"
+  },
+  "contact_sheet_every_seconds": {
+   "value": {
+    "overview": 3,
+    "moving_shots": 0.5
+   },
+   "unit": "seconds between frames",
+   "kind": "judged",
+   "source": "Logs 13-32"
+  },
+  "profile_frame": {
+   "value": {
+    "warm_up_frames": 2,
+    "timed_frames": 3
+   },
+   "unit": "frames",
+   "kind": "judged",
+   "source": "profile_frame.mjs lines 1-40"
+  }
+ },
+ "script": {
+  "about": "What a script for newcomers needs, measured on the recorded chapter 2 and its rewrite (log 33). The script gate adds its own limits.",
+  "words_per_sentence": {
+   "value": 9,
+   "unit": "words (about)",
+   "kind": "judged",
+   "source": "Log 33 audit and rewrite (sentences about 8 to 10 words)"
+  },
+  "main_rule_said_times": {
+   "value": 2,
+   "unit": "times, in identical words",
+   "kind": "judged",
+   "source": "Log 33 (the main rule had been said once, 3 minutes in, as one 28-word sentence)"
+  },
+  "real_cases": {
+   "value": 4,
+   "unit": "cases in time order",
+   "kind": "judged",
+   "source": "Log 33 (8 cases changing direction in time 8 times were too many)"
+  },
+  "spoken_figures": {
+   "value": {
+    "before": 37,
+    "after": 28
+   },
+   "unit": "figures in the chapter",
+   "kind": "measured",
+   "source": "Log 33 (the newcomer script carries about 28 spoken figures)"
+  },
+  "stakes_within_seconds": {
+   "value": 30,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Log 33"
+  },
+  "newcomer_script_length": {
+   "value": {
+    "words": 1021,
+    "minutes": 7.25
+   },
+   "unit": "words and minutes",
+   "kind": "measured",
+   "source": "Log 33; Status.md"
+  },
+  "delivery_cues_per_page": {
+   "value": 1,
+   "unit": "leading bracket cue (the accent instruction)",
+   "kind": "judged",
+   "source": "Decisions (voice fix): one identical cue per page, no mood cues, no capitals"
+  }
+ },
+ "graphics": {
+  "about": "The newcomer graphics drawn over the film (graphics.js).",
+  "dot_panel": {
+   "value": {
+    "grid": [
+     10,
+     10
+    ],
+    "spacing_pixels": 34,
+    "radius_pixels": 12,
+    "empty_step_seconds": 0.18
+   },
+   "unit": "pixels and seconds",
+   "kind": "judged",
+   "source": "graphics.js dotPanel (lines 286-554)"
+  },
+  "build_words": {
+   "value": {
+    "size_pixels": 52,
+    "line_gap": 1.22
+   },
+   "unit": "pixels and factor",
+   "kind": "judged",
+   "source": "graphics.js buildWords (auto-shrinks to fit)"
+  },
+  "rule_card_plate_alpha": {
+   "value": 0.66,
+   "unit": "opacity",
+   "kind": "judged",
+   "source": "graphics.js ruleCard"
+  },
+  "guess_ring_seconds": {
+   "value": 4.0,
+   "unit": "seconds to fill",
+   "kind": "judged",
+   "source": "graphics.js guessRing"
+  },
+  "name_tag_pixels": {
+   "value": 34,
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "graphics.js nameTag"
+  },
+  "price_arrow_seconds": {
+   "value": 0.9,
+   "unit": "seconds to draw",
+   "kind": "judged",
+   "source": "graphics.js priceArrow"
+  },
+  "pointer_seconds": {
+   "value": 0.45,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "graphics.js pointer"
+  },
+  "callout_corner_pixels": {
+   "value": {
+    "dx": 120,
+    "dy": -8
+   },
+   "unit": "pixels",
+   "kind": "judged",
+   "source": "page-3.js line 116 (the line leaves its thing sideways)"
+  }
+ },
+ "paper_look": {
+  "about": "The paper pop-up look of chapter 1 (cut-out pieces in front of a page).",
+  "pieces_out_from_page_units": {
+   "value": [
+    0.7,
+    2.7
+   ],
+   "unit": "units (bigger pieces further out)",
+   "kind": "judged",
+   "source": "Lesson 22 (at 0.5 the shadows hid behind the pieces)"
+  },
+  "words_out_from_page_units": {
+   "value": 0.55,
+   "unit": "units",
+   "kind": "judged",
+   "source": "Lessons 22, 32"
+  },
+  "piece_edge_from_middle_units": {
+   "value": 4.1,
+   "unit": "units at the page plane (less for pieces further forward)",
+   "kind": "judged",
+   "source": "Lesson 31"
+  },
+  "shadows": {
+   "value": {
+    "paper_stage": {
+     "kind": "PCFShadowMap",
+     "radius": 5
+    },
+    "cinema_kit": {
+     "map_size": 2048,
+     "radius": 6,
+     "normal_bias": 0.02
+    },
+    "folded_props_normal_bias": 0
+   },
+   "unit": "three.js shadow settings",
+   "kind": "judged",
+   "source": "Lessons 21, 36; paper-stage.js lines 37-54; cinema-kit.js lines 95-106"
+  },
+  "fading_alpha_test": {
+   "value": 0.02,
+   "unit": "alphaTest while a piece fades (0.5 otherwise)",
+   "kind": "judged",
+   "source": "Lesson 87; house-sample/page-1.js setFading"
+  }
+ },
+ "shot_kind_profiles": {
+  "about": "Which composing rules apply to each kind of shot, and their limits. still_life is the base (the notice corner, where the rules were measured); the other kinds list only what they change, taken from what the project kept. A view names one or more kinds (place facts \"kind_of_shot\"). settings.py resolve_profile() gives the rules a view is held to.",
+  "about_combining": "For each rule, every named kind that changes it is used and the loosest wins: a rule switched off by any named kind is off; \"max\" limits take the largest, \"min\" limits the smallest, \"range\" the widest. A view's one-off exceptions go in its place facts \"accepted\" list, not here.",
+  "rule_order_when_rules_conflict": {
+   "value": [
+    "rule2: camera level and at eye height (it moves everything on screen)",
+    "rule1: the street's lines meet at the subject's edge (slide or move the subject, never turn)",
+    "rule12: words and story props clear of the phone buttons",
+    "rule7: some story thing reaches 0.70 down (wins over rule 8's bottom-left limit for the story things that make the reach)",
+    "people: figures at least 6 m away, backs turned, a crowd across the view (wins over rule 3's box width)",
+    "rule3: the story group together",
+    "rule4: clear overlaps or clear gaps",
+    "rule8: work props small and far; nothing big at bottom left",
+    "rule5 and rule6: light, once the layout has settled",
+    "rule10: the quiet side's weight (the weakest: the checker ranks it 0.8)"
+   ],
+   "unit": "order, first wins",
+   "kind": "judged",
+   "source": "check_shot.py ranking (KINDS/TIER lines 48-56: camera first; quiet side weighted 0.8); skeptic's missing list (log 35)"
+  },
+  "still_life": {
+   "about": "A few props round one subject, close to the camera: the notice corner (log 31-32, kept by the user: decision 38). These limits were measured on the picture the user liked (log 30) and are the check_shot.py defaults.",
+   "example_views": [
+    "notice corner (end)"
+   ],
+   "rules": {
+    "main_rule_spot_box": {
+     "applies": true,
+     "value": [
+      0.4,
+      0.5
+     ],
+     "unit": "share of width x height",
+     "kind": "measured",
+     "source": "Log 30 (liked picture); check_shot.py check_light lines 1667-1691",
+     "limit_type": "box_max"
+    },
+    "rule1_meeting_point_gap": {
+     "applies": true,
+     "value": 0.03,
+     "unit": "share of the width",
+     "kind": "judged",
+     "source": "Rule 1; check_shot.py line 940",
+     "limit_type": "max",
+     "measure": "to the subject's (or support's) nearest edge"
+    },
+    "rule2_eye_height": {
+     "applies": true,
+     "value": [
+      1.5,
+      1.9
+     ],
+     "unit": "metres above the surface under the camera",
+     "kind": "judged",
+     "source": "check_shot.py line 478",
+     "limit_type": "range"
+    },
+    "rule3_story_box": {
+     "applies": true,
+     "value": [
+      0.4,
+      0.5
+     ],
+     "unit": "share of width x height",
+     "kind": "measured",
+     "source": "Log 30 (or the reference's box + 0.02: 0.48 x 0.50 at the notice corner)",
+     "limit_type": "box_max"
+    },
+    "rule3_story_together_metres": {
+     "applies": true,
+     "value": 0.3,
+     "unit": "metres between footprints",
+     "kind": "judged",
+     "source": "check_shot.py check_story_in_3d",
+     "limit_type": "max"
+    },
+    "rule4_near_touch": {
+     "applies": true,
+     "value": {
+      "overlap_min": 20,
+      "gap_min": 25
+     },
+     "unit": "pixels at 1536 wide",
+     "kind": "judged",
+     "source": "Rule 4; check_shot.py line 966",
+     "limit_type": "rule"
+    },
+    "rule4_between_figures": {
+     "applies": true,
+     "value": {
+      "overlap_min": 20,
+      "gap_min": 25
+     },
+     "unit": "pixels at 1536 wide",
+     "kind": "judged",
+     "source": "Rule 4 (as rule4_near_touch)",
+     "limit_type": "rule"
+    },
+    "rule5_subject_brightness_ratio": {
+     "applies": true,
+     "value": 1.8,
+     "unit": "times the frame's mean",
+     "kind": "measured",
+     "source": "Log 30 (liked notice 0.61 against 0.32); check_shot.py line 1515",
+     "limit_type": "min"
+    },
+    "rule5_brightest_share_on_subject": {
+     "applies": true,
+     "value": 0.4,
+     "unit": "share of the brightest 3%",
+     "kind": "measured",
+     "source": "Log 30; check_shot.py line 1507",
+     "limit_type": "min"
+    },
+    "rule5_brightest_share_in_story_box": {
+     "applies": true,
+     "value": 0.75,
+     "unit": "share of the brightest 3%",
+     "kind": "measured",
+     "source": "Log 30 (about 80%); check_shot.py line 1507",
+     "limit_type": "min"
+    },
+    "rule5_nothing_in_story_as_bright": {
+     "applies": true,
+     "value": 0.05,
+     "unit": "brightness below the subject's median",
+     "kind": "judged",
+     "source": "check_shot.py line ~1585",
+     "limit_type": "rule"
+    },
+    "rule5_top_third_brightness": {
+     "applies": true,
+     "value": 0.36,
+     "unit": "mean brightness (0 to 1)",
+     "kind": "measured",
+     "source": "Log 30 (liked top-centre sky 0.35); check_shot.py line 1518",
+     "limit_type": "max"
+    },
+    "rule6_warm_share": {
+     "applies": true,
+     "value": [
+      0.015,
+      0.03
+     ],
+     "unit": "share of the frame",
+     "kind": "measured",
+     "source": "Log 30 (liked 2.2 to 2.3%); check_shot.py lines 1529-1532",
+     "limit_type": "range"
+    },
+    "rule6_lit_from_below": {
+     "applies": true,
+     "value": 0.1,
+     "unit": "(r - b)/(r + b) bottom minus top",
+     "kind": "judged",
+     "source": "Rule 6 (the liked picture 0.17); check_shot.py line 1569",
+     "limit_type": "min"
+    },
+    "rule7_story_reaches_down": {
+     "applies": true,
+     "value": 0.7,
+     "unit": "down the frame",
+     "kind": "judged",
+     "source": "Round 4 critic and round 5 (the notice corner's drum, chair and pail fill 0.45 to 0.8)",
+     "limit_type": "min",
+     "who_may_reach": "story"
+    },
+    "rule8_work_prop_share": {
+     "applies": true,
+     "value": 0.02,
+     "unit": "share of the frame",
+     "kind": "measured",
+     "source": "Log 30 (liked back props 0.16 to 1.9%); check_shot.py line 1346",
+     "limit_type": "max"
+    },
+    "rule8_bottom_left_share": {
+     "applies": true,
+     "value": 0.01,
+     "unit": "share of the frame per thing",
+     "kind": "judged",
+     "source": "Rule 8; check_shot.py line 1369",
+     "limit_type": "max",
+     "applies_to": "every thing"
+    },
+    "rule10_quiet_side_weight": {
+     "applies": true,
+     "value": [
+      0.4,
+      0.48
+     ],
+     "unit": "share of the weight",
+     "kind": "judged",
+     "source": "Rule 10 (liked 43/57); check_shot.py line 1645",
+     "limit_type": "range"
+    },
+    "rule10_nothing_on_quiet_side_outshines": {
+     "applies": true,
+     "value": 1.0,
+     "unit": "times the subject's brightness",
+     "kind": "judged",
+     "source": "Rule 10; check_shot.py lines 1660-1666",
+     "limit_type": "rule"
+    },
+    "rule12_must_read_right_edge": {
+     "applies": true,
+     "value": 0.9,
+     "unit": "share of the width",
+     "kind": "judged",
+     "source": "Rule 12",
+     "limit_type": "max"
+    },
+    "rule12_story_right_edge": {
+     "applies": true,
+     "value": 0.95,
+     "unit": "share of the width (in 0.45-0.95 down)",
+     "kind": "judged",
+     "source": "Rule 12",
+     "limit_type": "max"
+    },
+    "rule12_title_zone_sky_share": {
+     "applies": true,
+     "value": 0.85,
+     "unit": "share of the title zone that is sky",
+     "kind": "judged",
+     "source": "check_shot.py check_titles line 1316",
+     "limit_type": "min"
+    },
+    "resting_on": {
+     "applies": true,
+     "value": "the street (ground rays; \"landed high\" over 0.5 m)",
+     "unit": "rule",
+     "kind": "judged",
+     "source": "check_shot.py check_resting lines 697-775",
+     "limit_type": "rule"
+    },
+    "slide_magnification": {
+     "applies": true,
+     "value": "painting limit",
+     "unit": "times nearer at the nearest painted surface",
+     "kind": "measured",
+     "source": "Plan 34 F13; skeptic (log 35): (2672/1920) x tan(30.2)/tan(32.2) = 1.29 (frame_geometry.py slide_limit)",
+     "limit_type": "rule"
+    }
+   }
+  },
+  "crowd": {
+   "about": "A gathered crowd as the story (the Works' waiting men, W1 and W2 slowed; the people test). Taken from the round 5 views the helpers kept (not yet seen by the user): recalibrate when the user has judged them.",
+   "example_views": [
+    "works w1",
+    "works w2 (slowed)",
+    "works w3",
+    "people test"
+   ],
+   "rules": {
+    "rule3_story_box": {
+     "applies": true,
+     "value": [
+      0.8,
+      0.5
+     ],
+     "unit": "share of width x height",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet 0.64 x 0.33, W2 slowed 0.76 x 0.32, W1 working 0.50; a loose crowd two deep across a gate (round 4 finding 2) cannot fit 0.40 wide (skeptic: \"a crowd's box limit is set by the crowd\")",
+     "limit_type": "box_max"
+    },
+    "rule4_between_figures": {
+     "applies": false,
+     "value": null,
+     "unit": "replaced",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): near-touches between men accepted (W1 5, W2 slowed 8, W3 14)",
+     "limit_type": "rule",
+     "replaced_by": "people.crowd_head_spacing_head_widths and people.crowd_figure_visible_share_min (skeptic, log 35)"
+    },
+    "rule8_bottom_left_share": {
+     "applies": true,
+     "value": 0.02,
+     "unit": "share of the frame per story thing (the subject or a story prop)",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet diesel drum 1.6%, man 6 1.5%, man 5 1.2%; W2 quiet the gateway 1.4%; W2 slowed men 1.6, 1.6, 1.3% (rule order: the reach wins). W1's petrol drum (1.4%) is not a story thing there and stays a problem",
+     "limit_type": "max",
+     "applies_to": "story things (the subject and story props); other things keep 0.01"
+    },
+    "rule10_quiet_side_weight": {
+     "applies": true,
+     "value": [
+      0.4,
+      0.5
+     ],
+     "unit": "share of the weight",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 quiet 49%, W1 working 49%, W2 48%",
+     "limit_type": "range"
+    },
+    "rule12_title_zone_sky_share": {
+     "applies": false,
+     "value": null,
+     "unit": "replaced",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): only 27% (W1) and 32% (W2) of the title band is sky; rounds 3-4 measured 28 to 49%",
+     "limit_type": "rule",
+     "replaced_by": "a soft dark band behind the words (safe_area.top_shade) wherever the band holds roofs, chimneys or smoke (plan T13)"
+    }
+   }
+  },
+  "overview": {
+   "about": "A raised view of the whole place, its story far away (the Works' W3 from an upstairs window, 29-30 m from the crowd).",
+   "example_views": [
+    "works w3"
+   ],
+   "rules": {
+    "rule2_eye_height": {
+     "applies": true,
+     "value": [
+      0.8,
+      7.0
+     ],
+     "unit": "metres above the surface the checker finds under the camera",
+     "kind": "judged",
+     "source": "works-w3-shot-check.json eye_height_note (the checker measures down to the window sill)",
+     "limit_type": "range",
+     "note": "Better: floor + [1.5, 1.9] with the floor the viewer stands on (place facts camera.floor_height)."
+    },
+    "rule3_story_box": {
+     "applies": true,
+     "value": [
+      0.6,
+      0.5
+     ],
+     "unit": "share of width x height",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 0.51 x 0.17",
+     "limit_type": "box_max"
+    },
+    "rule3_story_together_metres": {
+     "applies": true,
+     "value": 2.0,
+     "unit": "metres between footprints",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 no-2 crates 1.92 m from the gate boards (the subject is two gates: two clusters)",
+     "limit_type": "max"
+    },
+    "rule7_story_reaches_down": {
+     "applies": true,
+     "value": 0.7,
+     "unit": "down the frame",
+     "kind": "judged",
+     "source": "works-shot.json decisions.round_4 (the handcart in W3's bottom third); skeptic: W3's crowd at 29-30 m reaches only 0.67 (an eye of about 6.9 m would be needed)",
+     "limit_type": "min",
+     "who_may_reach": "story or a fill prop (a handcart, crates)"
+    },
+    "rule10_quiet_side_weight": {
+     "applies": true,
+     "value": [
+      0.4,
+      0.6
+     ],
+     "unit": "share of the weight",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W3 57%",
+     "limit_type": "range"
+    }
+   }
+  },
+  "interior": {
+   "about": "Indoors, props on counters, shelves and tables (3 of plan 34's 6 places: the checkout, the corner shop, the kitchen). Provisional: from checkout C1's checks 1-10 (16 October 2026), which nobody has accepted yet.",
+   "example_views": [
+    "checkout c1"
+   ],
+   "rules": {
+    "rule2_eye_height": {
+     "applies": true,
+     "value": [
+      1.5,
+      1.7
+     ],
+     "unit": "metres above the floor",
+     "kind": "judged",
+     "source": "examples/inflation-chapter-2-newcomers/checkout-c1-shot-check.json eye_height",
+     "limit_type": "range"
+    },
+    "resting_on": {
+     "applies": true,
+     "value": 0.03,
+     "unit": "metres of air above a declared support surface (floor, counter, shelf, table)",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-checkout/check1/report.md: four props on the 0.9 m counter falsely \"landed on something high\"; the check file needed on_ground [] (skeptic, log 35)",
+     "limit_type": "max",
+     "note": "\"Landed high\" (0.5 m above the street) does not apply indoors."
+    },
+    "rule5_top_third_brightness": {
+     "applies": true,
+     "value": 0.36,
+     "unit": "mean brightness (0 to 1)",
+     "kind": "judged",
+     "source": "checkout-c1-shot-check.json \"sky\": \"ceiling*\" (the ceiling is the dim top)",
+     "limit_type": "max",
+     "sky_pattern": "ceiling*"
+    },
+    "rule7_story_reaches_down": {
+     "applies": true,
+     "value": 0.7,
+     "unit": "down the frame",
+     "kind": "judged",
+     "source": "checkout-c1-shot-check.json story_reaches_down (reach worked out above the counter top)",
+     "limit_type": "min",
+     "who_may_reach": "story",
+     "reach_above": "the support surface the story stands on"
+    }
+   }
+  },
+  "dark_subject": {
+   "about": "A subject that is dark by nature (an iron gate, an open doorway): shown by lighting what is behind it, judged by its silhouette, not its brightness (W1's gate, W2's gateway).",
+   "example_views": [
+    "works w1",
+    "works w2"
+   ],
+   "rules": {
+    "rule1_meeting_point_gap": {
+     "applies": true,
+     "value": 0.03,
+     "unit": "share of the width, across only",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W2's gateway 0 px across but 117 px below the meeting point (0.108); W1 working: the meeting point lies inside the opened gateway",
+     "limit_type": "max",
+     "measure": "to the opening's whole outline; a meeting point inside the opening passes"
+    },
+    "rule5_subject_brightness_ratio": {
+     "applies": false,
+     "value": null,
+     "unit": "replaced",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 gate 0.85 x the mean, W2 gateway 0.68, W1 working 0.64; round 5 raised the yard light 260 to 900 W and the gate still could not be brightest (inventory: a dark subject)",
+     "limit_type": "rule",
+     "replaced_by": "shot_kind_profiles.dark_subject.rules.silhouette_contrast"
+    },
+    "rule5_brightest_share_on_subject": {
+     "applies": false,
+     "value": null,
+     "unit": "replaced",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 8%, W2 0%, W2 slowed 13%",
+     "limit_type": "rule",
+     "replaced_by": "silhouette_contrast"
+    },
+    "rule5_brightest_share_in_story_box": {
+     "applies": false,
+     "value": null,
+     "unit": "replaced",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 43%, W2 33%, W1 working 62%",
+     "limit_type": "rule",
+     "replaced_by": "silhouette_contrast"
+    },
+    "rule5_nothing_in_story_as_bright": {
+     "applies": false,
+     "value": null,
+     "unit": "replaced",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): every story thing is brighter than a dark gate",
+     "limit_type": "rule",
+     "replaced_by": "silhouette_contrast"
+    },
+    "rule6_lit_from_below": {
+     "applies": false,
+     "value": null,
+     "unit": "off",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): W1 0.06, W2 0.01, W2 slowed -0.10, W1 working -0.05 (a dark subject has no colour to warm)",
+     "limit_type": "rule"
+    },
+    "rule10_nothing_on_quiet_side_outshines": {
+     "applies": false,
+     "value": null,
+     "unit": "off",
+     "kind": "judged",
+     "source": "scratchpad redesign/round5-set/checks/final-*/report.md (round 5 final checks, 2026-10-16): a lit window or lamp always outshines a dark gate",
+     "limit_type": "rule"
+    },
+    "silhouette_contrast": {
+     "applies": true,
+     "value": 2.2,
+     "unit": "(surround + 0.05)/(subject + 0.05) over a band round the subject",
+     "kind": "measured",
+     "source": "People test: painted figures read at 2.20 on the film frame (film-figure-contrast.json)",
+     "limit_type": "min",
+     "note": "Measured on figures, not a gate: calibrate on the W1 painting."
+    }
+   }
+  }
+ },
+ "shot_planner": {
+  "about": "The shot planner (calculators/plan_shot.py) and the shot checker's kinds of shot and accepted list (paper-film/tools/check_shot.py): margins, figure sizes and crowd tests. Added by the shot planner helper (log 35).",
+  "reach_aim_margin_down": {
+   "value": 0.02,
+   "unit": "down the frame, past rule 7's reach",
+   "kind": "judged",
+   "source": "The camera sums land within 0.006 to 0.015 of the rendered reach (core tests: W1 DIESEL drum 0.723 against the rendered 0.72; checkout C1 divider 0.776 against 0.78; man 6's feet 0.696 against his box bottom 0.704), so the planner aims 0.02 past the limit; round 5's W1 passed at 0.72 (scratchpad redesign/round5-set/checks/final-w1-quiet/report.md)"
+  },
+  "figure_shoes_below_feet_down": {
+   "value": 0.012,
+   "unit": "down the frame",
+   "kind": "measured",
+   "source": "Core tests (log 35): a figure's feet point lands 0.0005 to 0.0111 above the bottom of its model's box from Blender (people test, 11 figures, people-test-shot.json film_frame_box) and 0.0076 for W1's man 6 (works-shot.json men_seen); a figure that misses the reach by less than this is a 'look'"
+  },
+  "right_edge_aim_margin_share": {
+   "value": 0.015,
+   "unit": "share of the width, inside the must-read edge",
+   "kind": "invented",
+   "source": "Design (log 35): the wanted meeting point is 0.895 - the subject's width - 0.01, so its right edge ends at 0.885 (check_shot.py's own fixes aim 0.005 inside the limit); untested"
+  },
+  "planning_spot_box": {
+   "value": [
+    0.3,
+    0.4
+   ],
+   "unit": "share of width x height",
+   "kind": "invented",
+   "source": "Design (log 35): keep the spots that can be worked out before rendering (meeting point, subject, story) inside 0.30 x 0.40, leaving room for the brightest parts and the warm light within the main rule's 0.40 x 0.50; rendered spans: notice corner 0.11 x 0.23 (log 31), checkout C1 0.22 x 0.10 (check 10)"
+  },
+  "figure_shoulder_width_metres": {
+   "value": 0.47,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "paper-film/blender/figures/build_figures.py: shoulder joints 0.175 m either side of the middle (SHOULDER_SIDE) and a coat chest ring 0.192 m half-wide, plus the sleeve (about 0.06 m, judged from the code); figures/index.json overall widths 0.53 to 0.66 m include the arms"
+  },
+  "figure_box_metres": {
+   "value": [
+    0.64,
+    0.54
+   ],
+   "unit": "metres [across, front to back]",
+   "kind": "measured",
+   "source": "figures/index.json size_metres of the five waiting men (widths 0.529 to 0.663 m, depths 0.47 to 0.833 m; medians 0.636 and 0.539): the box shot_facts.py measures round a figure, arms included"
+  },
+  "figure_head_width_metres": {
+   "value": 0.155,
+   "unit": "metres",
+   "kind": "measured",
+   "source": "build_figures.py HEAD_HALF_SIZE (0.0775 m half width, without the cap)"
+  },
+  "face_visible_dot_min": {
+   "value": -0.2,
+   "unit": "cosine between the figure's facing and the way to the camera",
+   "kind": "invented",
+   "source": "Inventory 'Head size decides painted or silhouette' (log 35): a face or profile shows when facing . to-camera > -0.2 (about 100 degrees); untested"
+  },
+  "sign_edge_on_degrees": {
+   "value": 70,
+   "unit": "degrees between a sign's facing and the way to the camera",
+   "kind": "judged",
+   "source": "Plan 34 lines 85-87 ('a face seen at under about 20 degrees is edge-on and fails'); a drum's stencil uses its own wrap (lettering.stencil_wrap_degrees)"
+  },
+  "crowd_min_figures": {
+   "value": 3,
+   "unit": "figures",
+   "kind": "invented",
+   "source": "Shot planner (log 35): a story group of 3 or more figures is judged as a crowd (its long axis, rows and heads)"
+  },
+  "crowd_axis_min_elongation": {
+   "value": 1.5,
+   "unit": "spread along the long axis over the spread across it",
+   "kind": "invented",
+   "source": "Shot planner (log 35): a group that spreads less than 1.5 times as far one way as the other has no long axis to line up along a view"
+  },
+  "slide_sample_steps": {
+   "value": 10,
+   "unit": "steps along a slide",
+   "kind": "judged",
+   "source": "Design (log 35): cast the film frame's corners every 10% of the slide; people are judged from every step too"
+  },
+  "check_shot_silhouette_band_share_of_width": {
+   "value": 0.02,
+   "unit": "share of the frame width",
+   "kind": "invented",
+   "source": "check_shot.py's dark-subject test (log 35): the band round the subject's outline whose brightness is compared with the subject's (the people test measured its figure contrast over a band too, film-figure-contrast.json); untested on a gate"
+  },
+  "check_shot_accepted_worse_share": {
+   "value": 0.05,
+   "unit": "share of the accepted number",
+   "kind": "invented",
+   "source": "check_shot.py's accepted list (log 35): an accepted problem that has grown more than 5% past the number it was accepted at is a problem again"
+  }
+ },
+ "views_and_models": {
+  "about": "The house numbers of three tools: view_audit.py (lettering, figures and landmarks seen from each view), make_check_file.py (writes a view's shot check file from the Blender scene) and model_lint.py (model faults before plates). Added by the views-and-models helper (log 35).",
+  "lettering_material_patterns": {
+   "value": [
+    "*-lettering",
+    "*-lettering.0*",
+    "*-stencil",
+    "*-stencil.0*",
+    "*-printing",
+    "*-printing.0*",
+    "*-paper",
+    "*-paper.0*"
+   ],
+   "unit": "material name patterns (lower case, * any letters)",
+   "kind": "judged",
+   "source": "The naming the build scripts use: works-effects.js LETTERING (-lettering, -stencil, -printing), checkout-signs.glb (-lettering), notice-corner-signs.glb (notice-paper); inventory 'Lettering keeps its own surface; naming convention'"
+  },
+  "model_lint": {
+   "about": "model_lint.py: squashed textures (stripes), same-plane faces, floors over ground, names, glass, glows, sizes, fronts.",
+   "stripe_ratio_of_median": {
+    "value": 0.02,
+    "unit": "share of the part's median texture area per square metre",
+    "kind": "judged",
+    "source": "scratchpad redesign/check-round-3/tools/find_stripes.py (its threshold found round 3's 15, 27 and 33 striped parts and round 4's 0; skeptic, log 35: not the design's 1e-3)"
+   },
+   "stripe_report_area_square_metres": {
+    "value": 0.5,
+    "unit": "square metres of striped faces in one part",
+    "kind": "judged",
+    "source": "find_stripes.py (round 3): parts with more striped area than this are listed"
+   },
+   "stripe_face_min_area_square_metres": {
+    "value": 1e-06,
+    "unit": "square metres",
+    "kind": "judged",
+    "source": "find_stripes.py (round 3): smaller faces are left out of the median"
+   },
+   "same_plane_gap_metres": {
+    "value": 0.0001,
+    "unit": "metres between the two planes",
+    "kind": "invented",
+    "source": "Inventory 'Two surfaces on the same plane flicker' (proposed: less than 0.1 mm apart); lesson 85's ceiling sat exactly on the slab. The fix's gap is models.coplanar_gap_metres (0.01)"
+   },
+   "same_plane_normal_cos": {
+    "value": 0.9999,
+    "unit": "cosine between the two faces' normals (facing the same way)",
+    "kind": "invented",
+    "source": "Design (log 35): parallel normals; faces back to back (a prop's base on the ground) are left out because one hides the other"
+   },
+   "same_plane_overlap_min_square_metres": {
+    "value": 0.001,
+    "unit": "square metres of overlap (or of raised floor) worth reporting",
+    "kind": "invented",
+    "source": "views-and-models helper (log 35): 10 cm by 1 cm; smaller slivers along shared edges are not worth a fix"
+   },
+   "upward_normal_z_min": {
+    "value": 0.9,
+    "unit": "normal's z (1 = straight up)",
+    "kind": "invented",
+    "source": "views-and-models helper (log 35): a floor or ground face (the street's 4-degree slope is 0.998)"
+   },
+   "glass_material_patterns": {
+    "value": [
+     "*glass*",
+     "*lens*",
+     "*mantle*"
+    ],
+    "unit": "material name patterns (lower case)",
+    "kind": "judged",
+    "source": "Log 32 (the gas lamps' street_lamp_01_glass and the lantern's Lantern_01_glass took their see-through value from their pictures); set_dressing.see_through"
+   },
+   "glowing_base_brightness_max": {
+    "value": 0.05,
+    "unit": "base colour brightness (0 to 1, linear)",
+    "kind": "invented",
+    "source": "Design (log 35) from lesson 89 (a glow lit by its own lamp renders white: glow materials get a black base, set_dressing.glow_material)"
+   },
+   "size_claim_tolerance_share": {
+    "value": 0.1,
+    "unit": "share of the measured size",
+    "kind": "invented",
+    "source": "views-and-models helper (log 35): the jacket's 'about 0.6 m wide' against 0.516 measured (round 1) is 16% off"
+   },
+   "floor_min_square_metres": {
+    "value": 1.0,
+    "unit": "square metres of a raised floor over another ground",
+    "kind": "invented",
+    "source": "views-and-models helper (log 35): a yard or a room's floor, not a window sill 5 cm over its opening (0.2 square metres each on the Works' cottages); round 2's yard setts covered about 2,000 square metres"
+   }
+  },
+  "view_audit": {
+   "about": "view_audit.py: letters in pixels at every view, drums' turns, loud unnamed signs, landmark tops in the words band, heads, signs' backs, continuity counts, title contrast.",
+   "must_read_facing_min_cos": {
+    "value": 0.85,
+    "unit": "cosine between the sign's face and the way to the camera, across (the width of the letters)",
+    "kind": "invented",
+    "source": "Design (log 35) and inventory 'Words meant to be read face the camera' (flag under 0.85); no recorded case sets it"
+   },
+   "unnamed_sign_legibility_share_max": {
+    "value": 0.55,
+    "unit": "letter pixels x letter brightness, as a share of the least legible named sign in the view",
+    "kind": "judged",
+    "source": "Calibrated on BANK in W3 (skeptic, log 35: about 0.5 of the boards'), against the least legible named sign that is itself readable: the No. 1 board, 14.7 px x 120 levels (the No. 2 board's 13.8 px is under lettering.not_meant_to_read_max_pixels). BANK lit, 29 px x 118 levels = 1.94 of it, was read first (round 3); dimmed to 0.3, 52 levels (measured) = 0.86, the critic still read it (round 4); the accepted dim 0.15 comes out 0.53 by dim_brightness_exponent (predicted, not measured). 0.55 separates them and asks for a dim of 0.157 (0.15 was chosen by eye)"
+   },
+   "dim_brightness_exponent": {
+    "value": 0.68,
+    "unit": "levels = lit levels x dim ^ exponent",
+    "kind": "measured",
+    "source": "Round 4 (round4-result.json): BANK's letters 118 levels lit, 52 at dim 0.3 (ln(52/118)/ln(0.3) = 0.68); the film's 57 against 128 gives 0.60. One sign, two points"
+   },
+   "figure_half_width_metres": {
+    "value": 0.25,
+    "unit": "metres either side of a figure's feet",
+    "kind": "judged",
+    "source": "A working man's shoulders about 0.45-0.5 m (works-shot.json men_seen boxes: man 6 at 7.42 m spans 0.155 of the width = 0.58 m with his arms)"
+   },
+   "face_shows_within_degrees": {
+    "value": 100,
+    "unit": "degrees between a figure's facing and the way to the camera",
+    "kind": "invented",
+    "source": "Design (log 35); the people test showed faces are painted or not regardless (lesson 137; skeptic)"
+   },
+   "title_contrast_min": {
+    "value": 4.5,
+    "unit": "(lighter + 0.05)/(darker + 0.05), relative luminance",
+    "kind": "judged",
+    "source": "Inventory 'Title size and contrast' and 'Readable words: contrast and a dark band' (the common 4.5 to 1 for words; lessons 53, 66; log 32's faint amber 1926)"
+   },
+   "title_background_grow_pixels": {
+    "value": 20,
+    "unit": "pixels round the word's box",
+    "kind": "judged",
+    "source": "Inventory 'Readable words: contrast and a dark band over busy sets' (the box widened 20 px)"
+   }
+  },
+  "check_file": {
+   "about": "make_check_file.py: what it generates (story roles come from the shot list).",
+   "on_ground_within_metres": {
+    "value": 0.05,
+    "unit": "metres between a group's lowest point and a declared ground (road, pavement, ground, floor)",
+    "kind": "judged",
+    "source": "Design (log 35: within 0.05 m of the ground); check_shot.py's own resting limits are 0.03 floating and 0.05 sunk (composing.resting_*)"
+   },
+   "ground_kinds": {
+    "value": [
+     "ground",
+     "road",
+     "pavement",
+     "floor"
+    ],
+    "unit": "support surface kinds that count as the ground for check_shot's on_ground",
+    "kind": "judged",
+    "source": "Skeptic (log 35): on_ground against declared support surfaces; check1 of the checkout (round 5) falsely reported four counter props 'landed on something high'"
+   },
+   "thin_pixels": {
+    "value": 6,
+    "unit": "pixels across at the film frame (the group's narrow side)",
+    "kind": "judged",
+    "source": "Design (log 35) and check_dark_picture.py (round 3-5 scratch wrapper: gate bars); composing.thin_parts_ignored_pixels_at_1080 is the same 6"
+   },
+   "dark_base_brightness": {
+    "value": 0.02,
+    "unit": "area-weighted base colour brightness of a group's materials (linear, 0 to 1)",
+    "kind": "invented",
+    "source": "views-and-models helper (log 35): near-black paint and iron (the notice board 0.016, the gates 0.015 measured here); the design's 0.08 was plate brightness, which does not exist before the plate is drawn"
+   },
+   "title_zone_fallback": {
+    "value": [
+     0.06,
+     0.05,
+     0.9,
+     0.22
+    ],
+    "unit": "[left, top, right, bottom] shares of the frame",
+    "kind": "judged",
+    "source": "Works check files title_zone; safe_area.title_band_down and text left/right (0.06, 0.90)"
+   },
+   "sky_pattern_outdoors": {
+    "value": "sky_dome*",
+    "unit": "object name pattern",
+    "kind": "judged",
+    "source": "shot_facts.py default \"sky\" pattern"
+   },
+   "prop_collections": {
+    "value": [
+     "props",
+     "signs",
+     "gates",
+     "pop-up",
+     "men*",
+     "workers*",
+     "figures*",
+     "people*",
+     "walkers*",
+     "checkout"
+    ],
+    "unit": "collection name patterns where a place's assemble script puts props and figures",
+    "kind": "judged",
+    "source": "The kit's assemble scripts: assemble_notice_corner.py (props, signs), assemble_works.py (props, signs, gates, pop-up, men-no-1, men-no-2, workers-no-1, workers-no-2), assemble_checkout.py (checkout, signs); a shot list's prop_collections replaces it"
+   },
+   "light_prop_glow_share": {
+    "value": 0.15,
+    "unit": "share of a story group's own surface that glows",
+    "kind": "judged",
+    "source": "Measured by make_check_file.py on the kept scenes (log 35): the hurricane lantern 0.23 (notice corner) and 0.21 (Works W1), both hand-made files' only light prop; the brazier with its coals 0.11 and 0.06, which the hand files and the skeptic keep out (log 31: its rim as bright as the notice was a real fault). Set between them"
+   },
+   "thin_fill_share": {
+    "value": 0.3,
+    "unit": "share of a group's outline its faces fill, seen square on",
+    "kind": "invented",
+    "source": "views-and-models helper (log 35): iron gates and bars (the picture-match test misread them, rounds 3-5; check_dark_picture.py); a standing man fills about half his box"
+   },
+   "figure_collections": {
+    "value": [
+     "men*",
+     "workers*",
+     "figures*",
+     "people*",
+     "walkers*"
+    ],
+    "unit": "collection name patterns holding figures",
+    "kind": "judged",
+    "source": "assemble_works.py (men-no-1, men-no-2, workers-no-1, workers-no-2); check_dark_picture.py left every waiting man out of the picture-match test (rounds 3-5)"
+   }
+  }
+ },
+ "page_timing": {
+  "about": "Page timing and words on screen: calculators/plan_page_timing.py, paper-film/tools/page_events.mjs and paper-film/tools/check_page_layout.mjs (log 35). The other numbers these tools read live in timing, safe_area, camera and checking. Added by the page timing helper.",
+  "settle_after_join_seconds": {
+   "value": 0.15,
+   "unit": "seconds after a join ends, before the next page's first word",
+   "kind": "judged",
+   "source": "Skeptic (log 35): the pause after a page = join.after + join.length + about 0.15 s to settle, plus any hold; clamped to 1.1-1.7 s only for plain peels"
+  },
+  "join_clear_of_next_word_seconds": {
+   "value": 0.1,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Design (log 35), 'Page turn timing': each join must end at least 0.1 s before the next page's first word"
+  },
+  "pause_longer_than_needed_seconds": {
+   "value": 0.3,
+   "unit": "seconds",
+   "kind": "invented",
+   "source": "plan_page_timing.py: a pause this much longer than its join needs is reported as information (the extra is a rest before the next page)"
+  },
+  "conclusion_on_screen_seconds": {
+   "value": 1.2,
+   "unit": "seconds from when it starts to appear until the cut (one frame short allowed)",
+   "kind": "judged",
+   "source": "Round 3 check (round3-result.json checked.findings[4]): '-> PRICES UP' on 'up' was up 0.65 s and could not be read; moved to 'prices' it was up 1.19 s before the cut and passed. That 1.2 s counts from appearing: at full strength it is 1.05 s (skeptic, log 35). timing.conclusion_full_strength_seconds names the same number but says full strength, which the accepted fix does not meet."
+  },
+  "typed_word_window_seconds": {
+   "value": 6.0,
+   "unit": "seconds either side of when the words show",
+   "kind": "judged",
+   "source": "Inventory (log 35) 'Words on screen are short forms of what is said' (+-6 s). The design's +-3 s would fail round 4's accepted FLAT OUT = WORKING AS HARD AS THEY CAN, shown 4.7 s after 'working'."
+  },
+  "overlap_opacity_min": {
+   "value": 0.1,
+   "unit": "strength (0 to 1) both lines must have to count as overlapping",
+   "kind": "judged",
+   "source": "Design (log 35) overlay lint: two text boxes overlapping with both alpha above 0.1"
+  },
+  "overlap_pixels_min": {
+   "value": 2,
+   "unit": "pixels two boxes must overlap by, across and down",
+   "kind": "invented",
+   "source": "plan_page_timing.py and check_page_layout.mjs: ignores boxes that only touch"
+  },
+  "number_hold_seconds": {
+   "value": [
+    0.5,
+    0.15
+   ],
+   "unit": "seconds, plus seconds per character shown",
+   "kind": "judged",
+   "source": "Log 19 (page 10's 5.6% never held still); inventory 'Numbers on screen held still and true to the ledger': 0.5 s + 0.15 s a character, about 1.5 s for 5.6%; at least timing.key_number_hold_seconds"
+  },
+  "count_end_after_word_max_seconds": {
+   "value": 0.1,
+   "unit": "seconds after the number's spoken word",
+   "kind": "judged",
+   "source": "Lesson 53 and the plugin guide 'Hold the key number still': a count finishes on its word (design: count end <= the number word + 0.1 s)"
+  },
+  "still_after_event_seconds": {
+   "value": 0.25,
+   "unit": "seconds after an event (or 0.05 s after its words are full, if later)",
+   "kind": "judged",
+   "source": "Design (log 35) 'Automatic still lists': every event + 0.25 s"
+  },
+  "page_turn_stills_after_last_word_seconds": {
+   "value": [
+    0.3,
+    0.7,
+    1.2
+   ],
+   "unit": "seconds after each page's last word",
+   "kind": "judged",
+   "source": "Workflows.md lines 120-121 (each last word + 0.7 s, drawn in one run of the chapter); design (log 35) adds 0.3 and 1.2 s"
+  },
+  "merge_stills_within_seconds": {
+   "value": 0.1,
+   "unit": "seconds",
+   "kind": "invented",
+   "source": "plan_page_timing.py: still times closer than this are drawn once"
+  },
+  "layout": {
+   "about": "check_page_layout.mjs: what it calls a pop, a hold and a moving camera.",
+   "pop_frames_max": {
+    "value": 2,
+    "unit": "frames: a thing that comes or goes in this many frames or fewer, outside a planned cut, is a pop",
+    "kind": "judged",
+    "source": "Design (log 35) page pose sampler: any change completed in under 3 frames that is not a planned cut (log 27's one-frame faults: the scissors' jump, the padlock's glow switching on); lesson 86"
+   },
+   "pop_strength_change": {
+    "value": 0.8,
+    "unit": "change in strength (0 to 1) that counts as coming or going",
+    "kind": "invented",
+    "source": "check_page_layout.mjs"
+   },
+   "hold_without_still_key_frames": {
+    "value": 15,
+    "unit": "frames of a held camera with no still key before it is reported",
+    "kind": "invented",
+    "source": "check_page_layout.mjs; a held shot without a still key draws the whole set every frame, about 5 times slower (design, log 35; filming.seconds_per_frame_* measured 0.9 s held against 4.3 s sliding)"
+   },
+   "camera_still_tolerance": {
+    "value": 0.0001,
+    "unit": "metres (and quaternion parts) a camera may differ between frames and still count as holding",
+    "kind": "invented",
+    "source": "check_page_layout.mjs (page_events.mjs rounds the camera to 0.0001 m)"
+   },
+   "jump_pixels_min": {
+    "value": 40,
+    "unit": "pixels a drawn thing's middle may move in one frame before it counts as a jump",
+    "kind": "invented",
+    "source": "check_page_layout.mjs; log 27's one-frame faults (the scissors' jump). Judged on what shows: a label whose words have not come in yet does not count"
+   }
+  }
+ },
+ "painting_tools": {
+  "about": "The painting tools' own numbers (kit/calculators/paint_request.py, after_painting.py, plan_states.py; log 35). Before a painting: the plate preflight and the prompt's choices. After it: the line-up, figure, tone and style checks. For held shots: which helper plates, cut or blend. Numbers shared with other tools are read from their sections (painting, state_pictures, people, money, composing).",
+  "paint_request": {
+   "about": "Plate preflight and prompt building (paint_request.py).",
+   "keep_min_frame_share": {
+    "value": 0.0005,
+    "unit": "share of the frame",
+    "kind": "judged",
+    "source": "Design (log 35) said 0.1%; the people test's ledger kept the colliery's shut gates, which show 0.08% of its plate, so the limit is 0.05%. Hidden groups (the notice corner's barrel, 0%) still drop out"
+   },
+   "far_metres": {
+    "value": 10,
+    "unit": "metres from the plate camera",
+    "kind": "judged",
+    "source": "Design (log 35): 'small, far up the street' beyond 10 m; notice corner plate facts: handcart 12.2 m, sacks 15.2 m, dustbins 20.8 m were written 'far up on the left'"
+   },
+   "near_figure_metres": {
+    "value": 15,
+    "unit": "metres from the plate camera",
+    "kind": "judged",
+    "source": "Design (log 35): people split into near (under 15 m) and far; people test near men 6.6 to 8.9 m, walkers 42 to 55 m"
+   },
+   "thin_share_named": {
+    "value": 0.03,
+    "unit": "share of a group's showing pixels that are thin",
+    "kind": "judged",
+    "source": "Set on the notice corner plate (scratchpad plan3/corner/final/plate-facts-3): the chair's rungs are 4.7% of the chair and the ledger named them; nothing the ledger left out lies between 3% and 4.7% except the handcart (7.3%)"
+   },
+   "thin_share_remove_or_thicken": {
+    "value": 0.05,
+    "unit": "share of a story group's showing pixels that are thin",
+    "kind": "judged",
+    "source": "Design (log 35): thin over 5% of a group: remove or thicken, else name it in the prompt (log 31 removed the pail's wire handle)"
+   },
+   "pair_band_factor": {
+    "value": 2,
+    "unit": "times the clear overlap (20 px) and clear gap (25 px) at 1536 wide",
+    "kind": "judged",
+    "source": "Design (log 35): edges that meet or nearly meet = signed distance between -2 x overlap and 2 x gap"
+   },
+   "warm_owner_share_min": {
+    "value": 0.015,
+    "unit": "share of the plate's warm pixels",
+    "kind": "judged",
+    "source": "Design (log 35) said 10%; on the notice corner plate the notice owns 79% of the warm pixels, so 10% named only the board and the lamps against the five places the ledger named. At 1.5% (with every group holding a fire or a lamp, place facts emitters) the tool names the ledger's five places on the notice corner (its lit windows hold 1.9% of the warm pixels; the nearest group not named holds 1.2%) and the people test's four"
+   },
+   "darker_than_subject_share": {
+    "value": 0.5,
+    "unit": "a story prop's 95th-percentile brightness over the subject's median",
+    "kind": "judged",
+    "source": "Notice corner plate 3: the ledger wrote 'darker than the notice' only for the pale chair (0.55); the drum (0.37) and pail (0.25) did not get it; lights (the lantern) are left out. One case"
+   },
+   "hollow_glow": {
+    "value": {
+     "top_share": 0.3,
+     "brighter_than_body": 2.0,
+     "share_max": 0.02
+    },
+    "unit": "top share of the prop's height; times the prop's median brightness; share of that top",
+    "kind": "judged",
+    "source": "Lesson 138 and the skeptic (log 35). Measured on the two plates painted: people test brazier 8.2% of its top 30% over 2 x its body (painted as a band), notice corner drum 0.4% (painted as a dark hollow). Two cases only"
+   },
+   "even_disc": {
+    "value": {
+     "spread_levels_max": 2,
+     "saturation_min": 0.5,
+     "value_min": 0.25,
+     "frame_share_min": 0.003,
+     "window_pixels_at_1080": 7
+    },
+    "unit": "levels, shares (0-1), share of the frame, pixels",
+    "kind": "judged",
+    "source": "Design (log 35) preflight (e); log 32 (an even orange disc in the drum's mouth would be painted as soup or a lid)"
+   },
+   "dark_hole_levels_max": {
+    "value": 5,
+    "unit": "levels of 255",
+    "kind": "judged",
+    "source": "Design (log 35) preflight (e); log 32 (a pure-black doorway made the shut gate read as open)"
+   },
+   "figure_surround_ratio_max_plate": {
+    "value": 0.5,
+    "unit": "a figure's brightness over its surround's, in the plate",
+    "kind": "judged",
+    "source": "People test (scratchpad redesign/people-paint/check-looks): the painter lifted the dark men from about 0.15 to 0.50; the two men already at 0.64 in the plate came out pale khaki (0.77 to 0.85) and were the weakest read"
+   },
+   "head_band_over_coat_max": {
+    "value": 1.0,
+    "unit": "head band brightness over coat brightness",
+    "kind": "judged",
+    "source": "Design (log 35) preflight (g): flag a head as bright as its coat (round 1: heads 80/54/35 over coats 39/25/14 read as bald dummies; round 3: band 12 against coat 25 passed)"
+   },
+   "coat_band_share_of_height": {
+    "value": [
+     0.2,
+     0.55
+    ],
+    "unit": "share of the figure's height from its top",
+    "kind": "invented",
+    "source": "The torso of a standing figure below the collar. Through the film's finish its lit half reproduces round 2's red coats (21/0/0 against 26/1/0 filmed) and round 3's olive coats (28/17/3 against 27/16/3)"
+   },
+   "red_hue_band_degrees": {
+    "value": [
+     345,
+     15
+    ],
+    "unit": "degrees of hue",
+    "kind": "judged",
+    "source": "Design (log 35) preflight (h); round 2 (coats sampled 26/1/0, 19/1/1, 23/2/1 in the film, pure red)"
+   },
+   "red_saturation_min": {
+    "value": 0.5,
+    "unit": "saturation (0-1) of the colour as filmed",
+    "kind": "judged",
+    "source": "Design (log 35) preflight (h)"
+   },
+   "film_look": {
+    "value": {
+     "exposure": 1.0,
+     "contrast": 1.04,
+     "saturation": 1.0,
+     "shadow_tint": [
+      0.44,
+      0.52,
+      0.56
+     ],
+     "highlight_tint": [
+      0.56,
+      0.5,
+      0.42
+     ],
+     "tint_amount": 0.35,
+     "lift": 0.015
+    },
+    "unit": "the stage's finish settings",
+    "kind": "judged",
+    "source": "paper-film/stage/cinema-stage.js finish pass (shader defaults; pages' LOOK contrast 1.04, DEFAULT_LOOK 1.05). A page's own exposure is given with --exposure (page 3's W1: 1.6)"
+   },
+   "megapixel_pixels": {
+    "value": 1000000,
+    "unit": "pixels a megapixel",
+    "kind": "judged",
+    "source": "Design (log 35): 1504 x 2672 = 4.02 MP, the plate 4.19 MP, the style picture 1.05 MP"
+   },
+   "head_band_pale_min_levels": {
+    "value": 40,
+    "unit": "levels of 255 (brightness of the band under the cap)",
+    "kind": "judged",
+    "source": "Round 1 (log 34): the faulty heads measured 80/54/35 (brightness about 58) over coats 39/25/14 (about 27). The round 2 and 3 plates' men by the fire have rim-lit head bands of 15 to 22 over near-black coats (7 to 10) and were painted with dark heads, so a head band is flagged only when it is also pale"
+   },
+   "dark_hole_frame_share_min": {
+    "value": 0.001,
+    "unit": "share of the frame (one connected near-black patch, anywhere)",
+    "kind": "judged",
+    "source": "Log 32: the doorway behind the colliery's gates was 0.21% of the plate under 5 levels in plates 1 and 2 (scratchpad plan3/corner/final) and read as an open gate; plate 3 (painted, kept) has 1 such pixel there. The design's 0.3% would have missed it"
+   }
+  },
+  "after_painting": {
+   "about": "Checks on a returned painting (after_painting.py).",
+   "align_floor": {
+    "value": 0.85,
+    "unit": "share of outline points on painting edges after lining up",
+    "kind": "judged",
+    "source": "Design and skeptic (log 35): fail if it ends under 0.85 (notice corner ended 0.956, people test 0.903)"
+   },
+   "align_gain_min": {
+    "value": 0.005,
+    "unit": "share",
+    "kind": "invented",
+    "source": "Skeptic (log 35): fail if lining up is no better than before; a gain under this counts as none (an already lined-up painting gains 0.001 and passes only if it is over the floor and the aim)"
+   },
+   "figure_edges": {
+    "value": {
+     "painting_canny": [
+      20,
+      50
+     ],
+     "plate_canny": [
+      8,
+      24
+     ],
+     "blur": 1.5,
+     "within_pixels": 3
+    },
+    "unit": "Canny thresholds, blur pixels, pixels",
+    "kind": "judged",
+    "source": "scratchpad redesign/people-paint/check-figures/scripts/chamfer.py (the figures helper's outline measure, log 34)"
+   },
+   "figure_outline_drop_max": {
+    "value": 0.05,
+    "unit": "share of the figure's outline within 3 px, below its own plate baseline",
+    "kind": "judged",
+    "source": "Skeptic (log 35): pass when within-3-px is no more than 0.05 below that figure's plate baseline (the hand-on-bar man's plate baseline is only 0.838)"
+   },
+   "figure_ring_pixels_at_1536": {
+    "value": {
+     "erode": 7,
+     "ring_inner": 13,
+     "ring_outer": 61
+    },
+    "unit": "pixels on a plate 1536 wide",
+    "kind": "judged",
+    "source": "scratchpad redesign/people-paint/check-looks/scripts/measure1.py (the looks helper's figure-to-surround measure)"
+   },
+   "figure_surround_ratio_max": {
+    "value": 0.35,
+    "unit": "a figure's brightness over its surround's, in the painting",
+    "kind": "invented",
+    "source": "People test: plate about 0.15, painting about 0.50, which 'turn mid-grey and blend into the road' (looks helper, log 34); the film gave the front men back about 0.20. Set between them; not yet tested on a painting a person approved"
+   },
+   "figure_surround_lift_max": {
+    "value": 1.5,
+    "unit": "times the plate's ratio",
+    "kind": "invented",
+    "source": "As figure_surround_ratio_max: the people test's dark men were lifted 3 to 3.6 times"
+   },
+   "head_widen_share_of_height": {
+    "value": 0.03,
+    "unit": "share of the figure's height",
+    "kind": "invented",
+    "source": "Widens the head region so ears and cheeks the painter put just outside the plate's outline count (painted outlines were about 3.6 px wider all round, log 34)"
+   },
+   "new_skin_pixels_look": {
+    "value": 50,
+    "unit": "skin-coloured pixels added on one head, at 1536 wide",
+    "kind": "invented",
+    "source": "People test: the hand-on-bar man's head went from 0 to 183 skin pixels (figures helper, log 34), judged invisible on a phone but not wanted; this asks a person to look"
+   },
+   "style_standard": {
+    "value": {
+     "brightness": 77.4,
+     "spread": 26.1,
+     "colour": 49.8,
+     "ink_share": 0.0671,
+     "line_width_pixels": 2.94,
+     "warm_ground_share": 0.197
+    },
+    "unit": "mean brightness and its spread (0-255), mean HSV saturation (0-255), share of ink lines, line width (px at 1536), warm share of the lower 45%",
+    "kind": "measured",
+    "source": "The notice corner painting the user kept (film-kit/assets/models/pit-village/notice-corner-painted.jpg), measured with the people test looks helper's measures (check-looks/scripts measure1.py, lines.py, warm.py): 77.4, 26.1, 50, 6.7%, 2.9 px, 19.7%"
+   },
+   "style_tolerance": {
+    "value": {
+     "brightness": 12,
+     "spread": 6,
+     "colour": 12,
+     "ink_share": 0.012,
+     "line_width_ratio": 1.3,
+     "warm_ground_ratio_min": 0.75
+    },
+    "unit": "levels, levels, levels, share, times, times",
+    "kind": "invented",
+    "source": "Set between the plate (brightness 48.9, colour 69, ink 5.3%, lines 4.2 px) and the paintings (people test 77.4, 45, 6.4%); the people test's warm ground (10.0% of the whole painting against 19.7%) was a must-fix. Warnings only (skeptic, log 35)"
+   },
+   "ink_line": {
+    "value": {
+     "blackhat_pixels": 21,
+     "blackhat_min": 18,
+     "dark_max": 45
+    },
+    "unit": "pixels and levels",
+    "kind": "judged",
+    "source": "scratchpad redesign/people-paint/check-looks/scripts/lines.py"
+   },
+   "warm_ground": {
+    "value": {
+     "red_minus_blue_min": 18,
+     "brightness_min": 45,
+     "ground_from_down": 0.55
+    },
+    "unit": "levels and share of the height",
+    "kind": "judged",
+    "source": "scratchpad redesign/people-paint/check-looks/scripts/warm.py"
+   },
+   "added_figure_blob": {
+    "value": {
+     "darker_than_surround": 0.6,
+     "surround_pixels_at_1536": 201,
+     "height_range_factor": [
+      0.6,
+      1.5
+     ],
+     "aspect_range": [
+      1.5,
+      6.0
+     ],
+     "fill_min": 0.45
+    },
+    "unit": "share of the surround's brightness, pixels, times the height of a 1.75 m person standing at the blob's feet (from the plate camera's eye and horizon), height over width, share of the box",
+    "kind": "invented",
+    "source": "Skeptic (log 35): count figure-sized blobs to catch added people. Tested only on the people test (the painter added nobody: 0 found) and on a planted figure; the street's own dark verticals (downpipes, doorways) are rejected because they are not a person's height for where they stand. The fill (0.45 of the box) rejects the people test's one dark door panel (0.36), which is a person's height for where it stands"
+   },
+   "shadow_band_pixels_at_1536": {
+    "value": [
+     10,
+     30
+    ],
+    "unit": "pixels beside each near prop",
+    "kind": "judged",
+    "source": "Design (log 35): the ground band 10-30 px beside each near prop"
+   },
+   "shadow_band_change_max_levels": {
+    "value": 2,
+    "unit": "levels between the main and the combined behind picture",
+    "kind": "judged",
+    "source": "Log 32 (lesson 122, 125): the pavement patch beside the pail stayed 70 to 71 once the shadows were kept, against 89 before"
+   },
+   "leftover_shadow": {
+    "value": {
+     "plate_over_helper_max": 0.75,
+     "brightening_share_min": 0.5,
+     "expected_min_levels": 3
+    },
+    "unit": "plate over helper plate brightness, share of the expected brightening, levels",
+    "kind": "judged",
+    "source": "People test painter-faults helper (log 34): the men's cast-shadow area is where the plate is under 0.75 of the helper plate; the people-out painting brightened it 0.7 L where the helper plate is 11.3 L brighter (lesson 135)"
+   }
+  },
+  "plan_states": {
+   "about": "Planning the helper plates and state pictures of held shots (plan_states.py).",
+   "cut_when_change_share_max": {
+    "value": 0.12,
+    "unit": "share of the frame the state picture swaps",
+    "kind": "judged",
+    "source": "Skeptic (log 35): 0.12 separates the men-gone cuts (round 3 7.2%, round 4 9.3%, round 5 10.3%) from the window blends (41 to 76%). NOTE: state_pictures.cut_when_mask_share_max says 0.10, which would make round 5's men-gone (10.3%) a blend"
+   },
+   "come_and_go_mask_over_outline_max": {
+    "value": 3.0,
+    "unit": "mask share over the changing things' outline share",
+    "kind": "judged",
+    "source": "Design (log 35); one bad case: the people test, 42.2% over 7.5% (5.6 times; 46% over 6% = 7.7 by the painter-faults helper). Works round 5 helper plates with no long shadows: men gone 1.9, behind 1.3"
+   },
+   "cue_inside_share_min": {
+    "value": 0.6,
+    "unit": "share of the cue's box inside the frame and below the title band",
+    "kind": "judged",
+    "source": "Design (log 35); round 3 (No. 2's windows were not in W2's frame)"
+   },
+   "near_parallax_pixels": {
+    "value": 10,
+    "unit": "pixels a near thing slides against what lies 1 m behind it, over the slide",
+    "kind": "judged",
+    "source": "Design (log 35) said 1 px. For props: on the notice corner's 1.5 m slide the ledger painted out pail 79, lantern 49, chair 48, drum 36, board 29 and lamp post 27 px (place facts) and kept the handcart (5.7 px), barrel, sacks and dustbins; any limit between 5.7 and 27 separates them. One case only"
+   },
+   "behind_gap_metres": {
+    "value": 1.0,
+    "unit": "metres between a near thing and what lies behind it, when not known",
+    "kind": "invented",
+    "source": "Without Blender's rays the tool assumes the set lies 1 m behind a near thing (a lower bound on how much it slides)"
+   },
+   "people_field_words": {
+    "value": [
+     "men",
+     "workers",
+     "people",
+     "figures",
+     "walkers",
+     "crowd",
+     "queue"
+    ],
+    "unit": "words in a state field's name that make it a people field",
+    "kind": "judged",
+    "source": "Lesson 136 (a time cut of people alone reads as a glitch); the Works' state fields men_1, men_2, workers_1, workers_2"
+   },
+   "busy_words": {
+    "value": [
+     "working",
+     "flat out",
+     "busy",
+     "at work",
+     "slowed"
+    ],
+    "unit": "words in a state's description that need people seen at work",
+    "kind": "judged",
+    "source": "Round 4 critic (log 34): a flat-out factory with nobody at work read as 'open late or deserted'; round 5 added workers"
+   },
+   "near_parallax_pixels_figures": {
+    "value": 2,
+    "unit": "pixels a near figure slides against what lies 1 m behind it, over the slide",
+    "kind": "judged",
+    "source": "The Works W1 (round 3 to 5): the behind picture hides all seven waiting men, who slide 2.2 to 4.9 px over the 1.2 m slide, and not the workers inside the doorways (0.3 to 1.6 px). People leave ghosts more readily than props (their painted outlines are about 3.7 px against 2.9 elsewhere, people test)"
+   }
+  }
+ },
+ "budget_planner": {
+  "about": "plan_budget.py's own numbers: the repaint and re-record reserves, how big a filming piece is, when a chapter must load lazily, the 2-hour stretches, memory, disk and the filming watch. The prices and the measured frame costs it uses live in money and filming.",
+  "repaint_share": {
+   "value": 0.5,
+   "unit": "repaints a painting",
+   "kind": "judged",
+   "source": "Plan 34 money table (one repaint per two paintings; lesson 97: Flux's strength varies)"
+  },
+  "rerecord_reserve_pages": {
+   "value": 1,
+   "unit": "pages",
+   "kind": "judged",
+   "source": "Plan 34 money table (re-record reserve one page, about US$0.30)"
+  },
+  "stretch_margin_minutes": {
+   "value": 10,
+   "unit": "minutes kept spare in each 2-hour stretch",
+   "kind": "judged",
+   "source": "Design log 35 (2 h minus 10 min = 6,600 s); lesson 69 (background jobs stop after 2 hours)"
+  },
+  "piece_load_share_max": {
+   "value": 0.1,
+   "unit": "share of a piece's time spent loading",
+   "kind": "invented",
+   "source": "Design log 35 (PIECE_FRAMES = load / (0.10 x seconds a frame)); not tested by filming"
+  },
+  "restart_loss_max_seconds": {
+   "value": 900,
+   "unit": "seconds of filming a restart may lose",
+   "kind": "judged",
+   "source": "Lesson 71 (60-frame pieces lose at most about 13 minutes on the slowest pages); design log 35 (floor(900 / seconds a frame))"
+  },
+  "piece_frames_min": {
+   "value": 60,
+   "unit": "frames",
+   "kind": "judged",
+   "source": "film-chapter-parallel.sh PIECE_FRAMES default (lesson 71)"
+  },
+  "lazy_model_memory_factor": {
+   "value": 4,
+   "unit": "times the models' file size, in memory",
+   "kind": "invented",
+   "source": "Design log 35 (lazy when model MB x 4 > half the free memory); log 34 measured about 2.6-2.8 GB a loaded set"
+  },
+  "lazy_heavy_pages_max": {
+   "value": 8,
+   "unit": "pages carrying painted sets",
+   "kind": "invented",
+   "source": "Design log 35; log 34 (16 heavy pages ran a 16 GB machine out of memory)"
+  },
+  "memory_reserve_gb": {
+   "value": 2,
+   "unit": "GB kept free for the system",
+   "kind": "invented",
+   "source": "Design log 35 (workers <= (free GB - 2) / (2.6 x views a page))"
+  },
+  "busy_machine_factor": {
+   "value": 1.8,
+   "unit": "times slower while Blender renders alongside",
+   "kind": "judged",
+   "source": "Plan 34 seconds a frame (held with smoke 0.9-1.3 s alone, 2.0-2.3 s while another Blender runs); round 5 filmed pages 3-5 in 110 min against round 4's 53 min while other helpers ran Blender (set also changed)"
+  },
+  "film_copies": {
+   "value": 2,
+   "unit": "copies of the film on disk at once (pieces and the joined film)",
+   "kind": "judged",
+   "source": "Plan 34 F2 (delete pieces after the silent film is checked)"
+  },
+  "disk_free_reserve_gb": {
+   "value": 4,
+   "unit": "GB",
+   "kind": "judged",
+   "source": "Helpers' house rule (keep above 4 GB free disk)"
+  },
+  "stalled_after_piece_times": {
+   "value": 2,
+   "unit": "times a piece's filming time with no new file",
+   "kind": "judged",
+   "source": "Design log 35; lesson 56 (filming stopped silently for 90 minutes after a restart)"
+  }
+ },
+ "script_gate": {
+  "about": "lint_script.py's own limits for a narration script before recording and the recordings after. The script section holds what log 33 measured; these are the gate's pass marks.",
+  "sentence_words_max": {
+   "value": 20,
+   "unit": "words in one sentence",
+   "kind": "judged",
+   "source": "Design log 35 from log 33 (the rule said as one 28-word sentence; the rewrite's longest is 19)"
+  },
+  "sentence_words_mean_max": {
+   "value": 12,
+   "unit": "words a sentence on average",
+   "kind": "judged",
+   "source": "Design log 35 from log 33 (long sentences ran fastest: 10-13 words a sentence at 169-176 words a minute; aim about 9)"
+  },
+  "figures_per_minute_max": {
+   "value": 6,
+   "unit": "spoken figures a minute of speech",
+   "kind": "judged",
+   "source": "Skeptic log 35, calibrated on chapter 2: the recorded script has 37 figures in 252 s of speech (8.8 a minute, too many), the newcomer script 28 in 407 s (4.1 a minute, accepted); 6 lies between"
+  },
+  "figures_per_minute_look": {
+   "value": 5,
+   "unit": "spoken figures a minute of speech",
+   "kind": "judged",
+   "source": "Skeptic log 35 (a limit of 5-6 a minute)"
+  },
+  "page_words_a_minute_max": {
+   "value": 170,
+   "unit": "words a minute on one page",
+   "kind": "judged",
+   "source": "Inventory 'Speaking speed and holds' (flag pages over 170); log 33 (pages at 174-176 carried the most load)"
+  },
+  "page_speed_over_median_share": {
+   "value": 1.1,
+   "unit": "times the chapter's median page",
+   "kind": "judged",
+   "source": "Design log 35"
+  },
+  "repeated_sentence_words_min": {
+   "value": 5,
+   "unit": "words",
+   "kind": "invented",
+   "source": "lint_script.py: a sentence this long said on two pages is offered as the main rule"
+  },
+  "guess_phrases": {
+   "value": [
+    "have a guess",
+    "take a guess",
+    "make a guess",
+    "guess what",
+    "what do you think",
+    "think about it",
+    "take a moment"
+   ],
+   "unit": "phrases in a page's last two sentences",
+   "kind": "judged",
+   "source": "Newcomer script (pages 4, 8 and 10 end 'Have a guess.'); lesson 129"
+  },
+  "stake_words": {
+   "value": [
+    "job",
+    "jobs",
+    "out of work",
+    "work",
+    "loan",
+    "loans",
+    "rent",
+    "pay",
+    "wage",
+    "wages",
+    "cost",
+    "costs",
+    "price",
+    "prices",
+    "cure",
+    "money",
+    "afford",
+    "poor",
+    "lose",
+    "lost"
+   ],
+   "unit": "words that say what is at stake",
+   "kind": "invented",
+   "source": "lint_script.py; log 33 (the stakes within the first 30 seconds); a person judges"
+  },
+  "allowed_capitals": {
+   "value": [
+    "NZ",
+    "GDP",
+    "UK",
+    "US",
+    "USA",
+    "OK",
+    "TV",
+    "I"
+   ],
+   "unit": "short forms allowed in capitals",
+   "kind": "judged",
+   "source": "Inventory 'Script lint before paid recording' (a whitelist such as NZ, GDP)"
+  },
+  "year_direction_changes_max": {
+   "value": 1,
+   "unit": "changes of direction in the years said",
+   "kind": "judged",
+   "source": "Design log 35 from log 33 (time changed direction 8 times in the recorded chapter)"
+  },
+  "long_word_letters": {
+   "value": 9,
+   "unit": "letters",
+   "kind": "invented",
+   "source": "lint_script.py: without a common-words list, words this long are listed for a person"
+  },
+  "term_repeats_min": {
+   "value": 4,
+   "unit": "times a word is said",
+   "kind": "invented",
+   "source": "lint_script.py: the table of repeated words for a person (log 33: 'price' in six senses)"
+  },
+  "silence_before_late_word_seconds": {
+   "value": 0.5,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Inventory 'Multi-word delivery cue, and a late first word' (extend the first-word check to words after a silence over 0.5 s)"
+  }
+ },
+ "sound_gates": {
+  "about": "sound_gates.py's own pass marks: how the music under the voice is measured, the loudness and alignment gates, the voice steadiness gate, the paper mouth and the soundtrack picker. The house targets themselves live in sound.",
+  "pause_min_seconds": {
+   "value": 0.5,
+   "unit": "seconds of silence between words",
+   "kind": "judged",
+   "source": "Inventory 'Music level under the voice (ducking depth)' (pauses of 0.5 s or more); skeptic log 35"
+  },
+  "pause_gap_band_db": {
+   "value": [
+    10,
+    14
+   ],
+   "unit": "dB under the voice in pauses",
+   "kind": "judged",
+   "source": "Design log 35 (flag the pause gap outside 10-14 dB); logs 07, 10 (about 12 in pauses)"
+  },
+  "loudness_tolerance_lu": {
+   "value": 0.5,
+   "unit": "LU either side of the target",
+   "kind": "judged",
+   "source": "Skeptic log 35 (-15 LUFS +/- 0.5); sent copies measured -15.0 and -15.1 (logs 13, 19, 20)"
+  },
+  "true_peak_margin_db": {
+   "value": 0.2,
+   "unit": "dB below the true-peak limit when lowering the limiter",
+   "kind": "judged",
+   "source": "Design log 35 (lower the limiter by peak + 1.2 dB)"
+  },
+  "alignment_max_ms": {
+   "value": 2,
+   "unit": "milliseconds",
+   "kind": "judged",
+   "source": "Skeptic log 35 (within 2 ms); lesson 15 (5 ms late before latency=1, 0.00 ms since)"
+  },
+  "alignment_match_min": {
+   "value": 0.8,
+   "unit": "correlation",
+   "kind": "invented",
+   "source": "Design log 35 (fail if correlation < 0.8)"
+  },
+  "page_pitch_from_median_semitones": {
+   "value": 1.5,
+   "unit": "semitones",
+   "kind": "judged",
+   "source": "Design log 35 (a page more than 1.5 semitones from the chapter median is recorded again)"
+  },
+  "pitch_spread_max_semitones": {
+   "value": 2.6,
+   "unit": "semitones across pages",
+   "kind": "judged",
+   "source": "Decisions item 20: chapter 2's 2.2 accepted, chapter 1's 3.0 not (compare_voice_steadiness.py); the limit lies between"
+  },
+  "voiced_below_peak_db": {
+   "value": 40,
+   "unit": "dB under the loudest 40 ms slice",
+   "kind": "invented",
+   "source": "sound_gates.py mouth: slices quieter than this are not voice"
+  },
+  "mouth_percentiles": {
+   "value": [
+    25,
+    90
+   ],
+   "unit": "percentiles of voiced 40 ms slices (QUIET, LOUD)",
+   "kind": "judged",
+   "source": "Fitted on chapter 1's narration, where make_mouth_track.py's -25 and -11 dB were set by eye (lesson 24): -25 sits at the 27th percentile of its voiced slices, -11 at the 94th. The design's 40th percentile gave -19.6, 5 dB off."
+  },
+  "music_mood_percentiles": {
+   "value": {
+    "quiet": 10,
+    "lively": 75
+   },
+   "unit": "percentile of the soundtrack's own 3 s loudness",
+   "kind": "judged",
+   "source": "sound_gates.py music-start, tuned on log 32 (the notice corner's music from 216 s, chosen as a quiet stretch): the 25th percentile is not quiet on this soundtrack (-13.7 LUFS), the 10th is (-16.7)"
+  },
+  "music_mood_band_lu": {
+   "value": 2,
+   "unit": "LU around the mood's level",
+   "kind": "judged",
+   "source": "Inventory 'Which stretch of the soundtrack to use' (within 2 LU of the mood's target)"
+  },
+  "fade_in_without_onset_seconds": {
+   "value": 2.0,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Log 27 (the music came in at once; a 2-second fade-in was added)"
+  },
+  "section_change_db": {
+   "value": 3,
+   "unit": "dB change of the 1 s mean loudness",
+   "kind": "invented",
+   "source": "sound_gates.py music-start (where a section of the music starts); tuned on the one recorded case (216 s)"
+  },
+  "section_snap_seconds": {
+   "value": 12,
+   "unit": "seconds before a window to look for its section start",
+   "kind": "invented",
+   "source": "sound_gates.py music-start; tuned on the one recorded case (216 s)"
+  }
+ }
+}

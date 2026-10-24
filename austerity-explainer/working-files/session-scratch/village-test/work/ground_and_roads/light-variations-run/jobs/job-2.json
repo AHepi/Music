@@ -1,0 +1,65 @@
+{
+ "job": 2,
+ "scene": "/workspace/place-jobs/scenes/f5d56040/part.blend",
+ "settings": "/workspace/place-jobs/scenes/f5d56040/settings-dd8b4f3b-e8bf066e/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2",
+ "cameras": [
+  "View wide",
+  "View road_eye"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "flat-sky",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 3.0,
+    "sky_strength": 0.85,
+    "hill_gain": 1.0
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py"
+  },
+  {
+   "name": "bright-sky",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 5.0,
+    "sky_strength": 0.8,
+    "hill_gain": 1.0
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py"
+  },
+  {
+   "name": "strong-light-hills",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 6.0,
+    "sky_strength": 0.65,
+    "hill_gain": 1.15
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py"
+  }
+ ]
+}

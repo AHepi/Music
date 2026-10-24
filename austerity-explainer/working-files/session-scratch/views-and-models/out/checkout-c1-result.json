@@ -1,0 +1,1221 @@
+{
+ "check_file": "out/checkout-c1-check.json",
+ "check": {
+  "about": "What this file is: the shot check for view c1 (interior), written by make_check_file.py from the Blender scene and the shot list (subject, support, story and work are the author's; groups, must_read, pairs_also, on_ground, stands_on, lights_in_story, the title zone and the rest are measured). Used by shot_facts.py and check_shot.py.",
+  "size": [
+   1080,
+   1920
+  ],
+  "groups": {
+   "bread label": [
+    "basket-bread-lettering"
+   ],
+   "milk label": [
+    "basket-milk-lettering"
+   ],
+   "butter label": [
+    "basket-butter-lettering"
+   ],
+   "cheese label": [
+    "basket-cheese-lettering"
+   ],
+   "bill": [
+    "bill-stand-bill-lettering"
+   ],
+   "petrol fascia": [
+    "petrol-station-fascia-lettering"
+   ],
+   "bill stand": [
+    "bill-stand"
+   ],
+   "basket": [
+    "basket"
+   ],
+   "divider": [
+    "divider-bar*"
+   ],
+   "bag rack": [
+    "bag-rack*"
+   ],
+   "crates": [
+    "crate-1*",
+    "crate-2*"
+   ],
+   "till": [
+    "till*"
+   ],
+   "card terminal": [
+    "card-terminal*"
+   ],
+   "checkout sign": [
+    "checkout-sign*"
+   ]
+  },
+  "subject": "bill",
+  "support": "bill stand",
+  "story": [
+   "basket",
+   "divider"
+  ],
+  "lights_in_story": [],
+  "pairs_also": [
+   "bag rack",
+   "crates",
+   "till",
+   "card terminal",
+   "checkout sign"
+  ],
+  "work": [
+   "bag rack",
+   "crates",
+   "till"
+  ],
+  "on_ground": [
+   "bag rack",
+   "crates"
+  ],
+  "stands_on": {
+   "bill": "bill stand"
+  },
+  "must_read": [
+   "bread label",
+   "milk label",
+   "butter label",
+   "cheese label",
+   "bill",
+   "petrol fascia",
+   "basket",
+   "checkout sign"
+  ],
+  "box_excludes": [
+   "bill stand"
+  ],
+  "lines": {
+   "belt": [
+    0,
+    1,
+    0
+   ],
+   "level": [
+    0,
+    1,
+    0
+   ]
+  },
+  "lines_key": "belt",
+  "eye_height": [
+   1.5,
+   1.7
+  ],
+  "title_zone": [
+   0.19,
+   0.02,
+   0.9,
+   0.22
+  ],
+  "sky": "ceiling*",
+  "story_reaches_down": 0.7,
+  "kind_of_shot": [
+   "interior"
+  ],
+  "figures": [],
+  "support_surfaces": [
+   {
+    "name": "story surface",
+    "height": 0.885
+   }
+  ],
+  "match_excludes": [
+   "bread label",
+   "milk label",
+   "butter label",
+   "cheese label",
+   "bill",
+   "petrol fascia",
+   "basket",
+   "bag rack",
+   "till",
+   "card terminal",
+   "checkout sign"
+  ],
+  "own_surface_materials": [
+   "bill-lettering",
+   "bread-bag-lettering",
+   "bread-bag-paper",
+   "butter-wrapper-lettering",
+   "butter-wrapper-paper",
+   "checkout-sign-lettering",
+   "cheese-label-lettering",
+   "milk-label-lettering",
+   "petrol-fascia-lettering"
+  ],
+  "accepted": []
+ },
+ "facts": {
+  "kinds_of_shot": [
+   "interior"
+  ],
+  "interior": true,
+  "resting": {
+   "bill": {
+    "lowest": 1.139999970793724,
+    "votes": [
+     [
+      "group",
+      "bill stand",
+      0.009
+     ],
+     [
+      "group",
+      "bill stand",
+      0.009
+     ],
+     [
+      "group",
+      "bill stand",
+      0.009
+     ],
+     [
+      "group",
+      "bill stand",
+      0.009
+     ],
+     [
+      "group",
+      "bill stand",
+      0.009
+     ]
+    ]
+   },
+   "bill stand": {
+    "lowest": 0.9005358745343983,
+    "votes": [
+     [
+      "set",
+      "counter",
+      0.001
+     ],
+     [
+      "set",
+      "counter",
+      0.001
+     ],
+     [
+      "set",
+      "counter-belt",
+      -0.003
+     ],
+     [
+      "set",
+      "counter",
+      0.001
+     ],
+     [
+      "set",
+      "counter",
+      0.001
+     ]
+    ]
+   },
+   "basket": {
+    "lowest": 0.8855358888395131,
+    "votes": [
+     [
+      "set",
+      "counter-belt",
+      0.001
+     ],
+     [
+      "set",
+      "counter-belt",
+      0.001
+     ],
+     [
+      "group",
+      "divider",
+      -0.022
+     ],
+     [
+      "set",
+      "counter-belt",
+      0.001
+     ],
+     [
+      "set",
+      "counter-belt",
+      0.001
+     ]
+    ]
+   },
+   "divider": {
+    "lowest": 0.8849999904632568,
+    "votes": [
+     [
+      "set",
+      "counter-belt",
+      0.0
+     ],
+     [
+      "set",
+      "counter-belt",
+      0.0
+     ],
+     [
+      "set",
+      "counter-belt",
+      0.0
+     ],
+     [
+      "set",
+      "counter-belt",
+      0.0
+     ],
+     [
+      "set",
+      "counter",
+      0.015
+     ]
+    ]
+   },
+   "bag rack": {
+    "lowest": 0.0,
+    "votes": [
+     [
+      "set",
+      "shop",
+      -0.0
+     ],
+     [
+      "set",
+      "shop",
+      0.0
+     ],
+     [
+      "set",
+      "shop",
+      0.0
+     ],
+     [
+      "set",
+      "shop",
+      0.0
+     ],
+     [
+      "set",
+      "shop",
+      -0.0
+     ]
+    ]
+   },
+   "crates": {
+    "lowest": 0.0,
+    "votes": [
+     [
+      "set",
+      "shop",
+      -0.0
+     ],
+     [
+      "set",
+      "shop",
+      -0.0
+     ],
+     [
+      "set",
+      "shop",
+      -0.0
+     ],
+     [
+      "set",
+      "shop",
+      0.0
+     ],
+     [
+      "set",
+      "shop",
+      0.0
+     ]
+    ]
+   },
+   "till": {
+    "lowest": 0.8999999761581421,
+    "votes": [
+     [
+      "set",
+      "counter",
+      0.0
+     ],
+     [
+      "set",
+      "counter",
+      0.0
+     ],
+     [
+      "set",
+      "counter",
+      0.0
+     ],
+     [
+      "set",
+      "counter",
+      0.0
+     ],
+     [
+      "set",
+      "counter",
+      0.0
+     ]
+    ]
+   },
+   "card terminal": {
+    "lowest": 0.8959999759681523,
+    "votes": [
+     [
+      "set",
+      "counter",
+      -0.004
+     ],
+     [
+      "set",
+      "counter",
+      -0.004
+     ],
+     [
+      "set",
+      "counter",
+      -0.004
+     ],
+     [
+      "set",
+      "counter",
+      -0.004
+     ],
+     [
+      "set",
+      "counter",
+      -0.004
+     ]
+    ]
+   },
+   "checkout sign": {
+    "lowest": 2.5899999141693115,
+    "votes": [
+     [
+      "set",
+      "shop",
+      2.59
+     ],
+     [
+      "set",
+      "shop",
+      2.59
+     ],
+     [
+      "set",
+      "shop",
+      2.59
+     ],
+     [
+      "set",
+      "shop",
+      2.59
+     ],
+     [
+      "set",
+      "shop",
+      2.59
+     ]
+    ]
+   }
+  },
+  "surfaces": {
+   "bread label": {
+    "area": 0.0070943390967031315,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0070943390967031315,
+    "base_brightness": 0.7992483973503113,
+    "facing_area": 0.006504359025243845
+   },
+   "milk label": {
+    "area": 0.00514417005606606,
+    "glowing_share": 0.0,
+    "lettered_area": 0.00514417005606606,
+    "base_brightness": 0.6973628401756287,
+    "facing_area": 0.004783830344574892
+   },
+   "butter label": {
+    "area": 0.0026295787722672324,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0026295787722672324,
+    "base_brightness": 0.5995805859565735,
+    "facing_area": 0.0026151736627097986
+   },
+   "cheese label": {
+    "area": 0.003037146400069832,
+    "glowing_share": 0.0,
+    "lettered_area": 0.003037146400069832,
+    "base_brightness": 0.6022539138793945,
+    "facing_area": 0.00302558914413848
+   },
+   "bill": {
+    "area": 0.4463999934554099,
+    "glowing_share": 0.0,
+    "lettered_area": 0.4463999934554099,
+    "base_brightness": 0.5560528039932251,
+    "facing_area": 0.4463999934554099
+   },
+   "petrol fascia": {
+    "area": 2.533807666748089,
+    "glowing_share": 1.0,
+    "lettered_area": 2.533807666748089,
+    "base_brightness": 0.2694365680217743,
+    "facing_area": 2.533807666748089
+   },
+   "bill stand": {
+    "area": 1.3571385908415525,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.27549729921465776,
+    "facing_area": 1.0284812287615552
+   },
+   "basket": {
+    "area": 1.4538441042026995,
+    "glowing_share": 0.0,
+    "lettered_area": 0.22019392499080526,
+    "base_brightness": 0.32237798289671304,
+    "facing_area": 0.7597251539447695
+   },
+   "divider": {
+    "area": 0.07638732323224383,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.13429800286591054,
+    "facing_area": 0.04600000192206322
+   },
+   "bag rack": {
+    "area": 2.3976239421911676,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.1924223605769309,
+    "facing_area": 0.35293039154772365
+   },
+   "crates": {
+    "area": 2.874426848238488,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": null,
+    "facing_area": 0.9884055153572742
+   },
+   "till": {
+    "area": 0.5979333284989703,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.03713706070525047,
+    "facing_area": 0.05493330212524582
+   },
+   "card terminal": {
+    "area": 0.09706942730218845,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.08467419075267346,
+    "facing_area": 0.022769763203633504
+   },
+   "checkout sign": {
+    "area": 1.3200000087171768,
+    "glowing_share": 0.0,
+    "lettered_area": 0.5078719793497326,
+    "base_brightness": 0.21037551159921702,
+    "facing_area": 1.210432002917221
+   }
+  },
+  "frame_boxes": {
+   "basket": [
+    0.46946853399276733,
+    0.5917432010173798,
+    0.8709554076194763,
+    0.777605727314949
+   ],
+   "bill stand": [
+    0.49117961525917053,
+    0.4170082211494446,
+    0.8402532935142517,
+    0.7103255093097687
+   ],
+   "card terminal": [
+    0.8523240089416504,
+    0.5920019149780273,
+    0.9173499941825867,
+    0.6759153008460999
+   ],
+   "bag rack": [
+    1.0666441917419434,
+    0.5283322334289551,
+    1.5981184244155884,
+    0.9661824144423008
+   ],
+   "crates": [
+    1.0603752136230469,
+    0.6765501499176025,
+    1.2721047401428223,
+    0.7812754809856415
+   ],
+   "checkout sign": [
+    0.455305814743042,
+    0.275531530380249,
+    0.8064743876457214,
+    0.32340216636657715
+   ],
+   "divider": [
+    0.4725188612937927,
+    0.7520036846399307,
+    0.788551926612854,
+    0.7763142734766006
+   ],
+   "till": [
+    0.36157724261283875,
+    0.5419066846370697,
+    0.4254993200302124,
+    0.6816798746585846
+   ],
+   "bread label": [
+    0.5022242069244385,
+    0.6309905052185059,
+    0.5740392804145813,
+    0.652971625328064
+   ],
+   "milk label": [
+    0.6140123009681702,
+    0.6362975835800171,
+    0.680051326751709,
+    0.6540793180465698
+   ],
+   "butter label": [
+    0.5332848429679871,
+    0.6751591265201569,
+    0.5993703007698059,
+    0.6872518658638
+   ],
+   "cheese label": [
+    0.6308354735374451,
+    0.676559329032898,
+    0.7003520727157593,
+    0.689820796251297
+   ],
+   "bill": [
+    0.5,
+    0.42554593086242676,
+    0.8156346082687378,
+    0.6317265927791595
+   ],
+   "petrol fascia": [
+    0.1569475680589676,
+    0.403123140335083,
+    0.42073890566825867,
+    0.4159395694732666
+   ]
+  },
+  "match_exclude_reasons": {
+   "bread label": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "milk label": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "butter label": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "cheese label": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "bill": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "petrol fascia": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "basket": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "bag rack": [
+    "bars (0.06 of its outline filled)"
+   ],
+   "till": [
+    "bars (0.14 of its outline filled)"
+   ],
+   "card terminal": [
+    "bars (0.27 of its outline filled)"
+   ],
+   "checkout sign": [
+    "lettered (a board's border is its strongest edge)"
+   ]
+  },
+  "declared_groups": [
+   "bread label",
+   "milk label",
+   "butter label",
+   "cheese label",
+   "bill",
+   "petrol fascia"
+  ],
+  "generated_groups": [
+   "bill stand",
+   "basket",
+   "divider",
+   "bag rack",
+   "crates",
+   "till",
+   "card terminal",
+   "checkout sign"
+  ]
+ },
+ "notes": [
+  "title zone: the largest 85%-sky rectangle of the words band (99% of the band is sky)"
+ ],
+ "comparison": {
+  "groups": [
+   {
+    "hand": "basket",
+    "generated": "basket",
+    "same_objects_share": 1.0,
+    "hand_objects": 29,
+    "generated_objects": 29
+   },
+   {
+    "hand": "divider",
+    "generated": "divider",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "bill stand",
+    "generated": "bill stand",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "card terminal",
+    "generated": "card terminal",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "till",
+    "generated": "till",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "bag rack",
+    "generated": "bag rack",
+    "same_objects_share": 1.0,
+    "hand_objects": 19,
+    "generated_objects": 19
+   },
+   {
+    "hand": "crates",
+    "generated": "crates",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "checkout sign",
+    "generated": "checkout sign",
+    "same_objects_share": 1.0,
+    "hand_objects": 3,
+    "generated_objects": 3
+   },
+   {
+    "hand": "petrol fascia",
+    "generated": "petrol fascia",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "bread label",
+    "generated": "bread label",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "milk label",
+    "generated": "milk label",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "butter label",
+    "generated": "butter label",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "cheese label",
+    "generated": "cheese label",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "bill",
+    "generated": "bill",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   }
+  ],
+  "hand_groups_drawing_nothing": [],
+  "generated_only": [],
+  "roles": {
+   "subject": {
+    "hand": "bill",
+    "hand_as_generated": "bill",
+    "generated": "bill",
+    "same": true
+   },
+   "support": {
+    "hand": "bill stand",
+    "hand_as_generated": "bill stand",
+    "generated": "bill stand",
+    "same": true
+   },
+   "story": {
+    "hand": [
+     "basket",
+     "divider"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "work": {
+    "hand": [
+     "bag rack",
+     "crates",
+     "till"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "pairs_also": {
+    "hand": [
+     "card terminal",
+     "checkout sign",
+     "till"
+    ],
+    "same": false,
+    "only_hand": [],
+    "only_generated": [
+     "bag rack",
+     "crates"
+    ]
+   },
+   "on_ground": {
+    "hand": [],
+    "same": false,
+    "only_hand": [],
+    "only_generated": [
+     "bag rack",
+     "crates"
+    ]
+   },
+   "must_read": {
+    "hand": [
+     "bill",
+     "bread label",
+     "butter label",
+     "checkout sign",
+     "cheese label",
+     "milk label",
+     "petrol fascia"
+    ],
+    "same": false,
+    "only_hand": [],
+    "only_generated": [
+     "basket"
+    ]
+   },
+   "lights_in_story": {
+    "hand": [],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "box_excludes": {
+    "hand": [],
+    "same": false,
+    "only_hand": [],
+    "only_generated": [
+     "bill stand"
+    ]
+   },
+   "stands_on": {
+    "hand": {},
+    "generated": {
+     "bill": "bill stand"
+    },
+    "hand_pairs_found": true
+   }
+  },
+  "keys": {
+   "size": {
+    "hand": [
+     1080,
+     1920
+    ],
+    "generated": [
+     1080,
+     1920
+    ],
+    "same": true
+   },
+   "lines": {
+    "hand": {
+     "belt": [
+      0,
+      1,
+      0
+     ],
+     "level": [
+      0,
+      1,
+      0
+     ]
+    },
+    "generated": {
+     "belt": [
+      0,
+      1,
+      0
+     ],
+     "level": [
+      0,
+      1,
+      0
+     ]
+    },
+    "same": true
+   },
+   "lines_key": {
+    "hand": "belt",
+    "generated": "belt",
+    "same": true
+   },
+   "eye_height": {
+    "hand": [
+     1.5,
+     1.7
+    ],
+    "generated": [
+     1.5,
+     1.7
+    ],
+    "same": true
+   },
+   "title_zone": {
+    "hand": [
+     0.06,
+     0.05,
+     0.9,
+     0.22
+    ],
+    "generated": [
+     0.19,
+     0.02,
+     0.9,
+     0.22
+    ],
+    "same": false
+   },
+   "story_reaches_down": {
+    "hand": 0.7,
+    "generated": 0.7,
+    "same": true
+   },
+   "sky": {
+    "hand": "ceiling*",
+    "generated": "ceiling*",
+    "same": true
+   }
+  },
+  "mapping": {
+   "basket": "basket",
+   "divider": "divider",
+   "bill stand": "bill stand",
+   "card terminal": "card terminal",
+   "till": "till",
+   "bag rack": "bag rack",
+   "crates": "crates",
+   "checkout sign": "checkout sign",
+   "petrol fascia": "petrol fascia",
+   "bread label": "bread label",
+   "milk label": "milk label",
+   "butter label": "butter label",
+   "cheese label": "cheese label",
+   "bill": "bill"
+  }
+ },
+ "calculator": "make_check_file",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.main_rule_spot_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule1_meeting_point_gap": {
+   "value": 0.03,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.interior.rules.rule2_eye_height": {
+   "value": [
+    1.5,
+    1.7
+   ],
+   "unit": "metres above the floor",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule3_story_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule3_story_together_metres": {
+   "value": 0.3,
+   "unit": "metres between footprints",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_near_touch": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_between_figures": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_subject_brightness_ratio": {
+   "value": 1.8,
+   "unit": "times the frame's mean",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_brightest_share_on_subject": {
+   "value": 0.4,
+   "unit": "share of the brightest 3%",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_brightest_share_in_story_box": {
+   "value": 0.75,
+   "unit": "share of the brightest 3%",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_nothing_in_story_as_bright": {
+   "value": 0.05,
+   "unit": "brightness below the subject's median",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.interior.rules.rule5_top_third_brightness": {
+   "value": 0.36,
+   "unit": "mean brightness (0 to 1)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_warm_share": {
+   "value": [
+    0.015,
+    0.03
+   ],
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_lit_from_below": {
+   "value": 0.1,
+   "unit": "(r - b)/(r + b) bottom minus top",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.interior.rules.rule7_story_reaches_down": {
+   "value": 0.7,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_work_prop_share": {
+   "value": 0.02,
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_bottom_left_share": {
+   "value": 0.01,
+   "unit": "share of the frame per thing",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule10_quiet_side_weight": {
+   "value": [
+    0.4,
+    0.48
+   ],
+   "unit": "share of the weight",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule10_nothing_on_quiet_side_outshines": {
+   "value": 1.0,
+   "unit": "times the subject's brightness",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_must_read_right_edge": {
+   "value": 0.9,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_story_right_edge": {
+   "value": 0.95,
+   "unit": "share of the width (in 0.45-0.95 down)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share": {
+   "value": 0.85,
+   "unit": "share of the title zone that is sky",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.interior.rules.resting_on": {
+   "value": 0.03,
+   "unit": "metres of air above a declared support surface (floor, counter, shelf, table)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.slide_magnification": {
+   "value": "painting limit",
+   "unit": "times nearer at the nearest painted surface",
+   "kind": "measured"
+  },
+  "views_and_models.check_file.prop_collections": {
+   "value": [
+    "props",
+    "signs",
+    "gates",
+    "pop-up",
+    "men*",
+    "workers*",
+    "figures*",
+    "people*",
+    "walkers*",
+    "checkout"
+   ],
+   "unit": "collection name patterns where a place's assemble script puts props and figures",
+   "kind": "judged"
+  },
+  "composing.shot_facts_groups_max": {
+   "value": 20,
+   "unit": "groups",
+   "kind": "measured"
+  },
+  "views_and_models.lettering_material_patterns": {
+   "value": [
+    "*-lettering",
+    "*-lettering.0*",
+    "*-stencil",
+    "*-stencil.0*",
+    "*-printing",
+    "*-printing.0*",
+    "*-paper",
+    "*-paper.0*"
+   ],
+   "unit": "material name patterns (lower case, * any letters)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.light_prop_glow_share": {
+   "value": 0.15,
+   "unit": "share of a story group's own surface that glows",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.on_ground_within_metres": {
+   "value": 0.05,
+   "unit": "metres between a group's lowest point and a declared ground (road, pavement, ground, floor)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.ground_kinds": {
+   "value": [
+    "ground",
+    "road",
+    "pavement",
+    "floor"
+   ],
+   "unit": "support surface kinds that count as the ground for check_shot's on_ground",
+   "kind": "judged"
+  },
+  "safe_area.text_left_pixels": {
+   "value": 65,
+   "unit": "pixels (0.06 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.text_right_pixels": {
+   "value": 972,
+   "unit": "pixels (0.90 of the width)",
+   "kind": "judged"
+  },
+  "safe_area.title_band_down": {
+   "value": [
+    0.05,
+    0.22
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.figure_collections": {
+   "value": [
+    "men*",
+    "workers*",
+    "figures*",
+    "people*",
+    "walkers*"
+   ],
+   "unit": "collection name patterns holding figures",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.thin_pixels": {
+   "value": 6,
+   "unit": "pixels across at the film frame (the group's narrow side)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.dark_base_brightness": {
+   "value": 0.02,
+   "unit": "area-weighted base colour brightness of a group's materials (linear, 0 to 1)",
+   "kind": "invented"
+  },
+  "views_and_models.check_file.thin_fill_share": {
+   "value": 0.3,
+   "unit": "share of a group's outline its faces fill, seen square on",
+   "kind": "invented"
+  }
+ }
+}

@@ -1,0 +1,281 @@
+// What this does: page 4 of chapter 2, "Glasgow, 1915" (the rent strikes, research C2-H04). We stand
+// in a painted Glasgow tenement street at dusk (a painting with depth: wet cobbles, gas lamps), with a
+// light rain falling and haze in the air.
+//   - "Homes work the same way": the empty street; the word HOMES.
+//   - "In 1915": a place-and-year title, GLASGOW 1915.
+//   - "workers poured into Glasgow for war work": three long files of workers stream in from the
+//     right and walk away up the street, one after another.
+//   - "landlords pushed rents up... by as much as a quarter": the camera turns to a notice board on the
+//     left-hand pavement; a printed notice (RENT RAISED) slaps onto it, then UP TO +25% / AS MUCH AS A QUARTER.
+//   - "By November, about twenty thousand households were refusing to pay the rise": a row of
+//     rent strikers with placards pops up on the pavement under the notice; 20,000 counts up,
+//     HOUSEHOLDS REFUSING TO PAY.
+//   - "Within weeks, Parliament froze rents": a rubber stamp slams down on the notice (shake, dust)
+//     and lifts away, leaving a red RENTS FROZEN stamp on it.
+//   - "Homes can't be built in a hurry": a quick dip to black on "homes" cuts to a small card house
+//     on the cobbles, its walls going up one slow course at a time beside the faint outline of the
+//     finished house; HOMES CAN'T BE BUILT / IN A HURRY.
+// Narration words used are listed in T below; every time comes from Malina's recording.
+
+import { THREE, popUp, foldDown, clamp01, smooth, ramp, lerp, seededRandom, spring, walkBob, knock } from '../cinema-kit.js';
+import { paper, PAPER } from '../models.js';
+import { Motes, DustBurst } from '../effects.js';
+import { placeTitle, hook, counter, presence, INK } from '../graphics.js';
+
+export async function build(kit) {
+  const T = {
+    start: kit.firstWordAt - 0.8,
+    homes: kit.at('homes'),
+    y1915: kit.at('1915'),
+    workers: kit.at('workers'),
+    poured: kit.at('poured'),
+    glasgow: kit.at('glasgow'),
+    landlords: kit.at('landlords'),
+    pushed: kit.at('pushed'),
+    by: kit.at('by'),
+    quarter: kit.at('quarter'),
+    november: kit.at('november'),
+    about: kit.at('about'),
+    twenty: kit.at('twenty'),
+    households: kit.at('households'),
+    refusing: kit.at('refusing'),
+    rise: kit.at('rise'),
+    within: kit.at('within'),
+    parliament: kit.at('parliament'),
+    froze: kit.at('froze'),
+    homes2: kit.at('homes', 2),
+    hurry: kit.at('hurry'),
+    last: kit.lastWordEnd,
+  };
+  T.slam = T.froze + 0.12;
+  // "Homes can't be built": a quick dip to black that bottoms out on "homes"; under the black the
+  // wall scene (board, notice, stamp, strikers) is hidden and the camera cuts to the building site,
+  // so the foundation shot starts clean
+  T.cut = T.homes2;
+  T.dipIn = 0.22; T.dipOut = 0.26;
+
+  kit.lightRig({ keyColour: 0xffc887, keyShare: 0.72, keyFrom: [4, 6, -4], keyTarget: [-1.5, -2, -15], fillSky: 0x5f7a92, fillGround: 0x2a241e,
+    fillShare: 0.22, haze: 0x182230, hazeDensity: 0.005, shadowBox: 12, shadowSoftness: 5, background: 0x0f1720, reflections: 0.3 });
+  const street = await kit.relief('403-bg-glasgow-tenements', { near: 6, far: 70, fov: 40 });
+  const P = (u, v, k = 1) => street.pointAt(u, v).multiplyScalar(k);
+
+  // ------------------------------------------------------------------ rain and haze
+  const motes = new Motes(kit.scene, { count: 160, min: [-3, -2.2, -20], max: [3, 2.5, -5], size: 0.035, colour: 0xcfe0ff, seed: 41, opacity: 0.45 });
+  const RAIN = 520, rainTop = 3.5, rainHeight = 6.2, dropLength = 0.32;
+  const rainRandom = seededRandom(404);
+  const drops = Array.from({ length: RAIN }, () => ({ x: lerp(-4, 4, rainRandom()), z: lerp(-22, -4, rainRandom()), phase: rainRandom(), speed: 0.85 + rainRandom() * 0.3 }));
+  const rainGeometry = new THREE.BufferGeometry();
+  rainGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(RAIN * 6), 3));
+  const rainMaterial = new THREE.LineBasicMaterial({ color: 0xb8cce0, transparent: true, opacity: 0.22, depthWrite: false, blending: THREE.AdditiveBlending });
+  const rain = new THREE.LineSegments(rainGeometry, rainMaterial);
+  rain.frustumCulled = false;
+  kit.scene.add(rain);
+  function setRain(t) {
+    const a = rainGeometry.attributes.position.array;
+    drops.forEach((d, i) => {
+      const fall = ((t * 7.5 * d.speed) / rainHeight + d.phase) % 1;
+      const y = rainTop - fall * rainHeight;
+      a.set([d.x + 0.04 * (1 - fall), y, d.z, d.x + 0.04 * (1 - fall) + 0.03, y + dropLength, d.z], i * 6);
+    });
+    rainGeometry.attributes.position.needsUpdate = true;
+  }
+
+  // ------------------------------------------------------------------ workers pouring in
+  // three files of workers (painted side-view, facing left), turned so each file heads away up the
+  // street; they walk in from the right along their own line.
+  const yaw = -0.45;
+  const along = new THREE.Vector3(-Math.cos(yaw), 0, Math.sin(yaw)); // the way they face and walk
+  const files = [];
+  const fileSpecs = [
+    { start: [1.0, -2.13, -8.0], width: 3.0, at: T.workers - 0.1, speed: 1.1 },
+    { start: [2.0, -2.08, -11.0], width: 3.2, at: T.poured, speed: 1.05 },
+    { start: [2.9, -2.03, -14.5], width: 3.4, at: T.glasgow, speed: 1.0 },
+  ];
+  for (const spec of fileSpecs) {
+    const piece = await kit.cutout('workers-queue', { at: spec.start, width: spec.width, yaw });
+    files.push({ piece, ...spec });
+  }
+
+  // ------------------------------------------------------------------ the notice on the wall
+  // a wooden notice board on two posts, standing on the left-hand pavement; the landlords' notice
+  // is slapped onto it
+  const boardFoot = P(0.2, 0.31, 1.0);
+  boardFoot.x += 0.45; boardFoot.z = -13; // pavement edge, clear of the wall
+  const noticeYaw = 0.22;
+  const boardW = 1.55, boardH = 0.78, postH = 1.25;
+  const boardGroup = new THREE.Group();
+  boardGroup.position.set(boardFoot.x, boardFoot.y, boardFoot.z);
+  boardGroup.rotation.y = noticeYaw;
+  const wood = paper(0x6b4e36, { roughness: 0.85 });
+  const panel = new THREE.Mesh(new THREE.BoxGeometry(boardW, boardH, 0.05), wood);
+  panel.position.set(0, postH + boardH / 2, 0);
+  const posts = [-1, 1].map((side) => { const m = new THREE.Mesh(new THREE.BoxGeometry(0.07, postH + boardH * 0.9, 0.07), wood); m.position.set(side * boardW * 0.4, (postH + boardH * 0.9) / 2, -0.06); return m; });
+  boardGroup.add(panel, ...posts);
+  boardGroup.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  kit.scene.add(boardGroup);
+  const facing = new THREE.Vector3(Math.sin(noticeYaw), 0, Math.cos(noticeYaw));
+  const onBoard = (y, out = 0.03) => new THREE.Vector3(boardFoot.x, boardFoot.y + y, boardFoot.z).addScaledVector(facing, out);
+  const noticeBase = onBoard(postH + 0.12);
+  const notice = await kit.card(['NOTICE', 'RENT RAISED'], { size: 0.15, at: noticeBase.toArray(), yaw: noticeYaw });
+  const noticeCentre = noticeBase.clone().add(new THREE.Vector3(0, notice.height * 0.5, 0));
+  const frozen = await kit.card(['RENTS', 'FROZEN'], { size: 0.145, at: onBoard(postH + 0.2, 0.06).toArray(), yaw: noticeYaw,
+    look: { cardColour: '#b23a2a', inkColour: '#f2ede3', borderColour: 'rgba(242,237,227,0.7)' } });
+  const stamp = await kit.cutout('rubber-stamp', { at: onBoard(postH + 0.28, 0.14).toArray(), width: 0.7, yaw: noticeYaw });
+  const dust = new DustBurst(kit.scene, { count: 20, seed: 9, colour: 'rgba(150,140,128,0.9)' });
+
+  // ------------------------------------------------------------------ the rent strikers
+  const strikersAt = [boardFoot.x + 0.5, boardFoot.y - 0.08, -11.3];
+  const strikers = await kit.cutout('rent-strikers', { at: strikersAt, width: 2.9, yaw: 0.15 });
+
+  // ------------------------------------------------------------------ the house going up slowly
+  const site = P(0.56, 0.205, 1.0);
+  const house = new THREE.Group();
+  house.position.copy(site);
+  house.rotation.y = -0.5;
+  kit.scene.add(house);
+  const W = 1.3, D = 0.95, H = 0.9, COURSES = 10, courseH = H / COURSES, wallT = 0.07;
+  const brickA = paper(PAPER.cream), brickB = paper(PAPER.card);
+  const courses = [];
+  for (let i = 0; i < COURSES; i++) {
+    const course = new THREE.Group();
+    const m = i % 2 ? brickA : brickB;
+    for (const [w, d, x, z] of [[W, wallT, 0, D / 2 - wallT / 2], [W, wallT, 0, -D / 2 + wallT / 2], [wallT, D - 2 * wallT, W / 2 - wallT / 2, 0], [wallT, D - 2 * wallT, -W / 2 + wallT / 2, 0]]) {
+      // a gap for the door in the front wall's lower courses
+      if (z > 0 && i < 6) {
+        for (const [ww, xx] of [[W * 0.38, -W * 0.31], [W * 0.38, W * 0.31]]) {
+          const b = new THREE.Mesh(new THREE.BoxGeometry(ww, courseH * 0.94, d), m);
+          b.position.set(xx, 0, z); b.castShadow = b.receiveShadow = true; course.add(b);
+        }
+        continue;
+      }
+      const b = new THREE.Mesh(new THREE.BoxGeometry(w, courseH * 0.94, d), m);
+      b.position.set(x, 0, z); b.castShadow = b.receiveShadow = true; course.add(b);
+    }
+    course.userData.y = courseH * (i + 0.5);
+    house.add(course);
+    courses.push(course);
+  }
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(W + 0.16, 0.03, D + 0.16), paper(PAPER.card));
+  slab.position.y = 0.015; slab.receiveShadow = true; house.add(slab);
+  // the faint outline of the finished house (walls and a pitched roof), drawn as thin glowing rods
+  const outline = new THREE.Group();
+  const lineMaterial = new THREE.MeshBasicMaterial({ color: 0xe8a33d, transparent: true, opacity: 0, depthWrite: false, fog: false });
+  const corners = [];
+  for (const y of [0, H]) for (const [x, z] of [[-W / 2, -D / 2], [W / 2, -D / 2], [W / 2, D / 2], [-W / 2, D / 2]]) corners.push(new THREE.Vector3(x, y, z));
+  const ridgeF = new THREE.Vector3(0, H + 0.5, D / 2), ridgeB = new THREE.Vector3(0, H + 0.5, -D / 2);
+  const edges = [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]].map(([i, j]) => [corners[i], corners[j]]);
+  edges.push([corners[7], ridgeF], [corners[6], ridgeF], [corners[4], ridgeB], [corners[5], ridgeB], [ridgeF, ridgeB]);
+  for (const [p, q] of edges) {
+    const length = p.distanceTo(q);
+    // dashed: short rods along the edge
+    const dashes = Math.max(2, Math.round(length / 0.09));
+    for (let i = 0; i < dashes; i++) {
+      const a0 = p.clone().lerp(q, i / dashes), a1 = p.clone().lerp(q, (i + 0.6) / dashes);
+      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.009, 0.009, a0.distanceTo(a1), 5), lineMaterial);
+      rod.position.copy(a0).add(a1).multiplyScalar(0.5);
+      rod.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), a1.clone().sub(a0).normalize());
+      outline.add(rod);
+    }
+  }
+  house.add(outline);
+  // one course every 0.75 s, from just after the cut: only a few are up by the end
+  const courseAt = (i) => T.cut + 0.45 + i * 0.75;
+
+  // ------------------------------------------------------------------ the camera
+  const noticeFocus = [noticeCentre.x, noticeCentre.y, noticeCentre.z];
+  const wallTarget2 = [noticeCentre.x + 0.4, noticeCentre.y - 0.22, noticeCentre.z];
+  const wallShot = kit.shot([
+    { t: T.start, position: [0, 0.25, 0.6], target: [0, -0.5, -30], fov: 40, focus: 18 },
+    { t: T.y1915 + 0.3, position: [0.05, 0.1, -0.2], target: [0, -0.75, -30], fov: 39, focus: 14 },
+    { t: T.glasgow, position: [0.15, -0.15, -0.9], target: [0.1, -1.25, -30], fov: 38, focus: 12 },
+    { t: T.pushed + 0.15, position: [0.35, -0.2, -1.0], target: wallTarget2, fov: 24, focus: noticeFocus },
+    { t: T.november, position: [0.4, -0.25, -1.3], target: [wallTarget2[0], wallTarget2[1] - 0.1, wallTarget2[2]], fov: 23.5, focus: noticeFocus },
+    { t: T.rise, position: [0.45, -0.3, -1.5], target: [wallTarget2[0], wallTarget2[1] - 0.1, wallTarget2[2]], fov: 23, focus: [strikersAt[0], strikersAt[1] + 0.7, strikersAt[2]] },
+    { t: T.parliament, position: [0.45, -0.3, -1.6], target: [wallTarget2[0], wallTarget2[1], wallTarget2[2]], fov: 21, focus: noticeFocus },
+    { t: T.cut, position: [0.45, -0.32, -1.68], target: [wallTarget2[0], wallTarget2[1], wallTarget2[2]], fov: 20.6, focus: noticeFocus },
+  ], { handheld: 0.01, seed: 4 });
+  // after the cut: a slow push in on the building site
+  const siteFocus = [site.x, site.y + 0.4, site.z];
+  const siteShot = kit.shot([
+    { t: T.cut, position: [0.34, -0.47, -1.7], target: [site.x, site.y + 0.58, site.z], fov: 31, focus: siteFocus },
+    { t: T.hurry + 0.35, position: [0.3, -0.55, -2.0], target: [site.x, site.y + 0.55, site.z], fov: 30, focus: siteFocus },
+    { t: T.last + 1.4, position: [0.25, -0.65, -2.4], target: [site.x, site.y + 0.5, site.z], fov: 28, focus: siteFocus },
+  ], { handheld: 0.01, seed: 5 });
+  const shot = (t) => (t < T.cut ? wallShot(t) : siteShot(t));
+  kit.shake(T.pushed + 0.12, 0.006, 0.12);
+  kit.shake(T.slam, 0.02, 0.16);
+
+  function pose(t) {
+    motes.set(t);
+    setRain(t);
+    // workers stream in and fold away as the camera turns to the wall
+    for (const f of files) {
+      if (t < f.at || t > T.pushed + 0.5) { f.piece.set({ visible: false }); continue; }
+      const s = f.speed * (t - f.at);
+      const move = along.clone().multiplyScalar(s);
+      const base = t < T.landlords - 0.2 ? { visible: true, fold: 0 } : foldDown(t, T.landlords - 0.2, 0.25);
+      f.piece.set({ ...base, dx: move.x, dz: move.z, dy: walkBob(t, f.at, Infinity, 0.025, 2.2) });
+    }
+    // the board pops up on "landlords"
+    const boardUp = t < T.landlords - 0.1 ? 0 : 1 - spring(t - (T.landlords - 0.1), { stiffness: 14, damping: 0.6 });
+    const wall = t < T.cut; // everything at the wall is hidden under the dip, never lowered or tipped
+    boardGroup.visible = t > T.landlords - 0.1 && wall;
+    boardGroup.rotation.x = (Math.PI / 2) * (1 - boardUp);
+    // the notice slaps onto the board
+    if (t < T.pushed) notice.set({ visible: false });
+    else if (!wall) notice.set({ visible: false });
+    else {
+      const age = t - T.pushed;
+      const k = spring(age, { stiffness: 18, damping: 0.6 });
+      notice.set({ lift: 0.5 * Math.max(0, k), scale: 1 + 0.25 * Math.max(0, k), roll: -0.05 + 0.25 * k + knock(age - 0.15, 0.02) });
+    }
+    // the stamp: rises into view above, slams down on "froze", lifts away
+    const stampDown = T.slam, stampFall = 0.22;
+    if (t < T.within + 0.3 || t > stampDown + 1.0) stamp.set({ visible: false });
+    else {
+      let dy;
+      if (t < stampDown - stampFall) dy = lerp(3.2, 0.75, smooth(ramp(t, T.within + 0.3, stampDown - stampFall - 0.1)));
+      else if (t < stampDown) { const x = ramp(t, stampDown - stampFall, stampDown); dy = 0.75 * (1 - x * x); }
+      else dy = 0.02 * Math.exp(-(t - stampDown) / 0.06) + lerp(0, 3.4, smooth(ramp(t, stampDown + 0.25, stampDown + 0.85)));
+      const squash = t >= stampDown && t < stampDown + 0.3 ? 1 - 0.04 * Math.exp(-(t - stampDown) / 0.08) : 1;
+      stamp.set({ dy, lift: 0.12, scale: squash, roll: t < stampDown ? 0.05 * (1 - ramp(t, stampDown - 0.6, stampDown)) : 0 });
+    }
+    if (t < T.slam || !wall) frozen.set({ visible: false });
+    else frozen.set({ lift: 0.03, roll: -0.13, scale: 1 + 0.12 * Math.exp(-(t - T.slam) / 0.07) });
+    if (t > T.slam - 0.05 && t < Math.min(T.slam + 1.3, T.cut)) dust.set({ origin: [noticeCentre.x + 0.1, noticeCentre.y - 0.25, noticeCentre.z + 0.3], width: 1.0, age: t - T.slam, scale: 0.35 });
+    else dust.hide();
+    // the strikers pop up on "about" and stay until the camera leaves
+    strikers.set(wall ? popUp(t, T.about - 0.15, { height: 1.18, restZ: 0.3 }) : { visible: false });
+    // the house: courses drop into place one by one; the outline fades in
+    house.visible = !wall;
+    lineMaterial.opacity = 0.75 * smooth(ramp(t, T.cut + 0.3, T.cut + 0.9));
+    courses.forEach((course, i) => {
+      const at = courseAt(i);
+      const k = clamp01((t - (at - 0.25)) / 0.25);
+      course.visible = t > at - 0.25;
+      course.position.y = course.userData.y + 0.35 * (1 - k * k) + knock(t - at, 0.004, 6, 0.1);
+    });
+    // the dip: black exactly on the cut, picture back about a quarter second later
+    const fade = t < T.cut ? smooth(ramp(t, T.cut - T.dipIn, T.cut)) : 1 - smooth(ramp(t, T.cut, T.cut + T.dipOut));
+    return { camera: shot(t), look: { aperture: 8, maxBlur: 14, exposure: 0.95, glowThreshold: 0.93, glowStrength: 0.68, contrast: 1.06, fade } };
+  }
+
+  function draw2D(ctx, t) {
+    hook(ctx, t, { at: T.homes, until: T.y1915 - 0.1, text: 'HOMES', y: 330, size: 78, colour: INK.paper });
+    placeTitle(ctx, t, { at: T.y1915, until: T.landlords - 0.2, place: 'Glasgow', year: 1915, y: 280 });
+    hook(ctx, t, { at: T.workers + 0.2, until: T.landlords - 0.1, lines: ['WORKERS POUR IN'], y: 420, size: 62, colour: INK.muted });
+    hook(ctx, t, { at: T.quarter - 0.1, until: T.november - 0.1, text: 'UP TO +25%', y: 330, size: 112, colour: INK.amber });
+    hook(ctx, t, { at: T.quarter + 0.25, until: T.november - 0.1, text: 'AS MUCH AS A QUARTER', y: 455, size: 52 });
+    hook(ctx, t, { at: T.november, until: T.within - 0.2, text: 'BY NOVEMBER', y: 150, size: 38, colour: INK.muted });
+    counter(ctx, t, { at: T.twenty - 0.05, until: T.within - 0.2, duration: 0.9, from: 0, to: 20000, y: 350, size: 150,
+      format: (v) => (Math.round(v / 100) * 100).toLocaleString('en-GB') });
+    hook(ctx, t, { at: T.about, until: T.within - 0.2, text: 'ABOUT', y: 205, size: 44, colour: INK.muted });
+    hook(ctx, t, { at: T.refusing, until: T.within - 0.2, lines: ['HOUSEHOLDS', 'REFUSING TO PAY'], y: 480, size: 54, colour: INK.amber });
+    hook(ctx, t, { at: T.parliament, until: T.homes2 - 0.2, text: 'PARLIAMENT', y: 300, size: 56, colour: INK.paper });
+    hook(ctx, t, { at: T.homes2, until: T.last + 2, lines: ['HOMES CAN\u2019T', 'BE BUILT'], y: 330, size: 74 });
+    hook(ctx, t, { at: T.hurry - 0.05, until: T.last + 2, text: 'IN A HURRY', y: 470, size: 74, colour: INK.amber });
+    return true;
+  }
+
+  return { pose, draw2D };
+}

@@ -1,0 +1,57 @@
+00:00.656  blend            | Read blend: "/home/user/Music/austerity-explainer/film-kit/assets/models/pit-village/notice-corner.blend"
+/home/user/Music/plugins/explainer-film/kit/paper-film/blender/model_lint.py:274: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if material is None or not material.use_nodes:
+model_lint: 1 file(s): notice-corner.blend
+  notice-corner.blend: 530,314 triangles, 840 parts
+
+FAIL Surfaces on the same plane, facing the same way: 67 pair(s) of objects
+      spoil_heap_main  and  spoil_heap_old: 2803.104 square metres overlap, facing [0.001, -0.001, 1.0], near [85.394, 112.917, 5.014]
+      left_row_b_cottage_01_end_chimney  and  left_row_b_cottage_02_chimney: 11.5606 square metres overlap, facing [-1.0, -0.0, 0.0], near [-8.25, 43.844, 11.776]
+      left_row_a_cottage_01_end_chimney  and  left_row_a_cottage_02_chimney: 11.5606 square metres overlap, facing [-1.0, -0.0, 0.0], near [-8.25, 3.844, 8.979]
+      engine_house_glass  and  engine_house_trim: 1.8816 square metres overlap, facing [-1.0, 0.0, 0.0], near [-11.18, 92.852, 11.468]
+      right_row_b_cottage_02_trim  and  right_row_b_cottage_02_walls: 1.8636 square metres overlap, facing [0.0, -1.0, 0.0], near [4.31, 47.85, 5.391]
+      right_row_b_cottage_01_trim  and  right_row_b_cottage_01_walls: 1.8636 square metres overlap, facing [0.0, -1.0, 0.0], near [4.23, 41.05, 3.964]
+      left_row_b_cottage_02_trim  and  left_row_b_cottage_02_walls: 1.8551 square metres overlap, facing [0.0, -1.0, 0.0], near [-4.31, 45.55, 4.531]
+      left_row_b_cottage_01_trim  and  left_row_b_cottage_01_walls: 1.8551 square metres overlap, facing [0.0, -1.0, 0.0], near [-4.31, 43.35, 5.077]
+      right_row_a_cottage_06_trim  and  right_row_a_cottage_06_walls: 1.8278 square metres overlap, facing [0.0, -1.0, 0.0], near [4.31, 25.85, 3.853]
+      right_row_a_cottage_04_trim  and  right_row_a_cottage_04_walls: 1.8278 square metres overlap, facing [0.0, -1.0, 0.0], near [4.31, 16.85, 3.224]
+      right_row_a_cottage_02_trim  and  right_row_a_cottage_02_walls: 1.8278 square metres overlap, facing [0.0, -1.0, 0.0], near [4.31, 7.85, 2.594]
+      right_row_a_cottage_01_trim  and  right_row_a_cottage_01_walls: 1.8278 square metres overlap, facing [0.0, -1.0, 0.0], near [4.23, 1.05, 1.167]
+  Fix: move one surface 0.01 m apart (models.coplanar_gap_metres); they swap colour as the camera moves.
+
+FAIL Floors laid just over another ground (0 to 0.05 m above it): 3
+      spoil_heap_old over spoil_heap_main: 155.295 square metres, 0.0 to 0.049 m apart; the lower one pokes through in places, near [24.58, 116.02, 5.02]
+      spoil_heap_main over ground: 146.359 square metres, 0.0 to 0.05 m apart; the lower one pokes through in places, near [-24.23, 114.29, 5.33]
+      ground over spoil_heap_old: 114.243 square metres, 0.001 to 0.05 m apart; the lower one pokes through in places, near [46.66, 107.74, 5.32]
+  Fix: lower or cut the ground under the raised floor (round 3 lowered the lane under the yards).
+
+Names:
+  WARN notice-corner.blend: root "brazier-drum.001" ends in a copy number; root "coal-sacks.001" ends in a copy number; root "coal-sacks.003" ends in a copy number; root "coal-tub-on-track.001" ends in a copy number; root "colliery-name-board.001" ends in a copy number; root "dustbins.001" ends in a copy number (and 11 more)
+  Fix: rename a second copy's parts '<instance>-<part>' at import; the checker and the page take a '.001' part for the first copy.
+
+PASS Glass whose see-through value comes from its picture: 0
+
+PASS Glowing materials with a light plain base colour: 0
+  Not judged: 12 glowing material(s) over a picture (lit windows, glowing brick: meant to show it): Lantern_01_glass, engine_window_glow, lamp_glass_glow, sky_dome_glow, street_lamp_01_bulb, street_lamp_01_bulb.001 ...
+
+Note: materials used by several objects (when building one model, join its parts by material: lesson 67): brass (115); paint_cream (84); dressed_stone (64); cast_iron (35); chimney_pot_clay (32)
+
+Verdict: FAIL (floors, same-plane)
+
+Settings used (film-settings.json):
+  views_and_models.model_lint.same_plane_gap_metres = 0.0001 metres between the two planes (invented)
+  views_and_models.model_lint.same_plane_normal_cos = 0.9999 cosine between the two faces' normals (facing the same way) (invented)
+  views_and_models.model_lint.same_plane_overlap_min_square_metres = 0.001 square metres of overlap (or of raised floor) worth reporting (invented)
+  models.ground_under_raised_area_metres = 0.05 metres (judged)
+  views_and_models.model_lint.upward_normal_z_min = 0.9 normal's z (1 = straight up) (invented)
+  views_and_models.model_lint.floor_min_square_metres = 1.0 square metres of a raised floor over another ground (invented)
+  views_and_models.model_lint.glass_material_patterns = ["*glass*", "*lens*", "*mantle*"] material name patterns (lower case) (judged)
+  views_and_models.model_lint.glowing_base_brightness_max = 0.05 base colour brightness (0 to 1, linear) (invented)
+  models.coplanar_gap_metres = 0.01 metres (judged)
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit
+
+real	0m10.660s
+user	0m8.662s
+sys	0m0.949s

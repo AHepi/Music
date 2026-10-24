@@ -1,0 +1,859 @@
+{
+ "about": "The state of one variations batch sent to rented cards. `explainer-film-place variations collect THIS-FOLDER` finishes it if the command that sent it was cut off.",
+ "spec": {
+  "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/light-variations.json",
+  "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads",
+  "about": null,
+  "change": "the sun, the sky light and the hill tone of the ground part",
+  "change_id": "the-sun-the-sky-light-and-the-hill-tone",
+  "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/part.blend",
+  "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json",
+  "cameras": [
+   "View wide",
+   "View road_eye"
+  ],
+  "engine": "auto",
+  "size": [
+   600,
+   400
+  ],
+  "samples": null,
+  "variations": [
+   {
+    "name": "dim-soft",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 2.5,
+     "sky_strength": 0.35,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "flat-sky",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 3.0,
+     "sky_strength": 0.85,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "bright-low-sky",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 5.0,
+     "sky_strength": 0.35,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "harsh",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 6.5,
+     "sky_strength": 0.3,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "bright-sky",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 5.0,
+     "sky_strength": 0.8,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "dim-dark-hills",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 3.5,
+     "sky_strength": 0.55,
+     "hill_gain": 0.78
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "base-light-hills",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 4.0,
+     "sky_strength": 0.55,
+     "hill_gain": 1.3
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "strong-light-hills",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 6.0,
+     "sky_strength": 0.65,
+     "hill_gain": 1.15
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "mid-dark-hills",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 2.8,
+     "sky_strength": 0.45,
+     "hill_gain": 0.85
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "warm-high",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 4.6,
+     "sky_strength": 0.5,
+     "hill_gain": 1.05
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   }
+  ],
+  "for_film": false
+ },
+ "checked": {
+  "kept": [
+   {
+    "name": "dim-soft",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 2.5,
+     "sky_strength": 0.35,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "flat-sky",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 3.0,
+     "sky_strength": 0.85,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "bright-low-sky",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 5.0,
+     "sky_strength": 0.35,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "harsh",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 6.5,
+     "sky_strength": 0.3,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "bright-sky",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 5.0,
+     "sky_strength": 0.8,
+     "hill_gain": 1.0
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "dim-dark-hills",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 3.5,
+     "sky_strength": 0.55,
+     "hill_gain": 0.78
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "base-light-hills",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 4.0,
+     "sky_strength": 0.55,
+     "hill_gain": 1.3
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "strong-light-hills",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 6.0,
+     "sky_strength": 0.65,
+     "hill_gain": 1.15
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "mid-dark-hills",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 2.8,
+     "sky_strength": 0.45,
+     "hill_gain": 0.85
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   },
+   {
+    "name": "warm-high",
+    "set": {},
+    "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+    "args": {
+     "sun_strength": 4.6,
+     "sky_strength": 0.5,
+     "hill_gain": 1.05
+    },
+    "ranges": {
+     "sun_strength": [
+      2.0,
+      7.0
+     ],
+     "sky_strength": [
+      0.2,
+      1.0
+     ],
+     "hill_gain": [
+      0.7,
+      1.35
+     ]
+    },
+    "reset": "reopen"
+   }
+  ],
+  "dropped": []
+ },
+ "jobs": [
+  {
+   "index": 1,
+   "entries": [
+    {
+     "name": "dim-soft",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 2.5,
+      "sky_strength": 0.35,
+      "hill_gain": 1.0
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    },
+    {
+     "name": "harsh",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 6.5,
+      "sky_strength": 0.3,
+      "hill_gain": 1.0
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    },
+    {
+     "name": "base-light-hills",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 4.0,
+      "sky_strength": 0.55,
+      "hill_gain": 1.3
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    },
+    {
+     "name": "warm-high",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 4.6,
+      "sky_strength": 0.5,
+      "hill_gain": 1.05
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "entries": [
+    {
+     "name": "baseline",
+     "set": {},
+     "script": null,
+     "args": {},
+     "ranges": {},
+     "reset": "auto",
+     "is_baseline": true
+    },
+    {
+     "name": "flat-sky",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 3.0,
+      "sky_strength": 0.85,
+      "hill_gain": 1.0
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    },
+    {
+     "name": "bright-sky",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 5.0,
+      "sky_strength": 0.8,
+      "hill_gain": 1.0
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    },
+    {
+     "name": "strong-light-hills",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 6.0,
+      "sky_strength": 0.65,
+      "hill_gain": 1.15
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "entries": [
+    {
+     "name": "bright-low-sky",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 5.0,
+      "sky_strength": 0.35,
+      "hill_gain": 1.0
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    },
+    {
+     "name": "dim-dark-hills",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 3.5,
+      "sky_strength": 0.55,
+      "hill_gain": 0.78
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    },
+    {
+     "name": "mid-dark-hills",
+     "set": {},
+     "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py",
+     "args": {
+      "sun_strength": 2.8,
+      "sky_strength": 0.45,
+      "hill_gain": 0.85
+     },
+     "ranges": {
+      "sun_strength": [
+       2.0,
+       7.0
+      ],
+      "sky_strength": [
+       0.2,
+       1.0
+      ],
+      "hill_gain": [
+       0.7,
+       1.35
+      ]
+     },
+     "reset": "reopen",
+     "is_baseline": false
+    }
+   ]
+  }
+ ],
+ "estimate_card_seconds": 348.0,
+ "estimate_elapsed_seconds": 146.0,
+ "pictures": 22,
+ "saved_values_before": null,
+ "scout": null,
+ "base": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505",
+ "helper": "builder-ground_and_roads",
+ "role": "builder",
+ "ledger": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/card-time-ledger.jsonl",
+ "card": {
+  "kind": "a command-line client",
+  "card_client": "python3 -I /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/runpod/render_client_serverless.py",
+  "store_folder": "/workspace"
+ },
+ "check_reset": false,
+ "uploaded_note": [
+  "kit uploaded"
+ ],
+ "sent": [
+  {
+   "index": 1,
+   "job_id": "09319619-83c3-48f2-83b0-ff71d43ee555-u2",
+   "remote": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1"
+  },
+  {
+   "index": 2,
+   "job_id": "f69c95bb-2991-413b-9baf-d073d7ea416c-u2",
+   "remote": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2"
+  },
+  {
+   "index": 3,
+   "job_id": "afceeda2-98c3-42f7-898e-81aa70ffc2fa-u1",
+   "remote": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3"
+  }
+ ],
+ "finished": true,
+ "timing": {
+  "started": 1792753381.766637,
+  "set_up_done": 1792753566.8665588,
+  "small_seconds": 190.0,
+  "small_measured": false,
+  "sent": 1792753567.7163124
+ }
+}

@@ -1,0 +1,90 @@
+== sound gates: lengths, loudness, alignment, music under the voice, voice, mouth, music start
+PASS  the film kit's mix of chapter 2 is 0.36 s short and the gate fails it: 269.975 s against 270.333 s
+      recorded in: lesson 5 (a mix came out 3 s short); here ffmpeg 6.1's sidechaincompress ends early
+      proves: a real fault the gate catches (the delivered mix was full length, made on 12 October)
+PASS  the plugin's mix of chapter 2 with its timeline: every gate passes (lengths, music under the voice, alignment): PASS  length after the mix (WAV): 270.333 s against 270.333 s asked (allowed 0.05 s) | PASS  length after the mix (MP3): 270.360 s against 270.333 s asked (allowed 0.05 s) | PASS  music under the voice while she speaks: 18.5 dB (target 18 +/- 1; pages 18.1 to 20.4) | PASS  in pauses of 0.5 s or more
+PASS  the plugin's mix against the film kit's, sample by sample, before the last 4 s: largest difference: got 0, recorded 0 (allowed difference 1e-07)
+      proves: the gates and the length fix change nothing else in the mix
+PASS  the plugin's mix against the delivered chapter-2-mix.flac: correlation: got 1, must lie in [0.99999, 1]
+      recorded in: chapter-2-inflation/mix/chapter-2-mix.flac (made 12-13 October)
+      proves: the soundtrack, narration and chain are the ones the project used
+PASS  23.04 s delivered for 23.0 s asked: passes: got 0, expected 0
+      recorded in: lesson 5 (23 s asked, 23.04 s delivered; the first check 3 s short)
+      proves: the tolerance of 0.05 s
+PASS  20.0 s delivered for 23.0 s asked: fails: got 1, expected 1
+      recorded in: lesson 5 (23 s asked, 23.04 s delivered; the first check 3 s short)
+      proves: the tolerance of 0.05 s
+PASS  19 sendable copy: -15.0 LUFS, true peak -1.6 dBTP: passes: yes
+      recorded in: logs 19-20: -15.0/-15.1 LUFS, true peak -1.5 to -1.8
+      proves: the gate passes the films the user accepted
+PASS  20 sendable copy: -15.0 LUFS, true peak -1.6 dBTP: passes: yes
+      recorded in: logs 19-20: -15.0/-15.1 LUFS, true peak -1.5 to -1.8
+      proves: the gate passes the films the user accepted
+PASS  log 27 house: -17.0 LUFS fails (target -14): yes
+      recorded in: logs 27 and 29 (-17 and -17.7; log 32's helper found -17.7 faint on a phone)
+      proves: the gate fails what the project found too quiet
+PASS  log 29 lockout: -17.7 LUFS fails (target -14): yes
+      recorded in: logs 27 and 29 (-17 and -17.7; log 32's helper found -17.7 faint on a phone)
+      proves: the gate fails what the project found too quiet
+PASS  log 32 notice corner: -13.7 LUFS passes the loudness; its true peak -0.9 dBTP does not: yes
+      recorded in: log 32 (raised to -14, measured -13.7)
+      proves: a finding: the kept clip is 0.1 dB over the -1 dBTP limit; add_music_bed.sh now aims at -1.5
+PASS  the delivered film against its mix: largest offset 0.0 ms: yes
+      recorded in: logs 13, 19, 20 (0.00 ms at every page)
+      proves: repeats the record with the same sum (check_sound_alignment.py)
+PASS  a limiter without latency=1 makes the mix 4.979 ms late against the narration: fails: yes
+      recorded in: lesson 15 (5 ms late; 0.00 ms after latency=1)
+      proves: the mix script's new alignment gate (against the narration) catches it
+PASS  the plugin's mix against the narration: 0.0 ms: yes
+      recorded in: lesson 15
+PASS  chapter 1's narration rebuilt from its recordings: peak: got 1.008, recorded 1.008 (allowed difference 0.0005)
+      recorded in: examples/austerity-chapter-1/timeline.json (narration_peak 1.008)
+      proves: the same track the music was measured against
+PASS  chapter 1 at music level -14: dB under while she speaks: got 21.29, recorded 21 (allowed difference 1)
+      recorded in: decision 12 (about 21 before the user asked for it slightly louder)
+      proves: only that the measure was chosen well: it was picked from three because it gives these figures
+PASS  chapter 1 at -11: dB under while she speaks: got 18.29, recorded 18 (allowed difference 1)
+      recorded in: decision 12 and log 10 (about 18)
+      proves: as above (chosen to match)
+PASS  chapter 1 at -11: dB under in pauses of 0.5 s or more: got 11.83, recorded 12 (allowed difference 1)
+      recorded in: logs 07 and 10 (about 12 in pauses)
+      proves: as above (chosen to match)
+PASS  chapter 2 at -11: dB under while she speaks: got 18.46, recorded 18 (allowed difference 1)
+      recorded in: chapter 2 shipped at -11 (logs 19-20); its gap was never measured
+      proves: the hold-out: the same measure on another narration
+PASS  chapter 2: the gap moves 3 dB when the level moves 3 dB: got 3, recorded 3 (allowed difference 0.3)
+      proves: the loop can step straight to the level (the voice drives the ducking, so the gap is linear in the level: skeptic log 35)
+PASS  chapter 1: the loop from -14 finds MUSIC_LEVEL_DB -10.71 in 2 passes (by hand: -11): yes
+      recorded in: decision 12 (-14 to -11, found by trying four settings in logs 04-10)
+      proves: the level is found without hand-searching
+PASS  chapter 2: the loop from -14 finds MUSIC_LEVEL_DB -10.54 in 2 passes (by hand: -11): yes
+      recorded in: decision 12 (-14 to -11, found by trying four settings in logs 04-10)
+      proves: the level is found without hand-searching
+PASS  "slightly louder" (--louder 3): the level found: got -7.54, recorded -7.5 (allowed difference 0.6)
+      recorded in: decision 12 (the user's "slightly" was 3 dB)
+      proves: repeats the 3 dB rule through the loop
+PASS  chapter 2: spread 2.18 semitones passes and no page is sent back: yes
+      recorded in: decisions item 20 (2.2 semitones, accepted)
+      proves: the gate passes the accepted narration (same measure as compare_voice_steadiness.py)
+NOTE  chapter 2 words 5+ semitones over their page: 4 to 12 a page, all in an accepted narration, so they are listed, not sent back
+PASS  chapter 1: spread 2.99 semitones fails; pages [1, 2, 10] sent back: yes
+      recorded in: decisions item 20 (chapter 1 sounded unsteady: 3.0)
+      proves: the gate fails the narration the project judged unsteady and names its pages
+PASS  chapter 2: QUIET from the 25th percentile of voiced slices: got -24.76, recorded -25 (allowed difference 3)
+      recorded in: make_mouth_track.py QUIET_DB -25 (lesson 24)
+      proves: a weak hold-out: fitted on chapter 1, same narrator at the same level (the design's 40th percentile gave -19.6)
+PASS  chapter 2: LOUD from the 90th percentile: got -11.41, recorded -11 (allowed difference 3)
+      recorded in: make_mouth_track.py LOUD_DB -11
+      proves: the design's percentile, unchanged
+PASS  the 216 s the notice corner uses is among the top three starts ([215.2, 228.0, 229.0]): yes
+      recorded in: log 32 (music from 3 min 36 s, chosen by its loudness)
+      proves: only repeats: the quiet level and the section snap were tuned on this one case
+PASS  finish_film.sh with a timeline: 6 gates, all pass, exit 0: PASS  length after the master's sound: 25.000 s against 25.000 s asked (allowed 0.05 s) | PASS  length after the sendable copy's sound: 25.000 s against 25.000 s asked (allowed 0.05 s) | PASS  loudness of send.mp4: -15.0 LUFS (target -15.0 +/- 0.5) | PASS  true peak: -1.7 dBTP (at most -1.0; measure
+PASS  finish_film.sh without a timeline makes the files but ends with exit 3 (alignment not checked): got 3, expected 3
+PASS  a mix 6 dB too loud stops finish_film.sh at the loudness gate: ['FAIL  loudness of send.mp4: -9.9 LUFS (target -15.0 +/- 0.5)', 'FAIL  true peak: 2.1 dBTP (at most -1.0; measured on the encoded file, since encoding raises peaks)']
+PASS  add_music_bed.sh from 216 s: length, loudness and true peak all pass: PASS  length after the music bed: 13.000 s against 13.000 s asked (allowed 0.05 s) | PASS  loudness of bed.mp4: -13.7 LUFS (target -14.0 +/- 0.5) | PASS  true peak: -1.5 dBTP (at most -1.0; measured on the encoded file, since encoding raises peaks)
+      recorded in: log 32 (the same stretch at -14 measured -13.7 LUFS)
+      proves: with loudnorm aimed at -1.5 dBTP the encoded peak stays under -1
+PASS  sound_gates.py answers --help and opens with its note: yes
+-- sound gates: lengths, loudness, alignment, music under the voice, voice, mouth, music start: 33 of 33 checks passed
+exit 0

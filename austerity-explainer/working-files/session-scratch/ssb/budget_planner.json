@@ -1,0 +1,69 @@
+{
+ "about": "plan_budget.py's own numbers: the repaint and re-record reserves, how big a filming piece is, memory, the 2-hour stretches, disk and the filming watch. The prices and the measured frame costs and memory it uses live in money and filming (lazy loading follows from filming.memory_per_piece_gb).",
+ "repaint_share": {
+  "value": 0.5,
+  "unit": "repaints a painting",
+  "kind": "judged",
+  "source": "Plan 34 money table (one repaint per two paintings; lesson 97: Flux's strength varies)"
+ },
+ "rerecord_reserve_pages": {
+  "value": 1,
+  "unit": "pages",
+  "kind": "judged",
+  "source": "Plan 34 money table (re-record reserve one page, about US$0.30)"
+ },
+ "stretch_margin_minutes": {
+  "value": 10,
+  "unit": "minutes kept spare in each 2-hour stretch",
+  "kind": "judged",
+  "source": "Design log 35 (2 h minus 10 min = 6,600 s); lesson 69 (background jobs stop after 2 hours)"
+ },
+ "piece_load_share_max": {
+  "value": 0.1,
+  "unit": "share of a piece's time spent loading",
+  "kind": "invented",
+  "source": "Design log 35 (PIECE_FRAMES = load / (0.10 x seconds a frame)); not tested by filming"
+ },
+ "restart_loss_max_seconds": {
+  "value": 900,
+  "unit": "seconds of filming a restart may lose",
+  "kind": "judged",
+  "source": "Lesson 71 (60-frame pieces lose at most about 13 minutes on the slowest pages); design log 35 (floor(900 / seconds a frame))"
+ },
+ "piece_frames_min": {
+  "value": 60,
+  "unit": "frames",
+  "kind": "judged",
+  "source": "film-chapter-parallel.sh PIECE_FRAMES default (lesson 71)"
+ },
+ "memory_reserve_gb": {
+  "value": 2,
+  "unit": "GB kept free for the system",
+  "kind": "invented",
+  "source": "Design log 35 (workers <= (free GB - 2) / (2.6 x views a page))"
+ },
+ "busy_machine_factor": {
+  "value": 1.8,
+  "unit": "times slower while Blender renders alongside",
+  "kind": "judged",
+  "source": "Plan 34 seconds a frame (held with smoke 0.9-1.3 s alone, 2.0-2.3 s while another Blender runs); round 5 filmed pages 3-5 in 110 min against round 4's 53 min while other helpers ran Blender (set also changed)"
+ },
+ "film_copies": {
+  "value": 2,
+  "unit": "copies of the film on disk at once (pieces and the joined film)",
+  "kind": "judged",
+  "source": "Plan 34 F2 (delete pieces after the silent film is checked)"
+ },
+ "disk_free_reserve_gb": {
+  "value": 4,
+  "unit": "GB",
+  "kind": "judged",
+  "source": "Helpers' house rule (keep above 4 GB free disk)"
+ },
+ "stalled_after_piece_times": {
+  "value": 2,
+  "unit": "times a piece's filming time with no new file",
+  "kind": "judged",
+  "source": "Design log 35; lesson 56 (filming stopped silently for 90 minutes after a restart)"
+ }
+}

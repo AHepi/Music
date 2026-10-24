@@ -1,0 +1,226 @@
+{
+ "about": "The house numbers of three tools: view_audit.py (lettering, figures and landmarks seen from each view), make_check_file.py (writes a view's shot check file from the Blender scene) and model_lint.py (model faults before plates). Added by the views-and-models helper (log 35).",
+ "lettering_material_patterns": {
+  "value": [
+   "*-lettering",
+   "*-lettering.0*",
+   "*-stencil",
+   "*-stencil.0*",
+   "*-printing",
+   "*-printing.0*",
+   "*-paper",
+   "*-paper.0*"
+  ],
+  "unit": "material name patterns (lower case, * any letters)",
+  "kind": "judged",
+  "source": "The naming the build scripts use: works-effects.js LETTERING (-lettering, -stencil, -printing), checkout-signs.glb (-lettering), notice-corner-signs.glb (notice-paper); inventory 'Lettering keeps its own surface; naming convention'"
+ },
+ "model_lint": {
+  "about": "model_lint.py: squashed textures (stripes), same-plane faces, floors over ground, names, glass, glows, sizes, fronts.",
+  "stripe_ratio_of_median": {
+   "value": 0.02,
+   "unit": "share of the part's median texture area per square metre",
+   "kind": "judged",
+   "source": "scratchpad redesign/check-round-3/tools/find_stripes.py (its threshold found round 3's 15, 27 and 33 striped parts and round 4's 0; skeptic, log 35: not the design's 1e-3)"
+  },
+  "stripe_report_area_square_metres": {
+   "value": 0.5,
+   "unit": "square metres of striped faces in one part",
+   "kind": "judged",
+   "source": "find_stripes.py (round 3): parts with more striped area than this are listed"
+  },
+  "stripe_face_min_area_square_metres": {
+   "value": 1e-06,
+   "unit": "square metres",
+   "kind": "judged",
+   "source": "find_stripes.py (round 3): smaller faces are left out of the median"
+  },
+  "same_plane_gap_metres": {
+   "value": 0.0001,
+   "unit": "metres between the two planes",
+   "kind": "invented",
+   "source": "Inventory 'Two surfaces on the same plane flicker' (proposed: less than 0.1 mm apart); lesson 85's ceiling sat exactly on the slab. The fix's gap is models.coplanar_gap_metres (0.01)"
+  },
+  "same_plane_normal_cos": {
+   "value": 0.9999,
+   "unit": "cosine between the two faces' normals (facing the same way)",
+   "kind": "invented",
+   "source": "Design (log 35): parallel normals; faces back to back (a prop's base on the ground) are left out because one hides the other"
+  },
+  "same_plane_overlap_min_square_metres": {
+   "value": 0.001,
+   "unit": "square metres of overlap (or of raised floor) worth reporting",
+   "kind": "invented",
+   "source": "views-and-models helper (log 35): 10 cm by 1 cm; smaller slivers along shared edges are not worth a fix"
+  },
+  "upward_normal_z_min": {
+   "value": 0.9,
+   "unit": "normal's z (1 = straight up)",
+   "kind": "invented",
+   "source": "views-and-models helper (log 35): a floor or ground face (the street's 4-degree slope is 0.998)"
+  },
+  "glass_material_patterns": {
+   "value": [
+    "*glass*",
+    "*lens*",
+    "*mantle*"
+   ],
+   "unit": "material name patterns (lower case)",
+   "kind": "judged",
+   "source": "Log 32 (the gas lamps' street_lamp_01_glass and the lantern's Lantern_01_glass took their see-through value from their pictures); set_dressing.see_through"
+  },
+  "glowing_base_brightness_max": {
+   "value": 0.05,
+   "unit": "base colour brightness (0 to 1, linear)",
+   "kind": "invented",
+   "source": "Design (log 35) from lesson 89 (a glow lit by its own lamp renders white: glow materials get a black base, set_dressing.glow_material)"
+  },
+  "size_claim_tolerance_share": {
+   "value": 0.1,
+   "unit": "share of the measured size",
+   "kind": "invented",
+   "source": "views-and-models helper (log 35): the jacket's 'about 0.6 m wide' against 0.516 measured (round 1) is 16% off"
+  },
+  "floor_min_square_metres": {
+   "value": 1.0,
+   "unit": "square metres of a raised floor over another ground",
+   "kind": "invented",
+   "source": "views-and-models helper (log 35): a yard or a room's floor, not a window sill 5 cm over its opening (0.2 square metres each on the Works' cottages); round 2's yard setts covered about 2,000 square metres"
+  }
+ },
+ "view_audit": {
+  "about": "view_audit.py: letters in pixels at every view, drums' turns, loud unnamed signs, landmark tops in the words band, heads, signs' backs, continuity counts, title contrast.",
+  "must_read_facing_min_cos": {
+   "value": 0.85,
+   "unit": "cosine between the sign's face and the way to the camera, across (the width of the letters)",
+   "kind": "invented",
+   "source": "Design (log 35) and inventory 'Words meant to be read face the camera' (flag under 0.85); no recorded case sets it"
+  },
+  "unnamed_sign_legibility_share_max": {
+   "value": 0.55,
+   "unit": "letter pixels x letter brightness, as a share of the least legible named sign in the view",
+   "kind": "judged",
+   "source": "Calibrated on BANK in W3 (skeptic, log 35: about 0.5 of the boards'), against the least legible named sign that is itself readable: the No. 1 board, 14.7 px x 120 levels (the No. 2 board's 13.8 px is under lettering.not_meant_to_read_max_pixels). BANK lit, 29 px x 118 levels = 1.94 of it, was read first (round 3); dimmed to 0.3, 52 levels (measured) = 0.86, the critic still read it (round 4); the accepted dim 0.15 comes out 0.53 by dim_brightness_exponent (predicted, not measured). 0.55 separates them and asks for a dim of 0.157 (0.15 was chosen by eye)"
+  },
+  "dim_brightness_exponent": {
+   "value": 0.68,
+   "unit": "levels = lit levels x dim ^ exponent",
+   "kind": "measured",
+   "source": "Round 4 (round4-result.json): BANK's letters 118 levels lit, 52 at dim 0.3 (ln(52/118)/ln(0.3) = 0.68); the film's 57 against 128 gives 0.60. One sign, two points"
+  },
+  "figure_half_width_metres": {
+   "value": 0.25,
+   "unit": "metres either side of a figure's feet",
+   "kind": "judged",
+   "source": "A working man's shoulders about 0.45-0.5 m (works-shot.json men_seen boxes: man 6 at 7.42 m spans 0.155 of the width = 0.58 m with his arms)"
+  },
+  "face_shows_within_degrees": {
+   "value": 100,
+   "unit": "degrees between a figure's facing and the way to the camera",
+   "kind": "invented",
+   "source": "Design (log 35); the people test showed faces are painted or not regardless (lesson 137; skeptic)"
+  },
+  "title_contrast_min": {
+   "value": 4.5,
+   "unit": "(lighter + 0.05)/(darker + 0.05), relative luminance",
+   "kind": "judged",
+   "source": "Inventory 'Title size and contrast' and 'Readable words: contrast and a dark band' (the common 4.5 to 1 for words; lessons 53, 66; log 32's faint amber 1926)"
+  },
+  "title_background_grow_pixels": {
+   "value": 20,
+   "unit": "pixels round the word's box",
+   "kind": "judged",
+   "source": "Inventory 'Readable words: contrast and a dark band over busy sets' (the box widened 20 px)"
+  }
+ },
+ "check_file": {
+  "about": "make_check_file.py: what it generates (story roles come from the shot list).",
+  "on_ground_within_metres": {
+   "value": 0.05,
+   "unit": "metres between a group's lowest point and a declared ground (road, pavement, ground, floor)",
+   "kind": "judged",
+   "source": "Design (log 35: within 0.05 m of the ground); check_shot.py's own resting limits are 0.03 floating and 0.05 sunk (composing.resting_*)"
+  },
+  "ground_kinds": {
+   "value": [
+    "ground",
+    "road",
+    "pavement",
+    "floor"
+   ],
+   "unit": "support surface kinds that count as the ground for check_shot's on_ground",
+   "kind": "judged",
+   "source": "Skeptic (log 35): on_ground against declared support surfaces; check1 of the checkout (round 5) falsely reported four counter props 'landed on something high'"
+  },
+  "thin_pixels": {
+   "value": 6,
+   "unit": "pixels across at the film frame (the group's narrow side)",
+   "kind": "judged",
+   "source": "Design (log 35) and check_dark_picture.py (round 3-5 scratch wrapper: gate bars); composing.thin_parts_ignored_pixels_at_1080 is the same 6"
+  },
+  "dark_base_brightness": {
+   "value": 0.02,
+   "unit": "area-weighted base colour brightness of a group's materials (linear, 0 to 1)",
+   "kind": "invented",
+   "source": "views-and-models helper (log 35): near-black paint and iron (the notice board 0.016, the gates 0.015 measured here); the design's 0.08 was plate brightness, which does not exist before the plate is drawn"
+  },
+  "title_zone_fallback": {
+   "value": [
+    0.06,
+    0.05,
+    0.9,
+    0.22
+   ],
+   "unit": "[left, top, right, bottom] shares of the frame",
+   "kind": "judged",
+   "source": "Works check files title_zone; safe_area.title_band_down and text left/right (0.06, 0.90)"
+  },
+  "sky_pattern_outdoors": {
+   "value": "sky_dome*",
+   "unit": "object name pattern",
+   "kind": "judged",
+   "source": "shot_facts.py default \"sky\" pattern"
+  },
+  "prop_collections": {
+   "value": [
+    "props",
+    "signs",
+    "gates",
+    "pop-up",
+    "men*",
+    "workers*",
+    "figures*",
+    "people*",
+    "walkers*",
+    "checkout"
+   ],
+   "unit": "collection name patterns where a place's assemble script puts props and figures",
+   "kind": "judged",
+   "source": "The kit's assemble scripts: assemble_notice_corner.py (props, signs), assemble_works.py (props, signs, gates, pop-up, men-no-1, men-no-2, workers-no-1, workers-no-2), assemble_checkout.py (checkout, signs); a shot list's prop_collections replaces it"
+  },
+  "light_prop_glow_share": {
+   "value": 0.15,
+   "unit": "share of a story group's own surface that glows",
+   "kind": "judged",
+   "source": "Measured by make_check_file.py on the kept scenes (log 35): the hurricane lantern 0.23 (notice corner) and 0.21 (Works W1), both hand-made files' only light prop; the brazier with its coals 0.11 and 0.06, which the hand files and the skeptic keep out (log 31: its rim as bright as the notice was a real fault). Set between them"
+  },
+  "thin_fill_share": {
+   "value": 0.3,
+   "unit": "share of a group's outline its faces fill, seen square on",
+   "kind": "invented",
+   "source": "views-and-models helper (log 35): iron gates and bars (the picture-match test misread them, rounds 3-5; check_dark_picture.py); a standing man fills about half his box"
+  },
+  "figure_collections": {
+   "value": [
+    "men*",
+    "workers*",
+    "figures*",
+    "people*",
+    "walkers*"
+   ],
+   "unit": "collection name patterns holding figures",
+   "kind": "judged",
+   "source": "assemble_works.py (men-no-1, men-no-2, workers-no-1, workers-no-2); check_dark_picture.py left every waiting man out of the picture-match test (rounds 3-5)"
+  }
+ }
+}

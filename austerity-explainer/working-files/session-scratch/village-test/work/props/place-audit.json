@@ -1,0 +1,7676 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-23T14:25:47",
+ "blender": "5.2.2 LTS",
+ "scene_file": "part.blend",
+ "scene_sha1": "c3e64def5832c1d4db3d905c72f9e42cc9101906",
+ "settings_file": "place-settings.json",
+ "settings_sha1": "a5fef7dc0f7f343b19a5b72c643e641d08585739",
+ "place": "forest village",
+ "place_type": "village",
+ "look": "lived_in",
+ "state": "damp",
+ "quick": true,
+ "map_size_pixels": 256,
+ "mask": {
+  "cell_metres": 0.5,
+  "cells": [
+   764,
+   764
+  ],
+  "seconds": 40.58,
+  "source": "part_only",
+  "bounds": [
+   -191.0,
+   -191.0,
+   191.0,
+   191.0
+  ],
+  "sun": {
+   "compass_degrees": 315.0,
+   "height_degrees": 50.0,
+   "from": "the scene's sun lamp \"Sun\"",
+   "sun": "Sun"
+  }
+ },
+ "masks_from": "part_only",
+ "picture": {
+  "camera": "View wide",
+  "height_pixels": 800,
+  "set": true
+ },
+ "counts": {
+  "objects_visible": 66,
+  "objects_total": 87,
+  "materials": 19,
+  "triangles": 633184,
+  "triangles_by_owner": {
+   "ground_and_roads": 383270,
+   "props": 249914
+  },
+  "scatter_pieces": 87394,
+  "ground_area_m2": 113408.26
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.forest_floor": 1,
+   "ground.grass": 3,
+   "ground.dirt_road": 2,
+   "ground.mud": 1,
+   "stone.well": 1,
+   "timber.post": 2,
+   "timber.beam": 3,
+   "iron.fitting": 4,
+   "prop.wood": 10,
+   "prop.rope": 1,
+   "prop.barrel": 5,
+   "prop.crate": 3,
+   "prop.cloth": 4,
+   "prop.wheel": 4,
+   "prop.cart": 3,
+   "prop.furniture": 3,
+   "prop.straw": 3,
+   "prop.wicker": 10,
+   "prop.ceramic": 3
+  }
+ },
+ "materials": [
+  {
+   "name": "PK ground.dirt_road / dirt_road",
+   "role": "ground.dirt_road",
+   "roles": [
+    "ground.dirt_road"
+   ],
+   "users": 2,
+   "objects": [
+    "Ground road high_road",
+    "Ground road stable_lane"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_dirt_road_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.54,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.05999999865889549,
+      "max_vertex_displacement": 0.05999999865889549,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 1.0,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6000000000000001,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37935,
+      "per_100_square_metres": 33.44994559584079
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49459,
+      "per_100_square_metres": 43.6114632720361
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.forest_floor / forest_floor",
+   "role": "ground.forest_floor",
+   "roles": [
+    "ground.forest_floor"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground forest floor"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_forest_floor_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.03999999910593033,
+      "max_vertex_displacement": 0.03999999910593033,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.8999999999999999,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37935,
+      "per_100_square_metres": 33.44994559584079
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49459,
+      "per_100_square_metres": 43.6114632720361
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.grass / grass",
+   "role": "ground.grass",
+   "roles": [
+    "ground.grass"
+   ],
+   "users": 3,
+   "objects": [
+    "Ground clearing",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_grass_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "node": null,
+      "method": "BUMP",
+      "depth_metres": 0.0,
+      "max_vertex_displacement": 0.0,
+      "mesh": null
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37935,
+      "per_100_square_metres": 33.44994559584079
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49459,
+      "per_100_square_metres": 43.6114632720361
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.mud / mud",
+   "role": "ground.mud",
+   "roles": [
+    "ground.mud"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground yard"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_mud_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.05999999865889549,
+      "max_vertex_displacement": 0.05999999865889549,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.78,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37935,
+      "per_100_square_metres": 33.44994559584079
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49459,
+      "per_100_square_metres": 43.6114632720361
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK iron.fitting / iron_forged",
+   "role": "iron.fitting",
+   "roles": [
+    "iron.fitting"
+   ],
+   "users": 4,
+   "objects": [
+    "Prop well crank",
+    "Prop cart tyres",
+    "Prop axe head",
+    "Prop iron bands"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_iron_forged_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.8,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "rust": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.72,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.barrel / timber_planks",
+   "role": "prop.barrel",
+   "roles": [
+    "prop.barrel"
+   ],
+   "users": 5,
+   "objects": [
+    "Prop barrel 1",
+    "Prop barrel 2",
+    "Prop barrel 3",
+    "Prop barrel 4",
+    "Prop barrel 5"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_planks_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.cart / timber_weathered",
+   "role": "prop.cart",
+   "roles": [
+    "prop.cart"
+   ],
+   "users": 3,
+   "objects": [
+    "Prop cart shafts",
+    "Prop cart bed",
+    "Prop handbarrow"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_weathered_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.ceramic / ceramic_glazed",
+   "role": "prop.ceramic",
+   "roles": [
+    "prop.ceramic"
+   ],
+   "users": 3,
+   "objects": [
+    "Prop jug 1",
+    "Prop jug 2",
+    "Prop jug B"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_ceramic_glazed_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.4,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.cloth / cloth_sack",
+   "role": "prop.cloth",
+   "roles": [
+    "prop.cloth"
+   ],
+   "users": 4,
+   "objects": [
+    "Prop sack 1",
+    "Prop sack 2",
+    "Prop sack 3",
+    "Prop sack 4"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_cloth_sack_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.7,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.crate / timber_planks",
+   "role": "prop.crate",
+   "roles": [
+    "prop.crate"
+   ],
+   "users": 3,
+   "objects": [
+    "Prop crate C",
+    "Prop crate broken",
+    "Prop chest B"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_planks_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.furniture / timber_planks",
+   "role": "prop.furniture",
+   "roles": [
+    "prop.furniture"
+   ],
+   "users": 3,
+   "objects": [
+    "Prop stool",
+    "Prop bench",
+    "Prop low bench"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_planks_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.rope / rope",
+   "role": "prop.rope",
+   "roles": [
+    "prop.rope"
+   ],
+   "users": 1,
+   "objects": [
+    "Prop well rope"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_rope_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.8,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.straw / straw",
+   "role": "prop.straw",
+   "roles": [
+    "prop.straw"
+   ],
+   "users": 3,
+   "objects": [
+    "Prop haystack",
+    "Prop hay bales",
+    "Prop straw scraps"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_straw_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.8,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.wheel / timber_weathered",
+   "role": "prop.wheel",
+   "roles": [
+    "prop.wheel"
+   ],
+   "users": 4,
+   "objects": [
+    "Prop cart wheel left",
+    "Prop cart wheel right",
+    "Prop spare wheel",
+    "Prop broken wheel"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_weathered_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.wicker / wicker",
+   "role": "prop.wicker",
+   "roles": [
+    "prop.wicker"
+   ],
+   "users": 10,
+   "objects": [
+    "Prop hurdle 1",
+    "Prop hurdle 2",
+    "Prop hurdle 3",
+    "Prop hurdle 4",
+    "Prop hurdle 5",
+    "Prop hurdle 6",
+    "Prop basket 1",
+    "Prop basket 2",
+    "Prop skep 1",
+    "Prop skep 2"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_wicker_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK prop.wood / generic_wood",
+   "role": "prop.wood",
+   "roles": [
+    "prop.wood"
+   ],
+   "users": 10,
+   "objects": [
+    "Prop bucket well",
+    "Prop bucket woodpile",
+    "Prop bucket B",
+    "Prop cart block",
+    "Prop woodpile logs",
+    "Prop woodpile stakes",
+    "Prop chopping block",
+    "Prop axe haft",
+    "Prop chips and bark",
+    "Prop ladder"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_generic_wood_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.2,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK stone.well / stone_rubble",
+   "role": "stone.well",
+   "roles": [
+    "stone.well"
+   ],
+   "users": 1,
+   "objects": [
+    "Prop well curb"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_stone_rubble_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK timber.beam / timber_beam",
+   "role": "timber.beam",
+   "roles": [
+    "timber.beam"
+   ],
+   "users": 3,
+   "objects": [
+    "Prop well crossbeam",
+    "Prop well roller",
+    "Prop cart axle"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_beam_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.2,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK timber.post / timber_beam",
+   "role": "timber.post",
+   "roles": [
+    "timber.post"
+   ],
+   "users": 2,
+   "objects": [
+    "Prop well post west",
+    "Prop well post east"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_beam_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.2,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  }
+ ],
+ "objects": [
+  {
+   "name": "Ground forest floor",
+   "role": "ground.forest_floor",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.forest_floor / forest_floor"
+   ],
+   "mesh_name": "Ground forest floor",
+   "size": [
+    380.0,
+    380.0,
+    1.7607
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.8999999999999999,
+    "cracks_and_chips": 0.7,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 64034,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.9773487870649863,
+    "subdivided": false,
+    "fine_edge_m": 0.2800014068817447,
+    "relief_m": 0.2472
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground clearing",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground clearing",
+   "size": [
+    112.8122,
+    84.4715,
+    1.0816
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.75,
+    "cracks_and_chips": 0.7,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 72624,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.48416115275905836,
+    "subdivided": false,
+    "fine_edge_m": 0.27831690631544204,
+    "relief_m": 0.0944
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground road high_road",
+   "role": "ground.dirt_road",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.dirt_road / dirt_road"
+   ],
+   "mesh_name": "Ground road high_road",
+   "size": [
+    284.9228,
+    41.0064,
+    1.5252
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "weathering": 0.8,
+    "grime": 0.8,
+    "cracks_and_chips": 0.7,
+    "dirt": 1.0,
+    "rubbish": 0.6000000000000001,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 157634,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.14706922598428612,
+    "subdivided": false,
+    "fine_edge_m": 0.06505471175695714,
+    "relief_m": 0.1881,
+    "road_entry": true
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "scale": [
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "high_road"
+    },
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "stable_lane"
+    }
+   ]
+  },
+  {
+   "name": "Ground road stable_lane",
+   "role": "ground.dirt_road",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.dirt_road / dirt_road"
+   ],
+   "mesh_name": "Ground road stable_lane",
+   "size": [
+    6.7115,
+    19.8361,
+    0.2852
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "weathering": 0.8,
+    "grime": 0.8,
+    "cracks_and_chips": 0.7,
+    "dirt": 1.0,
+    "rubbish": 0.6000000000000001,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 18996,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.09241720972962299,
+    "subdivided": false,
+    "fine_edge_m": 0.04600466086678256,
+    "relief_m": 0.074,
+    "road_entry": true
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "scale": [
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "high_road"
+    },
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "stable_lane"
+    }
+   ]
+  },
+  {
+   "name": "Ground yard",
+   "role": "ground.mud",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.mud / mud"
+   ],
+   "mesh_name": "Ground yard",
+   "size": [
+    20.2547,
+    12.2686,
+    0.2047
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.75,
+    "cracks_and_chips": 0.7,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.78
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 37319,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.1246981145269118,
+    "subdivided": false,
+    "fine_edge_m": 0.0701483907791053,
+    "relief_m": 0.0572
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground verge high_road",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground verge high_road",
+   "size": [
+    287.633,
+    43.3105,
+    1.3995
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.75,
+    "cracks_and_chips": 0.7,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 29406,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.27366980494659204,
+    "subdivided": false,
+    "fine_edge_m": 0.09610459464050147,
+    "relief_m": 0.1632
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground verge stable_lane",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground verge stable_lane",
+   "size": [
+    8.8853,
+    18.8589,
+    0.1831
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.75,
+    "cracks_and_chips": 0.7,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 3257,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.2100523644039661,
+    "subdivided": false,
+    "fine_edge_m": 0.09000262223830381,
+    "relief_m": 0.0061
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Prop well curb",
+   "role": "stone.well",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK stone.well / stone_rubble"
+   ],
+   "mesh_name": "Prop well curb",
+   "size": [
+    1.3164,
+    1.316,
+    0.9718
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "moss_and_algae": 0.45,
+    "cracks_and_chips": 0.5,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 14352,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.2409491129263397,
+    "subdivided": true,
+    "fine_edge_m": 0.2409491129263397
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 6.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.11,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 27
+   }
+  },
+  {
+   "name": "Prop well post west",
+   "role": "timber.post",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK timber.post / timber_beam"
+   ],
+   "mesh_name": "Prop well post west",
+   "size": [
+    0.1781,
+    0.1947,
+    2.2807
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "moss_and_algae": 0.45,
+    "cracks_and_chips": 0.5,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8661917965146686,
+    "subdivided": true,
+    "fine_edge_m": 0.8661917965146686
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0004,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.13,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1953,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop well post east",
+   "role": "timber.post",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK timber.post / timber_beam"
+   ],
+   "mesh_name": "Prop well post east",
+   "size": [
+    0.1758,
+    0.1985,
+    2.2651
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "moss_and_algae": 0.45,
+    "cracks_and_chips": 0.5,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8600056979459132,
+    "subdivided": true,
+    "fine_edge_m": 0.8600056979459132
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0014,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.11,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1976,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop well crossbeam",
+   "role": "timber.beam",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK timber.beam / timber_beam"
+   ],
+   "mesh_name": "Prop well crossbeam",
+   "size": [
+    2.1617,
+    0.1525,
+    0.1421
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "moss_and_algae": 0.45,
+    "cracks_and_chips": 0.5,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8166664441426595,
+    "subdivided": true,
+    "fine_edge_m": 0.8166664441426595
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop well post west",
+     "Prop well post east"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 30.5,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "beam_size",
+     "dimension": "thickness",
+     "value": 0.14,
+     "min": 0.04,
+     "max": 0.4,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop well roller",
+   "role": "timber.beam",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK timber.beam / timber_beam"
+   ],
+   "mesh_name": "Prop well roller",
+   "size": [
+    2.2981,
+    0.1399,
+    0.1389
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "moss_and_algae": 0.45,
+    "cracks_and_chips": 0.5,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 864,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8007171920559029,
+    "subdivided": true,
+    "fine_edge_m": 0.8007171920559029
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop well rope",
+     "joined into Prop well post west, Prop well post east"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 6.2,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.3,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "beam_size",
+     "dimension": "thickness",
+     "value": 0.14,
+     "min": 0.04,
+     "max": 0.4,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop well crank",
+   "role": "iron.fitting",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Prop well crank",
+   "size": [
+    0.1955,
+    0.3836,
+    0.344
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "rust": 0.72,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 68,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.0835252632420494,
+    "subdivided": false,
+    "fine_edge_m": 0.0835252632420494
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop bucket well",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop bucket well",
+   "size": [
+    0.3161,
+    0.3109,
+    0.3
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1872,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.09962837492506525,
+    "subdivided": true,
+    "fine_edge_m": 0.09962837492506525
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop well curb:17"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop well rope",
+   "role": "prop.rope",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.rope / rope"
+   ],
+   "mesh_name": "Prop well rope",
+   "size": [
+    0.4535,
+    0.1648,
+    0.3587
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2140,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.031197482573578447,
+    "subdivided": true,
+    "fine_edge_m": 0.031197482573578447
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop well roller",
+     "Prop iron bands:2"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 7.1,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop barrel 1",
+   "role": "prop.barrel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.barrel / timber_planks"
+   ],
+   "mesh_name": "Prop barrel 1",
+   "size": [
+    0.6639,
+    0.6789,
+    0.7831
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1400,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.11770916995322259,
+    "subdivided": true,
+    "fine_edge_m": 0.11770916995322259
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.234,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "barrel_height",
+     "dimension": "height",
+     "value": 0.78,
+     "min": 0.45,
+     "max": 1.0,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Prop barrel 2",
+   "role": "prop.barrel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.barrel / timber_planks"
+   ],
+   "mesh_name": "Prop barrel 2",
+   "size": [
+    0.5699,
+    0.563,
+    0.6228
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1400,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.09770651499545478,
+    "subdivided": true,
+    "fine_edge_m": 0.09770651499545478
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.234,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "barrel_height",
+     "dimension": "height",
+     "value": 0.62,
+     "min": 0.45,
+     "max": 1.0,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Prop barrel 3",
+   "role": "prop.barrel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.barrel / timber_planks"
+   ],
+   "mesh_name": "Prop barrel 3",
+   "size": [
+    0.6354,
+    0.8825,
+    0.6255
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1400,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.11662525654267873,
+    "subdivided": true,
+    "fine_edge_m": 0.11662525654267873
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop iron bands:11",
+     "Prop iron bands:12",
+     "Prop iron bands:13",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 3.8,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "barrel_height",
+     "dimension": "height",
+     "value": 0.6248,
+     "min": 0.45,
+     "max": 1.0,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Prop barrel 4",
+   "role": "prop.barrel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.barrel / timber_planks"
+   ],
+   "mesh_name": "Prop barrel 4",
+   "size": [
+    0.7611,
+    0.7462,
+    0.9429
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1400,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.13417545901770486,
+    "subdivided": true,
+    "fine_edge_m": 0.13417545901770486
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": 0.308,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "barrel_height",
+     "dimension": "height",
+     "value": 0.94,
+     "min": 0.45,
+     "max": 1.0,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Prop barrel 5",
+   "role": "prop.barrel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.barrel / timber_planks"
+   ],
+   "mesh_name": "Prop barrel 5",
+   "size": [
+    0.6272,
+    0.6399,
+    0.7421
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1288,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.14503045922338756,
+    "subdivided": true,
+    "fine_edge_m": 0.14503045922338756
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": 0.305,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "barrel_height",
+     "dimension": "height",
+     "value": 0.74,
+     "min": 0.45,
+     "max": 1.0,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Prop crate C",
+   "role": "prop.crate",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.crate / timber_planks"
+   ],
+   "mesh_name": "Prop crate C",
+   "size": [
+    0.752,
+    0.5604,
+    0.4423
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 3888,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.2795185169126216,
+    "subdivided": true,
+    "fine_edge_m": 0.2795185169126216
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 1.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.296,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 9
+   }
+  },
+  {
+   "name": "Prop crate broken",
+   "role": "prop.crate",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.crate / timber_planks"
+   ],
+   "mesh_name": "Prop crate broken",
+   "size": [
+    1.0296,
+    1.3531,
+    0.3877
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 4320,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.22564821479609337,
+    "subdivided": true,
+    "fine_edge_m": 0.22564821479609337
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 1.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.006,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.084,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 10
+   }
+  },
+  {
+   "name": "Prop chest B",
+   "role": "prop.crate",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.crate / timber_planks"
+   ],
+   "mesh_name": "Prop chest B",
+   "size": [
+    0.6203,
+    0.9397,
+    0.54
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 956,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.44021035384264223,
+    "subdivided": true,
+    "fine_edge_m": 0.44021035384264223
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 2.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.005,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Prop sack 1",
+   "role": "prop.cloth",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.cloth / cloth_sack"
+   ],
+   "mesh_name": "Prop sack 1",
+   "size": [
+    0.546,
+    0.6314,
+    0.8148
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1288,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.10289058660158662,
+    "subdivided": true,
+    "fine_edge_m": 0.10289058660158662
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.235,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop sack 2",
+   "role": "prop.cloth",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.cloth / cloth_sack"
+   ],
+   "mesh_name": "Prop sack 2",
+   "size": [
+    0.624,
+    0.6749,
+    0.615
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1288,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.10379316916719611,
+    "subdivided": true,
+    "fine_edge_m": 0.10379316916719611
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.235,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop sack 3",
+   "role": "prop.cloth",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.cloth / cloth_sack"
+   ],
+   "mesh_name": "Prop sack 3",
+   "size": [
+    0.6679,
+    0.5669,
+    0.7246
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1288,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.10146758390513909,
+    "subdivided": true,
+    "fine_edge_m": 0.10146758390513909
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.05,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop sack 4",
+   "role": "prop.cloth",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.cloth / cloth_sack"
+   ],
+   "mesh_name": "Prop sack 4",
+   "size": [
+    0.6812,
+    0.5993,
+    0.5646
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1288,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.0997067085092029,
+    "subdivided": true,
+    "fine_edge_m": 0.0997067085092029
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.049,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop bucket woodpile",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop bucket woodpile",
+   "size": [
+    0.3011,
+    0.3045,
+    0.3012
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1872,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.0979688025651871,
+    "subdivided": true,
+    "fine_edge_m": 0.0979688025651871
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.3,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop bucket B",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop bucket B",
+   "size": [
+    0.313,
+    0.3142,
+    0.3018
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1928,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.10051205655440405,
+    "subdivided": true,
+    "fine_edge_m": 0.10051205655440405
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.005,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop cart wheel left",
+   "role": "prop.wheel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wheel / timber_weathered"
+   ],
+   "mesh_name": "Prop cart wheel left",
+   "size": [
+    1.0854,
+    0.2573,
+    1.0915
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 13024,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.07168143767473843,
+    "subdivided": true,
+    "fine_edge_m": 0.07168143767473843
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop cart axle",
+     "Prop cart tyres",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 5.1,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "cart_wheel_diameter",
+     "dimension": "height",
+     "value": 1.0903,
+     "min": 0.85,
+     "max": 1.3,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop cart wheel right",
+   "role": "prop.wheel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wheel / timber_weathered"
+   ],
+   "mesh_name": "Prop cart wheel right",
+   "size": [
+    1.0773,
+    0.2562,
+    1.0958
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 13024,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.0717009824652105,
+    "subdivided": true,
+    "fine_edge_m": 0.0717009824652105
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop cart axle",
+     "Prop cart tyres:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 5.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "cart_wheel_diameter",
+     "dimension": "height",
+     "value": 1.0943,
+     "min": 0.85,
+     "max": 1.3,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop cart axle",
+   "role": "timber.beam",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK timber.beam / timber_beam"
+   ],
+   "mesh_name": "Prop cart axle",
+   "size": [
+    0.3574,
+    1.6255,
+    0.078
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "moss_and_algae": 0.45,
+    "cracks_and_chips": 0.5,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 864,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.5670764203883416,
+    "subdivided": true,
+    "fine_edge_m": 0.5670764203883416
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop cart wheel left",
+     "Prop cart wheel right"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 6.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "beam_size",
+     "dimension": "thickness",
+     "value": 0.08,
+     "min": 0.04,
+     "max": 0.4,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop cart shafts",
+   "role": "prop.cart",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.cart / timber_weathered"
+   ],
+   "mesh_name": "Prop cart shafts",
+   "size": [
+    3.7937,
+    1.5032,
+    0.6006
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1632,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3997239958962639,
+    "subdivided": true,
+    "fine_edge_m": 0.3997239958962639
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop cart axle",
+     "Prop cart block"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 41.5,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Prop cart block",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop cart block",
+   "size": [
+    0.4676,
+    1.1495,
+    0.2695
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.5557527806060826,
+    "subdivided": true,
+    "fine_edge_m": 0.5557527806060826
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": 0.025,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop cart bed",
+   "role": "prop.cart",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.cart / timber_weathered"
+   ],
+   "mesh_name": "Prop cart bed",
+   "size": [
+    2.37,
+    1.5341,
+    0.3035
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 7776,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.5317739745251511,
+    "subdivided": true,
+    "fine_edge_m": 0.5317739745251511
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop cart shafts",
+     "Prop cart shafts:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 3.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 18
+   }
+  },
+  {
+   "name": "Prop spare wheel",
+   "role": "prop.wheel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wheel / timber_weathered"
+   ],
+   "mesh_name": "Prop spare wheel",
+   "size": [
+    0.2661,
+    1.0422,
+    1.0305
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 13024,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.06895680015886226,
+    "subdivided": true,
+    "fine_edge_m": 0.06895680015886226
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop cart tyres:2",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.9,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "cart_wheel_diameter",
+     "dimension": "height",
+     "value": 1.0308,
+     "min": 0.85,
+     "max": 1.3,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Prop cart tyres",
+   "role": "iron.fitting",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Prop cart tyres",
+   "size": [
+    7.2048,
+    45.6478,
+    1.344
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "rust": 0.72,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 960,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.06074868132205298,
+    "subdivided": false,
+    "fine_edge_m": 0.06074868132205298
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop cart wheel left",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 5.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 3
+   }
+  },
+  {
+   "name": "Prop woodpile logs",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop woodpile logs",
+   "size": [
+    0.7348,
+    2.3995,
+    1.166
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 8640,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.25947893353889334,
+    "subdivided": true,
+    "fine_edge_m": 0.25947893353889334
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 33.8,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.249,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 90
+   }
+  },
+  {
+   "name": "Prop woodpile stakes",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop woodpile stakes",
+   "size": [
+    0.8776,
+    2.7447,
+    1.618
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 288,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.5478072353459792,
+    "subdivided": true,
+    "fine_edge_m": 0.5478072353459792
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0025,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.27,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Prop chopping block",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop chopping block",
+   "size": [
+    0.5651,
+    0.5418,
+    0.4507
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 624,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.131501465733135,
+    "subdivided": true,
+    "fine_edge_m": 0.131501465733135
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.235,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop axe head",
+   "role": "iron.fitting",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Prop axe head",
+   "size": [
+    0.1481,
+    0.2184,
+    0.2286
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "rust": 0.72,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 28,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.07812186633745881,
+    "subdivided": false,
+    "fine_edge_m": 0.07812186633745881
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop chopping block"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 42.7,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop axe haft",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop axe haft",
+   "size": [
+    0.1985,
+    0.3484,
+    0.7443
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 72,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.28333323329953974,
+    "subdivided": true,
+    "fine_edge_m": 0.28333323329953974
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop axe head"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop chips and bark",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop chips and bark",
+   "size": [
+    1.8548,
+    2.337,
+    0.0455
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 768,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.08385188520980129,
+    "subdivided": true,
+    "fine_edge_m": 0.08385188520980129
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.234,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 16
+   }
+  },
+  {
+   "name": "Prop stool",
+   "role": "prop.furniture",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.furniture / timber_planks"
+   ],
+   "mesh_name": "Prop stool",
+   "size": [
+    0.3447,
+    0.3474,
+    0.4735
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 4080,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.12349689363205205,
+    "subdivided": true,
+    "fine_edge_m": 0.12349689363205205
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.25,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Prop haystack",
+   "role": "prop.straw",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.straw / straw"
+   ],
+   "mesh_name": "Prop haystack",
+   "size": [
+    2.9656,
+    3.0747,
+    2.7326
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1360,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.429993174492951,
+    "subdivided": true,
+    "fine_edge_m": 0.429993174492951
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.341,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop hay bales",
+   "role": "prop.straw",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.straw / straw"
+   ],
+   "mesh_name": "Prop hay bales",
+   "size": [
+    0.6413,
+    0.5765,
+    0.6812
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.1350032882780991,
+    "subdivided": true,
+    "fine_edge_m": 0.1350032882780991
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 12.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.296,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Prop hurdle 1",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop hurdle 1",
+   "size": [
+    1.8038,
+    0.2087,
+    1.3781
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 16832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.054342447756828324,
+    "subdivided": true,
+    "fine_edge_m": 0.054342447756828324
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Prop hurdle 1:1, Prop hurdle 1:2, Prop hurdle 1:3"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0005,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.005,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Prop hurdle 2",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop hurdle 2",
+   "size": [
+    1.7534,
+    0.6389,
+    1.2909
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 16832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.05281235437176105,
+    "subdivided": true,
+    "fine_edge_m": 0.05281235437176105
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Prop hurdle 2:1, Prop hurdle 2:2, Prop hurdle 2:3"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0005,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.006,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Prop hurdle 3",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop hurdle 3",
+   "size": [
+    1.7833,
+    0.5205,
+    1.42
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 16832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.05579769718157209,
+    "subdivided": true,
+    "fine_edge_m": 0.05579769718157209
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Prop hurdle 3:1, Prop hurdle 3:2, Prop hurdle 3:3"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0018,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.005,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Prop hurdle 4",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop hurdle 4",
+   "size": [
+    0.6807,
+    1.7437,
+    1.3096
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 16832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.05336677372357555,
+    "subdivided": true,
+    "fine_edge_m": 0.05336677372357555
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Prop hurdle 4:1, Prop hurdle 4:2, Prop hurdle 4:3"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0016,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.006,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Prop hurdle 5",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop hurdle 5",
+   "size": [
+    0.25,
+    1.8046,
+    1.4199
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 16832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.05491924549170415,
+    "subdivided": true,
+    "fine_edge_m": 0.05491924549170415
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Prop hurdle 5:1, Prop hurdle 5:2, Prop hurdle 5:3"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.05,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Prop hurdle 6",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop hurdle 6",
+   "size": [
+    1.0799,
+    1.5663,
+    1.2797
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 16832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.0520250418460514,
+    "subdivided": true,
+    "fine_edge_m": 0.0520250418460514
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Prop hurdle 6:1, Prop hurdle 6:2, Prop hurdle 6:3"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.002,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.05,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Prop bench",
+   "role": "prop.furniture",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.furniture / timber_planks"
+   ],
+   "mesh_name": "Prop bench",
+   "size": [
+    1.5113,
+    0.3595,
+    0.4653
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1296,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3697751288145036,
+    "subdivided": true,
+    "fine_edge_m": 0.3697751288145036
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.235,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 3
+   }
+  },
+  {
+   "name": "Prop jug 1",
+   "role": "prop.ceramic",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.ceramic / ceramic_glazed"
+   ],
+   "mesh_name": "Prop jug 1",
+   "size": [
+    0.2253,
+    0.1701,
+    0.2439
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1336,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.029185474238333196,
+    "subdivided": true,
+    "fine_edge_m": 0.029185474238333196
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop bench:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop jug 2",
+   "role": "prop.ceramic",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.ceramic / ceramic_glazed"
+   ],
+   "mesh_name": "Prop jug 2",
+   "size": [
+    0.2094,
+    0.1698,
+    0.2381
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1336,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.028806543906565812,
+    "subdivided": true,
+    "fine_edge_m": 0.028806543906565812
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop bench:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop jug B",
+   "role": "prop.ceramic",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.ceramic / ceramic_glazed"
+   ],
+   "mesh_name": "Prop jug B",
+   "size": [
+    0.1712,
+    0.2178,
+    0.2375
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1336,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.02880658561817899,
+    "subdivided": true,
+    "fine_edge_m": 0.02880658561817899
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.005,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop basket 1",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop basket 1",
+   "size": [
+    0.4696,
+    0.4701,
+    0.5717
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1424,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.07632306837714162,
+    "subdivided": true,
+    "fine_edge_m": 0.07632306837714162
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.295,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop basket 2",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop basket 2",
+   "size": [
+    0.4806,
+    0.4815,
+    0.6078
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1424,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.07942127388066823,
+    "subdivided": true,
+    "fine_edge_m": 0.07942127388066823
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.135,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop handbarrow",
+   "role": "prop.cart",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.cart / timber_weathered"
+   ],
+   "mesh_name": "Prop handbarrow",
+   "size": [
+    1.9265,
+    1.4984,
+    0.3964
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 5088,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.24655931913133866,
+    "subdivided": true,
+    "fine_edge_m": 0.24655931913133866
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop handbarrow:8",
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 9.1,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.153,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 10
+   }
+  },
+  {
+   "name": "Prop ladder",
+   "role": "prop.wood",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wood / generic_wood"
+   ],
+   "mesh_name": "Prop ladder",
+   "size": [
+    0.5126,
+    0.9077,
+    2.4762
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 4320,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3444786196428812,
+    "subdivided": true,
+    "fine_edge_m": 0.3444786196428812
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.05,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 10
+   }
+  },
+  {
+   "name": "Prop straw scraps",
+   "role": "prop.straw",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.straw / straw"
+   ],
+   "mesh_name": "Prop straw scraps",
+   "size": [
+    7.8865,
+    3.7673,
+    0.0098
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 540,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.033836654795944075,
+    "subdivided": false,
+    "fine_edge_m": 0.033836654795944075
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.0011,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": 0.302,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 15
+   }
+  },
+  {
+   "name": "Prop low bench",
+   "role": "prop.furniture",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.furniture / timber_planks"
+   ],
+   "mesh_name": "Prop low bench",
+   "size": [
+    1.0007,
+    0.3208,
+    0.4542
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1296,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3146666731271479,
+    "subdivided": true,
+    "fine_edge_m": 0.3146666731271479
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.006,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 3
+   }
+  },
+  {
+   "name": "Prop skep 1",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop skep 1",
+   "size": [
+    0.4077,
+    0.4074,
+    0.3008
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.07264620376952702,
+    "subdivided": true,
+    "fine_edge_m": 0.07264620376952702
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop low bench:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop skep 2",
+   "role": "prop.wicker",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wicker / wicker"
+   ],
+   "mesh_name": "Prop skep 2",
+   "size": [
+    0.3659,
+    0.3657,
+    0.2694
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 832,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.06685872005424821,
+    "subdivided": true,
+    "fine_edge_m": 0.06685872005424821
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Prop low bench:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop broken wheel",
+   "role": "prop.wheel",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK prop.wheel / timber_weathered"
+   ],
+   "mesh_name": "Prop broken wheel",
+   "size": [
+    0.9082,
+    0.6752,
+    1.0226
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "weathering": 0.6,
+    "grime": 0.6,
+    "edge_wear": 0.55,
+    "dirt": 0.65,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 11296,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.06456810574012739,
+    "subdivided": true,
+    "fine_edge_m": 0.06456810574012739
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.048,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Prop iron bands",
+   "role": "iron.fitting",
+   "owner": "props",
+   "collection": "Place: props",
+   "materials": [
+    "PK iron.fitting / iron_forged"
+   ],
+   "mesh_name": "Prop iron bands",
+   "size": [
+    75.6778,
+    36.2266,
+    1.5822
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "rust": 0.72,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "edge_wear": 0.55
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 3542,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.06632125783104655,
+    "subdivided": false,
+    "fine_edge_m": 0.06632125783104655
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.6,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 32
+   }
+  }
+ ],
+ "siblings": {
+  "iron.fitting": {
+   "count": 4,
+   "copies_share": 0.0,
+   "size_spread": 1.07,
+   "all_damaged": false
+  },
+  "prop.wood": {
+   "count": 10,
+   "copies_share": 0.0,
+   "size_spread": 0.84,
+   "all_damaged": true
+  },
+  "prop.barrel": {
+   "count": 5,
+   "copies_share": 0.0,
+   "size_spread": 0.136,
+   "all_damaged": true
+  },
+  "prop.cloth": {
+   "count": 4,
+   "copies_share": 0.0,
+   "size_spread": 0.097,
+   "all_damaged": true
+  },
+  "prop.wheel": {
+   "count": 4,
+   "copies_share": 0.0,
+   "size_spread": 0.341,
+   "all_damaged": true
+  },
+  "prop.wicker": {
+   "count": 10,
+   "copies_share": 0.0,
+   "size_spread": 0.619,
+   "all_damaged": true
+  }
+ },
+ "scatter": {
+  "groups": [
+   {
+    "name": "leaf",
+    "group": "litter",
+    "objects": [
+     "PK scatter leaf 0",
+     "PK scatter leaf 1"
+    ],
+    "count": 24255,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "pine_needles",
+    "group": "litter",
+    "objects": [
+     "PK scatter pine_needles 0"
+    ],
+    "count": 10907,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "stick",
+    "group": "litter",
+    "objects": [
+     "PK scatter stick 0"
+    ],
+    "count": 8724,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "straw",
+    "group": "litter",
+    "objects": [
+     "PK scatter straw 0"
+    ],
+    "count": 3415,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "clod",
+    "group": "litter",
+    "objects": [
+     "PK scatter clod 0"
+    ],
+    "count": 2158,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "tuft",
+    "group": "plant",
+    "objects": [
+     "PK scatter tuft 0",
+     "PK scatter tuft 1"
+    ],
+    "count": 21575,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "clover",
+    "group": "plant",
+    "objects": [
+     "PK scatter clover 0"
+    ],
+    "count": 4608,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "nettle",
+    "group": "plant",
+    "objects": [
+     "PK scatter nettle 0"
+    ],
+    "count": 4328,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "fern",
+    "group": "plant",
+    "objects": [
+     "PK scatter fern 0"
+    ],
+    "count": 2871,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "bramble",
+    "group": "plant",
+    "objects": [
+     "PK scatter bramble 0"
+    ],
+    "count": 1119,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "moss_cushion",
+    "group": "plant",
+    "objects": [
+     "PK scatter moss_cushion 0"
+    ],
+    "count": 3434,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   }
+  ],
+  "plants_per_100m2": 33.44994559584079,
+  "litter_per_100m2": 43.6114632720361,
+  "required": {
+   "plants": {
+    "required_by": [
+     "Ground forest floor",
+     "Ground clearing",
+     "Ground road high_road",
+     "Ground road stable_lane",
+     "Ground yard",
+     "Ground verge high_road",
+     "Ground verge stable_lane"
+    ],
+    "count": 37935,
+    "per_100_square_metres": 33.44994559584079,
+    "has": true
+   },
+   "litter_pieces": {
+    "required_by": [
+     "Ground forest floor",
+     "Ground clearing",
+     "Ground road high_road",
+     "Ground road stable_lane",
+     "Ground yard",
+     "Ground verge high_road",
+     "Ground verge stable_lane"
+    ],
+    "count": 49459,
+    "per_100_square_metres": 43.6114632720361,
+    "has": true
+   }
+  }
+ },
+ "normal_maps": {
+  "images": [
+   {
+    "name": "pk_dirt_road_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4998356103897095,
+     0.500018298625946,
+     0.9774683117866516
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9989045262336731,
+     "y": 0.9988864064216614,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_forest_floor_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999009668827057,
+     0.5000139474868774,
+     0.9759030342102051
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9989592432975769,
+     "y": 0.9989268183708191,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_grass_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000083446502686,
+     0.49999162554740906,
+     0.9843347072601318
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9993100762367249,
+     "y": 0.9993526339530945,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_mud_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000390410423279,
+     0.4999043941497803,
+     0.9777207970619202
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9985438585281372,
+     "y": 0.9986855387687683,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_iron_forged_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000085830688477,
+     0.4997093081474304,
+     0.9927644729614258
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9988009333610535,
+     "y": 0.998831033706665,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_planks_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000197291374207,
+     0.5000577569007874,
+     0.9910684823989868
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": 0.9998650550842285,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_weathered_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49998506903648376,
+     0.49999213218688965,
+     0.9909131526947021
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": 0.9998669028282166,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_ceramic_glazed_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5003020763397217,
+     0.49954816699028015,
+     0.9837543368339539
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9935650825500488,
+     "y": 0.9929019212722778,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_cloth_sack_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000023245811462,
+     0.4999983012676239,
+     0.9639880657196045
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9999253749847412,
+     "y": 0.9999245405197144,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_rope_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5,
+     0.5000013709068298,
+     0.9662495255470276
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9999118447303772,
+     "y": 0.9997390508651733,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_straw_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999859035015106,
+     0.5000001788139343,
+     0.988408625125885
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9996675252914429,
+     "y": 0.999642550945282,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_wicker_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49999502301216125,
+     0.5000072121620178,
+     0.9642041921615601
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9999204277992249,
+     "y": 0.9999208450317383,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_generic_wood_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000124573707581,
+     0.49995818734169006,
+     0.9910210967063904
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": 0.9998465180397034,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_stone_rubble_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49999701976776123,
+     0.5000177025794983,
+     0.9935925602912903
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9995551705360413,
+     "y": 0.999589204788208,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_beam_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000277161598206,
+     0.5000181794166565,
+     0.99078369140625
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": 0.9998638033866882,
+     "method": "height"
+    },
+    "verdict": "pass"
+   }
+  ],
+  "test_light": null
+ },
+ "displacement": {
+  "materials": [
+   "PK ground.dirt_road / dirt_road",
+   "PK ground.forest_floor / forest_floor",
+   "PK ground.mud / mud"
+  ],
+  "objects": [
+   "Ground forest floor",
+   "Ground road high_road",
+   "Ground road stable_lane",
+   "Ground yard"
+  ],
+  "too_coarse": []
+ },
+ "roads": [
+  {
+   "name": "high_road",
+   "ground_objects": [
+    "Ground forest floor",
+    "Ground clearing",
+    "Ground road high_road",
+    "Ground road stable_lane",
+    "Ground yard",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "relief_m": 0.2472,
+   "ruts_found": true,
+   "rut_depth_m": 0.1016,
+   "gauge_m": 1.333,
+   "gauge_in_settings_m": 1.4
+  },
+  {
+   "name": "stable_lane",
+   "ground_objects": [
+    "Ground forest floor",
+    "Ground clearing",
+    "Ground road high_road",
+    "Ground road stable_lane",
+    "Ground yard",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "relief_m": 0.2472,
+   "ruts_found": true,
+   "rut_depth_m": 0.0791,
+   "gauge_m": 1.417,
+   "gauge_in_settings_m": 1.4
+  }
+ ],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [
+   "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+  ],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "lamps": 1,
+  "suns": 1,
+  "world_light": true,
+  "emissive_materials": false,
+  "clip_share": null
+ },
+ "off": {
+  "entries": [],
+  "allowed_ids": [
+   "floors_indoors"
+  ],
+  "share": 0.0
+ },
+ "construction_summary": {
+  "parts_checked": 319,
+  "objects_checked": 59,
+  "carried": 59,
+  "floating": [],
+  "hung": [
+   "Prop iron bands",
+   "Prop well crank"
+  ],
+  "sample_spacing_metres": 0.02,
+  "sampled_coarser": false,
+  "scatter_exempt": 16,
+  "note": "scattered pieces (plants, leaves, litter) and never-roles are exempt on purpose: they stand on the ground by their own roots"
+ },
+ "non_mesh": [],
+ "problems": [],
+ "views": {
+  "for_film": false,
+  "render_size": [
+   1200,
+   800,
+   100
+  ],
+  "cameras": [
+   {
+    "name": "View wide",
+    "scene_camera": true,
+    "kind": "PERSP",
+    "lens_mm": 28.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 321.11,
+    "farthest_object": "Ground forest floor",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 480,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 435,
+    "sun": {
+     "ground_points": 435,
+     "shadowed": 2,
+     "shadowed_share": 0.004597701149425287,
+     "shadowed_by": [
+      {
+       "object": "Prop barrel 2",
+       "points": 1
+      },
+      {
+       "object": "PK scatter bramble 0",
+       "points": 1
+      }
+     ]
+    }
+   },
+   {
+    "name": "View road_eye",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 35.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 270.02,
+    "farthest_object": "Ground forest floor",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 320,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 300,
+    "sun": {
+     "ground_points": 300,
+     "shadowed": 1,
+     "shadowed_share": 0.0033333333333333335,
+     "shadowed_by": [
+      {
+       "object": "Prop well post east",
+       "points": 1
+      }
+     ]
+    }
+   },
+   {
+    "name": "View stable_close",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 28.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 237.27,
+    "farthest_object": "Ground forest floor",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 352,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 344,
+    "sun": {
+     "ground_points": 344,
+     "shadowed": 0,
+     "shadowed_share": 0.0,
+     "shadowed_by": []
+    }
+   },
+   {
+    "name": "View cottage_close",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 35.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 220.15,
+    "farthest_object": "Ground forest floor",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 352,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 242,
+    "sun": {
+     "ground_points": 242,
+     "shadowed": 3,
+     "shadowed_share": 0.012396694214876033,
+     "shadowed_by": [
+      {
+       "object": "Prop well post east",
+       "points": 2
+      },
+      {
+       "object": "PK scatter nettle 0",
+       "points": 1
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "world": {
+  "backdrops": [],
+  "backdrops_casting_shadows": [],
+  "far_large_casting_shadows": [],
+  "haze_volume": false,
+  "place_span_m": 380.0
+ },
+ "sun": {
+  "name": "Sun",
+  "compass_degrees": 315.0,
+  "height_degrees": 50.0,
+  "energy": 4.5
+ },
+ "lettering": {
+  "checked": 0,
+  "objects": []
+ }
+}

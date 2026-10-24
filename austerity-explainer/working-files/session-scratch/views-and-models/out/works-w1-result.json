@@ -1,0 +1,1700 @@
+{
+ "check_file": "out/works-w1-check.json",
+ "check": {
+  "about": "What this file is: the shot check for view w1 (crowd, dark_subject), written by make_check_file.py from the Blender scene and the shot list (subject, support, story and work are the author's; groups, must_read, pairs_also, on_ground, stands_on, lights_in_story, the title zone and the rest are measured). Used by shot_facts.py and check_shot.py.",
+  "size": [
+   1080,
+   1920
+  ],
+  "groups": {
+   "no-1 gate": [
+    "no-1-gate",
+    "no-1-chain"
+   ],
+   "no-1 chimney": [
+    "no-1-chimney"
+   ],
+   "no-2 chimneys": [
+    "no-2-chimney-a",
+    "no-2-chimney-b"
+   ],
+   "brazier": [
+    "brazier-drum*",
+    "brazier_coal_*"
+   ],
+   "lantern": [
+    "hurricane-lantern*"
+   ],
+   "diesel drum": [
+    "no-1-drum-diesel*"
+   ],
+   "man 1": [
+    "man-1*"
+   ],
+   "man 2": [
+    "man-2*"
+   ],
+   "man 3": [
+    "man-3*"
+   ],
+   "man 4": [
+    "man-4*"
+   ],
+   "man 5": [
+    "man-5*"
+   ],
+   "man 6": [
+    "man-6*"
+   ],
+   "man 7": [
+    "man-7*"
+   ],
+   "no-1 board": [
+    "gate-board-no-1*"
+   ],
+   "petrol drum": [
+    "no-1-drum-petrol*"
+   ],
+   "gate lamp": [
+    "no-1-gate-lamp*"
+   ],
+   "lunch tin": [
+    "lunch-tin*"
+   ],
+   "no-2-worker-1": [
+    "no-2-worker-1*"
+   ],
+   "no-2-worker-2": [
+    "no-2-worker-2*"
+   ]
+  },
+  "subject": "no-1 gate",
+  "story": [
+   "brazier",
+   "lantern",
+   "diesel drum",
+   "man 1",
+   "man 2",
+   "man 3",
+   "man 4",
+   "man 5",
+   "man 6",
+   "man 7"
+  ],
+  "lights_in_story": [
+   "lantern"
+  ],
+  "pairs_also": [
+   "no-1 chimney",
+   "no-2 chimneys",
+   "no-1 board",
+   "petrol drum",
+   "gate lamp",
+   "lunch tin",
+   "no-2-worker-1",
+   "no-2-worker-2"
+  ],
+  "work": [],
+  "on_ground": [
+   "brazier",
+   "diesel drum",
+   "man 1",
+   "man 2",
+   "man 3",
+   "man 4",
+   "man 5",
+   "man 6",
+   "man 7",
+   "petrol drum",
+   "no-2-worker-1",
+   "no-2-worker-2"
+  ],
+  "stands_on": {
+   "lantern": "diesel drum",
+   "lunch tin": "petrol drum"
+  },
+  "must_read": [
+   "diesel drum",
+   "no-1 board",
+   "petrol drum"
+  ],
+  "lines": {
+   "lane": [
+    0,
+    1,
+    0
+   ],
+   "level": [
+    0,
+    1,
+    0
+   ]
+  },
+  "lines_key": "lane",
+  "eye_height": [
+   1.5,
+   1.9
+  ],
+  "band": true,
+  "title_zone": [
+   0.06,
+   0.05,
+   0.9,
+   0.22
+  ],
+  "story_reaches_down": 0.7,
+  "kind_of_shot": [
+   "crowd",
+   "dark_subject"
+  ],
+  "figures": [
+   "man 1",
+   "man 2",
+   "man 3",
+   "man 4",
+   "man 5",
+   "man 6",
+   "man 7",
+   "no-2-worker-1",
+   "no-2-worker-2"
+  ],
+  "match_excludes": [
+   "no-1 gate",
+   "diesel drum",
+   "man 1",
+   "man 2",
+   "man 3",
+   "man 4",
+   "man 5",
+   "man 6",
+   "man 7",
+   "no-1 board",
+   "petrol drum",
+   "gate lamp",
+   "no-2-worker-1",
+   "no-2-worker-2"
+  ],
+  "own_surface_materials": [
+   "gate-board-no-1-lettering",
+   "steel-drum-diesel-stencil",
+   "steel-drum-petrol-stencil"
+  ],
+  "accepted": []
+ },
+ "facts": {
+  "kinds_of_shot": [
+   "crowd",
+   "dark_subject"
+  ],
+  "interior": false,
+  "resting": {
+   "no-1 gate": {
+    "lowest": 0.0,
+    "votes": [
+     [
+      "set",
+      "ground",
+      0.08
+     ],
+     [
+      "set",
+      "ground",
+      0.08
+     ],
+     [
+      "set",
+      "ground",
+      0.08
+     ],
+     [
+      "set",
+      "ground",
+      0.08
+     ],
+     [
+      "set",
+      "ground",
+      0.08
+     ]
+    ]
+   },
+   "brazier": {
+    "lowest": 0.019351720809936523,
+    "votes": [
+     [
+      "set",
+      "street_setts",
+      0.002
+     ],
+     [
+      "set",
+      "street_setts",
+      0.016
+     ],
+     [
+      "set",
+      "street_setts",
+      -0.001
+     ],
+     [
+      "set",
+      "street_setts",
+      -0.014
+     ],
+     [
+      "set",
+      "ground",
+      0.099
+     ]
+    ]
+   },
+   "lantern": {
+    "lowest": 1.0098595544323254,
+    "votes": [
+     [
+      "group",
+      "diesel drum",
+      -0.0
+     ],
+     [
+      "group",
+      "diesel drum",
+      -0.0
+     ],
+     [
+      "group",
+      "diesel drum",
+      -0.0
+     ],
+     [
+      "group",
+      "diesel drum",
+      -0.0
+     ],
+     [
+      "group",
+      "diesel drum",
+      -0.0
+     ]
+    ]
+   },
+   "diesel drum": {
+    "lowest": 0.1438596248626709,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      -0.0
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.004
+     ],
+     [
+      "set",
+      "ground",
+      0.184
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.0
+     ]
+    ]
+   },
+   "man 1": {
+    "lowest": 0.14387365442235023,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.006
+     ],
+     [
+      "set",
+      "ground",
+      0.224
+     ]
+    ]
+   },
+   "man 2": {
+    "lowest": -0.023018643027171493,
+    "votes": [
+     [
+      "set",
+      "street_channels",
+      -0.014
+     ],
+     [
+      "set",
+      "ground",
+      0.028
+     ],
+     [
+      "set",
+      "street_channels",
+      0.001
+     ],
+     [
+      "set",
+      "street_setts",
+      -0.038
+     ],
+     [
+      "set",
+      "street_channels",
+      0.001
+     ]
+    ]
+   },
+   "man 3": {
+    "lowest": 0.1337061393202872,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ],
+     [
+      "set",
+      "street_kerbs",
+      0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ]
+    ]
+   },
+   "man 4": {
+    "lowest": 0.15906584592730677,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.002
+     ],
+     [
+      "set",
+      "lane-head-corners",
+      0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.006
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ]
+    ]
+   },
+   "man 5": {
+    "lowest": 0.15161211949229036,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.006
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ]
+    ]
+   },
+   "man 6": {
+    "lowest": 0.13992231815173062,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.002
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.006
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.001
+     ]
+    ]
+   },
+   "man 7": {
+    "lowest": 0.13115903717669006,
+    "votes": [
+     [
+      "set",
+      "street_kerbs",
+      0.001
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.001
+     ],
+     [
+      "set",
+      "street_kerbs",
+      0.001
+     ],
+     [
+      "set",
+      "street_channels",
+      0.151
+     ],
+     [
+      "set",
+      "street_kerbs",
+      0.001
+     ]
+    ]
+   },
+   "no-1 board": {
+    "lowest": 4.079999893903732,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      3.947
+     ],
+     [
+      "group",
+      "gate lamp",
+      0.547
+     ],
+     [
+      "group",
+      "gate lamp",
+      0.565
+     ],
+     [
+      "set",
+      "street_channels",
+      4.095
+     ],
+     [
+      "group",
+      "gate lamp",
+      0.565
+     ]
+    ]
+   },
+   "petrol drum": {
+    "lowest": 0.15789484977722168,
+    "votes": [
+     [
+      "set",
+      "street_pavements",
+      0.0
+     ],
+     [
+      "set",
+      "lane-head-corners",
+      0.003
+     ],
+     [
+      "set",
+      "street_pavements",
+      -0.0
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.004
+     ],
+     [
+      "set",
+      "street_pavements",
+      0.0
+     ]
+    ]
+   },
+   "gate lamp": {
+    "lowest": 2.200000137090683,
+    "votes": [
+     [
+      "set",
+      "works-wall",
+      1.75
+     ],
+     [
+      "set",
+      "works-wall",
+      1.75
+     ],
+     [
+      "set",
+      "works-wall",
+      1.75
+     ],
+     [
+      "set",
+      "works-wall",
+      1.75
+     ],
+     [
+      "set",
+      "works-wall",
+      1.75
+     ]
+    ]
+   },
+   "lunch tin": {
+    "lowest": 1.0238947868347168,
+    "votes": [
+     [
+      "group",
+      "petrol drum",
+      0.0
+     ],
+     [
+      "group",
+      "petrol drum",
+      0.0
+     ],
+     [
+      "group",
+      "petrol drum",
+      0.0
+     ],
+     [
+      "group",
+      "petrol drum",
+      0.0
+     ],
+     [
+      "group",
+      "petrol drum",
+      0.0
+     ]
+    ]
+   },
+   "no-2-worker-1": {
+    "lowest": 0.021165684098377824,
+    "votes": [
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ],
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ],
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ],
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ],
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ]
+    ]
+   },
+   "no-2-worker-2": {
+    "lowest": 0.021235190448351204,
+    "votes": [
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ],
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ],
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ],
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ],
+     [
+      "set",
+      "no-2-yard-setts",
+      0.001
+     ]
+    ]
+   }
+  },
+  "surfaces": {
+   "no-1 gate": {
+    "area": 7.372341828007085,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.014580000223068011,
+    "facing_area": 3.9025644790435012
+   },
+   "no-1 chimney": {
+    "area": 448.63989011818785,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": null,
+    "facing_area": 144.11029573679306
+   },
+   "no-2 chimneys": {
+    "area": 625.3704419029091,
+    "glowing_share": 0.33618561836663896,
+    "lettered_area": 0.0,
+    "base_brightness": null,
+    "facing_area": 192.78018084069907
+   },
+   "brazier": {
+    "area": 4.038188482900479,
+    "glowing_share": 0.06742313693217168,
+    "lettered_area": 0.0,
+    "base_brightness": 0.13841423239555414,
+    "facing_area": 2.1258706892139
+   },
+   "lantern": {
+    "area": 0.13203666516108808,
+    "glowing_share": 0.21349391469426587,
+    "lettered_area": 0.0,
+    "base_brightness": 0.06500814855098724,
+    "facing_area": 0.06588661401520388
+   },
+   "diesel drum": {
+    "area": 2.3720201926373825,
+    "glowing_share": 0.0,
+    "lettered_area": 0.1230028222270072,
+    "base_brightness": 0.04231283317491176,
+    "facing_area": 1.1596363797140479
+   },
+   "man 1": {
+    "area": 5.127601155784075,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.020071492334925722,
+    "facing_area": 2.7380778623115862
+   },
+   "man 2": {
+    "area": 4.836936889055409,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.011547904417304496,
+    "facing_area": 2.485542617756137
+   },
+   "man 3": {
+    "area": 5.339571411309026,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.01573896603549385,
+    "facing_area": 3.0046387944438595
+   },
+   "man 4": {
+    "area": 4.871611887450686,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.011544881127136808,
+    "facing_area": 2.7566539430315005
+   },
+   "man 5": {
+    "area": 4.8794159265066055,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.015591664641617884,
+    "facing_area": 2.731044653179624
+   },
+   "man 6": {
+    "area": 5.528014128661009,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.011695429808564542,
+    "facing_area": 3.1805026161272116
+   },
+   "man 7": {
+    "area": 4.781571795730215,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.011521006175854557,
+    "facing_area": 2.6913069646345678
+   },
+   "no-1 board": {
+    "area": 2.9004682957111303,
+    "glowing_share": 0.0,
+    "lettered_area": 0.8122061903440061,
+    "base_brightness": 0.06353422095007381,
+    "facing_area": 2.1581764524840588
+   },
+   "petrol drum": {
+    "area": 2.372020320579444,
+    "glowing_share": 0.0,
+    "lettered_area": 0.12300282750242635,
+    "base_brightness": 0.04232510653842251,
+    "facing_area": 1.157046055300287
+   },
+   "gate lamp": {
+    "area": 1.866168226575118,
+    "glowing_share": 0.42572317114397934,
+    "lettered_area": 0.0,
+    "base_brightness": 0.058554451912641525,
+    "facing_area": 0.7825815140824577
+   },
+   "lunch tin": {
+    "area": 0.15294396807389643,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.11973838658920463,
+    "facing_area": 0.04376438402307127
+   },
+   "no-2-worker-1": {
+    "area": 4.836937209192789,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.021929493033102435,
+    "facing_area": 2.4335730359428256
+   },
+   "no-2-worker-2": {
+    "area": 5.127601153613571,
+    "glowing_share": 0.0,
+    "lettered_area": 0.0,
+    "base_brightness": 0.022067099266562543,
+    "facing_area": 2.579320221527776
+   }
+  },
+  "frame_boxes": {
+   "bank-brass-plate": null,
+   "bank-hanging-sign": null,
+   "no-1 board": [
+    0.4056074023246765,
+    0.21244055032730103,
+    0.6643131375312805,
+    0.28144580125808716
+   ],
+   "petrol drum": [
+    0.0816112756729126,
+    0.5907124578952789,
+    0.23775827884674072,
+    0.7074523866176605
+   ],
+   "diesel drum": [
+    0.28759902715682983,
+    0.5981512665748596,
+    0.43624940514564514,
+    0.7236911356449127
+   ],
+   "gate-board-no-2": [
+    1.618247151374817,
+    0.21244055032730103,
+    1.8879215717315674,
+    0.28144580125808716
+   ],
+   "no-2-drum-petrol": [
+    2.2383313179016113,
+    0.5908721387386322,
+    2.5232772827148438,
+    0.7076259851455688
+   ],
+   "no-2-drum-diesel": [
+    2.1547656059265137,
+    0.5981512665748596,
+    2.452065944671631,
+    0.7236911356449127
+   ],
+   "no-2-gate": [
+    1.2966909408569336,
+    0.3967825770378113,
+    1.9800503253936768,
+    0.6733003258705139
+   ],
+   "gate lamp": [
+    0.26461729407310486,
+    0.29594212770462036,
+    0.4120727777481079,
+    0.46509742736816406
+   ],
+   "no-2-gate-lamp": [
+    1.8474217653274536,
+    0.29594212770462036,
+    2.051567554473877,
+    0.46509742736816406
+   ],
+   "brazier": [
+    0.680544376373291,
+    0.5866383910179138,
+    0.8020038604736328,
+    0.6874310076236725
+   ],
+   "lantern": [
+    0.34412094950675964,
+    0.5686556398868561,
+    0.3730766475200653,
+    0.6082578599452972
+   ],
+   "lunch tin": [
+    0.12521906197071075,
+    0.5877306759357452,
+    0.18035461008548737,
+    0.599522739648819
+   ],
+   "no-2-crate-1": [
+    1.335986852645874,
+    0.5995807349681854,
+    1.506872534751892,
+    0.6450583040714264
+   ],
+   "no-2-crate-2": [
+    1.4426177740097046,
+    0.5981738567352295,
+    1.621425986289978,
+    0.6432283222675323
+   ],
+   "no-2-crate-3": [
+    1.3930474519729614,
+    0.5606635212898254,
+    1.5615737438201904,
+    0.6035174131393433
+   ],
+   "hand-truck": [
+    1.4667772054672241,
+    0.5284857749938965,
+    1.6153899431228638,
+    0.6335200369358063
+   ],
+   "handcart": null,
+   "handcart-crate-1": null,
+   "handcart-crate-2": null,
+   "handcart-crate-3": null,
+   "jacket-and-cap": [
+    1.2559545040130615,
+    0.5001120269298553,
+    1.4074597358703613,
+    0.5753889381885529
+   ],
+   "w4-upturned-crate": [
+    1.3009287118911743,
+    0.6082240343093872,
+    1.458558201789856,
+    0.6624941527843475
+   ],
+   "tin-mug-and-wages": [
+    1.3308230638504028,
+    0.6048538088798523,
+    1.3594900369644165,
+    0.6139525771141052
+   ],
+   "man 1": [
+    0.34057140350341797,
+    0.49031805992126465,
+    0.47436922788619995,
+    0.6737653911113739
+   ],
+   "man 2": [
+    0.5969377160072327,
+    0.53507861495018,
+    0.7630505561828613,
+    0.7050150334835052
+   ],
+   "man 3": [
+    0.4715416133403778,
+    0.4920443296432495,
+    0.6081416010856628,
+    0.6816068291664124
+   ],
+   "man 4": [
+    0.12346698343753815,
+    0.4969356656074524,
+    0.27850204706192017,
+    0.6811507344245911
+   ],
+   "man 5": [
+    0.19750864803791046,
+    0.4992590546607971,
+    0.361335426568985,
+    0.7003535330295563
+   ],
+   "man 6": [
+    0.37344294786453247,
+    0.48404473066329956,
+    0.5278853178024292,
+    0.7045778632164001
+   ],
+   "man 7": [
+    0.5385670065879822,
+    0.5018574595451355,
+    0.6919509172439575,
+    0.7000168561935425
+   ],
+   "no-2-worker-1": [
+    0.9220724105834961,
+    0.513938695192337,
+    1.0061159133911133,
+    0.586662083864212
+   ],
+   "no-2-worker-2": [
+    0.8931437730789185,
+    0.5011007785797119,
+    0.9630412459373474,
+    0.5725090503692627
+   ],
+   "no-1 gate": [
+    0.29138943552970886,
+    0.3960150480270386,
+    0.776252269744873,
+    0.6745889484882355
+   ],
+   "no-1 chimney": [
+    0.3704471290111542,
+    -0.016571640968322754,
+    0.513404905796051,
+    0.5376774370670319
+   ],
+   "no-2 chimneys": [
+    0.7311197519302368,
+    0.028427720069885254,
+    1.0030561685562134,
+    0.5373649597167969
+   ]
+  },
+  "match_exclude_reasons": {
+   "no-1 gate": [
+    "bars (0.23 of its outline filled)",
+    "dark (base colour 0.015)"
+   ],
+   "diesel drum": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "man 1": [
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ],
+   "man 2": [
+    "dark (base colour 0.012)",
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ],
+   "man 3": [
+    "dark (base colour 0.016)",
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ],
+   "man 4": [
+    "dark (base colour 0.012)",
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ],
+   "man 5": [
+    "dark (base colour 0.016)",
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ],
+   "man 6": [
+    "dark (base colour 0.012)",
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ],
+   "man 7": [
+    "dark (base colour 0.012)",
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ],
+   "no-1 board": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "petrol drum": [
+    "lettered (a board's border is its strongest edge)"
+   ],
+   "gate lamp": [
+    "bars (0.29 of its outline filled)"
+   ],
+   "no-2-worker-1": [
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ],
+   "no-2-worker-2": [
+    "one of 9 alike figures (slid, it lines up with a neighbour: round 3-5)"
+   ]
+  },
+  "declared_groups": [
+   "no-1 gate",
+   "no-1 chimney",
+   "no-2 chimneys"
+  ],
+  "generated_groups": [
+   "brazier",
+   "lantern",
+   "diesel drum",
+   "man 1",
+   "man 2",
+   "man 3",
+   "man 4",
+   "man 5",
+   "man 6",
+   "man 7",
+   "no-1 board",
+   "petrol drum",
+   "gate lamp",
+   "lunch tin",
+   "no-2-worker-1",
+   "no-2-worker-2"
+  ]
+ },
+ "notes": [
+  "title zone: the view's kind of shot puts the words over a soft dark band (a soft dark band behind the words (safe_area.top_shade) wherever the band holds roofs, chimneys or smoke (plan T13))",
+  "out of the frame, left out: bank-brass-plate, bank-hanging-sign, gate-board-no-2, hand-truck, handcart, handcart-crate-1, handcart-crate-2, handcart-crate-3, jacket-and-cap, no-2-crate-1, no-2-crate-2, no-2-crate-3, no-2-drum-diesel, no-2-drum-petrol, no-2-gate, no-2-gate-lamp, tin-mug-and-wages, w4-upturned-crate"
+ ],
+ "comparison": {
+  "groups": [
+   {
+    "hand": "no-1 board",
+    "generated": "no-1 board",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "petrol drum",
+    "generated": "petrol drum",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "diesel drum",
+    "generated": "diesel drum",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "no-1 chimney",
+    "generated": "no-1 chimney",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "no-2 chimneys",
+    "generated": "no-2 chimneys",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "no-1 gate",
+    "generated": "no-1 gate",
+    "same_objects_share": 1.0,
+    "hand_objects": 5,
+    "generated_objects": 5
+   },
+   {
+    "hand": "gate lamp",
+    "generated": "gate lamp",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "brazier",
+    "generated": "brazier",
+    "same_objects_share": 1.0,
+    "hand_objects": 23,
+    "generated_objects": 23
+   },
+   {
+    "hand": "lantern",
+    "generated": "lantern",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "lunch tin",
+    "generated": "lunch tin",
+    "same_objects_share": 1.0,
+    "hand_objects": 1,
+    "generated_objects": 1
+   },
+   {
+    "hand": "man 1",
+    "generated": "man 1",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "man 2",
+    "generated": "man 2",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "man 3",
+    "generated": "man 3",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "man 4",
+    "generated": "man 4",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "man 5",
+    "generated": "man 5",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "man 6",
+    "generated": "man 6",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   },
+   {
+    "hand": "man 7",
+    "generated": "man 7",
+    "same_objects_share": 1.0,
+    "hand_objects": 2,
+    "generated_objects": 2
+   }
+  ],
+  "hand_groups_drawing_nothing": [],
+  "generated_only": [
+   "no-2-worker-1",
+   "no-2-worker-2"
+  ],
+  "roles": {
+   "subject": {
+    "hand": "no-1 gate",
+    "hand_as_generated": "no-1 gate",
+    "generated": "no-1 gate",
+    "same": true
+   },
+   "support": {
+    "hand": [],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "story": {
+    "hand": [
+     "brazier",
+     "diesel drum",
+     "lantern",
+     "man 1",
+     "man 2",
+     "man 3",
+     "man 4",
+     "man 5",
+     "man 6",
+     "man 7"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "work": {
+    "hand": [],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "pairs_also": {
+    "hand": [
+     "gate lamp",
+     "lunch tin",
+     "no-1 board",
+     "petrol drum"
+    ],
+    "same": false,
+    "only_hand": [],
+    "only_generated": [
+     "no-1 chimney",
+     "no-2 chimneys",
+     "no-2-worker-1",
+     "no-2-worker-2"
+    ]
+   },
+   "on_ground": {
+    "hand": [
+     "brazier",
+     "diesel drum",
+     "man 1",
+     "man 2",
+     "man 3",
+     "man 4",
+     "man 5",
+     "man 6",
+     "man 7",
+     "petrol drum"
+    ],
+    "same": false,
+    "only_hand": [],
+    "only_generated": [
+     "no-2-worker-1",
+     "no-2-worker-2"
+    ]
+   },
+   "must_read": {
+    "hand": [
+     "diesel drum",
+     "no-1 board",
+     "petrol drum"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "lights_in_story": {
+    "hand": [
+     "lantern"
+    ],
+    "same": true,
+    "only_hand": [],
+    "only_generated": []
+   },
+   "box_excludes": {
+    "hand": [
+     "no-1 board"
+    ],
+    "same": false,
+    "only_hand": [
+     "no-1 board"
+    ],
+    "only_generated": []
+   },
+   "stands_on": {
+    "hand": {},
+    "generated": {
+     "lantern": "diesel drum",
+     "lunch tin": "petrol drum"
+    },
+    "hand_pairs_found": true
+   }
+  },
+  "keys": {
+   "size": {
+    "hand": [
+     1080,
+     1920
+    ],
+    "generated": [
+     1080,
+     1920
+    ],
+    "same": true
+   },
+   "lines": {
+    "hand": {
+     "lane": [
+      0,
+      1,
+      0
+     ],
+     "level": [
+      0,
+      1,
+      0
+     ]
+    },
+    "generated": {
+     "lane": [
+      0,
+      1,
+      0
+     ],
+     "level": [
+      0,
+      1,
+      0
+     ]
+    },
+    "same": true
+   },
+   "lines_key": {
+    "hand": "lane",
+    "generated": "lane",
+    "same": true
+   },
+   "eye_height": {
+    "hand": [
+     1.5,
+     1.9
+    ],
+    "generated": [
+     1.5,
+     1.9
+    ],
+    "same": true
+   },
+   "title_zone": {
+    "hand": [
+     0.06,
+     0.05,
+     0.9,
+     0.22
+    ],
+    "generated": [
+     0.06,
+     0.05,
+     0.9,
+     0.22
+    ],
+    "same": true
+   },
+   "story_reaches_down": {
+    "hand": 0.7,
+    "generated": 0.7,
+    "same": true
+   },
+   "sky": {
+    "hand": "sky_dome*",
+    "generated": "sky_dome*",
+    "same": true
+   }
+  },
+  "mapping": {
+   "no-1 board": "no-1 board",
+   "petrol drum": "petrol drum",
+   "diesel drum": "diesel drum",
+   "no-1 chimney": "no-1 chimney",
+   "no-2 chimneys": "no-2 chimneys",
+   "no-1 gate": "no-1 gate",
+   "gate lamp": "gate lamp",
+   "brazier": "brazier",
+   "lantern": "lantern",
+   "lunch tin": "lunch tin",
+   "man 1": "man 1",
+   "man 2": "man 2",
+   "man 3": "man 3",
+   "man 4": "man 4",
+   "man 5": "man 5",
+   "man 6": "man 6",
+   "man 7": "man 7"
+  }
+ },
+ "calculator": "make_check_file",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.main_rule_spot_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule1_meeting_point_gap": {
+   "value": 0.03,
+   "unit": "share of the width, across only",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule2_eye_height": {
+   "value": [
+    1.5,
+    1.9
+   ],
+   "unit": "metres above the surface under the camera",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule3_story_box": {
+   "value": [
+    0.8,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule3_story_together_metres": {
+   "value": 0.3,
+   "unit": "metres between footprints",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_near_touch": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule4_between_figures": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_subject_brightness_ratio": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_brightest_share_on_subject": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_brightest_share_in_story_box": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_nothing_in_story_as_bright": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_top_third_brightness": {
+   "value": 0.36,
+   "unit": "mean brightness (0 to 1)",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_warm_share": {
+   "value": [
+    0.015,
+    0.03
+   ],
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule6_lit_from_below": {
+   "value": null,
+   "unit": "off",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule7_story_reaches_down": {
+   "value": 0.7,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_work_prop_share": {
+   "value": 0.02,
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.crowd.rules.rule8_bottom_left_share": {
+   "value": 0.02,
+   "unit": "share of the frame per story thing (the subject or a story prop)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule10_quiet_side_weight": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of the weight",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule10_nothing_on_quiet_side_outshines": {
+   "value": null,
+   "unit": "off",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_must_read_right_edge": {
+   "value": 0.9,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_story_right_edge": {
+   "value": 0.95,
+   "unit": "share of the width (in 0.45-0.95 down)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule12_title_zone_sky_share": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.resting_on": {
+   "value": "the street (ground rays; \"landed high\" over 0.5 m)",
+   "unit": "rule",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.slide_magnification": {
+   "value": "painting limit",
+   "unit": "times nearer at the nearest painted surface",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.silhouette_contrast": {
+   "value": 2.2,
+   "unit": "(surround + 0.05)/(subject + 0.05) over a band round the subject",
+   "kind": "measured"
+  },
+  "views_and_models.check_file.prop_collections": {
+   "value": [
+    "props",
+    "signs",
+    "gates",
+    "pop-up",
+    "men*",
+    "workers*",
+    "figures*",
+    "people*",
+    "walkers*",
+    "checkout"
+   ],
+   "unit": "collection name patterns where a place's assemble script puts props and figures",
+   "kind": "judged"
+  },
+  "composing.shot_facts_groups_max": {
+   "value": 20,
+   "unit": "groups",
+   "kind": "measured"
+  },
+  "views_and_models.lettering_material_patterns": {
+   "value": [
+    "*-lettering",
+    "*-lettering.0*",
+    "*-stencil",
+    "*-stencil.0*",
+    "*-printing",
+    "*-printing.0*",
+    "*-paper",
+    "*-paper.0*"
+   ],
+   "unit": "material name patterns (lower case, * any letters)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.light_prop_glow_share": {
+   "value": 0.15,
+   "unit": "share of a story group's own surface that glows",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.on_ground_within_metres": {
+   "value": 0.05,
+   "unit": "metres between a group's lowest point and a declared ground (road, pavement, ground, floor)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.ground_kinds": {
+   "value": [
+    "ground",
+    "road",
+    "pavement",
+    "floor"
+   ],
+   "unit": "support surface kinds that count as the ground for check_shot's on_ground",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.sky_pattern_outdoors": {
+   "value": "sky_dome*",
+   "unit": "object name pattern",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.title_zone_fallback": {
+   "value": [
+    0.06,
+    0.05,
+    0.9,
+    0.22
+   ],
+   "unit": "[left, top, right, bottom] shares of the frame",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.figure_collections": {
+   "value": [
+    "men*",
+    "workers*",
+    "figures*",
+    "people*",
+    "walkers*"
+   ],
+   "unit": "collection name patterns holding figures",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.thin_pixels": {
+   "value": 6,
+   "unit": "pixels across at the film frame (the group's narrow side)",
+   "kind": "judged"
+  },
+  "views_and_models.check_file.dark_base_brightness": {
+   "value": 0.02,
+   "unit": "area-weighted base colour brightness of a group's materials (linear, 0 to 1)",
+   "kind": "invented"
+  },
+  "views_and_models.check_file.thin_fill_share": {
+   "value": 0.3,
+   "unit": "share of a group's outline its faces fill, seen square on",
+   "kind": "invented"
+  }
+ }
+}

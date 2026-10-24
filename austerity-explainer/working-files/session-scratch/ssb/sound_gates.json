@@ -1,0 +1,102 @@
+{
+ "about": "sound_gates.py's own pass marks: how the music under the voice is measured, the loudness and alignment gates, the voice steadiness gate, the paper mouth and the soundtrack picker. The house targets themselves live in sound.",
+ "pause_min_seconds": {
+  "value": 0.5,
+  "unit": "seconds of silence between words",
+  "kind": "judged",
+  "source": "Inventory 'Music level under the voice (ducking depth)' (pauses of 0.5 s or more); skeptic log 35"
+ },
+ "pause_gap_band_db": {
+  "value": [
+   10,
+   14
+  ],
+  "unit": "dB under the voice in pauses",
+  "kind": "judged",
+  "source": "Design log 35 (flag the pause gap outside 10-14 dB); logs 07, 10 (about 12 in pauses)"
+ },
+ "loudness_tolerance_lu": {
+  "value": 0.5,
+  "unit": "LU either side of the target",
+  "kind": "judged",
+  "source": "Skeptic log 35 (-15 LUFS +/- 0.5); sent copies measured -15.0 and -15.1 (logs 13, 19, 20)"
+ },
+ "true_peak_margin_db": {
+  "value": 0.2,
+  "unit": "dB below the true-peak limit when lowering the limiter",
+  "kind": "judged",
+  "source": "Design log 35 (lower the limiter by peak + 1.2 dB)"
+ },
+ "alignment_max_ms": {
+  "value": 2,
+  "unit": "milliseconds",
+  "kind": "judged",
+  "source": "Skeptic log 35 (within 2 ms); lesson 15 (5 ms late before latency=1, 0.00 ms since)"
+ },
+ "alignment_match_min": {
+  "value": 0.8,
+  "unit": "correlation",
+  "kind": "invented",
+  "source": "Design log 35 (fail if correlation < 0.8)"
+ },
+ "page_pitch_from_median_semitones": {
+  "value": 1.5,
+  "unit": "semitones",
+  "kind": "judged",
+  "source": "Design log 35 (a page more than 1.5 semitones from the chapter median is recorded again)"
+ },
+ "pitch_spread_max_semitones": {
+  "value": 2.6,
+  "unit": "semitones across pages",
+  "kind": "judged",
+  "source": "Decisions item 20: chapter 2's 2.2 accepted, chapter 1's 3.0 not (compare_voice_steadiness.py); the limit lies between"
+ },
+ "voiced_below_peak_db": {
+  "value": 40,
+  "unit": "dB under the loudest 40 ms slice",
+  "kind": "judged",
+  "source": "sound_gates.py mouth: fitted together with mouth_percentiles on chapter 1 (at 30 or 50 dB the QUIET level moves about 2 dB); slices quieter than this are not voice"
+ },
+ "mouth_percentiles": {
+  "value": [
+   25,
+   90
+  ],
+  "unit": "percentiles of voiced 40 ms slices (QUIET, LOUD)",
+  "kind": "judged",
+  "source": "Fitted on chapter 1's narration, where make_mouth_track.py's -25 and -11 dB were set by eye (lesson 24): -25 sits at the 27th percentile of its voiced slices, -11 at the 94th. The design's 40th percentile gave -19.6, 5 dB off."
+ },
+ "music_mood_percentiles": {
+  "value": {
+   "quiet": 10,
+   "lively": 75
+  },
+  "unit": "percentile of the soundtrack's own 3 s loudness",
+  "kind": "judged",
+  "source": "sound_gates.py music-start, tuned on log 32 (the notice corner's music from 216 s, chosen as a quiet stretch): the 25th percentile is not quiet on this soundtrack (-13.7 LUFS), the 10th is (-16.7)"
+ },
+ "music_mood_band_lu": {
+  "value": 2,
+  "unit": "LU around the mood's level",
+  "kind": "judged",
+  "source": "Inventory 'Which stretch of the soundtrack to use' (within 2 LU of the mood's target)"
+ },
+ "fade_in_without_onset_seconds": {
+  "value": 2.0,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Log 27 (the music came in at once; a 2-second fade-in was added)"
+ },
+ "section_change_db": {
+  "value": 3,
+  "unit": "dB change of the 1 s mean loudness",
+  "kind": "judged",
+  "source": "sound_gates.py music-start: chosen so the picker lands on log 32's choice (the notice corner's music from 216 s); one recorded case only"
+ },
+ "section_snap_seconds": {
+  "value": 12,
+  "unit": "seconds before a window to look for its section start",
+  "kind": "judged",
+  "source": "sound_gates.py music-start: chosen so the picker lands on log 32's choice (216 s); one recorded case only"
+ }
+}

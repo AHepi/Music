@@ -1,0 +1,57 @@
+{
+ "job": 3,
+ "scene": "/workspace/place-jobs/scenes/f5d56040/part.blend",
+ "settings": "/workspace/place-jobs/scenes/f5d56040/settings-dd8b4f3b-e8bf066e/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3",
+ "cameras": [
+  "View wide",
+  "View road_eye"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "bright-low-sky",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 5.0,
+    "sky_strength": 0.35,
+    "hill_gain": 1.0
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py"
+  },
+  {
+   "name": "dim-dark-hills",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 3.5,
+    "sky_strength": 0.55,
+    "hill_gain": 0.78
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py"
+  },
+  {
+   "name": "mid-dark-hills",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 2.8,
+    "sky_strength": 0.45,
+    "hill_gain": 0.85
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py"
+  }
+ ]
+}

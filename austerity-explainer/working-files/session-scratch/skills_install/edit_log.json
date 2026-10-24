@@ -1,0 +1,666 @@
+[
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "If a sibling skill named here is missing from\nyour available skills, ask the user to install it\n(`npx skills add scenario-labs/skills --skill <name>`); unattended, proceed from tool schemas and\nflag the gap.",
+  "new": "If a sibling skill named here is missing from\nyour available skills, do not install anything: tell the person which skill is missing and carry on\nwithout it (proceed from tool schemas and flag the gap).",
+  "why": "remove npx self-install instruction (must-change)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "## 1. Execution channel\n",
+  "new": "## 1. Execution channel\n\n**Local rules for this project (they override everything below):** run Blender only as `xvfb-run -a /home/user/work/blender-app/blender-5.2.2-linux-x64/blender -b --disable-autoexec --factory-startup --python-exit-code 1 -P script.py -- args` (plain `blender` is not on the search path; `xvfb-run -a` gives Blender a virtual screen, not a window, and without it Blender stops with \"Couldn't open libEGL.so.1\" as soon as a script renders or uses the graphics side, which includes the Workbench review sheets). Headless only: never open a Blender window and never use a live GUI session, an MCP bridge or the Scenario Blender Plugin. Never install anything (no `npx`, `pip`, add-ons or extensions), never sign in to or call an outside service, and do not load add-ons. Do not render the film's plates or run EEVEE or Cycles animation or bake jobs on this shared computer (they are slow): those go to the rented machine with the project's render guide; only the quick Workbench review sheets and the audits of this skill run here. Write output only to a scratch folder, keep it small (disk is tight) and delete it when done.\n",
+  "why": "local rules paragraph (second reader); wording adjusted: tested here, Blender starts without xvfb-run for plain scripts but fails with libEGL once anything renders",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "**Live GUI Blender** (user's session over the MCP bridge)",
+  "new": "**Live GUI Blender** (not used here: no Blender window is ever opened, so never use a live session or an MCP bridge) (user's session over the MCP bridge)",
+  "why": "second reader's better wording",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "`blender -b [file] --factory-startup --python-exit-code 1 -P x.py -- args`",
+  "new": "`xvfb-run -a /home/user/work/blender-app/blender-5.2.2-linux-x64/blender -b --disable-autoexec [file] --factory-startup --python-exit-code 1 -P x.py -- args`",
+  "why": "full path, xvfb-run, --disable-autoexec (second reader's better edit)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "`blender --background scene.blend --command scenario_blender`, is the exception because it needs",
+  "new": "`blender --background scene.blend --command scenario_blender` (NEVER run this here: the Scenario add-on is not installed, no add-on or extension is ever loaded, and `--factory-startup` has no exception), would be the exception because it needs",
+  "why": "stop the Scenario add-on headless-server exception (must-change, second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "**Live channel: the Scenario Blender Plugin.**",
+  "new": "**Live channel: the Scenario Blender Plugin (not used here: the Scenario add-on is not installed and no Blender window is ever opened, so skip this whole section).**",
+  "why": "second reader's better wording",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "results are the `scenario-blender` skill's work;",
+  "new": "results are the `scenario-blender` (not installed here) skill's work;",
+  "why": "not-installed note",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "spelling (quit, factory reset, file deletion) changed nothing: rewrite the call.",
+  "new": "spelling (quit, factory reset, file deletion) changed nothing: do not try another spelling of the same action; stop and tell the person.",
+  "why": "do not work around a refused call (must-change, second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "`scenario-blender-sculpting/scripts/bx_sculpt.py`",
+  "new": "`scenario-blender-sculpting/scripts/bx_sculpt.py` (not installed here)",
+  "why": "not-installed note",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "## 3. Persona pipelines\n",
+  "new": "## 3. Persona pipelines\n\nOnly scenario-blender-expert, scenario-blender-texturing-shading, scenario-blender-uv-baking, scenario-blender-geometry-nodes, scenario-blender-lighting-rendering, scenario-blender-export and scenario-blender-previs-storyboard are installed here. Every other skill named in this table (sculpting, retopology, hair, hard-surface, rigging, animation, grease-pencil, scenario-3d, scenario-textures) is NOT installed: skip that step, do not install it and do not use any outside service for it.\n",
+  "why": "installed-skills sentence (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "scenario-blender-sculpting, scenario-blender-retopology, scenario-blender-uv-baking, scenario-blender-texturing-shading, scenario-blender-hair",
+  "new": "scenario-blender-sculpting (not installed here), scenario-blender-retopology (not installed here), scenario-blender-uv-baking, scenario-blender-texturing-shading, scenario-blender-hair (not installed here)",
+  "why": "not-installed notes (character artist row)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "scenario-blender-retopology (or cleanup + remesh)",
+  "new": "scenario-blender-retopology (not installed here) (or cleanup + remesh)",
+  "why": "not-installed note",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "generation itself: scenario-3d",
+  "new": "generation itself: scenario-3d (not installed here)",
+  "why": "not-installed note (Scenario AI generation service)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "scenario-blender-hard-surface or scenario-blender-sculpting, scenario-blender-retopology (game budget)",
+  "new": "scenario-blender-hard-surface (not installed here) or scenario-blender-sculpting (not installed here), scenario-blender-retopology (not installed here) (game budget)",
+  "why": "not-installed notes (game asset row)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "scenario-blender-rigging",
+  "new": "scenario-blender-rigging (not installed here)",
+  "why": "not-installed note (rigger row)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "scenario-blender-animation",
+  "new": "scenario-blender-animation (not installed here)",
+  "why": "not-installed note (animator row)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "scenario-blender-previs-storyboard, scenario-blender-grease-pencil",
+  "new": "scenario-blender-previs-storyboard, scenario-blender-grease-pencil (not installed here)",
+  "why": "not-installed note (story/previs row)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "| scenario-blender-grease-pencil",
+  "new": "| scenario-blender-grease-pencil (not installed here)",
+  "why": "not-installed note (2D animator row)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "scenario-3d (generate meshes to finish here), scenario-textures (AI",
+  "new": "scenario-3d (not installed here) (generate meshes to finish here), scenario-textures (not installed here) (AI",
+  "why": "not-installed notes (Scenario AI generation skills)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "`blender -b f.blend --python bx_audit.py -- --object Name [--high Sculpt] [--json out.json]`",
+  "new": "`xvfb-run -a /home/user/work/blender-app/blender-5.2.2-linux-x64/blender -b --disable-autoexec f.blend --factory-startup --python-exit-code 1 -P bx_audit.py -- --object Name [--high Sculpt] [--json out.json]`",
+  "why": "full path, xvfb-run, --disable-autoexec (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "CLI, exit code 2 on failure:",
+  "new": "CLI, exit code 2 on failure (`--import` first empties that Blender process, so use it only in a throwaway headless run with nothing unsaved):",
+  "why": "warn that --import wipes the process (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "`blender -b --factory-startup --python-exit-code 1 -P bx_audit.py -- --deliverable [--import model.glb | --objects A B] --profile game [--json out.json]`",
+  "new": "`xvfb-run -a /home/user/work/blender-app/blender-5.2.2-linux-x64/blender -b --disable-autoexec --factory-startup --python-exit-code 1 -P bx_audit.py -- --deliverable [--import model.glb | --objects A B] --profile game [--json out.json]`",
+  "why": "full path, xvfb-run, --disable-autoexec (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "user settings untouched; `playblast(out_path, res_pct=50)`;",
+  "new": "user preferences untouched, but the default `wire` mode overwrites the Object Color of the objects you pass in (leave `wire` out of `modes` to avoid it) and `playblast` resets the scene's still-image format to 8-bit PNG and its video container and codec, and renders the whole frame range, so run `playblast` only on a throwaway copy of the .blend, with the frame range set first, and never save that copy afterwards; `playblast(out_path, res_pct=50)`;",
+  "why": "measured side effects of bx_review (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "`bx_gui.py`: real brushes in a live session:",
+  "new": "`bx_gui.py` (not usable here, it needs a window): real brushes in a live session:",
+  "why": "bx_gui needs a window (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "`import sys; sys.path.append(\"<this skill>/scripts\"); import bx_audit, bx_review`",
+  "new": "`import sys; sys.dont_write_bytecode = True; sys.path.append(\"<this skill>/scripts\"); import bx_audit, bx_review` (the second statement stops Python writing a `__pycache__` folder into the installed skill folder)",
+  "why": "no __pycache__ in the installed folder (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/references/bpy-reliability.md",
+  "old": "`blender -b [file.blend] --factory-startup --python-exit-code 1 -P script.py -- <args>`",
+  "new": "`xvfb-run -a /home/user/work/blender-app/blender-5.2.2-linux-x64/blender -b --disable-autoexec [file.blend] --factory-startup --python-exit-code 1 -P script.py -- <args>`",
+  "why": "full path, xvfb-run, --disable-autoexec (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/references/bpy-reliability.md",
+  "old": "After a rerun: `bpy.data.orphans_purge(do_recursive=True)` removes nothing new",
+  "new": "After a rerun (only in a throwaway copy: it really deletes every unused data-block in the open session): `bpy.data.orphans_purge(do_recursive=True)` removes nothing new",
+  "why": "orphans_purge is a real purge (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/references/bpy-reliability.md",
+  "old": "`bpy.ops.wm.save_as_mainfile(filepath=abs_path)`.",
+  "new": "`bpy.ops.wm.save_as_mainfile(filepath=abs_path)` (abs_path is a new file in a folder the person named, never the file the job opened).",
+  "why": "do not overwrite the opened file (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/references/bpy-reliability.md",
+  "old": "`blender -b scene.blend --factory-startup --python-exit-code 1 -P setup.py -E CYCLES -o /abs/out/frame_#### -F PNG -f 10`",
+  "new": "`xvfb-run -a /home/user/work/blender-app/blender-5.2.2-linux-x64/blender -b --disable-autoexec scene.blend --factory-startup --python-exit-code 1 -P setup.py -E CYCLES -o /abs/out/frame_#### -F PNG -f 10` (an example of the flag ORDER only: on this shared computer never run a Cycles or EEVEE render like this; use `-E BLENDER_WORKBENCH` for quick looks and send real renders to the rented machine)",
+  "why": "P8 is an example only (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/references/bpy-reliability.md",
+  "old": "/Applications/Blender.app/Contents/Resources/5.2/scripts/startup/bl_ui/*.py",
+  "new": "/home/user/work/blender-app/blender-5.2.2-linux-x64/5.2/scripts/startup/bl_ui/*.py",
+  "why": "Mac path replaced by this computer's path (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/references/blender-5.2-deltas.md",
+  "old": "/Applications/Blender.app/Contents/Resources/5.2/datafiles/assets/brushes/",
+  "new": "/home/user/work/blender-app/blender-5.2.2-linux-x64/5.2/datafiles/assets/brushes/",
+  "why": "Mac path replaced by this computer's path (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/SKILL.md",
+  "old": "If a sibling skill named here is missing from your available skills, ask the user\nto install it (`npx skills add scenario-labs/skills --skill <name>`); unattended, proceed from tool\nschemas and flag the gap.",
+  "new": "If a sibling skill is missing, do not install anything: tell the person which skill is missing and carry\non without it.",
+  "why": "remove npx self-install instruction (must-change)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/SKILL.md",
+  "old": "(execution channel, review loop, 5.2 API changes)",
+  "new": "(execution channel, review loop, 5.2 API changes; here use only its headless channel, never an MCP bridge, add-on or live window)",
+  "why": "headless channel only (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/SKILL.md",
+  "old": "import bx_materials as M`.",
+  "new": "import bx_materials as M`.\n\nOn this shared computer: call `M.preview` only with `engines=(\"BLENDER_EEVEE\",)`, `res=256`, `samples=8` and an `out_dir` inside the scratch folder (its default also renders Cycles at 64 samples on the CPU, which is slow here). `M.value_report` is cheap (six small renders) but also needs a scratch `out_dir`. The Cycles half of every check runs on the rented machine. Never pass the film project's folder as `out_dir` or as a `save_image` path.",
+  "why": "slow-render guard at the top of the toolkit section (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/SKILL.md",
+  "old": "Cycles finals, EEVEE side by side",
+  "new": "EEVEE finals (our plate renderer), Cycles as a check",
+  "why": "default to EEVEE finals (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/SKILL.md",
+  "old": "GUI: brushes are assets",
+  "new": "GUI (needs a live window: not available here, use the Headless route below): brushes are assets",
+  "why": "live-window route not usable (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/SKILL.md",
+  "old": "`M.preview` (EEVEE and Cycles, studio, backlit, roughness),",
+  "new": "`M.preview` (EEVEE and Cycles, studio, backlit, roughness; on the shared computer pass `engines=(\"BLENDER_EEVEE\",)`, `res=256`, `samples=8` and leave the Cycles half to the rented machine),",
+  "why": "slow-render guard (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/references/critique.md",
+  "old": "EEVEE and Cycles), open the sheet,",
+  "new": "EEVEE only here via `engines=(\"BLENDER_EEVEE\",), res=256, samples=8`; the Cycles half runs on the rented machine), open the sheet,",
+  "why": "slow-render guard in the rubric (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/references/expert-notes.md",
+  "old": "Load Factory Settings when lost",
+  "new": "Load Factory Settings when lost (a GUI habit from the video; never do it here, it wipes the open session)",
+  "why": "never reset the session (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-texturing-shading/references/procedures.md",
+  "old": "## P9. Anisotropic hair or brushed metal (Cycles only)",
+  "new": "## P9. Anisotropic hair or brushed metal (Cycles only; not for our EEVEE plates: it aims the Material Output at CYCLES, so EEVEE ignores that output)",
+  "why": "EEVEE trap (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-uv-baking/SKILL.md",
+  "old": "sibling skill named here is missing from your available skills, ask the user to install it\n(`npx skills add scenario-labs/skills --skill <name>`); unattended, proceed from tool schemas and\nflag the gap.",
+  "new": "sibling skill is missing, do not install anything: tell the person which skill is missing and carry on without it.",
+  "why": "remove npx self-install instruction (must-change)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-uv-baking/SKILL.md",
+  "old": "Metal GPU, headless",
+  "new": "Metal GPU on a Mac, headless (CPU-only: far slower)",
+  "why": "timing caveat (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-uv-baking/SKILL.md",
+  "old": "- `scripts/bx_uvbake.py`: the module (docstrings list every function).",
+  "new": "- `scripts/bx_uvbake.py`: the module (docstrings list every function).\n\n## Local setup notes (this project, added after reading)\n\n- Blender 5.2.2, headless only (`-b --disable-autoexec`); nothing here needs a window. The module was\n  tested on 5.2.1, so check the first run on 5.2.2.\n- The four picture-review functions (`checker_review`, `distortion_review`, `map_problem_review`,\n  `bake_review`) import `bx_review` from the `scenario-blender-expert` folder next to this one. Keep\n  the folders side by side, also when copying them to the rented machine, and install nothing.\n- Baking needs Cycles (EEVEE cannot bake). `bake_high_to_low` switches the scene to Cycles and puts\n  the engine back afterwards; the film's plate renderer stays EEVEE. In a background run it also\n  switches Blender's Cycles graphics-card setting in memory (nothing here saves preferences).\n- This computer is shared and slow. Test bakes at `res=512` with `adaptive=False` (the adaptive bake\n  repeats every map five times). `bake_review` makes 12 EEVEE pictures: pass `views=(\"threequarter\",)`\n  and a small `res`, or ask the person whether to run it on the rented machine.\n- Work on a duplicate object or a new UV map (`uv_map=`), never on the film's own objects.\n  `unwrap`, `pack`, `prepare_low` and `hookup_maps` change the object, or its materials (which other\n  objects may share), in place. `unwrap` overwrites the UV map with a placeholder first and restores\n  it only when it succeeds, so an error halfway leaves the UVs ruined. Call `explode` once and\n  `unexplode` after the bake.\n- Every bake leaves its image in the open Blender session (about 64 MB each at 2048) and may add a\n  material or a World if the scene had none. Use a throwaway scene or a fresh Blender process per\n  bake, and do not save the film's .blend afterwards.\n- `bake_id` picks colours with Python's `hash()`, which changes from run to run: read the colours back\n  from the map each time.\n- Run the raw snippets in `references/procedures.md` only in a scratch session, never in the film\n  project: they add demo objects, some switch the engine to Cycles or hide other objects from render\n  without restoring, and `s2a_bake` writes a small PNG into Blender's temp folder.",
+  "why": "local setup notes (second reader's merged version)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-geometry-nodes/SKILL.md",
+  "old": "If a sibling skill named here is missing from your\navailable skills, ask the user to install it (`npx skills add scenario-labs/skills --skill <name>`);\nunattended, proceed from tool schemas and flag the gap.",
+  "new": "If a sibling skill named here is not installed, do not install, download or ask for anything: carry on without it.",
+  "why": "remove npx self-install instruction (must-change, second reader's wording)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-geometry-nodes/SKILL.md",
+  "old": "Curl, Hair Dynamics grooms): scenario-blender-hair.",
+  "new": "Curl, Hair Dynamics grooms): scenario-blender-hair (not installed here; ignore this pointer and do not try to fetch it).",
+  "why": "not-installed note (second reader's wording)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-geometry-nodes/SKILL.md",
+  "old": "(headless or live, idempotent:",
+  "new": "(headless only here, with no Blender window; idempotent:",
+  "why": "no live window (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-geometry-nodes/references/procedures.md",
+  "old": "for o in list(bpy.data.objects):\n    bpy.data.objects.remove(o)\n",
+  "new": "# TEST HARNESS ONLY: the next two lines delete EVERY object in the open file. Never run them in a session that holds the person's scene; use a fresh headless run.\nfor o in list(bpy.data.objects):\n    bpy.data.objects.remove(o)\n",
+  "why": "warn before the delete-all-objects test harness (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-geometry-nodes/references/procedures.md",
+  "old": "obj.rotation_euler = (math.pi, 0, 0); bpy.context.view_layer.update(); obj.update_tag()",
+  "new": "# NOTE: this changes the object's rotation. Run the probe on a scratch copy of the object, or save tuple(obj.rotation_euler) first and put it back afterwards.\nobj.rotation_euler = (math.pi, 0, 0); bpy.context.view_layer.update(); obj.update_tag()",
+  "why": "comment: probe changes rotation (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-geometry-nodes/scripts/bx_gn.py",
+  "old": "    Returns the sheet path; a <path>_legend.txt lists the tiles.\"\"\"",
+  "new": "    Returns the sheet path; a <path>_legend.txt lists the tiles.\n\n    CAUTION: it renders the OPEN scene itself, so that scene's compositor, sequencer and output\n    settings apply, and it overwrites files named like <path> and <path>_f0001_<view>.png. Use it on a\n    scratch copy of the scene, point path at a scratch folder, and delete the tile PNGs afterwards.\"\"\"",
+  "why": "docstring caution (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-geometry-nodes/scripts/bx_gn.py",
+  "old": "def free_bake(obj):\n    with _Selected(obj):\n        return bpy.ops.object.simulation_nodes_cache_delete(selected=True)",
+  "new": "def free_bake(obj):\n    \"\"\"Delete the simulation caches and bakes of obj. If a modifier bakes to DISK this can also remove\n    that bake folder (its path comes from the modifier). Use only on a scratch object baked with bake().\"\"\"\n    with _Selected(obj):\n        return bpy.ops.object.simulation_nodes_cache_delete(selected=True)",
+  "why": "docstring caution (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-lighting-rendering/SKILL.md",
+  "old": "ask the user to install it (`npx skills add scenario-labs/skills --skill <name>`);",
+  "new": "do not install anything: tell the person which skill is missing and carry on without it;",
+  "why": "remove npx self-install instruction (must-change)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-lighting-rendering/SKILL.md",
+  "old": "scenario-blender-previs-storyboard (shot planning, cameras).",
+  "new": "scenario-blender-previs-storyboard (shot planning, cameras).\n\n**Local rules for this install (added by the person who installed it):** run Blender only headless (`-b --disable-autoexec`); never open a window and never use a live or bridge session. The `BL.*` helpers that set things (`aim_camera_at_frame_point`, `preset_eevee`, `preset_cycles`, `color_setup`, `working_space`, `outdoor_sun_sky`, `split_world`, `world_gradient`, `haze`, `comp_tree`, `comp_finish`, `light_groups`, `lightgroup_mix`, `register_aovs`, `freestyle`, `outline_hull`) change the open scene in memory: use them on a scratch copy, never on the film project's own files, and do not save over a scene that must stay as it was. Write every picture, EXR and sheet into the scratchpad folder (never into the film project, and never a made-up path such as `/abs/out`), keep them small (`pct=25`, `exr=False`) and delete the big ones afterwards. Cycles renders, `bake_probes` and `light_contributions` are slow on the shared computer: do them on the rented machine or skip them. Never run npx, npm or pip, and never open or download the video links in `references/sources.md`.",
+  "why": "local rules paragraph (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-lighting-rendering/SKILL.md",
+  "old": "Import: `sys.path.append(\"<this skill>/scripts\"); import bx_light as BL`.",
+  "new": "Import: `import sys; sys.dont_write_bytecode = True; sys.path.append(\"<this skill>/scripts\"); import bx_light as BL` (the first statement stops Python writing a `__pycache__` folder into the skill).",
+  "why": "no __pycache__ in the installed folder (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-lighting-rendering/SKILL.md",
+  "old": "`BL.aim_camera_at_frame_point(head, 1/3 or 2/3, 0.62)` for look room, and 80 mm for boxy",
+  "new": "`BL.aim_camera_at_frame_point(head, 1/3 or 2/3, 0.62)` for look room (it ROTATES the scene camera: use it only on a scratch copy, and skip it when the camera is already fixed), and 80 mm for boxy",
+  "why": "camera-rotation caution (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-lighting-rendering/references/procedures.md",
+  "old": "BL.file_output(tree, \"//exr/\", {\"rebuilt\": rebuilt, \"image\": rl.outputs[\"Image\"]}, depth=\"32\")",
+  "new": "BL.file_output(tree, OUT_DIR + \"/exr/\", {\"rebuilt\": rebuilt, \"image\": rl.outputs[\"Image\"]}, depth=\"32\")  # set OUT_DIR first, to a folder in the scratchpad",
+  "why": "no relative output path (second reader's better edit)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-lighting-rendering/references/procedures.md",
+  "old": "L = BL.new_light(\"Key\", \"AREA\")",
+  "new": "L = BL.new_light(\"BX_TestKey\", \"AREA\")",
+  "why": "do not take over a real light named Key (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-lighting-rendering/references/procedures.md",
+  "old": "It works in a live GUI session too (object mode).",
+  "new": "Here it is always run headless (never open a Blender window). Paths such as `/abs/out/...` in the examples are placeholders: replace them with a folder in the scratchpad.",
+  "why": "no live GUI, placeholder paths (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-lighting-rendering/references/sources.md",
+  "old": "Fifteen videos, distilled into `notes/lighting/` (one note each) and two digests",
+  "new": "Reference list only: do not open, fetch or download any link or video named here. Fifteen videos, distilled into `notes/lighting/` (one note each) and two digests",
+  "why": "do not fetch links (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/SKILL.md",
+  "old": "If a sibling skill named here is missing from your available skills,\nask the user to install it (`npx skills add scenario-labs/skills --skill <name>`); unattended,\nproceed from tool schemas and flag the gap.",
+  "new": "If a sibling skill is missing, do not install anything: tell the person which skill is missing and carry on without it.",
+  "why": "remove npx self-install instruction (must-change)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/SKILL.md",
+  "old": "**Engine check:** import into the engine and look, with `scenario-unity-pipeline-automation`,\n   `scenario-unreal-pipeline-automation` or `scenario-godot-pipeline-automation`.",
+  "new": "**Engine check:** skip it here. No game engine is installed and the Unity, Unreal and Godot\n   pipeline skills it names are not installed; do not install them. Say in your report that the\n   engine check was not done.",
+  "why": "skip the engine check (second reader's better edit)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/SKILL.md",
+  "old": "Building ARKit or viseme sets is `scenario-blender-rigging`'s work.",
+  "new": "Building ARKit or viseme sets is the work of `scenario-blender-rigging` (not installed here).",
+  "why": "not-installed note (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/SKILL.md",
+  "old": "bpy.ops.wm.read_factory_settings(use_empty=True)",
+  "new": "bpy.ops.wm.read_factory_settings(use_empty=True)   # wipes the open scene: only in a throwaway run, never on a scene you still need",
+  "why": "warning comment (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/SKILL.md",
+  "old": "Open the report before calling the batch done.",
+  "new": "Open the report before calling the batch done. Use an output folder that is not the input folder (same-named files in it are overwritten), and run it only in its own headless Blender, since every file is loaded into a wiped, empty scene.",
+  "why": "batch warning (first reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/SKILL.md",
+  "old": "blender -b --factory-startup --python-exit-code 1 -P bx_export.py -- \\",
+  "new": "xvfb-run -a /home/user/work/blender-app/blender-5.2.2-linux-x64/blender -b --disable-autoexec --factory-startup --python-exit-code 1 -P bx_export.py -- \\",
+  "why": "full path, xvfb-run, --disable-autoexec (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/SKILL.md",
+  "old": "Join them (`bpy.ops.object.join` with\nthe parts selected) for a single static prop, then gate again.",
+  "new": "Join them (`bpy.ops.object.join` with\nthe parts selected; it merges the objects and removes the originals, so do it only in a throwaway run, never on a scene you still need) for a single static prop, then gate again.",
+  "why": "join warning (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/references/engines.md",
+  "old": "Vendor pages were read on 2026-10-18: check them again\nbefore relying on a number in a new engine version.",
+  "new": "Vendor pages were read on 2026-10-18. Do not open them from here (no outside services are used);\nif a number matters for a newer engine version, tell the person it needs checking.",
+  "why": "no outside web pages (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-export/scripts/bx_export.py",
+  "old": "[bpy.app.binary_path, \"-b\", \"--factory-startup\", \"--python-exit-code\", \"1\",",
+  "new": "[bpy.app.binary_path, \"-b\", \"--disable-autoexec\", \"--factory-startup\", \"--python-exit-code\", \"1\",",
+  "why": "child Blender also gets --disable-autoexec (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/SKILL.md",
+  "old": "If a sibling skill named here is missing from\nyour available skills, ask the user to install it\n(`npx skills add scenario-labs/skills --skill <name>`); unattended, proceed from tool schemas and\nflag the gap.",
+  "new": "If a sibling skill is missing, do not install anything: tell the person which skill is missing and carry on without it.",
+  "why": "remove npx self-install instruction (must-change)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/SKILL.md",
+  "old": "rebuild it with scenario-blender-blockout,",
+  "new": "rebuild it with scenario-blender-blockout (deliberately not installed here, since it uses outside video services: do not install or use it),",
+  "why": "blockout stays uninstalled (second reader's wording)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/SKILL.md",
+  "old": "Strokes: scenario-blender-grease-pencil.",
+  "new": "Strokes: scenario-blender-grease-pencil (not installed here).",
+  "why": "not-installed note",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/SKILL.md",
+  "old": "layout: scenario-blender-animation. Real rigs: scenario-blender-rigging.",
+  "new": "layout: scenario-blender-animation (not installed here). Real rigs: scenario-blender-rigging (not installed here).",
+  "why": "not-installed notes",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/SKILL.md",
+  "old": "**REQUIRED BACKGROUND:** scenario-blender-expert (execution channel, review loop, 5.2 API changes).",
+  "new": "**REQUIRED BACKGROUND:** scenario-blender-expert (execution channel, review loop, 5.2 API changes).\n\n**Local rules (this machine):** run only in a fresh `-b --factory-startup --disable-autoexec` session, never inside the film's own .blend. Give every scene, object, collection, camera, marker and shot id a new previs-only name: the helpers reuse and overwrite same-named ones. Always pass a new `edit_name` to `P.animatic` (it deletes the strips of the scene it finds). Write only into a new folder under the scratch area, and delete scratch outputs when done.",
+  "why": "local rules paragraph (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/references/procedures.md",
+  "old": "## P21. Storyboarding app template (replaces the open file, run last)",
+  "new": "## P21. Storyboarding app template (replaces the open file, run last). DO NOT RUN unless the person asks for this template: it wipes the open Blender session",
+  "why": "stop sign on the session-wiping block (must-change)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/references/procedures.md",
+  "old": "bpy.ops.wm.read_homefile(app_template=\"Storyboarding\")",
+  "new": "raise RuntimeError(\"P21 is disabled on this machine: read_homefile would replace the open Blender session\")",
+  "why": "make the session-wiping call stop (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/references/procedures.md",
+  "old": "line: `blender --app-template Storyboarding`.",
+  "new": "line: `blender --app-template Storyboarding` (this opens a Blender window: never run it here).",
+  "why": "no window (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/references/procedures.md",
+  "old": "blender --background --factory-startup --python-exit-code 1 --python tests/code/blender-previs-storyboard/<test>.py",
+  "new": "<full path to blender> -b --factory-startup --disable-autoexec --python-exit-code 1 --python <your script>.py",
+  "why": "run-command template follows our rules (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/references/procedures.md",
+  "old": "# any writable folder",
+  "new": "# a NEW empty folder under the scratch area; REPLACE this placeholder first (makedirs would otherwise create /abs/path/to/output on the disk)",
+  "why": "placeholder path warning (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/references/procedures.md",
+  "old": "Strokes: scenario-blender-grease-pencil;",
+  "new": "Strokes: scenario-blender-grease-pencil (not installed here);",
+  "why": "not-installed note",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/references/procedures.md",
+  "old": "Full rigging: scenario-blender-rigging.",
+  "new": "Full rigging: scenario-blender-rigging (not installed here).",
+  "why": "not-installed note",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/references/sources.md",
+  "old": "Seven videos, distilled in",
+  "new": "Citations only: never fetch or open these links. Seven videos, distilled in",
+  "why": "do not fetch links (second reader)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-previs-storyboard/scripts/bx_previs.py",
+  "old": "    ed = bpy.data.scenes.get(edit_name or sc.name.replace(\"_blend\", \"_edit\")) or \\\n        bpy.data.scenes.new(edit_name or sc.name.replace(\"_blend\", \"_edit\"))",
+  "new": "    ed = bpy.data.scenes.get(edit_name or sc.name.replace(\"_blend\", \"_edit\")) or \\\n        bpy.data.scenes.new(edit_name or sc.name.replace(\"_blend\", \"_edit\"))\n    if ed == sc:\n        raise ValueError(\"animatic: the edit scene would be the previs scene itself (no '_blend' in its name); pass edit_name\")",
+  "why": "guard: edit scene must not be the previs scene (second reader, optional but listed)",
+  "count_before": 1,
+  "status": "applied"
+ },
+ {
+  "file": "scenario-blender-expert/SKILL.md",
+  "old": "Never install anything (no `npx`, `pip`, add-ons or extensions), never sign in to or call an outside service, and do not load add-ons.",
+  "new": "Never install or download anything (no `npx`, `pip`, add-ons or extensions), never sign in to or call an outside service, and load no add-on other than Blender's own bundled ones (Rigify, Node Wrangler), only when a task needs them.",
+  "why": "wording fix so the local rule does not contradict the previs/Rigify and Node Wrangler advice (bundled add-ons only, no download)",
+  "count_before": 1,
+  "status": "applied (second pass)"
+ },
+ {
+  "file": "scenario-blender-expert/references/blender-5.2-deltas.md",
+  "old": "Get Extensions (online) or legacy zip;",
+  "new": "Get Extensions (online) or legacy zip (never do either here: nothing is downloaded or installed);",
+  "why": "remaining pointer to online extensions",
+  "count_before": 1,
+  "status": "applied (second pass)"
+ }
+]

@@ -1,0 +1,71 @@
+{
+ "job": 2,
+ "scene": "/workspace/place-jobs/scenes/6af58990/scene.blend",
+ "settings": "/workspace/place-jobs/scenes/6af58990/settings-dd8b4f3b-e8bf066e/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-the-eave-roll-thatch-lumps-plaster-chips-1792757984/job-2",
+ "cameras": [
+  "View wide",
+  "View cottage_close"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v02-roll0p67-chip1p12-n0p95-lump0p67",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "thatch_roll": 0.67,
+    "chip_amount": 1.12,
+    "chip_count": 0.95,
+    "thatch_lump": 0.67,
+    "sag_cm": 1.21
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-eave-roll-thatch-lumps-plaster-chips-1792757984/hooks/1-north_hook.py"
+  },
+  {
+   "name": "v05-roll1p93-chip1p6-n2p05-lump0p49",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "thatch_roll": 1.93,
+    "chip_amount": 1.6,
+    "chip_count": 2.05,
+    "thatch_lump": 0.49,
+    "sag_cm": 0.85
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-eave-roll-thatch-lumps-plaster-chips-1792757984/hooks/1-north_hook.py"
+  },
+  {
+   "name": "v08-roll1p23-chip1p72-n1p61-lump1p57",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "thatch_roll": 1.23,
+    "chip_amount": 1.72,
+    "chip_count": 1.61,
+    "thatch_lump": 1.57,
+    "sag_cm": 0.91
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-the-eave-roll-thatch-lumps-plaster-chips-1792757984/hooks/1-north_hook.py"
+  }
+ ]
+}

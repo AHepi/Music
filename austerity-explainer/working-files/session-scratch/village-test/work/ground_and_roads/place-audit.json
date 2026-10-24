@@ -1,0 +1,1632 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-23T11:26:44",
+ "blender": "5.2.2 LTS",
+ "scene_file": "part.blend",
+ "scene_sha1": "7ec607d60512a92b80765831408cc185060539f6",
+ "settings_file": "place-settings.json",
+ "settings_sha1": "a5fef7dc0f7f343b19a5b72c643e641d08585739",
+ "place": "forest village",
+ "place_type": "village",
+ "look": "lived_in",
+ "state": "damp",
+ "quick": true,
+ "map_size_pixels": 256,
+ "mask": {
+  "cell_metres": 0.5,
+  "cells": [
+   764,
+   764
+  ],
+  "seconds": 27.85,
+  "source": "part_only",
+  "bounds": [
+   -191.0,
+   -191.0,
+   191.0,
+   191.0
+  ],
+  "sun": {
+   "compass_degrees": 315.0,
+   "height_degrees": 50.0,
+   "from": "the scene's sun lamp \"Sun\"",
+   "sun": "Sun"
+  }
+ },
+ "masks_from": "part_only",
+ "picture": {
+  "camera": "View wide",
+  "height_pixels": 800,
+  "set": true
+ },
+ "counts": {
+  "objects_visible": 10,
+  "objects_total": 28,
+  "materials": 4,
+  "triangles": 482150,
+  "triangles_by_owner": {
+   "ground_and_roads": 482150
+  },
+  "scatter_pieces": 87372,
+  "ground_area_m2": 113408.26
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.forest_floor": 1,
+   "ground.grass": 3,
+   "ground.dirt_road": 2,
+   "ground.mud": 1,
+   "backdrop": 3
+  }
+ },
+ "materials": [
+  {
+   "name": "PK ground.dirt_road / dirt_road",
+   "role": "ground.dirt_road",
+   "roles": [
+    "ground.dirt_road"
+   ],
+   "users": 2,
+   "objects": [
+    "Ground road high_road",
+    "Ground road stable_lane"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_dirt_road_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.54,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.05999999865889549,
+      "max_vertex_displacement": 0.05999999865889549,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 1.0,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6000000000000001,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37895,
+      "per_100_square_metres": 33.41467479515979
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49477,
+      "per_100_square_metres": 43.62733513234255
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.forest_floor / forest_floor",
+   "role": "ground.forest_floor",
+   "roles": [
+    "ground.forest_floor"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground forest floor"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_forest_floor_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.03999999910593033,
+      "max_vertex_displacement": 0.03999999910593033,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.8999999999999999,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37895,
+      "per_100_square_metres": 33.41467479515979
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49477,
+      "per_100_square_metres": 43.62733513234255
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.grass / grass",
+   "role": "ground.grass",
+   "roles": [
+    "ground.grass"
+   ],
+   "users": 3,
+   "objects": [
+    "Ground clearing",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_grass_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "node": null,
+      "method": "BUMP",
+      "depth_metres": 0.0,
+      "max_vertex_displacement": 0.0,
+      "mesh": null
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37895,
+      "per_100_square_metres": 33.41467479515979
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49477,
+      "per_100_square_metres": 43.62733513234255
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.mud / mud",
+   "role": "ground.mud",
+   "roles": [
+    "ground.mud"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground yard"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_mud_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.05999999865889549,
+      "max_vertex_displacement": 0.05999999865889549,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.78,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37895,
+      "per_100_square_metres": 33.41467479515979
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49477,
+      "per_100_square_metres": 43.62733513234255
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  }
+ ],
+ "objects": [
+  {
+   "name": "Ground forest floor",
+   "role": "ground.forest_floor",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.forest_floor / forest_floor"
+   ],
+   "mesh_name": "Ground forest floor",
+   "size": [
+    380.0,
+    380.0,
+    1.7607
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "rubbish": 0.75,
+    "dirt": 0.85,
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.8999999999999999,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 64034,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.9773487870649863,
+    "subdivided": false,
+    "fine_edge_m": 0.2800014068817447,
+    "relief_m": 0.2472
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground clearing",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground clearing",
+   "size": [
+    112.8122,
+    84.4715,
+    1.0816
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "rubbish": 0.75,
+    "dirt": 0.85,
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.75,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 72624,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.48416115275905836,
+    "subdivided": false,
+    "fine_edge_m": 0.27831690631544204,
+    "relief_m": 0.0944
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground road high_road",
+   "role": "ground.dirt_road",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.dirt_road / dirt_road"
+   ],
+   "mesh_name": "Ground road high_road",
+   "size": [
+    284.9228,
+    41.0064,
+    1.5252
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "rubbish": 0.6000000000000001,
+    "dirt": 1.0,
+    "weathering": 0.8,
+    "grime": 0.8,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 157634,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.14706922598428612,
+    "subdivided": false,
+    "fine_edge_m": 0.06505471175695714,
+    "relief_m": 0.1881,
+    "road_entry": true
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "scale": [
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "high_road"
+    },
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "stable_lane"
+    }
+   ]
+  },
+  {
+   "name": "Ground road stable_lane",
+   "role": "ground.dirt_road",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.dirt_road / dirt_road"
+   ],
+   "mesh_name": "Ground road stable_lane",
+   "size": [
+    6.7115,
+    19.8361,
+    0.2852
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "rubbish": 0.6000000000000001,
+    "dirt": 1.0,
+    "weathering": 0.8,
+    "grime": 0.8,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 18996,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.09241720972962299,
+    "subdivided": false,
+    "fine_edge_m": 0.04600466086678256,
+    "relief_m": 0.074,
+    "road_entry": true
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "scale": [
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "high_road"
+    },
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "stable_lane"
+    }
+   ]
+  },
+  {
+   "name": "Ground yard",
+   "role": "ground.mud",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.mud / mud"
+   ],
+   "mesh_name": "Ground yard",
+   "size": [
+    20.2547,
+    12.2686,
+    0.2047
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "rubbish": 0.75,
+    "dirt": 0.85,
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.75,
+    "wetness": 0.78
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 37319,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.1246981145269118,
+    "subdivided": false,
+    "fine_edge_m": 0.0701483907791053,
+    "relief_m": 0.0572
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground verge high_road",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground verge high_road",
+   "size": [
+    287.633,
+    43.3105,
+    1.3995
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "rubbish": 0.75,
+    "dirt": 0.85,
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.75,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 29406,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.27366980494659204,
+    "subdivided": false,
+    "fine_edge_m": 0.09610459464050147,
+    "relief_m": 0.1632
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground verge stable_lane",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground verge stable_lane",
+   "size": [
+    8.8853,
+    18.8589,
+    0.1831
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "rubbish": 0.75,
+    "dirt": 0.85,
+    "weathering": 0.8,
+    "grime": 0.8,
+    "moss_and_algae": 0.75,
+    "wetness": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 3257,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.2100523644039661,
+    "subdivided": false,
+    "fine_edge_m": 0.09000262223830381,
+    "relief_m": 0.0061
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Backdrop near ring",
+   "role": "backdrop",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "Backdrop near ring",
+    "Backdrop plain ground"
+   ],
+   "mesh_name": "Backdrop near ring",
+   "size": [
+    1800.0,
+    1800.0,
+    50.4937
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 47880,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 15.741220847207053,
+    "subdivided": false,
+    "fine_edge_m": 15.741220847207053
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Backdrop middle ring",
+   "role": "backdrop",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "Backdrop middle ring"
+   ],
+   "mesh_name": "Backdrop middle ring",
+   "size": [
+    1400.0,
+    1400.0,
+    79.2772
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 27200,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 11.193182760119116,
+    "subdivided": false,
+    "fine_edge_m": 11.193182760119116
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Backdrop far ring",
+   "role": "backdrop",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "Backdrop far ring"
+   ],
+   "mesh_name": "Backdrop far ring",
+   "size": [
+    1640.0,
+    1640.0,
+    116.8906
+   ],
+   "has_normal_map": false,
+   "needs_uv": true,
+   "uv": {
+    "has": false,
+    "layer": null,
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {},
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 23800,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 12.847000448663634,
+    "subdivided": false,
+    "fine_edge_m": 12.847000448663634
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": true,
+   "unsurfaced": false,
+   "surface_missing": []
+  }
+ ],
+ "siblings": {},
+ "scatter": {
+  "groups": [
+   {
+    "name": "leaf",
+    "group": "litter",
+    "objects": [
+     "PK scatter leaf 0",
+     "PK scatter leaf 1"
+    ],
+    "count": 24229,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "pine_needles",
+    "group": "litter",
+    "objects": [
+     "PK scatter pine_needles 0"
+    ],
+    "count": 10944,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "stick",
+    "group": "litter",
+    "objects": [
+     "PK scatter stick 0"
+    ],
+    "count": 8725,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "straw",
+    "group": "litter",
+    "objects": [
+     "PK scatter straw 0"
+    ],
+    "count": 3416,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "clod",
+    "group": "litter",
+    "objects": [
+     "PK scatter clod 0"
+    ],
+    "count": 2163,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "tuft",
+    "group": "plant",
+    "objects": [
+     "PK scatter tuft 0",
+     "PK scatter tuft 1"
+    ],
+    "count": 21551,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "clover",
+    "group": "plant",
+    "objects": [
+     "PK scatter clover 0"
+    ],
+    "count": 4608,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "nettle",
+    "group": "plant",
+    "objects": [
+     "PK scatter nettle 0"
+    ],
+    "count": 4337,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "fern",
+    "group": "plant",
+    "objects": [
+     "PK scatter fern 0"
+    ],
+    "count": 2862,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "bramble",
+    "group": "plant",
+    "objects": [
+     "PK scatter bramble 0"
+    ],
+    "count": 1111,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "moss_cushion",
+    "group": "plant",
+    "objects": [
+     "PK scatter moss_cushion 0"
+    ],
+    "count": 3426,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   }
+  ],
+  "plants_per_100m2": 33.41467479515979,
+  "litter_per_100m2": 43.62733513234255,
+  "required": {
+   "plants": {
+    "required_by": [
+     "Ground forest floor",
+     "Ground clearing",
+     "Ground road high_road",
+     "Ground road stable_lane",
+     "Ground yard",
+     "Ground verge high_road",
+     "Ground verge stable_lane"
+    ],
+    "count": 37895,
+    "per_100_square_metres": 33.41467479515979,
+    "has": true
+   },
+   "litter_pieces": {
+    "required_by": [
+     "Ground forest floor",
+     "Ground clearing",
+     "Ground road high_road",
+     "Ground road stable_lane",
+     "Ground yard",
+     "Ground verge high_road",
+     "Ground verge stable_lane"
+    ],
+    "count": 49477,
+    "per_100_square_metres": 43.62733513234255,
+    "has": true
+   }
+  }
+ },
+ "normal_maps": {
+  "images": [
+   {
+    "name": "pk_dirt_road_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4998356103897095,
+     0.500018298625946,
+     0.9774683117866516
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9989045262336731,
+     "y": 0.9988864064216614,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_forest_floor_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999009668827057,
+     0.5000139474868774,
+     0.9759030342102051
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9989592432975769,
+     "y": 0.9989268183708191,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_grass_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000083446502686,
+     0.49999162554740906,
+     0.9843347072601318
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9993100762367249,
+     "y": 0.9993526339530945,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_mud_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000390410423279,
+     0.4999043941497803,
+     0.9777207970619202
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9985438585281372,
+     "y": 0.9986855387687683,
+     "method": "height"
+    },
+    "verdict": "pass"
+   }
+  ],
+  "test_light": null
+ },
+ "displacement": {
+  "materials": [
+   "PK ground.dirt_road / dirt_road",
+   "PK ground.forest_floor / forest_floor",
+   "PK ground.mud / mud"
+  ],
+  "objects": [
+   "Ground forest floor",
+   "Ground road high_road",
+   "Ground road stable_lane",
+   "Ground yard"
+  ],
+  "too_coarse": []
+ },
+ "roads": [
+  {
+   "name": "high_road",
+   "ground_objects": [
+    "Ground forest floor",
+    "Ground clearing",
+    "Ground road high_road",
+    "Ground road stable_lane",
+    "Ground yard",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "relief_m": 0.2472,
+   "ruts_found": true,
+   "rut_depth_m": 0.1016,
+   "gauge_m": 1.333,
+   "gauge_in_settings_m": 1.4
+  },
+  {
+   "name": "stable_lane",
+   "ground_objects": [
+    "Ground forest floor",
+    "Ground clearing",
+    "Ground road high_road",
+    "Ground road stable_lane",
+    "Ground yard",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "relief_m": 0.2472,
+   "ruts_found": true,
+   "rut_depth_m": 0.0791,
+   "gauge_m": 1.417,
+   "gauge_in_settings_m": 1.4
+  }
+ ],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [
+   "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+  ],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "lamps": 1,
+  "suns": 1,
+  "world_light": true,
+  "emissive_materials": false,
+  "clip_share": null
+ },
+ "off": {
+  "entries": [],
+  "allowed_ids": [
+   "floors_indoors"
+  ],
+  "share": 0.0
+ },
+ "construction_summary": {
+  "parts_checked": 0,
+  "objects_checked": 0,
+  "carried": 0,
+  "floating": [],
+  "hung": [],
+  "sample_spacing_metres": 0.02,
+  "sampled_coarser": false,
+  "scatter_exempt": 16,
+  "note": "scattered pieces (plants, leaves, litter) and never-roles are exempt on purpose: they stand on the ground by their own roots"
+ },
+ "non_mesh": [],
+ "problems": [],
+ "views": {
+  "for_film": false,
+  "render_size": [
+   1200,
+   800,
+   100
+  ],
+  "cameras": [
+   {
+    "name": "View wide",
+    "scene_camera": true,
+    "kind": "PERSP",
+    "lens_mm": 28.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 1306.3,
+    "farthest_object": "Backdrop near ring",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 480,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 437,
+    "sun": {
+     "ground_points": 437,
+     "shadowed": 2,
+     "shadowed_share": 0.004576659038901602,
+     "shadowed_by": [
+      {
+       "object": "PK scatter nettle 0",
+       "points": 1
+      },
+      {
+       "object": "PK scatter tuft 0",
+       "points": 1
+      }
+     ]
+    }
+   },
+   {
+    "name": "View road_eye",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 35.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 1047.25,
+    "farthest_object": "Backdrop near ring",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 320,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 316,
+    "sun": {
+     "ground_points": 316,
+     "shadowed": 2,
+     "shadowed_share": 0.006329113924050633,
+     "shadowed_by": [
+      {
+       "object": "PK scatter nettle 0",
+       "points": 2
+      }
+     ]
+    }
+   },
+   {
+    "name": "View stable_close",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 28.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 1169.33,
+    "farthest_object": "Backdrop near ring",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 352,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 342,
+    "sun": {
+     "ground_points": 342,
+     "shadowed": 0,
+     "shadowed_share": 0.0,
+     "shadowed_by": []
+    }
+   },
+   {
+    "name": "View cottage_close",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 35.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 1091.74,
+    "farthest_object": "Backdrop near ring",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 352,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 319,
+    "sun": {
+     "ground_points": 319,
+     "shadowed": 1,
+     "shadowed_share": 0.003134796238244514,
+     "shadowed_by": [
+      {
+       "object": "PK scatter nettle 0",
+       "points": 1
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "world": {
+  "backdrops": [
+   "Backdrop near ring",
+   "Backdrop middle ring",
+   "Backdrop far ring"
+  ],
+  "backdrops_casting_shadows": [],
+  "far_large_casting_shadows": [],
+  "haze_volume": false,
+  "place_span_m": 380.0
+ },
+ "sun": {
+  "name": "Sun",
+  "compass_degrees": 315.0,
+  "height_degrees": 50.0,
+  "energy": 4.5
+ },
+ "lettering": {
+  "checked": 0,
+  "objects": []
+ }
+}

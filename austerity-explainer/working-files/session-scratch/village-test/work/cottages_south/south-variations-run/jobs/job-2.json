@@ -1,0 +1,83 @@
+{
+ "job": 2,
+ "scene": "/workspace/place-jobs/scenes/ecd7c067/batch.blend",
+ "settings": "/workspace/place-jobs/scenes/ecd7c067/settings-dd8b4f3b-e8bf066e/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-colour-and-surface-of-cottage-c-red-daub-1792762741/job-2",
+ "cameras": [
+  "Place cottages_south cam 1",
+  "Place cottages_south cam 2"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "v02-dm07-tp00-ch15",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "daub_tone": -0.73,
+    "daub_value": 0.91,
+    "thatch_tone": 0.04,
+    "thatch_roll": 0.65,
+    "thatch_lump": 0.36,
+    "chip": 1.52,
+    "cob_lump": 1.94,
+    "cob_tone": -0.78,
+    "shingle_mix": 1.53
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-colour-and-surface-of-cottage-c-red-daub-1792762741/hooks/1-south_hook.py"
+  },
+  {
+   "name": "v05-dp07-tp07-ch07",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "daub_tone": 0.72,
+    "daub_value": 0.93,
+    "thatch_tone": 0.69,
+    "thatch_roll": 1.6,
+    "thatch_lump": 2.17,
+    "chip": 0.71,
+    "cob_lump": 1.28,
+    "cob_tone": 0.03,
+    "shingle_mix": 1.6
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-colour-and-surface-of-cottage-c-red-daub-1792762741/hooks/1-south_hook.py"
+  },
+  {
+   "name": "v08-dm02-tm10-ch09",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "daub_tone": -0.23,
+    "daub_value": 1.0,
+    "thatch_tone": -0.98,
+    "thatch_roll": 0.32,
+    "thatch_lump": 0.55,
+    "chip": 0.89,
+    "cob_lump": 0.74,
+    "cob_tone": 0.79,
+    "shingle_mix": 0.53
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-colour-and-surface-of-cottage-c-red-daub-1792762741/hooks/1-south_hook.py"
+  }
+ ]
+}

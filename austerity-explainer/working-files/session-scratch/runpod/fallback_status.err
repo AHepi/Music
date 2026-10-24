@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/runpod/render_client_cached.py", line 227, in <module>
+    download_file(remote, local, info['size'])
+    
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/runpod/render_client_cached.py", line 181, in main
+    parser.add_argument('action')
+    ^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/runpod/render_client_cached.py", line 87, in ensure_machine
+    started = time.time()
+            ^^^^^^^^^^^^^
+RuntimeError: the machine did not get ready within 15 minutes

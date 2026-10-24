@@ -1,0 +1,39 @@
+passed   test_after_painting.py  (95.9 s)  after_painting: the arrival checks on the real paintings: 21 of 21 checks passed
+FAILED   test_camera_audit.py  (0.1 s)
+    Traceback (most recent call last):
+      File "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_camera_audit.py", line 18, in <module>
+    ModuleNotFoundError: No module named 'checks'
+passed   test_check_page_layout.py  (0.7 s)  page layout: pops, effects after their moment, held shots, overlaps: 10 of 10 checks passed
+passed   test_check_shot_kinds.py  (101.2 s)  shot checker: kinds of shot and the accepted list: 20 of 20 checks passed
+passed   test_frame_geometry.py  (0.0 s)  frame geometry: recorded cases and hold-outs: 57 of 57 checks passed
+passed   test_frame_geometry_parity.py  (0.3 s)  frame geometry: Python and JavaScript give the same numbers: 31 of 31 checks passed
+passed   test_house_rules.py  (1.6 s)  house rules: a plain note at the top and a --help: 3 of 3 checks passed
+passed   test_lint_script.py  (2.3 s)  script and narration gate: before recording and after: 43 of 43 checks passed
+passed   test_make_check_file.py  (58.7 s)  make_check_file: check files from the scene: 45 of 45 checks passed
+passed   test_model_lint.py  (37.7 s)  model_lint: model faults before plates: 24 of 24 checks passed
+passed   test_page_events.py  (62.2 s)  page events: the notes change nothing, and the events are reproducible: 13 of 13 checks passed
+passed   test_paint_request.py  (72.1 s)  paint_request: prompts, preflight and price against the recorded cases: 37 of 37 checks passed
+passed   test_place_facts.py  (0.9 s)  place facts: schema, converters and what they carry: 35 of 35 checks passed
+passed   test_plan_budget.py  (1.4 s)  budget planner: money, filming time, pieces, stretches, memory, disk, pushes: 47 of 47 checks passed
+FAILED   test_plan_effects.py  (0.1 s)
+    Traceback (most recent call last):
+      File "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_plan_effects.py", line 17, in <module>
+    ModuleNotFoundError: No module named 'checks'
+FAILED   test_plan_lights.py  (0.1 s)
+    Traceback (most recent call last):
+      File "/home/user/Music/plugins/explainer-film/kit/calculators/tests/test_plan_lights.py", line 16, in <module>
+    ModuleNotFoundError: No module named 'checks'
+passed   test_plan_page_timing.py  (0.9 s)  page timing: pauses, reading times, cuts, margins, words, numbers, stills: 57 of 57 checks passed
+passed   test_plan_shot.py  (0.3 s)  shot planner: recorded cases and the checkout hold-out: 60 of 60 checks passed
+passed   test_plan_states.py  (36.9 s)  plan_states: helper plates, cut or blend, against the Works and the people test: 17 of 17 checks passed
+FAILED   test_settings.py  (0.1 s)  film settings: the table, its reader and drift in the tools: 42 of 43 checks passed; FAILED: the invented numbers are few (at most a tenth of the table) and named
+    == film settings: the table, its reader and drift in the tools
+    FAIL  the invented numbers are few (at most a tenth of the table) and named: 59 of 523: camera.slide_magnification_borderline_share, people.facing_head_max_pixels, people.crowd_axis_min_angle_to_view_degrees, shot_planner.right_edge_aim_margin_share, shot_planner.planning_spot_box, shot_planner.face_visible_dot_min, shot_planner.crowd_min_figures, shot_planner.crowd_axis_min_elongation, shot_planner.check_shot_silhouette_band_share_of_width, shot_planner.check_shot_accepted_worse_share, views_and_models.model_lint.same_plane_gap_metres, views_and_models.model_lint.same_plane_normal_cos, views_and_models.model_lint.same_plane_overlap_min_square_metres, views_and_models.model_lint.upward_normal_z_min, views_and_models.model_lint.glowing_base_brightness_max, views_and_models.model_lint.size_claim_tolerance_share, views_and_models.model_lint.floor_min_square_metres, views_and_models.view_audit.must_read_facing_min_cos, views_and_models.view_audit.face_shows_within_degrees, views_and_models.check_file.dark_base_brightness, views_and_models.check_file.thin_fill_share, page_timing.pause_longer_than_needed_seconds, page_timing.overlap_pixels_min, page_timing.merge_stills_within_seconds, page_timing.layout.pop_strength_change, page_timing.layout.hold_without_still_key_frames, page_timing.layout.camera_still_tolerance, page_timing.layout.jump_pixels_min, painting_tools.paint_request.coat_band_share_of_height, painting_tools.after_painting.align_gain_min, painting_tools.after_painting.figure_surround_ratio_max, painting_tools.after_painting.figure_surround_lift_max, painting_tools.after_painting.head_widen_share_of_height, painting_tools.after_painting.new_skin_pixels_look, painting_tools.after_painting.style_tolerance, painting_tools.after_painting.added_figure_blob, painting_tools.plan_states.behind_gap_metres, effects_planner.visible_strength_min, effects_planner.edge_strength_min, effects_planner.other_chimney_clearance_share, effects_planner.mouth_to_chimney_top_ratio_min, effects_planner.plume_colour_difference_min, effects_planner.contact_shadow_on_ground_within_metres, effects_planner.flame_variety_min, light_planner.cone_margin_degrees, light_planner.own_housing_within_metres, light_planner.near_surface_within_metres, script_gate.repeated_sentence_words_min, script_gate.stake_words, script_gate.long_word_letters, script_gate.term_repeats_min, sound_gates.alignment_match_min, sound_gates.voiced_below_peak_db, sound_gates.section_change_db, sound_gates.section_snap_seconds, budget_planner.piece_load_share_max, budget_planner.lazy_model_memory_factor, budget_planner.lazy_heavy_pages_max, budget_planner.memory_reserve_gb
+    -- film settings: the table, its reader and drift in the tools: 42 of 43 checks passed; FAILED: the invented numbers are few (at most a tenth of the table) and named
+passed   test_shot_kind_profiles.py  (0.1 s)  shot-kind profiles against the views the project kept: 17 of 17 checks passed
+passed   test_sound_gates.py  (267.6 s)  sound gates: lengths, loudness, alignment, music under the voice, voice, mouth, music start: 33 of 33 checks passed
+passed   test_view_audit.py  (0.4 s)  view_audit: lettering, figures and landmarks per view: 55 of 55 checks passed
+
+23 test files: 19 passed, 4 failed, 0 skipped.
+Failed: test_camera_audit.py, test_plan_effects.py, test_plan_lights.py, test_settings.py
+exit 1

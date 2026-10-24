@@ -1,0 +1,93 @@
+{
+ "about": "The shot planner (calculators/plan_shot.py) and the shot checker's kinds of shot and accepted list (paper-film/tools/check_shot.py): margins, figure sizes and crowd tests. Added by the shot planner helper (log 35).",
+ "reach_aim_margin_down": {
+  "value": 0.02,
+  "unit": "down the frame, past rule 7's reach",
+  "kind": "judged",
+  "source": "The camera sums land within 0.006 to 0.015 of the rendered reach (core tests: W1 DIESEL drum 0.723 against the rendered 0.72; checkout C1 divider 0.776 against 0.78; man 6's feet 0.696 against his box bottom 0.704), so the planner aims 0.02 past the limit; round 5's W1 passed at 0.72 (scratchpad redesign/round5-set/checks/final-w1-quiet/report.md)"
+ },
+ "figure_shoes_below_feet_down": {
+  "value": 0.012,
+  "unit": "down the frame",
+  "kind": "measured",
+  "source": "Core tests (log 35): a figure's feet point lands 0.0005 to 0.0111 above the bottom of its model's box from Blender (people test, 11 figures, people-test-shot.json film_frame_box) and 0.0076 for W1's man 6 (works-shot.json men_seen); a figure that misses the reach by less than this is a 'look'"
+ },
+ "right_edge_aim_margin_share": {
+  "value": 0.015,
+  "unit": "share of the width, inside the must-read edge",
+  "kind": "invented",
+  "source": "Design (log 35): the wanted meeting point is 0.895 - the subject's width - 0.01, so its right edge ends at 0.885 (check_shot.py's own fixes aim 0.005 inside the limit); untested"
+ },
+ "planning_spot_box": {
+  "value": [
+   0.3,
+   0.4
+  ],
+  "unit": "share of width x height",
+  "kind": "invented",
+  "source": "Design (log 35): keep the spots that can be worked out before rendering (meeting point, subject, story) inside 0.30 x 0.40, leaving room for the brightest parts and the warm light within the main rule's 0.40 x 0.50; rendered spans: notice corner 0.11 x 0.23 (log 31), checkout C1 0.22 x 0.10 (check 10)"
+ },
+ "figure_shoulder_width_metres": {
+  "value": 0.47,
+  "unit": "metres",
+  "kind": "judged",
+  "source": "paper-film/blender/figures/build_figures.py: shoulder joints 0.175 m either side of the middle (SHOULDER_SIDE) and a coat chest ring 0.192 m half-wide, plus the sleeve (about 0.06 m, judged from the code); figures/index.json overall widths 0.53 to 0.66 m include the arms"
+ },
+ "figure_box_metres": {
+  "value": [
+   0.64,
+   0.54
+  ],
+  "unit": "metres [across, front to back]",
+  "kind": "measured",
+  "source": "figures/index.json size_metres of the five waiting men (widths 0.529 to 0.663 m, depths 0.47 to 0.833 m; medians 0.636 and 0.539): the box shot_facts.py measures round a figure, arms included"
+ },
+ "figure_head_width_metres": {
+  "value": 0.155,
+  "unit": "metres",
+  "kind": "measured",
+  "source": "build_figures.py HEAD_HALF_SIZE (0.0775 m half width, without the cap)"
+ },
+ "face_visible_dot_min": {
+  "value": -0.2,
+  "unit": "cosine between the figure's facing and the way to the camera",
+  "kind": "invented",
+  "source": "Inventory 'Head size decides painted or silhouette' (log 35): a face or profile shows when facing . to-camera > -0.2 (about 100 degrees); untested"
+ },
+ "sign_edge_on_degrees": {
+  "value": 70,
+  "unit": "degrees between a sign's facing and the way to the camera",
+  "kind": "judged",
+  "source": "Plan 34 lines 85-87 ('a face seen at under about 20 degrees is edge-on and fails'); a drum's stencil uses its own wrap (lettering.stencil_wrap_degrees)"
+ },
+ "crowd_min_figures": {
+  "value": 3,
+  "unit": "figures",
+  "kind": "invented",
+  "source": "Shot planner (log 35): a story group of 3 or more figures is judged as a crowd (its long axis, rows and heads)"
+ },
+ "crowd_axis_min_elongation": {
+  "value": 1.5,
+  "unit": "spread along the long axis over the spread across it",
+  "kind": "invented",
+  "source": "Shot planner (log 35): a group that spreads less than 1.5 times as far one way as the other has no long axis to line up along a view"
+ },
+ "slide_sample_steps": {
+  "value": 10,
+  "unit": "steps along a slide",
+  "kind": "judged",
+  "source": "Design (log 35): cast the film frame's corners every 10% of the slide; people are judged from every step too"
+ },
+ "check_shot_silhouette_band_share_of_width": {
+  "value": 0.02,
+  "unit": "share of the frame width",
+  "kind": "invented",
+  "source": "check_shot.py's dark-subject test (log 35): the band round the subject's outline whose brightness is compared with the subject's (the people test measured its figure contrast over a band too, film-figure-contrast.json); untested on a gate"
+ },
+ "check_shot_accepted_worse_share": {
+  "value": 0.05,
+  "unit": "share of the accepted number",
+  "kind": "invented",
+  "source": "check_shot.py's accepted list (log 35): an accepted problem that has grown more than 5% past the number it was accepted at is a problem again"
+ }
+}

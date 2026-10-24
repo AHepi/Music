@@ -1,0 +1,82 @@
+{
+ "job": 2,
+ "scene": "/workspace/place-jobs/scenes/7ebb7efe/part.blend",
+ "settings": "/workspace/place-jobs/scenes/7ebb7efe/settings-dd8b4f3b-e8bf066e/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2",
+ "cameras": [
+  "View wide",
+  "View road_eye",
+  "View stable_close",
+  "View cottage_close"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "reset": "auto",
+   "script": null
+  },
+  {
+   "name": "rough-small-olive",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.34,
+    "crown_scale": 0.8,
+    "density": 1.3,
+    "tone_olive": 0.55,
+    "golden": 2,
+    "moss_scale": 1.0,
+    "lump_detail": 1,
+    "lean_share": 0.2
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  },
+  {
+   "name": "autumn-gold",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.26,
+    "crown_scale": 0.95,
+    "density": 1.0,
+    "tone_olive": 0.95,
+    "golden": 6,
+    "moss_scale": 0.8,
+    "lump_detail": 2,
+    "lean_share": 0.0
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  },
+  {
+   "name": "leaning-rim",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.2,
+    "crown_scale": 1.2,
+    "density": 1.1,
+    "tone_olive": 0.4,
+    "golden": 2,
+    "moss_scale": 1.4,
+    "lump_detail": 2,
+    "lean_share": 0.4
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  }
+ ]
+}

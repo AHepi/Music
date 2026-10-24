@@ -1,0 +1,78 @@
+make_check_file: wrote out/works-w3-check.json for view w3 (overview, crowd, dark_subject), camera "camera-w3"
+  groups (20): two gates and the wall between, no-1 chimney, no-2 chimneys, gate boards, brazier, no-2 crates, man 1, man 2, man 3, man 4, man 5, man 6, man 7, bank-brass-plate, bank sign, no-1 drums, no-2 drums, lantern, lunch-tin, handcart
+    declared in the shot list: two gates and the wall between, no-1 chimney, no-2 chimneys
+  story (shot list): gate boards, brazier, no-2 crates, man 1, man 2, man 3, man 4, man 5, man 6, man 7; subject two gates and the wall between; support None
+  must_read: gate boards, no-2 crates, bank-brass-plate, bank sign, no-1 drums, no-2 drums, handcart
+  on_ground: brazier, no-2 crates, man 1, man 2, man 3, man 4, man 5, man 6, man 7, no-1 drums, no-2 drums, handcart; stands_on: {'lantern': 'no-1 drums', 'lunch-tin': 'no-1 drums'}
+  lights_in_story: none (glowing share of each story group: gate boards 0.00, brazier 0.07, no-2 crates 0.00, man 1 0.00, man 2 0.00, man 3 0.00, man 4 0.00, man 5 0.00, man 6 0.00, man 7 0.00)
+  pairs_also: no-1 chimney, no-2 chimneys, bank-brass-plate, bank sign, no-1 drums, no-2 drums, lantern, lunch-tin, handcart
+  eye_height [0.8, 7.0], story_reaches_down 0.7, sky "sky_dome*", title_zone [0.06, 0.05, 0.9, 0.22], band: true
+  match_excludes: two gates and the wall between (bars (0.20 of its outline filled), dark (base colour 0.015)); gate boards (lettered (a board's border is its strongest edge)); no-2 crates (lettered (a board's border is its strongest edge)); man 1 (one of 7 alike figures (slid, it lines up with a neighbour: round 3-5)); man 2 (dark (base colour 0.012), one of 7 alike figures (slid, it lines up with a neighbour: round 3-5)); man 3 (dark (base colour 0.016), one of 7 alike figures (slid, it lines up with a neighbour: round 3-5)); man 4 (dark (base colour 0.012), one of 7 alike figures (slid, it lines up with a neighbour: round 3-5)); man 5 (dark (base colour 0.016), one of 7 alike figures (slid, it lines up with a neighbour: round 3-5)); man 6 (dark (base colour 0.012), one of 7 alike figures (slid, it lines up with a neighbour: round 3-5)); man 7 (dark (base colour 0.012), one of 7 alike figures (slid, it lines up with a neighbour: round 3-5)); bank-brass-plate (bars (0.01 of its outline filled), lettered (a board's border is its strongest edge)); bank sign (lettered (a board's border is its strongest edge)); no-1 drums (lettered (a board's border is its strongest edge)); no-2 drums (lettered (a board's border is its strongest edge)); handcart (lettered (a board's border is its strongest edge))
+  figures: man 1, man 2, man 3, man 4, man 5, man 6, man 7; kind_of_shot ['overview', 'crowd', 'dark_subject']; accepted: 0
+  (check_shot.py reads kind_of_shot, figures, fill, support_surfaces and accepted; "band", "match_excludes" and "own_surface_materials" are for the next tools and the page)
+  note: more than 20 groups (shot_facts.py's colours): left out the farthest: no-2-worker-2, no-2-worker-1, w4-upturned-crate, tin-mug-and-wages, jacket-and-cap, no-2-gate-lamp, no-1-gate-lamp
+  note: title zone: the view's kind of shot puts the words over a soft dark band (a soft dark band behind the words (safe_area.top_shade) wherever the band holds roofs, chimneys or smoke (plan T13))
+
+Against the hand-made check file:
+  groups: 18 of 18 hand groups hold exactly the same drawn objects as a generated group
+  generated only: bank-brass-plate, lunch-tin
+  subject: same
+  support: same
+  story: same
+  work: same
+  pairs_also: only in the hand file: -; only generated: bank-brass-plate, lunch-tin, no-1 chimney, no-2 chimneys
+  on_ground: same
+  must_read: only in the hand file: -; only generated: bank-brass-plate, handcart, no-1 drums, no-2 crates, no-2 drums
+  lights_in_story: only in the hand file: lantern; only generated: -
+  box_excludes: same
+  stands_on: hand {}, generated {'lantern': 'no-1 drums', 'lunch-tin': 'no-1 drums'}
+  size: same
+  lines: same
+  lines_key: same
+  eye_height: same
+  title_zone: same
+  story_reaches_down: hand null, generated 0.7
+  sky: same
+
+Settings used (film-settings.json):
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  shot_kind_profiles.still_life.rules.main_rule_spot_box = [0.4, 0.5] share of width x height (measured)
+  shot_kind_profiles.dark_subject.rules.rule1_meeting_point_gap = 0.03 share of the width, across only (judged)
+  shot_kind_profiles.overview.rules.rule2_eye_height = [0.8, 7.0] metres above the surface the checker finds under the camera (judged)
+  shot_kind_profiles.overview.rules.rule3_story_box = [0.6, 0.5] share of width x height (judged)
+  shot_kind_profiles.crowd.rules.rule3_story_box = [0.8, 0.5] share of width x height (judged)
+  shot_kind_profiles.overview.rules.rule3_story_together_metres = 2.0 metres between footprints (judged)
+  shot_kind_profiles.still_life.rules.rule4_near_touch = {"overlap_min": 20, "gap_min": 25} pixels at 1536 wide (judged)
+  shot_kind_profiles.crowd.rules.rule4_between_figures = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_subject_brightness_ratio = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_brightest_share_on_subject = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_brightest_share_in_story_box = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_nothing_in_story_as_bright = None replaced (judged)
+  shot_kind_profiles.still_life.rules.rule5_top_third_brightness = 0.36 mean brightness (0 to 1) (measured)
+  shot_kind_profiles.still_life.rules.rule6_warm_share = [0.015, 0.03] share of the frame (measured)
+  shot_kind_profiles.dark_subject.rules.rule6_lit_from_below = None off (judged)
+  shot_kind_profiles.overview.rules.rule7_story_reaches_down = 0.7 down the frame (judged)
+  shot_kind_profiles.still_life.rules.rule8_work_prop_share = 0.02 share of the frame (measured)
+  shot_kind_profiles.crowd.rules.rule8_bottom_left_share = 0.02 share of the frame per story thing (the subject or a story prop) (judged)
+  shot_kind_profiles.overview.rules.rule10_quiet_side_weight = [0.4, 0.6] share of the weight (judged)
+  shot_kind_profiles.crowd.rules.rule10_quiet_side_weight = [0.4, 0.5] share of the weight (judged)
+  shot_kind_profiles.dark_subject.rules.rule10_nothing_on_quiet_side_outshines = None off (judged)
+  shot_kind_profiles.still_life.rules.rule12_must_read_right_edge = 0.9 share of the width (judged)
+  shot_kind_profiles.still_life.rules.rule12_story_right_edge = 0.95 share of the width (in 0.45-0.95 down) (judged)
+  shot_kind_profiles.crowd.rules.rule12_title_zone_sky_share = None replaced (judged)
+  shot_kind_profiles.still_life.rules.resting_on = the street (ground rays; "landed high" over 0.5 m) rule (judged)
+  shot_kind_profiles.still_life.rules.slide_magnification = painting limit times nearer at the nearest painted surface (measured)
+  shot_kind_profiles.dark_subject.rules.silhouette_contrast = 2.2 (surround + 0.05)/(subject + 0.05) over a band round the subject (measured)
+  views_and_models.check_file.prop_collections = ["props", "signs", "gates", "pop-up", "men*", "workers*", "figures*", "people*", "walkers*", "checkout"] collection name patterns where a place's assemble script puts props and figures (judged)
+  composing.shot_facts_groups_max = 20 groups (measured)
+  views_and_models.lettering_material_patterns = ["*-lettering", "*-lettering.0*", "*-stencil", "*-stencil.0*", "*-printing", "*-printing.0*", "*-paper", "*-paper.0*"] material name patterns (lower case, * any letters) (judged)
+  views_and_models.check_file.light_prop_glow_share = 0.15 share of a story group's own surface that glows (judged)
+  views_and_models.check_file.on_ground_within_metres = 0.05 metres between a group's lowest point and a declared ground (road, pavement, ground, floor) (judged)
+  views_and_models.check_file.ground_kinds = ["ground", "road", "pavement", "floor"] support surface kinds that count as the ground for check_shot's on_ground (judged)
+  views_and_models.check_file.sky_pattern_outdoors = sky_dome* object name pattern (judged)
+  views_and_models.check_file.title_zone_fallback = [0.06, 0.05, 0.9, 0.22] [left, top, right, bottom] shares of the frame (judged)
+  views_and_models.check_file.figure_collections = ["men*", "workers*", "figures*", "people*", "walkers*"] collection name patterns holding figures (judged)
+  views_and_models.check_file.thin_pixels = 6 pixels across at the film frame (the group's narrow side) (judged)
+  views_and_models.check_file.dark_base_brightness = 0.02 area-weighted base colour brightness of a group's materials (linear, 0 to 1) (invented)
+  views_and_models.check_file.thin_fill_share = 0.3 share of a group's outline its faces fill, seen square on (invented)

@@ -1,0 +1,13 @@
+{
+ "owner": "cottages_north",
+ "objects": {"A": 51, "B": 28},
+ "triangles_as_built": 99660,
+ "triangles_after_the_pass_modifiers_audit_count": 187500,
+ "batch": {"count": 1, "card_seconds": 269, "pick": "chip_amount 1.35, thatch_roll 1.3, thatch_lump 1.25, sag 1.0, chip_count 1.0 (judged by looking, the sheet showed nearly no difference between the variations except the chips)"},
+ "deviations": [
+  "ridge about 5.6 m above the ground (not 4.9): 50 degree pitch, 2.0 m eaves, 4.8 m span and a 0.3 m thatch slab make 4.9 impossible",
+  "studs are made with role timber.beam (a joined object with the role timber.post would be leaned as one piece by the damage step); the posts are timber.post, one object each",
+  "cottage B (stone walls) has no studs or wall panels and no tie beam (a 3.6 m tie would pass the 2.5 m beam limit of the construction verb)",
+  "relief objects (walls, panels, thatch, shingles) carry pk_bevelled and no bevel modifier; small boxy objects carry their own one-segment bevel"
+ ]
+}

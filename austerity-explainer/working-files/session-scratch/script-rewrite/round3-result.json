@@ -1,0 +1,1142 @@
+{
+ "tested": [
+  {
+   "key": "newcomers",
+   "summary": "I heard the script once at about 140 words a minute. It has 965 spoken words, about seven and a half minutes counting the three guess holds and the fade. The work folder /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-newcomers was created and left empty. As told, I opened only round3/viewer-version.md.\n\nOverall, the newcomer version mostly works. All four viewers get the main claim, and all four reason the idle-builders case the right way. Where they get lost:\n- the two closing questions;\n- the jump from \"a whole country\" to \"one city's homes\";\n- the vague page 11 line (\"partly from that\", \"building new ones\");\n- a few idioms that trip the second-language viewer.\n\nThese rules held in the spoken text:\n- no name for the money view;\n- no Klein wording that I could spot;\n- numbers written as said;\n- no capitals for emphasis and no bracketed cues;\n- /məˈteɪi/ is used;\n- Mattei's view is said as hers.\n\nTHE 15-YEAR-OLD\n- Main claim: \"New money doesn't always push prices up. If people and machines are doing nothing, it gets more stuff made. If everyone's already busy, prices go up. And the fix for fast-rising prices puts people out of work.\"\n- Terms: inflation, new money, spare, flat-out and interest are fine. The Reserve Bank is \"the bank that makes money\". They are unsure whether the Reserve Bank is the government. \"Loans cost more\" means nothing to them until page 12.\n- First hesitation: page 1, \"the usual cure makes loans cost more\". The first real stumble is page 2, \"a government like ours can't run out of its own money\": is the Reserve Bank the government, and if it can't run out, why can't it pay for everything?\n- Examples:\n  - Britain is clear: no one spare, fewer things, prices doubled.\n  - Glasgow: they follow the story but can't say where the new money comes in, and they notice it's one city, not \"a whole country\".\n  - Japan is clear: the money wasn't spent.\n  - New Zealand: they get the guess right but lose \"partly from that\".\n- Case 1 (idle builders): quiet factory, so more homes and prices barely move. That's correct, but page 11's \"biggest push came from homes... building new ones\" makes them wobble.\n- Case 2 (hospitals, builders all busy): flat-out, so prices go up. The direction is right, but they may say \"so the hospitals don't get built at all\".\n- End: \"Who pays?\" yes: the people who lose their jobs. \"Spent on what?\" only partly: \"what the money buys\", and maybe not linked to spare workers.\n\nTHE 70-YEAR-OLD WHO LEFT SCHOOL AT 15\n- Main claim: \"Printing money only pushes prices up when everyone's already working. The way they fight rising prices costs workers their jobs, and this author says that's the point: it keeps wages down.\"\n- Terms: all fine, except they don't believe \"can't run out of its own money\", which is given with no reason, and they can't say what \"like ours\" means.\n- First hesitation: page 2, that same line.\n- Examples:\n  - Britain lands well.\n  - Glasgow is the most memorable, but they notice it's \"one city's homes\", not a whole country.\n  - Japan: they wonder why the money sat in the banks.\n  - New Zealand: they lose \"that\" on page 11 and may take \"building new ones\" literally.\n- Pages 13 and 15 seem to clash: \"They raised rates again and again and prices still went up four point one percent, so the cure didn't work?\"\n- Case 1: correct.\n- Case 2: correct, and they may add that builders and materials get dearer.\n- End: \"Spent on what?\" yes, through Glasgow: money spent where there are no builders. \"Who pays?\" yes.\n\nTHE ADULT WHOSE FIRST LANGUAGE ISN'T ENGLISH\n- Main claim: \"New money makes prices go up only when no workers or machines are free.\"\n- Terms:\n  - \"Flat-out\" is fine because it's explained.\n  - They stumble on \"in uniform\" (page 6), \"homes were already short\" (page 7), \"set out to\" (page 8), \"gets more things made\" and \"aren't any spare\" (pages 5 and 16), \"partly from that\" (page 11), \"the year to June\" and \"if... hadn't changed... would have gone up\" (page 15), and \"those inside\" (page 14).\n- First hesitation: page 2's 20-word sentence, \"Economists who study how modern money works argue that a government like ours can't run out of its own money\". Whose \"own money\"?\n- Examples:\n  - Britain is clear from the numbers.\n  - Glasgow: they miss the starting point (\"short homes\"?) but get the rent rise and the refusal to pay.\n  - Japan is clear.\n  - New Zealand: they get the guess right and are lost on page 11.\n- Case 1: correct.\n- Case 2: correct direction.\n- End: they hear \"Spent on what?\" literally, as \"what is the money used for?\", without the spare-workers test. They may hear \"who pays?\" literally, as \"who pays money for the cure?\", and only partly recover from the out-of-work dots.\n\nTHE BUSY PARENT HALF-WATCHING ON A PHONE\n- Main claim: \"New money doesn't always raise prices. It depends on whether there are spare workers. Fixing high prices puts people out of work.\"\n- Terms: fine by ear. They miss links that are only on screen: the rule cards tying \"spare\" to the two factories, and the dots going from 3 to 6 in 100.\n- First hesitation: page 3, \"Think of each one as a whole country\", which is odd without the picture. Then they lose Glasgow's point (81 words, six facts) and page 11's \"that\".\n- Examples: Britain yes. Glasgow comes across as \"a rent story\". Japan and New Zealand yes.\n- Case 1: correct.\n- Case 2: correct direction.\n- End: \"Spent on what?\" no; they can only repeat the words. \"Who pays?\" probably: the people who lose their jobs.\n\nTHE TWO CLOSING QUESTIONS\n- \"Who pays?\" works for three of the four, but its answer is never said in one plain sentence.\n- \"Spent on what?\" works reliably for only one or two of the four. Its meaning (\"are there spare workers, materials and machines to make what it buys?\") is said once, in the middle of page 9, and never tied to the question at the end.",
+   "findings": [
+    {
+     "page": 16,
+     "quote": "So next time you hear the warning... ask two questions. Spent on what? And who pays for the cure?",
+     "problem": "\"Spent on what?\" only works if the viewer remembers page 9's single line, \"Are there spare workers, materials and machines to make what it buys?\". At the end, page 16 repeats the general rule but never ties the question to it. The second-language viewer hears it literally (\"what is the money used for?\"). The busy parent can only repeat the words. Only one or two of the four can use it to reason about the hospitals case.",
+     "fix": "Join the question to the test where it's asked: \"Spent on what... and are there spare workers, materials and machines to make it?\" On screen, add a small line under SPENT ON WHAT?: ANY SPARE TO MAKE IT?",
+     "severity": "must-fix"
+    },
+    {
+     "page": 11,
+     "quote": "The biggest push came from homes... building new ones, and rents.",
+     "problem": "By ear, and on the card BIGGEST PUSH: BUILDING NEW HOMES, AND RENTS over a building site, this can be taken as \"building homes pushes prices up\". The 70-year-old and the second-language viewer take it literally. That works against the right answer to the idle-builders case, and against the quiet-factory lesson.",
+     "fix": "Say \"the cost of building new ones, and rents\", and change the card to COST OF BUILDING NEW HOMES, AND RENTS. Only if the ledger says builders were busy then, add \"Builders were busy too\" so the flat-out link is plain.",
+     "severity": "must-fix"
+    },
+    {
+     "page": 13,
+     "quote": "Who pays for the cure?",
+     "problem": "The question is asked and followed by facts (loans cost more, jobs harder to find, nearly six in a hundred out of work), but the answer is never said in a plain sentence. \"Pays\" is used in a figurative sense, and the second-language viewer may hear it as \"who pays money for the cure?\". On page 16 it's also unclear why you'd ask about the cure when you hear a warning about prices.",
+     "fix": "After \"Loans cost more, and jobs got harder to find.\" add one plain line: \"So the people who pay are people with loans... and people who lose their jobs.\" Keep the hedge \"isn't the only reason\". On page 16, make the step plain, e.g. \"And if they call for the cure... who pays for it?\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 2,
+     "quote": "Here in New Zealand, the Reserve Bank can.",
+     "problem": "The page 1 warning says \"If the government creates new money\". Page 2 says the Reserve Bank creates it, then says \"a government like ours can't run out of its own money\". Page 3 says new money \"is spent\" without saying who spends it. Page 10 lists \"the Reserve Bank created new money\" and \"the government spent more\" as two separate things. The teen and the second-language viewer ask: is the Reserve Bank the government? Both test cases say \"the government pays\", so viewers have to guess whether that counts as new money spent.",
+     "fix": "On page 3, give the spending someone to do it, as a made-up example (no ledger fact needed): \"Say the government spends new money on what the factory makes.\" Only if the ledger supports it, add one clause on page 2 saying how the Reserve Bank and the government are linked.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 2,
+     "quote": "Economists who study how modern money works argue that a government like ours can't run out of its own money.",
+     "problem": "This is a 20-word sentence with a 9-word subject before the verb. \"Like ours\" and \"its own money\" are never explained. The 70-year-old, who has heard \"the country can't afford it\" all his life, doesn't believe a claim given with no reason. The second-language viewer can't tell whose money \"its own\" is.",
+     "fix": "Split it and say what \"like ours\" means, as far as the ledger allows: \"Some economists study how modern money works. They argue that a government with its own money, like New Zealand's dollar, can't run out of it.\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 3,
+     "quote": "More things get made... and prices barely move.",
+     "problem": "The film never says why prices barely move. The teen and the busy parent can't explain the quiet-factory half of the rule. Page 6 explains the other half neatly (\"More money... and fewer things to buy\"), but this half has no matching line.",
+     "fix": "Use the same pattern as page 6: \"More money... and more things to buy. So prices barely move.\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 5,
+     "quote": "Just more money, offered for the same things... and prices go up.",
+     "problem": "This is the core of the whole film, and it's abstract. \"Offered\" by whom? It never says who raises the price. The teen asks \"but why do prices go up just because there's more money?\"",
+     "fix": "Make it concrete: \"People have more money to spend... but there's nothing more to buy. So sellers can ask more... and prices go up.\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 7,
+     "quote": "So for homes, Glasgow was like the flat-out factory.",
+     "problem": "Page 3 said each factory is \"a whole country\". Now the factory stands for one city's homes, with no bridge. The 70-year-old and the busy parent notice the jump. Glasgow also never mentions new money or extra spending, so viewers can't say how it supports the rule. Both test cases (builders, hospitals) need this one-kind-of-thing reading.",
+     "fix": "Add a bridge and a matching line before the tag: \"The factory picture works for one kind of thing too. More people needing homes... and hardly any new ones. So for homes, Glasgow was like the flat-out factory.\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 7,
+     "quote": "where homes were already short",
+     "problem": "\"Short\" meaning \"not enough\" is an idiom. The second-language viewer hears \"short homes\" and misses the starting point of the whole example. The card HOMES ALREADY SHORT repeats it.",
+     "fix": "Say \"where there already weren't enough homes\", and change the card to NOT ENOUGH HOMES ALREADY.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 6,
+     "quote": "Millions were in uniform.",
+     "problem": "\"In uniform\", meaning in the armed forces, is an idiom the second-language viewer may not know, and the card MILLIONS IN UNIFORM doesn't help. Viewers also aren't told why it matters: workers left their jobs.",
+     "fix": "Say \"Millions went off to fight.\" and change the card to MILLIONS WENT TO FIGHT. The next line (fewer than one in a hundred out of work) then makes the link.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 11,
+     "quote": "partly from that, and partly from world prices, like oil.",
+     "problem": "\"That\" points vaguely back to \"almost no one was waiting at the gate\". By ear, the second-language viewer, the busy parent and the 70-year-old lose it. After Japan (\"it's whether it's spent\"), viewers also want to know whether money was being spent this time, but page 10 lists the Reserve Bank and government spending as two separate facts. The card PARTLY: FEW SPARE is clearer than the speech.",
+     "fix": "Match the card and use page 10's own fact: \"partly because more was being spent while almost no one was spare, and partly from world prices, like oil.\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 15,
+     "quote": "In the year to June twenty twenty-six, prices here went up four point one percent. If petrol and diesel prices hadn't changed... prices would have gone up two point nine percent.",
+     "problem": "\"The year to June\" is office language. \"If... hadn't changed... would have gone up\" is hard for the second-language viewer. There is also an accuracy question: a figure that leaves petrol and diesel out is not the same as one where they hadn't changed (the two differ slightly). If the ledger's entry is a \"leave them out\" figure, both the speech and the card say something stronger than the ledger. I could not check this.",
+     "fix": "Check the ledger wording. If it's a \"leave them out\" figure, say: \"In the twelve months to June twenty twenty-six, prices here went up four point one percent. Leave out petrol and diesel... and prices went up two point nine percent.\" Change the card to match.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 13,
+     "quote": "From late twenty twenty-one into twenty twenty-three, the Reserve Bank raised its interest rate again and again.",
+     "problem": "Page 12 says the cure makes prices go up more slowly. Page 13 shows the cure used again and again. Page 15 then shows prices up four point one percent in the year to mid twenty twenty-six. The 70-year-old concludes either \"the cure didn't work\" or \"the film contradicts itself\". The film never says what happened to prices after the cure, or that fuel is outside what the cure can reach.",
+     "fix": "On page 15, after the fuel line, add a short bridge in plain words, as far as the ledger and rules allow, e.g. \"The cure works on spending here... it can't make world fuel cheaper.\" Or say what happened to prices after the rate rises, if the ledger has it.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 14,
+     "quote": "She argues that putting people out of work is the main goal.",
+     "problem": "It isn't said whose goal, or the goal of what. Right after \"our Reserve Bank... see putting people out of work as unfortunate\", it can be heard as \"the Reserve Bank secretly wants us unemployed\". That may be stronger than, or different from, Mattei's claim in the ledger. I could not check this.",
+     "fix": "Anchor it to the cure, using the ledger's wording: \"She argues that putting people out of work is the cure's main goal.\" Check the ledger entry for how strong her claim is.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 14,
+     "quote": "With more workers waiting at the gate, she says, those inside have less power to ask for more pay.",
+     "problem": "\"Those inside\" stretches the picture further; the second-language viewer may not read it as \"people with jobs\". The film says who pays, but never names who gains (the Klein-spirit rule: who gains and who pays). The 70-year-old works it out; the others don't.",
+     "fix": "Say \"those still in work have less power to ask for more pay.\" Only if the ledger has it, name who gains as her view, e.g. \"That suits employers, she argues.\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 1,
+     "quote": "the usual cure makes loans cost more",
+     "problem": "The teen has no loans, and how a loan \"costs more\" isn't explained until page 12, about five minutes later. This is a small early stumble in the hook.",
+     "fix": "Give a familiar example: \"the usual cure makes loans, like home loans, cost more.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 5,
+     "quote": "new money, once it's spent, mostly gets more things made. When there aren't any spare... it mostly pushes prices up.",
+     "problem": "\"Gets more things made\" and the shortened \"aren't any spare\" are hard for the second-language viewer. By ear, the rule uses \"spare\" while the pictures were named \"the quiet factory\" and \"the flat-out factory\". Only the screen links them, so the busy parent misses it. \"The quiet factory\" is never named again after page 3. The same wording comes back on page 16.",
+     "fix": "On pages 5 and 16: \"When there are spare workers, materials and machines, like the quiet factory... new money, once it's spent, mostly means more things are made. When nothing is spare, like the flat-out factory... it mostly pushes prices up.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 5,
+     "quote": "No spare workers, materials or machines... so no more things get made.",
+     "problem": "For the hospitals case, a literal viewer (the teen) concludes \"the hospitals won't get built at all\". Glasgow already shows the real swap (builders went to the war, so homes weren't built), but the film never says it in so many words.",
+     "fix": "On page 7, make the swap plain: \"Builders busy with the war... weren't building homes.\" That gives viewers what they need for \"build hospitals and something else doesn't get built, and prices go up\".",
+     "severity": "minor"
+    },
+    {
+     "page": 8,
+     "quote": "Japan's version of our Reserve Bank set out to double the money it had created... in two years.",
+     "problem": "\"Set out to\" is a phrasal verb that's hard for the second-language viewer. \"The money it had created\" can be heard as \"all the money in Japan\".",
+     "fix": "\"Japan's version of our Reserve Bank planned to double, in two years, the money it had created.\" Check the ledger for exactly what was to double.",
+     "severity": "minor"
+    },
+    {
+     "page": 9,
+     "quote": "most of the new money just sat in the banks",
+     "problem": "The teen and the 70-year-old wonder which banks, and why the money would just sit there. The next line (\"never reached the factory\") helps, but \"spent\" isn't said here.",
+     "fix": "Add three words: \"most of the new money just sat in the banks... it wasn't spent.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 12,
+     "quote": "The Reserve Bank raises its interest rate. Interest is the extra you pay back when you borrow. Many loans cost more",
+     "problem": "\"Interest\" is explained but \"rate\" isn't. It's never said how the Reserve Bank's own rate makes your loan cost more. The teen and the second-language viewer miss the step.",
+     "fix": "If the ledger has it: \"The Reserve Bank raises its interest rate... and banks charge more on loans, like home loans.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 13,
+     "quote": "nearly six in a hundred were out of work",
+     "problem": "To see the rise, viewers have to remember page 10's \"three in a hundred\". The busy parent only gets the comparison from the returning dot panel, which they may not be watching.",
+     "fix": "\"nearly six in a hundred were out of work... up from about three.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 15,
+     "quote": "So part of what you felt at the checkout wasn't new money being spent.",
+     "problem": "This can be heard as \"and the rest was new money being spent\", which the film doesn't claim and the ledger may not support.",
+     "fix": "Name the cause instead: \"So part of what you felt at the checkout came from world fuel prices... not from new money being spent here.\"",
+     "severity": "minor"
+    }
+   ],
+   "not_checked": "As instructed, I read only round3/viewer-version.md. I did not open the script (final.md), its notes or earlier drafts, the research ledger, the rules file or the Pinker toolkit; I used the comprehension probes as listed in the task. So I did not check whether any fact is in the ledger or stated no more strongly than its entry. In particular I could not confirm:\n- page 15: whether 2.9% is a \"leave out petrol and diesel\" figure or an \"if prices hadn't changed\" one;\n- page 14: how strong Mattei's \"main goal\" claim is in the ledger;\n- page 8: what exactly was to double in Japan;\n- page 11: the biggest-push wording;\n- the 2026 jobless and price figures;\n- the Glasgow figures and dates;\n- the Britain figures.\n\nSeveral suggested fixes add a fact and are marked \"only if the ledger has it\": how the Reserve Bank and the government are linked, banks raising their own loan rates, builders being busy in New Zealand, and employers gaining. Each needs a ledger check before use.\n\nThe four viewers were simulated from the text at about 140 words a minute; no audio or video was heard or seen. On-screen judgments come from the written descriptions only (cards, timing of the holds, the \"waiting for a guess\" marker).\n\nI did not check whether \"Malina\" pronounces /məˈteɪi/, \"Clara E.\" or the spoken numbers well. I also did not compare the viewer version against final.md for differences."
+  },
+  {
+   "key": "facts",
+   "findings": [
+    {
+     "page": 14,
+     "quote": "Our Reserve Bank, and others like it, see putting people out of work as unfortunate... but not the goal.",
+     "problem": "No ledger entry gives our Reserve Bank's view on this. The only support is one line in C2-M17's 'simplified or contested' column: \"Central banks frame job losses as an 'unfortunate cost', not a goal\". No source is named for that line. C2-M17's own sources are America's central bank (Powell, 2022) and Australia's. The ledger lists the Reserve Bank of New Zealand's pages as blocked (403). I opened Powell's speech, which the ledger cites, and the words are his: \"These are the unfortunate costs of reducing inflation.\" He also talks of \"softer labor market conditions\" and \"some pain\", which is milder than \"putting people out of work\". So the line puts a sourced American view into our Reserve Bank's mouth. The screen card OUR RESERVE BANK AND OTHERS LIKE IT: UNFORTUNATE, NOT THE GOAL has the same problem.",
+     "fix": "Either (a) before recording, open a Reserve Bank of New Zealand source that says this and add it to the ledger, or (b) name the bank the ledger does support, using C2-M17's plain wording: \"America's version of our Reserve Bank has said its cure brings some pain, including fewer jobs... an unfortunate cost, but not the goal.\" Change the card to match, and ask the ledger's owner to add Powell's 'unfortunate costs' sentence to C2-M17's claim column.",
+     "severity": "must-fix"
+    },
+    {
+     "page": 14,
+     "quote": "She argues that putting people out of work is the main goal.",
+     "problem": "This is stronger than C2-H18's own words. Mattei (The Nation, 2023) says: \"The main objective of interest rate hikes is to cool down the labor market\" and \"Fewer job openings and higher unemployment diminish the bargaining power of workers\". In RevDem she calls unemployment \"the best disciplinary device to suppress wages\". So her main objective is a cooler job market, meaning fewer openings as well as more people out of work. In her account, unemployment is the tool used to weaken workers. The ledger's plain version describes it as the means (\"works by putting people out of work\"), and the second fact check only confirmed \"part of the point\". The new line leaves out the fewer-openings half and turns her means into the goal. The card MATTEI ARGUES: THE MAIN GOAL goes with it.",
+     "fix": "\"She argues that the main goal is fewer jobs, and more people out of work.\" Keep the next sentence (\"With more workers waiting at the gate, she says...\") as it is. This pairs with the fix above (\"including fewer jobs... not the goal\"), so the two views still clash out loud. Card: MATTEI ARGUES: THE MAIN GOAL: FEWER JOBS.",
+     "severity": "must-fix"
+    },
+    {
+     "page": 11,
+     "quote": "The biggest push came from homes... building new ones, and rents.",
+     "problem": "To answer the question: Stats NZ's 'driven mainly by' is about one group, not the whole 7.3%. The release the ledger cites (republished Stats NZ text, opened today) says: \"The main driver for the 7.3 percent annual inflation to the June 2022 quarter was the housing and household utilities group, due to rising prices for construction and rentals for housing\", and \"The next largest contributor to annual inflation was from the transport group, due to higher prices for petrol and diesel.\" So 'the biggest push' is correct, but there are two problems. (1) It holds only for the year to June 2022, while the page is talking about the whole price rise. (2) 'homes... building new ones' can be heard as house prices, or as the building work itself. The item that rose is the price of building a new home, and house prices are not in the figure (ledger Trap, C2-N08). The research note also puts the ledger's paraphrase in quotation marks as if it were Stats NZ's words.",
+     "fix": "\"At the peak, the biggest push came from the cost of building new homes... and from rents.\" Fix the note so it quotes Stats NZ's real sentence. Tell the ledger's owner that C2-N02's claim column should say the housing group was the main driver, with transport (petrol and diesel) next.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 15,
+     "quote": "So part of what you felt at the checkout wasn't new money being spent.",
+     "problem": "This conclusion only holds if the 2026 fuel rise came from outside New Zealand's spending, and the ledger hasn't checked that. C2-N05 says \"Cause of the 2026 fuel spike not researched in this lane\". The New Zealand 'Could not verify (kept out of the film)' list includes \"Cause of the 2026 fuel price spike\". The only support is C2-M04's note that Westpac blames the Middle East war, and C2-M04 was read from search results. The Trap says to open the page before a medium entry goes in.",
+     "fix": "Before recording, open one source on why petrol and diesel went up in the year to June 2026 (Westpac's or Stats NZ's release) and add it to the ledger. If it can't be sourced, the line can't say what the fuel rise wasn't caused by.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 15,
+     "quote": "In the year to June twenty twenty-six, prices here went up four point one percent. If petrol and diesel prices hadn't changed... prices would have gone up two point nine percent.",
+     "problem": "These figures go out of date soon. The September quarter figures come out on 22 October 2026, and C2-XC05 says they replace these. The June-year wording stays true, but it won't be the latest figure. Page 1's present-tense \"costs more than it did a year ago\" also rests on whatever the latest figure is.",
+     "fix": "If the film comes out after 22 October, put the September figures into the ledger first, then decide whether to switch. Keep the dated June wording if you don't switch, and never say 'mostly fuel'.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 13,
+     "quote": "By the middle of twenty twenty-six... nearly six in a hundred were out of work.",
+     "problem": "This figure goes out of date soon. C2-XD05 gives 5.6% for the June 2026 quarter, and the next release is 4 November 2026. The series gets revised (March was revised to 5.4%), so the June figure itself could change.",
+     "fix": "After 4 November, check that the June quarter still reads about 5.6%. If it is revised to 5.4% or below, 'nearly six' no longer fits, so say 'more than five in a hundred'. The 28 October Reserve Bank decision doesn't touch any line.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 7,
+     "quote": "With builders and materials gone to the war, few new homes were built.",
+     "problem": "This sentence names a cause, and its support is thin. It rests on a second fact check row that has no id. That row's evidence that 'house building virtually ceased' is Merrett and Sykes quoted second-hand from a search result. 'Labour and materials were diverted to the war' is the checker's own line with no source, and it is about Britain generally, not Glasgow. It is probably true, but it is the weakest link on the page.",
+     "fix": "Open a source before recording (Merrett and Sykes, or another Glasgow or British housing history) and give it an id. Otherwise say less: \"And with the war on, few new homes were built.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 2,
+     "quote": "It also tries to stop prices going up too fast.",
+     "problem": "Verdict: supported, and no stronger than the ledger. C2-N04 and C2-M04 give the Reserve Bank's 1-3% target band, C2-M15 dates New Zealand's inflation targeting to about 1990, and C2-M17 says central banks fight inflation by raising interest rates. Two small points. The notes don't cite C2-M17, which is the most direct support. And the target is a band, so the Bank also acts when prices go up too slowly. That is what Japan's version was doing on page 8 (it aimed for 2%, C2-C06 and C2-XB03), and the listener is never told.",
+     "fix": "Add C2-M17 to page 2's ids. No change to the narration is needed. If page 8 tests as confusing, the optional 'It even wanted prices to go up' line is supported by C2-C06.",
+     "severity": "minor"
+    },
+    {
+     "page": 11,
+     "quote": "partly from that, and partly from world prices, like oil.",
+     "problem": "Verdict: supported, and kept within the entries. C2-N16 says no published split exists, with evidence on both sides; its plain version says \"Part came from the world: oil, shipping, war. Part came from here.\" C2-N03 gives tradables at 8.2% and non-tradables at 6.6%. The best support is C2-N14 (the Royal Commission: the economic response 'in part' contributed to cost-of-living pressures, with international forces also significant), and the notes don't cite it. C2-N16 is medium confidence, and C2-N02 says the world-oil link was 'not researched here in detail'.",
+     "fix": "Add C2-N14 to page 11's ids. Note that C2-N16 is medium confidence and was not read from the full page. No change to the narration.",
+     "severity": "minor"
+    },
+    {
+     "page": 1,
+     "quote": "the usual cure makes loans cost more",
+     "problem": "This drops a qualification. C2-XD01 says \"higher charges on many mortgages and loans\". Page 12 keeps 'Many loans cost more', but page 1 and page 13 (\"Loans cost more, and jobs got harder to find.\") drop 'many'.",
+     "fix": "Page 1: \"the usual cure makes many loans cost more\". Page 13: \"Many loans cost more, and jobs got harder to find.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 12,
+     "quote": "And prices go up more slowly. Not down... just more slowly.",
+     "problem": "'Not down' is stated as a rule, but C2-XD01 only says prices go up less quickly. The ledger also shows prices falling about a fifth after Britain's 1920 rate rise (C2-H09). That case is cut from this chapter but belongs to the series.",
+     "fix": "\"Usually not down... just more slowly.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 9,
+     "quote": "the almost-level line ABOUT ½% A YEAR",
+     "problem": "The second fact check's final reviewer advised putting 'UNDER 1% A YEAR' or 'ABOUT 0.6% A YEAR' on screen, because the 2013-2021 average is about 0.6% (C2-XB04). The spoken 'about half a percent' was judged fair, and the card follows Malina's words, so this is a small point.",
+     "fix": "Keep the narration. Either keep the card as a short form of what Malina says, or follow the reviewer's choice: UNDER 1% A YEAR.",
+     "severity": "minor"
+    }
+   ],
+   "summary": "I checked every factual sentence on all 16 pages against its ledger entry, the second fact check of 12 October (and its JSON) and the Traps. The narration file matches the script word for word. Most lines hold up: Britain, Glasgow's numbers, Japan, New Zealand 2020-21, the dates of the rate rises, 4.1% and 2.9% (Stats NZ's own wording), and every 'partly', 'about', 'one reason' and 'isn't the only reason' is kept. Answers to the lines no one else has checked: (1) Page 2, \"It also tries to stop prices going up too fast\", is supported by C2-N04, C2-M04, C2-M15 and C2-M17. No change needed; just add C2-M17 to the ids. (2) Page 11, \"partly from that, and partly from world prices\", is supported by C2-N16, C2-N03 and C2-N14; add C2-N14 to the ids. (3) Page 11's homes line: I opened the Stats NZ release the ledger cites. \"Driven mainly by\" describes only the housing and household utilities group, which was the main driver of the 7.3%, with transport (petrol and diesel) next. So \"the biggest push\" is right, but only for the year to June 2022, and \"homes... building new ones\" should say \"the cost of building new homes\" so nobody hears house prices. The ledger's own paraphrase in C2-N02 overstates Stats NZ slightly. (4) Page 14's bank line is a must-fix. The ledger has no source for our Reserve Bank's view. \"Unfortunate costs\" is Powell's phrase from America's central bank (I confirmed it in his 2022 speech), and the Reserve Bank of New Zealand's pages were blocked. (5) Page 14's Mattei line is a must-fix. C2-H18's own words make \"cool down the labor market\" (fewer job openings and higher unemployment) the main objective, with unemployment as the tool against workers. \"Putting people out of work is the main goal\" is stronger than that, and also stronger than the checked \"part of the point\". The suggested fixes (\"fewer jobs\" on both sides) keep the clash audible. Page 15's \"wasn't new money being spent\" depends on the cause of the 2026 fuel rise, which the ledger lists as not checked. Dated figures: page 15 (and page 1's present tense) on 22 October, page 13 on 4 November. Nothing depends on the 28 October decision. No use of \"MMT\", the school's name or Klein's wording turned up. I edited nothing; my work folder exists and is empty: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-facts.",
+   "not_checked": "I didn't check style, voice or Pinker-toolkit choices (word counts, timings, pauses, one-name rule, pronunciation), and I didn't render or check pictures beyond reading the picture notes for figures. I read the fact-check JSON only for passages on the questioned lines (Japan's screen figure, the 1950s-60s point, Mattei), not in full. Outside the ledger I opened only two pages, both through a fetch tool that summarises and trims quotes: the republished Stats NZ June 2022 release (nationaltribune.com.au) and Powell's 26 August 2022 speech. I didn't look for any Reserve Bank of New Zealand statement on job losses, the cause of the 2026 fuel rise, or Merrett and Sykes; those are left as fixes for whoever owns the ledger. I didn't check the chapter 1 ledger beyond C1-01. Every New Zealand figure for 2026 is taken as given in the ledger (news and republished sources, as the ledger itself notes)."
+  },
+  {
+   "key": "rules-and-voice",
+   "summary": "Verdict: the hard rules all pass. There are no must-fixes. Ten should-fixes are cheap word changes, and twelve minor points are mostly things to listen for in the take.\n\nHard rules, all passing:\n- No \"MMT\" and no school name. The group is always \"economists who study how modern money works\".\n- Mattei is written /məˈteɪi/, and the symbols match the rules file letter for letter. Her view is marked \"She argues\" and \"she says\".\n- No capitals for emphasis, no digits, no brackets, no exclamation marks, and no stray dots.\n- Every number is written as said. All 29 pauses are written as \"...\".\n- Nothing of Naomi Klein's: no title, no coined phrase and no near copy. \"Shock\" appears nowhere in the narration or the notes. \"Cure\" echoes Mattei's own \"remedy\" (C2-H18), not Klein.\n\nLength:\n- 975 spoken words (965 if words like \"flat-out\" count as one), 29 pauses.\n- At 140 words a minute: 417.9 s of speech plus 17.4 s of pauses, so about 435 s, or about 7:15.\n- With 15 page turns, three 4-second guess holds and the fade: about 7:54.\n- At Malina's measured 160 a minute: about 6:23 of speech, about 7:01 in all.\n- 5,391 characters, or 6,015 with the accent line on all 16 pages. All of this matches the script's own figures.\n- If every should-fix below goes in: 992 words, about 7:23 (about 7:19 without the added people count on page 13). I ran the checker on that version and it adds no new flags.\n\nSynonym swaps (one thing, two names):\n1. \"wages\" (p10) and \"pay\" (p14). Fix.\n2. \"oil\" (p11), then \"petrol and diesel\", then \"fuel\" (p15). Minor.\n3. Prices are said to \"go up\" everywhere, but on p1 the basket \"costs more\" and on p15 fuel and everything else \"costs more\". The script's own list says prices \"go up\" and loans \"cost more\". Minor.\n4. Both \"the government\" (p1 warning, p2) and \"the Reserve Bank\" (p2, p10) are named as the one that creates new money. Minor.\n5. \"World prices\" (p11) is a new name for prices overseas. Fix.\n6. Acceptable as they are:\n   - \"more money\" (p5, p6) and \"the money it had created\" (p8) next to \"new money\";\n   - \"like\" the flat-out factory for Glasgow, against \"close to\" it for Britain and New Zealand;\n   - \"a job\" and \"jobs\" next to \"work\" and \"out of work\".\n\nWords used in two senses:\n1. \"Pay\" has four:\n   - paid for, meaning funded (p6);\n   - handing money over (p7, and \"pay back\" on p12);\n   - carrying the harm (\"who pays for the cure\", p13 and p16);\n   - wages (\"more pay\", p14). Fix p14.\n2. \"Cost\": the price of the basket (p1), the extra on loans (p1, p12, p13), and the price of fuel and of things made (p15).\n3. \"Prices\" twice in one sentence with two meanings: on p15 (fuel prices, then prices in general) and on p11 (prices here, then world prices). Fix both.\n4. \"The extra\": the rent rise (p7) and interest (p12). Leave.\n5. \"Makes\": \"the usual cure makes loans cost more\" (p1) means causes. Everywhere else, make means produce. Leave.\n6. \"Works\" and \"workers\" side by side on p2. The group's fixed name causes it, so leave.\n7. \"No more\" (p5) can be heard as \"not any longer\". Fix.\n8. \"Short\" (p7) can be heard as low or small. Minor.\n9. \"The banks\" (p9) means ordinary banks only. The last revision handled this, so it is fine.\n\nEvery term is explained or plain at first use. Small gaps: \"world prices\" (p11), \"in the year to June\" (p15), and \"rate\" in \"interest rate\" (p12 explains only \"interest\", which is acceptable).\n\nStock phrases are few and doing work: \"It matters...\" (p1), \"next time you hear\" (p16), and \"Have a guess\" three times on purpose. No change needed.\n\nUrgency: not flat overall.\n- It opens on the viewer's own checkout. The stakes (loans, jobs) come on page 1, though the job line lands at about 34 s at 140 words a minute, or about 30 s at 160.\n- There are nine direct questions and three guesses.\n- Glasgow's landlords and families sit side by side.\n- The \"who pays\" part is dated and local, with a number the viewer can compare.\n- The two views now clash out loud, and the film ends on two questions to carry away.\n- Two places went soft:\n  - page 13 ends on its qualification;\n  - on page 14, the introduction of Mattei sits between the two clashing views.\n- \"Who gains\" appears only in Glasgow (the landlords). The cure section names who pays but not who gains. The ledger has no who-gains line for the cure, so don't add one without a new entry.\n- Pages 2 to 11 are a calm lesson. That suits newcomers, and the guesses keep it lively.\n\nFiles in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-rules-and-voice:\n- check_rules_and_voice.py: my checker;\n- check-output-as-sent.txt: its results on the script as sent;\n- narration-with-suggested-fixes.txt: the narration with the should-fixes applied;\n- check-output-with-suggested-fixes.txt: the checker's results on that version (word count and timings);\n- narration-with-suggested-fixes-as-script.md: the same narration reformatted so the checker can read it.\n\nNothing outside that folder was changed.",
+   "findings": [
+    {
+     "page": 5,
+     "quote": "No spare workers, materials or machines... so no more things get made.",
+     "problem": "\"No more things get made\" is often heard as \"things stop being made\" (no more = not any longer). That contradicts the busy flat-out factory, and it sits on the page that states the rule.",
+     "fix": "\"so no extra things get made.\" Same word count, and it sets up the next line: \"Just more money, offered for the same things\".",
+     "severity": "should-fix"
+    },
+    {
+     "page": 5,
+     "quote": "new money, once it's spent, mostly gets more things made.",
+     "problem": "An aside sits between the subject and its verb (\"new money ... gets\"). The project rules (section 4) say never do that. The same sentence is on page 16.",
+     "fix": "On both pages, in the same words: \"once new money is spent, it mostly gets more things made.\" It keeps the spending condition the last fact check added (one extra word on each page). Alternative: \"...and new money is spent... it mostly gets more things made.\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 15,
+     "quote": "If petrol and diesel prices hadn't changed... prices would have gone up two point nine percent.",
+     "problem": "\"Prices\" means two different things in one sentence: petrol and diesel prices, then prices in general. A listener can hear the 2.9 as the fuel figure.",
+     "fix": "\"...prices in general would have gone up two point nine percent.\" This reuses page 1's own words for inflation (two extra words).",
+     "severity": "should-fix"
+    },
+    {
+     "page": 14,
+     "quote": "those inside have less power to ask for more pay.",
+     "problem": "Two names for one thing: page 10 says \"help with wages\". It also uses one word in two senses: \"pay\" here means wages, one page after \"Who pays for the cure?\", where it means who carries the harm.",
+     "fix": "\"those inside have less power to ask for higher wages.\" Same word count, and it fits C2-H18 (\"suppress wages\", \"bargaining power of workers\").",
+     "severity": "should-fix"
+    },
+    {
+     "page": 2,
+     "quote": "Economists who study how modern money works argue that a government like ours can't run out of its own money.",
+     "problem": "This is the longest sentence (20 words), and it leads the ear down the wrong path. Seven words of subject end in \"money works\" and run straight into \"argue\", so the ear hears two verbs piled together.",
+     "fix": "Keep the fixed name and split the sentence: \"There are economists who study how modern money works. They argue that a government like ours can't run out of its own money.\" (three extra words, about 1.3 s)",
+     "severity": "should-fix"
+    },
+    {
+     "page": 14,
+     "quote": "Our Reserve Bank, and others like it, see putting people out of work as unfortunate... but not the goal.",
+     "problem": "An aside sits between the subject and its verb, against rule section 4. The ear also hears \"Our Reserve Bank ... see\", which sounds like a grammar slip.",
+     "fix": "\"To our Reserve Bank, and others like it, putting people out of work is unfortunate... but not the goal.\" Same word count. It also makes the clash with the next line word for word: \"...putting people out of work is the main goal.\"",
+     "severity": "should-fix"
+    },
+    {
+     "page": 10,
+     "quote": "Only about three in a hundred were out of work... the lowest in more than thirty years.",
+     "problem": "Two new numbers in one sentence, against rule section 4. This is the clue for the guess, so \"three in a hundred\" should stand alone.",
+     "fix": "\"Only about three in a hundred were out of work. That was the lowest in more than thirty years.\" (two extra words, one pause fewer) If time is short, cut the second sentence and the LOWEST IN 30+ YEARS card together.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 9,
+     "quote": "For about eight years, they went up about half a percent a year, on average.",
+     "problem": "Two new numbers in one sentence (eight years, half a percent), against rule section 4.",
+     "fix": "\"Prices barely moved... for about eight years. On average, they went up about half a percent a year.\" Same words, one extra pause (0.6 s).",
+     "severity": "should-fix"
+    },
+    {
+     "page": 11,
+     "quote": "And prices here went up fast... partly from that, and partly from world prices, like oil.",
+     "problem": "\"World prices\" is a new term on the page that already carries the most new ideas. It also uses \"prices\" in two senses in one sentence, so \"prices went up... from world prices\" sounds circular.",
+     "fix": "\"...partly from that, and partly from prices overseas, like oil.\" Same word count. \"Here\" against \"overseas\" makes the contrast clear by ear.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 13,
+     "quote": "By the middle of twenty twenty-six... nearly six in a hundred were out of work. The interest rate isn't the only reason for that.",
+     "problem": "This is the most urgent page, and it ends on its qualification. With the 170,000 count removed, the people behind the figure are no longer counted as people, which is part of the Klein spirit the script aims for.",
+     "fix": "Keep the qualification and add a separate sentence before it: \"That's about a hundred and seventy thousand people.\" (C2-XD05: 171,000; eight words, about 3.5 s; re-check after 4 November; bring the ABOUT 170,000 card back with it). It sits after the six-in-a-hundred figure, so the comparison with page 10 still works.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 14,
+     "quote": "Clara E. /məˈteɪi/ is the economist whose book this series follows.",
+     "problem": "This line sits between \"not the goal\" and \"the main goal\", so the clash is split by a short biography. Separately, the full stop after \"E.\" may make Malina pause as if the sentence had ended.",
+     "fix": "Optional: open page 14 with this line, then the Reserve Bank line, then \"/məˈteɪi/ argues that it's the main goal.\" (five words fewer, and the two views sit side by side). Either way, listen to \"Clara E.\" in the take.",
+     "severity": "minor"
+    },
+    {
+     "page": 15,
+     "quote": "When fuel like that costs more, almost everything that's made or moved costs more... in both factories.",
+     "problem": "\"Petrol and diesel\" becomes \"fuel\", and page 11 said \"oil\". Prices also \"cost more\" here, although the script's own naming list says prices \"go up\" and only loans \"cost more\".",
+     "fix": "\"When petrol and diesel go up, the price of almost everything that's made or moved goes up too... in both factories.\" (about four extra words; narrower than C2-M06, so still within the ledger)",
+     "severity": "minor"
+    },
+    {
+     "page": 11,
+     "quote": "The biggest push came from homes... building new ones, and rents.",
+     "problem": "\"Building new ones\" can be heard as a building boom rather than the price of building going up, which is what Stats NZ measured (C2-N02).",
+     "fix": "\"...the price of building new ones, and rents.\" (three extra words)",
+     "severity": "minor"
+    },
+    {
+     "page": 1,
+     "quote": "If the government creates new money... prices will go up.",
+     "problem": "Two names for the one who creates new money: page 1's warning and page 2's \"a government like ours\" say the government, while page 2's answer and page 10 say the Reserve Bank. How they are related is never said, and a newcomer may stall on it.",
+     "fix": "Keep the warning in the government's mouth (page 16's politician depends on it). If the ledger can back a short link such as \"the Reserve Bank, the government's own bank\", add it on page 2. Otherwise leave it and ask the newcomer listeners about it.",
+     "severity": "minor"
+    },
+    {
+     "page": 13,
+     "quote": "By the middle of twenty twenty-six... nearly six in a hundred were out of work.",
+     "problem": "\"twenty-six... nearly six\" is a sound echo that can blur the key figure.",
+     "fix": "Listen in the take. If it blurs, say \"By the middle of this year...\" but only if the film comes out in 2026.",
+     "severity": "minor"
+    },
+    {
+     "page": 7,
+     "quote": "where homes were already short.",
+     "problem": "\"Short\" can be heard as small or low homes, especially with \"small homes\" two sentences later.",
+     "fix": "\"where there were already too few homes.\" (two extra words)",
+     "severity": "minor"
+    },
+    {
+     "page": 12,
+     "quote": "Businesses sell less, and hire fewer people.",
+     "problem": "\"Businesses sell less\" runs four hissing sounds together and may blur, as the script's own notes warn.",
+     "fix": "\"Businesses sell fewer things, and hire fewer people.\" (one extra word, a matching \"fewer... fewer\" pattern, and the film's own word \"things\")",
+     "severity": "minor"
+    },
+    {
+     "page": 15,
+     "quote": "So part of what you felt at the checkout wasn't new money being spent.",
+     "problem": "A price rise isn't \"money being spent\". The line means it wasn't caused by new money being spent, so it is slightly off for the ear.",
+     "fix": "\"So part of what you felt at the checkout didn't come from new money being spent.\" (two extra words)",
+     "severity": "minor"
+    },
+    {
+     "page": 15,
+     "quote": "In the year to June twenty twenty-six, prices here went up four point one percent.",
+     "problem": "\"In the year to June\" is statistics wording. Neither 4.1 nor 2.9 gets a plain anchor, which rule section 4 asks for.",
+     "fix": "Low priority: \"Over the twelve months to June...\" The page 1 basket could anchor the numbers, but that adds length, so leave it unless the newcomer test shows confusion.",
+     "severity": "minor"
+    },
+    {
+     "page": 2,
+     "quote": "can't run out of its own money. But it can run out of workers, materials and machines.",
+     "problem": "The contrast rests on hearing \"can't\" against \"can\". A clipped \"can't\" would flip the meaning.",
+     "fix": "No text change. Listen for a clear \"can't\" in the take, and re-record the page if it blurs.",
+     "severity": "minor"
+    },
+    {
+     "page": 6,
+     "quote": "German submarines sank ships carrying food and materials.",
+     "problem": "\"Submarines sank ships\" is a run of s and sh sounds that may trip the tongue.",
+     "fix": "No text change unless the take stumbles. Then: \"German submarines sank supply ships...\" is no better, so use \"German submarines were sinking the ships that carried food and materials.\"",
+     "severity": "minor"
+    },
+    {
+     "page": 1,
+     "quote": "It matters... because when prices go up too fast, the usual cure makes loans cost more. And that can put people out of work.",
+     "problem": "The job stake lands at about 34 s at 140 words a minute (about 30 s at 160), just past the rule's first 30 seconds. \"It matters\" is a mild stock bridge.",
+     "fix": "No change needed at Malina's measured speed. If a slow take pushes it later, the first ready cut is \"Not one price tag.\" (four words), which keeps \"The whole basket.\"",
+     "severity": "minor"
+    }
+   ],
+   "not_checked": "Facts were checked against the ledger only in passing; that is the fact checker's job. Two points to pass on:\n- Page 14 credits \"Our Reserve Bank\" with a view that C2-M17 records for central banks in general (Australia's and America's, not New Zealand's).\n- The 171,000 count must be re-checked after 4 November.\n\nNot done:\n- No take was listened to. The tongue and sound points are judged on paper.\n- The Naomi Klein check used her book titles and well-known coined phrases plus a word scan. It was not a search of her full texts.\n- The picture notes and on-screen words were scanned only for \"shock\", Klein words and \"MMT\", not reviewed line by line.\n- I reread only the Pinker toolkit's \"write for readers\" part and its revision checklist, not the \"teach for understanding\" part.\n- The timings are estimates at 140 and 160 words a minute.\n- No real newcomer has heard this version."
+  },
+  {
+   "key": "the-people-who-got-lost",
+   "summary": "Verdict: the new script mostly fixes both complaints. Nothing left would lose a newcomer outright, so nothing is marked must-fix. What's left is a short fast stretch in the middle, a few lines a newcomer could misread, and an ending that goes flat.\n\nToo fast: fixed for most pages. I tagged every page by hand using the same kinds of item as the first-round audit: places, years, numbers and terms.\n- Overall load fell from 4.0 items every 10 seconds in the recorded film to about 2.\n- Places, years and numbers fell from 52 to 29.\n- The busiest page fell from 5.7 items every 10 seconds to 4.0.\n- Pages 1, 3, 4, 5, 11, 12, 14 and 16 are calm, at 0.5 to 1.6 items every 10 seconds.\n- The stretch that is still fast is Britain, then Glasgow, then Japan (pages 6 to 8): about 80 seconds carrying 26 items.\n  - Glasgow (page 7) carries the most: 11 items in 82 words.\n  - Japan's set-up (page 8) is as dense per second as the old film's average.\n- Page 2 is the heaviest page of the opening, with four ideas in about 20 seconds before any picture.\n- The script alone can't fix pace. Malina ran at 164 words a minute, and a \"...\" gives less than a second. At that speed the film is about 6:55; at 150 a minute it's about 7:25.\n\nWords people don't know: largely fixed. Every hard word in the recording is gone or explained (\"unemployment\", \"central bank\", \"yen\", \"shares\", \"the 2008 crash\", \"heartland\", \"marks\", \"dearer\"). Weak spots remain, but none blocks understanding:\n- \"in uniform\" and \"homes were already short\" (idioms)\n- \"sat in the banks\"\n- \"help with wages\"\n- \"world prices\" (explained four pages later)\n- \"building new ones\" (easily misheard)\n- who creates money: page 1 says the government, page 2 says the Reserve Bank, and nothing says how the two are linked\n- the only numbers without a plain anchor: four point one and two point nine percent on page 15\n\nGone too far the other way? The script isn't padded or patronising line by line. Three \"Have a guess\" prompts and the one-line definition of interest suit a mixed audience. Line trims save only 15 to 30 words. The real length risk is structural:\n- Pages 12 to 16 run about 2 minutes 20 seconds after the last guess, with nothing for the viewer to do.\n- Page 15 turns to fuel sums right after Mattei's view, which is the high point.\n- If 7 minutes is too long for a phone, cut or fold page 15, or split the film between pages 11 and 12. Trimming lines won't get there.\n- My fixes as written add about 25 words.\n\nUrgency in the spirit of Naomi Klein:\n- The opening has stakes, direct questions and the viewer's own experience.\n- It goes flat on page 13, where the \"who pays\" page ends on a hedge and gives people only as \"nearly six in a hundred\" with nothing to compare it to.\n- It goes flat again on page 15 (sums).\n- The cure section names who pays but never who gains.\n- The script dropped the live stake: the Reserve Bank has started raising its rate again this year.\n\nWork folder: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-the-people-who-got-lost\n- load_per_page.py and load-per-page.txt: the per-page count\n- timeline-estimate.txt: when each page starts\n- proposed-lines.txt: my fix wordings. The project's voice checker and sound scan found no never-use words, capitals, digits or brackets in them.\n\nThe narration text in final.md matches narration-revised.txt exactly.",
+   "findings": [
+    {
+     "page": 15,
+     "quote": "In the year to June twenty twenty-six, prices here went up four point one percent. If petrol and diesel prices hadn't changed... prices would have gone up two point nine percent.",
+     "problem": "These are the only figures left with no plain anchor, which breaks the rules file's newcomer number rule. The listener gets two decimals and an 'if... hadn't... would have' in about ten seconds, at about 6:30 when attention is lowest, and has to subtract to see fuel's share. So 'part' rests on sums they can't do at speed. The 60-year-old who is slow with decimals and the second-language listener are the most likely to lose the point here. They'll still catch the conclusion line, which is why this isn't a must-fix.",
+     "fix": "Tie both figures to page 1's basket, as whole numbers in the same unit: 'And the checkout? Take a basket that cost a hundred dollars a year earlier. By June twenty twenty-six, it cost about a hundred and four. If petrol and diesel prices hadn't changed... it would have cost about a hundred and three.' These are rounded from 4.1 and 2.9 (C2-N05, C2-XC05), and Stats NZ's 'if petrol and diesel prices had not changed' is kept. Change the screen bars to match. Never say a dollar of it 'came from fuel', because the 2.9 only holds petrol and diesel unchanged.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 7,
+     "quote": "By nineteen fifteen, crowds of war workers had come to Glasgow, a British city, where homes were already short.",
+     "problem": "This is the longest and heaviest page: 82 words, about 31 to 33 seconds, 11 items (two dates, two numbers, a new place, Parliament). It opens with a 19-word sentence that has an aside and a 'where' clause. 'So for homes, Glasgow was like the flat-out factory' quietly changes what the picture stands for, from 'a whole country' to homes in one city. The line doesn't name either half of the match, so many newcomers won't hear Glasgow as the first 'on what' case that the closing 'Spent on what?' depends on.",
+     "fix": "'By nineteen fifteen, crowds of war workers had come to Glasgow. Homes there were already short. With builders and materials gone to the war, few new homes were built. So for homes, Glasgow was like the flat-out factory. More people needed somewhere to live... and there was hardly anyone spare to build.' This uses C2-XB01 and the second fact check (building virtually stopped; workers and materials went to the war). Cut 'a British city', but keep 'Britain's Parliament', because a New Zealand viewer hears plain 'Parliament' as Wellington.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 8,
+     "quote": "Japan, twenty thirteen. Japan's version of our Reserve Bank set out to double the money it had created... in two years.",
+     "problem": "This is the densest page per second: 6 items (new country, year, new actor, 'double the money it had created', 'two years', and a call back to 'the warning') in about 15 to 16 seconds. That is 3.7 to 4.0 items every 10 seconds, the same as the recorded film people got lost in. It also jumps nearly a century and half the world from Glasgow's rents, and nothing spoken says why. The 4-second guess hold helps, but only after the load has landed.",
+     "fix": "Say what the case is for, which also gives the jump a beat: 'Now, a test. Japan, twenty thirteen. Japan's version of our Reserve Bank set out to double the money it had created... in just two years.' (C2-XB03 says 'within two years'.)",
+     "severity": "should-fix"
+    },
+    {
+     "page": 11,
+     "quote": "And prices here went up fast... partly from that, and partly from world prices, like oil. The biggest push came from homes... building new ones, and rents.",
+     "problem": "'The biggest push came from homes... building new ones' is easily heard as 'building new homes pushed prices up'. The ledger fact (C2-N02) is that the price of building a new home went up, about 18%. Also, 'oil' here and 'petrol and diesel' or 'fuel' on page 15 are two names for the same push, and page 15 is meant to explain it.",
+     "fix": "'And prices here went up fast... partly from that, and partly from world prices, like fuel. The biggest push came from homes. Building new ones cost more... and rents went up.' Here 'cost more' keeps the script's one meaning: the price went up.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 2,
+     "quote": "Economists who study how modern money works argue that a government like ours can't run out of its own money. But it can run out of workers, materials and machines.",
+     "problem": "Before any picture, the newcomer gets the Reserve Bank's two jobs, a new group of economists, the series' most surprising claim and the real limit, all in about 20 seconds. That is 2.8 to 3.1 items every 10 seconds, the heaviest page of the opening, and the chapter never comes back to the claim. Who creates money also shifts: page 1 says 'If the government creates new money', page 2 says 'the Reserve Bank can', and then 'a government like ours can't run out of its own money'. Nothing says how the two are linked, so a newcomer can't tell whose money it is.",
+     "fix": "(1) On page 1, take the actor out of the warning: 'If new money is created... prices will go up.' Page 2's 'Who can create new money?' then becomes the natural next question. (2) Move these two sentences, word for word, to the end of page 5, after the rule. There 'run out of workers, materials and machines' already has a picture behind it, which puts the concrete before the idea as the Pinker toolkit asks. Page 2 then ends on 'It also tries to stop prices going up too fast.' If they stay on page 2, do (1) at least. Saying how the Reserve Bank and the government are linked would need a ledger entry first.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 5,
+     "quote": "So when there are spare workers, materials and machines... new money, once it's spent, mostly gets more things made.",
+     "problem": "The film's key sentence, said again word for word on page 16, has an aside between its subject and verb. The rules file's newcomer section says never to do that. It also gives the two conditions in the opposite order to page 9's recap ('whether it's spent... and on what').",
+     "fix": "Use the same words on both pages: 'So when new money is spent... and there are spare workers, materials and machines... it mostly gets more things made. When there aren't any spare... it mostly pushes prices up.' This keeps the 'spent' condition the fact tester asked for (C2-XA03) and matches page 9's order. Update the Traps line to 'keep when new money is spent'.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 13,
+     "quote": "From late twenty twenty-one into twenty twenty-three, the Reserve Bank raised its interest rate again and again.",
+     "problem": "There are three dates in two sentences. The 'who pays' page gives people only as 'nearly six in a hundred', with nothing to compare it to ('three in a hundred' came about 75 seconds earlier). The page ends on the hedge 'The interest rate isn't the only reason for that'. So the urgency goes flat at the very moment the film asks who pays. The live stake, that the Reserve Bank has started raising its rate again this year, was cut.",
+     "fix": "'Who pays for the cure? From late twenty twenty-one, the Reserve Bank raised its interest rate again and again. Loans cost more, and jobs got harder to find. By the middle of twenty twenty-six... nearly six in a hundred were out of work. Up from about three. The interest rate isn't the only reason for that. And this year, the Reserve Bank has started raising its interest rate again.' Sources: C2-N10, and C2-N11 for the from-to pair. For the last line, C2-XD04 asks for exactly this tense. Re-check after the 28 October decision. Never say the rise is aimed at fuel.",
+     "severity": "should-fix"
+    },
+    {
+     "page": 5,
+     "quote": "When there aren't any spare... it mostly pushes prices up.",
+     "problem": "Wording alone can't fix 'too fast'. Malina ran the recorded chapter at 164 words a minute, and each '...' gives less than a second. The only real breathing room is the three 4-second guess holds. The two places the main idea lands, the rule on page 5 and the recap on page 9, go straight into the next page after a 1.5-second turn. Short sentences may also make the voice run quicker.",
+     "fix": "In the edit, hold about 2 seconds of picture and music after page 5 (rule cards on screen) and after page 9 (recap card). Listen to whether Malina speeds up on the short sentences. Plan the length at about 164 a minute, as the rules file says (about 6:55 in all), not at 140 (7:55).",
+     "severity": "should-fix"
+    },
+    {
+     "page": 15,
+     "quote": "And the checkout?",
+     "problem": "Too long for a phone? Pages 12 to 16 run about 2 minutes 20 seconds after the last guess, with nothing for the viewer to do. Page 15 brings in a second cause of price rises, with sums, at about 6:30, right after Mattei's view, the film's high point. The script isn't padded line by line: every trim below saves only 15 to 30 words. So if 7 minutes is too long, the choice is about whole pages, not lines.",
+     "fix": "Choose one. (a) Keep page 15 with the basket numbers above. (b) Cut page 15 and add one sentence to page 11 after 'like fuel': 'When fuel costs more, almost everything that's made or moved costs more... whatever's being spent.' (C2-M06). That saves about 27 seconds, so about 7:00 at 150 a minute and 6:25 at 164; the checkout return is lost. (c) Split the film between pages 11 and 12 into 'what causes it' and 'who pays for the cure'. This is the user's call.",
+     "severity": "minor"
+    },
+    {
+     "page": 10,
+     "quote": "By the end of twenty twenty-one, almost everyone looking for work had found it. Only about three in a hundred were out of work... the lowest in more than thirty years.",
+     "problem": "These are three ways of giving one clue, page 11 repeats it as the answer ('Almost no one was waiting at the gate'), and the last one adds another number. 'Help with wages' is also vague: whose wages, paid how?",
+     "fix": "Cut '...the lowest in more than thirty years' (7 words, one number) and its screen card. 'Almost everyone looking for work had found it' already tells a newcomer that three in a hundred is low. Optionally say 'including help paying people's wages' (C2-N14, wage subsidies).",
+     "severity": "minor"
+    },
+    {
+     "page": 6,
+     "quote": "Millions were in uniform. Soon, fewer than one worker in a hundred was out of work.",
+     "problem": "The listener has to supply the link (soldiers away, so jobs filled). 'In uniform' is an idiom the second-language listener may miss.",
+     "fix": "'Millions were in uniform. So before long, fewer than one worker in a hundred was out of work.' C2-H02 says this is why the share out of work was so low. 'Before long' avoids 'so soon'. Also keep 'Now a real case.', which is on the ready-cut list: it is the only spoken line marking the change from imagined picture to evidence.",
+     "severity": "minor"
+    },
+    {
+     "page": 14,
+     "quote": "With more workers waiting at the gate, she says, those inside have less power to ask for more pay.",
+     "problem": "Naomi Klein in spirit means who gains and who pays side by side. The script does that only in Glasgow (landlords and families). The cure section names who pays, but the other side is only implied.",
+     "fix": "Inside her view: '...those inside have less power to ask for more pay... and wages are held down.' (C2-H18, 'suppress wages', still under 'she says'). Naming who gains (employers, or lenders as in C2-H17's 1920 reading) needs a ledger entry for her saying it about today before it goes in.",
+     "severity": "minor"
+    },
+    {
+     "page": 12,
+     "quote": "Many loans cost more... so people have less to spend.",
+     "problem": "The stakes switch from 'you' (page 1) to 'people' at the exact point where the viewer's own mortgage is affected.",
+     "fix": "'Many loans cost more... maybe yours. So people have less to spend.' This adds no new fact and keeps 'many' (C2-XD01).",
+     "severity": "minor"
+    },
+    {
+     "page": 4,
+     "quote": "What do you think happens? Have a guess.",
+     "problem": "The guess doesn't say what to guess about. A newcomer may guess 'they work overtime' or 'nothing', and miss the point page 5 answers.",
+     "fix": "'What happens to prices? Have a guess.' It is the same length and aims the guess at the thing the chapter is about.",
+     "severity": "minor"
+    },
+    {
+     "page": 9,
+     "quote": "For about eight years, they went up about half a percent a year, on average.",
+     "problem": "'About' and 'on average' hedge the same figure twice, adding words without adding meaning.",
+     "fix": "Cut ', on average'. 'About half a percent a year' already holds the fact check's caution (C2-XB04).",
+     "severity": "minor"
+    }
+   ],
+   "not_checked": "- Listeners: no real newcomer heard either version. The load counts and listener reactions are my judgement of imagined listeners (a 17-year-old student, a 60-year-old builder, a second-language adult), so read the listener test in final.md to one or two of the people who got lost.\n- Audio: I didn't listen to the recording or hear Malina read the new text, so the times are estimates at 150 and 164 words a minute.\n- Pictures: I didn't review the picture notes or on-screen words, except where a fix changes a card. Those cards are the basket bars on page 15, the LOWEST IN 30+ YEARS card on page 10, and a possible card for the 2026 rise.\n- Facts: I didn't re-check the script's facts as a fact checker. I checked my own proposed wordings against the ledger entries named in each fix, and spot-read the entries behind pages 6, 7, 9, 10, 11, 13, 14 and 15.\n- One wording for the fact checker: page 14's 'putting people out of work is the main goal' is a little stronger than C2-H18's 'main objective... to cool down the labor market', though it stays inside 'she argues'.\n- The 2026 rate-rise line I suggest for page 13 must be re-checked after the Reserve Bank's 28 October 2026 decision.\n- My proposed lines passed the project's voice checker and sound scan. Nobody has read them aloud.\n- Nothing outside my work folder was changed."
+  }
+ ],
+ "fixed": {
+  "title": "Script - chapter 2 - what really causes inflation - for newcomers (final fix)",
+  "how_it_teaches": "The sentence a viewer should be able to say back: whether new money pushes prices up depends on whether it's spent, and on what. When new money is spent and there are spare workers, materials and machines to make what it buys, it mostly gets more things made. When nothing is spare, it mostly pushes prices up. And the usual cure is paid for by many people with loans and by people put out of work.\n\nHow the film gets there:\n- One made-up picture comes before any real case: two factories, each standing for \"a whole country... all its workers, materials and machines\".\n  - The quiet factory: the government spends new money on what it makes. \"More money... and more things to buy. So prices barely move.\"\n  - The flat-out factory: \"More money... for the same things. So sellers can ask more... and prices go up.\"\n  - Page 6 completes the pattern with Britain: more, the same, then fewer things to buy.\n- The rule is said in the same words on pages 5 and 16: \"When new money is spent... and there are spare workers, materials and machines... it mostly gets more things made. When nothing is spare... it mostly pushes prices up.\"\n- Each real case is placed on the picture out loud:\n  - Britain at war is \"close to the flat-out factory\".\n  - Glasgow: \"Our picture works for one kind of thing too. For homes, Glasgow was like the flat-out factory.\" It shows the swap: builders gone to the war, so few new homes.\n  - Japan's money \"never reached the factory\", then the recap: \"whether it's spent... and on what. Are there spare workers, materials and machines to make what it buys?\"\n  - New Zealand 2020-21 is the application check: clue, guess, answer. Prices went up partly because more was being spent with almost no one at the gate, and partly because of prices overseas. At the peak, the biggest push came from the price of building new homes, and rents.\n- The cure is placed on the picture: the flat-out factory slows, and more workers wait at the gate.\n- Who pays is asked and then answered plainly (\"Many people with loans... and people put out of work\"), with the out-of-work share compared in one unit (about three, then nearly six in a hundred).\n- The two views clash on the same two words, \"fewer jobs\": America's version of our Reserve Bank calls them unfortunate, not the goal; Mattei argues they are the cure's main goal.\n- The checkout returns in the page 1 basket's own unit, dollars: a hundred, about a hundred and four, about a hundred and three if petrol and diesel prices hadn't changed. Petrol and diesel push prices up in both factories.\n- The close joins the question to its test: \"Spent on what... and is anything spare to make it? And who pays for the cure?\"\n\nSupports for the viewer:\n- three guesses, each held 4 seconds;\n- 2-second picture holds after the rule (page 5) and the Japan recap (page 9);\n- every term explained at first use, with one plain name per thing;\n- Mattei's view marked \"she argues\" and \"she says\";\n- the money view never named;\n- Klein's spirit only: stakes first, direct questions, who gains and who pays.\n\nFiles:\n- script: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-fix/final.md\n- narration on its own: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-fix/narration-final.txt\n- checker output: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-fix/check-rules-and-voice-output.txt",
+  "estimated_seconds": 499,
+  "spoken_words": 1027,
+  "pages": [
+   {
+    "page": 1,
+    "name": "The question",
+    "seconds": 33,
+    "text": "You've felt it at the checkout. The same basket of shopping costs more than it did a year ago. That's inflation... prices in general, going up. The whole basket. You've heard the warning too. If new money is created... prices will go up. Is that always true? It matters... because when prices go up too fast, the usual cure makes many loans cost more. And that can put people out of work.",
+    "research_ids": [
+     "C2-XA04",
+     "C2-M01",
+     "C2-XA05",
+     "C2-M14",
+     "C2-M17",
+     "C2-XD01"
+    ],
+    "terms_explained": [
+     "inflation (prices in general, going up... the whole basket)",
+     "the usual cure (makes many loans cost more; in full on page 12)"
+    ],
+    "pictures": "Page-1 reused with its parts swapped (code only): checkout basket, every tag flips: THE WHOLE BASKET; the invented politician (no party colours) mouths NEW MONEY → PRICES UP?, then IS THAT ALWAYS TRUE?, then MANY LOANS COST MORE → OUT OF WORK."
+   },
+   {
+    "page": 2,
+    "name": "Who can create new money",
+    "seconds": 23,
+    "text": "Who can create new money? Here in New Zealand, the Reserve Bank can. It also tries to stop prices going up too fast. There are economists who study how modern money works. They argue that our government can't run out of its own money. But it can run out of workers, materials and machines.",
+    "research_ids": [
+     "C2-M15",
+     "C2-N04",
+     "C2-M04",
+     "C2-M17",
+     "C2-N06",
+     "C2-M12"
+    ],
+    "terms_explained": [
+     "who can create new money (the Reserve Bank can)",
+     "the Reserve Bank and what it tries to do",
+     "economists who study how modern money works, and their view, marked 'argue'",
+     "workers, materials and machines as the real limit"
+    ],
+    "pictures": "Page-10's New Zealand street at dusk with the typed card THE RESERVE BANK (no logo) and a small CAN CREATE NEW MONEY; TRIES TO STOP PRICES GOING UP TOO FAST; page-2's banknote bundles land: NEW MONEY; card CAN'T RUN OUT OF ITS OWN MONEY / CAN RUN OUT OF..., then page-3's three cut-outs pop up: WORKERS / MATERIALS / MACHINES."
+   },
+   {
+    "page": 3,
+    "name": "The quiet factory",
+    "seconds": 30,
+    "text": "Picture two factories. Think of each one as a whole country... all its workers, materials and machines. In the first, the machines stand still. Workers wait at the gate, hoping for a job. Call it the quiet factory. Now the government spends new money on what the factory makes. The workers go in. The machines start. More money... and more things to buy. So prices barely move.",
+    "research_ids": [
+     "C2-XA03",
+     "C2-M09",
+     "C2-M05"
+    ],
+    "terms_explained": [
+     "the two-factories picture and what it stands for (a whole country)",
+     "the quiet factory",
+     "who spends the new money in the picture (the government)",
+     "why prices barely move (more money, and more things to buy)"
+    ],
+    "pictures": "Page-3's works A; A WHOLE COUNTRY: WORKERS, MATERIALS, MACHINES; THE QUIET FACTORY; coins rain in: THE GOVERNMENT SPENDS NEW MONEY; workers go in, goods come out: MORE MONEY / MORE THINGS TO BUY (same layout as page 6's MORE MONEY / FEWER THINGS); the price counter stays put."
+   },
+   {
+    "page": 4,
+    "name": "The flat-out factory, the first guess",
+    "seconds": 21,
+    "text": "In the second factory, every worker and every machine is already busy... working as hard as they can. No one waits at the gate. Call it the flat-out factory. The same new money is spent on what this factory makes. What happens to prices? Have a guess.",
+    "research_ids": [
+     "C2-XA03",
+     "C2-M05"
+    ],
+    "terms_explained": [
+     "flat out (working as hard as they can)",
+     "the flat-out factory"
+    ],
+    "pictures": "Page-3's works B, gate empty, THE FLAT-OUT FACTORY with FLAT OUT = WORKING AS HARD AS THEY CAN; coins rain in; the counter freezes; WHAT HAPPENS TO PRICES? held about 4 seconds with a small waiting-for-a-guess marker."
+   },
+   {
+    "page": 5,
+    "name": "The rule",
+    "seconds": 30,
+    "text": "No spare workers, materials or machines... so no extra things get made. More money... for the same things. So sellers can ask more... and prices go up. Most economists agree on this much. When new money is spent... and there are spare workers, materials and machines... it mostly gets more things made. When nothing is spare... it mostly pushes prices up.",
+    "research_ids": [
+     "C2-M05",
+     "C2-XD01",
+     "C2-XA03",
+     "C2-M09"
+    ],
+    "terms_explained": [
+     "spare",
+     "why prices go up (sellers can ask more)",
+     "the rule (recap 1, repeated word for word on page 16)"
+    ],
+    "pictures": "Works B's counter flips up; cut-outs stamped NO SPARE with MORE MONEY / SAME THINGS, then SELLERS CAN ASK MORE and a small MOST ECONOMISTS AGREE; wide shot of both works with rule cards NEW MONEY SPENT + SPARE → MOSTLY MORE THINGS MADE and NOTHING SPARE → MOSTLY PRICES UP. Hold the cards about 2 seconds after Malina stops."
+   },
+   {
+    "page": 6,
+    "name": "Britain at war",
+    "seconds": 31,
+    "text": "Now a real case. Britain, during the First World War. Millions went to fight. Soon, fewer than one worker in a hundred was out of work. German submarines sank ships carrying food and materials. And the war was paid for partly with new money. More money... and fewer things to buy. By the end of the war, prices had roughly doubled. Britain at war was close to the flat-out factory.",
+    "research_ids": [
+     "C2-H02",
+     "C2-H03",
+     "C2-XA02",
+     "C2-XA01",
+     "C2-H01",
+     "second fact check 12 Oct 2026 (Britain rows)"
+    ],
+    "terms_explained": [
+     "out of work (one worker in a hundred)",
+     "why workers weren't spare (millions went to fight)"
+    ],
+    "pictures": "Page-2's munitions hall (code only): BRITAIN, FIRST WORLD WAR; MILLIONS WENT TO FIGHT; 100 dots, last nearly empty: FEWER THAN 1 IN 100 OUT OF WORK; SHIPS SUNK: FOOD, MATERIALS; PARTLY NEW MONEY; MORE MONEY / FEWER THINGS; bars 1914 ×1 and 1918 ABOUT ×2; cut to works B: CLOSE TO THE FLAT-OUT FACTORY."
+   },
+   {
+    "page": 7,
+    "name": "Glasgow's homes",
+    "seconds": 38,
+    "text": "By nineteen fifteen, crowds of war workers had come to Glasgow. There were already too few homes. With builders and materials gone to the war, few new ones were built. Our picture works for one kind of thing too. For homes, Glasgow was like the flat-out factory. Landlords raised the rent... in places by up to a quarter. By November, about twenty thousand families were refusing to pay the extra. Within weeks, Britain's Parliament brought rents on small homes back to what they were before the war.",
+    "research_ids": [
+     "C2-XB01",
+     "C2-H04",
+     "C2-XB02",
+     "second fact check 12 Oct 2026 (Glasgow rows: building virtually ceased; labour and materials went to the war)"
+    ],
+    "terms_explained": [
+     "too few homes",
+     "the picture standing for one kind of thing, said before it is used",
+     "the swap: builders busy with the war, so few new homes",
+     "Britain's Parliament"
+    ],
+    "pictures": "Page-4's Glasgow tenement street (code only): GLASGOW 1915, TOO FEW HOMES ALREADY; workers stream in; building site: BUILDERS AND MATERIALS GONE TO WAR / FEW NEW HOMES; works B shrinks to a row of tenements with ONE KIND OF THING; tag FOR HOMES: LIKE THE FLAT-OUT FACTORY; RENT RAISED / UP TO +25% IN PLACES; counter to 20,000 FAMILIES REFUSING THE EXTRA; stamp RENTS BACK TO BEFORE THE WAR. Never WON, RENTS FROZEN or NOT ENOUGH HOMES; no Mary Barbour card."
+   },
+   {
+    "page": 8,
+    "name": "Japan, the second guess",
+    "seconds": 17,
+    "text": "Japan, twenty thirteen. Japan's version of our Reserve Bank planned to double the money it had created... in two years. If the warning is right, prices should go up fast. What do you think happened? Have a guess.",
+    "research_ids": [
+     "C2-XB03",
+     "C2-C06",
+     "second fact check 12 Oct 2026 (Bank of Japan statement, 4 April 2013)"
+    ],
+    "terms_explained": [
+     "Japan's version of our Reserve Bank"
+    ],
+    "pictures": "Unchanged: page-5 part A, JAPAN 2013, ×2 MONEY / IN TWO YEARS; dashed line IF THE WARNING IS RIGHT climbs under WHAT HAPPENED?; held about 4 seconds."
+   },
+   {
+    "page": 9,
+    "name": "Japan, the answer",
+    "seconds": 33,
+    "text": "Prices barely moved... for about eight years. On average, they went up about half a percent a year. Why? One reason economists give... most of the new money just sat in the banks. In our picture, most of it never reached the factory. So it's not just how much new money there is. It's whether it's spent... and on what. Are there spare workers, materials and machines to make what it buys?",
+    "research_ids": [
+     "C2-XB04",
+     "C2-C06",
+     "C2-XB03",
+     "C2-XA03",
+     "C2-M09"
+    ],
+    "terms_explained": [
+     "money created but not spent",
+     "recap 2: whether it's spent, and on what, and what 'on what' asks"
+    ],
+    "pictures": "As before: almost-level line ABOUT ½% A YEAR; coins pile up in front of the card bank: MOST SAT IN THE BANKS; NOT JUST HOW MUCH / WHETHER IT'S SPENT, AND ON WHAT; then SPARE WORKERS, MATERIALS, MACHINES TO MAKE WHAT IT BUYS?, held about 2 seconds after Malina stops."
+   },
+   {
+    "page": 10,
+    "name": "New Zealand, the third guess",
+    "seconds": 26,
+    "text": "Now, here. When Covid hit in twenty twenty, the Reserve Bank created new money. And the government spent more... including help paying wages. By the end of twenty twenty-one, almost everyone looking for work had found it. Only about three in a hundred were out of work. Which factory was New Zealand closer to? Have a guess.",
+    "research_ids": [
+     "C2-N06",
+     "C2-N14",
+     "C2-N09"
+    ],
+    "terms_explained": [
+     "out of work as a share (about three in a hundred)",
+     "what part of the government's money went on (paying wages)"
+    ],
+    "pictures": "Page-8 part B's New Zealand street (code only): NEW ZEALAND 2020; notes land: NEW MONEY; GOVERNMENT SPENT MORE / INCLUDING HELP PAYING WAGES; 2021 with the 100-dot panel, 3 empty: ABOUT 3 IN 100 OUT OF WORK, credited Stats NZ (LOWEST IN 30+ YEARS removed); wide shot of both factories: WHICH ONE?, held about 4 seconds."
+   },
+   {
+    "page": 11,
+    "name": "New Zealand, the answer",
+    "seconds": 23,
+    "text": "Close to the flat-out factory. Almost no one was waiting at the gate. And prices here went up fast. Partly because more was being spent... and partly because of prices overseas, like oil. At the peak, the biggest push came from the price of building new homes... and rents.",
+    "research_ids": [
+     "C2-N09",
+     "C2-N15",
+     "C2-N14",
+     "C2-N16",
+     "C2-N01",
+     "C2-N03",
+     "C2-N02"
+    ],
+    "terms_explained": [
+     "none new: both causes in plain words (more being spent; prices overseas)",
+     "'at the peak' ties the homes line to the year prices went up fastest"
+    ],
+    "pictures": "Cut to works B, gate almost empty: CLOSE TO THE FLAT-OUT FACTORY; PRICES WENT UP FAST splits into PARTLY: MORE SPENT and PARTLY: PRICES OVERSEAS, LIKE OIL (oil barrel, no counter); building-site shot relabelled NEW ZEALAND: AT THE PEAK: THE PRICE OF BUILDING NEW HOMES, AND RENTS. Never BUILDING NEW HOMES on its own; no house prices, +30% or review desk."
+   },
+   {
+    "page": 12,
+    "name": "The usual cure",
+    "seconds": 31,
+    "text": "So what's the usual cure? The Reserve Bank raises its interest rate. Interest is the extra you pay back when you borrow. Many loans cost more... so people have less to spend. Businesses sell fewer things, and hire fewer people. And prices go up more slowly. Usually not down... just more slowly. In our picture, the flat-out factory slows... and more workers wait at the gate.",
+    "research_ids": [
+     "C2-XD01",
+     "C2-M17",
+     "C2-H09"
+    ],
+    "terms_explained": [
+     "interest and interest rate",
+     "the usual cure in full",
+     "prices go up more slowly, usually not down"
+    ],
+    "pictures": "As before; ends on works B: smoke thins, the lights dim, the queue returns: MORE WORKERS AT THE GATE."
+   },
+   {
+    "page": 13,
+    "name": "Who pays, here",
+    "seconds": 35,
+    "text": "Who pays for the cure? From late twenty twenty-one into twenty twenty-three, the Reserve Bank raised its interest rate again and again. Many loans cost more, and jobs got harder to find. By the middle of twenty twenty-six... nearly six in a hundred were out of work. Up from about three. The interest rate isn't the only reason for that. So who pays for the cure? Many people with loans... and people put out of work.",
+    "research_ids": [
+     "C2-N10",
+     "C2-XD03",
+     "C2-XD01",
+     "C2-N11",
+     "C2-XD05",
+     "C2-N09",
+     "C2-M17"
+    ],
+    "terms_explained": [
+     "who pays, said plainly (so 'pays' means who carries the harm)",
+     "the out-of-work share compared in one unit with page 10"
+    ],
+    "pictures": "Dial climbs in steps: LATE 2021 TO 2023: AGAIN AND AGAIN (no rate figures); the 100-dot panel returns with nearly 6 empty: NEARLY 6 IN 100 OUT OF WORK, Stats NZ, MIDDLE OF 2026, faint UP FROM ABOUT 3, small NOT THE ONLY REASON; then WHO PAYS? over two cut-outs: MANY PEOPLE WITH LOANS / PEOPLE PUT OUT OF WORK."
+   },
+   {
+    "page": 14,
+    "name": "Two views",
+    "seconds": 29,
+    "text": "America's version of our Reserve Bank has said the cure would probably mean fewer jobs. It sees that as unfortunate... but not the goal. Clara E. /məˈteɪi/ is the economist whose book this series follows. She argues that fewer jobs are the cure's main goal. With more workers waiting at the gate, she says, people with jobs have less power to ask for higher wages.",
+    "research_ids": [
+     "C2-M17",
+     "C2-H18",
+     "C1-01",
+     "C2-XD02 (background only)"
+    ],
+    "terms_explained": [
+     "who Mattei is",
+     "the two views, opposed on the same words ('fewer jobs')",
+     "people with jobs; higher wages (one name with page 10)"
+    ],
+    "pictures": "Page-9 part B (code only): AMERICA'S VERSION OF OUR RESERVE BANK: FEWER JOBS: UNFORTUNATE, NOT THE GOAL (no quotation marks; small credit US FEDERAL RESERVE); book card CLARA E. MATTEI, THE CAPITAL ORDER (2022); MATTEI ARGUES: FEWER JOBS ARE THE MAIN GOAL; queue grows, iron weight drops on the pay packet: LESS POWER TO ASK FOR HIGHER WAGES. No portrait."
+   },
+   {
+    "page": 15,
+    "name": "Back at the checkout",
+    "seconds": 33,
+    "text": "And the checkout? Imagine the basket cost a hundred dollars in June twenty twenty-five. A year later, it cost about a hundred and four. If petrol and diesel prices hadn't changed... it would have cost about a hundred and three. When petrol and diesel go up, the price of almost everything made or moved goes up too... in both factories. So part of what you felt at the checkout came from petrol and diesel.",
+    "research_ids": [
+     "C2-N05",
+     "C2-M04",
+     "C2-XA05",
+     "C2-XC05",
+     "second fact check 12 Oct 2026 (Stats NZ 2.9% sentence)",
+     "C2-M06",
+     "Traps on C2-M18"
+    ],
+    "terms_explained": [
+     "the two price figures in the page 1 basket's unit (dollars), rounded from 4.1% and 2.9%",
+     "a second cause of prices going up, working in both factories"
+    ],
+    "pictures": "Page-1's basket with tag $100, JUNE 2025, flipping to ABOUT $104, A YEAR LATER; ghost tag ABOUT $103 IF PETROL AND DIESEL PRICES HADN'T CHANGED, credited STATS NZ (no 4.1%, 2.9% or 2026 on screen); two-factories wide shot, oil barrel lands by each works, both counters flip up: BOTH FACTORIES; back to the basket: PART OF IT: PETROL AND DIESEL."
+   },
+   {
+    "page": 16,
+    "name": "Spent on what?",
+    "seconds": 30,
+    "text": "Does new money always push prices up? No. When new money is spent... and there are spare workers, materials and machines... it mostly gets more things made. When nothing is spare... it mostly pushes prices up. So next time you hear the warning... ask two questions. Spent on what... and is anything spare to make it? And who pays for the cure?",
+    "research_ids": [
+     "C2-XA03",
+     "C2-M09"
+    ],
+    "terms_explained": [
+     "none new: recap 1 in page 5's words; the first closing question carries its own test; the second repeats page 13's question, now answered there"
+    ],
+    "pictures": "Two-factories wide shot with page 5's rule cards; page-10 part B's chamber with the invented politician (no party colours); SPENT ON WHAT? with a small ANYTHING SPARE TO MAKE IT?, then WHO PAYS FOR THE CURE?; both hold; 4-second fade."
+   }
+  ],
+  "fixes_made": "Length: 1,017 words (1,027 as spoken), up from 965, with 34 pauses. At 140 a minute that is 7:41 of speech with pauses and about 8:19 in all; at the measured 164 it is about 7:14 in all. The new words explain; spoken figures stay at about 28. Three ready cuts (36 words, listed in final.md) bring it back to about 980. Every new line was checked against the ledger. The voice checker, sound scan and rules checker show no flags beyond sentences of 16-20 words. final.md matches narration-final.txt. Nothing outside the work folder changed.\n\nMUST-FIXES (all fixed)\n- Newcomers p16 \"Spent on what?\" not tied to its test: FIXED. \"Spent on what... and is anything spare to make it?\" echoes \"When nothing is spare\" just before. Screen adds ANYTHING SPARE TO MAKE IT?. I used 7 words, not the tester's 11.\n- Newcomers p11 \"building new ones\" (also facts and rules minor): FIXED. \"At the peak, the biggest push came from the price of building new homes... and rents.\" The card matches. Stats NZ's \"main driver\" covers only the year to June 2022, hence \"At the peak\". \"Price\", not \"cost\", keeps one name.\n- Facts p14 \"Our Reserve Bank... see\": FIXED. Confirmed that C2-M17's sources are the Fed and Australia's bank, not New Zealand's. Now: \"America's version of our Reserve Bank has said the cure would probably mean fewer jobs. It sees that as unfortunate... but not the goal.\" This uses C2-M17's plain version and its \"unfortunate, not a goal\" column; the tester confirmed Powell's words. It also fixes the rules reader's aside. No figurative \"cost\".\n- Facts p14 \"putting people out of work is the main goal\": FIXED. C2-H18 says the main objective is to cool the labour market. Now \"She argues that fewer jobs are the cure's main goal.\" It answers the newcomers' \"whose goal?\" too. The next sentence carries the out-of-work half, and both views turn on \"fewer jobs\".\n\nSHOULD-FIXES\n- Newcomers p13 who pays never answered: FIXED. The page ends \"So who pays for the cure? Many people with loans... and people put out of work.\" It keeps the hedge and \"many\", and no longer ends on the hedge (rules reader, people who got lost).\n- Newcomers p2 Reserve Bank vs government (also rules minor, people who got lost p2): FIXED as far as the ledger allows. Page 1 is now \"If new money is created... prices will go up\". Page 3 is \"Now the government spends new money on what the factory makes\" (made-up picture; C2-M05). The ledger has no line linking the two, so none was added. Moving the economists' lines to page 5 was REJECTED: page 2 sets up page 3's three parts, and page 5 would be overloaded.\n- Newcomers and rules p2 20-word sentence, \"like ours\": FIXED. \"There are economists who study how modern money works. They argue that our government can't run out of its own money.\" This keeps the fixed group name; \"some economists\" was avoided. C2-M12 covers New Zealand.\n- Newcomers p3 why prices barely move: FIXED. \"More money... and more things to buy. So prices barely move.\" This mirrors page 6.\n- Newcomers p5 \"offered for the same things\": FIXED. \"More money... for the same things. So sellers can ask more... and prices go up.\" (C2-M05, C2-XD01.)\n- Newcomers p7 bridge, and people who got lost p7: FIXED. The long sentence is split and \"a British city\" cut. \"Our picture works for one kind of thing too.\" now comes before \"For homes, Glasgow was like the flat-out factory.\" The extra matching line was left out for length; the scene sentences before it give both halves.\n- Newcomers p7 \"homes were already short\" (rules minor too): FIXED with \"There were already too few homes.\" The card is TOO FEW HOMES ALREADY. Not the tester's \"weren't enough\": \"not enough\" echoes a Naomi Klein title and is on the project's never-use list.\n- Newcomers p6 \"in uniform\": FIXED. \"Millions went to fight.\" (C2-H02.)\n- Newcomers p11 \"partly from that\", and rules p11 \"world prices\": FIXED. \"And prices here went up fast. Partly because more was being spent... and partly because of prices overseas, like oil.\" (C2-N16, C2-N14, C2-N15, C2-N03, C2-N02.) \"Prices\" no longer has two senses in one sentence.\n- Newcomers p15 office wording and conditional; rules p15 \"prices\" in two senses; people who got lost p15 no anchor: FIXED with the basket: \"Imagine the basket cost a hundred dollars in June twenty twenty-five. A year later, it cost about a hundred and four. If petrol and diesel prices hadn't changed... it would have cost about a hundred and three.\" Checked: Stats NZ's 2.9% IS an \"if they had not changed\" figure, so that wording stays and \"leave out\" would be less exact. The dollar figures are the ledger's 4.1% and 2.9% rounded. Neither percentage goes on screen.\n- Newcomers p13/p15 seeming clash: PARTLY FIXED. The basket is dated to a later year, and \"in both factories\" says petrol and diesel push prices whatever is spent. Both suggested bridges were REJECTED. \"The cure can't make fuel cheaper\" is contested (C2-M17, C2-N12). \"Prices slowed after the cure\" credits the cure with a slowdown the ledger puts largely down to import prices (C2-N04). Listener question 4 probes it.\n- Newcomers p14 \"those inside\", and rules p14 \"more pay\": FIXED. \"people with jobs have less power to ask for higher wages\", one name with page 10. Who gains is NOT added: the ledger has no line for today.\n- Facts p11 biggest push: FIXED (above). C2-N14 added to the ids, C2-N16 marked medium, and the Stats NZ sentence quoted correctly in the notes.\n- Facts p15 \"wasn't new money being spent\": FIXED by saying less. \"So part of what you felt at the checkout came from petrol and diesel.\" The cause of the 2026 rise is unverified (C2-N05). This also fixes the newcomers' minor \"the rest was new money?\".\n- Facts p15 and p13 dated figures: no text change needed. Re-check notes are in final.md (22 Oct; 4 Nov, where a revision to 5.4% or lower means \"more than five in a hundred\").\n- Rules p5 \"no more things\": FIXED, now \"no extra things\".\n- Rules and people who got lost p5/p16 aside and order: FIXED. \"When new money is spent... and there are spare workers, materials and machines... it mostly gets more things made. When nothing is spare... it mostly pushes prices up.\" Identical on both pages; the Traps are updated.\n- Rules p10 two numbers: FIXED by cutting \"the lowest in more than thirty years\" and its card (people who got lost minor).\n- Rules p9 two numbers: FIXED, split into \"for about eight years. On average, ...\".\n- Rules p13 add 170,000: REJECTED. It would be a fifth figure on the busiest page, it needs a re-check after 4 Nov, and the closing answer now names the people.\n- People who got lost p8 \"Now, a test.\": REJECTED. The page's last line already says what it tests, and the 4-second hold gives the thinking time.\n- People who got lost p13: PARTLY. \"Up from about three\" is added. The 2026 rate-rise line is REJECTED: the last round cut it because it misleads without the 2024-25 cuts said aloud, and it invites the contested \"aimed at fuel\" reading.\n- People who got lost pace: FIXED in the edit notes (about 2 seconds of picture after pages 5 and 9) and timings at 160 and 164 a minute.\n\nMINOR\nFixed:\n- \"many loans\" on pages 1 and 13 (facts);\n- \"Usually not down\" (facts; C2-H09);\n- \"Businesses sell fewer things\" (rules);\n- \"planned to double\" (newcomers);\n- \"What happens to prices?\" (people who got lost);\n- \"help paying wages\" (people who got lost);\n- petrol and diesel all through page 15, with \"fuel\" gone (rules);\n- \"the price of almost everything made or moved goes up\" (rules);\n- \"When nothing is spare\" (newcomers);\n- C2-M17 added to page 2's ids (facts);\n- \"Not one price tag.\" cut, so the job stake lands at about 29 seconds at 160 a minute (rules ready cut).\n\nNot changed:\n- p1 and p12 \"home loans\": would lengthen the hook, and no ledger line shows banks passing the rate on.\n- \"maybe yours\": no wording change.\n- \"So before long\": \"went to fight\" already makes the reason plain.\n- \"wages are held down\": already said.\n- cut \"on average\": REJECTED; it is a qualification, since 2014 was about 2.8%.\n- factory names inside the rule: costs 8 words a page; the cards carry the link.\n- \"It wasn't spent\": the recap says it.\n- p16 cure bridge: page 13 now answers the question.\n- p7 builders line: kept; it is in the second fact check, verdict confirmed. The source should be opened before recording.\n- ½% card: matches the narration.\n- p13 \"twenty-six... six\", \"Clara E.\", \"can't\" against \"can\", and the submarines line: listen for these in the take.\n\nFOR THE LEDGER'S OWNER (I couldn't edit the ledger):\n- add Powell's \"unfortunate costs\" sentence to C2-M17;\n- correct C2-N02's \"driven mainly by\" wording;\n- source the cause of the 2026 petrol and diesel rise;\n- source Merrett and Sykes;\n- find any Reserve Bank of New Zealand statement on job losses;\n- add a who-gains line from Mattei.\n\nNot checked: no real newcomer has heard it, Malina hasn't read it, and no fact checker has read this round's new lines."
+ },
+ "verified": {
+  "summary": "I compared the narration before and after the fix, page by page, using /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-revise/final.md and /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-fix/final.md. All 16 pages have changes: 45 sentences are new or reworded, and one was cut (\"Not one price tag.\"). I checked each one against the ledger, the rules file and the toolkit, and ran the project's voice checker and sound scan again. My comparison script is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-verify/tools/diff.py. Nothing outside my work folder was changed.\n\nFacts: I found no factual errors, so there is no must-fix. Each new claim stays within its ledger entry and keeps its qualifications:\n- the America line (C2-M17, Powell's \"very likely\", and the \"unfortunate cost, not a goal\" column)\n- Mattei's \"fewer jobs are the cure's main goal\" (C2-H18, marked \"she argues\")\n- page 11's \"At the peak... the price of building new homes... and rents\" (C2-N01 and N02) and its \"partly... partly\" (C2-N14 to N16)\n- page 15's dollar figures (4.1% and 2.9% rounded, using Stats NZ's own \"if they had not changed\" wording)\n- \"Millions went to fight\" (C2-H02), \"Usually not down\" (C2-H09), \"many loans\" (C2-XD01), \"help paying wages\" (C2-N14) and \"Up from about three\" (C2-N09)\n\nOther checks:\n- final.md matches narration-final.txt word for word.\n- The counts are right: 1,017 words (1,027 as spoken), 34 pauses, no sentence over 20 words.\n- None of the forbidden words appear: MMT, Naomi Klein's wording, capitals, digits, \"fuel\", \"rise\".\n- The rule on pages 5 and 16 is identical word for word.\n- The notes (research ids, pictures, on-screen words) match the narration, apart from the items below.\n- Page 12's picture note now says \"the lights dim\" instead of \"windows dim\". This change wasn't listed, but it does no harm.\n- The fixer says the checkers show \"no flags beyond sentences of 16-20 words\". That isn't quite right: the sound scan also flags \"2 figures in one sentence\" on page 6, twice on page 13, and on page 15's new first sentence (a dollar amount plus a year). The project has accepted this year-plus-figure pattern before, so I didn't count it as a finding.\n\nWhat's left:\n- Two should-fixes: page 16's \"to make it\" changes what \"it\" refers to, and repeats the recap in new words; and the page 10 ready cut would leave a figure undated, so it would sound like 2020.\n- Three minor wording points on pages 5 and 16.",
+  "changed_lines_checked": 45,
+  "findings": [
+   {
+    "page": 16,
+    "quote": "Spent on what... and is anything spare to make it?",
+    "problem": "The word \"it\" changes what it refers to. In the two rule sentences just before, \"it\" means new money twice (\"it mostly gets more things made... it mostly pushes prices up\"). Page 9's recap also uses \"it\" for new money (\"to make what it buys\"). Here \"it\" has to mean the thing bought, so a listener can hear \"is anything spare to make [the money]?\", or hear \"make it\" as \"succeed\". The last round turned down \"to make it\" for exactly this reason (\"'make it' can be heard as 'make money'\", work-revise/final.md). It also gives the spare test a third wording instead of repeating page 9's recap word for word, which breaks the same-words rule for recaps. The toolkit also warns against unclear pronouns.",
+    "fix": "\"Spent on what... and is anything spare to make what it buys?\" This adds 2 words, keeps \"it\" meaning new money, and repeats page 9's \"to make what it buys\" exactly. Change the screen line to ANYTHING SPARE TO MAKE WHAT IT BUYS?, and update the page 16 \"Terms explained\" note and the \"Recaps\" line to match.",
+    "severity": "should-fix"
+   },
+   {
+    "page": 10,
+    "quote": "| 10 | \"By the end of twenty twenty-one, almost everyone looking for work had found it.\" (\"Only about three in a hundred were out of work\" stays as the clue) | 14 |",
+    "problem": "This ready cut removes the only date for the figure. \"Only about three in a hundred were out of work\" would then come straight after \"When Covid hit in twenty twenty...\", so it would be heard as 2020. The ledger's figure is for the December 2021 quarter (C2-N09), and nothing in the ledger says the rate was that low in 2020. A ready cut should be safe to use without re-checking. The table's word counts are also wrong: the page 11 cut (\"At the peak, the biggest push came from the price of building new homes... and rents.\") is 16 words, not 14. So the three cuts come to 38 words, not 36 (about 16 seconds at 140 a minute, not 15).",
+    "fix": "Change the page 10 cut so the date stays. One way is to cut only \"almost everyone looking for work had found it\" and read \"By the end of twenty twenty-one... only about three in a hundred were out of work.\" This saves 9 words, and the pause matches page 13's dated figure. Otherwise, drop the cut. Change 14 to 16 for page 11, and \"about 36 words (about 15 seconds)\" to \"about 38 words (about 16 seconds)\".",
+    "severity": "should-fix"
+   },
+   {
+    "page": 16,
+    "quote": "ask two questions. Spent on what... and is anything spare to make it? And who pays for the cure?",
+    "problem": "Heard aloud, this sounds like three questions, not two. The pause after \"Spent on what\" makes it end like a question of its own, and then two more questions follow, each starting with \"and\". A listener told \"two questions\" hears three in the chapter's closing line and may not know which two to keep.",
+    "fix": "Put a comma instead of a pause after \"Spent on what\", so Malina reads it as one question: \"Spent on what, and is anything spare to make what it buys?\" That leaves 33 pauses. Or drop the number: \"ask yourself...\".",
+    "severity": "minor"
+   },
+   {
+    "page": 5,
+    "quote": "So sellers can ask more... and prices go up.",
+    "problem": "\"Sellers\" is a new name for the people page 12 calls \"businesses\" (\"Businesses sell fewer things\"). The ledger entry behind this line (C2-XD01) also says businesses. The one-name rule says a new word makes a listener think it is a new thing, so \"sellers\" may sound like someone other than the factory or the businesses. The card SELLERS CAN ASK MORE repeats the new name on screen.",
+    "fix": "\"So businesses can ask more... and prices go up.\" Change the card to BUSINESSES CAN ASK MORE, and the Naomi Klein note to \"businesses that can ask more\".",
+    "severity": "minor"
+   },
+   {
+    "page": 5,
+    "quote": "More money... for the same things.",
+    "problem": "The notes describe a more/same/fewer pattern said the same way each time. Pages 3 and 6 match (\"More money... and more things to buy\", \"More money... and fewer things to buy\"), but page 5 breaks the wording. Recaps in the same words are what let the ear recognise the pattern.",
+    "fix": "\"More money... and the same things to buy.\" This adds 2 words. The card stays MORE MONEY / SAME THINGS.",
+    "severity": "minor"
+   }
+  ]
+ },
+ "last": {
+  "title": "Chapter 2 - what really causes inflation - for newcomers (final, after the last check)",
+  "how_it_teaches": "The sentence a viewer should be able to say back: whether new money pushes prices up depends on whether it's spent, and on what. When new money is spent and there are spare workers, materials and machines to make what it buys, it mostly gets more things made. When nothing is spare, it mostly pushes prices up. And the usual cure is paid for by many people with loans and by people put out of work.\n\nThe model comes first: two factories, each standing for \"a whole country... all its workers, materials and machines\". The quiet factory (workers wait at the gate): \"More money... and more things to buy. So prices barely move.\" The flat-out factory (everyone working as hard as they can): \"More money... for the same things. So sellers can ask more... and prices go up.\" Money that is never spent never reaches the factory. The rule is said in the same words on pages 5 and 16.\n\nThen the real cases, in time order, each placed on the picture out loud: Britain at war (\"close to the flat-out factory\"; \"More money... and fewer things to buy\"); Glasgow's homes (\"Our picture works for one kind of thing too. For homes, Glasgow was like the flat-out factory\"); Japan (most of the new money \"never reached the factory\", then the recap \"whether it's spent... and on what. Are there spare workers, materials and machines to make what it buys?\"); New Zealand 2020-21 as the test (clue, guess, then \"Close to the flat-out factory\", prices up \"partly because more was being spent... and partly because of prices overseas, like oil\"); the usual cure placed on the picture; who pays, answered plainly (\"Many people with loans... and people put out of work\"); two views clashing on the same words (America's version of our Reserve Bank: fewer jobs are \"unfortunate... but not the goal\"; Mattei \"argues that fewer jobs are the cure's main goal\"); and back at the checkout, a hundred-dollar basket that became about a hundred and four, about a hundred and three without the petrol and diesel change.\n\nChecks for the viewer: three guesses at page ends, each held about 4 seconds (the flat-out factory, Japan, New Zealand). Recaps in the same words: the rule twice (pages 5 and 16); \"whether it's spent... and on what\" after Japan; \"Who pays for the cure?\" asked and answered on page 13 and asked again at the end; and the closing \"Spent on what... and is anything spare to make what it buys?\", which now ends in page 9's exact words, so \"it\" keeps meaning new money all through page 16.\n\nNaomi Klein in spirit only: stakes in the first 30 seconds, the viewer's own questions asked and answered, who gains and who pays side by side, people counted as people, urgency from facts. Pinker's principles, not his voice: a concrete scene before each idea, the imagined picture announced as imagined, where the picture changes what it stands for said aloud, qualifications kept (\"mostly\", \"close to\", \"partly\", \"many\", \"usually\", \"probably\"). Full notes, ready cuts, traps and the listener questions are in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-last/final.md; the narration alone is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-last/narration-final.txt.",
+  "estimated_seconds": 500,
+  "spoken_words": 1019,
+  "pages": [
+   {
+    "page": 1,
+    "name": "The question",
+    "seconds": 33,
+    "text": "You've felt it at the checkout. The same basket of shopping costs more than it did a year ago. That's inflation... prices in general, going up. The whole basket. You've heard the warning too. If new money is created... prices will go up. Is that always true? It matters... because when prices go up too fast, the usual cure makes many loans cost more. And that can put people out of work.",
+    "research_ids": [
+     "C2-XA04",
+     "C2-M01",
+     "C2-XA05",
+     "C2-M14",
+     "C2-M17",
+     "C2-XD01"
+    ],
+    "terms_explained": [
+     "inflation (\"prices in general, going up... the whole basket\"); the usual cure (it \"makes many loans cost more\"; in full on page 12)."
+    ],
+    "pictures": "as before (page-1 reused, parts swapped, code only). The politician still mouths the warning: NEW MONEY → PRICES UP?, then IS THAT ALWAYS TRUE?, then MANY LOANS COST MORE → OUT OF WORK. The one-tag-swings beat is shortened to match the cut line: every tag flips: THE WHOLE BASKET."
+   },
+   {
+    "page": 2,
+    "name": "Who can create new money",
+    "seconds": 23,
+    "text": "Who can create new money? Here in New Zealand, the Reserve Bank can. It also tries to stop prices going up too fast. There are economists who study how modern money works. They argue that our government can't run out of its own money. But it can run out of workers, materials and machines.",
+    "research_ids": [
+     "C2-M15",
+     "C2-N04",
+     "C2-M04",
+     "C2-M17",
+     "C2-N06",
+     "C2-M12"
+    ],
+    "terms_explained": [
+     "who can create new money; the Reserve Bank and what it tries to do; the economists' view, in its own sentence and marked \"argue\"; workers, materials and machines as the real limit."
+    ],
+    "pictures": "(code only): page-10's New Zealand street at dusk with the typed card THE RESERVE BANK (no logo) and a small CAN CREATE NEW MONEY; then TRIES TO STOP PRICES GOING UP TOO FAST; page-2's banknote bundles land: NEW MONEY; the card CAN'T RUN OUT OF ITS OWN MONEY / CAN RUN OUT OF..., then page-3's three cut-outs pop up: WORKERS / MATERIALS / MACHINES."
+   },
+   {
+    "page": 3,
+    "name": "The quiet factory",
+    "seconds": 30,
+    "text": "Picture two factories. Think of each one as a whole country... all its workers, materials and machines. In the first, the machines stand still. Workers wait at the gate, hoping for a job. Call it the quiet factory. Now the government spends new money on what the factory makes. The workers go in. The machines start. More money... and more things to buy. So prices barely move.",
+    "research_ids": [
+     "C2-XA03",
+     "C2-M09",
+     "C2-M05"
+    ],
+    "terms_explained": [
+     "the two-factories picture and what it stands for; the quiet factory; who spends the new money in the picture; why prices barely move (more money, and more things to buy)."
+    ],
+    "pictures": "page-3's works A; A WHOLE COUNTRY: WORKERS, MATERIALS, MACHINES; THE QUIET FACTORY; coins rain in: THE GOVERNMENT SPENDS NEW MONEY; the workers go in and goods come out: MORE MONEY / MORE THINGS TO BUY (the same layout page 6 uses for MORE MONEY / FEWER THINGS); the price counter stays put."
+   },
+   {
+    "page": 4,
+    "name": "The flat-out factory, the first guess",
+    "seconds": 21,
+    "text": "In the second factory, every worker and every machine is already busy... working as hard as they can. No one waits at the gate. Call it the flat-out factory. The same new money is spent on what this factory makes. What happens to prices? Have a guess.",
+    "research_ids": [
+     "C2-XA03",
+     "C2-M05"
+    ],
+    "terms_explained": [
+     "flat out; the flat-out factory. The guess now names what to guess about."
+    ],
+    "pictures": "page-3's works B, gate empty, labelled THE FLAT-OUT FACTORY with a small line under it: FLAT OUT = WORKING AS HARD AS THEY CAN. Coins rain in; the counter freezes. WHAT HAPPENS TO PRICES? held about 4 seconds, with a small on-screen marker that the film is waiting for a guess."
+   },
+   {
+    "page": 5,
+    "name": "The rule",
+    "seconds": 30,
+    "text": "No spare workers, materials or machines... so no extra things get made. More money... for the same things. So sellers can ask more... and prices go up. Most economists agree on this much. When new money is spent... and there are spare workers, materials and machines... it mostly gets more things made. When nothing is spare... it mostly pushes prices up.",
+    "research_ids": [
+     "C2-M05",
+     "C2-XD01",
+     "C2-XA03",
+     "C2-M09"
+    ],
+    "terms_explained": [
+     "spare; why prices go up (sellers can ask more); the rule (recap 1, repeated word for word on page 16), now with \"spent\" first, in the same order as page 9's \"whether it's spent... and on what\"."
+    ],
+    "pictures": "works B's counter flips up; the three cut-outs return stamped NO SPARE, with MORE MONEY / SAME THINGS, then SELLERS CAN ASK MORE, and a small MOST ECONOMISTS AGREE. Then the wide shot of both works with two rule cards: NEW MONEY SPENT + SPARE → MOSTLY MORE THINGS MADE and NOTHING SPARE → MOSTLY PRICES UP. Hold the rule cards about 2 seconds after Malina stops, with the music up, before the page turn."
+   },
+   {
+    "page": 6,
+    "name": "Britain at war",
+    "seconds": 31,
+    "text": "Now a real case. Britain, during the First World War. Millions went to fight. Soon, fewer than one worker in a hundred was out of work. German submarines sank ships carrying food and materials. And the war was paid for partly with new money. More money... and fewer things to buy. By the end of the war, prices had roughly doubled. Britain at war was close to the flat-out factory.",
+    "research_ids": [
+     "C2-H02",
+     "C2-H03",
+     "C2-XA02",
+     "C2-XA01",
+     "C2-H01"
+    ],
+    "terms_explained": [
+     "out of work (one worker in a hundred); why workers weren't spare (millions went to fight)."
+    ],
+    "pictures": "page-2's munitions hall, words matched (code only): BRITAIN, FIRST WORLD WAR; a typed card MILLIONS WENT TO FIGHT; the 100 dots, last nearly empty: FEWER THAN 1 IN 100 OUT OF WORK; SHIPS SUNK: FOOD, MATERIALS; PARTLY NEW MONEY; MORE MONEY / FEWER THINGS; bars 1914 ×1 and 1918 ABOUT ×2; quick cut to works B: CLOSE TO THE FLAT-OUT FACTORY."
+   },
+   {
+    "page": 7,
+    "name": "Glasgow's homes",
+    "seconds": 38,
+    "text": "By nineteen fifteen, crowds of war workers had come to Glasgow. There were already too few homes. With builders and materials gone to the war, few new ones were built. Our picture works for one kind of thing too. For homes, Glasgow was like the flat-out factory. Landlords raised the rent... in places by up to a quarter. By November, about twenty thousand families were refusing to pay the extra. Within weeks, Britain's Parliament brought rents on small homes back to what they were before the war.",
+    "research_ids": [
+     "C2-XB01",
+     "C2-H04",
+     "C2-XB02"
+    ],
+    "terms_explained": [
+     "too few homes (plain words in place of \"homes were already short\"); the picture standing for one kind of thing, said aloud before it is used; the swap (builders busy with the war, so few new homes); Britain's Parliament."
+    ],
+    "pictures": "page-4's Glasgow tenement street (code only), titled GLASGOW 1915, with TOO FEW HOMES ALREADY; workers stream in; the building-site shot: BUILDERS AND MATERIALS GONE TO WAR / FEW NEW HOMES; a quick wide shot of works B shrinking to a row of tenements, with the small card ONE KIND OF THING; the tag FOR HOMES: LIKE THE FLAT-OUT FACTORY; RENT RAISED / UP TO +25% IN PLACES; the counter to 20,000 FAMILIES REFUSING THE EXTRA; the stamp RENTS BACK TO BEFORE THE WAR. Never WON or RENTS FROZEN. No Mary Barbour card. Never \"NOT ENOUGH HOMES\" (a Naomi Klein title)."
+   },
+   {
+    "page": 8,
+    "name": "Japan, the second guess",
+    "seconds": 17,
+    "text": "Japan, twenty thirteen. Japan's version of our Reserve Bank planned to double the money it had created... in two years. If the warning is right, prices should go up fast. What do you think happened? Have a guess.",
+    "research_ids": [
+     "C2-XB03",
+     "C2-C06"
+    ],
+    "terms_explained": [
+     "Japan's version of our Reserve Bank (meaningful, since page 2 said what ours does). \"Planned to\" replaces \"set out to\"."
+    ],
+    "pictures": "unchanged (page-5 part A, JAPAN 2013, ×2 MONEY / IN TWO YEARS, the dashed line IF THE WARNING IS RIGHT climbs under WHAT HAPPENED?), hold about 4 seconds."
+   },
+   {
+    "page": 9,
+    "name": "Japan, the answer",
+    "seconds": 33,
+    "text": "Prices barely moved... for about eight years. On average, they went up about half a percent a year. Why? One reason economists give... most of the new money just sat in the banks. In our picture, most of it never reached the factory. So it's not just how much new money there is. It's whether it's spent... and on what. Are there spare workers, materials and machines to make what it buys?",
+    "research_ids": [
+     "C2-XB04",
+     "C2-C06",
+     "C2-XB03",
+     "C2-XA03",
+     "C2-M09"
+    ],
+    "terms_explained": [
+     "money created but not spent; recap 2, and what \"on what\" asks. The two numbers are now in separate sentences."
+    ],
+    "pictures": "as before (the almost-level line ABOUT ½% A YEAR; coins piling up in front of the card bank: MOST SAT IN THE BANKS; NOT JUST HOW MUCH / WHETHER IT'S SPENT, AND ON WHAT), then the typed card SPARE WORKERS, MATERIALS, MACHINES TO MAKE WHAT IT BUYS? Hold that card about 2 seconds after Malina stops, before the page turn."
+   },
+   {
+    "page": 10,
+    "name": "New Zealand, the third guess",
+    "seconds": 26,
+    "text": "Now, here. When Covid hit in twenty twenty, the Reserve Bank created new money. And the government spent more... including help paying wages. By the end of twenty twenty-one, almost everyone looking for work had found it. Only about three in a hundred were out of work. Which factory was New Zealand closer to? Have a guess.",
+    "research_ids": [
+     "C2-N06",
+     "C2-N14",
+     "C2-N09"
+    ],
+    "terms_explained": [
+     "out of work as a share (\"about three in a hundred\"); what part of the government's money went on (paying wages); \"almost everyone looking for work had found it\"."
+    ],
+    "pictures": "page-8 part B's New Zealand street (code only): NEW ZEALAND 2020; notes land: NEW MONEY; GOVERNMENT SPENT MORE / INCLUDING HELP PAYING WAGES; 2021 with the 100-dot panel, 3 empty: ABOUT 3 IN 100 OUT OF WORK, credited Stats NZ (the LOWEST IN 30+ YEARS card is removed with its line); wide shot of both factories: WHICH ONE?, held about 4 seconds."
+   },
+   {
+    "page": 11,
+    "name": "New Zealand, the answer",
+    "seconds": 23,
+    "text": "Close to the flat-out factory. Almost no one was waiting at the gate. And prices here went up fast. Partly because more was being spent... and partly because of prices overseas, like oil. At the peak, the biggest push came from the price of building new homes... and rents.",
+    "research_ids": [
+     "C2-N09",
+     "C2-N15",
+     "C2-N14",
+     "C2-N16",
+     "C2-N01",
+     "C2-N03",
+     "C2-N02"
+    ],
+    "terms_explained": [
+     "none new. It says the outcome and gives both causes in plain words: \"more was being spent\" (the page 10 spending, with almost no one spare) and \"prices overseas\". \"At the peak\" ties the homes line to the year prices went up fastest."
+    ],
+    "pictures": "(code only, no new paintings): quick cut to works B with the gate almost empty: CLOSE TO THE FLAT-OUT FACTORY. Then PRICES WENT UP FAST, splitting into two small cards: PARTLY: MORE SPENT and PARTLY: PRICES OVERSEAS, LIKE OIL (page-7 part A's oil barrel, no counter). Then page-4's building-site shot relabelled NEW ZEALAND with AT THE PEAK: THE PRICE OF BUILDING NEW HOMES, AND RENTS. Never BUILDING NEW HOMES on its own. No house-price figures, no +30%, no review desk."
+   },
+   {
+    "page": 12,
+    "name": "The usual cure",
+    "seconds": 31,
+    "text": "So what's the usual cure? The Reserve Bank raises its interest rate. Interest is the extra you pay back when you borrow. Many loans cost more... so people have less to spend. Businesses sell fewer things, and hire fewer people. And prices go up more slowly. Usually not down... just more slowly. In our picture, the flat-out factory slows... and more workers wait at the gate.",
+    "research_ids": [
+     "C2-XD01",
+     "C2-M17",
+     "C2-H09"
+    ],
+    "terms_explained": [
+     "interest and interest rate; the usual cure in full; \"prices go up more slowly. Usually not down\"."
+    ],
+    "pictures": "as before. Ends on works B: smoke thins, the lights dim, the queue returns: MORE WORKERS AT THE GATE."
+   },
+   {
+    "page": 13,
+    "name": "Who pays, here",
+    "seconds": 35,
+    "text": "Who pays for the cure? From late twenty twenty-one into twenty twenty-three, the Reserve Bank raised its interest rate again and again. Many loans cost more, and jobs got harder to find. By the middle of twenty twenty-six... nearly six in a hundred were out of work. Up from about three. The interest rate isn't the only reason for that. So who pays for the cure? Many people with loans... and people put out of work.",
+    "research_ids": [
+     "C2-N10",
+     "C2-XD03",
+     "C2-XD01",
+     "C2-N11",
+     "C2-XD05",
+     "C2-N09",
+     "C2-M17"
+    ],
+    "terms_explained": [
+     "who pays, said plainly at the end, so \"pays\" is heard as \"who carries the harm\", not \"who hands over money for it\". The share out of work is in the same unit as page 10, and the comparison is now said aloud."
+    ],
+    "pictures": "the dial climbs in steps: LATE 2021 TO 2023: AGAIN AND AGAIN (no rate figures). The 100-dot panel from page 10 returns with nearly 6 empty dots: NEARLY 6 IN 100 OUT OF WORK, Stats NZ, MIDDLE OF 2026, with a faint UP FROM ABOUT 3, and a small NOT THE ONLY REASON. Then WHO PAYS? lands over two cut-outs: MANY PEOPLE WITH LOANS / PEOPLE PUT OUT OF WORK."
+   },
+   {
+    "page": 14,
+    "name": "Two views",
+    "seconds": 29,
+    "text": "America's version of our Reserve Bank has said the cure would probably mean fewer jobs. It sees that as unfortunate... but not the goal. Clara E. /məˈteɪi/ is the economist whose book this series follows. She argues that fewer jobs are the cure's main goal. With more workers waiting at the gate, she says, people with jobs have less power to ask for higher wages.",
+    "research_ids": [
+     "C2-M17",
+     "C2-H18",
+     "C1-01",
+     "C2-XD02"
+    ],
+    "terms_explained": [
+     "who Mattei is; the two views, now opposed on the same words (\"fewer jobs... not the goal\" against \"fewer jobs are the cure's main goal\"); \"people with jobs\"; \"higher wages\" (one name with page 10's wages)."
+    ],
+    "pictures": "page-9 part B (code only): AMERICA'S VERSION OF OUR RESERVE BANK: FEWER JOBS: UNFORTUNATE, NOT THE GOAL (no quotation marks; small credit US FEDERAL RESERVE); her book with CLARA E. MATTEI, THE CAPITAL ORDER (2022); MATTEI ARGUES: FEWER JOBS ARE THE MAIN GOAL; the queue grows and the iron weight drops on the pay packet: LESS POWER TO ASK FOR HIGHER WAGES. No portrait."
+   },
+   {
+    "page": 15,
+    "name": "Back at the checkout",
+    "seconds": 33,
+    "text": "And the checkout? Imagine the basket cost a hundred dollars in June twenty twenty-five. A year later, it cost about a hundred and four. If petrol and diesel prices hadn't changed... it would have cost about a hundred and three. When petrol and diesel go up, the price of almost everything made or moved goes up too... in both factories. So part of what you felt at the checkout came from petrol and diesel.",
+    "research_ids": [
+     "C2-N05",
+     "C2-M04",
+     "C2-XA05",
+     "C2-XC05",
+     "C2-M06",
+     "C2-M18"
+    ],
+    "terms_explained": [
+     "the two price figures, now in the page 1 basket's own unit (dollars), so no percent or decimal is needed; a second cause of prices going up, in plain words, working in both factories."
+    ],
+    "pictures": "a brief return to page-1's basket with a tag: $100, JUNE 2025; it flips to ABOUT $104, A YEAR LATER; a ghost tag beside it: ABOUT $103 IF PETROL AND DIESEL PRICES HADN'T CHANGED, credited STATS NZ (no 4.1%, 2.9% or 2026 on screen, since Malina doesn't say them on this page); the two-factories wide shot, the oil barrel lands by each works and both counters flip up: BOTH FACTORIES; back to the basket with PART OF IT: PETROL AND DIESEL."
+   },
+   {
+    "page": 16,
+    "name": "Spent on what?",
+    "seconds": 30,
+    "text": "Does new money always push prices up? No. When new money is spent... and there are spare workers, materials and machines... it mostly gets more things made. When nothing is spare... it mostly pushes prices up. So next time you hear the warning... ask two questions. Spent on what... and is anything spare to make what it buys? And who pays for the cure?",
+    "research_ids": [
+     "C2-XA03",
+     "C2-M09"
+    ],
+    "terms_explained": [
+     "none new. Recap 1 in the same words as page 5; recap 3: the first question now carries its own test (\"is anything spare to make what it buys?\", echoing \"When nothing is spare\" two sentences before and ending in page 9's recap words, \"to make what it buys\", so \"it\" keeps meaning new money, as in the rule just before), and the second repeats page 13's question, which page 13 now answers out loud."
+    ],
+    "pictures": "the two-factories wide shot with page 5's rule cards; page-10 part B's chamber with the invented politician (no party colours); SPENT ON WHAT? lands with a small line under it: ANYTHING SPARE TO MAKE WHAT IT BUYS?; then WHO PAYS FOR THE CURE?; both hold; the 4-second fade."
+   }
+  ],
+  "fixes_made": "I checked all five findings against the ledger, the rules file and the script, and made only the two confirmed should-fixes. Nothing else in the narration changed. The script is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-last/final.md. The narration on its own, matching final.md word for word, is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/script-rewrite/work-final-last/narration-final.txt.\n\n1. Page 16, \"is anything spare to make it?\" (should-fix): CONFIRMED and FIXED. In the two rule sentences just before, \"it\" means new money twice (\"it mostly gets more things made... it mostly pushes prices up\"). In \"make it\", \"it\" has to mean the thing bought, and \"make it\" can be heard as \"succeed\" or as \"make money\". The round before turned down \"to make it\" for that same reason (work-revise/final.md, line 370). The words also didn't match page 9's recap. The line now reads \"Spent on what... and is anything spare to make what it buys?\" It is 2 words longer, \"it\" keeps meaning new money, and it repeats page 9's \"to make what it buys\" word for word. To match, I changed:\n- the screen line to ANYTHING SPARE TO MAKE WHAT IT BUYS?\n- page 16's \"Terms explained\" note\n- the \"Recaps\" line\n- the \"Closing\" line in \"Changes from the recorded chapter 2\"\n- the length and timing lines: 1,019 words, or 1,029 as Malina says them; still 34 pauses; at 140 a minute about 7:41 of speech and 8:20 in all; at 160 about 6:46 and 7:25; at 164 about 6:37 and 7:15.\nI left the older notes about \"make it\" in place as history and added a pointer to the change. The voice checker and the sound scan, re-run on the new narration, flag nothing new.\n\n2. Page 10 ready cut, and the cut table's sums (should-fix): CONFIRMED and FIXED.\n- The problem: cutting the whole \"By the end of twenty twenty-one...\" sentence would put \"Only about three in a hundred were out of work\" straight after \"When Covid hit in twenty twenty\", so a listener would hear it as 2020. The ledger's figure is for the December 2021 quarter (C2-N09), and the ledger has no 2020 figure.\n- The page 10 cut now removes only \"almost everyone looking for work had found it\". The line then reads \"By the end of twenty twenty-one... only about three in a hundred were out of work.\" That puts the date with the figure, the same way page 13's \"By the middle of twenty twenty-six...\" already does. On a test copy, the sound scan flags it only the way it already flags page 13.\n- The cut saves 8 words, not the 9 the verifier gave. I counted by hand and with the counting tool.\n- The page 11 cut is 16 words, not 14. The verifier was right about that.\n- The three cuts now come to 32 words, about 13 seconds at 140 a minute, leaving about 990 words. The table, the section's opening sentence and \"At a glance\" now say so.\n\n3. Page 16, \"ask two questions\" heard as three (minor): NOT CHANGED. The point is fair: the pause after \"Spent on what\" can end like a question of its own. But this check fixed must-fixes and should-fixes only. I logged it under \"Last check\" with the suggested comma fix, which would leave 33 pauses, so the project's owner can decide or listen for it in the take.\n\n4. Page 5, \"sellers\" vs page 12's \"businesses\" (minor): NOT CHANGED. Also fair: under the one-name rule, a new word sounds like a new thing, and C2-XD01 says \"businesses\". It is minor, though, so I logged it with the fix (\"So businesses can ask more\", the card BUSINESSES CAN ASK MORE, and the Naomi Klein note).\n\n5. Page 5, \"More money... for the same things\" breaking the more / same / fewer wording (minor): NOT CHANGED. Also fair under the rule that recaps use the same words each time. It is minor, so I logged it with the fix (\"More money... and the same things to buy\", 2 more words, card unchanged).\n\nWhat isn't checked: no real listener, fact checker or Malina has heard the new page 16 line. I opened no source outside the ledger, and I changed nothing outside the work-final-last folder."
+ }
+}

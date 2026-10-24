@@ -1,0 +1,2240 @@
+{
+ "change": "the sun, the sky light and the hill tone of the ground part",
+ "change_id": "the-sun-the-sky-light-and-the-hill-tone",
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/part.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json",
+ "cameras": [
+  "View wide",
+  "View road_eye"
+ ],
+ "engine": "EEVEE",
+ "size": [
+  600,
+  400
+ ],
+ "variations": [
+  {
+   "name": "dim-soft",
+   "set": {},
+   "args": {
+    "sun_strength": 2.5,
+    "sky_strength": 0.35,
+    "hill_gain": 1.0
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "flat-sky",
+   "set": {},
+   "args": {
+    "sun_strength": 3.0,
+    "sky_strength": 0.85,
+    "hill_gain": 1.0
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "bright-low-sky",
+   "set": {},
+   "args": {
+    "sun_strength": 5.0,
+    "sky_strength": 0.35,
+    "hill_gain": 1.0
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "harsh",
+   "set": {},
+   "args": {
+    "sun_strength": 6.5,
+    "sky_strength": 0.3,
+    "hill_gain": 1.0
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "bright-sky",
+   "set": {},
+   "args": {
+    "sun_strength": 5.0,
+    "sky_strength": 0.8,
+    "hill_gain": 1.0
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "dim-dark-hills",
+   "set": {},
+   "args": {
+    "sun_strength": 3.5,
+    "sky_strength": 0.55,
+    "hill_gain": 0.78
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "base-light-hills",
+   "set": {},
+   "args": {
+    "sun_strength": 4.0,
+    "sky_strength": 0.55,
+    "hill_gain": 1.3
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "strong-light-hills",
+   "set": {},
+   "args": {
+    "sun_strength": 6.0,
+    "sky_strength": 0.65,
+    "hill_gain": 1.15
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "mid-dark-hills",
+   "set": {},
+   "args": {
+    "sun_strength": 2.8,
+    "sky_strength": 0.45,
+    "hill_gain": 0.85
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  },
+  {
+   "name": "warm-high",
+   "set": {},
+   "args": {
+    "sun_strength": 4.6,
+    "sky_strength": 0.5,
+    "hill_gain": 1.05
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/hooks/light_hook.py"
+  }
+ ],
+ "dropped": [],
+ "jobs": [
+  {
+   "index": 1,
+   "job_id": "09319619-83c3-48f2-83b0-ff71d43ee555-u2",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 41.3,
+   "wake_up_ms": 858,
+   "billed_work_ms": 41579,
+   "log_tail": "00:08.280  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:31.965  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1/01_dim-soft__view-wide.jpg'\n00:32.633  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1/01_dim-soft__view-road-eye.jpg'\n00:32.655  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:33.634  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1/02_harsh__view-wide.jpg'\n00:34.150  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1/02_harsh__view-road-eye.jpg'\n00:34.169  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:35.590  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1/03_base-light-hills__view-wide.jpg'\n00:36.158  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1/03_base-light-hills__view-road-eye.jpg'\n00:36.179  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:37.050  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1/04_warm-high__view-wide.jpg'\n00:37.561  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-1/04_warm-high__view-road-eye.jpg'\nPASS dim-soft: 2 picture(s) in 21.2 s (reopened)\nPASS harsh: 2 picture(s) in 1.1 s (reopened)\nPASS base-light-hills: 2 picture(s) in 1.7 s (reopened)\nPASS warm-high: 2 picture(s) in 1.1 s (last of the job)\nPASS variations-worker: job 1: 4 of 4 variation(s), 8 picture(s), 26.3 s, eevee on EEVEE\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/light-variations-run/pictures/job-1"
+  },
+  {
+   "index": 2,
+   "job_id": "f69c95bb-2991-413b-9baf-d073d7ea416c-u2",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 59.5,
+   "wake_up_ms": 25324,
+   "billed_work_ms": 59777,
+   "log_tail": "00:08.625  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:48.559  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2/01_baseline__view-wide.jpg'\n00:49.381  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2/01_baseline__view-road-eye.jpg'\n00:50.149  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2/02_flat-sky__view-wide.jpg'\n00:50.779  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2/02_flat-sky__view-road-eye.jpg'\n00:50.805  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:52.258  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2/03_bright-sky__view-wide.jpg'\n00:52.842  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2/03_bright-sky__view-road-eye.jpg'\n00:52.873  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:54.952  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2/04_strong-light-hills__view-wide.jpg'\n00:55.558  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-2/04_strong-light-hills__view-road-eye.jpg'\nPASS baseline: 2 picture(s) in 35.7 s (restored exactly)\nPASS flat-sky: 2 picture(s) in 1.3 s (reopened)\nPASS bright-sky: 2 picture(s) in 1.4 s (reopened)\nPASS strong-light-hills: 2 picture(s) in 2.2 s (last of the job)\nPASS variations-worker: job 2: 4 of 4 variation(s), 8 picture(s), 42.0 s, eevee on EEVEE\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/light-variations-run/pictures/job-2"
+  },
+  {
+   "index": 3,
+   "job_id": "afceeda2-98c3-42f7-898e-81aa70ffc2fa-u1",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 13.4,
+   "wake_up_ms": 43039,
+   "billed_work_ms": 13570,
+   "log_tail": "00:05.161  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:08.509  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3/01_bright-low-sky__view-wide.jpg'\n00:09.160  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3/01_bright-low-sky__view-road-eye.jpg'\n00:09.185  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:10.223  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3/02_dim-dark-hills__view-wide.jpg'\n00:10.807  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3/02_dim-dark-hills__view-road-eye.jpg'\n00:10.832  blend            | Read blend: \"/workspace/place-jobs/scenes/f5d56040/part.blend\"\n00:11.804  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3/03_mid-dark-hills__view-wide.jpg'\n00:12.437  render           | Saved: '/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/job-3/03_mid-dark-hills__view-road-eye.jpg'\nPASS bright-low-sky: 2 picture(s) in 2.1 s (reopened)\nPASS dim-dark-hills: 2 picture(s) in 1.2 s (reopened)\nPASS mid-dark-hills: 2 picture(s) in 1.2 s (last of the job)\nPASS variations-worker: job 3: 3 of 3 variation(s), 6 picture(s), 5.5 s, eevee on EEVEE\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/light-variations-run/pictures/job-3"
+  }
+ ],
+ "job_summaries": {
+  "1": {
+   "job": 1,
+   "scene": "part.blend",
+   "blender": "5.2.2 LTS",
+   "device": "EEVEE",
+   "engine": "EEVEE",
+   "engine_reasons": [
+    "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 16,
+   "where": "card",
+   "cameras": [
+    "View wide",
+    "View road_eye"
+   ],
+   "fingerprint_at_start": "8f6173154abce675",
+   "saved_values": {},
+   "seconds_in_all": 26.3,
+   "reopened": 3,
+   "entries": [
+    "dim-soft",
+    "harsh",
+    "base-light-hills",
+    "warm-high"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "8f6173154abce675"
+  },
+  "2": {
+   "job": 2,
+   "scene": "part.blend",
+   "blender": "5.2.2 LTS",
+   "device": "EEVEE",
+   "engine": "EEVEE",
+   "engine_reasons": [
+    "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 16,
+   "where": "card",
+   "cameras": [
+    "View wide",
+    "View road_eye"
+   ],
+   "fingerprint_at_start": "8f6173154abce675",
+   "saved_values": {},
+   "seconds_in_all": 42.0,
+   "reopened": 2,
+   "entries": [
+    "baseline",
+    "flat-sky",
+    "bright-sky",
+    "strong-light-hills"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "8f6173154abce675"
+  },
+  "3": {
+   "job": 3,
+   "scene": "part.blend",
+   "blender": "5.2.2 LTS",
+   "device": "EEVEE",
+   "engine": "EEVEE",
+   "engine_reasons": [
+    "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 16,
+   "where": "card",
+   "cameras": [
+    "View wide",
+    "View road_eye"
+   ],
+   "fingerprint_at_start": "8f6173154abce675",
+   "saved_values": {},
+   "seconds_in_all": 5.5,
+   "reopened": 2,
+   "entries": [
+    "bright-low-sky",
+    "dim-dark-hills",
+    "mid-dark-hills"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "8f6173154abce675"
+  }
+ },
+ "results": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 35.73,
+   "seconds_reset": 0.0,
+   "job": 2,
+   "measures": {
+    "View wide": {
+     "p5": 0.3582141399383545,
+     "p95": 0.8577898144721985,
+     "range": 0.499575674533844,
+     "median": 0.42026352882385254,
+     "detail": 2.366199016571045,
+     "mean_saturation": 0.21163082122802734,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    },
+    "View road_eye": {
+     "p5": 0.3569427728652954,
+     "p95": 0.8541717529296875,
+     "range": 0.4972289800643921,
+     "median": 0.47389018535614014,
+     "detail": 2.523324966430664,
+     "mean_saturation": 0.17522960901260376,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    }
+   },
+   "average": {
+    "p5": 0.35757845640182495,
+    "p95": 0.855980783700943,
+    "range": 0.49840232729911804,
+    "median": 0.44707685708999634,
+    "detail": 2.4447619915008545,
+    "mean_saturation": 0.19343021512031555,
+    "squint": 1.0,
+    "flat_windows": 0.0,
+    "colour_shift": 0.0,
+    "saturation_shift": 0.0,
+    "detail_change": 0.0
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "01_baseline__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 34.9,
+     "bytes": 30182,
+     "ok": true,
+     "mean_luminance": 0.4879463016986847,
+     "path": "pictures/job-2/01_baseline__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "01_baseline__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.76,
+     "bytes": 27187,
+     "ok": true,
+     "mean_luminance": 0.5742672085762024,
+     "path": "pictures/job-2/01_baseline__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "dim-soft",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 2.5,
+    "sky_strength": 0.35,
+    "hill_gain": 1.0
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 0.08,
+   "seconds_draw": 21.22,
+   "seconds_reset": 0.32,
+   "job": 1,
+   "measures": {
+    "View wide": {
+     "p5": 0.28567060828208923,
+     "p95": 0.8552730083465576,
+     "range": 0.5696024000644684,
+     "median": 0.3366509974002838,
+     "detail": 2.0486483573913574,
+     "mean_saturation": 0.21606920659542084,
+     "squint": 0.9653807878494263,
+     "flat_windows": 0,
+     "colour_shift": 6.042553837133291,
+     "saturation_shift": 0.004438385367393494,
+     "detail_change": -0.3175506591796875
+    },
+    "View road_eye": {
+     "p5": 0.28535768389701843,
+     "p95": 0.8541717529296875,
+     "range": 0.5688140690326691,
+     "median": 0.38035452365875244,
+     "detail": 2.1924102306365967,
+     "mean_saturation": 0.17811429500579834,
+     "squint": 0.9749791026115417,
+     "flat_windows": 0,
+     "colour_shift": 4.034635167960558,
+     "saturation_shift": 0.00288468599319458,
+     "detail_change": -0.3309147357940674
+    }
+   },
+   "average": {
+    "p5": 0.28551414608955383,
+    "p95": 0.8547223806381226,
+    "range": 0.5692082345485687,
+    "median": 0.3585027605295181,
+    "detail": 2.120529294013977,
+    "mean_saturation": 0.1970917508006096,
+    "squint": 0.970179945230484,
+    "flat_windows": 0.0,
+    "colour_shift": 5.038594502546925,
+    "saturation_shift": 0.003661535680294037,
+    "detail_change": -0.32423269748687744
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "01_dim-soft__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 20.54,
+     "bytes": 27379,
+     "ok": true,
+     "mean_luminance": 0.4149619936943054,
+     "path": "pictures/job-1/01_dim-soft__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "01_dim-soft__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.64,
+     "bytes": 25017,
+     "ok": true,
+     "mean_luminance": 0.5140236616134644,
+     "path": "pictures/job-1/01_dim-soft__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "flat-sky",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 3.0,
+    "sky_strength": 0.85,
+    "hill_gain": 1.0
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 0.01,
+   "seconds_draw": 1.33,
+   "seconds_reset": 0.53,
+   "job": 2,
+   "measures": {
+    "View wide": {
+     "p5": 0.35993334650993347,
+     "p95": 0.8572235703468323,
+     "range": 0.4972902238368988,
+     "median": 0.4150870442390442,
+     "detail": 2.1604771614074707,
+     "mean_saturation": 0.19020621478557587,
+     "squint": 0.9974889755249023,
+     "flat_windows": 0,
+     "colour_shift": 1.351724491479934,
+     "saturation_shift": -0.021424606442451477,
+     "detail_change": -0.20572185516357422
+    },
+    "View road_eye": {
+     "p5": 0.36535218358039856,
+     "p95": 0.8541717529296875,
+     "range": 0.48881956934928894,
+     "median": 0.46768471598625183,
+     "detail": 2.21333646774292,
+     "mean_saturation": 0.15745660662651062,
+     "squint": 0.9968015551567078,
+     "flat_windows": 0,
+     "colour_shift": 0.9668290373503885,
+     "saturation_shift": -0.01777300238609314,
+     "detail_change": -0.30998849868774414
+    }
+   },
+   "average": {
+    "p5": 0.362642765045166,
+    "p95": 0.8556976616382599,
+    "range": 0.49305489659309387,
+    "median": 0.441385880112648,
+    "detail": 2.1869068145751953,
+    "mean_saturation": 0.17383141070604324,
+    "squint": 0.997145265340805,
+    "flat_windows": 0.0,
+    "colour_shift": 1.1592767644151611,
+    "saturation_shift": -0.01959880441427231,
+    "detail_change": -0.2578551769256592
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "02_flat-sky__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.69,
+     "bytes": 28751,
+     "ok": true,
+     "mean_luminance": 0.4858973026275635,
+     "path": "pictures/job-2/02_flat-sky__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "02_flat-sky__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.61,
+     "bytes": 25468,
+     "ok": true,
+     "mean_luminance": 0.5750959515571594,
+     "path": "pictures/job-2/02_flat-sky__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "bright-low-sky",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 5.0,
+    "sky_strength": 0.35,
+    "hill_gain": 1.0
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 0.01,
+   "seconds_draw": 2.18,
+   "seconds_reset": 0.34,
+   "job": 3,
+   "measures": {
+    "View wide": {
+     "p5": 0.36632469296455383,
+     "p95": 0.8591945171356201,
+     "range": 0.4928698241710663,
+     "median": 0.4329913854598999,
+     "detail": 2.616433620452881,
+     "mean_saturation": 0.23173248767852783,
+     "squint": 0.9974774718284607,
+     "flat_windows": 0,
+     "colour_shift": 1.7200832497120022,
+     "saturation_shift": 0.02010166645050049,
+     "detail_change": 0.25023460388183594
+    },
+    "View road_eye": {
+     "p5": 0.35896626114845276,
+     "p95": 0.8541717529296875,
+     "range": 0.49520549178123474,
+     "median": 0.4906776547431946,
+     "detail": 2.843111991882324,
+     "mean_saturation": 0.1889125108718872,
+     "squint": 0.9979268312454224,
+     "flat_windows": 0,
+     "colour_shift": 1.07048940599229,
+     "saturation_shift": 0.013682901859283447,
+     "detail_change": 0.31978702545166016
+    }
+   },
+   "average": {
+    "p5": 0.3626454770565033,
+    "p95": 0.8566831350326538,
+    "range": 0.4940376579761505,
+    "median": 0.46183452010154724,
+    "detail": 2.7297728061676025,
+    "mean_saturation": 0.21032249927520752,
+    "squint": 0.9977021515369415,
+    "flat_windows": 0.0,
+    "colour_shift": 1.3952863278521461,
+    "saturation_shift": 0.016892284154891968,
+    "detail_change": 0.28501081466674805
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "01_bright-low-sky__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.51,
+     "bytes": 31872,
+     "ok": true,
+     "mean_luminance": 0.49918031692504883,
+     "path": "pictures/job-3/01_bright-low-sky__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "01_bright-low-sky__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.64,
+     "bytes": 28799,
+     "ok": true,
+     "mean_luminance": 0.5815372467041016,
+     "path": "pictures/job-3/01_bright-low-sky__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "harsh",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 6.5,
+    "sky_strength": 0.3,
+    "hill_gain": 1.0
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 0.01,
+   "seconds_draw": 1.16,
+   "seconds_reset": 0.26,
+   "job": 1,
+   "measures": {
+    "View wide": {
+     "p5": 0.40187057852745056,
+     "p95": 0.8591945171356201,
+     "range": 0.45732393860816956,
+     "median": 0.4766635298728943,
+     "detail": 2.9295058250427246,
+     "mean_saturation": 0.23832760751247406,
+     "squint": 0.9804306626319885,
+     "flat_windows": 0,
+     "colour_shift": 5.165092336986,
+     "saturation_shift": 0.026696786284446716,
+     "detail_change": 0.5633068084716797
+    },
+    "View road_eye": {
+     "p5": 0.3889027535915375,
+     "p95": 0.8541717529296875,
+     "range": 0.46526899933815,
+     "median": 0.5380039215087891,
+     "detail": 3.2080419063568115,
+     "mean_saturation": 0.19530470669269562,
+     "squint": 0.9882521629333496,
+     "flat_windows": 0,
+     "colour_shift": 3.430363674369188,
+     "saturation_shift": 0.020075097680091858,
+     "detail_change": 0.6847169399261475
+    }
+   },
+   "average": {
+    "p5": 0.395386666059494,
+    "p95": 0.8566831350326538,
+    "range": 0.4612964689731598,
+    "median": 0.5073337256908417,
+    "detail": 3.068773865699768,
+    "mean_saturation": 0.21681615710258484,
+    "squint": 0.9843414127826691,
+    "flat_windows": 0.0,
+    "colour_shift": 4.297728005677594,
+    "saturation_shift": 0.023385941982269287,
+    "detail_change": 0.6240118741989136
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "02_harsh__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.64,
+     "bytes": 33965,
+     "ok": true,
+     "mean_luminance": 0.5360828638076782,
+     "path": "pictures/job-1/02_harsh__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "02_harsh__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.5,
+     "bytes": 30735,
+     "ok": true,
+     "mean_luminance": 0.6106345057487488,
+     "path": "pictures/job-1/02_harsh__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "bright-sky",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 5.0,
+    "sky_strength": 0.8,
+    "hill_gain": 1.0
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 0.01,
+   "seconds_draw": 1.49,
+   "seconds_reset": 0.43,
+   "job": 2,
+   "measures": {
+    "View wide": {
+     "p5": 0.4086282551288605,
+     "p95": 0.8591945171356201,
+     "range": 0.45056626200675964,
+     "median": 0.4760039448738098,
+     "detail": 2.5913259983062744,
+     "mean_saturation": 0.205594003200531,
+     "squint": 0.9811442494392395,
+     "flat_windows": 0,
+     "colour_shift": 4.353702444701847,
+     "saturation_shift": -0.006036818027496338,
+     "detail_change": 0.2251269817352295
+    },
+    "View road_eye": {
+     "p5": 0.40851452946662903,
+     "p95": 0.8541717529296875,
+     "range": 0.44565722346305847,
+     "median": 0.5365381240844727,
+     "detail": 2.7251670360565186,
+     "mean_saturation": 0.1700601875782013,
+     "squint": 0.9867904782295227,
+     "flat_windows": 0,
+     "colour_shift": 3.099834424004117,
+     "saturation_shift": -0.005169421434402466,
+     "detail_change": 0.2018420696258545
+    }
+   },
+   "average": {
+    "p5": 0.40857139229774475,
+    "p95": 0.8566831350326538,
+    "range": 0.44811174273490906,
+    "median": 0.5062710344791412,
+    "detail": 2.6582465171813965,
+    "mean_saturation": 0.18782709538936615,
+    "squint": 0.9839673638343811,
+    "flat_windows": 0.0,
+    "colour_shift": 3.726768434352982,
+    "saturation_shift": -0.005603119730949402,
+    "detail_change": 0.213484525680542
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "03_bright-sky__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.88,
+     "bytes": 31782,
+     "ok": true,
+     "mean_luminance": 0.5374457836151123,
+     "path": "pictures/job-2/03_bright-sky__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "03_bright-sky__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.56,
+     "bytes": 28384,
+     "ok": true,
+     "mean_luminance": 0.6157930493354797,
+     "path": "pictures/job-2/03_bright-sky__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "dim-dark-hills",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 3.5,
+    "sky_strength": 0.55,
+    "hill_gain": 0.78
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 0.02,
+   "seconds_draw": 1.27,
+   "seconds_reset": 0.31,
+   "job": 3,
+   "measures": {
+    "View wide": {
+     "p5": 0.33233726024627686,
+     "p95": 0.8552730083465576,
+     "range": 0.5229357481002808,
+     "median": 0.3971623480319977,
+     "detail": 2.299873113632202,
+     "mean_saturation": 0.20987021923065186,
+     "squint": 0.9781474471092224,
+     "flat_windows": 0,
+     "colour_shift": 2.442171196508187,
+     "saturation_shift": -0.0017606019973754883,
+     "detail_change": -0.06632590293884277
+    },
+    "View road_eye": {
+     "p5": 0.32164862751960754,
+     "p95": 0.8541717529296875,
+     "range": 0.53252312541008,
+     "median": 0.4489764869213104,
+     "detail": 2.4408926963806152,
+     "mean_saturation": 0.17294062674045563,
+     "squint": 0.9849091172218323,
+     "flat_windows": 0,
+     "colour_shift": 1.6168117049035238,
+     "saturation_shift": -0.0022889822721481323,
+     "detail_change": -0.08243227005004883
+    }
+   },
+   "average": {
+    "p5": 0.3269929438829422,
+    "p95": 0.8547223806381226,
+    "range": 0.5277294367551804,
+    "median": 0.42306941747665405,
+    "detail": 2.3703829050064087,
+    "mean_saturation": 0.19140542298555374,
+    "squint": 0.9815282821655273,
+    "flat_windows": 0.0,
+    "colour_shift": 2.0294914507058555,
+    "saturation_shift": -0.0020247921347618103,
+    "detail_change": -0.0743790864944458
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "02_dim-dark-hills__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.67,
+     "bytes": 29348,
+     "ok": true,
+     "mean_luminance": 0.46191054582595825,
+     "path": "pictures/job-3/02_dim-dark-hills__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "02_dim-dark-hills__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.57,
+     "bytes": 26484,
+     "ok": true,
+     "mean_luminance": 0.5525347590446472,
+     "path": "pictures/job-3/02_dim-dark-hills__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "base-light-hills",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 4.0,
+    "sky_strength": 0.55,
+    "hill_gain": 1.3
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 0.01,
+   "seconds_draw": 1.71,
+   "seconds_reset": 0.25,
+   "job": 1,
+   "measures": {
+    "View wide": {
+     "p5": 0.3590839207172394,
+     "p95": 0.8591945171356201,
+     "range": 0.5001105964183807,
+     "median": 0.4215254783630371,
+     "detail": 2.3646042346954346,
+     "mean_saturation": 0.2108936905860901,
+     "squint": 0.9729608297348022,
+     "flat_windows": 0,
+     "colour_shift": 1.5000812377198522,
+     "saturation_shift": -0.0007371306419372559,
+     "detail_change": -0.0015947818756103516
+    },
+    "View road_eye": {
+     "p5": 0.37124940752983093,
+     "p95": 0.8541717529296875,
+     "range": 0.48292234539985657,
+     "median": 0.48112156987190247,
+     "detail": 2.533437967300415,
+     "mean_saturation": 0.1749526709318161,
+     "squint": 0.9778221845626831,
+     "flat_windows": 0,
+     "colour_shift": 1.0166196848799076,
+     "saturation_shift": -0.0002769380807876587,
+     "detail_change": 0.010113000869750977
+    }
+   },
+   "average": {
+    "p5": 0.36516666412353516,
+    "p95": 0.8566831350326538,
+    "range": 0.49151647090911865,
+    "median": 0.4513235241174698,
+    "detail": 2.449021100997925,
+    "mean_saturation": 0.1929231807589531,
+    "squint": 0.9753915071487427,
+    "flat_windows": 0.0,
+    "colour_shift": 1.25835046129988,
+    "saturation_shift": -0.0005070343613624573,
+    "detail_change": 0.0042591094970703125
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "03_base-light-hills__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.13,
+     "bytes": 30328,
+     "ok": true,
+     "mean_luminance": 0.5006251335144043,
+     "path": "pictures/job-1/03_base-light-hills__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "03_base-light-hills__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.55,
+     "bytes": 27357,
+     "ok": true,
+     "mean_luminance": 0.5855764150619507,
+     "path": "pictures/job-1/03_base-light-hills__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "strong-light-hills",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 6.0,
+    "sky_strength": 0.65,
+    "hill_gain": 1.15
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.01,
+   "seconds_draw": 2.24,
+   "seconds_reset": 0.0,
+   "job": 2,
+   "measures": {
+    "View wide": {
+     "p5": 0.4206604063510895,
+     "p95": 0.8591945171356201,
+     "range": 0.43853411078453064,
+     "median": 0.49321961402893066,
+     "detail": 2.8064494132995605,
+     "mean_saturation": 0.216976597905159,
+     "squint": 0.9479612708091736,
+     "flat_windows": 0,
+     "colour_shift": 6.62878737726205,
+     "saturation_shift": 0.005345776677131653,
+     "detail_change": 0.4402503967285156
+    },
+    "View road_eye": {
+     "p5": 0.4266454875469208,
+     "p95": 0.8541717529296875,
+     "range": 0.4275262653827667,
+     "median": 0.5593042969703674,
+     "detail": 3.0129001140594482,
+     "mean_saturation": 0.1781395524740219,
+     "squint": 0.96522057056427,
+     "flat_windows": 0,
+     "colour_shift": 4.64207784297569,
+     "saturation_shift": 0.002909943461418152,
+     "detail_change": 0.4895751476287842
+    }
+   },
+   "average": {
+    "p5": 0.4236529469490051,
+    "p95": 0.8566831350326538,
+    "range": 0.4330301880836487,
+    "median": 0.526261955499649,
+    "detail": 2.9096747636795044,
+    "mean_saturation": 0.19755807518959045,
+    "squint": 0.9565909206867218,
+    "flat_windows": 0.0,
+    "colour_shift": 5.63543261011887,
+    "saturation_shift": 0.004127860069274902,
+    "detail_change": 0.4649127721786499
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "04_strong-light-hills__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.62,
+     "bytes": 33364,
+     "ok": true,
+     "mean_luminance": 0.5578247308731079,
+     "path": "pictures/job-2/04_strong-light-hills__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "04_strong-light-hills__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.58,
+     "bytes": 29919,
+     "ok": true,
+     "mean_luminance": 0.6320514678955078,
+     "path": "pictures/job-2/04_strong-light-hills__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "mid-dark-hills",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 2.8,
+    "sky_strength": 0.45,
+    "hill_gain": 0.85
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.02,
+   "seconds_draw": 1.28,
+   "seconds_reset": 0.0,
+   "job": 3,
+   "measures": {
+    "View wide": {
+     "p5": 0.3036878705024719,
+     "p95": 0.8552730083465576,
+     "range": 0.5515851378440857,
+     "median": 0.3587961196899414,
+     "detail": 2.140251636505127,
+     "mean_saturation": 0.21125833690166473,
+     "squint": 0.9705393314361572,
+     "flat_windows": 0,
+     "colour_shift": 4.873022878173233,
+     "saturation_shift": -0.00037248432636260986,
+     "detail_change": -0.22594738006591797
+    },
+    "View road_eye": {
+     "p5": 0.29809412360191345,
+     "p95": 0.8541717529296875,
+     "range": 0.556077629327774,
+     "median": 0.40717804431915283,
+     "detail": 2.271449565887451,
+     "mean_saturation": 0.1743224710226059,
+     "squint": 0.9799763560295105,
+     "flat_windows": 0,
+     "colour_shift": 3.2341596582561256,
+     "saturation_shift": -0.0009071379899978638,
+     "detail_change": -0.2518754005432129
+    }
+   },
+   "average": {
+    "p5": 0.3008909970521927,
+    "p95": 0.8547223806381226,
+    "range": 0.5538313835859299,
+    "median": 0.3829870820045471,
+    "detail": 2.205850601196289,
+    "mean_saturation": 0.19279040396213531,
+    "squint": 0.9752578437328339,
+    "flat_windows": 0.0,
+    "colour_shift": 4.05359126821468,
+    "saturation_shift": -0.0006398111581802368,
+    "detail_change": -0.23891139030456543
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "03_mid-dark-hills__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.62,
+     "bytes": 28039,
+     "ok": true,
+     "mean_luminance": 0.4317580759525299,
+     "path": "pictures/job-3/03_mid-dark-hills__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "03_mid-dark-hills__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.61,
+     "bytes": 25459,
+     "ok": true,
+     "mean_luminance": 0.5278657674789429,
+     "path": "pictures/job-3/03_mid-dark-hills__view-road-eye.jpg"
+    }
+   ]
+  },
+  {
+   "name": "warm-high",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sun_strength": 4.6,
+    "sky_strength": 0.5,
+    "hill_gain": 1.05
+   },
+   "script": "/workspace/place-jobs/variations-the-sun-the-sky-light-and-the-hill-tone-1792753505/hooks/1-light_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 0.01,
+   "seconds_draw": 1.08,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "View wide": {
+     "p5": 0.3699333667755127,
+     "p95": 0.8591945171356201,
+     "range": 0.4892611503601074,
+     "median": 0.43467453122138977,
+     "detail": 2.5030531883239746,
+     "mean_saturation": 0.21758200228214264,
+     "squint": 0.9956504702568054,
+     "flat_windows": 0,
+     "colour_shift": 1.5363242862523148,
+     "saturation_shift": 0.005951181054115295,
+     "detail_change": 0.1368541717529297
+    },
+    "View road_eye": {
+     "p5": 0.3701121509075165,
+     "p95": 0.8541717529296875,
+     "range": 0.484059602022171,
+     "median": 0.49231529235839844,
+     "detail": 2.690603494644165,
+     "mean_saturation": 0.18017591536045074,
+     "squint": 0.9981920719146729,
+     "flat_windows": 0,
+     "colour_shift": 1.0308775199050926,
+     "saturation_shift": 0.004946306347846985,
+     "detail_change": 0.16727852821350098
+    }
+   },
+   "average": {
+    "p5": 0.3700227588415146,
+    "p95": 0.8566831350326538,
+    "range": 0.4866603761911392,
+    "median": 0.4634949117898941,
+    "detail": 2.59682834148407,
+    "mean_saturation": 0.1988789588212967,
+    "squint": 0.9969212710857391,
+    "flat_windows": 0.0,
+    "colour_shift": 1.2836009030787037,
+    "saturation_shift": 0.00544874370098114,
+    "detail_change": 0.15206634998321533
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "04_warm-high__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.55,
+     "bytes": 31180,
+     "ok": true,
+     "mean_luminance": 0.5029449462890625,
+     "path": "pictures/job-1/04_warm-high__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "04_warm-high__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.5,
+     "bytes": 28084,
+     "ok": true,
+     "mean_luminance": 0.586355984210968,
+     "path": "pictures/job-1/04_warm-high__view-road-eye.jpg"
+    }
+   ]
+  }
+ ],
+ "pairs": [
+  {
+   "a": "baseline",
+   "b": "dim-soft",
+   "mean_difference": 16.194234027777778,
+   "changed_share": 0.7699583333333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 17.644591666666667,
+     "changed_share": 0.859025
+    },
+    "View road_eye": {
+     "mean_difference": 14.74387638888889,
+     "changed_share": 0.6808916666666667
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "flat-sky",
+   "mean_difference": 2.453920833333333,
+   "changed_share": 0.062025,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 2.401198611111111,
+     "changed_share": 0.0385125
+    },
+    "View road_eye": {
+     "mean_difference": 2.5066430555555557,
+     "changed_share": 0.0855375
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "bright-low-sky",
+   "mean_difference": 2.776307638888889,
+   "changed_share": 0.06787916666666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 2.9321375,
+     "changed_share": 0.0474875
+    },
+    "View road_eye": {
+     "mean_difference": 2.620477777777778,
+     "changed_share": 0.08827083333333334
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "harsh",
+   "mean_difference": 9.945987500000001,
+   "changed_share": 0.7426854166666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 11.040079166666667,
+     "changed_share": 0.8518375
+    },
+    "View road_eye": {
+     "mean_difference": 8.851895833333334,
+     "changed_share": 0.6335333333333333
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "bright-sky",
+   "mean_difference": 11.115277777777777,
+   "changed_share": 0.7684562500000001,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 11.983498611111111,
+     "changed_share": 0.8574458333333334
+    },
+    "View road_eye": {
+     "mean_difference": 10.247056944444445,
+     "changed_share": 0.6794666666666667
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "dim-dark-hills",
+   "mean_difference": 5.763695833333333,
+   "changed_share": 0.21105833333333335,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 6.279126388888889,
+     "changed_share": 0.212025
+    },
+    "View road_eye": {
+     "mean_difference": 5.248265277777778,
+     "changed_share": 0.21009166666666668
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "base-light-hills",
+   "mean_difference": 3.102970138888889,
+   "changed_share": 0.19405208333333335,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 3.2709944444444443,
+     "changed_share": 0.20186666666666667
+    },
+    "View road_eye": {
+     "mean_difference": 2.9349458333333334,
+     "changed_share": 0.1862375
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "strong-light-hills",
+   "mean_difference": 15.2853625,
+   "changed_share": 0.76983125,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 16.588956944444444,
+     "changed_share": 0.8593875
+    },
+    "View road_eye": {
+     "mean_difference": 13.981768055555555,
+     "changed_share": 0.680275
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "mid-dark-hills",
+   "mean_difference": 12.416836111111111,
+   "changed_share": 0.76795625,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 13.539558333333334,
+     "changed_share": 0.8581375
+    },
+    "View road_eye": {
+     "mean_difference": 11.294113888888889,
+     "changed_share": 0.677775
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "warm-high",
+   "mean_difference": 3.2363847222222226,
+   "changed_share": 0.057756249999999995,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 3.552463888888889,
+     "changed_share": 0.07477916666666666
+    },
+    "View road_eye": {
+     "mean_difference": 2.9203055555555557,
+     "changed_share": 0.04073333333333334
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "flat-sky",
+   "mean_difference": 16.365288194444446,
+   "changed_share": 0.7704166666666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 17.47099861111111,
+     "changed_share": 0.8593583333333333
+    },
+    "View road_eye": {
+     "mean_difference": 15.259577777777778,
+     "changed_share": 0.681475
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "bright-low-sky",
+   "mean_difference": 18.04468888888889,
+   "changed_share": 0.7678520833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 19.847779166666665,
+     "changed_share": 0.858675
+    },
+    "View road_eye": {
+     "mean_difference": 16.24159861111111,
+     "changed_share": 0.6770291666666667
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "harsh",
+   "mean_difference": 25.870995138888887,
+   "changed_share": 0.769225,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 28.5617625,
+     "changed_share": 0.8594958333333333
+    },
+    "View road_eye": {
+     "mean_difference": 23.180227777777777,
+     "changed_share": 0.6789541666666666
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "bright-sky",
+   "mean_difference": 27.288339583333332,
+   "changed_share": 0.77085625,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 29.607409722222222,
+     "changed_share": 0.8597083333333333
+    },
+    "View road_eye": {
+     "mean_difference": 24.969269444444443,
+     "changed_share": 0.6820041666666666
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "dim-dark-hills",
+   "mean_difference": 10.464610416666666,
+   "changed_share": 0.6221583333333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 11.399781944444445,
+     "changed_share": 0.7017375
+    },
+    "View road_eye": {
+     "mean_difference": 9.529438888888889,
+     "changed_share": 0.5425791666666666
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "base-light-hills",
+   "mean_difference": 19.048793055555556,
+   "changed_share": 0.7706458333333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 20.649583333333332,
+     "changed_share": 0.8596625
+    },
+    "View road_eye": {
+     "mean_difference": 17.448002777777777,
+     "changed_share": 0.6816291666666666
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "strong-light-hills",
+   "mean_difference": 31.45652152777778,
+   "changed_share": 0.7711104166666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 34.2095375,
+     "changed_share": 0.8600041666666667
+    },
+    "View road_eye": {
+     "mean_difference": 28.703505555555555,
+     "changed_share": 0.6822166666666667
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "mid-dark-hills",
+   "mean_difference": 3.9610923611111115,
+   "changed_share": 0.07631875,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 4.344508333333334,
+     "changed_share": 0.06052916666666667
+    },
+    "View road_eye": {
+     "mean_difference": 3.577676388888889,
+     "changed_share": 0.09210833333333333
+    }
+   }
+  },
+  {
+   "a": "dim-soft",
+   "b": "warm-high",
+   "mean_difference": 19.347247916666667,
+   "changed_share": 0.7702479166666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 21.11228611111111,
+     "changed_share": 0.8593375
+    },
+    "View road_eye": {
+     "mean_difference": 17.58220972222222,
+     "changed_share": 0.6811583333333333
+    }
+   }
+  },
+  {
+   "a": "flat-sky",
+   "b": "bright-low-sky",
+   "mean_difference": 4.635038194444444,
+   "changed_share": 0.41071041666666663,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 4.695569444444445,
+     "changed_share": 0.38159166666666666
+    },
+    "View road_eye": {
+     "mean_difference": 4.574506944444445,
+     "changed_share": 0.43982916666666666
+    }
+   }
+  },
+  {
+   "a": "flat-sky",
+   "b": "harsh",
+   "mean_difference": 10.566784722222222,
+   "changed_share": 0.7545416666666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 11.588252777777777,
+     "changed_share": 0.8577916666666666
+    },
+    "View road_eye": {
+     "mean_difference": 9.545316666666666,
+     "changed_share": 0.6512916666666667
+    }
+   }
+  },
+  {
+   "a": "flat-sky",
+   "b": "bright-sky",
+   "mean_difference": 10.965923611111112,
+   "changed_share": 0.7524145833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 12.167402777777777,
+     "changed_share": 0.8529666666666667
+    },
+    "View road_eye": {
+     "mean_difference": 9.764444444444445,
+     "changed_share": 0.6518625
+    }
+   }
+  },
+  {
+   "a": "flat-sky",
+   "b": "dim-dark-hills",
+   "mean_difference": 5.992069444444445,
+   "changed_share": 0.2523125,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 6.1619222222222225,
+     "changed_share": 0.2508916666666667
+    },
+    "View road_eye": {
+     "mean_difference": 5.822216666666667,
+     "changed_share": 0.2537333333333333
+    }
+   }
+  },
+  {
+   "a": "flat-sky",
+   "b": "base-light-hills",
+   "mean_difference": 4.0972993055555555,
+   "changed_share": 0.19690833333333332,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 4.684051388888889,
+     "changed_share": 0.2115625
+    },
+    "View road_eye": {
+     "mean_difference": 3.5105472222222223,
+     "changed_share": 0.18225416666666666
+    }
+   }
+  },
+  {
+   "a": "flat-sky",
+   "b": "strong-light-hills",
+   "mean_difference": 15.163081944444444,
+   "changed_share": 0.76449375,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 16.790144444444444,
+     "changed_share": 0.8559083333333334
+    },
+    "View road_eye": {
+     "mean_difference": 13.536019444444445,
+     "changed_share": 0.6730791666666667
+    }
+   }
+  },
+  {
+   "a": "flat-sky",
+   "b": "mid-dark-hills",
+   "mean_difference": 12.588097222222222,
+   "changed_share": 0.7698604166666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 13.366084722222222,
+     "changed_share": 0.8589125
+    },
+    "View road_eye": {
+     "mean_difference": 11.810109722222222,
+     "changed_share": 0.6808083333333333
+    }
+   }
+  },
+  {
+   "a": "flat-sky",
+   "b": "warm-high",
+   "mean_difference": 4.171676388888889,
+   "changed_share": 0.35539166666666666,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 4.509281944444444,
+     "changed_share": 0.36085416666666664
+    },
+    "View road_eye": {
+     "mean_difference": 3.8340708333333335,
+     "changed_share": 0.3499291666666667
+    }
+   }
+  },
+  {
+   "a": "bright-low-sky",
+   "b": "harsh",
+   "mean_difference": 7.857813194444445,
+   "changed_share": 0.7175979166666666,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.736766666666666,
+     "changed_share": 0.8279166666666666
+    },
+    "View road_eye": {
+     "mean_difference": 6.978859722222222,
+     "changed_share": 0.6072791666666667
+    }
+   }
+  },
+  {
+   "a": "bright-low-sky",
+   "b": "bright-sky",
+   "mean_difference": 9.26769375,
+   "changed_share": 0.7513541666666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.783875,
+     "changed_share": 0.829225
+    },
+    "View road_eye": {
+     "mean_difference": 8.7515125,
+     "changed_share": 0.6734833333333333
+    }
+   }
+  },
+  {
+   "a": "bright-low-sky",
+   "b": "dim-dark-hills",
+   "mean_difference": 7.714088194444444,
+   "changed_share": 0.6436333333333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.556230555555555,
+     "changed_share": 0.7026541666666667
+    },
+    "View road_eye": {
+     "mean_difference": 6.871945833333333,
+     "changed_share": 0.5846125
+    }
+   }
+  },
+  {
+   "a": "bright-low-sky",
+   "b": "base-light-hills",
+   "mean_difference": 4.677011111111112,
+   "changed_share": 0.22618541666666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 4.5813375,
+     "changed_share": 0.203475
+    },
+    "View road_eye": {
+     "mean_difference": 4.772684722222222,
+     "changed_share": 0.24889583333333334
+    }
+   }
+  },
+  {
+   "a": "bright-low-sky",
+   "b": "strong-light-hills",
+   "mean_difference": 13.433363194444444,
+   "changed_share": 0.7696875000000001,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 14.381672222222223,
+     "changed_share": 0.8586
+    },
+    "View road_eye": {
+     "mean_difference": 12.485054166666666,
+     "changed_share": 0.680775
+    }
+   }
+  },
+  {
+   "a": "bright-low-sky",
+   "b": "mid-dark-hills",
+   "mean_difference": 14.28138125,
+   "changed_share": 0.7638895833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 15.74940138888889,
+     "changed_share": 0.855425
+    },
+    "View road_eye": {
+     "mean_difference": 12.813361111111112,
+     "changed_share": 0.6723541666666667
+    }
+   }
+  },
+  {
+   "a": "bright-low-sky",
+   "b": "warm-high",
+   "mean_difference": 1.8845618055555555,
+   "changed_share": 0.04221458333333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 1.8404319444444444,
+     "changed_share": 0.028225
+    },
+    "View road_eye": {
+     "mean_difference": 1.9286916666666667,
+     "changed_share": 0.056204166666666666
+    }
+   }
+  },
+  {
+   "a": "harsh",
+   "b": "bright-sky",
+   "mean_difference": 3.5449694444444444,
+   "changed_share": 0.17576458333333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 3.3917166666666665,
+     "changed_share": 0.13543333333333332
+    },
+    "View road_eye": {
+     "mean_difference": 3.6982222222222223,
+     "changed_share": 0.21609583333333332
+    }
+   }
+  },
+  {
+   "a": "harsh",
+   "b": "dim-dark-hills",
+   "mean_difference": 15.496070833333334,
+   "changed_share": 0.7661770833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 17.225366666666666,
+     "changed_share": 0.8576916666666666
+    },
+    "View road_eye": {
+     "mean_difference": 13.766775,
+     "changed_share": 0.6746625
+    }
+   }
+  },
+  {
+   "a": "harsh",
+   "b": "base-light-hills",
+   "mean_difference": 8.702771527777777,
+   "changed_share": 0.6356541666666666,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.023515277777777,
+     "changed_share": 0.6931791666666667
+    },
+    "View road_eye": {
+     "mean_difference": 8.382027777777777,
+     "changed_share": 0.5781291666666667
+    }
+   }
+  },
+  {
+   "a": "harsh",
+   "b": "strong-light-hills",
+   "mean_difference": 5.688931944444445,
+   "changed_share": 0.2980479166666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 5.741130555555555,
+     "changed_share": 0.2913541666666667
+    },
+    "View road_eye": {
+     "mean_difference": 5.636733333333333,
+     "changed_share": 0.3047416666666667
+    }
+   }
+  },
+  {
+   "a": "harsh",
+   "b": "mid-dark-hills",
+   "mean_difference": 22.110755555555556,
+   "changed_share": 0.7685875,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 24.463868055555555,
+     "changed_share": 0.858775
+    },
+    "View road_eye": {
+     "mean_difference": 19.757643055555555,
+     "changed_share": 0.6784
+    }
+   }
+  },
+  {
+   "a": "harsh",
+   "b": "warm-high",
+   "mean_difference": 6.877076388888889,
+   "changed_share": 0.6527166666666666,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.610356944444445,
+     "changed_share": 0.7732541666666667
+    },
+    "View road_eye": {
+     "mean_difference": 6.143795833333333,
+     "changed_share": 0.5321791666666666
+    }
+   }
+  },
+  {
+   "a": "bright-sky",
+   "b": "dim-dark-hills",
+   "mean_difference": 16.845545833333333,
+   "changed_share": 0.7704416666666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 18.23136111111111,
+     "changed_share": 0.8595416666666666
+    },
+    "View road_eye": {
+     "mean_difference": 15.459730555555556,
+     "changed_share": 0.6813416666666666
+    }
+   }
+  },
+  {
+   "a": "bright-sky",
+   "b": "base-light-hills",
+   "mean_difference": 8.342047916666667,
+   "changed_share": 0.5746895833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.095031944444445,
+     "changed_share": 0.6547916666666667
+    },
+    "View road_eye": {
+     "mean_difference": 7.589063888888889,
+     "changed_share": 0.4945875
+    }
+   }
+  },
+  {
+   "a": "bright-sky",
+   "b": "strong-light-hills",
+   "mean_difference": 4.365631944444445,
+   "changed_share": 0.21222291666666665,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 4.821033333333333,
+     "changed_share": 0.22573333333333334
+    },
+    "View road_eye": {
+     "mean_difference": 3.9102305555555557,
+     "changed_share": 0.1987125
+    }
+   }
+  },
+  {
+   "a": "bright-sky",
+   "b": "mid-dark-hills",
+   "mean_difference": 23.511768055555557,
+   "changed_share": 0.7708541666666666,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 25.503004166666667,
+     "changed_share": 0.8597833333333333
+    },
+    "View road_eye": {
+     "mean_difference": 21.520531944444443,
+     "changed_share": 0.681925
+    }
+   }
+  },
+  {
+   "a": "bright-sky",
+   "b": "warm-high",
+   "mean_difference": 7.9617875,
+   "changed_share": 0.7105854166666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.515459722222221,
+     "changed_share": 0.7673583333333334
+    },
+    "View road_eye": {
+     "mean_difference": 7.408115277777778,
+     "changed_share": 0.6538125
+    }
+   }
+  },
+  {
+   "a": "dim-dark-hills",
+   "b": "base-light-hills",
+   "mean_difference": 8.62074513888889,
+   "changed_share": 0.21328750000000002,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.286904166666666,
+     "changed_share": 0.21310416666666668
+    },
+    "View road_eye": {
+     "mean_difference": 7.954586111111111,
+     "changed_share": 0.21347083333333333
+    }
+   }
+  },
+  {
+   "a": "dim-dark-hills",
+   "b": "strong-light-hills",
+   "mean_difference": 21.014877777777777,
+   "changed_share": 0.7706708333333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 22.83548888888889,
+     "changed_share": 0.8599041666666667
+    },
+    "View road_eye": {
+     "mean_difference": 19.194266666666667,
+     "changed_share": 0.6814375
+    }
+   }
+  },
+  {
+   "a": "dim-dark-hills",
+   "b": "mid-dark-hills",
+   "mean_difference": 6.685368055555555,
+   "changed_share": 0.5497770833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.292943055555556,
+     "changed_share": 0.6173541666666666
+    },
+    "View road_eye": {
+     "mean_difference": 6.0777930555555555,
+     "changed_share": 0.4822
+    }
+   }
+  },
+  {
+   "a": "dim-dark-hills",
+   "b": "warm-high",
+   "mean_difference": 8.913047222222222,
+   "changed_share": 0.6440041666666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.74172361111111,
+     "changed_share": 0.691675
+    },
+    "View road_eye": {
+     "mean_difference": 8.084370833333333,
+     "changed_share": 0.5963333333333334
+    }
+   }
+  },
+  {
+   "a": "base-light-hills",
+   "b": "strong-light-hills",
+   "mean_difference": 12.431738194444446,
+   "changed_share": 0.76043125,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 13.584395833333334,
+     "changed_share": 0.8572
+    },
+    "View road_eye": {
+     "mean_difference": 11.279080555555556,
+     "changed_share": 0.6636625
+    }
+   }
+  },
+  {
+   "a": "base-light-hills",
+   "b": "mid-dark-hills",
+   "mean_difference": 15.272239583333334,
+   "changed_share": 0.7686270833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 16.545272222222223,
+     "changed_share": 0.8587541666666667
+    },
+    "View road_eye": {
+     "mean_difference": 13.999206944444444,
+     "changed_share": 0.6785
+    }
+   }
+  },
+  {
+   "a": "base-light-hills",
+   "b": "warm-high",
+   "mean_difference": 3.8159631944444445,
+   "changed_share": 0.14495625,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 3.9073,
+     "changed_share": 0.13473333333333334
+    },
+    "View road_eye": {
+     "mean_difference": 3.724626388888889,
+     "changed_share": 0.15517916666666667
+    }
+   }
+  },
+  {
+   "a": "strong-light-hills",
+   "b": "mid-dark-hills",
+   "mean_difference": 27.67962222222222,
+   "changed_share": 0.7710874999999999,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 30.10487638888889,
+     "changed_share": 0.8600375
+    },
+    "View road_eye": {
+     "mean_difference": 25.254368055555556,
+     "changed_share": 0.6821375
+    }
+   }
+  },
+  {
+   "a": "strong-light-hills",
+   "b": "warm-high",
+   "mean_difference": 12.131844444444445,
+   "changed_share": 0.7682125,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 13.121104166666667,
+     "changed_share": 0.8576041666666666
+    },
+    "View road_eye": {
+     "mean_difference": 11.142584722222223,
+     "changed_share": 0.6788208333333333
+    }
+   }
+  },
+  {
+   "a": "mid-dark-hills",
+   "b": "warm-high",
+   "mean_difference": 15.56934861111111,
+   "changed_share": 0.7691854166666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 17.007377777777776,
+     "changed_share": 0.8588958333333333
+    },
+    "View road_eye": {
+     "mean_difference": 14.131319444444445,
+     "changed_share": 0.679475
+    }
+   }
+  }
+ ],
+ "nearly_the_same": [],
+ "invisible": [],
+ "faint": [],
+ "faint_against_baseline": [],
+ "reset_check": null,
+ "sheet": {
+  "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/light-variations-run/the-sun-the-sky-light-and-the-hill-tone-sheet.jpg",
+  "bytes": 363081,
+  "quality": 82,
+  "scale": 1.0,
+  "width": 1874,
+  "height": 1335
+ },
+ "card_seconds": 402.2,
+ "card_lines": [
+  "Card seconds (work + wake-up + the idle tail): job 1: work 41.6 + wake-up 0.9 + idle tail 5 = 47.5 s; job 2: work 59.8 + wake-up 25.3 + idle tail 5 = 90.1 s; job 3: work 13.6 + wake-up 43.0 + idle tail 5 = 61.6 s; set-up and downloads 203 s (an estimate from the wall clock); in all 402 s, about US$0.12 (an estimate at the price of the day, US$1.1 an hour; not a bill).",
+  "The 3 job(s) ran side by side: from sending to the last result took 90 s. Wake-up times (waiting for a card to start): 0.9 s, 25.3 s, 43.0 s."
+ ],
+ "estimate_card_seconds": 348.0,
+ "estimate_elapsed_seconds": 146.0,
+ "where": "a rented card",
+ "helper": "builder-ground_and_roads",
+ "role": "builder",
+ "ledger": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/card-time-ledger.jsonl",
+ "saved_values": {},
+ "scout": null
+}

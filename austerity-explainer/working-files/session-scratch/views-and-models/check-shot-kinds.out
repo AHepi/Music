@@ -1,0 +1,42 @@
+== shot checker: kinds of shot and the accepted list
+PASS  box world, no new keys: the report is the original checker's, word for word (version line aside): 71 lines, all the same
+      recorded in: fixtures/shot-planner/box-world-original-report.md (written by the film kit's check_shot.py 3ad3cd77 on the same box world)
+      proves: default behaviour unchanged when the check file has neither "kind_of_shot" nor "accepted"
+PASS  box world, no new keys: no known.json is written: yes
+PASS  box world, still life and an empty accepted list: the same numbered problems: 9 problems
+      proves: naming the base kind changes no problem (only the header names the kind)
+PASS  box world, accepted: the handcart's bottom-left problem is known, the drum's stays: 8 problems, known: ['handcart fills 2.2% of the frame in the ']
+      proves: an accepted entry with "things" matches only its own thing
+PASS  box world, accepted: an entry no problem matches is noted; one for a rule this tool never measures says so: ry out.
+- accepted: The check file accepts "slide_magnification" (a planner rule), which this tool does not measure (it is for other tools: plan_shot.py, the slide and painting checks); kept as it is.
+PASS  box world, accepted at 1.5% but now 2.2%: the handcart stays a problem and says it is worse than accepted: ttom-left quarter, where the eye enters (limit 1%). (The check file accepts this at 0.015, the test, 2026-10-16: it is now worse than that, so it counts again.)
+      recorded in: shot_planner.check_shot_accepted_worse_share 0.05 (invented)
+PASS  box world, crowd: the drum (a story thing, 1.5%) is allowed under the crowd's 2%; the handcart (a work prop, 2.2%) is not: known: ['drum fills 1.5% of the frame i']
+      recorded in: shot_kind_profiles.crowd rule8_bottom_left_share 0.02, applies to story things (round 5 final checks)
+PASS  box world, crowd without "figures": the head-spacing test says it was not run: yes
+PASS  box world, crowd: known.json lists the kinds, the settings used and each known problem: 1 known
+PASS  notice corner: the plugin's checker writes the film kit's report (version line aside): 78 lines, all the same
+      recorded in: film-kit/paper-film/tools/check_shot.py (3ad3cd77) on round 5's notice corner measurement and the log 32 still
+      proves: the notice corner's report is unchanged by the new keys' code
+PASS  notice corner: and the same marked picture, byte for byte: yes
+PASS  notice corner: the film kit's checker gives the recorded log 32 problems (so these inputs are the kept shot): 6 problems, word for word
+      recorded in: experiments/32 Notice corner - the shot checker's report.md
+      proves: only that the test runs on the right measurement and picture
+PASS  notice corner with its accepted list: the light and quiet-side problems the user kept are known: got ['rule 10: the quiet side keeps the frame from tipping', 'rule 6: lit from below'], expected ['rule 10: the quiet side keeps the frame from tipping', 'rule 6: lit from below']
+      recorded in: notice-corner-place-facts.json accepted (decision 38: "Wow that's incredible. Yes keep it.")
+PASS  notice corner with its accepted list: only the reference problems (matching the liked picture, not a house rule) stay: 4 problems: ['reference: where each prop stands']
+PASS  W1: the plugin's checker writes the film kit's report (version line aside): 93 lines, all the same
+      recorded in: round 5 final check of W1 (quiet), with round 5's relaxed picture test
+PASS  W1: and it is the recorded round 5 light report: 93 lines, all the same
+      recorded in: scratchpad redesign/round5-set/checks/final-w1-quiet/light/report.md (21 problems)
+PASS  W1 as a crowd with a dark subject: problems allowed by the kinds of shot: got 15, expected 15
+      recorded in: test_shot_kind_profiles.py (the core's reading of the same 21 problems: 15 covered for "w1-quiet-light")
+      proves: the checker applies the profiles as the core read them from the report's words
+PASS  W1 kinds: the petrol drum (not a story thing) and the lantern touching man 1 stay open: yes
+      recorded in: core: the profiles leave these open on purpose (fix them, or accept them by name)
+PASS  W1 kinds: no near-touch between two men is left as a problem (a crowd replaces it by head spacing): rule 4 problems left: ['lantern and man 1 almost touch: 3 pixels', "no-1 gate's edge runs right along man 3'"]
+PASS  W1 kinds: the replacement tests run and fail where the render shows it: man 1 hidden behind man 6, the gate's outline faint: dark subject: its outline against the light: no-1 gate (a dark subject) against the light round its outline: (surround + 0.05) / (subje; crowd: heads apart: The closest two heads, man 1's and man 6's, are 0.48 head widths apart on screen (at least; crowd: every figure half seen: man 1 shows 19% of itself (at least 50%).
+      recorded in: works-shot.json men_seen (man 1's box 0.34-0.47 across behind man 6's 0.37-0.53); plan_shot.py predicts man 1 shows about 12% of his box
+NOTE  W1 kinds: the silhouette test uses 2.2, measured on painted figures, never on a gate, and a band width that is invented: calibrate on the W1 painting before trusting its fail
+-- shot checker: kinds of shot and the accepted list: 20 of 20 checks passed
+exit 0

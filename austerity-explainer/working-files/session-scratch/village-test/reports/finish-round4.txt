@@ -1,0 +1,22 @@
+PASS roles: 450 object(s), 37 role(s)
+PASS roads: 2 road(s) shaped into 7 ground object(s)
+PASS parts: 7 object(s) seated again after the ground changed
+PASS surfaces: 21 material(s) made for 21 role(s): 17 from photographed scans (mud, bark_brown_01, brown_planks_04, castle_wall_slates, forest_leaves_02, hessian_230), 4 made in code; 148 slot(s) replaced, 393 kept (they carry their own maps); normal maps 1024 px, 440 object(s) got UVs, 82 bevelled, displacement on 4 object(s); kept (own picture): Cottage A boards, Cottage A earth, Cottage A footing stone, Cottage A iron, Cottage A limewash, Cottage A oak frame
+LOOK surfaces: made-in-code surface: no photographed scan is named for this surface, so the made-in-code surface is used
+PASS damage: 268 object(s) bent, leaned or lumped differently (172 left alone)
+PASS plan masks: 1500 x 1500 cells of 0.25 m in 75.03 s (whole_scene)
+PASS wear: layers dirt, grime, weathering, rust, wetness, cracks_and_chips, edge_wear, moss_and_algae, rubbish in 61 material(s)
+PASS puddles: 214 puddle(s), 41.4 square metres of standing water in hollows and ruts (damp: each filled to about 35% of its depth)
+PASS growth: 9495 plant(s), 5266 litter piece(s) and 3921 stone(s) in 13 object(s), 758,411 triangles; 87% of the plants at wall feet, verges, fence lines, joints and damp corners (by site: wall_foot 441, verge 2445, fence_line 3687, joint 1410, centre_strip 246, damp_corner 0, background 1266); only where 4 view camera(s) can see; none on a wheel track, a worn path, a road crown or in a puddle
+PASS light: the scene already has a lamp of its own (left as it is)
+PASS sun: the wear layers' shade used the scene's sun lamp "Sun" (compass 315, 50 up)
+Info: Saved as "finished.blend"
+PASS saved: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round4/finished.blend
+FAIL the kit stopped with an error while running finish: [Errno 2] No such file or directory: 'python3'
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/runpod-volume/blender/5.2/python/lib/python3.13/subprocess.py", line 1991, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python3'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)

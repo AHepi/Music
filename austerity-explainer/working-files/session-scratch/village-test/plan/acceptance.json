@@ -1,0 +1,357 @@
+{
+ "about": "Acceptance list for the forest village: the template's 23 tests (each with its command and pass line) plus this place's own tests (views, world, sun, roads, empty stable, four cottages, props, lettering, forest, renderer, budgets, period). 'kind_of_check' says whether a tool measures the test or a person or critic judges it. FINISHED.blend, NEW.png and PART.blend stand for the files of the round. Written by the planner on 2026-10-23; nothing has been run.",
+ "tests": [
+  {
+   "id": 1,
+   "group": "global look",
+   "what": "Squint test: the big shapes and light are unchanged from the last picture",
+   "command": "explainer-film-place measure NEW.png --previous OLD.png --guard style-guard.json",
+   "pass_line": "squint similarity 0.92 or better (a LOOK, never a fail; report the region that loses most)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 2,
+   "group": "global look",
+   "what": "Value range",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json",
+   "pass_line": "each percentile within 0.03 of the guard; the 99th not above 0.92; mean saturation within 0.04",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 3,
+   "group": "global look",
+   "what": "Detail energy per region",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json --id-map IDS.png --id-colours IDS.json",
+   "pass_line": "each region from 0.9 times the guard to the smaller of 1.4 times and 10",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 4,
+   "group": "global look",
+   "what": "No flat colour at 100 percent",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json",
+   "pass_line": "no 96 x 96 window below the sky with luminance spread under 0.010; under 2 percent under 0.014",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 5,
+   "group": "global look",
+   "what": "Palette",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json",
+   "pass_line": "at most 1 percent of pixels over saturation 0.70 outside the accent; at most 0.3 percent turquoise; no pure white patch over 30 pixels",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 6,
+   "group": "global look",
+   "what": "Character reads at normal size (blind reading test) against the 16 readable features in the plan",
+   "command": "the workflow's blind reader, at half size",
+   "pass_line": "a reviewer who has not seen the list names at least 12 of 16 planned features",
+   "kind_of_check": "judged"
+  },
+  {
+   "id": 7,
+   "group": "global look",
+   "what": "Designed-in test: marks are few, big and clean",
+   "command": "a fresh look checker on 100 percent crops next to the previous crops",
+   "pass_line": "the same picture language, not a photographic layer",
+   "kind_of_check": "judged"
+  },
+  {
+   "id": 8,
+   "group": "global look",
+   "what": "Render safety",
+   "command": "explainer-film-place render --job JOB.json",
+   "pass_line": "both finals draw on the card under 90 seconds with the card in use; the light groups add up within 2 percent",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 9,
+   "group": "construction",
+   "what": "Connected structure: every part carried from the ground up (cottages, stable, well frame, cart, stall partitions, hitching rail)",
+   "command": "explainer-film-place construction --out construction.json",
+   "pass_line": "no floating part, no span over 1.38 m, nothing hung unless its role may hang",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 10,
+   "group": "construction",
+   "what": "Walkability along each declared route (none is declared along the roads: ruts 9 to 12 cm deep are meant to be there)",
+   "command": "explainer-film-place construction --out construction.json",
+   "pass_line": "rays every 5 cm hit a surface; steps at most 2 cm; slope at most 1 in 20",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 11,
+   "group": "construction",
+   "what": "Siblings are not copies: planks, tiles and posts differ",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "the audit finds no group of siblings that are mostly exact copies",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 12,
+   "group": "construction",
+   "what": "Real sizes",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "no size beyond 1.5 times the facts table's range; out-of-range sizes are LOOK lines",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 13,
+   "group": "surfaces",
+   "what": "Every required treatment is present on every material",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "no FAIL line named 'place: treatments'",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 14,
+   "group": "surfaces",
+   "what": "Every layer has its amount property and none is silently 0",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "no FAIL line named 'place: layer amounts'; every 0 has an off entry with a reason",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 15,
+   "group": "surfaces",
+   "what": "Plants and rubbish keep out of the gates",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "the counts on wheel tracks, crowns, keep-clear places and in puddles are exactly 0",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 16,
+   "group": "surfaces",
+   "what": "Wear and moss shares are inside the style's numbers",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json",
+   "pass_line": "grime at most about a quarter of an area, a third darker; moss and mould inside the place's range",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 17,
+   "group": "normal maps",
+   "what": "Each normal map is wired right",
+   "command": "explainer-film-place normals-test --out normals.json",
+   "pass_line": "Tangent space, Non-Color image, Normal Map node reaching the shader, at least 1024 pixels for a final, no leftover Bump above 0.3",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 18,
+   "group": "normal maps",
+   "what": "Each normal map points the right way",
+   "command": "explainer-film-place normals-test --out normals.json",
+   "pass_line": "correlation at least +0.25 under a low light from two sides on each informative axis; the flipped copy fails",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 19,
+   "group": "UV",
+   "what": "UV hygiene",
+   "command": "explainer-film-place audit --out place-audit.json",
+   "pass_line": "a UV layer on every user of a normal map; mirrored faces at most 2 percent",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 20,
+   "group": "ownership and idempotence",
+   "what": "Nothing of another owner changed",
+   "command": "explainer-film-place ownership-diff --start FP1.json --end FP2.json --owners ownership.json",
+   "pass_line": "no violation; every new object carries place_owner and place_role",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 21,
+   "group": "ownership and idempotence",
+   "what": "The pass can be repeated",
+   "command": "explainer-film-place finish --scene SCENE.blend --settings place-settings.json --save-as OUT.blend",
+   "pass_line": "running it twice gives the same object, material and node counts",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 22,
+   "group": "combined scene",
+   "what": "Parts combine in any order",
+   "command": "explainer-film-place combine --stages stage_a.py stage_b.py --order plain --owners ownership.json --save-as OUT.blend",
+   "pass_line": "no violation in plain or reverse order; the chain run twice gives the same counts",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 23,
+   "group": "reports",
+   "what": "Every report is plain and complete",
+   "command": "read each part report",
+   "pass_line": "it says what was finished, tested, not tested, unsure, every failure, the card seconds used, and measured versus judged",
+   "kind_of_check": "judged"
+  },
+  {
+   "id": 24,
+   "group": "place: views",
+   "what": "Four view cameras exist, named View wide, View road_eye, View stable_close, View cottage_close, each 1200 x 800",
+   "command": "explainer-film-place audit --scene FINISHED.blend --settings /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json --out place-audit.json; explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend",
+   "pass_line": "the audit lists the four cameras; render size 1200 x 800; no 'place: film frame' check applies (not for the film)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 25,
+   "group": "place: world",
+   "what": "Every view sees a finished horizon: all-round backdrop rings of hills (role backdrop), plain ground to the horizon, ground edge hidden, no haze volume, each camera's clip end at 1000 m or more and past the farthest ground and backdrop (the audit names the figure)",
+   "command": "explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend (check 'place: world')",
+   "pass_line": "PASS: no empty sky below the horizon in any of the four views; clip end of every view camera at or above the figure the audit names; no backdrop object casts a shadow; no haze volume",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 26,
+   "group": "place: world",
+   "what": "The backdrop is not flat: every backdrop ring has 3 to 5 tone steps so no 96 x 96 pixel window below the sky is flat; rings get lighter and bluer with distance",
+   "command": "explainer-film-place measure NEW.png --guard style-guard.json (flat windows) on the four views",
+   "pass_line": "no window below the sky with luminance spread under 0.010; under 2 percent under 0.014; the far ring is lighter and bluer than the near ring (judged by eye)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 27,
+   "group": "place: sun",
+   "what": "The roads and the doors of every view are mostly in sunlight (the sun is from the south-east, about 50 degrees up; no tree shades a road, a doorway or a wall inside the clearing)",
+   "command": "explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend (check 'place: sun')",
+   "pass_line": "shadowed share of the ground a view sees at most 0.5 (more is a LOOK that names the object that shadows most); the sun the wear layers used is within 20 degrees of the scene's sun lamp",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 28,
+   "group": "roads",
+   "what": "Two ruts a cart's gauge apart are really in the ground of both roads, measured by rays on the finished ground",
+   "command": "explainer-film-place audit --scene FINISHED.blend --settings /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json --out place-audit.json (roads check)",
+   "pass_line": "the high road's ruts are 1.4 m apart (within 0.1 m) and 0.09 to 0.15 m deep; the lane's 1.4 m apart and at least 0.06 m deep; ground relief at least 0.03 m on every road",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 29,
+   "group": "roads",
+   "what": "Hoof prints run down the middle of both roads and in the stable yard, and nowhere else; a grass crown stands between the ruts; puddle hollows sit in some rut bottoms and in two or three potholes",
+   "command": "explainer-film-place audit --scene FINISHED.blend (roads check) and a look at the road_eye picture",
+   "pass_line": "hoof dimples about 0.13 m across, one about every 0.9 m, left and right in turn, only inside a road's width (measured); the crown, the potholes and the puddle hollows are visible in road_eye (judged by the blind reader and a fresh look checker)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 30,
+   "group": "roads",
+   "what": "The roads read as unkept and driven on by horse and cart, not as a prepared track",
+   "command": "a fresh look checker on the road_eye and wide pictures",
+   "pass_line": "ruts, hoof prints, grass on the crown, puddles and mud are all named by a reviewer who has not seen the plan; the road is not clean, not straight and not paved",
+   "kind_of_check": "judged"
+  },
+  {
+   "id": 31,
+   "group": "stable",
+   "what": "The stable is EMPTY: no horse, no person, no hay bale, no cart inside; a few loose straws (at most 15, each under 0.3 m, none piled); empty mangers, empty trough, bare hitching rail",
+   "command": "list the objects of the owners stable and props inside x 19.3 to 28.7, y 36.3 to 41.7 (explainer-film-place roles --scene FINISHED.blend) and look at the stable_close picture",
+   "pass_line": "no object with role prop.cart, prop.wheel, prop.straw bale or haystack, prop.furniture or a creature inside the stable's walls; at most 15 prop.straw scraps; the blind reader says 'empty stable' or similar (judged)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 32,
+   "group": "stable",
+   "what": "The stable is built as a real frame: stone sill or dwarf wall, posts, wall plate, bays of at most 3.9 m between trusses, rafters on a purlin, shingles; three box stalls of about 3.05 m with partitions 2.0 to 2.4 m high; door leaves on hinges; floor flush with the ground",
+   "command": "explainer-film-place construction --scene PART.blend --settings /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json --owner stable --out construction.json",
+   "pass_line": "no floating or short part; no free span over 1.38 m for planks and boards, 2.5 m for beams and fences, or 3.9 m for a named wall plate, ridge, purlin, tie or summer beam (the bay_free_span fact); a floor behind the doorway",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 33,
+   "group": "cottages",
+   "what": "A few cottages: four (A, B, C, D), each with a door and a threshold, a floor, a roof of its own kind, small shuttered windows; they are tellable apart at a glance (cream long, grey stone with chimney, red-ochre, pale cob with silver shingles)",
+   "command": "count the objects of the owners cottages_north and cottages_south by name (Cottage A to D); the blind reader's list of what looks alike",
+   "pass_line": "exactly four cottages are present; thatch pitch 45 to 60 degrees and shingle pitch 30 to 50; door heights 1.5 to 2.4 m (the facts); the reviewer names the stone one with the chimney, the red one and the long cream one (judged)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 34,
+   "group": "cottages",
+   "what": "Cottage walls and roofs have the thickness the facts give: wall slabs 0.1 to 0.7 m, thatch 0.15 to 0.45 m; the thatch is a thick rolled slab, not a thin sheet",
+   "command": "explainer-film-place audit --out place-audit.json (scale check)",
+   "pass_line": "no size beyond 1.5 times the facts' range; out-of-range sizes are LOOK lines",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 35,
+   "group": "props",
+   "what": "Some scattered mediaeval props: at least 10 kinds (well with windlass and bucket, barrels, crates or chests, sacks, buckets, parked two-wheeled cart with shafts down, woodpile with chopping block, haystack, wattle hurdles, bench or stool, jugs, baskets) and at least 30 prop objects, scattered not lined up",
+   "command": "list the objects of the owner props (explainer-film-place roles --scene FINISHED.blend)",
+   "pass_line": "at least 10 different prop roles or kinds and at least 30 objects; each tagged with a role as it was made; no prop floats; sizes inside the facts (barrel 0.45 to 1.0 m, wheel 0.85 to 1.3 m)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 36,
+   "group": "props",
+   "what": "No prop stands on a wheel track, a road crown, a doorstep, in a puddle hollow, or in the stable doorway",
+   "command": "explainer-film-place audit --out place-audit.json (keep-clear counts)",
+   "pass_line": "the counts of props on wheel tracks, crowns, doorsteps and in puddles are exactly 0",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 37,
+   "group": "place: lettering",
+   "what": "No sign, notice, board with text or lettering anywhere (the village has none)",
+   "command": "explainer-film-preflight place --place-audit place-audit.json --blend FINISHED.blend (check 'place: lettering')",
+   "pass_line": "the lettering check lists no sign, notice, placard, poster, name board or book",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 38,
+   "group": "forest",
+   "what": "Trees all round: at least 60 trees between 30 m and 150 m of the middle, trunks with moss, ferns and bushes at the rim, a few stumps and fallen logs; broadleaf 14 to 24 m and conifer 16 to 30 m; crowns touch their trunks",
+   "command": "list the objects of the owner forest (explainer-film-place roles) and explainer-film-place construction --owner forest",
+   "pass_line": "at least 60 tree trunks and 60 crowns; every crown carried by its trunk; every trunk on the ground; tree heights inside the facts (0.25 to 38 m for trunk objects)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 39,
+   "group": "forest",
+   "what": "Trees keep clear of the village: no trunk within 14 m of a building wall, none inside the stable yard, none within 10 m of a road edge inside the clearing, no crown touching a roof, each view camera's sightline open",
+   "command": "a ray and distance check of the forest objects against the roads and walls in the finished scene (the integrator writes it) and a look at the four pictures",
+   "pass_line": "zero trunks inside those distances; no trunk or crown covers more than a tenth of any view's frame unless it is a planned foreground tree (judged)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 40,
+   "group": "surfaces",
+   "what": "The ground keeps the village's mood: roads, mud, forest floor and grass use the look neglected, the buildings and props lived_in, the state damp",
+   "command": "explainer-film-place audit --out place-audit.json (which look and state each role got)",
+   "pass_line": "the audit's look and state lines agree with place-settings.json (look_by_role ground.* neglected; state damp)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 41,
+   "group": "renderer",
+   "what": "The renderer rule finds nothing lit and no water object, so EEVEE draws it; if the backdrop's plain colour was made with an emission shader the rule reads it as glowing and picks Cycles, which is recorded and accepted",
+   "command": "explainer-film-place renderer-for --scene FINISHED.blend",
+   "pass_line": "EEVEE with the reason 'nothing is lit', or CYCLES with every reason named (a lamp, a glowing material or a water object is a fault in this place: the backdrop's emission is the only accepted reason)",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 42,
+   "group": "budgets",
+   "what": "Object, triangle and scatter budgets",
+   "command": "explainer-film-place audit --out place-audit.json (check 'place: budgets')",
+   "pass_line": "objects in the scene at most 1000 (a LOOK above that, a FAIL above 3000); triangles at most 6,000,000 in all and 1,500,000 for each builder; scatter pieces at most 400,000",
+   "kind_of_check": "measured"
+  },
+  {
+   "id": 43,
+   "group": "period",
+   "what": "Nothing modern: no wire, plastic, concrete, tarmac, sheet-metal roofs, glass panes or tyres; no people or animals; no lamps, fire or smoke",
+   "command": "a fresh look checker and the blind reader on the four pictures",
+   "pass_line": "the reviewer's list of what they see names nothing modern, no creature and no light source",
+   "kind_of_check": "judged"
+  },
+  {
+   "id": 44,
+   "group": "global look",
+   "what": "Two shingle buildings and three thatched cottages are not mixed up: the reviewer can say which things look alike and what tells them apart",
+   "command": "the workflow's blind reader",
+   "pass_line": "the reviewer says the stable (long, dark boards, wide open doorway) and cottage D (small, pale, one low door) differ, and names the three thatched cottages apart by wall colour or material",
+   "kind_of_check": "judged"
+  }
+ ]
+}

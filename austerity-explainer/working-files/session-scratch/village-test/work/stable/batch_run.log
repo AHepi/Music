@@ -1,0 +1,19 @@
+PASS scout: using the free scout drawn here (stable-variations-scout/variations-result.json).
+PASS before drawing: 10 variation(s) asked, 10 kept.
+PASS scout: none of the 10 variation(s) came out nearly the same in the scout.
+PASS plan: 10 variation(s) and the baseline in 3 job(s) (4, 3, 3 variations; the baseline is drawn in job 2), 22 small picture(s) 600 x 400 through 2 camera(s); about 348 card seconds in all and about 146 s from sending to the last picture (an estimate from the house numbers; the first real batch gives better ones)
+PASS batches: batch 1 of at most 2 for the change "door-leaf-sag-and-opening-board-colours".
+PASS card time: builder-stable (role builder) has used 0 s of 600 s (10 min); this batch (3 job(s)) needs about 348 s more, 348 s in all.
+ledger: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/card-time-ledger.jsonl
+PASS card: a command-line client
+PASS jobs sent: 3 job(s) at the same time (kit already on the store; the scene and the job files are on the store). If this command is cut off, `explainer-film-place variations collect /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/stable/stable-variations-run` finishes the batch without sending anything again.
+PASS job 1 (a rented card): COMPLETED, exit 0, work 31.4 s billed, wake-up 0.8 s (the job's own clock: 31.2 s)
+PASS job 2 (a rented card): COMPLETED, exit 0, work 28.8 s billed, wake-up 15.5 s (the job's own clock: 28.6 s)
+PASS job 3 (a rented card): COMPLETED, exit 0, work 52.2 s billed, wake-up 22.0 s (the job's own clock: 51.9 s)
+PASS pictures: 22 drawn for 10 variation(s) and the baseline, eevee, 600 x 400
+PASS sheet: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/stable/stable-variations-run/door-leaf-sag-and-opening-board-colours-sheet.jpg (330 KB, 1874 x 1335)
+PASS card seconds: Card seconds (work + wake-up + the idle tail): job 1: work 31.4 + wake-up 0.8 + idle tail 5 = 37.2 s; job 2: work 28.8 + wake-up 15.5 + idle tail 5 = 49.3 s; job 3: work 52.2 + wake-up 22.0 + idle tail 5 = 79.2 s; set-up and downloads 73 s (an estimate from the wall clock); in all 239 s, about US$0.07 (an estimate at the price of the day, US$1.1 an hour; not a bill).
+PASS The 3 job(s) ran side by side: from sending to the last result took 75 s. Wake-up times (waiting for a card to start): 0.8 s, 15.5 s, 22.0 s.
+PASS result: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/stable/stable-variations-run/variations-result.json
+NEXT: look at the sheet with the Read tool; pick one variation, or combine two or three, and draw at most ONE more batch (`explainer-film-place variations refine variations-result.json --pick NAME NAME`); then apply the pick in the real scene, and go on. Draw full-size pictures only once, at the very end.
+exit 0

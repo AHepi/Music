@@ -1,0 +1,101 @@
+{
+ "about": "Who owns what in the forest village. Six owners build side by side; the ground part (ground_and_roads) is built FIRST, alone, and frozen; everything else is seated on it. A stage may change only what its owner owns (collection \"Place: <owner>\", object name patterns, materials). The cameras, lights, world and render settings are frozen, but the ground part is the one that MAKES them (frozen.set_by), because it is built first. `explainer-film-place combine` and `ownership-diff` check this. Object names start with the word shown in each owner's 'objects' patterns; every object also carries the custom properties place_owner and place_role.",
+ "owners": {
+  "ground_and_roads": {
+   "collections": ["^Place: ground_and_roads$"],
+   "objects": ["^Ground", "^Backdrop", "^View ", "^Sun", "^Sky", "^Fill"],
+   "materials": ["PK ground.", "Backdrop"]
+  },
+  "forest": {
+   "collections": ["^Place: forest$"],
+   "objects": ["^Tree", "^Bush", "^Fern", "^Log", "^Stump", "^Rock", "^Forest"],
+   "materials": ["PK tree.", "PK plant.", "PK stone.rock"]
+  },
+  "cottages_north": {
+   "collections": ["^Place: cottages_north$"],
+   "objects": ["^Cottage A", "^Cottage B"],
+   "materials": []
+  },
+  "cottages_south": {
+   "collections": ["^Place: cottages_south$"],
+   "objects": ["^Cottage C", "^Cottage D"],
+   "materials": []
+  },
+  "stable": {
+   "collections": ["^Place: stable$"],
+   "objects": ["^Stable"],
+   "materials": []
+  },
+  "props": {
+   "collections": ["^Place: props$"],
+   "objects": ["^Prop"],
+   "materials": ["PK prop."]
+  }
+ },
+ "frozen": {
+  "cameras": true,
+  "lights": true,
+  "world": true,
+  "render": true,
+  "set_by": "ground_and_roads",
+  "ground": "The graded ground height everyone is seated on, including the wheel ruts, the banks, the hoof prints, the puddle hollows, the stable yard and the verges; the four view cameras (View wide, View road_eye, View stable_close, View cottage_close); the sun and the soft fill; the world colours; the backdrop rings of hills; the render settings (1200 x 800)."
+ },
+ "contracts": [
+  {
+   "between": ["ground_and_roads", "cottages_north"],
+   "text": "Under each cottage's footprint and for 1.5 m round it the ground is level to within 0.25 m (a platform pad, built by the ground part, so the cottage stands on a stone footing without a floating corner); the cottages stand on the frozen ground (seat_on_ground) and the ground part never moves a wall. Nobody builds within 3.1 m of the high road's centre line or within 2.3 m of the lane's centre line: inside that the ground is as it is (ruts, banks, hoof prints, crown)."
+  },
+  {
+   "between": ["ground_and_roads", "cottages_south"],
+   "text": "Same as with cottages_north: a level pad under each cottage and 1.5 m round it; nothing within 3.1 m of the high road's centre line; the cottages are seated on the frozen ground."
+  },
+  {
+   "between": ["ground_and_roads", "stable"],
+   "text": "The stable yard (about x 14 to 34, y 24 to 36) is trodden mud, level to within 0.15 m in front of the doorway; the stable's beaten-earth floor is flush with the ground (the sill stone stands 0.10 m above it); the stable owns its trough, hitching rail and posts, built seated on the yard."
+  },
+  {
+   "between": ["ground_and_roads", "props"],
+   "text": "No prop stands on a wheel track, on a road crown, on a doorstep or in a puddle hollow, and none stands within 0.6 m of a road's outer bank (the road's half width plus 0.6 m from its centre line). The ground part writes the keep-clear shapes in place-settings.json; props check pk.is_keep_clear before placing."
+  },
+  {
+   "between": ["ground_and_roads", "forest"],
+   "text": "The ground under the forest is the ground part's forest-floor object, graded and frozen; trees are seated on it (seat_on_ground). The ground part leaves a clear sightline for every view camera; the forest never moves or hides a camera."
+  },
+  {
+   "between": ["forest", "cottages_north"],
+   "text": "No trunk within 14 m of any cottage wall of A or B, no crown above or touching a roof. Inside the clearing (x -50 to 60, y -32 to 50) trees stand only at its rim, at least 10 m from a road's edge and never on the south-east side of a building (the sun comes from the south-east, shadows 0.84 times the height long point north-west)."
+  },
+  {
+   "between": ["forest", "cottages_south"],
+   "text": "Same as with cottages_north for cottages C and D: no trunk within 14 m of a wall, no crown touching a roof, rim trees only, at least 10 m from a road's edge."
+  },
+  {
+   "between": ["forest", "stable"],
+   "text": "No trunk within 14 m of the stable's walls or inside the stable yard; nothing grows in the doorway or on the sill; the forest brings stumps or logs no closer than 6 m to the stable."
+  },
+  {
+   "between": ["forest", "props"],
+   "text": "Forest stumps and fallen logs belong to the forest part (role tree.bark); the props part makes the woodpile and the chopping block (role prop.wood) and places none of them on a stump. The forest part makes no prop of any kind (no barrel, no bucket, no cart)."
+  },
+  {
+   "between": ["cottages_north", "props"],
+   "text": "Anything that stands against or beside a cottage and is not part of its structure (woodpile, bench, barrel, bucket, ladder, jug, basket, sack, hurdle) belongs to the props part and rests on the ground, not on the wall. The cottages build no props, but they own their doorstep stones (stone.step), lean-to, hinges and shutters. Props keep 1.0 m clear of every doorstep."
+  },
+  {
+   "between": ["cottages_south", "props"],
+   "text": "Same as with cottages_north: the cottages C and D build no props; the props part rests everything on the ground and keeps 1.0 m clear of every doorstep."
+  },
+  {
+   "between": ["stable", "props"],
+   "text": "The stable stays EMPTY: nothing of props inside its walls except at most 15 loose straw scraps (role prop.straw, each under 0.3 m, on the floor only, none piled) made by the props part in the stable floor zone x 19.3 to 28.7, y 36.3 to 41.7; no horse, no person, no hay bale, no cart inside; props keep the doorway (x 21.4 to 26.6, y 34.6 to 36.8) and the aisle clear. Barrels and crates may stand behind or beside the stable, outside its walls."
+  },
+  {
+   "between": ["cottages_north", "cottages_south"],
+   "text": "The four cottages stay tellable apart at a glance (A long, cream panels, golden thatch, log store; B small, grey rubble stone, mossy grey thatch, the only stone chimney; C red-ochre panels, pale new thatch, tall door; D smallest, pale cob, silver shingles). Neither part copies the other's walls, roofs or colours. Both use the same facts (door heights, bay sizes, pitch) from real-world-facts.json."
+  },
+  {
+   "between": ["stable", "cottages_south"],
+   "text": "The stable (dark upright boards, dark mossy shingles, 2.4 m open double doorway) and cottage D (pale cob, light silver shingles, one low door) both have shingle roofs: they differ in size, wall, roof tone and door, and neither part borrows the other's look."
+  }
+ ]
+}

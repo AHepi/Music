@@ -1,0 +1,27 @@
+model_lint: 1 file(s): works-lane.blend
+  works-lane.blend: 1,013,235 triangles, 1267 parts
+
+FAIL Floors laid just over another ground (0 to 0.05 m above it): 2
+      man-7-foot-shadow over street_pavements: 1.33 square metres, 0.003 to 0.01 m apart, near [-3.48, 20.9, 0.14]
+      man-5-foot-shadow over street_pavements: 1.052 square metres, 0.001 to 0.012 m apart, near [-5.13, 20.72, 0.16]
+  Fix: lower or cut the ground under the raised floor (round 3 lowered the lane under the yards).
+
+FAIL Glass whose see-through value comes from its picture: 2
+      works-lane.blend: street_lamp_02_glass (alpha LINKED, read from its picture)
+      works-lane.blend: Lantern_01_glass (alpha LINKED, read from its picture)
+  Fix: unhook the picture from Alpha and set the value (set_dressing.see_through); a value set on the input is ignored otherwise (log 32).
+
+PASS Glowing materials with a light plain base colour: 0
+  Not judged: 20 glowing material(s) over a picture (lit windows, glowing brick: meant to show it): Lantern_01_glass, far-town-mill-window-narrow-lit, lamp_glass_glow, no-2-chimney-brick-lit-lane-side, no-2-chimney-brick-lit-sides, no-2-chimney-brick-sooted-lit-lane-side ...
+
+Note: materials used by several objects (when building one model, join its parts by material: lesson 67): far-town-brick-sooted (88); far-town-slate (85); far-town-mill-window-narrow-lit (84); far-town-mill-window-narrow-dark (84); far-town-brick (81)
+
+Verdict: FAIL (floors, glass)
+
+Settings used (film-settings.json):
+  models.ground_under_raised_area_metres = 0.05 metres (judged)
+  views_and_models.model_lint.same_plane_gap_metres = 0.0001 metres between the two planes (invented)
+  views_and_models.model_lint.upward_normal_z_min = 0.9 normal's z (1 = straight up) (invented)
+  views_and_models.model_lint.floor_min_square_metres = 1.0 square metres of a raised floor over another ground (invented)
+  views_and_models.model_lint.glass_material_patterns = ["*glass*", "*lens*", "*mantle*"] material name patterns (lower case) (judged)
+  views_and_models.model_lint.glowing_base_brightness_max = 0.05 base colour brightness (0 to 1, linear) (invented)

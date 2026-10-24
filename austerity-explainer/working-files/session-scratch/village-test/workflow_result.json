@@ -1,0 +1,1470 @@
+{
+ "plan": {
+  "place": "forest village",
+  "place_type": "village",
+  "files": {
+   "style_note": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/style-note.md",
+   "facts": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/real-world-facts.json",
+   "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json",
+   "ownership": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/ownership.json",
+   "acceptance": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/acceptance.json"
+  },
+  "ground_owner": "ground_and_roads",
+  "look": "lived_in",
+  "state": "damp",
+  "parts": [
+   {
+    "name": "ground_and_roads",
+    "owner": "ground_and_roads",
+    "collection": "Place: ground_and_roads",
+    "region": [
+     -900,
+     -900,
+     900,
+     900
+    ],
+    "brief": "Request, word for word: 'Now build a village in the forest. Needs unkept dirt roads like they're been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props.'\nYOU ARE THE GROUND PART (owner ground_and_roads, collection 'Place: ground_and_roads', stage file stage_ground_and_roads.py). You are built FIRST and alone, then frozen as ground.blend; the other five parts (forest, cottages_north, cottages_south, stable, props) are seated on you. You also MAKE the four view cameras, the sun, the fill, the world and the render settings (ownership.json: frozen.set_by). No building, no prop and no tree is yours. Read first: style-note.md (section 0, then 8), real-world-facts.json, place-settings.json (the roads, footfall and keep_clear shapes are already written: use them, change them only with a reason you state), ownership.json (every contract with you in it), acceptance.json (groups 'place: views', 'place: world', 'place: sun', 'roads'). The combine and ground-file steps are in your prompt: the ground alone goes into start.blend -> ground.blend, then the other parts are combined from that frozen file with --order both.\nMake every change in ONE sweep, build the scene once and save it. For a change you are unsure of (rut depth, puddle size, hill tone steps, sun strength) write about 10 far-apart variations and draw them in ONE batch (explainer-film-place variations), at most one more batch; small quick pictures until the end.\n1. THE GROUND. One continuous height field, x and y each from -900 to 900 m (z up, origin in the middle of the village), so its edge lies far behind the backdrop. Large soft relief only: inside the clearing (x -50 to 60, y -32 to 50) the land falls about 1.0 m from the north-east to the south-west so the ruts drain to a few low hollows; outside it lumps of at most 0.5 m; nothing steeper than 1 in 6 within 40 m of a building or the yard. Cut it into objects that do not overlap and have no coplanar faces within 1 mm (shared border vertices): 'Ground forest floor' (role ground.forest_floor: everything outside the clearing out to the horizon, with soft large colour variation so no 96 x 96 pixel window is flat), 'Ground clearing' (ground.grass: unkept meadow inside the clearing), 'Ground road high_road' and 'Ground road stable_lane' (ground.dirt_road), 'Ground yard' (ground.mud: the trodden stable yard, x 14 to 34, y 24 to 36), 'Ground verge ...' (ground.grass: a weedy strip about 1.2 m wide along each side of each road). Give every object its owner and role as it is made. Level pads (a footing must not float a corner): flat to within 0.25 m under each building and for 1.5 m round it: cottage A x -37.55 to -26.45, y 7.6 to 12.4 (its lean-to reaches x -40.05); B x -9.2 to -2.8, y 7.2 to 11.8; C x -29.7 to -22.3, y -12.8 to -8.2; D x 2.15 to 5.85, y -10.2 to -5.8; stable x 19.1 to 28.9, y 36 to 42. In front of the stable doorway (x 21.4 to 26.6, y 34.6 to 36.8) the yard is level to within 0.15 m.\n2. THE ROADS (unkept, driven by a horse and cart). Run the kit's roads step from the 'roads' entries of place-settings.json inside your stage, so the frozen ground already holds the ruts (the kit remembers each vertex's own height, so finish can run it again without digging twice). High road: 5.0 m wide, ruts 1.4 m apart and 0.12 m deep with a bank beside each (about a third of the depth), hoof prints down the middle (about 0.13 m across, one about every 0.9 m, left and right in turn), a grass crown in the middle, puddle hollows in some rut bottoms. Lane: 3.4 m wide, ruts 0.09 m deep, same gauge, ends in the yard at about (24.3, 34.2). Add 2 or 3 potholes on the high road between x -70 and 20 (0.3 to 0.6 m across, 6 to 10 cm deep, puddle hollows) and 2 in the yard, with hoof prints and ruts across the yard to the doorway. The road wobbles a few centimetres and bends away at both ends so the trees can hide where it goes. The road must read as unkept and driven on at 600 pixels wide from View road_eye: measure the ruts by rays (the audit's roads check). Nothing grows on a wheel track or in a puddle hollow (the kit's gates do it; check the counts are exactly 0).\n3. THE FOUR CAMERAS (names exact; render 1200 x 800; clip start 0.1 m; clip end 2000 m or more and never under the figure the audit names for each camera). Start values, adjust by up to 3 m sideways or 1 m up and report the final numbers: 'View wide' at (-48, -30, 14.0) looking at (-5, 14, 2.0), 28 mm: all four cottages, the well (-17.5, 6), the lane junction (20, 2), the stable (24, 39) and about 100 m of road must be inside the frame (project their centres through the camera to check; if the stable is out, move the camera back or up, never move a building). This is the first view: it shows the most of what the person asked for. 'View road_eye' at (-62, -3.7, 1.7) on the road crown at the west entrance looking at (-20, 0.5, 1.5), 35 mm: ruts, hoof prints, a puddle and the grass crown in the foreground, cottages A and C ahead. 'View stable_close' at (28.5, 25.5, 1.7) looking at (24, 36, 1.4), 28 mm: the open doorway, yard mud with hoof prints, the trough and the hitching rail. 'View cottage_close' at (-14, 0.3, 1.7) looking at (-31, 8, 1.6), 35 mm: cottage A's front, the well and its barrels. The forest builder keeps these sightlines clear.\n4. THE WORLD ROUND THE PLACE (the audit's check 'place: world'). Every view must see a finished horizon, not empty sky above a dark slab or the edge of the ground. Make an all-round backdrop of real shapes: three closed rings of hills with a lumpy tree-line skyline (role backdrop), near ring about 380 to 520 m from the middle, 25 to 45 m high, colour about #4F6A4A; middle ring 520 to 680 m, 45 to 75 m, about #6C8776; far ring 680 to 820 m, 70 to 110 m, about #8FA6B5: lighter and bluer when far, no gap in any direction (overlap the rings), each ring with 3 to 5 tone steps (tree-line bands, ridge shading) so no 96 x 96 pixel window below the sky is flat. Plain colour that does not take light and casts no shadow (turn shadow off on every backdrop object): use a flat, rough, no-emission colour if you can, because an emission shader makes the renderer rule pick Cycles; if the look needs emission say so in your report. Continue the plain forest-floor ground to about 900 m each way (its edge at least 80 m beyond the far ring's outer foot, hidden), a gradient sky (about #9DB7CC at the top to #D9E2E6 at the horizon) and NO haze or fog volume. Backdrop objects: at most 3 meshes under 60,000 triangles.\n5. LIGHT. One sun lamp only, warm (about #FFF1D6), from the south-east (compass 135 degrees, the direction it shines from) about 50 degrees up, soft shadow edge (1 to 2 degrees), strength by eye so the clearing is bright but under 0.5 percent of dots are clipped; plus a soft cool fill (a wide area lamp on the camera side, or more sky), never a second sun lamp. No other lamps, no lit window, no glow: nothing lit, so EEVEE.\n6. BUDGET AND REPORT. At most 20 mesh objects, 700,000 triangles (the kit makes the ruts fine itself, at most 150,000 faces). In ground_promise say what the ground promises the others: level pads under every building, a level yard in front of the stable doorway, ruts 9 to 12 cm deep, nobody builds within 3.1 m of the high road's centre line or 2.3 m of the lane's, the cameras and the sun never change. Say which of the audit's roads and world checks you saw pass.",
+    "steps_in_order": [
+     "Make the empty start scene and the ground: the graded height field, the level pads, the role objects without overlaps, the forest floor out to the horizon",
+     "Shape the two roads, the stable yard, the verges, the potholes and puddle hollows with the kit's roads step (ruts 1.4 m apart, banks, hoof prints, grass crown); check the ruts by rays",
+     "Make the four cameras (View wide, View road_eye, View stable_close, View cottage_close), the sun, the soft fill and the sky colours; check every item named for View wide is inside its frame",
+     "Make the three backdrop rings, hide the ground's edge, set every clip end, check 'place: world' and 'place: sun' pass (no emission, no haze, no flat windows)",
+     "Character: weedy verges, mud colour in the ruts, drier banks, then run finish-part, the construction check, the stage twice, and the ownership check; save ground.blend"
+    ],
+    "triangle_budget": 700000
+   },
+   {
+    "name": "forest",
+    "owner": "forest",
+    "collection": "Place: forest",
+    "region": [
+     -150,
+     -90,
+     150,
+     90
+    ],
+    "brief": "Request, word for word: 'Now build a village in the forest. Needs unkept dirt roads like they're been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props.'\nYOU ARE THE FOREST PART (owner forest, collection 'Place: forest', stage file stage_forest.py; object names start Tree, Bush, Fern, Log, Stump, Rock). You build the forest round the village on the frozen ground. Read first: style-note.md (sections 0, 1, 4, 8), real-world-facts.json (tree_height, tree_crown_and_trunk), place-settings.json, ownership.json (your contracts with the ground, the cottages, the stable and the props), acceptance.json (groups 'forest' and 'place: sun'). Make every change in ONE sweep, build the scene once and save it; for a change you are unsure of (crown lumpiness, tree density, tone mix) write about 10 far-apart variations and draw them in ONE batch (explainer-film-place variations), at most one more batch.\nWHAT TO BUILD\n- Trees all round, from the clearing's rim (about 30 m from the middle) out to about 150 m: at least 70 trees, about 60 percent broadleaf (oak, beech: trunk 0.35 to 0.9 m across, 14 to 24 m tall, a crown of 3 to 5 chunky lumps) and 40 percent pine (straight trunk 0.3 to 0.7 m across, 16 to 30 m tall, 4 to 6 stacked cones in the top half). Big simple masses, never leaf clouds. Each tree is a trunk (role tree.bark, tapered, with a root flare that rests ON the ground within 2 cm, never buried) and a crown (role plant.foliage) that overlaps the trunk top by at least 0.2 m so it is carried. About 12 hero trees (the nearest to the four cameras and to the clearing's rim) are one trunk object and one crown object each; the rest are clusters, one trunk object and one crown object holding 3 to 6 separate trees (loose pieces). Budget: at most 160 objects, 500,000 triangles in all, no mesh over 300,000.\n- Undergrowth: 25 to 40 bushes and ferns at the rim and beside the road outside the clearing (plant.foliage, joined into at most 20 objects); 6 stumps and 4 fallen logs (role tree.bark, 0.3 to 0.6 m high, mossy, at the rim, never on a road, no closer than 6 m to the stable); 8 mossy boulders (stone.rock, 0.4 to 1.2 m).\n- The road must disappear into the trees: the high road bends away at both ends (see the roads in place-settings.json) and goes out of sight behind tree groups at about 100 to 130 m; from |x| about 55 outward there are tight groups of trunks and undergrowth on both sides, 3 to 6 m from the road's edge (shade there is intended), never on the road's dirt strip or within 2.0 m of its centre line.\n- Inside the clearing (x -50 to 60, y -32 to 50): trees only at its rim, at least 10 m from any road edge, at least 14 m from any wall, never inside the stable yard and never on the south-east side of a building (the sun comes from the south-east about 50 degrees up; shadows point north-west and are 0.84 times the height long; the audit's 'place: sun' check names the object that shades most). No crown touches a roof.\n- Keep every view camera's sightline clear (read the camera objects in the frozen ground file): View wide at about (-48, -30, 14) looks at (-5, 14, 2); View road_eye at (-62, -3.7, 1.7) looks east; View stable_close at (28.5, 25.5, 1.7) looks north; View cottage_close at (-14, 0.3, 1.7) looks north-west. No trunk or crown within 6 m of a line of sight unless it is a planned foreground tree that frames the picture.\n- Look: trees lived_in (the ground round them is neglected): moss low on the north side of trunks, a few big designed marks (a scar, a hollow) and not bark noise; foliage in 3 to 4 dark greens (#3F5A32 family), one or two golden-brown trees allowed; faceted chunky forms, bevels where a hand could touch.\nROLES: tree.bark (trunks, stumps, logs), plant.foliage (crowns, bushes, ferns), stone.rock (boulders). YOU MAKE: no prop, no building part, no ground. DO NOT TOUCH: the ground, cameras, lights, world, the cottages, the stable and the props.",
+    "steps_in_order": [
+     "The about 12 hero trees nearest the cameras and the clearing rim, seated on the ground, with the road-end tree groups that hide where the road goes",
+     "The tree clusters all round out to about 150 m, kept clear of the roads, walls, yard and camera sightlines",
+     "Undergrowth at the rim (bushes, ferns), 6 stumps, 4 fallen logs, 8 mossy boulders",
+     "Character (moss, a few big designed marks, no two trees alike), roles, finish-part pass, construction check, stage twice, ownership check",
+     "If time: a second tone mix of crowns and a few leaning or broken trees at the clearing's rim"
+    ],
+    "triangle_budget": 500000
+   },
+   {
+    "name": "cottages_north",
+    "owner": "cottages_north",
+    "collection": "Place: cottages_north",
+    "region": [
+     -45,
+     3,
+     0,
+     18
+    ],
+    "brief": "Request, word for word: 'Now build a village in the forest. Needs unkept dirt roads like they're been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props.'\nYOU ARE THE COTTAGES_NORTH PART (owner cottages_north, collection 'Place: cottages_north', stage file stage_cottages_north.py): cottage A and cottage B, on the north side of the high road. Object names start 'Cottage A ...' and 'Cottage B ...'. Another builder, cottages_south, makes cottages C and D from the same facts at the same time: copy nothing from them. Read first: style-note.md (sections 0, 1, 2, 3, 8), real-world-facts.json (door_height, bay_free_span, thatch_pitch, thatch_thickness, wall_thickness, cottage_bay, cottage_eaves_height, wattle_stud_spacing, sleeper_wall_width), place-settings.json, ownership.json, acceptance.json (group 'cottages'). Make every change in ONE sweep, build the scene once and save it; for a change you are unsure of (thatch roll, chip amount, sag) write about 10 far-apart variations and draw them in ONE batch (explainer-film-place variations), at most one more batch.\nCOMMON TO BOTH (a mediaeval north-west European cottage: timber frame or stone, wattle and daub, thatch): build from the ground up, every part carried: a stone footing (role stone.footing, 0.3 to 0.5 m wide, 0.25 to 0.4 m high) under the walls, a sill timber on it, posts, a wall plate (the object name contains 'wall plate'), studs 0.45 to 0.9 m apart, wall panels, rafters resting on a purlin (name contains 'purlin') and a ridge piece (name contains 'ridge'), a floor.earth floor inside the walls (top 0.05 m above the ground, so the doorway looks onto something), a door leaf (timber.door) on iron hinges (iron.fitting) with a flat stone doorstep (stone.step, rise 0.12 to 0.2 m), 2 or 3 small shuttered windows (opening about 0.45 x 0.6 m, shutter leaves timber.shutter about 0.6 m high, one standing ajar, NO glass). Beams: planks and boards span at most 1.38 m, beams and fences at most 2.5 m, except a wall plate, ridge, purlin, tie or collar between two trusses or walls, which may span up to 3.9 m (the bay_free_span fact): place a truss at least every 3.7 m. Rafters need a purlin so they have no free stretch over 2.5 m. Character as SHAPE: no two posts alike, posts a little out of plumb, ridge sagging 2 to 4 cm between trusses, thatch lumpy with a rolled eave, a few boards replaced in a fresher colour. Everything stands on the frozen ground (pk.seat_on_ground); the ground part gave you a level pad under each building. Props are NOT yours (no barrel, bucket, bench, woodpile, ladder, sack, jug): the props part makes them. Object budget: at most 75 objects per cottage, about 100,000 triangles for each.\nCOTTAGE A (the long one, centre (-32, 10)): footprint 11.1 x 4.8 m (x -37.55 to -26.45, y 7.6 to 12.4), 3 bays of 3.7 m so 4 truss lines; eaves 2.0 m; walls wall.timber_frame: dark oak frame (#3E3128) with CREAM limewash panels (#CDBE9A), 4 or 5 panels with big chips showing the wattle (a few hazel rods as shapes) and a darker splash band at the foot; roof roof.thatch, golden (#9C7A3F) at 50 degrees, 0.3 m thick, eave overhang 0.45 m, ridge about 4.9 m, a darker ridge cap; door in the south wall at x -32 (1.7 m high, 0.85 m wide); two shuttered windows in the south wall (x -35 and -29) and one in the north wall; a LOG STORE LEAN-TO on the west end, 2.5 m deep (x -40.05 to -37.55) and 3.4 m wide (y 8.1 to 11.5), posts and a roof.shingle monopitch at 32 degrees, open to the south and EMPTY (the props part stacks the woodpile outside it).\nCOTTAGE B (small and heavy, centre (-6, 9.5)): footprint 6.4 x 4.6 m (x -9.2 to -2.8, y 7.2 to 11.8), 2 bays of 3.2 m (one central truss); walls wall.stone, grey rubble in big uneven blocks, 0.5 m thick, about 2.1 m to the eaves with stone gables up to the ridge, quoin stones at the corners; a timber lintel (name 'lintel', timber.beam) over the door; door in the south wall at x -6.0 (1.65 m high, 0.85 m wide); one small shuttered window in the south wall and one in the east wall (0.4 x 0.5 m); roof roof.thatch, OLD grey-green and mossy at 50 degrees, 0.35 m thick, eave overhang 0.4 m; the only STONE CHIMNEY (role stone.chimney, base about 0.9 x 0.7 m) on the EAST gable, built up from its footing through the gable and standing 1.2 m above the ridge: no smoke, no glow, no lamp.\nTELL THEM APART: A is long, cream, golden thatch with a lean-to; B is small, grey stone, dark mossy thatch and a chimney. Neither looks like cottage C (red-ochre panels) or D (pale cob, silver shingles).\nROLES: wall.timber_frame, wall.stone, roof.thatch, roof.shingle (lean-to), timber.post, timber.beam, timber.door, timber.shutter, timber.plank (lean-to boards), stone.footing, stone.step, stone.chimney, floor.earth, iron.fitting. DO NOT TOUCH: the ground, cameras, lights, world, and every other part's objects.",
+    "steps_in_order": [
+     "Cottage A and cottage B walls from the ground up: footing, sill, posts, wall plate, panels or stone, floor.earth, door, doorstep (carried, real sizes, level pad)",
+     "Roofs of A and B: rafters, purlin, ridge, thatch with a rolled eave, the stone chimney on B",
+     "Shutters and windows, hinges, the log-store lean-to on A, the lintel on B",
+     "Character as shape (no two parts alike, sag, chipped plaster showing wattle, replaced boards), roles, finish-part pass, construction check, stage twice, ownership check",
+     "If time: wattle rods in the chips, a drip line and mud splash as shapes, small timber details (pegs, latch)"
+    ],
+    "triangle_budget": 200000
+   },
+   {
+    "name": "cottages_south",
+    "owner": "cottages_south",
+    "collection": "Place: cottages_south",
+    "region": [
+     -35,
+     -17,
+     10,
+     -3
+    ],
+    "brief": "Request, word for word: 'Now build a village in the forest. Needs unkept dirt roads like they're been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props.'\nYOU ARE THE COTTAGES_SOUTH PART (owner cottages_south, collection 'Place: cottages_south', stage file stage_cottages_south.py): cottage C and cottage D, on the south side of the high road. Object names start 'Cottage C ...' and 'Cottage D ...'. Another builder, cottages_north, makes cottages A and B from the same facts at the same time: copy nothing from them. Read first: style-note.md (sections 0, 1, 2, 3, 8), real-world-facts.json (door_height, bay_free_span, thatch_pitch, shingle_pitch, thatch_thickness, wall_thickness, cottage_bay, cottage_eaves_height, wattle_stud_spacing, sleeper_wall_width), place-settings.json, ownership.json, acceptance.json (group 'cottages'). Make every change in ONE sweep, build the scene once and save it; for a change you are unsure of (daub colour, thatch roll, cob lumpiness) write about 10 far-apart variations and draw them in ONE batch (explainer-film-place variations), at most one more batch.\nCOMMON TO BOTH (a mediaeval north-west European cottage): build from the ground up, every part carried: a stone footing or plinth (role stone.footing, 0.3 to 0.5 m wide, 0.25 to 0.4 m high) under the walls; for C a sill timber, posts, a wall plate (the object name contains 'wall plate'), studs 0.45 to 0.9 m apart and wall panels; rafters on a purlin (name contains 'purlin') and a ridge piece (name contains 'ridge'); a floor.earth floor inside the walls (top 0.05 m above the ground); a door leaf (timber.door) on iron hinges (iron.fitting) with a flat stone doorstep (stone.step, rise 0.12 to 0.2 m); small shuttered windows (opening about 0.45 x 0.6 m, shutter leaves timber.shutter, one ajar, NO glass). Planks and boards span at most 1.38 m, beams and fences at most 2.5 m, except a wall plate, ridge, purlin, tie or collar between two trusses or walls (up to 3.9 m: the bay_free_span fact): a truss at least every 3.7 m; rafters need a purlin. Character as SHAPE: no two posts alike, a little out of plumb, ridge sagging 2 to 4 cm, a few slipped or missing shingles, a few boards replaced in a fresher colour. Everything stands on the frozen ground (pk.seat_on_ground) on the level pad the ground part made. Props are NOT yours (no barrel, bucket, bench, ladder, sack, jug, haystack): the props part makes them. Budget: at most 75 objects per cottage, about 80,000 triangles for each.\nCOTTAGE C (centre (-26, -10.5)): footprint 7.4 x 4.6 m (x -29.7 to -22.3, y -12.8 to -8.2), 2 bays of 3.7 m (3 truss lines); eaves 2.2 m; walls wall.timber_frame: black-brown frame (#3E3128 or darker) with RED-OCHRE daub panels (about #9C4F36): this is the ONE hot accent of the whole place, so no other object may be that saturated; a few big chips showing wattle; roof roof.thatch, PALE new straw (about #B8985A) at 50 degrees, 0.35 m thick, crisp ridge, eave overhang 0.5 m; door in the NORTH wall (it faces the road) at x -26.0, TALLER than the others, 1.8 m high and 0.9 m wide, with a stone step; two shuttered windows in the north wall; a small shuttered loft window high in the east gable.\nCOTTAGE D (the smallest, centre (4, -8)): footprint 3.7 x 4.4 m (x 2.15 to 5.85, y -10.2 to -5.8), ONE bay, ridge running north-south; walls wall.cob, pale clay (#B9A683 family), 0.5 m thick, about 2.0 m to the eaves, rounded corners, NO frame showing, on a stone plinth 0.3 m high; ONE low plank door (timber.door, 1.6 m high, 0.8 m wide) in the north gable end at x 4.0 with a stone step; one shuttered window (0.4 x 0.45 m) in the east wall; roof roof.shingle, light SILVER-GREY wooden shingles (about #A9A8A2, each a little different, a few slipped or missing) at 42 degrees on rafters and one purlin, eave overhang 0.3 m, ridge about 4.0 m; no chimney.\nTELL THEM APART: C is red-ochre with a tall door and pale thatch; D is small, pale clay, one low door, light silver shingles. Neither looks like A (cream panels, long) or B (grey stone, chimney) or the stable (long, near-black boards, dark mossy shingles, 2.4 m open doorway).\nROLES: wall.timber_frame, wall.cob, roof.thatch, roof.shingle, timber.post, timber.beam, timber.door, timber.shutter, stone.footing, stone.step, floor.earth, iron.fitting. DO NOT TOUCH: the ground, cameras, lights, world, and every other part's objects.",
+    "steps_in_order": [
+     "Cottage C and cottage D walls from the ground up: footing or plinth, frame or cob, floor.earth, door, doorstep (carried, real sizes, level pad)",
+     "Roofs of C and D: rafters, purlin, ridge, pale thatch with a rolled eave on C, silver shingles on D",
+     "Shutters and windows, hinges, the loft window on C",
+     "Character as shape (no two parts alike, sag, chips showing wattle, slipped shingles, replaced boards), roles, finish-part pass, construction check, stage twice, ownership check",
+     "If time: a drip line and mud splash as shapes, pegs and latches, a worn doorstep"
+    ],
+    "triangle_budget": 150000
+   },
+   {
+    "name": "stable",
+    "owner": "stable",
+    "collection": "Place: stable",
+    "region": [
+     12,
+     22,
+     38,
+     46
+    ],
+    "brief": "Request, word for word: 'Now build a village in the forest. Needs unkept dirt roads like they're been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props.'\nYOU ARE THE STABLE PART (owner stable, collection 'Place: stable', stage file stage_stable.py; object names start 'Stable ...'). You build the EMPTY STABLE, the most detailed building (View stable_close looks at it), its yard fittings and nothing else. Read first: style-note.md (sections 0, 1, 2, 6, 7 point 7, 8), real-world-facts.json (door_height, door_width, fence_height, shingle_pitch, bay_free_span, box_stall_size, stable_eaves_and_ceiling, manger_and_rack_height, horse_height_withers), place-settings.json, ownership.json (contracts with ground, forest, props), acceptance.json (group 'stable'). Make every change in ONE sweep, build the scene once and save it; for a change you are unsure of (door leaf sag, board colours, shingle gaps) write about 10 far-apart variations and draw them in ONE batch (explainer-film-place variations), at most one more batch.\nTHE BUILDING (centre (24, 39), the long side faces south onto the yard): outer footprint 9.8 x 6.0 m (x 19.1 to 28.9, y 36.0 to 42.0). Stone dwarf wall (stone.footing, 0.3 to 0.5 m wide, 0.3 to 0.45 m high) under all walls, with a gap at the doorway where a sill stone (stone.step, 0.10 m above the floor) lies. Walls: a timber frame (timber.post about 0.2 m square, a wall plate named 'wall plate' at 2.4 m, truss lines at x 19.1, 22.4, 25.6 and 28.9) clad in near-black UPRIGHT BOARDS (timber.plank, boards 0.15 to 0.3 m wide, different widths, silvered edges, 4 or 5 boards replaced in a fresher colour, a gap or two). Cladding may be one object per wall holding separate boards (loose pieces), so the scale check skips it. Stalls: THREE empty box stalls against the back (north) wall, each about 3.1 to 3.2 m wide and 3.05 m deep (x 19.3 to 22.4, 22.4 to 25.6, 25.6 to 28.7; y 38.75 to 41.8), partitions on the truss lines 2.2 m high (boards to 1.4 m, open rails above; role timber.fence; no free rail longer than 2.5 m), stall fronts open (no rail unless a post stands every 2.5 m). Aisle 2.4 to 2.55 m wide along the front (y 36.2 to 38.7). Ties across the building (names contain 'tie', timber.beam) rest on the wall plates and on posts at the stall-front line (y 38.7), so each stretch is at most 3.9 m. Each stall: an EMPTY manger on the back wall (timber.generic box about 1.0 x 0.4 m with its rim at 1.0 to 1.2 m, standing on two short posts on the floor), an EMPTY hay rack above it (timber.fence rails, bottom at about 1.5 m, fixed to the wall) and an iron tie ring at 1.5 m (iron.fitting). Floor: floor.earth, beaten earth, flush with the ground (top at ground level), with a shallow gutter if you like. Doorway: centred at x 24.0 in the south wall, 2.4 m wide and 2.3 m high, a lintel (name 'lintel', at most 2.5 m long), TWO door leaves (timber.door, 1.2 m wide, 2.3 m high, on iron hinges) standing OPEN: one fully open against the outside wall, one hanging half open and sagging a little on its hinges. Two small slatted vents high in the gable ends. Roof: roof.shingle, dark grey-brown and mossy on the shaded slope, 40 degrees, ridge about 4.9 m running east-west, eave overhang 0.4 m, rafters on one purlin per slope (rafters are about 3.9 m long), a few slipped or missing shingles and ONE fallen shingle broken on the ground below its gap (a few big pieces, role roof.shingle). The stable is open to its roof (no hay loft floor in step 1; a loft is step 5 and then needs joists at most 1.2 m apart and planks spanning at most 1.38 m).\nYARD FITTINGS (yours, seated on the yard): an EMPTY trough made from a hollowed log (timber.generic, about 1.8 m long, rim 0.6 m high, no water, no water object) lying on two stone blocks (stone.footing) at about (31.2, 34.2); a bare HITCHING RAIL: two posts (timber.post, 1.3 m high) at about x 16.6 and 18.8, y 33.0 with a rail (timber.fence, at most 2.5 m long, about 1.1 m high, tenoned into both posts). Nothing else: no horse, no hay bale, no cart, no person, no sign, no lamp. A few loose straws are made by the props part (at most 15, contract in ownership.json); you make none.\nEMPTY means: open doors, bare stalls and mangers, a bare rail and an empty trough. The stable is lived_in, not ruined. Budget: at most 130 objects, about 130,000 triangles.\nTELL IT APART: the only dark-boarded building, with the widest doorway, in the village. It shares shingles with cottage D but is long, dark and mossy where D is small and pale.\nROLES: timber.plank (cladding), timber.post, timber.beam, timber.fence (partitions, racks, hitching rail), timber.door, timber.generic (mangers, trough), roof.shingle, stone.footing, stone.step (sill), floor.earth, iron.fitting. DO NOT TOUCH: the ground, cameras, lights, world, every other part's objects; props go in the props part.",
+    "steps_in_order": [
+     "The frame from the ground up: dwarf wall and sill stone, posts, wall plates, ties on posts, floor.earth, board cladding, doorway with lintel (carried, real sizes, level pad)",
+     "The roof: rafters, purlins, ridge, shingles, vents; the two door leaves on hinges standing open",
+     "The three empty stalls: partitions, empty mangers on posts, empty hay racks, tie rings",
+     "Yard fittings: the hollowed-log trough on stone blocks and the bare hitching rail; the fallen shingle pieces",
+     "Character as shape (no two boards alike, replaced boards, sag, slipped shingles), roles, finish-part pass, construction check, stage twice, ownership check",
+     "If time: a hay loft floor with a gable hatch (joists at most 1.2 m apart, planks at most 1.38 m span), more rubbish of the stable's own work as big shapes"
+    ],
+    "triangle_budget": 130000
+   },
+   {
+    "name": "props",
+    "owner": "props",
+    "collection": "Place: props",
+    "region": [
+     -48,
+     -20,
+     40,
+     46
+    ],
+    "brief": "Request, word for word: 'Now build a village in the forest. Needs unkept dirt roads like they're been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props.'\nYOU ARE THE PROPS PART (owner props, collection 'Place: props', stage file stage_props.py; object names start 'Prop ...'). You make the SCATTERED MEDIAEVAL PROPS of the village: all of them, so that the cottages and the stable stay clean of them. Read first: style-note.md (sections 0, 1, 6, 8), real-world-facts.json (barrel_height, cart_wheel_diameter, fence_height, hurdle_size, well_curb_and_windlass, small_props), place-settings.json (the keep_clear and footfall shapes), ownership.json (every contract with props in it), acceptance.json (group 'props'). Make every change in ONE sweep, build the scene once and save it; for a change you are unsure of (sack slump, hurdle weave, haystack shape) write about 10 far-apart variations and draw them in ONE batch (explainer-film-place variations), at most one more batch.\nRULES: scatter them, never in a line: groups of two or three beside doors and walls, singles at the road edge, one story per hand-span. Each prop rests on the frozen ground (pk.seat_on_ground) or on another prop, and is carried (a leaning ladder or spare wheel is carried by the ground at its foot). Check pk.is_keep_clear before you place anything: nothing on a wheel track, a road crown, a doorstep (keep 1.0 m clear of every doorstep), in a puddle hollow, within 0.6 m of a road's outer bank (road half width plus 0.6 m from its centre line), or in the stable doorway (x 21.4 to 26.6, y 34.6 to 36.8). NO sign, notice or lettering of any kind. NO horse, person or other creature. Group repeated small pieces (logs, straws, stakes) into one mesh for each material. Budget: at most 90 objects, about 100,000 triangles.\nWHAT TO BUILD (positions are starting values in metres; nudge them to keep clear of the keep-clear shapes):\n- WELL at (-17.5, 6.0): stone curb ring (role stone.well, about 1.3 m across outside, 0.9 m high, 0.25 m thick, chunky blocks), two windlass posts (timber.post, 2.2 m high, 2.0 m apart) with a crossbeam tenoned into both (timber.beam, 2.0 m long), a roller and a crank, a rope (prop.rope, a mesh, not a curve) and a bucket (prop.wood, 0.3 m high) standing on the curb; no water object.\n- BARRELS, 5 (prop.barrel, 0.55 to 0.95 m high, iron hoops): 2 beside cottage A's door at about (-35.5, 7.0) and (-35.0, 6.2), 1 on its side at about (-10.6, 6.2) beside B, 2 behind the stable outside its walls at about (30.8, 40.5) and (30.6, 41.6).\n- CRATES AND CHESTS, 3 (prop.crate): one by C's wall at about (-21.2, -9.5), a chest by B's wall at about (-1.9, 9.2), one broken crate by the well at about (-16.2, 7.2).\n- SACKS, 4 (prop.cloth, slumped, 0.6 to 0.9 m): 2 against A's wall at about (-28.5, 6.8), 2 by D's wall at about (6.9, -8.0).\n- BUCKETS, 3 (prop.wood): at the well, by the woodpile, by B.\n- TWO-WHEELED CART (prop.cart body about 2.2 x 1.1 m, bed 0.8 m high; two prop.wheel wheels 1.0 to 1.2 m across, tyre 4 to 6 cm, on an axle 1.4 m apart; two shafts) parked at about (12.5, -5.8) with the shafts resting on a block on the ground: the horse is away. A spare wheel (prop.wheel) leaning on the stable's west wall at about (18.7, 38.5).\n- WOODPILE at about (-43.0, 10.5), 2.4 m long and 1.2 m high with end stakes (prop.wood logs joined into one or two meshes); a CHOPPING BLOCK (0.45 m high) with an axe stuck in it (axe head iron.fitting) at about (-41.4, 7.6) with a few big chips and bark pieces round it (the rubbish of the work, as shapes); a stool beside it.\n- HAYSTACK (prop.straw, conical, about 2.6 m high, 3 m across) at about (-34.5, -14.5) and 2 bales near C at about (-31.4, -9.8).\n- WATTLE HURDLES, 6 panels (prop.wicker, 1.8 m long, 0.9 to 1.1 m high, woven, on 3 stakes each): 4 behind B at about y 13.5, x -9 to -2; 2 beside D's east side at about (7.6, -8.0).\n- BENCH (prop.furniture, 1.5 m long, seat 0.45 m high) against A's wall at about (-29.4, 6.9) with 2 jugs on it (prop.ceramic); a jug by B's door side at about (-4.2, 6.9); 2 BASKETS (prop.wicker) by C's door at about (-24.2, -7.6) and by the well.\n- HANDBARROW (prop.cart) at about (-12.0, -6.0); LADDER (prop.wood, 2.6 m, leaning) on D's south wall at about (4.8, -10.3).\n- LOOSE STRAW in the empty stable: at most 15 scraps (prop.straw, each under 0.3 m, on the floor only, none piled, in 3 small clusters) in the floor zone x 19.3 to 28.7, y 36.3 to 41.7; nothing else of yours goes inside the stable.\nAt least 10 kinds of prop and at least 30 objects. Sizes come from real-world-facts.json (barrel 0.45 to 1.0 m, wheel 0.85 to 1.3 m). Look: lived_in, mud splashed to the knee, rust runs under iron, moss on the shaded side of wood and stone.\nROLES: stone.well, timber.post, timber.beam, prop.rope, prop.wood, prop.barrel, prop.crate, prop.cloth, prop.cart, prop.wheel, prop.straw, prop.wicker, prop.furniture, prop.ceramic, iron.fitting. DO NOT TOUCH: the ground, cameras, lights, world, every other part's objects; you never put anything on a cottage wall or roof.",
+    "steps_in_order": [
+     "The well with windlass, rope and bucket; the parked two-wheeled cart with the spare wheel; the woodpile, chopping block and axe",
+     "Barrels, crates and chests, sacks, buckets, the haystack and bales, the handbarrow and the ladder, scattered clear of the keep-clear shapes",
+     "Wattle hurdles, the bench with jugs, baskets, the loose straw scraps in the stable, chips and bark by the woodpile",
+     "Character as shape (no two sacks, barrels or hurdles alike), roles, finish-part pass, construction check, stage twice, ownership check",
+     "If time: two beehive skeps on a low bench behind cottage B, a broken cart wheel by the road verge"
+    ],
+    "triangle_budget": 100000
+   }
+  ],
+  "contracts": [
+   "ground_and_roads and every building part: a level pad (flat within 0.25 m) under each cottage (A, B, C, D) and the stable and 1.5 m round it, built by the ground part; the yard in front of the stable doorway is level within 0.15 m; nobody builds within 3.1 m of the high road's centre line or 2.3 m of the lane's centre line (ruts, banks, hoof prints, crown stay as they are)",
+   "ground_and_roads and props: no prop on a wheel track, a road crown, a doorstep or in a puddle hollow, none within 0.6 m of a road's outer bank; the ground writes the keep-clear shapes, props check pk.is_keep_clear",
+   "ground_and_roads and forest: trees are seated on the ground part's forest-floor object; every view camera has a clear sightline; the forest never moves a camera",
+   "forest and the cottages and the stable: no trunk within 14 m of any wall or inside the stable yard, none within 10 m of a road edge inside the clearing (x -50 to 60, y -32 to 50), none on the south-east side of a building, no crown touching a roof; forest stumps and logs no closer than 6 m to the stable; the forest makes no prop",
+   "cottages and props: anything that stands against or beside a cottage and is not structure (woodpile, bench, barrel, bucket, ladder, jug, basket, sack, hurdle) is made by props and rests on the ground; the cottages build no props but own their doorsteps, lean-to, hinges and shutters; props keep 1.0 m clear of every doorstep",
+   "stable and props: the stable stays EMPTY: props put nothing in it except at most 15 loose straw scraps (each under 0.3 m, on the floor, none piled) in the floor zone x 19.3 to 28.7, y 36.3 to 41.7; props keep the doorway (x 21.4 to 26.6, y 34.6 to 36.8) and the aisle clear; the stable owns its trough (a dry hollowed log), hitching rail and posts",
+   "cottages_north and cottages_south: the four cottages stay tellable apart (A long, cream panels, golden thatch, log store; B small, grey rubble stone, mossy grey thatch, the only chimney; C red-ochre panels, pale thatch, tall door; D smallest, pale cob, silver shingles); neither part copies the other; both use the same facts (door heights, bay sizes, pitch, the 3.9 m bay free span)",
+   "stable and cottage D both have shingle roofs: they differ in size, wall, roof tone and door, and neither part borrows the other's look"
+  ],
+  "frozen": [
+   "cameras: View wide, View road_eye, View stable_close, View cottage_close (made by ground_and_roads)",
+   "lights: one sun lamp and a soft fill (made by ground_and_roads; no other lamp)",
+   "the world: sky colours, no haze or fog volume",
+   "render settings: 1200 x 800",
+   "the graded ground height everyone is seated on, including ruts, banks, hoof prints, puddle hollows, the stable yard, the verges and the level pads",
+   "the backdrop rings of hills (role backdrop, no shadow)"
+  ],
+  "views": [
+   {
+    "name": "wide",
+    "camera": "View wide",
+    "size": [
+     1200,
+     800
+    ]
+   },
+   {
+    "name": "road_eye",
+    "camera": "View road_eye",
+    "size": [
+     1200,
+     800
+    ]
+   },
+   {
+    "name": "stable_close",
+    "camera": "View stable_close",
+    "size": [
+     1200,
+     800
+    ]
+   },
+   {
+    "name": "cottage_close",
+    "camera": "View cottage_close",
+    "size": [
+     1200,
+     800
+    ]
+   }
+  ],
+  "readable_features": [
+   {
+    "name": "deep wheel ruts in the dirt road",
+    "keywords": [
+     "rut",
+     "ruts",
+     "wheel",
+     "tracks",
+     "cart tracks",
+     "furrows"
+    ]
+   },
+   {
+    "name": "hoof prints down the middle of the road",
+    "keywords": [
+     "hoof",
+     "hoof prints",
+     "hoofprints",
+     "horse prints",
+     "prints"
+    ]
+   },
+   {
+    "name": "puddles in the ruts and potholes",
+    "keywords": [
+     "puddle",
+     "puddles",
+     "pothole",
+     "water",
+     "wet",
+     "mud"
+    ]
+   },
+   {
+    "name": "grass and weeds on the road's middle strip",
+    "keywords": [
+     "grass",
+     "weeds",
+     "overgrown",
+     "unkept",
+     "strip"
+    ]
+   },
+   {
+    "name": "thatched roofs with moss",
+    "keywords": [
+     "thatch",
+     "thatched",
+     "straw",
+     "roof",
+     "moss"
+    ]
+   },
+   {
+    "name": "timber-framed cottage with pale plaster panels",
+    "keywords": [
+     "timber",
+     "frame",
+     "half-timbered",
+     "plaster",
+     "whitewashed",
+     "cream",
+     "limewash"
+    ]
+   },
+   {
+    "name": "stone cottage with a stone chimney",
+    "keywords": [
+     "stone",
+     "chimney",
+     "rubble",
+     "grey"
+    ]
+   },
+   {
+    "name": "small shuttered windows and low doors",
+    "keywords": [
+     "shutter",
+     "shutters",
+     "window",
+     "door",
+     "low door"
+    ]
+   },
+   {
+    "name": "stable with wide open doors",
+    "keywords": [
+     "stable",
+     "barn",
+     "open doors",
+     "double doors",
+     "doorway",
+     "dark boards"
+    ]
+   },
+   {
+    "name": "empty stalls with empty mangers",
+    "keywords": [
+     "stall",
+     "stalls",
+     "manger",
+     "empty",
+     "horse stall"
+    ]
+   },
+   {
+    "name": "hollowed-log trough and hitching rail",
+    "keywords": [
+     "trough",
+     "hitching",
+     "rail",
+     "post"
+    ]
+   },
+   {
+    "name": "well with windlass and bucket",
+    "keywords": [
+     "well",
+     "windlass",
+     "bucket",
+     "rope",
+     "crank"
+    ]
+   },
+   {
+    "name": "barrels and crates",
+    "keywords": [
+     "barrel",
+     "barrels",
+     "cask",
+     "crate",
+     "crates",
+     "box",
+     "chest"
+    ]
+   },
+   {
+    "name": "parked two-wheeled cart with shafts down",
+    "keywords": [
+     "cart",
+     "wagon",
+     "wheel",
+     "wheels",
+     "shafts"
+    ]
+   },
+   {
+    "name": "woodpile with chopping block",
+    "keywords": [
+     "woodpile",
+     "wood pile",
+     "logs",
+     "firewood",
+     "chopping block",
+     "axe",
+     "stump"
+    ]
+   },
+   {
+    "name": "tall trees all round with moss on the trunks",
+    "keywords": [
+     "forest",
+     "trees",
+     "woods",
+     "trunks",
+     "woodland",
+     "tree"
+    ]
+   }
+  ],
+  "renderer_hint": "EEVEE is expected: the plan has no lamp, no lit window, no fire, no glowing material and no water object (daylight sun and sky only; the trough is a dry hollowed log, puddles are hollows in the ground), so the rule in renderer-for finds nothing lit. One caution: the role backdrop wants a plain unlit colour, and if the ground builder makes it with an emission shader the rule reads that as a glowing material and picks Cycles. The brief asks for a flat, rough, no-emission colour so EEVEE is kept; if emission is needed the builder says so, Cycles is accepted and the card time is counted against the 150-minute total. Renderer wished: auto.",
+  "open_questions": [
+   "Period and country: the request names none. I assumed a north-west European mediaeval village (timber frame with wattle and daub, rubble stone, cob, thatch and wooden shingles, 13th to 15th century). If the person pictures log cabins (Scandinavian or Slavic) the cottage walls and roofs change.",
+   "'Horse and carriage': read as horse-drawn carts and wagons (a gauge of 1.4 m, a one-horse cart). No measured mediaeval gauge was found (sources: Roman-era and Bronze Age figures, popular summaries), so the gauge is weak. If a wider coach is meant, raise the gauge in place-settings.json (the facts range 1.2 to 1.5 m would also need changing).",
+   "Backdrop colour and the renderer: the backdrop must be 'plain unlit colour'; an emission shader makes the kit's renderer rule pick Cycles (more card time). The brief asks for a flat no-emission colour to keep EEVEE; ask the person if they would rather accept Cycles for a flatter, truly unlit backdrop.",
+   "Numbers I could NOT confirm with a real source (all weak or guess in real-world-facts.json): the mediaeval cart gauge; hoof-print size for a DRAUGHT horse (only pony to Thoroughbred widths 85 to 132 mm were found; the kit's dimple is fixed at about 0.13 m and cannot be set per road); the size of mediaeval stalls (modern 10 x 10 to 12 x 12 ft figures, I used 3.05 m); peasant door heights (one V&A note about better houses); wood shingle pitch (from memory); cask heights (computed from volumes); undated cart wheel sizes; manger and rack heights; road widths; wattle hurdle, well and small prop sizes; tree crown ratios.",
+   "'A few cottages' is taken as four, 'some scattered props' as 14 kinds and about 70 to 90 objects, 'empty stable' as no animals, no hay and no people in it (a few loose straws only). Tell me if any count is wrong.",
+   "The 3.9 m bay_free_span fact lets wall plates, ridge pieces, purlins and ties span a 3.7 m bay (judged from one survey, weak). Confirm it, or the builders must add posts nobody would build.",
+   "The trough is a dry hollowed log (timber.generic) and the well has no water object, because a water object makes the renderer rule choose Cycles; say if a water-filled trough is wanted.",
+   "The 'place: sun' check: with the sun from the south-east at 50 degrees, the forest that stands beside the road outside the clearing (|x| above about 55) shades it by design; the audit may report more than half of some view's ground in shade as a LOOK. I kept trees 10 m or more from the roads inside the clearing to avoid it.",
+   "Object count: about 600 to 700 planned objects against the audit's LOOK line of 1000; if the forest or props builders go over, the audit says LOOK, above 3000 FAIL.",
+   "No concept pictures from the painter were planned or priced: this run allows no paid image step. If the person wants them, the garden's cost was 29 calls, US$3.86 (measured in that job); the person must say yes first."
+  ],
+  "notes": "I read the planner file, the skill (SKILL.md, the-required-steps, construction-and-scale, style-rule-and-measures, the worked examples, batched-rounds-and-card-time), the four templates, the village preset, the canal-lock example files and the kit's own code for settings, roads, masks, the scale check, the ownership check and the renderer rule, so that the plan fits what the tools read. I wrote the five plan files (style-note.md, real-world-facts.json, place-settings.json, ownership.json, acceptance.json) into the plan folder and wrote the person's 150-minute card total into the ledger (card-time start; it shows 150 min, 0 s used). The planner used no card time and touched no Blender scene. place-settings.json passes the kit's own validator with no problem and no road warning (measured); the other three JSON files parse (measured). Nothing else was run or measured: sizes are judged from the sources named in each fact row, none is strong.\\nTHE PLAN: place 'forest village', type village, look lived_in with every ground role neglected (the person's 'unkept', through look_by_role), state damp (shaded forest ground). Six parts: ground_and_roads (built first, frozen; also makes the 4 cameras, the sun and soft fill, the world, the three backdrop rings of hills, the graded ground to about 900 m, the two roads with ruts 1.4 m apart, banks, hoof prints, grass crown, potholes and the stable yard), forest (70+ trees, undergrowth, stumps, logs, boulders; hides where the road goes), cottages_north (A long cream timber frame with golden thatch and a log-store lean-to; B small grey rubble stone with mossy thatch and the only stone chimney), cottages_south (C red-ochre daub, pale thatch, tall door; D small pale cob with silver shingles), stable (9.8 x 6.0 m near-black boards, dark mossy shingles, 2.4 m open double doorway, three empty box stalls with empty mangers and hay racks, a dry hollowed-log trough, a bare hitching rail) and props (well with windlass, 5 barrels, crates, sacks, buckets, a parked two-wheeled cart with shafts down, woodpile and chopping block, haystack, wattle hurdles, bench, jugs, baskets, handbarrow, ladder). Count of the request's nouns: village (the whole), forest (forest part plus backdrop), dirt roads (ground, with ruts and hoof prints for the horse and cart), empty stable (stable), a few cottages (four), scattered mediaeval props (props): each lands in a part.\\nViews: 4, each 1200 x 800 (not for the film): wide (named first: it shows roads, cottages, stable, props and forest), road_eye, stable_close, cottage_close. The ground part's brief holds the world round the place (backdrop rings, ground to the horizon, edge hidden, clip end 2000 m or more, no haze volume) and the camera spots with the items each must frame; the backdrop must also avoid flat windows (the style rule's flat-window line), which I wrote into its brief. The facts research found most numbers only weakly (see open_questions). Things I added that you might not expect: a free_span fact of 3.9 m so cruck-style bays do not need invented posts; a trough that is a dry hollowed log, and a well with no water, to keep the renderer on EEVEE; no sign or lettering anywhere (the audit's lettering check); the straw scraps in the stable are made by props, not the stable, to keep material ownership clean (roles shared between parts, such as timber.post, are left without material patterns in ownership.json, as in the canal-lock example; if ownership-diff complains about shared PK materials, the integrator should say so). Not tested: that the cameras really frame what the brief lists, that the plan's budgets hold, that the 3.9 m free span fact passes the audit's judge, and that look_by_role with 'ground.*' behaves as the README describes (the validator accepts it)."
+ },
+ "ground": {
+  "owner": "ground_and_roads",
+  "stage_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/stages/stage_ground_and_roads.py",
+  "start_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/start.blend",
+  "ground_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/ground.blend",
+  "work_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/scene.blend (copy of ground.blend); the finished trial is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/part.blend; the fingerprint of ground.blend is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/ground.fingerprint.json",
+  "steps_finished": "All five steps finished. (1) Empty start scene made and the stage builds the graded ground, level pads, the level doorway yard, and the role objects with no overlap. (2) The kit's roads step runs inside the stage on the roads of place-settings.json; ruts, banks, hoof prints, crown and puddle hollows are in the frozen ground; I added 3 potholes on the high road, 2 in the yard, a turning loop of ruts and hoof prints in the yard, and dug the hoof prints 3 cm deeper (same places as the kit's). Ruts checked by rays. (3) Four cameras, one sun lamp, sky and 1200 x 800 render size made; the soft cool fill is the sky, not a lamp (a non-sun lamp makes the renderer rule pick Cycles). (4) Three backdrop rings of hills (four tone steps each, no emission, no shadow), the plain ground to 900 m in the near ring's mesh, a no-haze gradient sky, every clip end 3000 m; the audit's world and sun checks pass. (5) finish-part --quick, construction check, normals-test, audit and preflight run on the final file; the stage run twice by combine gives the same scene with no ownership violation; ground.blend and its fingerprint saved. One batch of 10 light variations drawn on the rented cards (picked sun 4.5, sky light 0.5). Not a full job: the forest floor is a 190 m disc, not 900 m (see shared_problems).",
+  "objects_added": 15,
+  "triangles": 482150,
+  "own_audit": {
+   "verdict": "WARN from finish-part (0 to fix, 4 to look at, 22 passed); explainer-film-preflight place gives FAIL only because the file was finished with --quick (trial maps and masks), which the kit does not accept for a final",
+   "problems": [
+    "LOOK place: quick output: finished with --quick (maps 256 px, masks 0.5 m); not a final",
+    "LOOK place: treatments PK ground.dirt_road / dirt_road: moss_and_algae wanted but missing (not required; the road role's own dial for it is 0)",
+    "LOOK place: treatments PK ground.grass / grass: displacement wanted but missing (not required; grass has no displacement in the kit)",
+    "LOOK place: normal maps: the end-to-end test light was not run inside finish (--quick); I ran normals-test myself and it passed",
+    "WARN preflight: no fresh checker has looked yet"
+   ]
+  },
+  "surface_pass_done": true,
+  "wear_preview_done": true,
+  "claims": [
+   {
+    "claim": "The seven ground objects meet edge to edge: no point inside the floor disc has a gap or two ground surfaces at different heights.",
+    "measured_by": "work/ground_and_roads/verify2.py on scene/ground.blend (ray from above at random points in the disc and over the village; result in verify2.json)"
+   },
+   {
+    "claim": "Every border vertex of every ground object is also a vertex of a neighbouring ground object, and the floor's round edge is shared with the plain ground of the backdrop.",
+    "measured_by": "work/ground_and_roads/verify2.py (boundary vertices compared by position; verify2.json)"
+   },
+   {
+    "claim": "The ground objects do not overlap and share no coplanar faces, because they are cut from one triangulation and each triangle goes to one object.",
+    "measured_by": "verify2.py ray test (no point has two different heights) and the construction of the stage; the kit's construction check examines no ground object, so it adds nothing here"
+   },
+   {
+    "claim": "The level pads under cottages A, B, C and D are flat far inside the 0.25 m limit, including the 1.5 m margin round each, and the stable pad is flat inside the limit.",
+    "measured_by": "work/ground_and_roads/verify_ground.py on scene/ground.blend (heights by ray on a grid; verify_ground.json)"
+   },
+   {
+    "claim": "The yard in front of the stable doorway is level inside the 0.15 m limit with the lane's rut ends and hoof prints in it.",
+    "measured_by": "verify_ground.py doorway_range (verify_ground.json)"
+   },
+   {
+    "claim": "The land near the buildings is gentler than 1 in 6; only ruts, banks, potholes and hoof prints are steeper, by design.",
+    "measured_by": "numpy slope of the land function within 40 m of every building (stage code, run in plain Python), and verify_ground.py with a 2 m baseline on the finished ground"
+   },
+   {
+    "claim": "The clearing falls about 1 m from its north-east corner to its south-west corner, and outside the clearing the lumps stay inside the 0.5 m limit.",
+    "measured_by": "numpy on the stage's land function (smooth_land) and verify_ground.py z_NE_corner / z_SW_corner"
+   },
+   {
+    "claim": "Two ruts a cart's gauge apart are really in the ground of both roads, measured by rays on the finished ground, with depths in the ranges the acceptance list gives.",
+    "measured_by": "explainer-film-place audit (roads section of work/ground_and_roads/place-audit.json) and my finer comb in verify_ground.py (verify_ground.json)"
+   },
+   {
+    "claim": "The audit's checks place: world, place: sun, place: ground relief, place: keep-out, place: budgets, place: displacement, place: scale, place: roles, place: lettering and place: renderer all pass for this part.",
+    "measured_by": "finish-part audit in work/ground_and_roads/finish_part.log and work/ground_and_roads/place-audit.json; explainer-film-preflight place report in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports"
+   },
+   {
+    "claim": "No view sees empty sky below the horizon, every view camera's clip end is above the figure the audit names, no backdrop object casts a shadow and the world has no haze volume.",
+    "measured_by": "place-audit.json views and world sections (explainer-film-place audit)"
+   },
+   {
+    "claim": "The renderer rule gives EEVEE for this ground: nothing is lit but the sun, the backdrop shader has no emission.",
+    "measured_by": "explainer-film-place renderer-for on scene/ground.blend and the audit's renderer section"
+   },
+   {
+    "claim": "No 96 x 96 window that lies wholly on the hills is flat in any of the four views at the final 1200 x 800 size.",
+    "measured_by": "work/ground_and_roads/lookdev.py (hills-only alpha renders, Cycles, local) read by measure_views.py using the kit's picture_measures luminance and the 0.010 limit; the pictures were deleted to save disk, the numbers were read from the run"
+   },
+   {
+    "claim": "Each hill ring, as lit and seen from the four views, comes out close to its planned colour and the far ring is lighter and bluer than the middle ring, which is lighter and bluer than the near ring.",
+    "measured_by": "work/ground_and_roads/ring_calib.py (each ring drawn alone, mean display colour over the four views, Cycles, local)"
+   },
+   {
+    "claim": "The backdrop is three meshes, each under the 60,000 triangle limit, with the plain ground to the horizon riding in the near ring's mesh as a second material.",
+    "measured_by": "verify2.json triangles per object and place-audit.json objects"
+   },
+   {
+    "claim": "The stage is idempotent and changes nothing that is not its own: running it twice gives the same scene and the ownership check finds no violation.",
+    "measured_by": "explainer-film-place combine --order plain (work/ground_and_roads/combine.json, combine_final.log)"
+   },
+   {
+    "claim": "pk.is_keep_clear answers on the frozen ground: true on both wheel tracks, in the doorway zone and in the yard, false on the meadow, the verge and the forest.",
+    "measured_by": "work/ground_and_roads/keepclear_test.py on scene/ground.blend (plan pictures stored in the file; keepclear_test.log)"
+   },
+   {
+    "claim": "No plant or litter piece lies on a wheel track, a crown, a puddle or a keep-clear shape.",
+    "measured_by": "place-audit.json scatter groups (all counts 0) from finish-part"
+   },
+   {
+    "claim": "There is one sun lamp only, warm, in the true south-east, about 50 degrees up, with a soft shadow edge, and no other lamp in the scene.",
+    "measured_by": "place-audit.json sun section and light check; the sun object's angle read in the stage"
+   },
+   {
+    "claim": "In View wide the four cottage centres, the well, the lane junction, the stable and a long stretch of the high road are inside the frame.",
+    "measured_by": "work/ground_and_roads/frames_final.py (world_to_camera_view, frames_final.json)"
+   },
+   {
+    "claim": "The ground part stays inside the object and triangle budgets: ten meshes and under the 700,000 triangles asked.",
+    "measured_by": "place-audit.json counts and verify2.json"
+   },
+   {
+    "claim": "Clipped pixels stay at or under half a percent of the picture in all four ground-only views at 1200 x 800.",
+    "measured_by": "work/ground_and_roads/measure_views.py on local Cycles renders of scene/ground.blend (any channel at or above 0.995; the PNGs were deleted, numbers read from the run); the finished place with cottages was NOT measured"
+   }
+  ],
+  "unsure": [
+   "The brief asked for the ground out to 900 m; the ground-role objects are a 190 m disc and the plain to 900 m is the backdrop's skirt. I chose this on measured numbers (see shared_problems) but a checker may read the brief literally.",
+   "The hoof prints are dug deeper than the kit's, but in a close-up render they do not stand out from the clod texture; whether they read at 600 px from View road_eye is judged only by my eye, no fresh checker has looked.",
+   "The sun is in the true south-east as the plan says in words; the kit prints its compass as 315 (not 135) because it measures from +x toward +y. A checker comparing the number with the brief's '135' will see a mismatch that is only in naming.",
+   "The hill rings were calibrated and flat-window tested with local Cycles pictures; the cards draw EEVEE, and on the cards the sunlit far ring peaks looked whiter than in Cycles. I toned the far ring down once but did not draw it again on a card.",
+   "The picked light (sun 4.5, sky light 0.5) was chosen by looking at the ground-only sheet; cream walls and thatch are not in the scene yet, so the clipped share of the finished views is not known.",
+   "The 'soft large colour variation' of the forest floor lives in the kit's material (3 m noise), not in my stage colour; the kit replaces my plain materials, so far ground may look flat at 100 percent.",
+   "The plan masks the integrator will make are 0.25 m cells (0.5 m in quick) over this 380 m ground; the ruts are 0.18 m wide, so the lowness mask may not mark every rut puddle, and potholes sit near the puddle threshold.",
+   "The audit's rut comb has 8 cm steps, so its gauge reads 1.333 and 1.417; my finer comb says the true spacing wanders about 1.36 to 1.44 m with the kit's wobble.",
+   "The crown centre of both roads is not marked keep-clear by the plan masks (the crown is only a worn path of 0.45), so props must also keep 3.1 m (high road) and 2.3 m (lane) from the centre lines as the contract says."
+  ],
+  "shared_problems": [
+   "Ground area against the audit's plant and litter minimum: a ground-role floor 900 m each way (3,240,000 square metres) needs at least 648,000 plants and 972,000 litter pieces (20 and 30 per 100 square metres) while the scatter cap is 400,000 pieces; the kit's growth step on that ground ran over 11 minutes with no result and I stopped it. The plan masks also take their cell from the ground's size (1800 m / 1500 = 1.2 m). So the ground-role objects are a 190 m disc (113,000 square metres) and the plain to 900 m is part of the near backdrop ring. The brief and ownership.json should say this.",
+   "The kit's construction check examines no ground or backdrop object (it says 0 objects checked), so it cannot prove the ground; I used ray measures of my own.",
+   "place-settings.json keep_clear does not cover the road crown, the verges or puddle hollows; props must use the 3.1 m and 2.3 m rules and their own puddle test as well as pk.is_keep_clear.",
+   "light.py's fallback sun is at azimuth 135 measured from +x toward +y, which is the north-west on a map with y north, while the style note and brief say south-east with shadows to the north-west. I followed the style note (true south-east).",
+   "This computer cannot run EEVEE (libEGL.so.1 missing, Blender aborts), so every local picture is Cycles; only the rented cards draw EEVEE, where colours differ a little.",
+   "The free `variations scout` on a finished 480,000-triangle part took over 10 minutes here, so it is not free in time for a ground part; I stopped it and planned straight to the cards.",
+   "The ground stage takes about 1 minute 10 seconds per run (50 s of it the plan pictures), so combine with idempotence takes over 2 minutes; the stage option plan_masks=False skips the pictures."
+  ],
+  "failures": [
+   "First finish-part on the 900 m ground ran over 11 minutes on one thread without finishing and I stopped it (growth step; numbers in shared_problems). I redesigned the floor and it then finished in about 2 minutes 20 seconds.",
+   "A local `variations scout` on part.blend ran over 10 minutes and I stopped it; nothing was sent to a card before the one real batch.",
+   "Two pkill commands killed my own shell (exit 144); no data lost.",
+   "Blender aborts locally when EEVEE is used (libEGL.so.1 missing); I used Cycles for local pictures.",
+   "I first set the Khronos PBR Neutral view transform; it darkened and over-saturated dark greens (hills came out about 40 percent too dark), so I switched to Standard.",
+   "Per-triangle labelling first gave sawtooth borders (0.14 to 0.3 m steps) between meadow and forest floor; I replaced it with contour lines of the region fields kept as mesh edges.",
+   "The plan pictures I stored in ground.blend were first dropped on save (no user); fixed with a fake user, and keepclear_test.py now finds them.",
+   "explainer-film-preflight place reports FAIL for this part only because of --quick output; I did not run a non-quick finish.",
+   "389 of the high road's triangles are thin slivers (quality under 0.1) along the contour edges; none is visible in the pictures I looked at.",
+   "The variations batch's set-up and downloads were counted by wall clock at 203 s of the card seconds, more than the jobs themselves (about 199 s)."
+  ],
+  "not_tested": [
+   "A non-quick finish of the ground (full 1024 px maps and 0.25 m masks).",
+   "The ground with the other parts on it (combine with --order both, seating, sightlines past trees, forest and building distances).",
+   "Full-size EEVEE pictures of the four views on a card; the hills and sun were only drawn small on the cards (the batch) and local Cycles.",
+   "A second light batch (not needed after the first pick).",
+   "Clipped share and brightness of the finished place with cottages, thatch and plaster.",
+   "Whether the hoof prints, crown, puddles and mud read as unkept and horse-driven for a fresh reader (blind reading test).",
+   "Flat windows on the forest floor and the plain skirt at the final size with the kit's materials.",
+   "That a fresh checker agrees with my claims.",
+   "Running the stage from a different working folder or with other options than the defaults and plan_masks=False."
+  ],
+  "seconds": 3750,
+  "card_seconds": 402,
+  "batches": 1,
+  "cameras": [
+   "View wide: at (-50.145, -27.903, 14.0), looks at (-5, 14, 2), 28 mm, 1200 x 800, clip 0.1 to 3000 m (the plan's spot moved 3 m to its left so cottage A's lean-to and the west end of the road are in the frame)",
+   "View road_eye: at (-62, -3.7) with the lens 1.7 m above the ground there (z -1.254 is wrong in this note: it stands at z 1.254 because the ground is -0.446 m there), looks at (-20, 0.5) 1.5 m above the ground, 35 mm, 1200 x 800, clip 0.1 to 3000 m",
+   "View stable_close: at (28.5, 25.5, 1.97), looks at (24, 36) 1.4 m above the ground, 28 mm, 1200 x 800, clip 0.1 to 3000 m",
+   "View cottage_close: at (-12.764, 3.033, 1.604), looks at (-31, 8) 1.6 m above the ground, 35 mm, 1200 x 800, clip 0.1 to 3000 m (the plan's spot moved 3 m to its right so the well at (-17.5, 6) is in the frame with cottage A's front; the barrels' side of the well toward the north is near the left-hand edge)"
+  ],
+  "ground_promise": "Inside 1.5 m round every building footprint (cottage A with its lean-to, B, C, D and the stable) the ground is a level pad, flat inside 0.25 m (measured about 4 mm for the cottages, 7 cm for the stable pad that holds the lane's rut ends); the yard in front of the stable doorway (x 21.4 to 26.6, y 34.6 to 36.8) is level inside 0.15 m (measured 9 cm); ruts are 9 to 12 cm deep on the high road (measured 10 to 12 cm) and about 8 cm on the lane, 1.4 m apart (the kit's own wobble moves them 1.3 to 1.5), with banks, hoof prints, a crown, puddle hollows, 3 potholes on the high road between x -70 and 20 and 2 in the yard; nobody builds within 3.1 m of the high road's centre line or 2.3 m of the lane's centre line (ground there stays as it is). The land is soft: no slope steeper than 1 in 14 within 40 m of a building apart from the ruts and potholes, a 1 m fall from the north-east to the south-west of the clearing, lumps under 0.5 m outside it. Ground-role objects (forest floor, clearing, roads, yard, verges) cover a disc of 190 m radius; beyond it the plain runs to 900 m as backdrop (no wear, no shadow). The four cameras (named View wide, View road_eye, View stable_close, View cottage_close), the sun, the sky, the render size 1200 x 800 and the three hill rings never change; the plan pictures in the file make pk.is_keep_clear answer on wheel tracks, the yard and the doorway zone.\""
+ },
+ "parts": [
+  {
+   "owner": "ground_and_roads",
+   "stage_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/stages/stage_ground_and_roads.py",
+   "start_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/start.blend",
+   "ground_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/ground.blend",
+   "work_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/scene.blend (copy of ground.blend); the finished trial is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/ground_and_roads/part.blend; the fingerprint of ground.blend is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/ground.fingerprint.json",
+   "steps_finished": "All five steps finished. (1) Empty start scene made and the stage builds the graded ground, level pads, the level doorway yard, and the role objects with no overlap. (2) The kit's roads step runs inside the stage on the roads of place-settings.json; ruts, banks, hoof prints, crown and puddle hollows are in the frozen ground; I added 3 potholes on the high road, 2 in the yard, a turning loop of ruts and hoof prints in the yard, and dug the hoof prints 3 cm deeper (same places as the kit's). Ruts checked by rays. (3) Four cameras, one sun lamp, sky and 1200 x 800 render size made; the soft cool fill is the sky, not a lamp (a non-sun lamp makes the renderer rule pick Cycles). (4) Three backdrop rings of hills (four tone steps each, no emission, no shadow), the plain ground to 900 m in the near ring's mesh, a no-haze gradient sky, every clip end 3000 m; the audit's world and sun checks pass. (5) finish-part --quick, construction check, normals-test, audit and preflight run on the final file; the stage run twice by combine gives the same scene with no ownership violation; ground.blend and its fingerprint saved. One batch of 10 light variations drawn on the rented cards (picked sun 4.5, sky light 0.5). Not a full job: the forest floor is a 190 m disc, not 900 m (see shared_problems).",
+   "objects_added": 15,
+   "triangles": 482150,
+   "own_audit": {
+    "verdict": "WARN from finish-part (0 to fix, 4 to look at, 22 passed); explainer-film-preflight place gives FAIL only because the file was finished with --quick (trial maps and masks), which the kit does not accept for a final",
+    "problems": [
+     "LOOK place: quick output: finished with --quick (maps 256 px, masks 0.5 m); not a final",
+     "LOOK place: treatments PK ground.dirt_road / dirt_road: moss_and_algae wanted but missing (not required; the road role's own dial for it is 0)",
+     "LOOK place: treatments PK ground.grass / grass: displacement wanted but missing (not required; grass has no displacement in the kit)",
+     "LOOK place: normal maps: the end-to-end test light was not run inside finish (--quick); I ran normals-test myself and it passed",
+     "WARN preflight: no fresh checker has looked yet"
+    ]
+   },
+   "surface_pass_done": true,
+   "wear_preview_done": true,
+   "claims": [
+    {
+     "claim": "The seven ground objects meet edge to edge: no point inside the floor disc has a gap or two ground surfaces at different heights.",
+     "measured_by": "work/ground_and_roads/verify2.py on scene/ground.blend (ray from above at random points in the disc and over the village; result in verify2.json)"
+    },
+    {
+     "claim": "Every border vertex of every ground object is also a vertex of a neighbouring ground object, and the floor's round edge is shared with the plain ground of the backdrop.",
+     "measured_by": "work/ground_and_roads/verify2.py (boundary vertices compared by position; verify2.json)"
+    },
+    {
+     "claim": "The ground objects do not overlap and share no coplanar faces, because they are cut from one triangulation and each triangle goes to one object.",
+     "measured_by": "verify2.py ray test (no point has two different heights) and the construction of the stage; the kit's construction check examines no ground object, so it adds nothing here"
+    },
+    {
+     "claim": "The level pads under cottages A, B, C and D are flat far inside the 0.25 m limit, including the 1.5 m margin round each, and the stable pad is flat inside the limit.",
+     "measured_by": "work/ground_and_roads/verify_ground.py on scene/ground.blend (heights by ray on a grid; verify_ground.json)"
+    },
+    {
+     "claim": "The yard in front of the stable doorway is level inside the 0.15 m limit with the lane's rut ends and hoof prints in it.",
+     "measured_by": "verify_ground.py doorway_range (verify_ground.json)"
+    },
+    {
+     "claim": "The land near the buildings is gentler than 1 in 6; only ruts, banks, potholes and hoof prints are steeper, by design.",
+     "measured_by": "numpy slope of the land function within 40 m of every building (stage code, run in plain Python), and verify_ground.py with a 2 m baseline on the finished ground"
+    },
+    {
+     "claim": "The clearing falls about 1 m from its north-east corner to its south-west corner, and outside the clearing the lumps stay inside the 0.5 m limit.",
+     "measured_by": "numpy on the stage's land function (smooth_land) and verify_ground.py z_NE_corner / z_SW_corner"
+    },
+    {
+     "claim": "Two ruts a cart's gauge apart are really in the ground of both roads, measured by rays on the finished ground, with depths in the ranges the acceptance list gives.",
+     "measured_by": "explainer-film-place audit (roads section of work/ground_and_roads/place-audit.json) and my finer comb in verify_ground.py (verify_ground.json)"
+    },
+    {
+     "claim": "The audit's checks place: world, place: sun, place: ground relief, place: keep-out, place: budgets, place: displacement, place: scale, place: roles, place: lettering and place: renderer all pass for this part.",
+     "measured_by": "finish-part audit in work/ground_and_roads/finish_part.log and work/ground_and_roads/place-audit.json; explainer-film-preflight place report in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports"
+    },
+    {
+     "claim": "No view sees empty sky below the horizon, every view camera's clip end is above the figure the audit names, no backdrop object casts a shadow and the world has no haze volume.",
+     "measured_by": "place-audit.json views and world sections (explainer-film-place audit)"
+    },
+    {
+     "claim": "The renderer rule gives EEVEE for this ground: nothing is lit but the sun, the backdrop shader has no emission.",
+     "measured_by": "explainer-film-place renderer-for on scene/ground.blend and the audit's renderer section"
+    },
+    {
+     "claim": "No 96 x 96 window that lies wholly on the hills is flat in any of the four views at the final 1200 x 800 size.",
+     "measured_by": "work/ground_and_roads/lookdev.py (hills-only alpha renders, Cycles, local) read by measure_views.py using the kit's picture_measures luminance and the 0.010 limit; the pictures were deleted to save disk, the numbers were read from the run"
+    },
+    {
+     "claim": "Each hill ring, as lit and seen from the four views, comes out close to its planned colour and the far ring is lighter and bluer than the middle ring, which is lighter and bluer than the near ring.",
+     "measured_by": "work/ground_and_roads/ring_calib.py (each ring drawn alone, mean display colour over the four views, Cycles, local)"
+    },
+    {
+     "claim": "The backdrop is three meshes, each under the 60,000 triangle limit, with the plain ground to the horizon riding in the near ring's mesh as a second material.",
+     "measured_by": "verify2.json triangles per object and place-audit.json objects"
+    },
+    {
+     "claim": "The stage is idempotent and changes nothing that is not its own: running it twice gives the same scene and the ownership check finds no violation.",
+     "measured_by": "explainer-film-place combine --order plain (work/ground_and_roads/combine.json, combine_final.log)"
+    },
+    {
+     "claim": "pk.is_keep_clear answers on the frozen ground: true on both wheel tracks, in the doorway zone and in the yard, false on the meadow, the verge and the forest.",
+     "measured_by": "work/ground_and_roads/keepclear_test.py on scene/ground.blend (plan pictures stored in the file; keepclear_test.log)"
+    },
+    {
+     "claim": "No plant or litter piece lies on a wheel track, a crown, a puddle or a keep-clear shape.",
+     "measured_by": "place-audit.json scatter groups (all counts 0) from finish-part"
+    },
+    {
+     "claim": "There is one sun lamp only, warm, in the true south-east, about 50 degrees up, with a soft shadow edge, and no other lamp in the scene.",
+     "measured_by": "place-audit.json sun section and light check; the sun object's angle read in the stage"
+    },
+    {
+     "claim": "In View wide the four cottage centres, the well, the lane junction, the stable and a long stretch of the high road are inside the frame.",
+     "measured_by": "work/ground_and_roads/frames_final.py (world_to_camera_view, frames_final.json)"
+    },
+    {
+     "claim": "The ground part stays inside the object and triangle budgets: ten meshes and under the 700,000 triangles asked.",
+     "measured_by": "place-audit.json counts and verify2.json"
+    },
+    {
+     "claim": "Clipped pixels stay at or under half a percent of the picture in all four ground-only views at 1200 x 800.",
+     "measured_by": "work/ground_and_roads/measure_views.py on local Cycles renders of scene/ground.blend (any channel at or above 0.995; the PNGs were deleted, numbers read from the run); the finished place with cottages was NOT measured"
+    }
+   ],
+   "unsure": [
+    "The brief asked for the ground out to 900 m; the ground-role objects are a 190 m disc and the plain to 900 m is the backdrop's skirt. I chose this on measured numbers (see shared_problems) but a checker may read the brief literally.",
+    "The hoof prints are dug deeper than the kit's, but in a close-up render they do not stand out from the clod texture; whether they read at 600 px from View road_eye is judged only by my eye, no fresh checker has looked.",
+    "The sun is in the true south-east as the plan says in words; the kit prints its compass as 315 (not 135) because it measures from +x toward +y. A checker comparing the number with the brief's '135' will see a mismatch that is only in naming.",
+    "The hill rings were calibrated and flat-window tested with local Cycles pictures; the cards draw EEVEE, and on the cards the sunlit far ring peaks looked whiter than in Cycles. I toned the far ring down once but did not draw it again on a card.",
+    "The picked light (sun 4.5, sky light 0.5) was chosen by looking at the ground-only sheet; cream walls and thatch are not in the scene yet, so the clipped share of the finished views is not known.",
+    "The 'soft large colour variation' of the forest floor lives in the kit's material (3 m noise), not in my stage colour; the kit replaces my plain materials, so far ground may look flat at 100 percent.",
+    "The plan masks the integrator will make are 0.25 m cells (0.5 m in quick) over this 380 m ground; the ruts are 0.18 m wide, so the lowness mask may not mark every rut puddle, and potholes sit near the puddle threshold.",
+    "The audit's rut comb has 8 cm steps, so its gauge reads 1.333 and 1.417; my finer comb says the true spacing wanders about 1.36 to 1.44 m with the kit's wobble.",
+    "The crown centre of both roads is not marked keep-clear by the plan masks (the crown is only a worn path of 0.45), so props must also keep 3.1 m (high road) and 2.3 m (lane) from the centre lines as the contract says."
+   ],
+   "shared_problems": [
+    "Ground area against the audit's plant and litter minimum: a ground-role floor 900 m each way (3,240,000 square metres) needs at least 648,000 plants and 972,000 litter pieces (20 and 30 per 100 square metres) while the scatter cap is 400,000 pieces; the kit's growth step on that ground ran over 11 minutes with no result and I stopped it. The plan masks also take their cell from the ground's size (1800 m / 1500 = 1.2 m). So the ground-role objects are a 190 m disc (113,000 square metres) and the plain to 900 m is part of the near backdrop ring. The brief and ownership.json should say this.",
+    "The kit's construction check examines no ground or backdrop object (it says 0 objects checked), so it cannot prove the ground; I used ray measures of my own.",
+    "place-settings.json keep_clear does not cover the road crown, the verges or puddle hollows; props must use the 3.1 m and 2.3 m rules and their own puddle test as well as pk.is_keep_clear.",
+    "light.py's fallback sun is at azimuth 135 measured from +x toward +y, which is the north-west on a map with y north, while the style note and brief say south-east with shadows to the north-west. I followed the style note (true south-east).",
+    "This computer cannot run EEVEE (libEGL.so.1 missing, Blender aborts), so every local picture is Cycles; only the rented cards draw EEVEE, where colours differ a little.",
+    "The free `variations scout` on a finished 480,000-triangle part took over 10 minutes here, so it is not free in time for a ground part; I stopped it and planned straight to the cards.",
+    "The ground stage takes about 1 minute 10 seconds per run (50 s of it the plan pictures), so combine with idempotence takes over 2 minutes; the stage option plan_masks=False skips the pictures."
+   ],
+   "failures": [
+    "First finish-part on the 900 m ground ran over 11 minutes on one thread without finishing and I stopped it (growth step; numbers in shared_problems). I redesigned the floor and it then finished in about 2 minutes 20 seconds.",
+    "A local `variations scout` on part.blend ran over 10 minutes and I stopped it; nothing was sent to a card before the one real batch.",
+    "Two pkill commands killed my own shell (exit 144); no data lost.",
+    "Blender aborts locally when EEVEE is used (libEGL.so.1 missing); I used Cycles for local pictures.",
+    "I first set the Khronos PBR Neutral view transform; it darkened and over-saturated dark greens (hills came out about 40 percent too dark), so I switched to Standard.",
+    "Per-triangle labelling first gave sawtooth borders (0.14 to 0.3 m steps) between meadow and forest floor; I replaced it with contour lines of the region fields kept as mesh edges.",
+    "The plan pictures I stored in ground.blend were first dropped on save (no user); fixed with a fake user, and keepclear_test.py now finds them.",
+    "explainer-film-preflight place reports FAIL for this part only because of --quick output; I did not run a non-quick finish.",
+    "389 of the high road's triangles are thin slivers (quality under 0.1) along the contour edges; none is visible in the pictures I looked at.",
+    "The variations batch's set-up and downloads were counted by wall clock at 203 s of the card seconds, more than the jobs themselves (about 199 s)."
+   ],
+   "not_tested": [
+    "A non-quick finish of the ground (full 1024 px maps and 0.25 m masks).",
+    "The ground with the other parts on it (combine with --order both, seating, sightlines past trees, forest and building distances).",
+    "Full-size EEVEE pictures of the four views on a card; the hills and sun were only drawn small on the cards (the batch) and local Cycles.",
+    "A second light batch (not needed after the first pick).",
+    "Clipped share and brightness of the finished place with cottages, thatch and plaster.",
+    "Whether the hoof prints, crown, puddles and mud read as unkept and horse-driven for a fresh reader (blind reading test).",
+    "Flat windows on the forest floor and the plain skirt at the final size with the kit's materials.",
+    "That a fresh checker agrees with my claims.",
+    "Running the stage from a different working folder or with other options than the defaults and plan_masks=False."
+   ],
+   "seconds": 3750,
+   "card_seconds": 402,
+   "batches": 1,
+   "cameras": [
+    "View wide: at (-50.145, -27.903, 14.0), looks at (-5, 14, 2), 28 mm, 1200 x 800, clip 0.1 to 3000 m (the plan's spot moved 3 m to its left so cottage A's lean-to and the west end of the road are in the frame)",
+    "View road_eye: at (-62, -3.7) with the lens 1.7 m above the ground there (z -1.254 is wrong in this note: it stands at z 1.254 because the ground is -0.446 m there), looks at (-20, 0.5) 1.5 m above the ground, 35 mm, 1200 x 800, clip 0.1 to 3000 m",
+    "View stable_close: at (28.5, 25.5, 1.97), looks at (24, 36) 1.4 m above the ground, 28 mm, 1200 x 800, clip 0.1 to 3000 m",
+    "View cottage_close: at (-12.764, 3.033, 1.604), looks at (-31, 8) 1.6 m above the ground, 35 mm, 1200 x 800, clip 0.1 to 3000 m (the plan's spot moved 3 m to its right so the well at (-17.5, 6) is in the frame with cottage A's front; the barrels' side of the well toward the north is near the left-hand edge)"
+   ],
+   "ground_promise": "Inside 1.5 m round every building footprint (cottage A with its lean-to, B, C, D and the stable) the ground is a level pad, flat inside 0.25 m (measured about 4 mm for the cottages, 7 cm for the stable pad that holds the lane's rut ends); the yard in front of the stable doorway (x 21.4 to 26.6, y 34.6 to 36.8) is level inside 0.15 m (measured 9 cm); ruts are 9 to 12 cm deep on the high road (measured 10 to 12 cm) and about 8 cm on the lane, 1.4 m apart (the kit's own wobble moves them 1.3 to 1.5), with banks, hoof prints, a crown, puddle hollows, 3 potholes on the high road between x -70 and 20 and 2 in the yard; nobody builds within 3.1 m of the high road's centre line or 2.3 m of the lane's centre line (ground there stays as it is). The land is soft: no slope steeper than 1 in 14 within 40 m of a building apart from the ruts and potholes, a 1 m fall from the north-east to the south-west of the clearing, lumps under 0.5 m outside it. Ground-role objects (forest floor, clearing, roads, yard, verges) cover a disc of 190 m radius; beyond it the plain runs to 900 m as backdrop (no wear, no shadow). The four cameras (named View wide, View road_eye, View stable_close, View cottage_close), the sun, the sky, the render size 1200 x 800 and the three hill rings never change; the plan pictures in the file make pk.is_keep_clear answer on wheel tracks, the yard and the doorway zone.\""
+  },
+  {
+   "owner": "forest",
+   "stage_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/stages/stage_forest.py",
+   "work_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/part.blend",
+   "steps_finished": "Fix round, finding 1 only. Changed one default in my stage file: make_tone_materials(size=512) is now size=1024, so the foliage normal map (pk_foliage_nor and its height picture) is made at 1024 px. The 512 came from my own stage, not from a kit default or a settings dial. Then ran the stage, finish-part --quick, the construction check, and combine (two runs plus the ownership check). Nothing else in the stage changed: same seed, same layout. To go back, set the default to 512 again (note in work/forest/fix_note.txt). Not run: normals-test, the non-quick finish-part, a picture.",
+   "objects_added": 156,
+   "triangles": 305500,
+   "own_audit": {
+    "verdict": "WARN (quick trial): 0 to fix, 4 to look at, 23 passed",
+    "problems": [
+     "LOOK: finished with --quick, so the audit does not check map size; I read the image size straight from part.blend instead (see claims)",
+     "LOOK: PK ground.dirt_road / dirt_road wanted but missing moss_and_algae (not my material)",
+     "LOOK: PK ground.grass / grass wanted but missing displacement (not my material)",
+     "LOOK: the normals test light was not run (skipped by --quick); I did not run it separately"
+    ]
+   },
+   "surface_pass_done": true,
+   "wear_preview_done": false,
+   "claims": [
+    {
+     "claim": "The foliage normal map used by the six forest leaf and moss materials is now at least 1024 px on each side and is Non-Color.",
+     "measured_by": "Blender script work/forest/img_sizes.py reading image sizes and colour space from work/forest/part.blend after finish-part --quick"
+    },
+    {
+     "claim": "The 512 px size came from my own stage file default, not from the kit or the place settings.",
+     "measured_by": "Reading stages/stage_forest.py (make_tone_materials) and the kit's build_surface_material and place_audit_check.py"
+    },
+    {
+     "claim": "The forest part's objects are all carried from the ground up and nothing floats.",
+     "measured_by": "explainer-film-place construction, written to work/forest/construction.json and construction.log"
+    },
+    {
+     "claim": "The stage gives the same scene when run twice and changes nothing that is not the forest's.",
+     "measured_by": "explainer-film-place combine, written to work/forest/combine.json (idempotent true, no violations)"
+    },
+    {
+     "claim": "The tree layout, counts and triangle total did not change from the earlier run.",
+     "measured_by": "The stage's own printed summary (same objects, trees, clusters and triangles as before); I did not recompute them with a separate tool"
+    }
+   ],
+   "unsure": [
+    "The audit that failed the finding was a full (not quick) run. I did not run a full non-quick finish-part or audit here (it would build every map at full size and is slow on this computer), so I did not see the audit's own normal-maps line pass. I only read the image size directly. The other kit maps are 256 px in my quick part file; in a full run they are 1024 as the audit already showed.",
+    "I list all four views as redraw because the crowns' normal map changed; the shapes did not change, so the change is only fine surface detail on leaves."
+   ],
+   "shared_problems": [
+    "The audit passes the map-size check without reading it when the part is finished with --quick (it only checks size when not quick). The size rule can only be proved with a full finish."
+   ],
+   "failures": [
+    "First StructuredOutput call was rejected for bad JSON and was sent again. No tool failed."
+   ],
+   "not_tested": [
+    "Full (non-quick) finish-part and the audit's normal maps line",
+    "normals-test for the 1024 map",
+    "A preview picture of any view",
+    "Squint test",
+    "Card time (none used)"
+   ],
+   "seconds": 290,
+   "card_seconds": 0,
+   "batches": 0,
+   "views_to_redraw": [
+    "wide",
+    "road_eye",
+    "stable_close",
+    "cottage_close"
+   ]
+  },
+  {
+   "owner": "cottages_north",
+   "stage_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/stages/stage_cottages_north.py",
+   "work_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/cottages_north/scene.blend",
+   "steps_finished": "Steps 1 to 4 finished, step 5 partly. Step 1: cottage A (51 objects) and cottage B (28 objects) from the ground up: stone footing, sill, posts, studs, wall plates, cream panels on A (chipped to the wattle, darker splash band at the foot) and rubble walls on B (quoins, moss low in the damp corners), earth floor, door leaf, flat stone doorstep. Step 2: rafters resting on the wall plates and let into a purlin, ridge piece laid on the rafter tops, thick rolled thatch slab on the rafters, stone chimney on B's east gable. Step 3: shuttered windows (no glass, one leaf ajar on each cottage), iron hinges and a latch, the log-store lean-to on A (posts, plate, ledger, rafters, purlin, shingle roof, north boards), the lintel on B. Step 4: character as shape (posts out of plumb and no two alike, sagging ridge, lumpy thatch with a rolled eave, replaced boards in a fresher colour, stones of uneven size), explicit roles on every object, the surface-and-wear pass (finish-part --quick, saved as work/cottages_north/part.blend), the construction check, the stage run twice with the ownership check. Step 5 done in part: hazel rods inside the chips, mud splash colour at the foot of the stone walls, a door latch; NOT done: a drip line and wooden pegs. One batch of 10 variations drawn on the card. Triangles: about 99,700 as built, 187,500 after the pass's modifiers (the audit's count).",
+   "objects_added": 79,
+   "triangles": 187500,
+   "own_audit": {
+    "verdict": "WARN: 0 to fix, 6 to look at, 5 known (switched off on purpose), 22 passed (finish-part --quick on the part; the audit's own triangle count for cottages_north is 187,500 against the 200,000 asked for)",
+    "problems": [
+     "LOOK place: quick output: finished with --quick (maps 256 px, masks 0.5 m), not a final",
+     "LOOK place: treatments [Cottage A earth]: floor.earth wanted but missing weathering, wetness (the settings switch these off for indoor floors with a reason; the same layers are listed as KNOWN)",
+     "LOOK place: treatments [Cottage B earth]: same as above",
+     "LOOK place: treatments [PK ground.dirt_road / dirt_road]: missing moss_and_algae (ground part, not mine)",
+     "LOOK place: treatments [PK ground.grass / grass]: missing displacement (ground part, not mine)",
+     "LOOK place: normal maps [the test light]: not run inside a --quick finish (I ran explainer-film-place normals-test on the part separately: it passed)"
+    ]
+   },
+   "surface_pass_done": true,
+   "wear_preview_done": true,
+   "claims": [
+    {
+     "claim": "Every part of both cottages is carried from the ground up and nothing floats, hangs from nothing or has twin faces.",
+     "measured_by": "explainer-film-place construction on part.blend (the finished part), owner cottages_north: PASS, every object carried, no problem object; /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/cottages_north/construction.json"
+    },
+    {
+     "claim": "No timber plate, ridge, purlin, collar or rafter of either cottage has a free stretch over the beam limit, and the longest free stretch in the part is on the lean-to rafters.",
+     "measured_by": "span_max_m of each object in construction.json (explainer-film-place construction)"
+    },
+    {
+     "claim": "The stage file gives the same scene when it is run twice and changes nothing that another owner owns.",
+     "measured_by": "explainer-film-place combine on scene/ground.blend with stage_cottages_north.py (plain order): idempotent true, no violation; work/cottages_north/combine.json; also a hash of every object's points was the same before and after a code clean-up"
+    },
+    {
+     "claim": "The audit of the finished part has no FAIL line; it reports real displacement on both thatch roofs and on the stone walls of B.",
+     "measured_by": "the audit that finish-part runs (place-audit.json, check 'place: treatments' and 'place: displacement') in work/cottages_north/finish_part.log"
+    },
+    {
+     "claim": "The part is inside the triangle budget the brief gave it, counted after the pass's modifiers.",
+     "measured_by": "counts.triangles_by_owner.cottages_north in work/cottages_north/place-audit.json (and my own count in evidence.json)"
+    },
+    {
+     "claim": "Both thatch roofs are inside the thatch pitch range, the lean-to shingle roof is inside the shingle pitch range, both doors are inside the door height range, both doorsteps have a rise inside the step range, the B chimney is inside the chimney height range and the B walls are inside the wall thickness range.",
+     "measured_by": "the scale entries per object in place-audit.json (explainer-film-place finish-part audit, scale check)"
+    },
+    {
+     "claim": "The stone footing strips are inside the width and height limits of the brief, the earth floors stand about 5 cm above the ground, the doors hang on the doorsteps, and the number of objects of each cottage is under the 75 allowed.",
+     "measured_by": "my own script dev/evidence.py reading part.blend: work/cottages_north/evidence.json"
+    },
+    {
+     "claim": "Studs are 0.45 to 0.9 m apart on every wall of A except across the doorway, where the plate bridges the two door posts.",
+     "measured_by": "dev/evidence.py stud_spacing_A_* in evidence.json (centre to centre, posts included)"
+    },
+    {
+     "claim": "The ridge pieces of both cottages sag a few centimetres between their trusses, no two posts are alike and the posts lean a little out of plumb.",
+     "measured_by": "dev/evidence.py (ridge sag, distinct post shapes, post lean in degrees) in evidence.json"
+    },
+    {
+     "claim": "The chimney stands on the ground at B's east gable and rises about 1.2 m above the thatch ridge, with no smoke, lamp or glow.",
+     "measured_by": "dev/evidence.py chimney_B and lamps_in_scene in evidence.json; explainer-film-place construction (carried by the ground)"
+    },
+    {
+     "claim": "Nothing of the part is within 3.1 m of the high road's centre line, and there is no glass pane and no lamp in the part.",
+     "measured_by": "dev/evidence.py (nearest_to_high_road_centre_line_m, glass_objects, lamps_in_scene) in evidence.json"
+    },
+    {
+     "claim": "Every object has its owner and an explicit role set as it was made; the kit guessed none.",
+     "measured_by": "explainer-film-place roles on part.blend (every role line PASS, none guessed or unknown) and the place_owner and place_role properties written by pk.new_part_object in the stage"
+    },
+    {
+     "claim": "The normal maps of the finished part are Non-Color, tangent space, wired to the shader and point the right way.",
+     "measured_by": "explainer-film-place normals-test on part.blend: work/cottages_north/normals.json"
+    },
+    {
+     "claim": "The ten variations of eave roll, thatch lumps, chip size, chip count and ridge sag came out measurably different from each other on the free scout and on the card sheet.",
+     "measured_by": "explainer-film-place variations scout and run (north-variations.json): sheets in work/cottages_north/north-variations-scout and north-variations-run; card seconds in the ledger for builder-cottages_north"
+    }
+   ],
+   "unsure": [
+    "The ridge of both cottages stands about 5.6 m above the ground, not the 4.9 m of the brief: a 50 degree pitch, 2.0 m or 2.1 m eaves, 4.6 to 4.8 m between the walls and a 0.3 to 0.35 m thatch slab cannot give 4.9 m. I kept the pitch (the facts table range) and let the height follow.",
+    "Studs are made with the role timber.beam, not timber.post: the damage step leans a whole joined object about one point, which would tilt an 11 m wall of studs by centimetres and lift the plates. The 15 posts are timber.post, one object each.",
+    "Cottage B (stone walls) has no studs, wall panels or tie beam: its walls are rubble, and a 3.6 m tie beam would fail the 2.5 m beam limit of the construction verb. Doors, windows and the lintel are timber; the rest of the common timber list (sill, plate, posts, purlin, ridge, collar) is there in the forms that fit stone.",
+    "Large relief objects (the rubble walls, the cream panels, both thatch roofs, the shingle roof) carry the property pk_bevelled and no bevel modifier; their rounding is in the shape. Small boxy objects carry my own one-segment Bevel modifier. I did this to keep the part's triangle count after the pass under the budget; the kit's own bevel would have made it about 450,000.",
+    "The batch pick (chip size 1.35, roll 1.3, lumps 1.25, sag 1.0, five chipped panels) is JUDGED by looking: on the sheet the variations differ only slightly at that size, the chips were the only thing that read clearly.",
+    "Colours are mine (vertex colours in a material of my own that carries a small picture so the kit keeps it); after the kit's normal maps and wear the final tones were not measured against the style note's palette.",
+    "The lean-to roof's high edge touches A's gable verge and its corner slightly overlaps the thatch there; the verge and the lean-to are not seamed.",
+    "Rafter spacing (A about 0.73 m, B about 0.8 m) and the purlin height are my choices; the brief fixes only that rafters rest on a purlin and a ridge piece."
+   ],
+   "shared_problems": [
+    "The surface pass does not give displacement to a material it keeps (one that already carries its own picture), so a builder who brings its own colours gets 'no displacement' FAIL lines on thatch and rubble stone until the material gets its own Displacement node and method (I wired it with the kit's displacement.set_displacement).",
+    "The surface and damage passes multiply the triangles of small objects (a bevel on every sharp edge, then a Subdivision Surface level on every object under 2,500 faces): a 900 triangle set of rafters became about 28,000 after the pass. The part budget in the brief and the audit's count (1,500,000 per builder) are different numbers; the brief should say which one it means.",
+    "The construction verb fails any timber.beam with a free stretch over 2.5 m and does not read the bay_free_span fact (3.9 m for a plate, ridge, purlin, tie or collar); only the audit judge reads it. I supported every plate, ridge and purlin so the verb passes, but a 3.7 m bay with no support would fail the verb and pass the audit.",
+    "The 'short' test of the construction verb flags a beam whose top face lies inside the timber above it (a purlin let into rafters, a collar tenoned into rafters); I had to lower the tenons and let the rafters rest on the purlin to avoid it.",
+    "The brief's ridge height of about 4.9 m for cottage A is not reachable at the facts table's 50 degree pitch with 2.0 m eaves (see unsure).",
+    "The audit prints a LOOK 'wanted but missing weathering, wetness' for the earth floors although the settings switch those layers off for floor.earth with a reason (the same layers are listed as KNOWN)."
+   ],
+   "failures": [
+    "First construction run on the raw scene had 6 FAIL lines (gable studs and the lean-to purlin and B's collar 'stop short', twin faces between B's chimney base and its footing): fixed (centre gable stud reaches the ridge bottom, purlins sit 2 cm into the rafters so the rafters rest on them, collar tenons lowered, chimney base moved clear of the footing); the next run passed.",
+    "First finish-part audit had 4 FAIL lines (no displacement on A's thatch, B's rubble and B's thatch; later twin faces on the door hinges because of my latch plate): fixed (own Displacement node and method on those materials, latch plate offset); the next audit had none.",
+    "After I coarsened the relief grids to save triangles, B's north wall and quoin stones flickered (twin faces): fixed by making the quoins stand 6 cm proud of the wall.",
+    "The audit's triangle count was first about 452,000 (the kit's bevel and subdivision), above the 200,000 asked for: fixed by my own cheap bevel on small objects, coarser flat panels and fewer rafters; it is now under the budget.",
+    "The first finish-part command ran past the 2 minute tool limit and moved to the background; it finished normally (no loss).",
+    "No tool crashed. No full-size picture was drawn."
+   ],
+   "not_tested": [
+    "A non-quick finish (final map sizes, the audit's normal-map test light inside finish) was not run; only --quick.",
+    "No full-size or 1200 x 800 picture was drawn; the wear preview is two Cycles pictures at 480 x 320 (A front, B front) made here from part.blend, plus earlier 640 x 427 raw previews.",
+    "The card batch drew the raw geometry (my hook rebuilds the part, so no wear) through View wide and View cottage_close only; View road_eye and View stable_close were not drawn for my part.",
+    "Plain order only for the combine run; the reverse order and the run next to the other builders' stages were not tested.",
+    "Contracts with other owners were not tested because their parts were not in my scene: trunks 14 m from walls, props keeping 1.0 m clear of my doorsteps and out of the lean-to (pk.is_keep_clear), cottages C and D told apart from A and B by a reader.",
+    "The walk test along routes, the shadow share seen from the forest, and a fresh checker's recount of my claims were not run.",
+    "Moss share and wear shares in a picture (measure with a style guard) were not measured.",
+    "Rain, wetness and Cycles displacement quality at full size on the cards were not looked at."
+   ],
+   "views_to_redraw": [],
+   "seconds": 2100,
+   "card_seconds": 269,
+   "batches": 1
+  },
+  {
+   "owner": "cottages_south",
+   "stage_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/stages/stage_cottages_south.py",
+   "work_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/cottages_south/scene.blend",
+   "steps_finished": "Steps 1 to 4 are finished, and step 5 only in part. (1) Cottage C and cottage D are built from the ground up: stone footing or plinth, sill, corner posts, studs, rails, daub panels (C) or cob walls (D), wall plate, earth floor, door leaf, doorstep. (2) The roofs are done: C has principal rafters, common rafters, purlins, collars, king posts, ridge piece, pale thatch with a rolled eave and a darker ridge cap; D has rafters, purlins, ridge piece and silver shingles with slipped and missing ones. (3) Shutters (one leaf ajar on each cottage), hinges, door latches and the loft window in the east gable of C are done. (4) Character as shape is done: posts out of plumb and no two alike, sagging ridges, daub chipped to show the wattle, a darker splash band at the foot, replaced boards, uneven stones. Every object has its owner and role. The finish-part pass ran, the construction check was read, and the stage was run twice (plain order and both orders) with the ownership check. A card batch of 10 variations picked the final colours. Step 5 (drip line, mud splash as shape, pegs, worn step shape) was NOT done; only the door latch and ring from step 5 exist. The finished part file is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/cottages_south/part.blend (a --quick pass); the evidence is in the same folder (place-audit.json, construction.json, evidence.json, combine.json, combine_both.json).",
+   "objects_added": 50,
+   "triangles": 60677,
+   "own_audit": {
+    "verdict": "WARN: 0 to fix, 5 to look at, 5 known (switched off on purpose), 23 passed (finish-part run with --facts plan/real-world-facts.json; preflight place with --real-world-facts and --allow-quick: PASS with things to look at)",
+    "problems": [
+     "LOOK place: quick output: the pass was a --quick trial (maps 256 px, masks 0.5 m), not a final",
+     "LOOK place: treatments [Cottage S floor.earth]: wanted but missing weathering and wetness (switched off by the plan's own off entry for floors indoors)",
+     "LOOK place: treatments [PK ground.dirt_road]: wanted but missing moss_and_algae (ground part, not mine)",
+     "LOOK place: treatments [PK ground.grass]: wanted but missing displacement (ground part, not mine)",
+     "LOOK place: normal maps [test light]: not run inside the --quick pass; I ran explainer-film-place normals-test on part.blend separately and it passed",
+     "Without --facts the same audit and the construction verb FAIL on 'Cottage C ridge piece: free span 3.5 m, role allows 2.5 m'; with the plan's bay_free_span fact it passes and names the fact"
+    ]
+   },
+   "surface_pass_done": true,
+   "wear_preview_done": true,
+   "claims": [
+    {
+     "claim": "Every part of both cottages is carried from the ground up and nothing floats; the shutters, shutter hinges and door hinges are carried only by hanging, which their roles allow.",
+     "measured_by": "explainer-film-place construction on part.blend (work/cottages_south/construction.json: floating list empty, hung list holds only hinges and shutters) and the audit line 'place: construction' in place-audit.json"
+    },
+    {
+     "claim": "The cottage C ridge piece is longer between its supports than a plain beam may be, but it is allowed by the plan's sourced bay span fact.",
+     "measured_by": "place-audit.json from finish-part --facts (the audit names fact bay_free_span) and explainer-film-preflight place --real-world-facts (PASS); the construction verb alone still prints a FAIL line for it because it does not read the facts"
+    },
+    {
+     "claim": "Every object of the part carries the owner cottages_south, a role set as it was made, a name starting Cottage C or Cottage D, and sits in the collection Place: cottages_south.",
+     "measured_by": "work/cottages_south/check_claims.py -> evidence.json (every_object_has_owner_and_role, names_ok, collection_ok) and the audit line 'place: roles'"
+    },
+    {
+     "claim": "The stage file gives the same scene when it is run twice and when it is run in reverse order, and it changes, removes or adds nothing that belongs to another owner.",
+     "measured_by": "explainer-film-place combine (combine.json, order plain; combine_both.json, order both): idempotent true, order independent, 0 violations"
+    },
+    {
+     "claim": "Neither cottage contains a prop of any kind: no barrel, bucket, bench, ladder, sack, jug, haystack, basket, woodpile or hurdle.",
+     "measured_by": "check_claims.py name and role check (evidence.json: no_props_named, roles_used has no prop.* role); judged only by names and roles"
+    },
+    {
+     "claim": "Each cottage is under the allowed object count and the part is under the triangle budget as built.",
+     "measured_by": "check_claims.py (evidence.json: objects_C, objects_D, triangles_C_as_built, triangles_D_as_built)"
+    },
+    {
+     "claim": "The stone footing of C and the plinth of D stand on the level pad, are flat on top, and every stone is inside the brief's width and height range.",
+     "measured_by": "check_claims.py (evidence.json: Cottage C footing, Cottage D plinth, pad_flatness_C_m, pad_flatness_D_m)"
+    },
+    {
+     "claim": "The studs and posts of cottage C stand in the brief's spacing range on every wall except across the door opening, which is wider.",
+     "measured_by": "check_claims.py (evidence.json: stud_spacing_C, gaps_over_0_9 lists only the door gap)"
+    },
+    {
+     "claim": "The truss lines of cottage C are a bay apart and no farther than the allowed bay span.",
+     "measured_by": "check_claims.py (evidence.json: truss_spacing_C_m)"
+    },
+    {
+     "claim": "The ridge pieces sag a little between their trusses, inside the brief's range for both cottages.",
+     "measured_by": "check_claims.py measuring the as-built ridge meshes (evidence.json: ridge_sag_C_each_bay_m, ridge_sag_D_m)"
+    },
+    {
+     "claim": "The thatch pitch of C and the shingle pitch of D are inside the plan's pitch ranges.",
+     "measured_by": "place-audit.json scale entries (roof pitch facts thatch_pitch and shingle_pitch) and the audit line 'place: scale'"
+    },
+    {
+     "claim": "Door height, door width, door thickness, post size and doorstep rise fit the facts table for both cottages.",
+     "measured_by": "explainer-film-place finish-part audit line 'place: scale' (place-audit.json) and construction.json rise_m"
+    },
+    {
+     "claim": "Each door leaf stands on its doorstep with a floor behind the doorway, and both doorstep rises are inside the brief's range.",
+     "measured_by": "construction.json (rise_m, opening_floor_gap_m for the door leaves) and check_claims.py evidence.json (doorstep_rise_m, doorway_floor_gap_m)"
+    },
+    {
+     "claim": "The earth floors of both cottages have their top at the brief's height above the ground.",
+     "measured_by": "check_claims.py (evidence.json: Cottage C earth floor, Cottage D earth floor)"
+    },
+    {
+     "claim": "The red-ochre daub of cottage C is the most saturated colour in the part, and no other object of the part is as saturated (measured on the colours written into the meshes, before the wear pass).",
+     "measured_by": "check_claims.py (evidence.json: colour_saturation_by_object, daub_is_the_most_saturated)"
+    },
+    {
+     "claim": "Both cottages keep farther from the high road's centre line than the contract distance.",
+     "measured_by": "check_claims.py using the road polyline of place-settings.json (evidence.json: nearest_distance_to_high_road_centre_m)"
+    },
+    {
+     "claim": "The thatch of C overhangs its walls by at least the brief's overhang and the shingles of D overhang by at least the brief's overhang.",
+     "measured_by": "check_claims.py (evidence.json: overhang_C_north_m, overhang_C_south_m, overhang_D_east_m, overhang_D_west_m)"
+    },
+    {
+     "claim": "One shutter leaf of cottage C and the shutter of cottage D stand ajar.",
+     "measured_by": "check_claims.py (evidence.json: Cottage C shutters ajar, Cottage D shutter ajar)"
+    },
+    {
+     "claim": "The surface-and-wear pass ran on the part and the audit finds nothing to fix, with real displacement on the thatch material.",
+     "measured_by": "explainer-film-place finish-part --quick (finish_part.log, place-audit.json: 0 to fix; audit lines 'place: displacement' and 'place: treatments')"
+    },
+    {
+     "claim": "The normal maps point the right way and the flipped control reads the other way.",
+     "measured_by": "explainer-film-place normals-test on part.blend (work/cottages_south/normals.json)"
+    },
+    {
+     "claim": "The part passes the preflight place stage when the plan's facts file is given and quick output is allowed.",
+     "measured_by": "explainer-film-preflight place --place-audit place-audit.json --real-world-facts plan/real-world-facts.json --allow-quick (work/cottages_south/preflight-reports)"
+    },
+    {
+     "claim": "Cottage C (red-ochre daub, pale thatch, tall door) and cottage D (pale cob, silver shingles, one low door) can be told apart at a glance in the wide and road views and in the close pictures.",
+     "measured_by": "judged by eye only, from the small Cycles pictures in work/cottages_south/prev3 and prev4 (no measuring tool); the card batch sheet is south-variations-run/colour-and-surface-of-cottage-c-red-daub-sheet.jpg"
+    }
+   ],
+   "unsure": [
+    "Which count the 150000-triangle budget means: as built the part has about 60.7 thousand triangles (C about 32 thousand, D about 28.5 thousand, under the brief's 80 thousand each); with the kit's bevel and subdivision modifiers the audit counts about 344 thousand for the part (C about 251 thousand, D about 93 thousand), over the brief's number but far under the audit's 1.5 million per builder.",
+    "The final colours were picked by eye from the 600 x 400 card sheet and the free scout, where the variations were drawn without the wear pass; the wear pass makes thatch and cob greyer, so I moved thatch, cob and daub brighter than the base colours. I did not test the picks at full size with the final pass.",
+    "Chip size and thatch lumps barely show at the road and wide camera distances (judged), so the choice of 1.5x chips and 1.3x lumps is a guess that is only visible in close pictures.",
+    "The brief's 'ridge about 4.0 m' was read as the length of the ridge of D (4.0 m); the roof height of D is about 3.5 m above the pad.",
+    "The brief's 'one purlin' for D was built as one purlin on each slope (two pieces), because one purlin on one slope would load the roof unevenly.",
+    "The D shingle roof is one connected slab for each slope with shingles as raised plates, tilts and tones, and slipped and missing ones as raised or dropped cells of the top layer; there are no separate loose shingle pieces. The same holds for the door and shutter leaves: planks are grooves in one solid, not separate boards.",
+    "The stud spacing across the door of C is wider than 0.9 m because the door is 0.9 m wide.",
+    "Leaning of posts by the kit's damage step is deterministic from each object's position and role, so my hinge pins are embedded deep enough for today's lean; a different object position in a later stage would change the lean."
+   ],
+   "shared_problems": [
+    "explainer-film-place finish-part (judge) and explainer-film-place construction do not read the facts file named in place-settings.json; they flag the cottage C ridge piece as 'free span 3.5 m, role allows 2.5 m' although real-world-facts.json holds a sourced bay_free_span fact (3.9 m). Only finish-part --facts FILE or preflight place --real-world-facts FILE passes it. The exact commands in my brief have no --facts, so with them the audit shows 5 to fix; cottages_north will meet the same line for its own ridge and plates.",
+    "The damage step leans a whole object of role timber.post about the middle of its lowest face, so a post object that spreads over several metres would lift or sink its far posts by centimetres. I worked around it with one object for each corner post and king post and small post groups, and the other uprights are role timber.beam. Anything hung from a leaned post (shutter hinges) lost contact until I sank the hinge pins deep into the posts.",
+    "Materials a builder makes itself are kept by the surface pass, but the pass gives them no displacement even where the role needs it (roof.thatch): the audit FAILed 'no displacement' until I wired a Displacement node into my own thatch material (kit surfaces.displacement.set_displacement).",
+    "variations run uploads a hook file alone under hooks/N-name.py, so a stage file lying beside the hook is not found on the card; I had to put the whole stage inside the hook file.",
+    "variations scout drew 10 variations of an 88 MB scene on this computer in 1007 seconds, because a hook reopens the whole scene for each variation.",
+    "The brief's 'cottage bay' fact would let a cottage be 4.6 m deep, but a tie beam that long is over the 3.9 m free span; I built trusses without tie beams (principal rafters, collars, king posts), so the walls have nothing tying them across."
+   ],
+   "failures": [
+    "The first picture try used the Workbench engine and failed (no libEGL on this computer); I used Cycles for every picture.",
+    "The first construction check on the new scene had 8 FAIL objects: daub panels, posts, studs, rails and wattle with twin faces (a bug: the west and east wall frames took the corner posts from the wrong wall, and panels, wattle and studs ended on the same heights), a stud and collars that stopped short, and a ridge that stopped short. All were fixed by changing the geometry, not the requirement.",
+    "The first finish-part run (the exact command in my brief, no --facts) gave an audit with 5 to fix: no displacement on the thatch, shutters and shutter hinges of C floating after the kit leaned the window posts, the loft window posts stopping short, and the ridge span. I fixed the first four (deeper hinge pins, loft window studs as timber.beam, displacement in the thatch material); the ridge span stays a FAIL without --facts.",
+    "The explainer-film-place construction verb still prints 'FAIL Cottage C ridge piece: free span 3.5 m (at most 2.5 m)' on the final part.blend (one problem object); it is allowed by the plan's fact but the verb cannot know.",
+    "The first variations file was refused because the names had a plus sign and capitals; I renamed them.",
+    "A pkill I wrote matched my own shell and stopped a finish-part run half way; I stopped the two leftover processes by their ids and ran it again.",
+    "The evaluated triangle count of the part (about 344 thousand) is over the brief's 150 thousand."
+   ],
+   "not_tested": [
+    "A full-size pass (without --quick) and full-size pictures; the part was finished with 256 px maps and 0.5 m masks only.",
+    "The part combined with the other owners' stages (forest, north cottages, stable, props): I combined it only with the frozen ground, so trees, props and the north cottages were not checked against my part (14 m trunk clearance, props 1.0 m from my doorsteps).",
+    "The views stable_close and cottage_close: I drew only wide and road_eye and four own cameras, and did not check whether anything of mine is in the other two.",
+    "A second batch of variations (I stopped after one because the ledger would have gone over my allowance), so the final picks were not drawn and compared.",
+    "How the red daub, thatch and cob colours look after the final full pass in EEVEE at 1200 x 800.",
+    "The inside of the cottages (floor, back of the walls, rafters from below) was never looked at; only the door and window openings show it.",
+    "Step 5 extras: drip line and mud splash as shapes, pegs, worn doorstep shape.",
+    "The scale of the thatch thickness (the thickness fact skips a roof that is not slab-like, so it was not measured by the audit) and the true slope of every shingle.",
+    "A fresh checker has not recomputed my claims."
+   ],
+   "seconds": 2500,
+   "views_to_redraw": [
+    "wide",
+    "road_eye"
+   ],
+   "card_seconds": 339,
+   "batches": 1
+  },
+  {
+   "owner": "stable",
+   "stage_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/stages/stage_stable.py",
+   "work_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/stable/scene.blend (stage applied on a copy of ground.blend); after the quick surface pass: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/stable/part.blend",
+   "steps_finished": "Steps 1 to 5 finished. Step 1: dwarf wall with a gap at the doorway and sill stones, posts, wall plates, lintel, ties on posts, earth floor, upright board cladding, doorway with lintel. Step 2: roof (queen posts, purlins, rafters on the plates, ridge piece, shingle courses, two gable vents) and two door leaves on iron hinges standing open (one against the outside wall, one half open and sagging). Step 3: three empty stalls (partitions, empty mangers on short posts, hay racks, iron tie rings). Step 4: empty hollowed-log trough on two stone blocks, bare hitching rail, one fallen shingle broken in three pieces. Step 5: character as shape (boards of different widths with replaced and gapped ones, posts out of plumb, ridge sag, door sag, slipped, missing and mossy shingles), roles on every object, finish-part pass, construction check, normals test, stage run twice with the ownership check. One batch of ten variations on the rented cards (door sag and opening, replaced-board colour, shingle gaps, moss) and the picks put into the stage. Step 6 (hay loft) NOT done.",
+   "objects_added": 95,
+   "triangles": 127352,
+   "own_audit": {
+    "verdict": "WARN (finish-part quick audit): 0 to fix, 5 to look at, 5 known (switched off on purpose), 22 passed",
+    "problems": [
+     "LOOK quick output: the pass was run with --quick (trial sizes), allowed here, not a final",
+     "LOOK treatments PK ground.dirt_road / dirt_road: wanted but missing moss_and_algae (ground part's material, not mine)",
+     "LOOK treatments PK ground.grass / grass: wanted but missing displacement (ground part's material, not mine)",
+     "LOOK treatments Stable earth floor: role floor.earth wanted but missing weathering and wetness (switched off on purpose for floors indoors in the settings)",
+     "LOOK normal maps test light not run inside finish-part --quick; I ran explainer-film-place normals-test myself and it printed PASS"
+    ]
+   },
+   "surface_pass_done": true,
+   "wear_preview_done": true,
+   "claims": [
+    {
+     "claim": "Every part of the stable is carried from the ground up and nothing floats.",
+     "measured_by": "explainer-film-place construction on part.blend with --owner stable (work/stable/construction.json): PASS, all objects carried, 0 problem objects"
+    },
+    {
+     "claim": "Nothing in the stable hangs from above unless its role may hang (door leaves, hinges and tie rings are the only hung things).",
+     "measured_by": "construction.json (summary hung list and hang_allowed per object)"
+    },
+    {
+     "claim": "No free span is longer than its role allows.",
+     "measured_by": "construction.json (span_max_m against max_span_m per object); the verb printed no FAIL line"
+    },
+    {
+     "claim": "The stage file gives the same scene when run twice and changes nothing that is not the stable's.",
+     "measured_by": "explainer-film-place combine --order plain on ground.blend (work/stable/combine.json): idempotent True, 0 violations"
+    },
+    {
+     "claim": "Every object of the stable carries owner stable and exactly one role as it is made, and no role was only guessed.",
+     "measured_by": "finish-part roles line and the audit line 'every visible object has a role' (work/stable/finish_part.log, place-audit.json); role counts in work/stable/evidence2.json"
+    },
+    {
+     "claim": "The stable is empty: no object of any other owner lies inside its walls, and no object of the stable is a horse, hay bale, cart, person, sign or lamp.",
+     "measured_by": "work/stable/evidence2.py output in work/stable/evidence2.json (others_inside empty, forbidden_names_present empty; the only objects with 'hay' in the name are the three bare hay racks)"
+    },
+    {
+     "claim": "Both roof slopes have the planned 40 degree pitch and the door leaves and sill stones are inside their fact ranges.",
+     "measured_by": "scale entries of the audit in work/stable/place-audit.json (roof_pitch, shingle_pitch, door_height, door_width, step_rise)"
+    },
+    {
+     "claim": "The earth floor stands flush with the ground inside the walls (its top a centimetre proud so it does not flicker against the ground).",
+     "measured_by": "work/stable/evidence2.json floor_top_minus_ground_mm, ray-cast ground heights under the floor"
+    },
+    {
+     "claim": "The part is inside its triangle budget.",
+     "measured_by": "place-audit.json counts.triangles_by_owner.stable and work/stable/evidence.json (after modifiers) against the 130000 budget of the brief"
+    },
+    {
+     "claim": "The surface-and-wear pass ran on the stable's objects, the normal maps point the right way and no plant or litter lies on a wheel track, crown or puddle.",
+     "measured_by": "explainer-film-place finish-part --owner stable --quick (work/stable/finish_part.log) and explainer-film-place normals-test (work/stable/normals.log, normals.json)"
+    },
+    {
+     "claim": "The stable is the only dark-boarded building: its cladding, door leaves and roof are near-black boards, dark boards and dark mossy shingles, with a doorway wider than any other building's.",
+     "measured_by": "NOT a tool measure: judged by eye from the small pictures in work/stable/prev (close.jpg, ne.jpg)"
+    },
+    {
+     "claim": "One batch of ten variations was drawn on the rented cards and all ten came out measurably different from the saved scene and from each other.",
+     "measured_by": "explainer-film-place variations scout and run (work/stable/stable-variations-run, card-time ledger: builder-stable used 239 s of 600 s)"
+    }
+   ],
+   "unsure": [
+    "Ridge top is about 5.1 m above the pad (plate top 2.44 m, 40 degrees), the brief said about 4.9 m; I kept the door at 2.3 m under the lintel and the plate above it, so the roof sits a little higher.",
+    "Rafters are about 4.4 m long along the slope including the 0.4 m overhang tail; the brief said about 3.9 m (that is plate to ridge only).",
+    "The sill stones stand 0.11 m above the pad (0.10 m above the floor top, as asked); the earth floor top is 1 cm above the ground, not exactly at it.",
+    "The hay racks are three rails tenoned into the two studs that flank each manger, lying in the wall plane; a deeper rack with cheeks was dropped because the surface pass's lean pulled it off the wall.",
+    "Inside the stable the pictures were too dark to judge the stall detail by eye; I judged the stalls from top views with the roof hidden and from the construction numbers.",
+    "The picks of the one batch (door sag 2.4 degrees, opening 52 degrees, moss 1.2, gaps 1.5, replaced boards 1.2) are judged from tiny pictures, not measured; the batch was drawn on the first build, before the shingle courses were made wider to meet the triangle budget.",
+    "The vent slats are held by touching the side bars (iron-free fence role); the surface pass's small lean could pull them off in another build."
+   ],
+   "shared_problems": [
+    "The surface pass (damage step) leans every timber.post and timber.fence OBJECT about the foot of the whole object. For an object holding many posts or many fence boards that tips the far ones several centimetres, so my first finish-part run showed 9 hung parts, 7 short parts and a tie span of 5.5 m. I worked around it by making every post its own object and sinking boards and rails into what carries them; the kit should lean each loose part about its own foot or skip multi-part objects.",
+    "The construction verb's 'stops short' test fires on a beam whose end is tenoned inside a leaning post when another part lies within 15 cm above that end inside the same post (girts under partition rails). I removed the girts instead of changing the check.",
+    "The construction verb gives every loose part of a door the 'floor under the doorway' test, so a door ledge built as its own piece fails with 'no floor'. I fused the ledges into the leaf as one slab.",
+    "The construction verb checks spans against the role limit only and does not read the place's bay_free_span fact (my first raw build printed FAIL for the purlins at 3.05 m free span, which the audit judge would have allowed by that fact). It no longer fires in the final build.",
+    "The free disk fell to about 0.5 GB during the run (shared work); I deleted my own scratch .blend files."
+   ],
+   "failures": [
+    "First finish-part run: audit FAIL with 2 floating parts (a door ledge and one manger), 9 hung parts, 7 short parts and a tie span of 5.5 m, all caused by the surface pass leaning multi-part post and fence objects; fixed by one object per post, queen posts and manger posts sunk into what they carry, rails tenoned 8 cm, racks tied to the studs, ledges fused into the door slab; the final run printed no FAIL.",
+    "First raw construction run: FAIL for no floor under the door (ledges as separate door pieces) and free span 3.05 m on the purlins; fixed as above.",
+    "After a leaning test run the construction verb printed 'stops short' for the girts; removed the girts.",
+    "First build had 149048 triangles after modifiers, over the 130000 budget; fixed by wider shingle tabs and taller courses (now 127352).",
+    "The hollowed-log trough rendered pale because the boolean result carried an empty material slot; found in a preview and fixed.",
+    "The first shingle roof left a strip of bare rafters under the ridge (last course missing); found in the north-east preview and fixed.",
+    "One mistaken Write call with a wrong parameter was rejected (no file written)."
+   ],
+   "not_tested": [
+    "Step 6 (hay loft floor with a gable hatch) was not built.",
+    "No second batch was drawn and no full-size 1200 x 800 picture was drawn; the renderer does that at the end.",
+    "The surface pass ran with --quick (256 px maps, 0.5 m masks); the final non-quick pass and the full audit/preflight place stage were not run.",
+    "The stage was combined only with the ground part (plain order), not with the other building, forest and props stages, and not in reverse order.",
+    "Contracts with props (straw scraps, keep-clear doorway), forest (trunk distances) and the ground (hoof prints near the doorway) were not tested because those parts were not in my scene.",
+    "No fresh checker or blind reader has looked at the stable; the look was judged by me from small Cycles pictures only (12 samples, 600 x 400).",
+    "The inside of the stalls was not judged by eye (too dark); the view through the doorway from View stable_close was seen once.",
+    "Door sag above 3 degrees (the batch went to 4.7 degrees) was seen only in the scout and batch pictures; at that size the free corner can reach the yard ground.",
+    "Cycles/EEVEE renders on the cards of the final part.blend (with wear) were not made; the batch used the built scene without the surface pass."
+   ],
+   "views_to_redraw": [
+    "stable_close",
+    "wide"
+   ],
+   "seconds": 1450,
+   "card_seconds": 239,
+   "batches": 1
+  },
+  {
+   "owner": "props",
+   "stage_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/stages/stage_props.py",
+   "work_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/props/scene.blend",
+   "steps_finished": "Steps 1 to 4 and step 5 are finished. Step 1: well with windlass, rope and bucket; parked two-wheeled cart with shafts on a block and the spare wheel on the stable's west wall; woodpile with stakes, chopping block with axe, chips and bark, stool. Step 2: 5 barrels, 3 crates and chests, 4 sacks, 3 buckets, haystack and bales, handbarrow, ladder. Step 3: 6 wattle hurdles, bench with 2 jugs, jug by B, 2 baskets, 15 straw scraps in the stable. Step 4: the finish-part pass, construction check, normals test, stage run twice and ownership check (alone and next to the cottages and the stable). Step 5 extras: two skeps on a low bench behind B and a broken wheel by the road verge. One batch of 10 variations was drawn (sack slump, haystack shape, wicker weave) and its picks are in the stage.",
+   "objects_added": 59,
+   "triangles": 44946,
+   "own_audit": {
+    "verdict": "WARN: 0 to fix, 4 to look at, 0 switched off, 23 passed (finish-part audit of the saved part.blend, made with --quick)",
+    "problems": [
+     "LOOK place: quick output: the part was finished with --quick (maps 256 px, masks 0.5 m), so it is a trial and not a final",
+     "LOOK place: treatments PK ground.dirt_road: wanted but missing moss_and_algae (a ground role, not a prop)",
+     "LOOK place: treatments PK ground.grass: wanted but missing displacement (a ground role, not a prop)",
+     "LOOK place: normal maps test light: not run by finish-part --quick; I ran explainer-film-place normals-test afterwards on part.blend and it passed",
+     "An earlier run of the same pass had a LOOK on the scale of Prop cart axle (height against the cart_height guess); I changed the axle's role to timber.beam and the LOOK is gone"
+    ]
+   },
+   "surface_pass_done": true,
+   "wear_preview_done": true,
+   "claims": [
+    {
+     "claim": "Every loose part of every prop is carried from the ground up and nothing floats.",
+     "measured_by": "explainer-film-place construction on part.blend (owner props), written to /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/props/construction.json; also run on the unfinished scene (construction_raw.json) and in the finish-part audit"
+    },
+    {
+     "claim": "Every prop object has its owner and an explicit role as it was made, and the kit guessed no role for them.",
+     "measured_by": "explainer-film-place roles on part.blend (no GUESSED or unknown lines for props); place_owner and place_role are written by pk.new_part_object in stage_props.py"
+    },
+    {
+     "claim": "The props part makes at least ten kinds of prop and at least thirty objects, with fifteen different roles.",
+     "measured_by": "explainer-film-place roles on part.blend and the object count printed by run_stage.py (work/props/run_stage.py output); finish-part audit"
+    },
+    {
+     "claim": "The stage file gives the same scene when run twice and changes nothing that is not the props part's own, alone and together with the cottages and the stable stages.",
+     "measured_by": "explainer-film-place combine, written to work/props/combine.json (props alone) and work/props/combine_all.json (north cottages, south cottages, stable, props)"
+    },
+    {
+     "claim": "Barrel heights and wheel diameters are inside the facts table ranges.",
+     "measured_by": "the scale entries of place-audit.json written by finish-part (work/props/place-audit.json)"
+    },
+    {
+     "claim": "No prop stands on a road or within 0.6 m of a road's outer bank, in a doorstep zone, on a footfall strip, in the stable yard or the stable doorway, or inside a building footprint.",
+     "measured_by": "the keep-clear function check_spot in stage_props.py (road centre lines, doorstep boxes, footfall lines, yard, doorway and building boxes read from the other parts' saved scenes, plus pk.is_keep_clear); it printed no problem on the last run (work/props/run_stage.py output); doorway and stable footprint also read by work/props/integration_check.py into integration.json"
+    },
+    {
+     "claim": "The only thing of the props part inside the stable is loose straw, and it is no more than fifteen scraps, each flat on the floor, none piled, each shorter than 0.3 m.",
+     "measured_by": "work/props/integration_check.py on a combined scene (integration.json) and work/props/straw_measure.py (straw_measure.json)"
+    },
+    {
+     "claim": "No prop mesh crosses the mesh of a cottage or of the stable, except the straw scraps which sit a few millimetres into the stable floor on purpose.",
+     "measured_by": "work/props/integration_check.py (BVH overlap of every prop object against every cottage and stable object in a scene made by combine with all four stages), written to integration.json"
+    },
+    {
+     "claim": "The finished part's normal maps point the right way.",
+     "measured_by": "explainer-film-place normals-test on part.blend, written to work/props/normals.json (NORMAL_DIRECTION PASS)"
+    },
+    {
+     "claim": "No sign, notice or lettering was made, and no animal or person.",
+     "measured_by": "the place: lettering line of the finish-part audit (place-audit.json); the object list in run_stage.py output"
+    },
+    {
+     "claim": "The authored geometry of the props part is inside the 100,000 triangle budget.",
+     "measured_by": "run_stage.py triangle count of the stage's own meshes before the kit's pass (TOTAL TRIS line); NOT inside it after the kit's pass, see unsure"
+    }
+   ],
+   "unsure": [
+    "Triangles: my own meshes are 44,946 triangles, inside the 100,000 budget. After finish-part the kit adds bevel and damage subdivision modifiers and the audit counts 249,914 evaluated triangles for the props owner (hurdles 16,832 each, curb 14,352, wheels about 13,000 each). That is above 100,000 although the per-builder house maximum (1,500,000) is not passed. I did not strip the kit's modifiers. A checker that reads the audit number will see 249,914.",
+    "The well's two windlass posts, crossbeam, roller and crank stand inside the 0.8 m keep-clear band that the settings put round the stone.well curb. A window of the well cannot be built without them. Other props keep outside the band (my own check, not the mask).",
+    "The kit's plan masks in my own copy hold no cottage doors (the cottages are other parts), so pk.is_keep_clear could not see the door strips there. I checked door strips, doorsteps and footfall lines by hand from the other parts' saved scenes instead; the final integrated masks were not re-read.",
+    "The crossbeam is 2.16 m long and lies on top of posts that are 2.0 m apart (centre to centre), because the construction check calls a beam tenoned into the side of a post 'short' of the post's head; the brief said 2.0 m long.",
+    "Sack slump, haystack shape and wicker weave were picked by eye from small pictures (the tiny differences between variations are hard to see at 600 x 400); the sheet showed measured differences only in tone and detail, none of them large.",
+    "Hurdles, sacks and the haystack carry designed shape only; moss on stone and wood, rust runs and mud come from the kit pass and my own colour bands, and were only judged by eye in small pictures.",
+    "The straw scraps sit on the stable floor top computed from the stable part's own pad formula (0.3127 m); if the stable part changes its pad the scraps need a new look.",
+    "The stable's own saved scene was read, but the forest part's trees and the 3 scatter objects were not checked against props beyond their listed stumps and logs (none near any prop)."
+   ],
+   "shared_problems": [
+    "The kit's damage pass multiplies the triangle count of simple boxy props by up to 36 (a 12-triangle post becomes 432) and turns the 100,000 budget into 250,000 evaluated triangles for this part; a budget meant for authored geometry should say so.",
+    "The construction check's 'stops short' rule flags a timber.beam lying on the heads of timber.post parts unless it rests on them with a patch; a beam tenoned into the side of two posts is called short by the height of the post above it. The rule has no way to say a post may stand above a mortised beam.",
+    "ownership.json lists props materials as the prefix 'PK prop.' but the kit's own copies are called 'PK <role> / <surface>' (for example 'PK prop.barrel / timber_planks'); my own base materials are named 'PK prop. wood' and so on to match the pattern.",
+    "The brief gives the chest by B's wall at (-1.9, 9.2), which is inside B's chimney (x -2.94 to -1.93, y 8.96 to 10.03); I moved it to (-2.22, 11.0). It also puts barrel, sacks and bench positions that a hand-check shows touch cottage footings or doors, so I moved them (bench to x -29.2, sacks to x -27.55 and -26.95)."
+   ],
+   "failures": [
+    "First construction run on the raw scene failed 4 objects: jugs 1 and 2 floated because I turned the bench about the world origin instead of its own centre; the crossbeam 'stopped short' of the post tops; hurdle 5 had twin faces flickering against a stake. All three were fixed in the stage (bench turned about its own centre, beam laid on the post heads, stakes built upright with 8 sides before being turned with the panel) and the check passed on the next run.",
+    "An early finish-part audit had a LOOK on the scale of Prop cart axle (height against the cart_height guess); fixed by giving the axle the role timber.beam.",
+    "My first background command to wait for the scout started the wrong working folder once (a command chained with && was sent to the background whole); no harm done, I read the log by its full path.",
+    "The weave of the first hurdle version read as flat brown slabs; I made the weave deeper with light and dark rods before the batch.",
+    "Not a failure of a tool, but a count I got wrong at first: Prop woodpile rows were thinned too fast; fixed before any check."
+   ],
+   "not_tested": [
+    "The saved part was not drawn at full size or with Cycles on the rented card; only 600 x 400 and 640 x 420 small pictures on this computer.",
+    "Full finish-part (without --quick) with 1024 pixel maps was not run; the part was finished with --quick only, so the audit's quick-output LOOK stands.",
+    "The integrated scene with the forest stage was not built; the forest part's trees were not checked against props (the nearest listed stumps and logs are 40 m or more away).",
+    "The preflight place gate (explainer-film-preflight place) was not run on my part.",
+    "The four official view cameras were drawn only as small checks of my part in the ground scene, not in the full village.",
+    "A second batch of variations was not drawn (one was enough, 267 of 600 card seconds used).",
+    "Whether the pass's displacement and damage modifiers show well on the rented card was not tested."
+   ],
+   "seconds": 1150,
+   "card_seconds": 267,
+   "batches": 1,
+   "views_to_redraw": []
+  }
+ ],
+ "missing_parts": [],
+ "combine": {
+  "order_plain_ok": true,
+  "order_reverse_ok": true,
+  "violations": [],
+  "idempotent": false,
+  "combined_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round3/combined.blend",
+  "finished_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round3/finished.blend",
+  "audit_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round3/place-audit.json",
+  "audit_verdict": "fail",
+  "audit_problems": [
+   {
+    "check": "place: budgets (triangles for one builder)",
+    "where": "the scene: owner 'unowned' = the scattered plants and litter made by finish (87,812 pieces on 113,408 m2 of ground)",
+    "owner": "ground_and_roads",
+    "text": "owner unowned: 2,723,900 triangles (at most 1,500,000). Measured: plants 2,166,000 triangles (38,649 pieces: tuft 892k, moss cushion 694k, clover 190k, fern 187k, nettle 120k, bramble 82k); litter 558k (49,163 pieces). The weakest point is the area: Ground forest floor is 380 x 380 m, and the audit's minimum density (20 plants and 30 litter pieces per 100 m2, a house number; the kit adds 15 percent) applies to all 113,408 m2. At exactly the minimum, with the same mix, I worked out about 1.65 million triangles (judged by scaling, not drawn), so no density dial can get under 1.5 million. Round 2 measured the same: density 0.36 gave 1.98 million and density 0.1 failed the plants and litter treatments.",
+    "fix": "Geometry fix for the ground owner: make the ground that carries the required plants and litter smaller (for example a forest floor of about 300 x 300 m or less, with the far floor as part of the backdrop rings, which carry the role backdrop), or split the far floor into its own object that the integrator may tag backdrop. I did not lower the requirement, did not raise the budget, and did not write an off entry (nothing true to say: the far floor does grow things). After the ground is changed, rebuild ground.blend, combine again and run finish again."
+   },
+   {
+    "check": "combine: idempotent (plain order)",
+    "where": "stage_forest.py",
+    "owner": "forest",
+    "text": "Running the stages a second time in plain order changed the scene: first run forest 156 objects, 239 trees, 305,500 triangles; second run 157 objects, 237 trees, 290,396 triangles. Cause, read from the stage file: the forest stage (World class, lines 249-253) widens its list of building rectangles with the real Cottage and Stable objects of the other parts when they are in the scene. In plain order the forest runs first, so on the first pass those objects are not there yet and on the second pass they are, so the trees are placed differently. In reverse order the forest runs last, so both passes see the same buildings and the test passes (PASS idempotent).",
+    "fix": "The forest owner must make the trees depend only on things that exist before the forest runs, for example use only the plan's BUILDINGS footprints (do not read the other parts' objects), or read them in a way that gives the same trees whether they exist or not. Then run the plain order again."
+   },
+   {
+    "check": "place: budgets (mask time)",
+    "where": "the plan masks: 151 s against a budget of 120 s (a LOOK, not a FAIL)",
+    "owner": "integrator",
+    "text": "Making the whole-scene plan masks (1500 x 1500 cells of 0.25 m) took 150.92 s on this slow computer.",
+    "fix": "A larger cell (--mask-cell-metres) would cut it; not changed, because the ground part is the cause of the size of the area and the run is judged later."
+   }
+  ],
+  "repairs_made": [],
+  "failures": [
+   "Step 1 (plain order combine): exit 1. All five stages passed with 0 violations (forest 156, cottages_north 79, cottages_south 50, stable 95, props 59 objects added, 0 changed, 0 deleted), but the idempotent test failed (see audit_problems, owner forest). The combined file was still saved.",
+   "Step 3 (finish): exit code 1 because the audit has one FAIL (the triangle budget, owner ground_and_roads, see audit_problems). Every finish stage itself passed: roles 450 objects, roads, parts seated, surfaces, damage, plan masks, wear, growth, light (the scene's own lamp left as it is), sun.",
+   "The preflight place that I also ran on round3 (exit 1, evidence in reports/preflight-round3.txt and reports/preflight-round3/): 1 to fix (the same triangle budget), 5 to look at (floor.earth missing weathering and wetness, dirt_road missing moss, grass missing displacement, mask time 151 s, no fresh checker), 1 known, 0 inputs missing, and the audit matches the scene file (not stale).",
+   "No repair was made: the asked repairs 1 and 2 go back to their owners (forest, ground_and_roads) because they are geometry. Repairs 3 and 4 were about a missing file and are met: round3/finished.blend and its place-audit.json now exist, and the preflight now finds both."
+  ],
+  "not_tested": [
+   "No card jobs, no variations batch and no pictures: no look or dial question was open that a picture could answer, so card_seconds = 0 and batches = 0 (the ledger was only read, not written).",
+   "Round 2 audit file name place-audit-round2.json was not made (round 2 was never finished as round2/finished.blend); round 3 replaces it. I kept a copy of this round's audit as /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/place-audit-round3.json.",
+   "The 1.65 million triangle figure at the audit's minimum density is a calculation from this round's counts, not a drawn test.",
+   "Idempotent test of the finished scene was not run separately (finish was run once).",
+   "Combined scene sha256 not taken; finished.blend sha256 is 94dca034ffdc1f4c9efcc6bcb10da1b462a399ee9270590864085853a793cde5.",
+   "Reverse-order combine: 0 violations and idempotent PASS (forest 157 objects, 237 trees); its result was not saved, as asked.",
+   "Deleted the old round 2 combined.blend (24 MB) to free disk; the round 2 finished_thin036.blend (104 MB, not mine) was left in place and the disk has about 290 MB free."
+  ],
+  "missing_parts": [],
+  "card_seconds": 0,
+  "batches": 0
+ },
+ "audit": {
+  "scene_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round3/finished.blend",
+  "audit_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/place-audit-round3.json",
+  "audit_exit_code": 1,
+  "preflight_exit_code": 1,
+  "scene_sha256": "94dca034ffdc1f4c9efcc6bcb10da1b462a399ee9270590864085853a793cde5",
+  "verdict": "fail",
+  "quick": false,
+  "problems": [
+   {
+    "check": "place: budgets",
+    "where": "the scene (triangle count; the audit lists it as owner unowned: 2,723,900 triangles, limit 1,500,000)",
+    "owner": "integrator",
+    "text": "The unowned triangles are the 87,812 scattered pieces (PK scatter leaf, pine_needles, stick, straw, clod and others) made by the finish pass from the settings dials. No builder owns them (ownership.json has no pattern for them). Measured: whole scene 4,464,780 triangles; by owner: ground_and_roads 482,150, forest 349,844, cottages_north 187,500, cottages_south 344,120, stable 127,352, props 249,914, unowned 2,723,900. The audit and the preflight both FAIL on this.",
+    "fix": "Thin out the scatter (lower the scatter counts or use simpler pieces) in place-settings.json and run finish again from the combined scene. The audit says a card draws about 1.5 million triangles per builder comfortably. Not repaired here (audit mode changes nothing)."
+   },
+   {
+    "check": "place: construction",
+    "where": "Cottage C ridge piece (timber.beam, 7.40 m long, 3.50 m free span) in the required preflight run only",
+    "owner": "cottages_south",
+    "text": "The required preflight command (no --real-world-facts) reports 1 part with a free span longer than its role allows (timber.beam limit 2.5 m). The audit, which read the facts file, PASSES the same span: the place fact bay_free_span allows up to 3.9 m and the span is 3.50 m. The preflight only reads the facts file when it is given --real-world-facts. When I added that option in a second, extra run, this FAIL went away. So this FAIL comes from the way the command was run, not from the cottage geometry.",
+    "fix": "Run the preflight with --real-world-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/real-world-facts.json. If the person wants the span cut anyway, the cottages_south owner adds a support under the 3.50 m ridge span (geometry goes back to its owner)."
+   }
+  ],
+  "looks": [
+   "place: treatments [Cottage A earth]: role floor.earth: wanted but missing weathering, wetness. Fix: worth adding; not required.",
+   "place: treatments [Cottage B earth]: role floor.earth: wanted but missing weathering, wetness. Fix: worth adding; not required.",
+   "place: treatments [Cottage S floor.earth]: role floor.earth: wanted but missing weathering, wetness. Fix: worth adding; not required.",
+   "place: treatments [Stable earth floor]: role floor.earth: wanted but missing weathering, wetness. Fix: worth adding; not required.",
+   "place: treatments [PK ground.dirt_road / dirt_road]: role ground.dirt_road: wanted but missing moss_and_algae. Fix: worth adding; not required.",
+   "place: treatments [PK ground.grass / grass]: role ground.grass: wanted but missing displacement. Fix: worth adding; not required.",
+   "place: budgets [the plan masks]: making the masks took 151 s (budget 120 s). Fix: use a larger cell (--mask-cell-metres) or --quick.",
+   "place: fresh checker [preflight]: not checked: no fresh checker has looked at this place (--fresh-check). Fix: run the workflow build-a-place (phase Check) or ask a helper who did not build the place to recompute its claims."
+  ],
+  "known": [
+   "place: off reasons [moss_and_algae off for floor.planks, floor.tile, floor.carpet, floor.earth, floor.concrete]: inside the buildings: dry, nothing grows (the place type allows this)",
+   "place: off reasons [weathering off for the same five floor roles]: same reason",
+   "place: off reasons [wetness off for the same five floor roles]: same reason",
+   "place: off reasons [plants off for the same five floor roles]: same reason",
+   "place: off reasons [litter_pieces off for the same five floor roles]: same reason",
+   "No accepted file exists, so nothing is signed for the person (the preflight shows the off-reasons as 'known and accepted' with an empty accepted-by field)."
+  ],
+  "notes": [
+   "Audit made from a full run, not quick (audit field quick=false; the 'quick output' check PASSES). Audit: 'FAIL. 1 to fix, 7 to look at, 5 known, 23 passed'; exit code 1. The audit's freshness check PASSES (made from this exact file).",
+   "Scene file SHA-256 measured with sha256sum before and after both runs: 94dca034ffdc1f4c9efcc6bcb10da1b462a399ee9270590864085853a793cde5. It did not change. I did not save the scene and did not run finish.",
+   "Required preflight command as given: exit code 1, 2 to fix (budgets; construction), 5 to look at, 1 known. The first try added --blender, which this preflight does not accept (it read it as --blender-running and exited 2 with a usage error); I ran it again without it. That failed attempt left a stray report set preflight-place-2026-10-23-152741 in the reports folder (it came from an earlier exit-0-less run, not from the usage error; the usage error wrote nothing). The valid result is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round3/preflight-place-2026-10-23-152930.md and .json.",
+   "Extra evidence run (not the required one): same preflight plus --real-world-facts. Exit code 1, 1 to fix (only the triangle budget); the construction FAIL is gone. Reports: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round3-with-facts/. So the verdict is fail either way: the triangle budget is a real failure measured by the audit.",
+   "Other audit lines that PASS (measured by the tool): roles (463 objects), object types, treatments required, layer amounts above floor (state damp), 23 normal maps, UVs, displacement, 165 sizes fit the real-world facts, 0% plain boxes, nothing floats (440 parts), ground relief and ruts on 2 roads, keep-out for scatter, light, renderer EEVEE, world and 4 view cameras, sun shade, no lettering in the place.",
+   "The place fact bay_free_span (3.9 m) is what lets the 3.50 m ridge span pass in the audit. I did not judge whether that fact is true; I only read that the audit accepted it.",
+   "Not tested: anything by eye (no pictures looked at), the fresh checker (none was given), the gate stage. The owner 'integrator' for the triangle FAIL is my judgement (the audit says unowned; the scatter comes from the finish pass and the settings dials). The audit run output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/audit-run-round3-final.txt and the preflight output in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-run-round3-final.txt. No card time used; no money spent. The audit run took about 64 s with 2 threads."
+  ]
+ },
+ "repairs": [
+  {
+   "round": 1,
+   "owners": [
+    "forest"
+   ],
+   "problems": 4,
+   "reported": 1,
+   "summary": [
+    "combine: running the stages twice does not give the same scene: a stage is not idempotent",
+    "place: normal maps: Only 512 x 512 px (at least 1024). It is used by the plant.foliage materials (Forest leaf ... and Forest moss green, on the Tree crowns), which the forest part owns. The other normal maps are 1024 and pass. The audit's map size setting reads 1024, so this one map was made smaller than the rest. Measured by the audit.",
+    "place: budgets: 2,723,900 triangles are not owned by any part (limit 1,500,000). They are the scatter from the whole pass (87,812 scatter pieces: plants, leaves, litter). The owned parts are within the limit: ground 482,150, forest 349,844, cottages_north 187,500, cottages_south 344,120, stable 127,352, props 249,914. Measured by the audit.",
+    "place: construction (preflight only): The preflight stage place, run with the command given (no --real-world-facts), fails because one span is longer than its role allows (timber.beam, ridge piece, 3.50 m free). The audit run with the facts file passes the same piece: the fact bay_free_span allows up to 3.9 m. So this FAIL comes from the missing facts input, not from the file. Part owner is cottages_south. I did not re-run the preflight with the facts, since the task gave the exact command."
+   ]
+  },
+  {
+   "round": 2,
+   "owners": [],
+   "problems": 4,
+   "reported": 0,
+   "summary": [
+    "combine: the stages could not be combined in plain order",
+    "combine: running the stages twice does not give the same scene: a stage is not idempotent",
+    "audit input: The scene file to audit does not exist. explainer-film-place audit stopped at once (exit 2, 0.07 s) with: 'the scene file ... is not there'. Blender was never started and no place-audit-round2.json was written.",
+    "preflight place inputs: Preflight place exited 2 (INPUTS MISSING): the place audit file it was given does not exist, and the check place_audit_check.py could not run. The --blend file was also not found. Its one LOOK line: no fresh checker has looked at this place (--fresh-check not given)."
+   ]
+  }
+ ],
+ "render": null,
+ "final_render": null,
+ "card_time": {
+  "ledger": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/card-time-ledger.jsonl",
+  "team_minutes": 150,
+  "allowance_minutes": {
+   "builder": 10,
+   "fixer": 5,
+   "integrator": 10,
+   "renderer": 10,
+   "checker": 3,
+   "planner": 0
+  },
+  "reported": [
+   {
+    "name": "builder-ground_and_roads",
+    "role": "builder",
+    "card_seconds": 402,
+    "batches": 1
+   },
+   {
+    "name": "builder-forest",
+    "role": "builder",
+    "card_seconds": 398,
+    "batches": 1
+   },
+   {
+    "name": "builder-cottages_north",
+    "role": "builder",
+    "card_seconds": 269,
+    "batches": 1
+   },
+   {
+    "name": "builder-cottages_south",
+    "role": "builder",
+    "card_seconds": 339,
+    "batches": 1
+   },
+   {
+    "name": "builder-stable",
+    "role": "builder",
+    "card_seconds": 239,
+    "batches": 1
+   },
+   {
+    "name": "builder-props",
+    "role": "builder",
+    "card_seconds": 267,
+    "batches": 1
+   },
+   {
+    "name": "integrator",
+    "role": "integrator",
+    "card_seconds": 0,
+    "batches": 0
+   },
+   {
+    "name": "fixer-forest",
+    "role": "fixer",
+    "card_seconds": 0,
+    "batches": 0
+   }
+  ],
+  "reported_card_seconds": 1914,
+  "over_allowance": []
+ },
+ "checks": {
+  "look": null,
+  "structure": null,
+  "process": null,
+  "blind_reader": null,
+  "skeptic": null
+ },
+ "confirmed": [],
+ "fixes": [],
+ "recheck": null,
+ "reading_test": null,
+ "fresh_check": null,
+ "final_gate": null,
+ "stopped": "the audit still fails after 2 repair round(s), so no picture was drawn (nothing is drawn unless the audit passes or fails only on items the person accepted in writing)",
+ "report_markdown": "# forest village: what was built and what was checked\n\nThe request, as it was given: \"Now build a village in the forest. Needs unkept dirt roads like they're been driven down by horse and carriage, an empty stable, a few cottages, some scattered mediaeval props.\"\n\n**The run stopped early: the audit still fails after 2 repair round(s), so no picture was drawn (nothing is drawn unless the audit passes or fails only on items the person accepted in writing)**\n\n## What I did\n- Planned 6 part(s): ground_and_roads (owner ground_and_roads); forest (owner forest); cottages_north (owner cottages_north); cottages_south (owner cottages_south); stable (owner stable); props (owner props). The ground part, ground_and_roads, was built first and frozen.\n- Look chosen: lived_in; state: damp. There were no reference pictures, so the style note and the style guard are PROVISIONAL.\n- The planner could not settle these (facts from memory stay marked guess until a source confirms them): Period and country: the request names none. I assumed a north-west European mediaeval village (timber frame with wattle and daub, rubble stone, cob, thatch and wooden shingles, 13th to 15th century). If the person pictures log cabins (Scandinavian or Slavic) the cottage walls and roofs change.; 'Horse and carriage': read as horse-drawn carts and wagons (a gauge of 1.4 m, a one-horse cart). No measured mediaeval gauge was found (sources: Roman-era and Bronze Age figures, popular summaries), so the gauge is weak. If a wider coach is meant, raise the gauge in place-settings.json (the facts range 1.2 to 1.5 m would also need changing).; Backdrop colour and the renderer: the backdrop must be 'plain unlit colour'; an emission shader makes the kit's renderer rule pick Cycles (more card time). The brief asks for a flat no-emission colour to keep EEVEE; ask the person if they would rather accept Cycles for a flatter, truly unlit backdrop.; Numbers I could NOT confirm with a real source (all weak or guess in real-world-facts.json): the mediaeval cart gauge; hoof-print size for a DRAUGHT horse (only pony to Thoroughbred widths 85 to 132 mm were found; the kit's dimple is fixed at about 0.13 m and cannot be set per road); the size of mediaeval stalls (modern 10 x 10 to 12 x 12 ft figures, I used 3.05 m); peasant door heights (one V&A note about better houses); wood shingle pitch (from memory); cask heights (computed from volumes); undated cart wheel sizes; manger and rack heights; road widths; wattle hurdle, well and small prop sizes; tree crown ratios.; 'A few cottages' is taken as four, 'some scattered props' as 14 kinds and about 70 to 90 objects, 'empty stable' as no animals, no hay and no people in it (a few loose straws only). Tell me if any count is wrong.; The 3.9 m bay_free_span fact lets wall plates, ridge pieces, purlins and ties span a 3.7 m bay (judged from one survey, weak). Confirm it, or the builders must add posts nobody would build.; The trough is a dry hollowed log (timber.generic) and the well has no water object, because a water object makes the renderer rule choose Cycles; say if a water-filled trough is wanted.; The 'place: sun' check: with the sun from the south-east at 50 degrees, the forest that stands beside the road outside the clearing (|x| above about 55) shades it by design; the audit may report more than half of some view's ground in shade as a LOOK. I kept trees 10 m or more from the roads inside the clearing to avoid it.; Object count: about 600 to 700 planned objects against the audit's LOOK line of 1000; if the forest or props builders go over, the audit says LOOK, above 3000 FAIL.; No concept pictures from the painter were planned or priced: this run allows no paid image step. If the person wants them, the garden's cost was 29 calls, US$3.86 (measured in that job); the person must say yes first..\n- Ground: built (/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/ground.blend); it promises: Inside 1.5 m round every building footprint (cottage A with its lean-to, B, C, D and the stable) the ground is a level pad, flat inside 0.25 m (measured about 4 mm for the cottages, 7 cm for the stable pad that holds the lane's rut ends); the yard in front of the stable doorway (x 21.4 to 26.6, y 34.6 to 36.8) is level inside 0.15 m (measured 9 cm); ruts are 9 to 12 cm deep on the high road (measured 10 to 12 cm) and about 8 cm on the lane, 1.4 m apart (the kit's own wobble moves them 1.3 to 1.5), with banks, hoof prints, a crown, puddle hollows, 3 potholes on the high road between x -70 and 20 and 2 in the yard; nobody builds within 3.1 m of the high road's centre line or 2.3 m of the lane's centre line (ground there stays as it is). The land is soft: no slope steeper than 1 in 14 within 40 m of a building apart from the ruts and potholes, a 1 m fall from the north-east to the south-west of the clearing, lumps under 0.5 m outside it. Ground-role objects (forest floor, clearing, roads, yard, verges) cover a disc of 190 m radius; beyond it the plain runs to 900 m as backdrop (no wear, no shadow). The four cameras (named View wide, View road_eye, View stable_close, View cottage_close), the sun, the sky, the render size 1200 x 800 and the three hill rings never change; the plan pictures in the file make pk.is_keep_clear answer on wheel tracks, the yard and the doorway zone.\". Steps finished: All five steps finished. (1) Empty start scene made and the stage builds the graded ground, level pads, the level doorway yard, and the role objects with no overlap. (2) The kit's roads step runs inside the stage on the roads of place-settings.json; ruts, banks, hoof prints, crown and puddle hollows are in the frozen ground; I added 3 potholes on the high road, 2 in the yard, a turning loop of ruts and hoof prints in the yard, and dug the hoof prints 3 cm deeper (same places as the kit's). Ruts checked by rays. (3) Four cameras, one sun lamp, sky and 1200 x 800 render size made; the soft cool fill is the sky, not a lamp (a non-sun lamp makes the renderer rule pick Cycles). (4) Three backdrop rings of hills (four tone steps each, no emission, no shadow), the plain ground to 900 m in the near ring's mesh, a no-haze gradient sky, every clip end 3000 m; the audit's world and sun checks pass. (5) finish-part --quick, construction check, normals-test, audit and preflight run on the final file; the stage run twice by combine gives the same scene with no ownership violation; ground.blend and its fingerprint saved. One batch of 10 light variations drawn on the rented cards (picked sun 4.5, sky light 0.5). Not a full job: the forest floor is a 190 m disc, not 900 m (see shared_problems)..\n- Parts that reported: forest (steps finished: Fix round, finding 1 only. Changed one default in my stage file: make_tone_materials(size=512) is now size=1024, so the foliage normal map (pk_foliage_nor and its height picture) is made at 1024 px. The 512 came from my own stage, not from a kit default or a settings dial. Then ran the stage, finish-part --quick, the construction check, and combine (two runs plus the ownership check). Nothing else in the stage changed: same seed, same layout. To go back, set the default to 512 again (note in work/forest/fix_note.txt). Not run: normals-test, the non-quick finish-part, a picture.; own pass done: yes; own wear preview looked at: no); cottages_north (steps finished: Steps 1 to 4 finished, step 5 partly. Step 1: cottage A (51 objects) and cottage B (28 objects) from the ground up: stone footing, sill, posts, studs, wall plates, cream panels on A (chipped to the wattle, darker splash band at the foot) and rubble walls on B (quoins, moss low in the damp corners), earth floor, door leaf, flat stone doorstep. Step 2: rafters resting on the wall plates and let into a purlin, ridge piece laid on the rafter tops, thick rolled thatch slab on the rafters, stone chimney on B's east gable. Step 3: shuttered windows (no glass, one leaf ajar on each cottage), iron hinges and a latch, the log-store lean-to on A (posts, plate, ledger, rafters, purlin, shingle roof, north boards), the lintel on B. Step 4: character as shape (posts out of plumb and no two alike, sagging ridge, lumpy thatch with a rolled eave, replaced boards in a fresher colour, stones of uneven size), explicit roles on every object, the surface-and-wear pass (finish-part --quick, saved as work/cottages_north/part.blend), the construction check, the stage run twice with the ownership check. Step 5 done in part: hazel rods inside the chips, mud splash colour at the foot of the stone walls, a door latch; NOT done: a drip line and wooden pegs. One batch of 10 variations drawn on the card. Triangles: about 99,700 as built, 187,500 after the pass's modifiers (the audit's count).; own pass done: yes; own wear preview looked at: yes); cottages_south (steps finished: Steps 1 to 4 are finished, and step 5 only in part. (1) Cottage C and cottage D are built from the ground up: stone footing or plinth, sill, corner posts, studs, rails, daub panels (C) or cob walls (D), wall plate, earth floor, door leaf, doorstep. (2) The roofs are done: C has principal rafters, common rafters, purlins, collars, king posts, ridge piece, pale thatch with a rolled eave and a darker ridge cap; D has rafters, purlins, ridge piece and silver shingles with slipped and missing ones. (3) Shutters (one leaf ajar on each cottage), hinges, door latches and the loft window in the east gable of C are done. (4) Character as shape is done: posts out of plumb and no two alike, sagging ridges, daub chipped to show the wattle, a darker splash band at the foot, replaced boards, uneven stones. Every object has its owner and role. The finish-part pass ran, the construction check was read, and the stage was run twice (plain order and both orders) with the ownership check. A card batch of 10 variations picked the final colours. Step 5 (drip line, mud splash as shape, pegs, worn step shape) was NOT done; only the door latch and ring from step 5 exist. The finished part file is /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/cottages_south/part.blend (a --quick pass); the evidence is in the same folder (place-audit.json, construction.json, evidence.json, combine.json, combine_both.json).; own pass done: yes; own wear preview looked at: yes); stable (steps finished: Steps 1 to 5 finished. Step 1: dwarf wall with a gap at the doorway and sill stones, posts, wall plates, lintel, ties on posts, earth floor, upright board cladding, doorway with lintel. Step 2: roof (queen posts, purlins, rafters on the plates, ridge piece, shingle courses, two gable vents) and two door leaves on iron hinges standing open (one against the outside wall, one half open and sagging). Step 3: three empty stalls (partitions, empty mangers on short posts, hay racks, iron tie rings). Step 4: empty hollowed-log trough on two stone blocks, bare hitching rail, one fallen shingle broken in three pieces. Step 5: character as shape (boards of different widths with replaced and gapped ones, posts out of plumb, ridge sag, door sag, slipped, missing and mossy shingles), roles on every object, finish-part pass, construction check, normals test, stage run twice with the ownership check. One batch of ten variations on the rented cards (door sag and opening, replaced-board colour, shingle gaps, moss) and the picks put into the stage. Step 6 (hay loft) NOT done.; own pass done: yes; own wear preview looked at: yes); props (steps finished: Steps 1 to 4 and step 5 are finished. Step 1: well with windlass, rope and bucket; parked two-wheeled cart with shafts on a block and the spare wheel on the stable's west wall; woodpile with stakes, chopping block with axe, chips and bark, stool. Step 2: 5 barrels, 3 crates and chests, 4 sacks, 3 buckets, haystack and bales, handbarrow, ladder. Step 3: 6 wattle hurdles, bench with 2 jugs, jug by B, 2 baskets, 15 straw scraps in the stable. Step 4: the finish-part pass, construction check, normals test, stage run twice and ownership check (alone and next to the cottages and the stable). Step 5 extras: two skeps on a low bench behind B and a broken wheel by the road verge. One batch of 10 variations was drawn (sack slump, haystack shape, wicker weave) and its picks are in the stage.; own pass done: yes; own wear preview looked at: yes).\n- Combined in plain order: yes; in reverse order: yes; running the stages twice gives the same scene: no. Ownership violations: none.\n\n## The audit (measured by tools on the exact saved file)\n- Verdict: **FAIL** after 2 repair round(s) before any picture (at most 2). Scene file: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round3/finished.blend (SHA-256 94dca034ffdc1f4c9efcc6bcb10da1b462a399ee9270590864085853a793cde5). Made from a quick run: no.\n- FAIL place: budgets [the scene (triangle count; the audit lists it as owner unowned: 2,723,900 triangles, limit 1,500,000)] (owner integrator): The unowned triangles are the 87,812 scattered pieces (PK scatter leaf, pine_needles, stick, straw, clod and others) made by the finish pass from the settings dials. No builder owns them (ownership.json has no pattern for them). Measured: whole scene 4,464,780 triangles; by owner: ground_and_roads 482,150, forest 349,844, cottages_north 187,500, cottages_south 344,120, stable 127,352, props 249,914, unowned 2,723,900. The audit and the preflight both FAIL on this.. Fix: Thin out the scatter (lower the scatter counts or use simpler pieces) in place-settings.json and run finish again from the combined scene. The audit says a card draws about 1.5 million triangles per builder comfortably. Not repaired here (audit mode changes nothing).\n- FAIL place: construction [Cottage C ridge piece (timber.beam, 7.40 m long, 3.50 m free span) in the required preflight run only] (owner cottages_south): The required preflight command (no --real-world-facts) reports 1 part with a free span longer than its role allows (timber.beam limit 2.5 m). The audit, which read the facts file, PASSES the same span: the place fact bay_free_span allows up to 3.9 m and the span is 3.50 m. The preflight only reads the facts file when it is given --real-world-facts. When I added that option in a second, extra run, this FAIL went away. So this FAIL comes from the way the command was run, not from the cottage geometry.. Fix: Run the preflight with --real-world-facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/real-world-facts.json. If the person wants the span cut anyway, the cottages_south owner adds a support under the 3.50 m ridge span (geometry goes back to its owner).\n- LOOK place: treatments [Cottage A earth]: role floor.earth: wanted but missing weathering, wetness. Fix: worth adding; not required.\n- LOOK place: treatments [Cottage B earth]: role floor.earth: wanted but missing weathering, wetness. Fix: worth adding; not required.\n- LOOK place: treatments [Cottage S floor.earth]: role floor.earth: wanted but missing weathering, wetness. Fix: worth adding; not required.\n- LOOK place: treatments [Stable earth floor]: role floor.earth: wanted but missing weathering, wetness. Fix: worth adding; not required.\n- LOOK place: treatments [PK ground.dirt_road / dirt_road]: role ground.dirt_road: wanted but missing moss_and_algae. Fix: worth adding; not required.\n- LOOK place: treatments [PK ground.grass / grass]: role ground.grass: wanted but missing displacement. Fix: worth adding; not required.\n- LOOK place: budgets [the plan masks]: making the masks took 151 s (budget 120 s). Fix: use a larger cell (--mask-cell-metres) or --quick.\n- LOOK place: fresh checker [preflight]: not checked: no fresh checker has looked at this place (--fresh-check). Fix: run the workflow build-a-place (phase Check) or ask a helper who did not build the place to recompute its claims.\n- KNOWN (switched off on purpose or accepted by the person) place: off reasons [moss_and_algae off for floor.planks, floor.tile, floor.carpet, floor.earth, floor.concrete]: inside the buildings: dry, nothing grows (the place type allows this)\n- KNOWN (switched off on purpose or accepted by the person) place: off reasons [weathering off for the same five floor roles]: same reason\n- KNOWN (switched off on purpose or accepted by the person) place: off reasons [wetness off for the same five floor roles]: same reason\n- KNOWN (switched off on purpose or accepted by the person) place: off reasons [plants off for the same five floor roles]: same reason\n- KNOWN (switched off on purpose or accepted by the person) place: off reasons [litter_pieces off for the same five floor roles]: same reason\n- KNOWN (switched off on purpose or accepted by the person) No accepted file exists, so nothing is signed for the person (the preflight shows the off-reasons as 'known and accepted' with an empty accepted-by field).\n- Repair round 1: owners asked: forest; problems routed: 4; reports back: 1.\n- Repair round 2: owners asked: only settings; problems routed: 4; reports back: 0.\n\n## Pictures\n- No pictures were drawn.\n\n## Card time (the rented cards)\n- builder-ground_and_roads (builder): 402 card seconds of 600 allowed; 1 batch(es).\n- builder-forest (builder): 398 card seconds of 600 allowed; 1 batch(es).\n- builder-cottages_north (builder): 269 card seconds of 600 allowed; 1 batch(es).\n- builder-cottages_south (builder): 339 card seconds of 600 allowed; 1 batch(es).\n- builder-stable (builder): 239 card seconds of 600 allowed; 1 batch(es).\n- builder-props (builder): 267 card seconds of 600 allowed; 1 batch(es).\n- integrator (integrator): 0 card seconds of 600 allowed; 0 batch(es).\n- fixer-forest (fixer): 0 card seconds of 300 allowed; 0 batch(es).\n- In all the helpers reported 1914 card seconds (the person's total for the run: 150 minutes). Card seconds are work + wake-up + the idle tail, read from the card-time ledger (/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/card-time-ledger.jsonl); a price made from them is an ESTIMATE, never a bill. The process checker compared these figures with the ledger: see its findings above.\n- Full-size pictures were asked for but not drawn (see the failures).\n\n## What the fresh checkers found (judged, with the numbers they recomputed)\n- look checker: no result came back or it did not run.\n- structure checker: no result came back or it did not run.\n- process checker: no result came back or it did not run.\n\n## The fix round (exactly one)\n- Nothing was fixed (nothing was confirmed that needed it, or pictures were missing).\n\n## Measured and judged\n- MEASURED by tools: every audit line, the construction and normal-map checks, the picture measures, the seconds of each picture, the combine check.\n- JUDGED: how the place looks (checkers and the reading test), the sizes from memory (marked weak or guess in the facts table), the style guard when it came from the first picture, the cost estimate.\n- Fresh checkers are helpers of the same kind as the builders and can share blind spots; the person's own eyes decide the look.\n\n## What was not tested\n- Full (non-quick) finish-part and the audit's normal maps line\n- normals-test for the 1024 map\n- A preview picture of any view\n- Squint test\n- Card time (none used)\n- A non-quick finish (final map sizes, the audit's normal-map test light inside finish) was not run; only --quick.\n- No full-size or 1200 x 800 picture was drawn; the wear preview is two Cycles pictures at 480 x 320 (A front, B front) made here from part.blend, plus earlier 640 x 427 raw previews.\n- The card batch drew the raw geometry (my hook rebuilds the part, so no wear) through View wide and View cottage_close only; View road_eye and View stable_close were not drawn for my part.\n- Plain order only for the combine run; the reverse order and the run next to the other builders' stages were not tested.\n- Contracts with other owners were not tested because their parts were not in my scene: trunks 14 m from walls, props keeping 1.0 m clear of my doorsteps and out of the lean-to (pk.is_keep_clear), cottages C and D told apart from A and B by a reader.\n- The walk test along routes, the shadow share seen from the forest, and a fresh checker's recount of my claims were not run.\n- Moss share and wear shares in a picture (measure with a style guard) were not measured.\n- Rain, wetness and Cycles displacement quality at full size on the cards were not looked at.\n- A full-size pass (without --quick) and full-size pictures; the part was finished with 256 px maps and 0.5 m masks only.\n- The part combined with the other owners' stages (forest, north cottages, stable, props): I combined it only with the frozen ground, so trees, props and the north cottages were not checked against my part (14 m trunk clearance, props 1.0 m from my doorsteps).\n- The views stable_close and cottage_close: I drew only wide and road_eye and four own cameras, and did not check whether anything of mine is in the other two.\n- A second batch of variations (I stopped after one because the ledger would have gone over my allowance), so the final picks were not drawn and compared.\n- How the red daub, thatch and cob colours look after the final full pass in EEVEE at 1200 x 800.\n- The inside of the cottages (floor, back of the walls, rafters from below) was never looked at; only the door and window openings show it.\n- Step 5 extras: drip line and mud splash as shapes, pegs, worn doorstep shape.\n- The scale of the thatch thickness (the thickness fact skips a roof that is not slab-like, so it was not measured by the audit) and the true slope of every shingle.\n- A fresh checker has not recomputed my claims.\n- Step 6 (hay loft floor with a gable hatch) was not built.\n- No second batch was drawn and no full-size 1200 x 800 picture was drawn; the renderer does that at the end.\n- The surface pass ran with --quick (256 px maps, 0.5 m masks); the final non-quick pass and the full audit/preflight place stage were not run.\n- The stage was combined only with the ground part (plain order), not with the other building, forest and props stages, and not in reverse order.\n- Contracts with props (straw scraps, keep-clear doorway), forest (trunk distances) and the ground (hoof prints near the doorway) were not tested because those parts were not in my scene.\n- No fresh checker or blind reader has looked at the stable; the look was judged by me from small Cycles pictures only (12 samples, 600 x 400).\n- The inside of the stalls was not judged by eye (too dark); the view through the doorway from View stable_close was seen once.\n- Door sag above 3 degrees (the batch went to 4.7 degrees) was seen only in the scout and batch pictures; at that size the free corner can reach the yard ground.\n- Cycles/EEVEE renders on the cards of the final part.blend (with wear) were not made; the batch used the built scene without the surface pass.\n- The saved part was not drawn at full size or with Cycles on the rented card; only 600 x 400 and 640 x 420 small pictures on this computer.\n- Full finish-part (without --quick) with 1024 pixel maps was not run; the part was finished with --quick only, so the audit's quick-output LOOK stands.\n- The integrated scene with the forest stage was not built; the forest part's trees were not checked against props (the nearest listed stumps and logs are 40 m or more away).\n- The preflight place gate (explainer-film-preflight place) was not run on my part.\n- The four official view cameras were drawn only as small checks of my part in the ground scene, not in the full village.\n- A second batch of variations was not drawn (one was enough, 267 of 600 card seconds used).\n- Whether the pass's displacement and damage modifiers show well on the rented card was not tested.\n- A non-quick finish of the ground (full 1024 px maps and 0.25 m masks).\n- The ground with the other parts on it (combine with --order both, seating, sightlines past trees, forest and building distances).\n- Full-size EEVEE pictures of the four views on a card; the hills and sun were only drawn small on the cards (the batch) and local Cycles.\n- A second light batch (not needed after the first pick).\n- Clipped share and brightness of the finished place with cottages, thatch and plaster.\n- Whether the hoof prints, crown, puddles and mud read as unkept and horse-driven for a fresh reader (blind reading test).\n- Flat windows on the forest floor and the plain skirt at the final size with the kit's materials.\n- That a fresh checker agrees with my claims.\n- Running the stage from a different working folder or with other options than the defaults and plan_masks=False.\n- No card jobs, no variations batch and no pictures: no look or dial question was open that a picture could answer, so card_seconds = 0 and batches = 0 (the ledger was only read, not written).\n- Round 2 audit file name place-audit-round2.json was not made (round 2 was never finished as round2/finished.blend); round 3 replaces it. I kept a copy of this round's audit as /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/place-audit-round3.json.\n- The 1.65 million triangle figure at the audit's minimum density is a calculation from this round's counts, not a drawn test.\n- Idempotent test of the finished scene was not run separately (finish was run once).\n- Combined scene sha256 not taken; finished.blend sha256 is 94dca034ffdc1f4c9efcc6bcb10da1b462a399ee9270590864085853a793cde5.\n- Reverse-order combine: 0 violations and idempotent PASS (forest 157 objects, 237 trees); its result was not saved, as asked.\n- Deleted the old round 2 combined.blend (24 MB) to free disk; the round 2 finished_thin036.blend (104 MB, not mine) was left in place and the disk has about 290 MB free.\n- Not tested by this workflow at all: the place seen by the person, a blind reader who was never given any hint (the reading test was only ever run this way here), and the lighter plan masks and the Cycles runs of the kit on a scene much bigger than the small test places unless a log above says otherwise.\n\n## Every failure and everything that came back empty\n- First finish-part on the 900 m ground ran over 11 minutes on one thread without finishing and I stopped it (growth step; numbers in shared_problems). I redesigned the floor and it then finished in about 2 minutes 20 seconds.\n- A local `variations scout` on part.blend ran over 10 minutes and I stopped it; nothing was sent to a card before the one real batch.\n- Two pkill commands killed my own shell (exit 144); no data lost.\n- Blender aborts locally when EEVEE is used (libEGL.so.1 missing); I used Cycles for local pictures.\n- I first set the Khronos PBR Neutral view transform; it darkened and over-saturated dark greens (hills came out about 40 percent too dark), so I switched to Standard.\n- Per-triangle labelling first gave sawtooth borders (0.14 to 0.3 m steps) between meadow and forest floor; I replaced it with contour lines of the region fields kept as mesh edges.\n- The plan pictures I stored in ground.blend were first dropped on save (no user); fixed with a fake user, and keepclear_test.py now finds them.\n- explainer-film-preflight place reports FAIL for this part only because of --quick output; I did not run a non-quick finish.\n- 389 of the high road's triangles are thin slivers (quality under 0.1) along the contour edges; none is visible in the pictures I looked at.\n- The variations batch's set-up and downloads were counted by wall clock at 203 s of the card seconds, more than the jobs themselves (about 199 s).\n- First StructuredOutput call was rejected for bad JSON and was sent again. No tool failed.\n- First construction run on the raw scene had 6 FAIL lines (gable studs and the lean-to purlin and B's collar 'stop short', twin faces between B's chimney base and its footing): fixed (centre gable stud reaches the ridge bottom, purlins sit 2 cm into the rafters so the rafters rest on them, collar tenons lowered, chimney base moved clear of the footing); the next run passed.\n- First finish-part audit had 4 FAIL lines (no displacement on A's thatch, B's rubble and B's thatch; later twin faces on the door hinges because of my latch plate): fixed (own Displacement node and method on those materials, latch plate offset); the next audit had none.\n- After I coarsened the relief grids to save triangles, B's north wall and quoin stones flickered (twin faces): fixed by making the quoins stand 6 cm proud of the wall.\n- The audit's triangle count was first about 452,000 (the kit's bevel and subdivision), above the 200,000 asked for: fixed by my own cheap bevel on small objects, coarser flat panels and fewer rafters; it is now under the budget.\n- The first finish-part command ran past the 2 minute tool limit and moved to the background; it finished normally (no loss).\n- No tool crashed. No full-size picture was drawn.\n- The first picture try used the Workbench engine and failed (no libEGL on this computer); I used Cycles for every picture.\n- The first construction check on the new scene had 8 FAIL objects: daub panels, posts, studs, rails and wattle with twin faces (a bug: the west and east wall frames took the corner posts from the wrong wall, and panels, wattle and studs ended on the same heights), a stud and collars that stopped short, and a ridge that stopped short. All were fixed by changing the geometry, not the requirement.\n- The first finish-part run (the exact command in my brief, no --facts) gave an audit with 5 to fix: no displacement on the thatch, shutters and shutter hinges of C floating after the kit leaned the window posts, the loft window posts stopping short, and the ridge span. I fixed the first four (deeper hinge pins, loft window studs as timber.beam, displacement in the thatch material); the ridge span stays a FAIL without --facts.\n- The explainer-film-place construction verb still prints 'FAIL Cottage C ridge piece: free span 3.5 m (at most 2.5 m)' on the final part.blend (one problem object); it is allowed by the plan's fact but the verb cannot know.\n- The first variations file was refused because the names had a plus sign and capitals; I renamed them.\n- A pkill I wrote matched my own shell and stopped a finish-part run half way; I stopped the two leftover processes by their ids and ran it again.\n- The evaluated triangle count of the part (about 344 thousand) is over the brief's 150 thousand.\n- First finish-part run: audit FAIL with 2 floating parts (a door ledge and one manger), 9 hung parts, 7 short parts and a tie span of 5.5 m, all caused by the surface pass leaning multi-part post and fence objects; fixed by one object per post, queen posts and manger posts sunk into what they carry, rails tenoned 8 cm, racks tied to the studs, ledges fused into the door slab; the final run printed no FAIL.\n- First raw construction run: FAIL for no floor under the door (ledges as separate door pieces) and free span 3.05 m on the purlins; fixed as above.\n- After a leaning test run the construction verb printed 'stops short' for the girts; removed the girts.\n- First build had 149048 triangles after modifiers, over the 130000 budget; fixed by wider shingle tabs and taller courses (now 127352).\n- The hollowed-log trough rendered pale because the boolean result carried an empty material slot; found in a preview and fixed.\n- The first shingle roof left a strip of bare rafters under the ridge (last course missing); found in the north-east preview and fixed.\n- One mistaken Write call with a wrong parameter was rejected (no file written).\n- First construction run on the raw scene failed 4 objects: jugs 1 and 2 floated because I turned the bench about the world origin instead of its own centre; the crossbeam 'stopped short' of the post tops; hurdle 5 had twin faces flickering against a stake. All three were fixed in the stage (bench turned about its own centre, beam laid on the post heads, stakes built upright with 8 sides before being turned with the panel) and the check passed on the next run.\n- An early finish-part audit had a LOOK on the scale of Prop cart axle (height against the cart_height guess); fixed by giving the axle the role timber.beam.\n- My first background command to wait for the scout started the wrong working folder once (a command chained with && was sent to the background whole); no harm done, I read the log by its full path.\n- The weave of the first hurdle version read as flat brown slabs; I made the weave deeper with light and dark rods before the batch.\n- Not a failure of a tool, but a count I got wrong at first: Prop woodpile rows were thinned too fast; fixed before any check.\n- Step 1 (plain order combine): exit 1. All five stages passed with 0 violations (forest 156, cottages_north 79, cottages_south 50, stable 95, props 59 objects added, 0 changed, 0 deleted), but the idempotent test failed (see audit_problems, owner forest). The combined file was still saved.\n- Step 3 (finish): exit code 1 because the audit has one FAIL (the triangle budget, owner ground_and_roads, see audit_problems). Every finish stage itself passed: roles 450 objects, roads, parts seated, surfaces, damage, plan masks, wear, growth, light (the scene's own lamp left as it is), sun.\n- The preflight place that I also ran on round3 (exit 1, evidence in reports/preflight-round3.txt and reports/preflight-round3/): 1 to fix (the same triangle budget), 5 to look at (floor.earth missing weathering and wetness, dirt_road missing moss, grass missing displacement, mask time 151 s, no fresh checker), 1 known, 0 inputs missing, and the audit matches the scene file (not stale).\n- No repair was made: the asked repairs 1 and 2 go back to their owners (forest, ground_and_roads) because they are geometry. Repairs 3 and 4 were about a missing file and are met: round3/finished.blend and its place-audit.json now exist, and the preflight now finds both.\n\n## For you to decide\n- The audit still fails; nothing was drawn. Read the FAIL lines above. Only you can accept a problem, in writing, with your name and the date.\n- Some treatments were switched off on purpose (KNOWN above): check the reasons are true."
+}

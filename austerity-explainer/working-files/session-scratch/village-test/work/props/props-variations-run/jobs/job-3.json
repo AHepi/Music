@@ -1,0 +1,61 @@
+{
+ "job": 3,
+ "scene": "/workspace/place-jobs/scenes/aae16969/batch.blend",
+ "settings": "/workspace/place-jobs/scenes/aae16969/settings-dd8b4f3b-e8bf066e/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-sack-slump-haystack-shape-and-the-depth-1792764873/job-3",
+ "cameras": [
+  "Place props cam 1",
+  "Place props cam 2",
+  "Place props cam 3"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "v03-slump0p9-hay1p5-weave1p4-rows14",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sack_slump": 0.86,
+    "hay_shape": 1.54,
+    "weave": 1.35,
+    "weave_rows": 14
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-sack-slump-haystack-shape-and-the-depth-1792764873/hooks/1-props_hook.py"
+  },
+  {
+   "name": "v06-slump1p5-hay0p8-weave2p1-rows11",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sack_slump": 1.49,
+    "hay_shape": 0.75,
+    "weave": 2.15,
+    "weave_rows": 11
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-sack-slump-haystack-shape-and-the-depth-1792764873/hooks/1-props_hook.py"
+  },
+  {
+   "name": "v09-slump1p3-hay0p9-weave2p0-rows12",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "sack_slump": 1.29,
+    "hay_shape": 0.94,
+    "weave": 1.98,
+    "weave_rows": 12
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-sack-slump-haystack-shape-and-the-depth-1792764873/hooks/1-props_hook.py"
+  }
+ ]
+}

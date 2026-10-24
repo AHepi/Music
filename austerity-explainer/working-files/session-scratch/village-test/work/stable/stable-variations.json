@@ -1,0 +1,341 @@
+{
+ "change": "door leaf sag and opening, board colours of the replaced boards, shingle gaps and moss of the stable",
+ "scene": "scene.blend",
+ "settings": "../../plan/place-settings.json",
+ "cameras": [
+  "View stable_close",
+  "View wide"
+ ],
+ "variations": [
+  {
+   "name": "v01-sag4p3-moss1p7-gap2p6",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 4.31,
+    "fresh": 1.28,
+    "gaps": 2.62,
+    "moss": 1.66,
+    "open_deg": 90.85
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v02-sag0p3-moss1p3-gap1p0",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 0.31,
+    "fresh": 0.79,
+    "gaps": 0.97,
+    "moss": 1.28,
+    "open_deg": 66.6
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v03-sag4p7-moss0p1-gap2p1",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 4.74,
+    "fresh": 0.71,
+    "gaps": 2.09,
+    "moss": 0.09,
+    "open_deg": 57.81
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v04-sag3p7-moss0p5-gap1p8",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 3.67,
+    "fresh": 0.56,
+    "gaps": 1.78,
+    "moss": 0.49,
+    "open_deg": 72.12
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v05-sag0p8-moss0p9-gap0p5",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 0.79,
+    "fresh": 1.49,
+    "gaps": 0.46,
+    "moss": 0.89,
+    "open_deg": 51.24
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v06-sag2p9-moss0p2-gap2p3",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 2.86,
+    "fresh": 0.27,
+    "gaps": 2.32,
+    "moss": 0.25,
+    "open_deg": 77.61
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v07-sag3p2-moss1p2-gap1p2",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 3.16,
+    "fresh": 1.43,
+    "gaps": 1.2,
+    "moss": 1.16,
+    "open_deg": 87.07
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v08-sag1p1-moss1p5-gap0p8",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 1.14,
+    "fresh": 0.98,
+    "gaps": 0.76,
+    "moss": 1.53,
+    "open_deg": 40.93
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v09-sag1p6-moss0p7-gap2p8",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 1.63,
+    "fresh": 0.43,
+    "gaps": 2.8,
+    "moss": 0.68,
+    "open_deg": 33.32
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  },
+  {
+   "name": "v10-sag2p3-moss1p9-gap1p5",
+   "script": "hooks/stable_hook.py",
+   "args": {
+    "sag_deg": 2.3,
+    "fresh": 1.11,
+    "gaps": 1.46,
+    "moss": 1.91,
+    "open_deg": 46.26
+   },
+   "ranges": {
+    "sag_deg": [
+     0.0,
+     5.0
+    ],
+    "fresh": [
+     0.2,
+     1.6
+    ],
+    "gaps": [
+     0.3,
+     3.0
+    ],
+    "moss": [
+     0.0,
+     2.0
+    ],
+    "open_deg": [
+     30.0,
+     95.0
+    ]
+   }
+  }
+ ]
+}

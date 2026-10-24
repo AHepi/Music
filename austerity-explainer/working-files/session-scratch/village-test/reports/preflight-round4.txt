@@ -1,0 +1,45 @@
+Preflight place (after building a place and before drawing its views (the order: shots, build the place, place, plates)): PASS, with things to look at. 0 to fix, 5 to look at, 1 known and accepted, 0 input(s) missing; 3 check(s) in 1.0 s.
+Long step ready: drawing this place's views and plates (the long step: a place that fails is drawn again).
+
+Made 2026-10-23 20:18:12 by preflight.py version aa7e89ed; kit /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/integrator/plugin/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round4/preflight-place-2026-10-23-201812.
+
+## To look at (they do not block; a person decides)
+
+- place: treatments: role floor.earth: wanted but missing weathering, wetness. (place_audit_check.py)
+  Fix: worth adding; not required.
+- place: treatments: role ground.dirt_road: wanted but missing moss_and_algae. (place_audit_check.py)
+  Fix: worth adding; not required.
+- place: treatments: role ground.grass: wanted but missing displacement. (place_audit_check.py)
+  Fix: worth adding; not required.
+- place: surfaces: 4 material(s) use the made-in-code surface: no photographed scan is named for this surface, so the made-in-code surface is used. (place_audit_check.py)
+  Fix: with network on, run explainer-film-place finish again (it downloads the free Poly Haven scans once per machine), or give your own surfaces in place-settings.json ("own_surfaces").
+- place: fresh checker: not checked: no fresh checker has looked at this place (--fresh-check). (preflight.py place)
+  Fix: run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.
+
+## Known and accepted (kept on purpose; they do not block)
+
+- place: off reasons: KNOWN: inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off) (the place type allows this) (place_audit_check.py)
+  Accepted:  ()
+
+## Notes
+
+- The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). A place that passes here has not been judged by eye: the fresh checkers and the person still look.
+
+## Checks run
+
+- WARN  the place audit: surfaces, wear and construction (place_audit_check.py): 0 fail, 4 look, 1 known, 26 pass, 0 info; exit 0, 0.6 s; calculators/place_audit_check.py version f15f9279
+  /workspace/blender/5.2/python/bin/python3.13 -I -B /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/integrator/plugin/kit/calculators/place_audit_check.py check /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round4/place-audit.json --facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/real-world-facts.json --place-settings /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings-round4.json --skip-freshness --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round4/preflight-place-2026-10-23-201812/01-the-place-audit-surfaces-wear-and-construction-p.json
+- PASS  the audit is about this scene file (freshness): 0 fail, 0 look, 0 known, 1 pass, 0 info; exit 0, 0.0 s; preflight.py place version aa7e89ed
+  (inside the preflight)
+- WARN  a fresh checker has looked: 0 fail, 1 look, 0 known, 0 pass, 0 info; exit 0, 0.0 s; preflight.py place version aa7e89ed
+  (inside the preflight)
+
+## Inputs (sha1 when the run ended)
+
+- 032c9fbe70c41d77b6d43731d5e8a86621483cdf  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings-round4.json
+- 4868ff7d8a747bd1d40672cfc9808afe1cbf7278  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/real-world-facts.json
+- 35d640632491abf5a1d57ec92496e7513c1416b9  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round4/finished.blend
+- 8d51498c5af3737c7d7b6d33d6991e7105a8cef6  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round4/place-audit.json
+- 9c77ca25e95d21ed6d398e00e530767552873280  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/integrator/plugin/kit/film-settings.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round4/preflight-place-2026-10-23-201812.json

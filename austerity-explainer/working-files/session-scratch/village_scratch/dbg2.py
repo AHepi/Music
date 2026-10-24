@@ -1,0 +1,10 @@
+import bpy, numpy as np
+img = bpy.data.images.new('t', 8, 4, alpha=False, float_buffer=True)
+print('before', img.pixels[0], len(img.pixels))
+a=np.full((4,8,4),0.5,dtype=np.float32)
+img.pixels.foreach_set(a.ravel())
+print('after foreach_set', img.pixels[0])
+img.pixels = a.ravel().tolist()
+print('after assign', img.pixels[0])
+img.update()
+print('after update', img.pixels[0])

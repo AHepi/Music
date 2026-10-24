@@ -1,0 +1,6 @@
+{"round":2,"card_seconds":0,"batches":0,
+"combine_plain":{"violations":0,"idempotent":false,"objects":454},
+"combine_reverse":{"violations":0,"idempotent":true,"objects":455},
+"idempotent_cause":"stage_forest.py World.__init__ widens its building footprints with the real Cottage/Stable objects of other owners when they are in the scene (lines ~247-251), so its output (237 trees, 157 objects) differs from a run with no buildings present (239 trees, 156 objects). Forest owner must read only the plan's footprints.",
+"scatter_tests":[{"density":1.0,"pieces":87812,"unowned_tris":2723900,"audit":"FAIL budgets only"},{"density":0.4,"pieces":70061,"unowned_tris":2182680},{"density":0.36,"pieces":62949,"unowned_tris":1978399,"plants_per_100m2":24.4,"litter_per_100m2":31.1,"note":"lowest density that still meets plants_min 20 and litter_min 30 per 100 m2"},{"density":0.1,"pieces":17596,"unowned_tris":553985,"audit":"FAIL 6: no plants/litter treatments (6.9 and 8.7 per 100 m2, below the minimum)"}],
+"final_file":"scene/round2/finished_thin036.blend","sha256":"0da3c3d32f1f380c173197dbd58d86e83bedf67e51fa10fb63eae954788a5a38"}

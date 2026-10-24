@@ -1,0 +1,759 @@
+['about', 'entry_format', 'kinds', 'frame', 'camera', 'composing', 'safe_area', 'lettering', 'people', 'light', 'effects', 'state_pictures', 'painting', 'timing', 'sound', 'filming', 'money', 'delivery', 'models', 'checking', 'script', 'graphics', 'paper_look', 'shot_kind_profiles', 'shot_planner', 'views_and_models', 'page_timing', 'painting_tools']
+===== timing
+{
+ "about": "Page timing and words on screen. Both timeline tools must read these (today estimate_timeline.py keeps 1.5 s, assemble_chapter_narration.py 1.4 s for the default pause).",
+ "first_word_at_seconds": {
+  "value": 1.08,
+  "unit": "seconds of music before the first word",
+  "kind": "judged",
+  "source": "assemble_chapter_narration.py FIRST_WORD_AT (line 28); estimate_timeline.py line 18"
+ },
+ "tail_after_last_word_seconds": {
+  "value": 4.0,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "assemble_chapter_narration.py TAIL_AFTER_LAST_WORD (line 29); estimate_timeline.py line 19"
+ },
+ "default_page_pause_seconds": {
+  "value": 1.4,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "assemble_chapter_narration.py DEFAULT_PAUSE (line 31)",
+  "note": "estimate_timeline.py --default-pause still defaults to 1.5 (line 76): the drift this table ends."
+ },
+ "page_pause_range_seconds": {
+  "value": [
+   1.1,
+   1.7
+  ],
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Decisions.md lines 81-82 (chapter 1)"
+ },
+ "chapter_1_pauses_seconds": {
+  "value": [
+   1.7,
+   1.4,
+   1.1,
+   1.5,
+   1.5,
+   1.3,
+   1.5,
+   1.4,
+   1.6
+  ],
+  "unit": "seconds",
+  "kind": "measured",
+  "source": "Log 07 (chosen gap by gap, longer where the turn has more to do)"
+ },
+ "turn_after_last_word_seconds": {
+  "value": 0.3,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "cinema-chapter.js DEFAULT_JOIN (line 15); paper-chapter.js line 22"
+ },
+ "peel_length_seconds": {
+  "value": 0.85,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "cinema-chapter.js DEFAULT_JOIN"
+ },
+ "peel_shading_in_share": {
+  "value": 0.3,
+  "unit": "share of the peel",
+  "kind": "judged",
+  "source": "cinema-stage.js PEEL_SHADING_IN (line 364); round 3 (first peel frame 5.8 against 0.4)"
+ },
+ "guess_hold_seconds": {
+  "value": 4.0,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Lesson 129; estimate_timeline.py --pause-after PAGE=4.0"
+ },
+ "rule_hold_seconds": {
+  "value": 2.0,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Plan 34 lines 604-621"
+ },
+ "final_fade_seconds": {
+  "value": 4.0,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Plan 34; mix fade out 4 s"
+ },
+ "rest_without_change_max_seconds": {
+  "value": 1.7,
+  "unit": "seconds (2.5 on the end card)",
+  "kind": "judged",
+  "source": "Decisions.md lines 87-88; lesson 16"
+ },
+ "end_card_rest_max_seconds": {
+  "value": 2.5,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "as rest_without_change_max_seconds"
+ },
+ "key_number_hold_seconds": {
+  "value": 1.0,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Lesson 53; plugin guide \"Hold the key number still\""
+ },
+ "conclusion_full_strength_seconds": {
+  "value": 1.2,
+  "unit": "seconds before the cut",
+  "kind": "judged",
+  "source": "Round 3 check (PRICES UP 0.65 s could not be read; moved to 1.2 s)"
+ },
+ "label_readable_min_seconds": {
+  "value": 1.0,
+  "unit": "seconds at full strength",
+  "kind": "judged",
+  "source": "Round 4 finding 8 (MACHINES readable 0.38 to 0.45 s)"
+ },
+ "callout_words_delay_seconds": {
+  "value": 0.55,
+  "unit": "seconds after the line starts",
+  "kind": "judged",
+  "source": "graphics.js callout default (lines 105-118)"
+ },
+ "callout_words_with_line_seconds": {
+  "value": 0.12,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "graphics.js wordsWithLine (round 5)"
+ },
+ "presence_fades_seconds": {
+  "value": {
+   "in": 0.3,
+   "out": 0.35
+  },
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "graphics.js presence() (line 22)"
+ },
+ "word_group_every_seconds": {
+  "value": 6,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Plan 34 T6 (about 65 groups in 407 s)"
+ },
+ "word_groups_per_page": {
+  "value": [
+   3,
+   5
+  ],
+  "unit": "groups",
+  "kind": "judged",
+  "source": "Plan 34"
+ },
+ "words_per_minute": {
+  "value": 160,
+  "unit": "words a minute",
+  "kind": "measured",
+  "source": "Lesson 126 (Malina read 164; plan at about 160); estimate_timeline.py 252 s predicted against 251.7 s"
+ },
+ "thinking_pause_min_seconds": {
+  "value": 1.0,
+  "unit": "seconds for a \"...\"",
+  "kind": "judged",
+  "source": "Log 33 (each \"...\" gave under a second)"
+ },
+ "page_drawn_window_seconds": {
+  "value": {
+   "from_previous_last_word": 0.3,
+   "after_own_last_word": 1.2
+  },
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "cinema-chapter.js line 9"
+ },
+ "camera_plan_window_seconds": {
+  "value": {
+   "before_first_word": 0.8,
+   "after_last_word_end": 1.3
+  },
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Plan 34 part 2 \"Between pages\""
+ },
+ "page_turn_still_after_last_word_seconds": {
+  "value": 0.7,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Workflows.md lines 120-121 (check page turns in one run)"
+ },
+ "first_word_tolerance_seconds": {
+  "value": 0.03,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "extract_word_times.py FIRST_WORD_TOLERANCE (line 33); lesson 18"
+ },
+ "bracket_cue_max_seconds": {
+  "value": 0.2,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Log 07 (a cue read aloud lasts longer or shows in the transcript)"
+ },
+ "caption_max_letters": {
+  "value": 42,
+  "unit": "letters",
+  "kind": "judged",
+  "source": "make_captions.py MAX_LETTERS (line 20)"
+ },
+ "caption_hold_after_last_word_seconds": {
+  "value": 0.15,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "make_captions.py HOLD_AFTER_LAST_WORD (line 21)"
+ },
+ "caption_shortest_seconds": {
+  "value": 0.8,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "make_captions.py SHORTEST_CAPTION (line 22)"
+ },
+ "fade_out_at_cut_seconds": {
+  "value": 0.0,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "graphics.js presence(..., fadeOut = 0) for everything that ends on a cut (round 3: words faded a frame early)"
+ },
+ "new_words_after_old_frames": {
+  "value": 1,
+  "unit": "frames after the old words have gone",
+  "kind": "judged",
+  "source": "page-5.js lines 65-68 (round 3: NO SPARE drawn over the fading question)"
+ },
+ "run_on_join_dip": {
+  "value": 0.0,
+  "unit": "dip in the blend",
+  "kind": "judged",
+  "source": "cinema-stage.js \"run-on\" join (round 3: the normal dissolve dipped 4 levels)"
+ }
+}
+===== sound
+{
+ "about": "Loudness, the music under the voice, the limiter and the voice checks.",
+ "sample_rate": {
+  "value": 48000,
+  "unit": "samples a second",
+  "kind": "judged",
+  "source": "assemble_chapter_narration.py SAMPLE_RATE; lesson 5 (resample to 48,000 after every loudnorm)"
+ },
+ "length_tolerance_seconds": {
+  "value": 0.05,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Design (log 35) from lesson 5 (23 s asked, 23.04 s delivered)"
+ },
+ "voice_page_lufs": {
+  "value": -16.0,
+  "unit": "LUFS",
+  "kind": "judged",
+  "source": "assemble_chapter_narration.py VOICE_LOUDNESS (line 27); decisions"
+ },
+ "mix_lufs": {
+  "value": -15.0,
+  "unit": "LUFS integrated",
+  "kind": "measured",
+  "source": "mix_narration_over_music.sh target; measured -15.0 to -15.1 in logs 13, 19, 20"
+ },
+ "music_only_lufs": {
+  "value": -14.0,
+  "unit": "LUFS integrated",
+  "kind": "judged",
+  "source": "add_music_bed.sh LOUDNESS (log 32: -17.7 was faint on a phone)"
+ },
+ "true_peak_max_dbtp": {
+  "value": -1.0,
+  "unit": "dBTP",
+  "kind": "judged",
+  "source": "Decisions; measured -1.5 to -1.8 on the sent copies"
+ },
+ "limiter": {
+  "value": {
+   "limit": 0.84,
+   "attack_ms": 5,
+   "release_ms": 60,
+   "latency": 1
+  },
+  "unit": "alimiter settings",
+  "kind": "judged",
+  "source": "mix_narration_over_music.sh line 33; lessons 11, 15"
+ },
+ "music_level_db": {
+  "value": -11.0,
+  "unit": "dB",
+  "kind": "judged",
+  "source": "mix_narration_over_music.sh (the user asked for \"slightly\" louder: -14 to -11)"
+ },
+ "music_eq": {
+  "value": {
+   "frequency_hz": 2500,
+   "gain_db": -4,
+   "width_q": 1.2
+  },
+  "unit": "equalizer",
+  "kind": "judged",
+  "source": "mix_narration_over_music.sh line 26"
+ },
+ "duck": {
+  "value": {
+   "threshold": 0.08,
+   "ratio": 2.5,
+   "attack_ms": 30,
+   "release_ms": 1100,
+   "makeup": 1
+  },
+  "unit": "sidechaincompress",
+  "kind": "judged",
+  "source": "mix_narration_over_music.sh line 27; lesson 6"
+ },
+ "music_under_voice_db": {
+  "value": {
+   "while_speaking": 18,
+   "in_pauses": 12,
+   "tolerance": 1
+  },
+  "unit": "dB under the voice",
+  "kind": "measured",
+  "source": "Logs 04, 07, 10 (measured page by page)"
+ },
+ "music_fades_seconds": {
+  "value": {
+   "in": 0.8,
+   "out": 4.0
+  },
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "mix_narration_over_music.sh line 28"
+ },
+ "music_only_fades_seconds": {
+  "value": {
+   "in": 0.8,
+   "out": 1.5
+  },
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "add_music_bed.sh FADE_IN, FADE_OUT"
+ },
+ "sound_alignment_max_ms": {
+  "value": 0.0,
+  "unit": "milliseconds (a few tolerated)",
+  "kind": "measured",
+  "source": "check_sound_alignment.py; log 08 (5 ms late before latency=1), 0.00 ms since"
+ },
+ "loud_word_db": {
+  "value": 6,
+  "unit": "dB above the page's typical word",
+  "kind": "judged",
+  "source": "find_loud_words.py default"
+ },
+ "raised_voice_semitones": {
+  "value": 5,
+  "unit": "semitones above the page's typical pitch",
+  "kind": "judged",
+  "source": "find_raised_voice.py default"
+ },
+ "pitch_spread_across_pages": {
+  "value": {
+   "accepted": 2.2,
+   "not_accepted": 3.0
+  },
+  "unit": "semitones",
+  "kind": "measured",
+  "source": "Decisions item 20; compare_voice_steadiness.py"
+ },
+ "pitch_burst_semitones": {
+  "value": 7,
+  "unit": "semitones",
+  "kind": "judged",
+  "source": "compare_voice_steadiness.py"
+ },
+ "mouth": {
+  "value": {
+   "quiet_db": -25.0,
+   "loud_db": -11.0,
+   "slice_ms": 40,
+   "open_speed": 0.8,
+   "close_speed": 0.55
+  },
+  "unit": "dB, ms, factors",
+  "kind": "judged",
+  "source": "make_mouth_track.py QUIET_DB, LOUD_DB (lines 20-21); lesson 24"
+ }
+}
+===== filming
+{
+ "about": "What a frame costs to film, and how to cut a long filming run into pieces that survive restarts.",
+ "seconds_per_frame_held_live_effects": {
+  "value": 0.9,
+  "unit": "seconds a frame, one worker",
+  "kind": "measured",
+  "source": "scratchpad redesign/round4-film/film/frame-times.txt (round 4: 0.88 to 0.99 by view; W3 0.89, W2 0.91, W1 0.99)"
+ },
+ "seconds_per_frame_sliding": {
+  "value": 4.3,
+  "unit": "seconds a frame, one worker",
+  "kind": "measured",
+  "source": "scratchpad redesign/round4-film/film/frame-times.txt (W1 slide 4.31)"
+ },
+ "seconds_loading_a_piece": {
+  "value": 34,
+  "unit": "seconds a piece",
+  "kind": "measured",
+  "source": "scratchpad redesign/round4-film/film/frame-times.txt (first stretch of each piece minus the steady rate: 22 to 58 s, mean 34)"
+ },
+ "seconds_per_frame_held_nothing_live": {
+  "value": {
+   "one_worker": 0.8,
+   "two_workers": 0.57
+  },
+  "unit": "seconds a frame",
+  "kind": "measured",
+  "source": "Plan 34 F3 (notice corner measurements)"
+ },
+ "seconds_per_frame_paper": {
+  "value": 0.85,
+  "unit": "seconds a frame",
+  "kind": "measured",
+  "source": "Workflows.md (chapter 1, about 95 minutes for 6,641 frames; log 13 measured about 80)"
+ },
+ "seconds_per_frame_model_pages": {
+  "value": [
+   12,
+   15
+  ],
+  "unit": "seconds a frame",
+  "kind": "measured",
+  "source": "Lesson 70 (realistic materials of the works and town)"
+ },
+ "peel_frames_cost_factor": {
+  "value": 2,
+  "unit": "times a held frame",
+  "kind": "judged",
+  "source": "Plan 34 computer time table (page peels about double)"
+ },
+ "piece_frames": {
+  "value": {
+   "default": 60,
+   "lazy_chapter": 240
+  },
+  "unit": "frames",
+  "kind": "judged",
+  "source": "film-chapter-parallel.sh PIECE_FRAMES (line 70); Workflows.md (lazy chapters 240)"
+ },
+ "stretch_max_hours": {
+  "value": 2,
+  "unit": "hours",
+  "kind": "measured",
+  "source": "Lesson 69 (background jobs stop after 2 hours)"
+ },
+ "workers": {
+  "value": {
+   "two_processors": 1,
+   "four_processors": 2,
+   "two_workers_speed_gain": 0.17
+  },
+  "unit": "workers",
+  "kind": "measured",
+  "source": "Lesson 34; Workflows traps (1.44 against 1.68 s a frame)"
+ },
+ "memory_per_piece_gb": {
+  "value": [
+   2.6,
+   2.8
+  ],
+  "unit": "GB of browser memory",
+  "kind": "measured",
+  "source": "Plan 34 F1; log 34 (about 2.8 GB a piece)"
+ },
+ "free_memory_before_piece_gb": {
+  "value": 6,
+  "unit": "GB",
+  "kind": "judged",
+  "source": "Plan 34 computer time (when Blender runs alongside)"
+ },
+ "machine_memory_gb": {
+  "value": 16,
+  "unit": "GB (no swap)",
+  "kind": "measured",
+  "source": "Plan 34 F1"
+ },
+ "plate_render_minutes": {
+  "value": [
+   6,
+   11
+  ],
+  "unit": "minutes (EEVEE, 1536 x 2730)",
+  "kind": "measured",
+  "source": "Round 1 (11 min at 48 samples); round 3 (6 min with three shadowing lights)"
+ },
+ "preview_render_minutes": {
+  "value": 1,
+  "unit": "minutes (540 x 960)",
+  "kind": "measured",
+  "source": "Round 1-3 previews"
+ },
+ "checker_render": {
+  "value": {
+   "size": [
+    1080,
+    1920
+   ],
+   "samples": 16
+  },
+  "unit": "pixels and samples",
+  "kind": "judged",
+  "source": "Round 1-4 checker runs"
+ },
+ "pages_3_to_5_minutes": {
+  "value": {
+   "frames": 2283,
+   "round_3": 70,
+   "round_4": 53
+  },
+  "unit": "frames and minutes",
+  "kind": "measured",
+  "source": "round3-result.json, round4-result.json film.summary"
+ },
+ "film_with_grain_megabytes_per_second": {
+  "value": 3.5,
+  "unit": "MB a second",
+  "kind": "measured",
+  "source": "Plan 34 F2"
+ },
+ "msaa_samples": {
+  "value": 4,
+  "unit": "samples",
+  "kind": "judged",
+  "source": "cinema-stage.js (?samples=N; default 4)"
+ }
+}
+===== money
+{
+ "about": "Prices of paid services, with the date each was read. Nothing here spends money: every paid step asks the user first.",
+ "fal_flux_3_edit_cents_per_megapixel": {
+  "value": 4.8,
+  "unit": "US cents a megapixel (returned + every picture sent)",
+  "kind": "measured",
+  "source": "people-test-paintings.json note",
+  "date_read": "2026-10-16",
+  "note": "The plan had 2.4 c/MP from the price list (log 34 plan); the bill on the day was twice that. The people test came to about 85 c for two paintings, itself an estimate (fal shows no exact charge)."
+ },
+ "fal_price_list_cents_per_megapixel": {
+  "value": 2.4,
+  "unit": "US cents a megapixel",
+  "kind": "measured",
+  "source": "Plan 34 lines 1131-1133 (fal's price list)",
+  "date_read": "2026-10-15",
+  "note": "Superseded by the 4.8 c/MP charged on 2026-10-16."
+ },
+ "nano_banana_pro_cents": {
+  "value": 15,
+  "unit": "US cents a picture",
+  "kind": "measured",
+  "source": "Project story logs 30-34",
+  "date_read": "2026-10-14"
+ },
+ "seedance_10_second_draft_cents": {
+  "value": 206,
+  "unit": "US cents",
+  "kind": "measured",
+  "source": "Project story log 30",
+  "date_read": "2026-10-14"
+ },
+ "minimax_6_second_video_cents": {
+  "value": 18,
+  "unit": "US cents",
+  "kind": "measured",
+  "source": "Project story logs 10-19",
+  "date_read": "2026-10-12"
+ },
+ "sam_3d_cents": {
+  "value": 2,
+  "unit": "US cents an object",
+  "kind": "measured",
+  "source": "Project story logs 23-24",
+  "date_read": "2026-10-13"
+ },
+ "tripo_cents": {
+  "value": [
+   20,
+   40
+  ],
+  "unit": "US cents a model (never its free plan)",
+  "kind": "measured",
+  "source": "Project story",
+  "date_read": "2026-10-13"
+ },
+ "world_labs_cents": {
+  "value": {
+   "per_world": 126,
+   "minimum_purchase": 500
+  },
+  "unit": "US cents",
+  "kind": "measured",
+  "source": "Project story log 26",
+  "date_read": "2026-10-13"
+ },
+ "elevenlabs_credits_per_letter": {
+  "value": 1.0,
+  "unit": "credits a letter of page text (accent instruction included)",
+  "kind": "measured",
+  "source": "Logs 04, 07, 19, 33 (2,950 credits for pages 2-10; 4,300 for chapter 2)",
+  "date_read": "2026-10-13"
+ },
+ "elevenlabs_dollars_per_credit": {
+  "value": 0.000175,
+  "unit": "US dollars a credit",
+  "kind": "judged",
+  "source": "Status.md (about 75 c for 4,300 credits \"counted by text length\", not a bill)",
+  "date_read": "2026-10-13"
+ },
+ "painting_failure_share": {
+  "value": 0.04,
+  "unit": "share of paintings redone",
+  "kind": "measured",
+  "source": "Log 13: 2 failures in 47 paintings"
+ },
+ "user_allowance_dollars": {
+  "value": {
+   "allowance": 20,
+   "spending_line": 12
+  },
+  "unit": "US dollars",
+  "kind": "judged",
+  "source": "Decision 40 (a new US$20 from log 34); plan 34 money table",
+  "date_read": "2026-10-15"
+ },
+ "old_painting_prices_cents": {
+  "value": {
+   "flux_2k": 10,
+   "flux_1k": 2.5,
+   "cut_out_mask": 0.2,
+   "flux_edit_repaint": 10
+  },
+  "unit": "US cents a picture",
+  "kind": "measured",
+  "source": "Project story logs 10-34 (before the per-megapixel price)",
+  "date_read": "2026-10-12",
+  "note": "Superseded for paintings by the 4.8 c/MP charged on 2026-10-16; the plugin's paint-and-cut skill still says 10 c."
+ },
+ "sam_3d_cents_per_painting": {
+  "value": 12,
+  "unit": "US cents a painting's objects",
+  "kind": "measured",
+  "source": "Inventory \"Painting prices\" (plan 34)",
+  "date_read": "2026-10-15"
+ }
+}
+===== script
+{
+ "about": "What a script for newcomers needs, measured on the recorded chapter 2 and its rewrite (log 33). The script gate adds its own limits.",
+ "words_per_sentence": {
+  "value": 9,
+  "unit": "words (about)",
+  "kind": "judged",
+  "source": "Log 33 audit and rewrite (sentences about 8 to 10 words)"
+ },
+ "main_rule_said_times": {
+  "value": 2,
+  "unit": "times, in identical words",
+  "kind": "judged",
+  "source": "Log 33 (the main rule had been said once, 3 minutes in, as one 28-word sentence)"
+ },
+ "real_cases": {
+  "value": 4,
+  "unit": "cases in time order",
+  "kind": "judged",
+  "source": "Log 33 (8 cases changing direction in time 8 times were too many)"
+ },
+ "spoken_figures": {
+  "value": {
+   "before": 37,
+   "after": 28
+  },
+  "unit": "figures in the chapter",
+  "kind": "measured",
+  "source": "Log 33 (the newcomer script carries about 28 spoken figures)"
+ },
+ "stakes_within_seconds": {
+  "value": 30,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Log 33"
+ },
+ "newcomer_script_length": {
+  "value": {
+   "words": 1021,
+   "minutes": 7.25
+  },
+  "unit": "words and minutes",
+  "kind": "measured",
+  "source": "Log 33; Status.md"
+ },
+ "delivery_cues_per_page": {
+  "value": 1,
+  "unit": "leading bracket cue (the accent instruction)",
+  "kind": "judged",
+  "source": "Decisions (voice fix): one identical cue per page, no mood cues, no capitals"
+ }
+}
+===== delivery
+{
+ "about": "The finished film: the sendable copy and the repository.",
+ "sendable_megabytes": {
+  "value": 28,
+  "unit": "MB",
+  "kind": "judged",
+  "source": "finish_film.sh (a file sent in chat must be under 30 MB; decision 16)"
+ },
+ "sendable_audio_kbps": {
+  "value": 128,
+  "unit": "kbps AAC",
+  "kind": "judged",
+  "source": "finish_film.sh"
+ },
+ "sendable_bitrate_factor": {
+  "value": 0.97,
+  "unit": "share kept for overhead",
+  "kind": "judged",
+  "source": "finish_film.sh: video kbps = (28 x 8000 x 0.97) / seconds - 128"
+ },
+ "master_audio_kbps": {
+  "value": 256,
+  "unit": "kbps AAC",
+  "kind": "judged",
+  "source": "finish_film.sh"
+ },
+ "repository_file_max_megabytes": {
+  "value": 90,
+  "unit": "MB (GitHub refuses 100)",
+  "kind": "judged",
+  "source": "Plan 34 \"The repository\"; decisions 27, 30"
+ },
+ "repository_batch_max_megabytes": {
+  "value": 400,
+  "unit": "MB a push",
+  "kind": "judged",
+  "source": "Decisions 27, 30"
+ },
+ "disk": {
+  "value": {
+   "chapter_copy_gb": [
+    1.4,
+    1.6
+   ],
+   "peak_gb": [
+    6.5,
+    7.5
+   ]
+  },
+  "unit": "GB",
+  "kind": "measured",
+  "source": "Plan 34 F2, F15"
+ }
+}

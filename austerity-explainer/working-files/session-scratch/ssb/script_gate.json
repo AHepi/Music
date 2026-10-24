@@ -1,0 +1,119 @@
+{
+ "about": "lint_script.py's own limits for a narration script before recording and the recordings after. The script section holds what log 33 measured; these are the gate's pass marks.",
+ "sentence_words_max": {
+  "value": 20,
+  "unit": "words in one sentence",
+  "kind": "judged",
+  "source": "Design log 35 from log 33 (the rule said as one 28-word sentence; the rewrite's longest is 19)"
+ },
+ "sentence_words_mean_max": {
+  "value": 12,
+  "unit": "words a sentence on average",
+  "kind": "judged",
+  "source": "Design log 35 from log 33 (long sentences ran fastest: 10-13 words a sentence at 169-176 words a minute; aim about 9)"
+ },
+ "figures_per_minute_max": {
+  "value": 6,
+  "unit": "spoken figures a minute of speech",
+  "kind": "judged",
+  "source": "Skeptic log 35, calibrated on chapter 2: the recorded script has 37 figures in 252 s of speech (8.8 a minute, too many), the newcomer script 28 in 407 s (4.1 a minute, accepted); 6 lies between"
+ },
+ "figures_per_minute_look": {
+  "value": 5,
+  "unit": "spoken figures a minute of speech",
+  "kind": "judged",
+  "source": "Skeptic log 35 (a limit of 5-6 a minute)"
+ },
+ "page_words_a_minute_max": {
+  "value": 170,
+  "unit": "words a minute on one page",
+  "kind": "judged",
+  "source": "Inventory 'Speaking speed and holds' (flag pages over 170); log 33 (pages at 174-176 carried the most load)"
+ },
+ "page_speed_over_median_share": {
+  "value": 1.1,
+  "unit": "times the chapter's median page",
+  "kind": "judged",
+  "source": "Design log 35"
+ },
+ "repeated_sentence_words_min": {
+  "value": 5,
+  "unit": "words",
+  "kind": "judged",
+  "source": "lint_script.py; checked on chapter 2's two scripts: at 5 words it finds the newcomer script's rule said on pages 5 and 16 and finds nothing in the recorded script (which said its rule once)"
+ },
+ "guess_phrases": {
+  "value": [
+   "have a guess",
+   "take a guess",
+   "make a guess",
+   "guess what",
+   "what do you think",
+   "think about it",
+   "take a moment"
+  ],
+  "unit": "phrases in a page's last two sentences",
+  "kind": "judged",
+  "source": "Newcomer script (pages 4, 8 and 10 end 'Have a guess.'); lesson 129"
+ },
+ "stake_words": {
+  "value": [
+   "job",
+   "jobs",
+   "out of work",
+   "work",
+   "loan",
+   "loans",
+   "rent",
+   "pay",
+   "wage",
+   "wages",
+   "cost",
+   "costs",
+   "price",
+   "prices",
+   "cure",
+   "money",
+   "afford",
+   "poor",
+   "lose",
+   "lost"
+  ],
+  "unit": "words that say what is at stake",
+  "kind": "invented",
+  "source": "lint_script.py; log 33 (the stakes within the first 30 seconds); a person judges"
+ },
+ "allowed_capitals": {
+  "value": [
+   "NZ",
+   "GDP",
+   "UK",
+   "US",
+   "USA",
+   "OK",
+   "TV",
+   "I"
+  ],
+  "unit": "short forms allowed in capitals",
+  "kind": "judged",
+  "source": "Inventory 'Script lint before paid recording' (a whitelist such as NZ, GDP)"
+ },
+ "year_direction_changes_max": {
+  "value": 1,
+  "unit": "changes of direction in the years said",
+  "kind": "judged",
+  "source": "Design log 35 from log 33 (time changed direction 8 times in the recorded chapter)"
+ },
+ "long_word_letters": {
+  "value": 9,
+  "unit": "letters",
+  "kind": "invented",
+  "source": "lint_script.py: without a common-words list, words this long are listed for a person"
+ },
+ "silence_before_late_word_seconds": {
+  "value": 0.5,
+  "unit": "seconds",
+  "kind": "judged",
+  "source": "Inventory 'Multi-word delivery cue, and a late first word' (extend the first-word check to words after a silence over 0.5 s)"
+ }
+}

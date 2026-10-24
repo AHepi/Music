@@ -1,0 +1,224 @@
+00:00.682  blend            | Read blend: "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/ground.blend"
+{
+ "objects": {
+  "Ground clearing": {
+   "tris": 72624,
+   "verts": 39522,
+   "bbox": [
+    -51.79,
+    -34.02,
+    -0.54,
+    61.02,
+    50.45,
+    0.54
+   ],
+   "relief": 0.094,
+   "fine_edge": 0.278
+  },
+  "Ground forest floor": {
+   "tris": 64034,
+   "verts": 36100,
+   "bbox": [
+    -190.0,
+    -190.0,
+    -0.89,
+    190.0,
+    190.0,
+    0.87
+   ],
+   "relief": 0.247,
+   "fine_edge": 0.28
+  },
+  "Ground road high_road": {
+   "tris": 157634,
+   "verts": 81832,
+   "bbox": [
+    -142.44,
+    -36.49,
+    -0.89,
+    142.48,
+    4.51,
+    0.63
+   ],
+   "relief": 0.188,
+   "fine_edge": 0.065
+  },
+  "Ground road stable_lane": {
+   "tris": 18996,
+   "verts": 9723,
+   "bbox": [
+    18.44,
+    4.24,
+    0.02,
+    25.15,
+    24.08,
+    0.31
+   ],
+   "relief": 0.074,
+   "fine_edge": 0.046
+  },
+  "Ground verge high_road": {
+   "tris": 29406,
+   "verts": 20753,
+   "bbox": [
+    -143.81,
+    -37.7,
+    -0.79,
+    143.82,
+    5.61,
+    0.61
+   ],
+   "relief": 0.163,
+   "fine_edge": 0.096
+  },
+  "Ground verge stable_lane": {
+   "tris": 3257,
+   "verts": 2017,
+   "bbox": [
+    17.32,
+    5.33,
+    0.11,
+    26.21,
+    24.19,
+    0.3
+   ],
+   "relief": 0.006,
+   "fine_edge": 0.09
+  },
+  "Ground yard": {
+   "tris": 37319,
+   "verts": 18959,
+   "bbox": [
+    13.85,
+    23.73,
+    0.14,
+    34.1,
+    36.0,
+    0.35
+   ],
+   "relief": 0.057,
+   "fine_edge": 0.07
+  }
+ },
+ "random_points": 6000,
+ "gaps": 1526,
+ "gap_examples": [
+  [
+   140.1305142628105,
+   329.43199768250906
+  ],
+  [
+   848.3480908455315,
+   -29.625154727254085
+  ],
+  [
+   532.6834789167219,
+   617.0597362721928
+  ],
+  [
+   463.99442744104704,
+   446.54058632951933
+  ],
+  [
+   -529.8256344860542,
+   -490.0927372915553
+  ]
+ ],
+ "multi_hit_differing": 0,
+ "multi_examples": [],
+ "max_z_diff_on_multi_hits": 0.0,
+ "pads": {
+  "A": {
+   "range": 0.0039,
+   "mean": -0.235
+  },
+  "B": {
+   "range": 0.0039,
+   "mean": -0.006
+  },
+  "C": {
+   "range": 0.0039,
+   "mean": -0.296
+  },
+  "D": {
+   "range": 0.0039,
+   "mean": -0.05
+  },
+  "stable": {
+   "range": 0.0713,
+   "mean": 0.302
+  }
+ },
+ "doorway_range": 0.0938,
+ "max_slope_within_40m_of_buildings(2m baseline)": 0.0936,
+ "outside_land_range": [
+  -0.854,
+  0.821
+ ],
+ "z_NE_corner": 0.485,
+ "z_SW_corner": -0.502,
+ "roads": [
+  {
+   "name": "high_road",
+   "ground_objects": [
+    "Ground clearing",
+    "Ground forest floor",
+    "Ground road high_road",
+    "Ground road stable_lane",
+    "Ground verge high_road",
+    "Ground verge stable_lane",
+    "Ground yard"
+   ],
+   "relief_m": 0.2472,
+   "ruts_found": true,
+   "rut_depth_m": 0.1016,
+   "gauge_m": 1.333,
+   "gauge_in_settings_m": 1.4
+  },
+  {
+   "name": "stable_lane",
+   "ground_objects": [
+    "Ground clearing",
+    "Ground forest floor",
+    "Ground road high_road",
+    "Ground road stable_lane",
+    "Ground verge high_road",
+    "Ground verge stable_lane",
+    "Ground yard"
+   ],
+   "relief_m": 0.2472,
+   "ruts_found": true,
+   "rut_depth_m": 0.0791,
+   "gauge_m": 1.417,
+   "gauge_in_settings_m": 1.4
+  }
+ ],
+ "fine": {
+  "high_road": {
+   "median_depth": 0.1162,
+   "p10_depth": 0.0868,
+   "p90_depth": 0.1484,
+   "median_gauge": 1.36,
+   "gauge_p10": 1.36,
+   "gauge_p90": 1.4
+  },
+  "stable_lane": {
+   "median_depth": 0.0864,
+   "p10_depth": 0.0751,
+   "p90_depth": 0.1104,
+   "median_gauge": 1.4,
+   "gauge_p10": 1.4,
+   "gauge_p90": 1.44
+  }
+ },
+ "road_triangle_quality": {
+  "min": 0.0003,
+  "p1": 0.326,
+  "p10": 0.505,
+  "median": 0.86,
+  "below_0.1": 389
+ }
+}
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

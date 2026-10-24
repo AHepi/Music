@@ -1,0 +1,82 @@
+00:00.765  blend            | Read blend: "/home/user/Music/austerity-explainer/film-kit/assets/models/pit-village/notice-corner.blend"
+/home/user/Music/plugins/explainer-film/kit/paper-film/blender/make_check_file.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if material is None or not material.use_nodes:
+make_check_file: wrote out/notice-corner-end-check.json for view end (still_life), camera "main_camera"
+  groups (17): notice, board, winding wheels, chimney, drum, chair, lantern, pail, handcart, sacks, barrel, dustbins, lamp post, left lamp, gates, coal-tub-on-track, colliery-name-board
+    declared in the shot list: notice, board, winding wheels, chimney
+  story (shot list): board, drum, chair, lantern, pail; subject notice; support board
+  must_read: notice
+  on_ground: board, drum, chair, pail, handcart, sacks, barrel, dustbins, lamp post, left lamp, coal-tub-on-track, colliery-name-board; stands_on: {'lantern': 'chair'}
+  lights_in_story: lantern (glowing share of each story group: board 0.00, drum 0.11, chair 0.00, lantern 0.23, pail 0.00)
+  pairs_also: winding wheels, chimney, handcart, sacks, barrel, dustbins, lamp post, left lamp, gates, coal-tub-on-track, colliery-name-board
+  eye_height [1.5, 1.9], story_reaches_down 0.7, sky "sky_dome*", title_zone [0.06, 0.02, 0.69, 0.22]
+  match_excludes: notice (lettered (a board's border is its strongest edge)); board (dark (base colour 0.016)); sacks (bars (0.17 of its outline filled)); lamp post (bars (0.26 of its outline filled)); left lamp (bars (0.26 of its outline filled)); gates (bars (0.23 of its outline filled), dark (base colour 0.015))
+  figures: none; kind_of_shot ['still_life']; accepted: 4
+  (check_shot.py reads kind_of_shot, figures, fill, support_surfaces and accepted; "band", "match_excludes" and "own_surface_materials" are for the next tools and the page)
+  note: title zone: the largest 85%-sky rectangle of the words band (79% of the band is sky)
+
+Against the hand-made check file:
+  groups: 15 of 15 hand groups hold exactly the same drawn objects as a generated group
+  generated only: coal-tub-on-track, colliery-name-board
+  subject: same
+  support: same
+  story: same
+  work: same
+  pairs_also: only in the hand file: -; only generated: barrel, chimney, coal-tub-on-track, colliery-name-board, gates
+  on_ground: only in the hand file: -; only generated: coal-tub-on-track, colliery-name-board, sacks
+  must_read: same
+  lights_in_story: same
+  box_excludes: same
+  stands_on: hand {'lantern': 'chair'}, generated {'lantern': 'chair'}
+  size: same
+  lines: same
+  lines_key: same
+  eye_height: same
+  title_zone: hand [0.05, 0.02, 0.62, 0.12], generated [0.06, 0.02, 0.69, 0.22]
+  story_reaches_down: hand null, generated 0.7
+  sky: same
+
+Settings used (film-settings.json):
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  shot_kind_profiles.still_life.rules.main_rule_spot_box = [0.4, 0.5] share of width x height (measured)
+  shot_kind_profiles.still_life.rules.rule1_meeting_point_gap = 0.03 share of the width (judged)
+  shot_kind_profiles.still_life.rules.rule2_eye_height = [1.5, 1.9] metres above the surface under the camera (judged)
+  shot_kind_profiles.still_life.rules.rule3_story_box = [0.4, 0.5] share of width x height (measured)
+  shot_kind_profiles.still_life.rules.rule3_story_together_metres = 0.3 metres between footprints (judged)
+  shot_kind_profiles.still_life.rules.rule4_near_touch = {"overlap_min": 20, "gap_min": 25} pixels at 1536 wide (judged)
+  shot_kind_profiles.still_life.rules.rule4_between_figures = {"overlap_min": 20, "gap_min": 25} pixels at 1536 wide (judged)
+  shot_kind_profiles.still_life.rules.rule5_subject_brightness_ratio = 1.8 times the frame's mean (measured)
+  shot_kind_profiles.still_life.rules.rule5_brightest_share_on_subject = 0.4 share of the brightest 3% (measured)
+  shot_kind_profiles.still_life.rules.rule5_brightest_share_in_story_box = 0.75 share of the brightest 3% (measured)
+  shot_kind_profiles.still_life.rules.rule5_nothing_in_story_as_bright = 0.05 brightness below the subject's median (judged)
+  shot_kind_profiles.still_life.rules.rule5_top_third_brightness = 0.36 mean brightness (0 to 1) (measured)
+  shot_kind_profiles.still_life.rules.rule6_warm_share = [0.015, 0.03] share of the frame (measured)
+  shot_kind_profiles.still_life.rules.rule6_lit_from_below = 0.1 (r - b)/(r + b) bottom minus top (judged)
+  shot_kind_profiles.still_life.rules.rule7_story_reaches_down = 0.7 down the frame (judged)
+  shot_kind_profiles.still_life.rules.rule8_work_prop_share = 0.02 share of the frame (measured)
+  shot_kind_profiles.still_life.rules.rule8_bottom_left_share = 0.01 share of the frame per thing (judged)
+  shot_kind_profiles.still_life.rules.rule10_quiet_side_weight = [0.4, 0.48] share of the weight (judged)
+  shot_kind_profiles.still_life.rules.rule10_nothing_on_quiet_side_outshines = 1.0 times the subject's brightness (judged)
+  shot_kind_profiles.still_life.rules.rule12_must_read_right_edge = 0.9 share of the width (judged)
+  shot_kind_profiles.still_life.rules.rule12_story_right_edge = 0.95 share of the width (in 0.45-0.95 down) (judged)
+  shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share = 0.85 share of the title zone that is sky (judged)
+  shot_kind_profiles.still_life.rules.resting_on = the street (ground rays; "landed high" over 0.5 m) rule (judged)
+  shot_kind_profiles.still_life.rules.slide_magnification = painting limit times nearer at the nearest painted surface (measured)
+  views_and_models.check_file.prop_collections = ["props", "signs", "gates", "pop-up", "men*", "workers*", "figures*", "people*", "walkers*", "checkout"] collection name patterns where a place's assemble script puts props and figures (judged)
+  composing.shot_facts_groups_max = 20 groups (measured)
+  views_and_models.lettering_material_patterns = ["*-lettering", "*-lettering.0*", "*-stencil", "*-stencil.0*", "*-printing", "*-printing.0*", "*-paper", "*-paper.0*"] material name patterns (lower case, * any letters) (judged)
+  views_and_models.check_file.light_prop_glow_share = 0.15 share of a story group's own surface that glows (judged)
+  views_and_models.check_file.on_ground_within_metres = 0.05 metres between a group's lowest point and a declared ground (road, pavement, ground, floor) (judged)
+  views_and_models.check_file.ground_kinds = ["ground", "road", "pavement", "floor"] support surface kinds that count as the ground for check_shot's on_ground (judged)
+  views_and_models.check_file.sky_pattern_outdoors = sky_dome* object name pattern (judged)
+  safe_area.text_left_pixels = 65 pixels (0.06 of the width) (judged)
+  safe_area.text_right_pixels = 972 pixels (0.90 of the width) (judged)
+  safe_area.title_band_down = [0.05, 0.22] down the frame (judged)
+  views_and_models.check_file.figure_collections = ["men*", "workers*", "figures*", "people*", "walkers*"] collection name patterns holding figures (judged)
+  views_and_models.check_file.thin_pixels = 6 pixels across at the film frame (the group's narrow side) (judged)
+  views_and_models.check_file.dark_base_brightness = 0.02 area-weighted base colour brightness of a group's materials (linear, 0 to 1) (invented)
+  views_and_models.check_file.thin_fill_share = 0.3 share of a group's outline its faces fill, seen square on (invented)
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

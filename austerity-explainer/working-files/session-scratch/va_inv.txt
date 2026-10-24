@@ -1,0 +1,300 @@
+###### Lettering, figure and landmark audit per view
+{
+"name": "Letter height needed for a reading distance",
+"area": "lettering and signs",
+"how_found": "Measured or worked out in every round: round 1 film-distance renders; round 2 measured props from the saved models (bank letters 0.2 m, not 0.29); round 3 resized the bank sign; T12 in the plan; round 4 critic's W4 target.",
+"final_value_or_rule": "px = letter_m x 1649.4 / d. Seen: 14 px (No. 1/No. 2 boards in W3) 'tiny on a phone'; 15 to 17 px (BANK 0.2 m at 20 to 22 m) marginal; 24 to 29 px (BANK 0.305 m) 'easy to read on a phone'; 26 px (4 cm headline at 2.5 m) too small for a headline; about 40 px the plan's test; about 60 px (0.1 m bill letters at about 2.75 m) readable on a phone; WAGES 1.8 cm = 5 px at 6 m, readable only within about 3 m; W4 target WAGES >= 25 px. Placard 0.12 m at 7 m = 28 px; No. 1 board 41 px in W1.",
+"evidence": "round1-result.json built[0].tested 'Film-distance check'; round2-result.json props_fixes.summary and checked.findings (bank, wages); round3-result.json fixes.summary (0.305 m); round4-result.json critique.findings[9]; PLAN lines 272-274, 281, 392, 549-554, 1438",
+"computable_from": "sign positions, letter heights from lettering-sizes.json, camera spots, script (which words must be read)",
+"proposed_calculation": "letter_m_needed = target_px x d / 1649.4 (target 25 px to be readable, 40 to 60 px for a headline the viewer must read). For every lettered prop and every view that shows it, print px and flag words below 16 px that the script needs read (then a typed label must carry them).",
+"already_automatic": "Partly: the prop builder writes lettering-sizes.json and index.json letter heights; no per-view pixel calculator.",
+"llm_tip": "Size every sign from its camera distance: letters need about 25 px on the 1920 frame to read on a phone; below about 16 px let a typed label carry the word.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Lettering big enough to read on a phone",
+"area": "lettering and signs",
+"how_found": "Log 32, left for later: PITS WILL BE CLOSED is 11 px tall; about 18 px would read easily. Log 34: drums whose words couldn't be read, then PETROL and DIESEL made readable.",
+"final_value_or_rule": "Key lines at least about 18 px tall on the 1080 \u00d7 1920 frame.",
+"evidence": "story L1245-1247 (log 32), L1376-1378 (log 34)",
+"computable_from": "the letters' height in metres, the camera and the lens",
+"proposed_calculation": "Height on screen = letter height (m) \u00d7 (H/2) / tan(vfov/2) / depth. Choose letter height = 18 px \u00d7 depth \u00d7 2 tan(vfov/2) / H at the shot's end frame, and flag anything smaller.",
+"already_automatic": "No.",
+"llm_tip": "Size key lettering for the end frame of the move, where it has to be read.",
+"from": "story-log"
+}
+---
+{
+"name": "Lettering size on screen and readability thresholds",
+"area": "lettering and signs",
+"how_found": "Logs 29-34: notice's PITS WILL BE CLOSED 11 px 'only just readable', about 18 px reads easily; WAGES 5 px flat (unreadable) -> stood up, >= 25 px; BANK 29 px vs 14 px boards drew the eye -> dimmed to 0.3 then 0.15; plan's 22 px for BANK actually 15-17 px; W1 board 50 px.",
+"final_value_or_rule": "Must-read lettering >= about 20-25 px cap height on 1080x1920; any lettering that is not the subject must be smaller or dimmer than the subject's; lettering lying flat is foreshortened by sin(view angle).",
+"evidence": "works-shot.json letter_pixels (written by assemble_works.py lines 1567-1578); round2 finding 20, 25; round3 finding 38; works-effects.js BANK_SIGN dim 0.15; project story log 32 'Left for later'",
+"computable_from": "letter heights (lettering-sizes.json from the prop painter), sign positions and normals, camera and fov",
+"proposed_calculation": "px = h_m x 1920/(2 x d x tan(vfov/2)) x max(0.05, cos(angle between sign normal and view ray)); compute for every must_read group in every view; fail < 20 px; warn if any non-subject lettering > subject's px x 1.2 (then dim or move it).",
+"already_automatic": "assemble_works.py computes letter_pixels for the Works only (film kit); scratch film_distance_check.py and pit-village/props/readability_test.py render tests; nothing generic, nothing in plugin.",
+"llm_tip": "Compute each sign's letter height in pixels at every view before building; under 20 px it will not read and the painter will garble it.",
+"from": "tools-and-plugin-gap"
+}
+---
+{
+"name": "Letter height on screen for words that must or must not be read",
+"area": "lettering and signs",
+"how_found": "Log 32: PITS WILL BE CLOSED only 11 px tall, 'about 18 would read easily'. Plan 34: W1 board about 41 px a letter, W3 boards 16 to 27 px; round 4: BANK 29 px still read, No. 1 and No. 2 about 14 px; WAGES should be at least about 25 px.",
+"final_value_or_rule": "Words meant to be read: key lines at least about 18 px tall on the 1920-tall frame (25 px for a single word like WAGES); words not meant to be read on that page: dimmed (0.15) or about 14 px or less.",
+"evidence": "Project story log 32 'Left for later'; 34 Plan lines 260-275; round4-result.json findings 10 and 12",
+"computable_from": "letter heights in metres on the sign models and their depth",
+"proposed_calculation": "letter_px = f*letter_height_m/d; scale the sign or bring it nearer until key lines reach 18 px at the composed frame; flag readable signs not in the script.",
+"already_automatic": "No.",
+"llm_tip": "Compute each sign's letter size at the composed spot; 18 px tall is about the least a phone viewer reads.",
+"from": "notice-corner-and-checker"
+}
+---
+{
+"name": "Words meant to be read face the camera",
+"area": "lettering and signs",
+"how_found": "T12: a headline at 4 cm letters unreadable; replaced by a newspaper bill in a wire stand. Kitchen letter: lying flat it shrinks to a third of its height, so propped against a mug facing us. Round 2: WAGES lying flat was 1 to 2 px tall foreshortened; round 3 stood it on edge leaning back 14 deg.",
+"final_value_or_rule": "Lettering to be read stands upright facing the camera (lean at most about 15 deg); foreshortening factor = sin(angle between the sign's plane and the line of sight).",
+"evidence": "PLAN lines 391-393, 504-506, 1438; round2-result.json checked.findings[5]; round3-result.json fixes.summary 'New prop, tin-mug-and-wages-envelope'",
+"computable_from": "sign normal, camera spot",
+"proposed_calculation": "effective_px = letter px x |dot(sign normal, direction to camera)|; flag if < 0.85 for must-read words.",
+"already_automatic": "No.",
+"llm_tip": "Prop up any paper the viewer must read so it faces the lens; flat on a table it all but vanishes.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Turn round lettered props to face the camera",
+"area": "lettering and signs",
+"how_found": "Round 1: each drum stencil wraps about 86 deg round the drum, so from a side angle the first or last letter turns away. Round 5 set turns per drum.",
+"final_value_or_rule": "Turn each drum so its stencil's middle faces the camera: No. 1's PETROL +12 deg, DIESEL +8 deg; No. 2's mirrored (-12, -8).",
+"evidence": "round1-result.json built[0].summary 'The drums need turning'; round5-set/tools/new_layout.txt DRUM_SPOTS; assemble_works.py line 912",
+"computable_from": "prop position, stencil's facing at turn 0, camera spot",
+"proposed_calculation": "turn = atan2(cam_x - x, -(cam_y - y)) in the stencil's frame (stencil faces -y at 0); for several views pick the turn that maximises the minimum |cos| over the views that must read it.",
+"already_automatic": "No.",
+"llm_tip": "Turn each drum or curved sign toward the camera that must read it, by the angle from the prop to the lens.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "A sign the page does not mention must not be the loudest word",
+"area": "lettering and signs",
+"how_found": "Round 3 check: BANK (29 px, lit by a gas lamp) was the clearest word in W3 on pages that never mention a bank; boards about 14 px. Round 4 dimmed it to 0.3 (118 to 52 levels; No. 1 board 120): still 'easy to read' per critic. Round 5: 0.15 until page 9, then brightened with the window.",
+"final_value_or_rule": "BANK_SIGN.dim = 0.15 (board and lettering, own copy of the board paint) until its page; measured in film 57 vs 128 levels at 0.3.",
+"evidence": "KIT/paper-film/scenes/inflation-chapter-2-newcomers/works-effects.js lines 132-138; round3-result.json checked.findings[7]; round4-result.json critique.findings[14], pageFixes.summary, film.summary",
+"computable_from": "script word times (when a word is first said), own-surface signs and their brightness in the plate",
+"proposed_calculation": "For each page and view: list legible signs (px >= 20); for signs whose word is not in that page's narration, set dim = (0.4 x brightness of the least bright sign that is named) / own brightness, at most 0.3; undim on the first spoken use.",
+"already_automatic": "No (the dim value was tuned by hand).",
+"llm_tip": "Dim or hide any readable sign until the narration names it; viewers read the clearest word first.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Boards seen from behind carry their lettering too",
+"area": "lettering and signs",
+"how_found": "Round 4 critic: from inside the yard (W4) the back of No. 2's board was a big blank plank in the top left.",
+"final_value_or_rule": "Any board visible from both sides is lettered on both, or turned.",
+"evidence": "round4-result.json critique.findings[9]",
+"computable_from": "views list, sign normals",
+"proposed_calculation": "For every sign and view: if dot(sign front normal, direction to camera) < 0 and the sign is visible, require a back lettering material or flag.",
+"already_automatic": "No.",
+"llm_tip": "Check each sign from every camera that sees it; a blank back is a blank plank sign on screen.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Places and sizes of the bank and its sign across views",
+"area": "camera and composition",
+"how_found": "T2/T10: bank was a sliver; plan moved it to the lane's last third. Round 3: any further up, its hanging sign would hang across W1's view; put at the left terrace's third building (17 to 21.5 m from W3), sign at 3.75 m (above W1's frame).",
+"final_value_or_rule": "An own-surface sign meant for one view must project outside the frames of the other views (or sit above them).",
+"evidence": "assemble_works.py lines 165-167; round3-result.json works.NOT DONE 'Away from the plan, on purpose'",
+"computable_from": "sign positions, all camera spots",
+"proposed_calculation": "For each sign and each view that shouldn't show it, project; flag if it falls inside the frame.",
+"already_automatic": "No.",
+"llm_tip": "Check every sign placed for one view against all the other views that share the set.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Chimney tops must not sit in the words band",
+"area": "camera and composition",
+"how_found": "Round 2: from gate views only the top 8 to 9 m of each chimney showed and tops fell at 0.07 to 0.14 down, inside the band kept for words. Round 3 check worked out the fix: 15 m further back or about 20 m tall puts them near 0.18 to 0.25 down in W2 and 0.28 to 0.34 in W3. Round 2: a full-height mill 8 m behind the wall hid most of a 25 m chimney 35 m back; mills kept to 2 storeys (eaves 7.8 m), measured by ray casts.",
+"final_value_or_rule": "down_top = 0.5 - (h_top - eye) x 1649.4 / (d x 1920); keep it below the title band (>= 0.24) or put words beside it, not over it; something tall in front (mill eaves) must not hide the identifying feature: visible chimney length W3 12 to 13 m.",
+"evidence": "round2-result.json factories.summary 'A conflict in the plan'; round3-result.json checked.findings[2]; round2-result.json checked.findings[0]",
+"computable_from": "model heights and positions, camera spots, title zone",
+"proposed_calculation": "For each view and marker: compute down_top; if < title_zone bottom + 0.02, solve for the height or distance that gives 0.24 (h = eye + (0.5 - 0.24) x 1920 x d / 1649.4) and report both; ray-cast from the camera to the marker to report visible length.",
+"already_automatic": "No.",
+"llm_tip": "Project every tall landmark's top: anything above about 0.24 down collides with the typed words.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Telling-apart features stay pale against the sky",
+"area": "light",
+"how_found": "Round 2 check: from street level No. 2's chimneys came out dark red-brown against the dusk (tops 15 levels vs sky 75) and seemed to rise out of No. 1's roof, so No. 1 looked like it had three chimneys. Round 3 made them pale buff with a little self-glow.",
+"final_value_or_rule": "No. 2's chimneys tint 1.0/0.95/0.84 over white sandstone, sooted only near the cap, a small emissive glow on the lane-facing sides; measured 70 to 116 in W1 and 105 to 134 in W3 vs No. 1's about 10. Round 2 factories helper: at phone size the factories are told apart more by count (one vs two), tone (dark vs pale) and the tank than by round vs square.",
+"evidence": "KIT/paper-film/blender/inflation-chapter-2-newcomers/works/build_factories.py lines 99-100 and 210-221; works_kit.py lines 126-158; round2-result.json checked.findings[1]; round3-result.json fixes.summary",
+"computable_from": "plate, outlines of the identifying features",
+"proposed_calculation": "For each identifying feature, measure its mean luminance vs the sky band behind it and vs the other factory's same feature in every view; require a difference of at least 40 levels and the planned order (No. 1 dark, No. 2 pale).",
+"already_automatic": "No.",
+"llm_tip": "Tell two places apart by count and light-vs-dark first; shape differences vanish at phone size.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Background landmarks must not borrow a factory's identity",
+"area": "models and Blender",
+"how_found": "Round 2: gasholder loomed beside No. 1's chimney; far chimneys rose over a factory roof. Round 3 put the gasholder and church on 38 m hills; round 3 check: now bigger than No. 1's chimney and read as a tank on No. 1's side. Round 4 moved the gasholder out of every view.",
+"final_value_or_rule": "No background object of the same kind as an identifying feature (tank, chimney) within a factory's column in any view; nothing in a column bigger on screen than its factory's own identifying feature.",
+"evidence": "round2-result.json factories.tested 'Earlier fixes'; round3-result.json checked.findings[6]; round4-result.json set.summary 'The gasholder'",
+"computable_from": "far-town objects, identifying features, camera spots",
+"proposed_calculation": "Project every background object; for each factory column (screen x range of its identifying features +-0.05), flag background objects with screen height >= the feature's or tagged as the same kind.",
+"already_automatic": "No.",
+"llm_tip": "Keep background tanks and chimneys out of each building's column, or they will be counted as its own.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Factory scale and identifying features",
+"area": "models and Blender",
+"how_found": "Round 2 factories built at true scale; chimney visibility measured by ray casting; plan required true scale (old 3.2 m shed).",
+"final_value_or_rule": "Mills 22 x 22 m, front 8 m behind the wall, 2 storeys (eaves 7.8 m); No. 1: one round chimney 26 m (2.9 m to 1.84 m), 35 m behind the wall in line with its outer pier, sawtooth peaks 10.2 m; No. 2: two square chimneys 25 and 23 m (2 m to 1.36 m) at (5.3, 35) and (8.6, 38.5), water tank 3 x 3 x 2.8 m, top 14.8 m, lantern roofs to 10.9 m. Lane 22 m, carriageway 6, pavements 2.2; gates 3 m wide, 7 m apart; wall 4 m; dividing wall 5.5 m.",
+"evidence": "round2-result.json factories.summary; build_factories.py lines 122-123; assemble_works.py lines 122-157",
+"computable_from": "script (what must be told apart), camera spots",
+"proposed_calculation": "Size identifying features so each projects at least 60 px wide at phone scale... i.e. at least 200 px tall on the film frame in the overview, using the projector.",
+"already_automatic": "No.",
+"llm_tip": "Build at true size and check by ray cast that the identifying feature shows over what stands in front of it.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Telling two similar buildings apart",
+"area": "models and Blender",
+"how_found": "Log 34 round 2: No. 1 became dark red brick with one round chimney, No. 2 pale stone with two square chimneys and a tank, so they're told apart at a glance.",
+"final_value_or_rule": "Different in brightness, colour and outline.",
+"evidence": "story L1369-1371 (log 34)",
+"computable_from": "the models",
+"proposed_calculation": "Render both outlines. Require a mean brightness difference of 20% or more and outline overlap (IoU) of 0.7 or less.",
+"already_automatic": "No.",
+"llm_tip": "Things the viewer must tell apart need different outlines and values, not just colours.",
+"from": "story-log"
+}
+---
+{
+"name": "Continuity across views of one place",
+"area": "checking and critique",
+"how_found": "Plan 34 'How the two factories stay the same' (9 points) and round 2-3 findings (No. 2's chimneys read as No. 1's; a gasholder read as a tank on the wrong side; BANK louder than the factory names).",
+"final_value_or_rule": "One set file, fixed left/right, shapes that differ (round vs square chimneys, tank), matched gate views (mirror spots, same lens), one painting chain, one shared effects module with fixed seeds, a continuity sheet of one still per view checked before filming.",
+"evidence": "34 Plan 'How the two factories stay the same'; film-kit/paper-film/blender/inflation-chapter-2-newcomers/works/make_works_continuity_sheet.py",
+"computable_from": "views list and the set",
+"proposed_calculation": "Generic continuity_sheet.py over any set's views; automatic check that mirrored views have equal fov and mirrored positions within 0.05 m.",
+"already_automatic": "Works-only sheet script (film kit); not in plugin.",
+"llm_tip": "When a place returns on several pages, keep one set, one effects module and fixed seeds, and check a sheet of every view side by side.",
+"from": "tools-and-plugin-gap"
+}
+---
+{
+"name": "Continuity sheet across views",
+"area": "checking and critique",
+"how_found": "Plan's 'how the two factories stay the same'; round 3 and 4 built one from the checker's measurements.",
+"final_value_or_rule": "One still per view side by side; counts per view (men 7, 7, 0, 0, 8, 8); No. 1 always left of No. 2; one round vs two square chimneys; boards consistent; same smoke and flicker seeds and wind on every page.",
+"evidence": "PLAN lines 1081-1107; round3-result.json works.summary 'Continuity sheet'; works-effects.js lines 111-117 (SEEDS)",
+"computable_from": "shot facts of every view",
+"proposed_calculation": "From each view's shot facts, count figures and identifying parts; compare against the state table; fail on any mismatch.",
+"already_automatic": "Partly: make_works_continuity_sheet.py (film kit, Works only).",
+"llm_tip": "Check every repeat view against one table of what must be the same.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Readable words: contrast and a dark band over busy sets",
+"area": "lettering and signs",
+"how_found": "Lesson 53: pale labels on pale walls couldn't be read. Lesson 66: words over a busy set (chimneys, papers on a desk) need a soft dark band, as the street already had.",
+"final_value_or_rule": "Use a dark plate behind the words (callout plate: true) or a soft dark band wherever the background is pale or busy.",
+"evidence": "Lessons.md:210-214, 260-261; plugin/skills/build-cinema-page/guide.md ('Pale words on pale surfaces vanish')",
+"computable_from": "a still at each word's moment + the word's screen box",
+"proposed_calculation": "For every on-screen text, take the still at mid-display. Measure the background behind its box (widened 20 px): the luminance contrast ratio (L1+0.05)/(L2+0.05) against the text colour, and how busy it is (std of a Laplacian). If contrast < 4.5 or the business is above the value measured behind chapter 2's accepted street titles, turn plate: true on automatically, or report it.",
+"already_automatic": "No.",
+"llm_tip": "Check every word at phone size against what is behind it, not on a plain test background.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Title size and contrast",
+"area": "lettering and signs",
+"how_found": "Log 19: labels pale on pale walls. Log 20: a soft dark band behind words on the desk. Log 29: the opening title was too small and was made larger. Log 32: the amber 1926 was faint against the sky, so a soft dark band went behind it.",
+"final_value_or_rule": "Titles go in dim sky away from the brightest lamp, with a soft dark band behind when needed, and big enough to read.",
+"evidence": "story L596-597 (log 19), L655-656 (log 20), L972-973 (log 29), L1232-1233 (log 32); 07 rule 12",
+"computable_from": "the title's text, colour and position, and the frame behind it",
+"proposed_calculation": "Measure the contrast between the text colour and the background under it. If it is below 4.5 to 1, add a band with the smallest opacity that reaches 4.5 to 1. Flag titles whose letters are under about 3.5% of the frame's height (to confirm).",
+"already_automatic": "No.",
+"llm_tip": "Measure title contrast on the actual frame behind it, not on the design.",
+"from": "story-log"
+}
+---
+{
+"name": "A soft dark band behind words over sky or smoke",
+"area": "timing and words on screen",
+"how_found": "Plan T13; round 3 and 4 set helpers measured only 28 to 49% of the title band is sky in the gate views (roofs and chimneys fill it).",
+"final_value_or_rule": "Words cross smoke or chimneys only over a soft dark band; title zone brightness at most 0.36.",
+"evidence": "PLAN lines 178-179 and 1439; round3-result.json works.NOT DONE 'The words band'; round4-result.json set.NOT DONE",
+"computable_from": "plate (title zone), smoke path, word boxes",
+"proposed_calculation": "If the title zone's sky share < 0.6 or its brightness > 0.36, or the traced smoke path crosses a word box, draw the band automatically under those words.",
+"already_automatic": "Partly: check_shot.py measures the title zone; the band is added by hand.",
+"llm_tip": "If the area behind the words isn't plain dark sky, put a soft dark band behind them.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Letters that change into other letters in cut-out fonts",
+"area": "lettering and signs",
+"how_found": "Lesson 13: a cut-out T read as I ('THREE PARIS'), and a narrow I read as two lines or a slash. Serif fonts give the T a foot; outline and slanted fonts thin the I. Fix: those letters skip those fonts. Checked by redrawing every title and reading it at full size.",
+"final_value_or_rule": "T never in serif fonts; I never in outline or slanted fonts. Read every title letter by letter at full size.",
+"evidence": "Lessons.md:48-51; Lessons.md:501 (trap)",
+"computable_from": "the rendered title pictures + their intended text",
+"proposed_calculation": "Render each title, run OCR (tesseract, single-line mode), and compare it with the intended text letter by letter. Any mismatch fails and names the letter and font.",
+"already_automatic": "No kit check (the fix lived in chapter 1's scrapbook label code; the paper and cinema looks use plain Inter).",
+"llm_tip": "Use one plain heavy font (Inter) for words. If you mix fonts, OCR every title.",
+"from": "lessons-and-notes"
+}
+---
+{
+"name": "Letters hidden by tacks, stains or props",
+"area": "lettering and signs",
+"how_found": "Log 29: a rust stain from a tack hid the A of ABBOTSCLOUGH, another tack punched a hole in the E of NOTICE, and the colliery sign was cut to stray letters. Log 31: the checker first missed a post across the notice's words (fixed).",
+"final_value_or_rule": "No decal or prop over key lettering; signs not cut by the frame.",
+"evidence": "story L956-957, L961-963 (log 29), L1113-1114 (log 31)",
+"computable_from": "the glyph boxes from the lettering script and the id pictures",
+"proposed_calculation": "Export each key line's letter boxes. Check that no other group or decal overlaps them on screen, and that no sign is cut by the frame's edge.",
+"already_automatic": "Partly: check_shot checks words of the subject hidden by a prop in front. Decals are not checked.",
+"llm_tip": "Place tacks and stains from the letters' boxes, never by eye.",
+"from": "story-log"
+}
+---
+{
+"name": "Plank joints and stripes kept off letters",
+"area": "lettering and signs",
+"how_found": "Round 1: plank joints ran through 'No. 1' like a strike-through. Round 2: three planks, a wide middle plank carries the lettering, joints 3 to 4 cm clear; painter and builder stop if a joint would cross a letter.",
+"final_value_or_rule": "Board joints at least 3 to 4 cm clear of any letter; the build refuses otherwise.",
+"evidence": "round1-result.json checked.findings[10]; round2-result.json props_fixes.summary 'Gate boards'",
+"computable_from": "lettering-sizes.json (where letters fall) and board build constants",
+"proposed_calculation": "Compute joint lines from plank widths; assert min distance to every letter's box >= 0.03 m; else re-split planks.",
+"already_automatic": "Yes in build_chapter_2_props.py / paint_chapter_2_pictures.py (they stop); not in the plugin kit.",
+"llm_tip": "Keep every line on a sign (joints, borders) clear of the letters, or the word reads as crossed out.",
+"from": "redesign-rounds"
+}
+---
+{
+"name": "Only narrated figures on set; scan all lettering for digits",
+"area": "lettering and signs",
+"how_found": "Plan's lettering rules and Traps; round 2 prop checker read every .glb directly ('only digits are No. 1 and No. 2'); round 4 film helper's words_check.py compared all 29 typed lines with the timeline (0 problems).",
+"final_value_or_rule": "No numerals in the set except 'No. 1' and 'No. 2'; no prices, keypads, door, lane or close numbers, dates, phone numbers; typed words only short forms of what is said on that page.",
+"evidence": "PLAN lines 181-191 and 1454-1457; round2-result.json props_fixes.tested; round4-result.json film.tested 'Words'",
+"computable_from": "lettering strings in the prop index, page files' text, narration word times",
+"proposed_calculation": "Collect every lettering string (index.json, lettering-sizes.json) and every typed string in the page files; flag any digit sequence or number word not spoken on that page; flag any typed line whose content words are not in that page's narration.",
+"already_automatic": "No (scratch words_check.py and a scratch prop checker).",
+"llm_tip": "Before building, list every word and number that will be on screen and tick each against the narration.",
+"from": "redesign-rounds"
+}
+---

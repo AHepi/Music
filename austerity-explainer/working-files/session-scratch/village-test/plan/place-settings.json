@@ -1,0 +1,68 @@
+{
+ "about": "DRAFT place settings for the forest village, written by the planner on 2026-10-23 (nothing was built or measured). The builders and the integrator improve it. Look: the person's 'unkept dirt roads' (unkempt) gives look 'neglected' to every ground role; the rest says nothing, so 'lived_in'. State 'damp': a village in the shade of a forest, not rain. The roads use a cart gauge of 1.4 m (weak, see real-world-facts.json) and hoof prints because horses walk them. Every object is tagged with its role as it is made; the role rules below only catch a builder that forgot (names as written in ownership.json).",
+ "place": "forest village",
+ "place_type": "village",
+ "look": "lived_in",
+ "look_by_role": {"ground.*": "neglected"},
+ "state": "damp",
+ "seed": 11,
+ "owners": "ownership.json",
+ "facts": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/real-world-facts.json",
+ "roles": [
+  {"role": "backdrop", "match": {"names": ["^Backdrop"]}},
+  {"role": "ground.dirt_road", "match": {"names": ["^Ground road"]}},
+  {"role": "ground.mud", "match": {"names": ["^Ground yard", "^Ground mud"]}},
+  {"role": "ground.grass", "match": {"names": ["^Ground clearing", "^Ground verge"]}},
+  {"role": "ground.forest_floor", "match": {"names": ["^Ground forest"]}},
+  {"role": "tree.bark", "match": {"names": ["^Tree .*trunk", "^Stump", "^Log"]}},
+  {"role": "plant.foliage", "match": {"names": ["^Tree .*crown", "^Bush", "^Fern"]}},
+  {"role": "stone.rock", "match": {"names": ["^Rock"]}},
+  {"role": "stone.well", "match": {"names": ["^Prop well curb"]}},
+  {"role": "timber.generic", "match": {"names": ["^Stable trough", "^Stable manger"]}},
+  {"role": "prop.barrel", "match": {"names": ["^Prop barrel"]}},
+  {"role": "prop.crate", "match": {"names": ["^Prop crate", "^Prop chest"]}},
+  {"role": "prop.cloth", "match": {"names": ["^Prop sack"]}},
+  {"role": "prop.wood", "match": {"names": ["^Prop bucket", "^Prop woodpile", "^Prop chopping block", "^Prop ladder"]}},
+  {"role": "prop.cart", "match": {"names": ["^Prop cart body", "^Prop cart shaft", "^Prop handbarrow"]}},
+  {"role": "prop.wheel", "match": {"names": ["^Prop wheel", "^Prop cart wheel"]}},
+  {"role": "prop.straw", "match": {"names": ["^Prop haystack", "^Prop straw"]}},
+  {"role": "prop.wicker", "match": {"names": ["^Prop hurdle", "^Prop basket", "^Prop skep"]}},
+  {"role": "prop.ceramic", "match": {"names": ["^Prop jug", "^Prop pot"]}},
+  {"role": "prop.furniture", "match": {"names": ["^Prop bench", "^Prop stool"]}},
+  {"role": "prop.rope", "match": {"names": ["^Prop rope"]}},
+  {"role": "timber.fence", "match": {"names": ["^Stable stall (partition|front)", "^Stable hitching rail"]}},
+  {"role": "timber.door", "match": {"names": ["door leaf"]}},
+  {"role": "timber.shutter", "match": {"names": ["shutter"]}}
+ ],
+ "never": [
+  {"role": "never.helper", "match": {"names": ["^Helper"]}, "reason": "a measuring helper that is hidden in every picture"}
+ ],
+ "off": [
+  {"layer": "moss_and_algae", "roles": ["floor.planks", "floor.tile", "floor.carpet", "floor.earth", "floor.concrete"], "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)", "reason_id": "floors_indoors"},
+  {"layer": "weathering", "roles": ["floor.planks", "floor.tile", "floor.carpet", "floor.earth", "floor.concrete"], "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)", "reason_id": "floors_indoors"},
+  {"layer": "wetness", "roles": ["floor.planks", "floor.tile", "floor.carpet", "floor.earth", "floor.concrete"], "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)", "reason_id": "floors_indoors"},
+  {"layer": "plants", "roles": ["floor.planks", "floor.tile", "floor.carpet", "floor.earth", "floor.concrete"], "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)", "reason_id": "floors_indoors"},
+  {"layer": "litter_pieces", "roles": ["floor.planks", "floor.tile", "floor.carpet", "floor.earth", "floor.concrete"], "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)", "reason_id": "floors_indoors"}
+ ],
+ "require_more": {"timber": ["moss_and_algae"]},
+ "roads": [
+  {"name": "high_road", "polyline": [[-140, -34], [-110, -18], [-80, -6], [-45, -1.5], [-12, 0.5], [20, 2], [52, -2.5], [85, -10], [115, -19], [140, -33]], "width": 5.0, "gauge": 1.4, "rut_depth": 0.12, "hoof": true, "centre_grass": true},
+  {"name": "stable_lane", "polyline": [[20, 2], [20.5, 10], [22, 18], [24, 26], [24.3, 34.2]], "width": 3.4, "gauge": 1.4, "rut_depth": 0.09, "hoof": true, "centre_grass": true}
+ ],
+ "footfall": [
+  {"shape": "auto_door_strip", "role": "timber.door", "depth": 1.2, "width": 1.4, "value": 1.0},
+  {"shape": "polyline", "points": [[-32, 7.4], [-32, 1.9]], "width": 1.0, "value": 0.8},
+  {"shape": "polyline", "points": [[-6, 7.1], [-6, 3.2]], "width": 1.0, "value": 0.8},
+  {"shape": "polyline", "points": [[-26, -8.0], [-26, -2.8]], "width": 1.0, "value": 0.8},
+  {"shape": "polyline", "points": [[4, -5.7], [4, -1.4]], "width": 1.0, "value": 0.8},
+  {"shape": "polyline", "points": [[-17.5, 3.2], [-17.5, 5.2]], "width": 1.0, "value": 0.8},
+  {"shape": "rect", "x0": 19.5, "x1": 29.5, "y0": 24.0, "y1": 36.0, "value": 0.8}
+ ],
+ "keep_clear": [
+  {"shape": "auto_door_strip", "role": "timber.door", "depth": 0.9, "width": 1.2},
+  {"shape": "rect", "x0": 21.4, "x1": 26.6, "y0": 34.6, "y1": 36.8},
+  {"shape": "around_role", "role": "stone.well", "depth": 0.8}
+ ],
+ "picture": {"camera": "View wide", "height_pixels": 800},
+ "renderer": "auto"
+}

@@ -1,0 +1,120 @@
+## Script lint before paid recording (cue, capitals, names)
+  how_found : Decisions, voice fix: ElevenLabs offers no voice-level accent rules. So every page opens with one instruction, '[in a warm, steady New Zealand accent]', with no other cues. No capitals for emphasis (they make the voice push). Mattei is respelled in English sounds, 'muh-TAY-ee' (the Italian phonetic spelling pulled the accent).
+  final_value_or_rule : One leading bracket cue per page. No ALL-CAPS words. Names in English-sound respellings (the script's phonetic_names).
+  evidence : Decisions.md:105-114; extract_word_times.py (phonetic_names)
+  computable_from : narration script JSON
+  proposed_calculation : Lint each page: exactly one [..] at the start and no other brackets; no all-capital token of 2 or more letters except a whitelist (NZ, GDP); every name in phonetic_names appears only in its respelled form. Errors stop the paid recording step.
+  already_automatic : No.
+  llm_tip : Run a script lint before spending any credits; a bad cue costs a whole re-record.
+## Multi-word delivery cue, and a late first word
+  how_found : Lesson 17: the timing tool counted '[in a warm, steady New Zealand accent]' as spoken words. Lesson 18: on all ten pages, ElevenLabs placed the first word 0.03 to 0.32 s after the voice really starts (page 2 worst). Fix: find where her voice begins and move the first word back when the gap is over 0.03 s (9 of 10 pages corrected).
+  final_value_or_rule : A cue is everything from '[' to ']'. FIRST_WORD_TOLERANCE = 0.03 s, with voice-onset detection.
+  evidence : Lessons.md:66-77; film-kit/narration-tools/extract_word_times.py header and FIRST_WORD_TOLERANCE
+  computable_from : recordings + transcripts + narration script
+  proposed_calculation : Already done for the first word. Extend the same onset check to the first word after every silence longer than 0.5 s inside a page, where transcripts can also run late.
+  already_automatic : Yes, extract_word_times.py (plugin kit).
+  llm_tip : Put exactly one bracketed cue at the start of each page; the tool handles its timing.
+## Bracketed delivery instructions are not spoken
+  how_found : Log 07 checked that no cue was read aloud (each lasts under a fifth of a second and sits in a pause). Log 09: the timing tool counted the words of the long accent instruction as spoken; fixed so everything in brackets counts as the instruction.
+  final_value_or_rule : Everything in [brackets] is an instruction, not speech. A bracket word that shows up in the transcript, or lasts more than about 0.2 s, means it was read aloud.
+  evidence : story L380-381 (log 07), L419-420 (log 09)
+  computable_from : the narration file and the transcript
+  proposed_calculation : For each page, compare the transcript's words with the script text minus the brackets. Any bracket word or extra word in the transcript means that page is re-recorded.
+  already_automatic : Partly: extract_word_times.py skips bracketed text (plugin kit). Nothing checks for instructions read aloud.
+  llm_tip : Use only the one accent instruction per page, and check the transcript doesn't contain it.
+## First word placed late by ElevenLabs
+  how_found : Log 10 found that ElevenLabs' transcript put each page's first word up to 0.32 s after the voice really starts. Nine pages were corrected.
+  final_value_or_rule : The first word's start is moved back to where the voice really begins in the recording.
+  evidence : story L425-427 (log 10); narration-tools/extract_word_times.py lines 22-23, 100
+  computable_from : the recording and its transcript
+  proposed_calculation : Already a calculation: detect where the voice's energy starts before the first word.
+  already_automatic : Yes, in extract_word_times.py (plugin kit).
+  llm_tip : Always get word times through extract_word_times.py. Never use ElevenLabs' raw first-word time.
+## Narrator speed for planning length
+  how_found : Lesson 126 (log 33): planned at 140 words a minute, but Malina read 164, and the page carrying the key sentence was the second fastest (175). Lesson 35: the guide called chapter 1 about 2,500 words when it is about 520 spoken words (corrected from the word times).
+  final_value_or_rule : Plan at about 160 words a minute, measured from her real recordings. estimate_timeline.py predicted 251.7 s of speech as 252 s.
+  evidence : Lessons.md:473-476, 152-156; Workflows.md:242-245; film-kit/narration-tools/estimate_timeline.py
+  computable_from : narration script + any earlier word-times file of the same voice
+  proposed_calculation : estimate_timeline prints per page: words, seconds and words a minute. Flag pages above 1.1 x the chapter median. Fail if the page marked as holding the key idea ("key": true in the script) is above the median. Total = sum of predicted word lengths + pauses + 1.08 + 4.0. Always take word counts from word times, never from a draft.
+  already_automatic : estimate_timeline.py exists in the film kit but is NOT in the plugin kit, and it does not flag fast pages.
+  llm_tip : Never plan with a generic 140 wpm; measure the narrator. Give the main idea a slower page with fewer words.
+## Speaking speed, and estimating the length before recording
+  how_found : Log 33 measured Malina at 164 words a minute against the 140 planned, and the three fastest pages carried the most new ideas. Log 34 built a timeline estimator from word lengths and pauses measured on her real recording: tested on the old recording it gave 252 s against the real 251.7 s.
+  final_value_or_rule : Plan at about 160 words a minute for this voice. Each word lasts base + per_letter × letters + an extra for its ending (full stop, comma, question mark, '...'); gaps are the median; everything is scaled so the measured recording comes out at its real length.
+  evidence : story L349 (word list), L1270-1271 (log 33), L1317, L1356-1358 (log 34); film-kit/narration-tools/estimate_timeline.py
+  computable_from : the narration file plus any earlier word-times file of the same voice
+  proposed_calculation : Use estimate_timeline.py as it is. Also print each page's words a minute and flag pages above 150, or with more than 3 new terms per 30 s.
+  already_automatic : estimate_timeline.py is in the film kit but NOT in the plugin kit (plugins/explainer-film/kit/narration-tools lacks it).
+  llm_tip : Build and check every page on the estimated timeline before paying for the voice. Pages ask for words, not seconds, so they retime themselves once the real recording exists.
+## Estimated timeline before recording (estimate_timeline.py)
+  how_found : Log 34 groundwork: word lengths and pauses measured from Malina's real recording; tested on the old chapter: 252 s predicted vs 251.7 s real.
+  final_value_or_rule : Linear fit word length vs letters for plain words, extra time after '.', ',', '?', '...' (medians), median gap, then scaled so the measured recording reproduces its real length; FIRST_WORD_AT 1.08, TAIL 4.0, default page pause 1.5, --pause-after PAGE=4.0 for guess holds, --slower to test a slower voice.
+  evidence : film-kit/narration-tools/estimate_timeline.py lines 18-19, 75-76 and measure(); examples/inflation-chapter-2-newcomers/timeline-estimated.json
+  computable_from : the narration script json and any previous word-times file of the same voice
+  proposed_calculation : Already a calculation; use it in the plugin's research-and-script and test-script-with-newcomers steps instead of the workflow's LLM estimate at 160 wpm + 0.6 s per '...'.
+  already_automatic : Yes in the film kit; missing from the plugin kit, and the plugin's newcomer workflow estimates length by asking an agent.
+  llm_tip : Build and time pages on an estimated timeline from the script; pages ask for words, so they retime themselves when the real recording arrives.
+## Speaking speed and holds for thinking
+  how_found : Log 33 audit: Malina read at 164 wpm against 140 planned (the main-idea page 175); each '...' gave under a second. Lessons 126, 129.
+  final_value_or_rule : Plan at about 160 wpm; a guess needs about 4 s held in the film after the page; a rule hold about 2 s; sentences about 8-10 words.
+  evidence : plugins/explainer-film/skills/research-and-script/SKILL.md section 3-4; 34 Plan 'The moves and holds at a glance'; Lessons 126, 129
+  computable_from : script text, measured voice
+  proposed_calculation : estimate_timeline.py with --pause-after set automatically: pages whose last sentence asks the viewer to guess (ends with '?' or contains 'guess') get 4.0 s; rule pages 2.0 s. Report words per minute per page and flag pages > 170 wpm.
+  already_automatic : The 160 figure is in the plugin as text; the holds are set by hand.
+  llm_tip : Write guesses as page endings and let the timeline tool hold them 4 seconds; a written '...' is not thinking time.
+## Guess hold after a question to the viewer
+  how_found : Lesson 129: each '...' gave Malina under a second, no longer than a full stop. A guess needs about 4 s held after the page ends.
+  final_value_or_rule : Hold 4.0 s after a page that asks the viewer to guess (estimate_timeline --pause-after PAGE=4.0).
+  evidence : Lessons.md:484-485; film-kit/narration-tools/estimate_timeline.py usage
+  computable_from : script text (a question to the viewer, 'guess', 'think about it')
+  proposed_calculation : A script lint marks pages whose last sentence is a question to the viewer or contains guess-words. It sets pause_after = 4.0 for both timeline tools and reminds the page builder to hold the shot still through it.
+  already_automatic : Manual flag only.
+  llm_tip : A written pause is not thinking time. Hold the picture for about 4 s after a guess.
+## Hold for a guess and thinking pauses
+  how_found : Log 33: each '...' pause gave under a second, no time to think. The new script holds about 4 s after 'Have a guess'.
+  final_value_or_rule : At least 4 s held after a question to the viewer. A '...' pause of at least 1 s.
+  evidence : story L345 (word list), L1276, L1309 (log 33)
+  computable_from : the script's punctuation and the timeline
+  proposed_calculation : In estimate_timeline and assemble, add 4.0 s automatically after any page ending with a viewer question. In the real recording, check that the gap after '...' is at least 1.0 s; if not, add silence.
+  already_automatic : Manual: estimate_timeline.py --pause-after.
+  llm_tip : A guess needs about 4 seconds of calm picture. Say it in the page file, not by stretching narration.
+## Script measures that keep newcomers following
+  how_found : Log 33 audit of the recorded chapter 2: 164 words a minute; the main rule said only once, 3 minutes in, as one 28-word sentence; 8 cases changing direction in time 8 times; 48 words a newcomer might not know; 'price' used for six different things; '...' pauses under a second. Three rounds, 22 helpers, about 3 h 20 min.
+  final_value_or_rule : Sentences of about 9 words. The main rule said twice in identical words. 4 real cases in time order. About 28 spoken figures (down from 37). Every unfamiliar word explained or cut. The stakes within the first 30 seconds. About 7.25 minutes for 1,021 words.
+  evidence : story L1268-1276, L1301-1317 (log 33); Status L250-252
+  computable_from : the script text, the research ledger and a common-word list
+  proposed_calculation : A script linter: mean words per sentence (flag above 12, or any sentence above 20); spoken figures per estimated minute (flag above 4); years mentioned in order, counting reversals (flag above 1); words outside the 5,000 most common English words with no explanation within 2 sentences; the rule sentence present exactly twice, verbatim; a stake in the first 30 estimated seconds.
+  already_automatic : No. The test-script-with-newcomers workflow (plugin 1.2.0) relies on helpers' judgement only.
+  llm_tip : Run cheap counts before the helper testers. They catch most 'too fast, too many terms' problems.
+## Research and script honesty rules
+  how_found : Lesson 127: 'new money mostly gets more things made' was contradicted by the film's own Japan case; say rules exactly as broadly as their evidence. Lesson 128: 'banks', 'pay' and 'price' each meant several things. Lesson 131: a line about our Reserve Bank rested on Powell's speech. Lesson 4: facts only a blocked page could confirm stay out.
+  final_value_or_rule : Scope each rule to its evidence; one word, one meaning; name whose words stand behind 'they say'; unconfirmed facts stay out.
+  evidence : Lessons.md:477-483, 490-492, 17-19
+  computable_from : script + research ledger (claims with ids and sources)
+  proposed_calculation : Term table: list every repeated noun with each sentence it appears in, for a check that one word has one meaning both ways. Speaker check: for each 'X says/argues' line, the ledger id's source author or institution must match X.
+  already_automatic : No; the test-script-with-newcomers workflow covers it by judgement.
+  llm_tip : Say a rule only as broadly as its evidence, and check whose words you quote.
+## Facts that go out of date
+  how_found : Traps list: New Zealand inflation may change on 22 October, the Reserve Bank's rate on 28 October, unemployment on 4 November.
+  final_value_or_rule : Check dated figures before recording and before publishing.
+  evidence : story Traps L1408-1409, L1421-1426
+  computable_from : ledger entries with their next release dates
+  proposed_calculation : Give each ledger fact a valid_until date (its next scheduled release). Before recording and before publishing, list the facts past that date.
+  already_automatic : No.
+  llm_tip : Write the next release date beside every 'latest' figure.
+## Checking names were said right, from the transcript
+  how_found : Log 05: Mattei said the Italian way. Log 09: Mattei in English sounds. Log 19: ElevenLabs' own transcript heard 'Ruhr' and 'Mattei' as those words.
+  final_value_or_rule : Compare the transcript's words with the script's words.
+  evidence : story L367-368 (log 05), L415 (log 09), L558-559 (log 19)
+  computable_from : the script and the transcript
+  proposed_calculation : A normalised word comparison. Any name that doesn't match is flagged for a re-record.
+  already_automatic : No flag (extract_word_times only lines the words up).
+  llm_tip : Use the transcript as a free pronunciation check for names.
+## Download recordings at once
+  how_found : Workflows, chapter steps: ElevenLabs links stop working after 2 hours. The transcript (word times) is free.
+  final_value_or_rule : Download each page into downloads/<voice>/chapterN/ straight away and ask for its transcript.
+  evidence : Workflows.md:29-30
+  computable_from : the generation job result
+  proposed_calculation : A record_page wrapper does it in one call: generate, download, request the transcript, save pageN.mp3 and pageN-words.json under fixed names, then run extract_word_times (which already refuses a transcript that doesn't match the script).
+  already_automatic : Manual. Only the transcript-mismatch refusal is automatic.
+  llm_tip : Never leave a paid recording only as a link.

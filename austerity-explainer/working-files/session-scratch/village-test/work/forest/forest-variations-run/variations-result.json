@@ -1,0 +1,3360 @@
+{
+ "change": "crown lumpiness, crown size, tree density, tone mix, moss and leaning trees of the forest",
+ "change_id": "crown-lumpiness-crown-size-tree-density",
+ "scene": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/part.blend",
+ "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json",
+ "cameras": [
+  "View wide",
+  "View road_eye",
+  "View stable_close",
+  "View cottage_close"
+ ],
+ "engine": "EEVEE",
+ "size": [
+  600,
+  400
+ ],
+ "variations": [
+  {
+   "name": "smooth-big-dark",
+   "set": {},
+   "args": {
+    "crown_lump": 0.06,
+    "crown_scale": 1.25,
+    "density": 1.0,
+    "tone_olive": 0.05,
+    "golden": 0,
+    "moss_scale": 1.0,
+    "lump_detail": 3,
+    "lean_share": 0.1
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "rough-small-olive",
+   "set": {},
+   "args": {
+    "crown_lump": 0.34,
+    "crown_scale": 0.8,
+    "density": 1.3,
+    "tone_olive": 0.55,
+    "golden": 2,
+    "moss_scale": 1.0,
+    "lump_detail": 1,
+    "lean_share": 0.2
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "dense-forest",
+   "set": {},
+   "args": {
+    "crown_lump": 0.16,
+    "crown_scale": 1.0,
+    "density": 1.7,
+    "tone_olive": 0.3,
+    "golden": 1,
+    "moss_scale": 0.6,
+    "lump_detail": 2,
+    "lean_share": 0.1
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "sparse-olive",
+   "set": {},
+   "args": {
+    "crown_lump": 0.22,
+    "crown_scale": 1.15,
+    "density": 0.5,
+    "tone_olive": 0.85,
+    "golden": 3,
+    "moss_scale": 1.2,
+    "lump_detail": 2,
+    "lean_share": 0.3
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "autumn-gold",
+   "set": {},
+   "args": {
+    "crown_lump": 0.26,
+    "crown_scale": 0.95,
+    "density": 1.0,
+    "tone_olive": 0.95,
+    "golden": 6,
+    "moss_scale": 0.8,
+    "lump_detail": 2,
+    "lean_share": 0.0
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "moss-heavy",
+   "set": {},
+   "args": {
+    "crown_lump": 0.1,
+    "crown_scale": 1.1,
+    "density": 1.2,
+    "tone_olive": 0.2,
+    "golden": 0,
+    "moss_scale": 1.9,
+    "lump_detail": 2,
+    "lean_share": 0.15
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "moss-none-faceted",
+   "set": {},
+   "args": {
+    "crown_lump": 0.3,
+    "crown_scale": 0.9,
+    "density": 0.8,
+    "tone_olive": 0.6,
+    "golden": 2,
+    "moss_scale": 0.3,
+    "lump_detail": 1,
+    "lean_share": 0.05
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "leaning-rim",
+   "set": {},
+   "args": {
+    "crown_lump": 0.2,
+    "crown_scale": 1.2,
+    "density": 1.1,
+    "tone_olive": 0.4,
+    "golden": 2,
+    "moss_scale": 1.4,
+    "lump_detail": 2,
+    "lean_share": 0.4
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "dark-compact",
+   "set": {},
+   "args": {
+    "crown_lump": 0.12,
+    "crown_scale": 0.85,
+    "density": 1.45,
+    "tone_olive": 0.0,
+    "golden": 0,
+    "moss_scale": 0.5,
+    "lump_detail": 2,
+    "lean_share": 0.0
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  },
+  {
+   "name": "mixed-broad",
+   "set": {},
+   "args": {
+    "crown_lump": 0.28,
+    "crown_scale": 1.3,
+    "density": 0.7,
+    "tone_olive": 0.65,
+    "golden": 4,
+    "moss_scale": 1.5,
+    "lump_detail": 3,
+    "lean_share": 0.25
+   },
+   "script": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/hooks/forest_hook.py"
+  }
+ ],
+ "dropped": [],
+ "jobs": [
+  {
+   "index": 1,
+   "job_id": "d89a3c02-a4bf-4990-a62f-301b64395abe-u1",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 92.6,
+   "wake_up_ms": 817,
+   "billed_work_ms": 92881,
+   "log_tail": "00:08.150  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n00:56.570  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/01_smooth-big-dark__view-wide.jpg'\n00:58.236  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/01_smooth-big-dark__view-road-eye.jpg'\n00:59.876  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/01_smooth-big-dark__view-stable-close.jpg'\n01:01.324  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/01_smooth-big-dark__view-cottage-close.jpg'\n01:01.355  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n01:07.154  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/02_sparse-olive__view-wide.jpg'\n01:08.286  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/02_sparse-olive__view-road-eye.jpg'\n01:09.463  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/02_sparse-olive__view-stable-close.jpg'\n01:10.482  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/02_sparse-olive__view-cottage-close.jpg'\n01:10.517  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n01:15.759  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/03_moss-none-faceted__view-wide.jpg'\n01:16.571  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/03_moss-none-faceted__view-road-eye.jpg'\n01:17.342  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/03_moss-none-faceted__view-stable-close.jpg'\n01:18.133  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/03_moss-none-faceted__view-cottage-close.jpg'\n01:18.163  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n01:24.770  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/04_mixed-broad__view-wide.jpg'\n01:25.914  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/04_mixed-broad__view-road-eye.jpg'\n01:27.095  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/04_mixed-broad__view-stable-close.jpg'\n01:28.340  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1/04_mixed-broad__view-cottage-close.jpg'\nforest stage: {'objects': 144, 'trees': 216, 'heroes': 12, 'clusters': 44, 'triangles': 702436, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 819, 'clearing road 10 m': 313, 'shadow on road, wall, yard or clearing': 376, 'south-east of a building': 433, 'road edge': 619, 'sightline View cottage_close': 2, 'close to camera View road_eye': 544, 'too close to another trunk': 950, 'sightline View road_eye': 5, 'inside clearing, not rim': 73, 'region': 12, 'sightline View wide': 1, 'close to camera View wide': 1}}\nforest stage: {'objects': 109, 'trees': 133, 'heroes': 12, 'clusters': 27, 'triangles': 171380, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 849, 'clearing road 10 m': 302, 'shadow on road, wall, yard or clearing': 256, 'south-east of a building': 359, 'road edge': 567, 'sightline View cottage_close': 2, 'close to camera View road_eye': 578, 'too close to another trunk': 810, 'sightline View road_eye': 5, 'sightline View wide': 8, 'close to camera View wide': 1, 'region': 3, 'sightline View stable_close': 6}}\nforest stage: {'objects': 130, 'trees': 171, 'heroes': 12, 'clusters': 37, 'triangles': 109774, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 848, 'clearing road 10 m': 302, 'shadow on road, wall, yard or clearing': 283, 'south-east of a building': 343, 'road edge': 642, 'sightline View cottage_close': 2, 'close to camera View road_eye': 546, 'too close to another trunk': 909, 'sightline View road_eye': 5, 'sightline View stable_close': 8, 'inside clearing, not rim': 85, 'region': 4}}\nforest stage: {'objects': 130, 'trees': 170, 'heroes': 12, 'clusters': 36, 'triangles': 581654, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 743, 'clearing road 10 m': 303, 'shadow on road, wall, yard or clearing': 156, 'south-east of a building': 364, 'road edge': 514, 'sightline View cottage_close': 2, 'close to camera View road_eye': 363, 'too close to another trunk': 1023, 'sightline View road_eye': 3, 'sightline View wide': 48, 'close to camera View wide': 7, 'region': 3, 'inside clearing, not rim': 120}}\nPASS smooth-big-dark: 4 picture(s) in 44.0 s (reopened)\nPASS sparse-olive: 4 picture(s) in 4.8 s (reopened)\nPASS moss-none-faceted: 4 picture(s) in 3.5 s (reopened)\nPASS mixed-broad: 4 picture(s) in 4.9 s (last of the job)\nPASS variations-worker: job 1: 4 of 4 variation(s), 16 picture(s), 77.6 s, eevee on EEVEE\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/forest-variations-run/pictures/job-1"
+  },
+  {
+   "index": 2,
+   "job_id": "671e4578-4895-41a5-a0cc-799886948177-u1",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 48.4,
+   "wake_up_ms": 14467,
+   "billed_work_ms": 48628,
+   "log_tail": "00:04.858  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n00:27.675  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/01_baseline__view-wide.jpg'\n00:28.436  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/01_baseline__view-road-eye.jpg'\n00:29.136  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/01_baseline__view-stable-close.jpg'\n00:29.813  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/01_baseline__view-cottage-close.jpg'\n00:32.838  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/02_rough-small-olive__view-wide.jpg'\n00:33.426  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/02_rough-small-olive__view-road-eye.jpg'\n00:34.002  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/02_rough-small-olive__view-stable-close.jpg'\n00:34.555  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/02_rough-small-olive__view-cottage-close.jpg'\n00:34.580  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n00:37.817  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/03_autumn-gold__view-wide.jpg'\n00:38.484  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/03_autumn-gold__view-road-eye.jpg'\n00:39.167  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/03_autumn-gold__view-stable-close.jpg'\n00:39.862  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/03_autumn-gold__view-cottage-close.jpg'\n00:39.888  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n00:43.229  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/04_leaning-rim__view-wide.jpg'\n00:43.909  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/04_leaning-rim__view-road-eye.jpg'\n00:44.573  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/04_leaning-rim__view-stable-close.jpg'\n00:45.272  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-2/04_leaning-rim__view-cottage-close.jpg'\nforest stage: {'objects': 164, 'trees': 257, 'heroes': 12, 'clusters': 54, 'triangles': 159812, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 931, 'clearing road 10 m': 302, 'shadow on road, wall, yard or clearing': 256, 'south-east of a building': 387, 'road edge': 619, 'sightline View cottage_close': 2, 'close to camera View road_eye': 543, 'too close to another trunk': 1331, 'sightline View road_eye': 5, 'sightline View stable_close': 14, 'sightline View wide': 61, 'close to camera View wide': 26, 'inside clearing, not rim': 157}}\nforest stage: {'objects': 145, 'trees': 212, 'heroes': 12, 'clusters': 44, 'triangles': 274270, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 808, 'clearing road 10 m': 303, 'shadow on road, wall, yard or clearing': 380, 'south-east of a building': 417, 'road edge': 601, 'sightline View cottage_close': 6, 'close to camera View road_eye': 576, 'too close to another trunk': 1079, 'sightline View road_eye': 6, 'sightline View wide': 2, 'region': 15, 'inside clearing, not rim': 24, 'yard': 1}}\nforest stage: {'objects': 150, 'trees': 226, 'heroes': 12, 'clusters': 47, 'triangles': 277908, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 822, 'clearing road 10 m': 311, 'shadow on road, wall, yard or clearing': 238, 'south-east of a building': 321, 'road edge': 639, 'sightline View cottage_close': 2, 'close to camera View road_eye': 599, 'too close to another trunk': 1297, 'sightline View road_eye': 6, 'sightline View wide': 25, 'close to camera View wide': 4, 'inside clearing, not rim': 159, 'near the camera View road_eye': 2, 'sightline View stable_close': 1}}\nPASS baseline: 4 picture(s) in 22.5 s (restored exactly)\nPASS rough-small-olive: 4 picture(s) in 2.6 s (reopened)\nPASS autumn-gold: 4 picture(s) in 3.0 s (reopened)\nPASS leaning-rim: 4 picture(s) in 3.2 s (last of the job)\nPASS variations-worker: job 2: 4 of 4 variation(s), 16 picture(s), 38.1 s, eevee on EEVEE\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/forest-variations-run/pictures/job-2"
+  },
+  {
+   "index": 3,
+   "job_id": "677bbabc-e5bb-4b6b-95cd-152047065a71-u1",
+   "where": "a rented card",
+   "remote": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3",
+   "runpod_status": "COMPLETED",
+   "return_code": 0,
+   "seconds": 99,
+   "wake_up_ms": 23423,
+   "billed_work_ms": 99308,
+   "log_tail": "00:07.109  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n00:57.928  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/01_dense-forest__view-wide.jpg'\n00:59.802  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/01_dense-forest__view-road-eye.jpg'\n01:07.098  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/01_dense-forest__view-stable-close.jpg'\n01:08.725  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/01_dense-forest__view-cottage-close.jpg'\n01:08.806  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n01:17.480  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/02_moss-heavy__view-wide.jpg'\n01:18.981  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/02_moss-heavy__view-road-eye.jpg'\n01:20.503  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/02_moss-heavy__view-stable-close.jpg'\n01:22.187  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/02_moss-heavy__view-cottage-close.jpg'\n01:22.221  blend            | Read blend: \"/workspace/place-jobs/scenes/7ebb7efe/part.blend\"\n01:29.662  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/03_dark-compact__view-wide.jpg'\n01:31.389  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/03_dark-compact__view-road-eye.jpg'\n01:33.187  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/03_dark-compact__view-stable-close.jpg'\n01:35.207  render           | Saved: '/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-3/03_dark-compact__view-cottage-close.jpg'\nforest stage: {'objects': 192, 'trees': 322, 'heroes': 12, 'clusters': 68, 'triangles': 388446, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 902, 'clearing road 10 m': 321, 'shadow on road, wall, yard or clearing': 377, 'south-east of a building': 374, 'road edge': 623, 'sightline View cottage_close': 2, 'close to camera View road_eye': 547, 'too close to another trunk': 1481, 'sightline View road_eye': 5, 'close to camera View wide': 8, 'sightline View wide': 12, 'sightline View stable_close': 8, 'inside clearing, not rim': 63, 'region': 1}}\nforest stage: {'objects': 158, 'trees': 240, 'heroes': 12, 'clusters': 51, 'triangles': 302720, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 790, 'clearing road 10 m': 329, 'shadow on road, wall, yard or clearing': 281, 'south-east of a building': 438, 'road edge': 665, 'sightline View cottage_close': 2, 'close to camera View road_eye': 549, 'too close to another trunk': 1250, 'sightline View road_eye': 6, 'sightline View wide': 18, 'close to camera View wide': 6, 'region': 2, 'inside clearing, not rim': 152}}\nforest stage: {'objects': 174, 'trees': 292, 'heroes': 12, 'clusters': 59, 'triangles': 370278, 'snags': 3, 'stumps': 6, 'logs': 4, 'rocks': 8, 'bush_and_fern_pieces': 38, 'rejects': {'wall 14 m': 827, 'clearing road 10 m': 304, 'shadow on road, wall, yard or clearing': 428, 'south-east of a building': 376, 'road edge': 697, 'sightline View cottage_close': 3, 'close to camera View road_eye': 569, 'too close to another trunk': 1365, 'sightline View road_eye': 5, 'sightline View wide': 14, 'sightline View stable_close': 3, 'region': 3, 'inside clearing, not rim': 15}}\nPASS dense-forest: 4 picture(s) in 51.5 s (reopened)\nPASS moss-heavy: 4 picture(s) in 6.2 s (reopened)\nPASS dark-compact: 4 picture(s) in 7.5 s (last of the job)\nPASS variations-worker: job 3: 3 of 3 variation(s), 12 picture(s), 83.9 s, eevee on EEVEE\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)\n",
+   "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/forest-variations-run/pictures/job-3"
+  }
+ ],
+ "job_summaries": {
+  "1": {
+   "job": 1,
+   "scene": "part.blend",
+   "blender": "5.2.2 LTS",
+   "device": "EEVEE",
+   "engine": "EEVEE",
+   "engine_reasons": [
+    "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 16,
+   "where": "card",
+   "cameras": [
+    "View wide",
+    "View road_eye",
+    "View stable_close",
+    "View cottage_close"
+   ],
+   "fingerprint_at_start": "e1de5f9a4c6ed553",
+   "saved_values": {},
+   "seconds_in_all": 77.6,
+   "reopened": 3,
+   "entries": [
+    "smooth-big-dark",
+    "sparse-olive",
+    "moss-none-faceted",
+    "mixed-broad"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "31e19b98d86f4cbc"
+  },
+  "2": {
+   "job": 2,
+   "scene": "part.blend",
+   "blender": "5.2.2 LTS",
+   "device": "EEVEE",
+   "engine": "EEVEE",
+   "engine_reasons": [
+    "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 16,
+   "where": "card",
+   "cameras": [
+    "View wide",
+    "View road_eye",
+    "View stable_close",
+    "View cottage_close"
+   ],
+   "fingerprint_at_start": "e1de5f9a4c6ed553",
+   "saved_values": {},
+   "seconds_in_all": 38.1,
+   "reopened": 2,
+   "entries": [
+    "baseline",
+    "rough-small-olive",
+    "autumn-gold",
+    "leaning-rim"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "96f3d8323c1b79ac"
+  },
+  "3": {
+   "job": 3,
+   "scene": "part.blend",
+   "blender": "5.2.2 LTS",
+   "device": "EEVEE",
+   "engine": "EEVEE",
+   "engine_reasons": [
+    "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+   ],
+   "size": [
+    600,
+    400
+   ],
+   "samples": 16,
+   "where": "card",
+   "cameras": [
+    "View wide",
+    "View road_eye",
+    "View stable_close",
+    "View cottage_close"
+   ],
+   "fingerprint_at_start": "e1de5f9a4c6ed553",
+   "saved_values": {},
+   "seconds_in_all": 83.9,
+   "reopened": 2,
+   "entries": [
+    "dense-forest",
+    "moss-heavy",
+    "dark-compact"
+   ],
+   "ok": true,
+   "fingerprint_at_end": "f433b5cdae063904"
+  }
+ },
+ "results": [
+  {
+   "name": "baseline",
+   "is_baseline": true,
+   "set": {},
+   "args": {},
+   "script": null,
+   "notes": [],
+   "ok": true,
+   "reset": "restored exactly",
+   "seconds_apply": 0.0,
+   "seconds_draw": 22.6,
+   "seconds_reset": 0.0,
+   "job": 2,
+   "measures": {
+    "View wide": {
+     "p5": 0.13561727106571198,
+     "p95": 0.8561427593231201,
+     "range": 0.7205254882574081,
+     "median": 0.4243145287036896,
+     "detail": 4.557579040527344,
+     "mean_saturation": 0.22324174642562866,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    },
+    "View road_eye": {
+     "p5": 0.1165756955742836,
+     "p95": 0.8502501845359802,
+     "range": 0.7336744889616966,
+     "median": 0.4666133522987366,
+     "detail": 4.8448991775512695,
+     "mean_saturation": 0.20177389681339264,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    },
+    "View stable_close": {
+     "p5": 0.07731740921735764,
+     "p95": 0.5216831564903259,
+     "range": 0.4443657472729683,
+     "median": 0.30774983763694763,
+     "detail": 5.562992572784424,
+     "mean_saturation": 0.253093957901001,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    },
+    "View cottage_close": {
+     "p5": 0.08071529120206833,
+     "p95": 0.8300917744636536,
+     "range": 0.7493764832615852,
+     "median": 0.41368234157562256,
+     "detail": 5.061129093170166,
+     "mean_saturation": 0.27143165469169617,
+     "squint": 1.0,
+     "flat_windows": 0,
+     "colour_shift": 0.0,
+     "saturation_shift": 0.0,
+     "detail_change": 0.0
+    }
+   },
+   "average": {
+    "p5": 0.10255641676485538,
+    "p95": 0.76454196870327,
+    "range": 0.6619855519384146,
+    "median": 0.4030900150537491,
+    "detail": 5.006649971008301,
+    "mean_saturation": 0.2373853139579296,
+    "squint": 1.0,
+    "flat_windows": 0.0,
+    "colour_shift": 0.0,
+    "saturation_shift": 0.0,
+    "detail_change": 0.0
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "01_baseline__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 20.45,
+     "bytes": 41199,
+     "ok": true,
+     "mean_luminance": 0.4550689458847046,
+     "path": "pictures/job-2/01_baseline__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "01_baseline__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.73,
+     "bytes": 37776,
+     "ok": true,
+     "mean_luminance": 0.5152415633201599,
+     "path": "pictures/job-2/01_baseline__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "01_baseline__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.69,
+     "bytes": 41333,
+     "ok": true,
+     "mean_luminance": 0.3002241551876068,
+     "path": "pictures/job-2/01_baseline__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "01_baseline__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.67,
+     "bytes": 40323,
+     "ok": true,
+     "mean_luminance": 0.3825249671936035,
+     "path": "pictures/job-2/01_baseline__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "smooth-big-dark",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.06,
+    "crown_scale": 1.25,
+    "density": 1.0,
+    "tone_olive": 0.05,
+    "golden": 0,
+    "moss_scale": 1.0,
+    "lump_detail": 3,
+    "lean_share": 0.1
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 6.45,
+   "seconds_draw": 44.11,
+   "seconds_reset": 0.66,
+   "job": 1,
+   "measures": {
+    "View wide": {
+     "p5": 0.11852581053972244,
+     "p95": 0.8555765151977539,
+     "range": 0.7370507046580315,
+     "median": 0.4215254783630371,
+     "detail": 4.434406757354736,
+     "mean_saturation": 0.22594548761844635,
+     "squint": 0.8763240575790405,
+     "flat_windows": 0,
+     "colour_shift": 0.6930371343668689,
+     "saturation_shift": 0.002703741192817688,
+     "detail_change": -0.12317228317260742
+    },
+    "View road_eye": {
+     "p5": 0.1062156930565834,
+     "p95": 0.8502501845359802,
+     "range": 0.7440344914793968,
+     "median": 0.4660470485687256,
+     "detail": 4.585036277770996,
+     "mean_saturation": 0.20388028025627136,
+     "squint": 0.8457590937614441,
+     "flat_windows": 0,
+     "colour_shift": 0.5382422532869469,
+     "saturation_shift": 0.002106383442878723,
+     "detail_change": -0.25986289978027344
+    },
+    "View stable_close": {
+     "p5": 0.06946039199829102,
+     "p95": 0.8161090016365051,
+     "range": 0.7466486096382141,
+     "median": 0.312808632850647,
+     "detail": 4.704570770263672,
+     "mean_saturation": 0.24655064940452576,
+     "squint": 0.616251528263092,
+     "flat_windows": 0,
+     "colour_shift": 3.8872461510367526,
+     "saturation_shift": -0.00654330849647522,
+     "detail_change": -0.858421802520752
+    },
+    "View cottage_close": {
+     "p5": 0.07395294308662415,
+     "p95": 0.5376731753349304,
+     "range": 0.4637202322483063,
+     "median": 0.3949851095676422,
+     "detail": 4.433193683624268,
+     "mean_saturation": 0.29437968134880066,
+     "squint": 0.6182999014854431,
+     "flat_windows": 0,
+     "colour_shift": 4.351586997494539,
+     "saturation_shift": 0.022948026657104492,
+     "detail_change": -0.6279354095458984
+    }
+   },
+   "average": {
+    "p5": 0.09203870967030525,
+    "p95": 0.7649022191762924,
+    "range": 0.6728635095059872,
+    "median": 0.39884156733751297,
+    "detail": 4.539301872253418,
+    "mean_saturation": 0.24268902465701103,
+    "squint": 0.7391586452722549,
+    "flat_windows": 0.0,
+    "colour_shift": 2.367528134046277,
+    "saturation_shift": 0.005303710699081421,
+    "detail_change": -0.4673480987548828
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "01_smooth-big-dark__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 39.35,
+     "bytes": 40974,
+     "ok": true,
+     "mean_luminance": 0.44358307123184204,
+     "path": "pictures/job-1/01_smooth-big-dark__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "01_smooth-big-dark__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.63,
+     "bytes": 37416,
+     "ok": true,
+     "mean_luminance": 0.5071334838867188,
+     "path": "pictures/job-1/01_smooth-big-dark__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "01_smooth-big-dark__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.62,
+     "bytes": 38348,
+     "ok": true,
+     "mean_luminance": 0.31877952814102173,
+     "path": "pictures/job-1/01_smooth-big-dark__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "01_smooth-big-dark__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.43,
+     "bytes": 40115,
+     "ok": true,
+     "mean_luminance": 0.3382934331893921,
+     "path": "pictures/job-1/01_smooth-big-dark__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "rough-small-olive",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.34,
+    "crown_scale": 0.8,
+    "density": 1.3,
+    "tone_olive": 0.55,
+    "golden": 2,
+    "moss_scale": 1.0,
+    "lump_detail": 1,
+    "lean_share": 0.2
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 2.09,
+   "seconds_draw": 2.63,
+   "seconds_reset": 0.29,
+   "job": 2,
+   "measures": {
+    "View wide": {
+     "p5": 0.15100471675395966,
+     "p95": 0.8572235703468323,
+     "range": 0.7062188535928726,
+     "median": 0.4248808026313782,
+     "detail": 4.54257345199585,
+     "mean_saturation": 0.2245107740163803,
+     "squint": 0.904700756072998,
+     "flat_windows": 0,
+     "colour_shift": 0.2865684507394364,
+     "saturation_shift": 0.001269027590751648,
+     "detail_change": -0.01500558853149414
+    },
+    "View road_eye": {
+     "p5": 0.12385255843400955,
+     "p95": 0.8502501845359802,
+     "range": 0.7263976261019707,
+     "median": 0.46795687079429626,
+     "detail": 5.116459846496582,
+     "mean_saturation": 0.2011987566947937,
+     "squint": 0.8877253532409668,
+     "flat_windows": 0,
+     "colour_shift": 0.16682223512924896,
+     "saturation_shift": -0.000575140118598938,
+     "detail_change": 0.2715606689453125
+    },
+    "View stable_close": {
+     "p5": 0.08236236125230789,
+     "p95": 0.7516435980796814,
+     "range": 0.6692812368273735,
+     "median": 0.314759224653244,
+     "detail": 5.829325199127197,
+     "mean_saturation": 0.2424469292163849,
+     "squint": 0.6334437131881714,
+     "flat_windows": 0,
+     "colour_shift": 4.460272788786128,
+     "saturation_shift": -0.010647028684616089,
+     "detail_change": 0.26633262634277344
+    },
+    "View cottage_close": {
+     "p5": 0.09356548637151718,
+     "p95": 0.8424070477485657,
+     "range": 0.7488415613770485,
+     "median": 0.4238297939300537,
+     "detail": 5.464052200317383,
+     "mean_saturation": 0.25890737771987915,
+     "squint": 0.6107611656188965,
+     "flat_windows": 0,
+     "colour_shift": 4.478257720161385,
+     "saturation_shift": -0.012524276971817017,
+     "detail_change": 0.4029231071472168
+    }
+   },
+   "average": {
+    "p5": 0.11269628070294857,
+    "p95": 0.8253811001777649,
+    "range": 0.7126848194748163,
+    "median": 0.40785667300224304,
+    "detail": 5.238102674484253,
+    "mean_saturation": 0.2317659594118595,
+    "squint": 0.7591577470302582,
+    "flat_windows": 0.0,
+    "colour_shift": 2.3479802987040497,
+    "saturation_shift": -0.005619354546070099,
+    "detail_change": 0.23145270347595215
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "02_rough-small-olive__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.9,
+     "bytes": 40334,
+     "ok": true,
+     "mean_luminance": 0.45984482765197754,
+     "path": "pictures/job-2/02_rough-small-olive__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "02_rough-small-olive__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.58,
+     "bytes": 38024,
+     "ok": true,
+     "mean_luminance": 0.5187848210334778,
+     "path": "pictures/job-2/02_rough-small-olive__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "02_rough-small-olive__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.57,
+     "bytes": 39990,
+     "ok": true,
+     "mean_luminance": 0.329252153635025,
+     "path": "pictures/job-2/02_rough-small-olive__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "02_rough-small-olive__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.54,
+     "bytes": 39953,
+     "ok": true,
+     "mean_luminance": 0.42020756006240845,
+     "path": "pictures/job-2/02_rough-small-olive__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "dense-forest",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.16,
+    "crown_scale": 1.0,
+    "density": 1.7,
+    "tone_olive": 0.3,
+    "golden": 1,
+    "moss_scale": 0.6,
+    "lump_detail": 2,
+    "lean_share": 0.1
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 5.78,
+   "seconds_draw": 51.56,
+   "seconds_reset": 2.54,
+   "job": 3,
+   "measures": {
+    "View wide": {
+     "p5": 0.11796000599861145,
+     "p95": 0.8561427593231201,
+     "range": 0.7381827533245087,
+     "median": 0.4211607873439789,
+     "detail": 4.7837324142456055,
+     "mean_saturation": 0.22535882890224457,
+     "squint": 0.9029616713523865,
+     "flat_windows": 0,
+     "colour_shift": 0.8765920410331778,
+     "saturation_shift": 0.0021170824766159058,
+     "detail_change": 0.22615337371826172
+    },
+    "View road_eye": {
+     "p5": 0.10929223895072937,
+     "p95": 0.8502501845359802,
+     "range": 0.7409579455852509,
+     "median": 0.4621255099773407,
+     "detail": 5.182102203369141,
+     "mean_saturation": 0.2066987305879593,
+     "squint": 0.890886127948761,
+     "flat_windows": 0,
+     "colour_shift": 1.3531177128633753,
+     "saturation_shift": 0.00492483377456665,
+     "detail_change": 0.3372030258178711
+    },
+    "View stable_close": {
+     "p5": 0.07113254815340042,
+     "p95": 0.49058905243873596,
+     "range": 0.41945650428533554,
+     "median": 0.3005247116088867,
+     "detail": 4.777204990386963,
+     "mean_saturation": 0.2610590159893036,
+     "squint": 0.7350952625274658,
+     "flat_windows": 0,
+     "colour_shift": 4.059167941687771,
+     "saturation_shift": 0.007965058088302612,
+     "detail_change": -0.7857875823974609
+    },
+    "View cottage_close": {
+     "p5": 0.07648079097270966,
+     "p95": 0.550897479057312,
+     "range": 0.47441668808460236,
+     "median": 0.4021756947040558,
+     "detail": 5.203350067138672,
+     "mean_saturation": 0.28318944573402405,
+     "squint": 0.7058802247047424,
+     "flat_windows": 0,
+     "colour_shift": 3.619157586973954,
+     "saturation_shift": 0.01175779104232788,
+     "detail_change": 0.14222097396850586
+    }
+   },
+   "average": {
+    "p5": 0.09371639601886272,
+    "p95": 0.6869698688387871,
+    "range": 0.5932534728199244,
+    "median": 0.3964966759085655,
+    "detail": 4.986597418785095,
+    "mean_saturation": 0.24407650530338287,
+    "squint": 0.8087058216333389,
+    "flat_windows": 0.0,
+    "colour_shift": 2.4770088206395693,
+    "saturation_shift": 0.006691191345453262,
+    "detail_change": -0.020052552223205566
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "01_dense-forest__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 40.75,
+     "bytes": 41976,
+     "ok": true,
+     "mean_luminance": 0.4409120976924896,
+     "path": "pictures/job-3/01_dense-forest__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "01_dense-forest__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.82,
+     "bytes": 39109,
+     "ok": true,
+     "mean_luminance": 0.4963192641735077,
+     "path": "pictures/job-3/01_dense-forest__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "01_dense-forest__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 7.28,
+     "bytes": 38994,
+     "ok": true,
+     "mean_luminance": 0.2719863951206207,
+     "path": "pictures/job-3/01_dense-forest__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "01_dense-forest__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.61,
+     "bytes": 41375,
+     "ok": true,
+     "mean_luminance": 0.3487376868724823,
+     "path": "pictures/job-3/01_dense-forest__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "sparse-olive",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.22,
+    "crown_scale": 1.15,
+    "density": 0.5,
+    "tone_olive": 0.85,
+    "golden": 3,
+    "moss_scale": 1.2,
+    "lump_detail": 2,
+    "lean_share": 0.3
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 3.65,
+   "seconds_draw": 4.83,
+   "seconds_reset": 0.57,
+   "job": 1,
+   "measures": {
+    "View wide": {
+     "p5": 0.1372894048690796,
+     "p95": 0.8569561243057251,
+     "range": 0.7196667194366455,
+     "median": 0.42347609996795654,
+     "detail": 4.670863628387451,
+     "mean_saturation": 0.22457772493362427,
+     "squint": 0.8830418586730957,
+     "flat_windows": 0,
+     "colour_shift": 0.1397649952708038,
+     "saturation_shift": 0.0013359785079956055,
+     "detail_change": 0.11328458786010742
+    },
+    "View road_eye": {
+     "p5": 0.1279694139957428,
+     "p95": 0.8502501845359802,
+     "range": 0.7222807705402374,
+     "median": 0.47053489089012146,
+     "detail": 4.65894889831543,
+     "mean_saturation": 0.2006213217973709,
+     "squint": 0.8513224720954895,
+     "flat_windows": 0,
+     "colour_shift": 0.711845919345694,
+     "saturation_shift": -0.0011525750160217285,
+     "detail_change": -0.18595027923583984
+    },
+    "View stable_close": {
+     "p5": 0.07984548807144165,
+     "p95": 0.5138400197029114,
+     "range": 0.4339945316314697,
+     "median": 0.305531769990921,
+     "detail": 5.104177474975586,
+     "mean_saturation": 0.2644510865211487,
+     "squint": 0.6219159364700317,
+     "flat_windows": 0,
+     "colour_shift": 1.0966378106958226,
+     "saturation_shift": 0.011357128620147705,
+     "detail_change": -0.4588150978088379
+    },
+    "View cottage_close": {
+     "p5": 0.10335921496152878,
+     "p95": 0.840456485748291,
+     "range": 0.7370972707867622,
+     "median": 0.4215254783630371,
+     "detail": 5.05576229095459,
+     "mean_saturation": 0.2677386701107025,
+     "squint": 0.6352906823158264,
+     "flat_windows": 0,
+     "colour_shift": 5.002556353796952,
+     "saturation_shift": -0.0036929845809936523,
+     "detail_change": -0.005366802215576172
+    }
+   },
+   "average": {
+    "p5": 0.1121158804744482,
+    "p95": 0.7653757035732269,
+    "range": 0.6532598230987787,
+    "median": 0.40526705980300903,
+    "detail": 4.872438073158264,
+    "mean_saturation": 0.2393472008407116,
+    "squint": 0.7478927373886108,
+    "flat_windows": 0.0,
+    "colour_shift": 1.7377012697773182,
+    "saturation_shift": 0.0019618868827819824,
+    "detail_change": -0.13421189785003662
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "02_sparse-olive__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.49,
+     "bytes": 41717,
+     "ok": true,
+     "mean_luminance": 0.45272427797317505,
+     "path": "pictures/job-1/02_sparse-olive__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "02_sparse-olive__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.11,
+     "bytes": 37279,
+     "ok": true,
+     "mean_luminance": 0.5252822637557983,
+     "path": "pictures/job-1/02_sparse-olive__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "02_sparse-olive__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.15,
+     "bytes": 40569,
+     "ok": true,
+     "mean_luminance": 0.29305464029312134,
+     "path": "pictures/job-1/02_sparse-olive__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "02_sparse-olive__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.01,
+     "bytes": 40670,
+     "ok": true,
+     "mean_luminance": 0.4235440790653229,
+     "path": "pictures/job-1/02_sparse-olive__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "autumn-gold",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.26,
+    "crown_scale": 0.95,
+    "density": 1.0,
+    "tone_olive": 0.95,
+    "golden": 6,
+    "moss_scale": 0.8,
+    "lump_detail": 2,
+    "lean_share": 0.0
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 1.88,
+   "seconds_draw": 3.09,
+   "seconds_reset": 0.31,
+   "job": 2,
+   "measures": {
+    "View wide": {
+     "p5": 0.1490384340286255,
+     "p95": 0.8575270771980286,
+     "range": 0.7084886431694031,
+     "median": 0.4248808026313782,
+     "detail": 4.226340293884277,
+     "mean_saturation": 0.2210526019334793,
+     "squint": 0.8944048285484314,
+     "flat_windows": 0,
+     "colour_shift": 0.6499028582792414,
+     "saturation_shift": -0.002189144492149353,
+     "detail_change": -0.3312387466430664
+    },
+    "View road_eye": {
+     "p5": 0.12188157439231873,
+     "p95": 0.8502501845359802,
+     "range": 0.7283686101436615,
+     "median": 0.4660470485687256,
+     "detail": 5.102331161499023,
+     "mean_saturation": 0.20335891842842102,
+     "squint": 0.9065318703651428,
+     "flat_windows": 0,
+     "colour_shift": 0.3857211866832945,
+     "saturation_shift": 0.0015850216150283813,
+     "detail_change": 0.2574319839477539
+    },
+    "View stable_close": {
+     "p5": 0.09217647463083267,
+     "p95": 0.8502501845359802,
+     "range": 0.7580737099051476,
+     "median": 0.32993099093437195,
+     "detail": 5.0553483963012695,
+     "mean_saturation": 0.21425816416740417,
+     "squint": 0.5926811695098877,
+     "flat_windows": 0,
+     "colour_shift": 12.916270375234287,
+     "saturation_shift": -0.0388357937335968,
+     "detail_change": -0.5076441764831543
+    },
+    "View cottage_close": {
+     "p5": 0.10083294659852982,
+     "p95": 0.8300917744636536,
+     "range": 0.7292588278651237,
+     "median": 0.4141514003276825,
+     "detail": 6.461970329284668,
+     "mean_saturation": 0.2754810154438019,
+     "squint": 0.6441578269004822,
+     "flat_windows": 0,
+     "colour_shift": 1.8310045421740058,
+     "saturation_shift": 0.004049360752105713,
+     "detail_change": 1.400841236114502
+    }
+   },
+   "average": {
+    "p5": 0.11598235741257668,
+    "p95": 0.8470298051834106,
+    "range": 0.731047447770834,
+    "median": 0.40875256061553955,
+    "detail": 5.21149754524231,
+    "mean_saturation": 0.2285376749932766,
+    "squint": 0.759443923830986,
+    "flat_windows": 0.0,
+    "colour_shift": 3.945724740592707,
+    "saturation_shift": -0.008847638964653015,
+    "detail_change": 0.2048475742340088
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "03_autumn-gold__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.03,
+     "bytes": 39542,
+     "ok": true,
+     "mean_luminance": 0.4635838568210602,
+     "path": "pictures/job-2/03_autumn-gold__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "03_autumn-gold__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.66,
+     "bytes": 38799,
+     "ok": true,
+     "mean_luminance": 0.51026850938797,
+     "path": "pictures/job-2/03_autumn-gold__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "03_autumn-gold__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.66,
+     "bytes": 37629,
+     "ok": true,
+     "mean_luminance": 0.3949219286441803,
+     "path": "pictures/job-2/03_autumn-gold__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "03_autumn-gold__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.68,
+     "bytes": 46604,
+     "ok": true,
+     "mean_luminance": 0.3929489254951477,
+     "path": "pictures/job-2/03_autumn-gold__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "moss-heavy",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.1,
+    "crown_scale": 1.1,
+    "density": 1.2,
+    "tone_olive": 0.2,
+    "golden": 0,
+    "moss_scale": 1.9,
+    "lump_detail": 2,
+    "lean_share": 0.15
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 4.58,
+   "seconds_draw": 6.29,
+   "seconds_reset": 0.57,
+   "job": 3,
+   "measures": {
+    "View wide": {
+     "p5": 0.11963216215372086,
+     "p95": 0.8566572666168213,
+     "range": 0.7370251044631004,
+     "median": 0.42260628938674927,
+     "detail": 4.629726886749268,
+     "mean_saturation": 0.2254517674446106,
+     "squint": 0.9209628105163574,
+     "flat_windows": 0,
+     "colour_shift": 0.5143001504737887,
+     "saturation_shift": 0.0022100210189819336,
+     "detail_change": 0.07214784622192383
+    },
+    "View road_eye": {
+     "p5": 0.1123552992939949,
+     "p95": 0.8502501845359802,
+     "range": 0.7378948852419853,
+     "median": 0.4666133522987366,
+     "detail": 4.846791744232178,
+     "mean_saturation": 0.20233623683452606,
+     "squint": 0.8818507194519043,
+     "flat_windows": 0,
+     "colour_shift": 0.23065911060323588,
+     "saturation_shift": 0.0005623400211334229,
+     "detail_change": 0.0018925666809082031
+    },
+    "View stable_close": {
+     "p5": 0.06972784548997879,
+     "p95": 0.5236541628837585,
+     "range": 0.45392631739377975,
+     "median": 0.30697256326675415,
+     "detail": 4.613054275512695,
+     "mean_saturation": 0.2655062675476074,
+     "squint": 0.6790482401847839,
+     "flat_windows": 0,
+     "colour_shift": 0.9011931415432567,
+     "saturation_shift": 0.012412309646606445,
+     "detail_change": -0.9499382972717285
+    },
+    "View cottage_close": {
+     "p5": 0.08014901727437973,
+     "p95": 0.8222426772117615,
+     "range": 0.7420936599373817,
+     "median": 0.40646666288375854,
+     "detail": 4.8395771980285645,
+     "mean_saturation": 0.28184106945991516,
+     "squint": 0.6803926229476929,
+     "flat_windows": 0,
+     "colour_shift": 2.242300678238197,
+     "saturation_shift": 0.010409414768218994,
+     "detail_change": -0.22155189514160156
+    }
+   },
+   "average": {
+    "p5": 0.09546608105301857,
+    "p95": 0.7632010728120804,
+    "range": 0.6677349917590618,
+    "median": 0.40066471695899963,
+    "detail": 4.732287526130676,
+    "mean_saturation": 0.2437838353216648,
+    "squint": 0.7905635982751846,
+    "flat_windows": 0.0,
+    "colour_shift": 0.9721132702146196,
+    "saturation_shift": 0.006398521363735199,
+    "detail_change": -0.2743624448776245
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "02_moss-heavy__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.57,
+     "bytes": 41410,
+     "ok": true,
+     "mean_luminance": 0.4467051327228546,
+     "path": "pictures/job-3/02_moss-heavy__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "02_moss-heavy__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.48,
+     "bytes": 37849,
+     "ok": true,
+     "mean_luminance": 0.5116137266159058,
+     "path": "pictures/job-3/02_moss-heavy__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "02_moss-heavy__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.51,
+     "bytes": 37680,
+     "ok": true,
+     "mean_luminance": 0.2950528860092163,
+     "path": "pictures/job-3/02_moss-heavy__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "02_moss-heavy__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.67,
+     "bytes": 40210,
+     "ok": true,
+     "mean_luminance": 0.3635006248950958,
+     "path": "pictures/job-3/02_moss-heavy__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "moss-none-faceted",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.3,
+    "crown_scale": 0.9,
+    "density": 0.8,
+    "tone_olive": 0.6,
+    "golden": 2,
+    "moss_scale": 0.3,
+    "lump_detail": 1,
+    "lean_share": 0.05
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": "reopened",
+   "seconds_apply": 3.55,
+   "seconds_draw": 3.52,
+   "seconds_reset": 0.55,
+   "job": 1,
+   "measures": {
+    "View wide": {
+     "p5": 0.16281020641326904,
+     "p95": 0.8577898144721985,
+     "range": 0.6949796080589294,
+     "median": 0.42514824867248535,
+     "detail": 4.066374778747559,
+     "mean_saturation": 0.22244301438331604,
+     "squint": 0.8756701350212097,
+     "flat_windows": 0,
+     "colour_shift": 0.8712593439370004,
+     "saturation_shift": -0.0007987320423126221,
+     "detail_change": -0.49120426177978516
+    },
+    "View road_eye": {
+     "p5": 0.1271827518939972,
+     "p95": 0.8502501845359802,
+     "range": 0.723067432641983,
+     "median": 0.4687858819961548,
+     "detail": 4.865661144256592,
+     "mean_saturation": 0.2004898488521576,
+     "squint": 0.8762069344520569,
+     "flat_windows": 0,
+     "colour_shift": 0.4676873366243989,
+     "saturation_shift": -0.0012840479612350464,
+     "detail_change": 0.020761966705322266
+    },
+    "View stable_close": {
+     "p5": 0.09356548637151718,
+     "p95": 0.853302001953125,
+     "range": 0.7597365155816078,
+     "median": 0.33665257692337036,
+     "detail": 4.608490467071533,
+     "mean_saturation": 0.20684824883937836,
+     "squint": 0.5644438862800598,
+     "flat_windows": 0,
+     "colour_shift": 14.902880974733128,
+     "saturation_shift": -0.04624570906162262,
+     "detail_change": -0.9545021057128906
+    },
+    "View cottage_close": {
+     "p5": 0.10197960585355759,
+     "p95": 0.8443779945373535,
+     "range": 0.7423983886837959,
+     "median": 0.426552951335907,
+     "detail": 5.259505271911621,
+     "mean_saturation": 0.2460506558418274,
+     "squint": 0.7281275987625122,
+     "flat_windows": 0,
+     "colour_shift": 7.233047621625338,
+     "saturation_shift": -0.025380998849868774,
+     "detail_change": 0.19837617874145508
+    }
+   },
+   "average": {
+    "p5": 0.12138451263308525,
+    "p95": 0.8514299988746643,
+    "range": 0.7300454862415791,
+    "median": 0.41428491473197937,
+    "detail": 4.700007915496826,
+    "mean_saturation": 0.21895794197916985,
+    "squint": 0.7611121386289597,
+    "flat_windows": 0.0,
+    "colour_shift": 5.868718819229967,
+    "saturation_shift": -0.018427371978759766,
+    "detail_change": -0.3066420555114746
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "03_moss-none-faceted__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.13,
+     "bytes": 38491,
+     "ok": true,
+     "mean_luminance": 0.46761900186538696,
+     "path": "pictures/job-1/03_moss-none-faceted__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "03_moss-none-faceted__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.8,
+     "bytes": 37650,
+     "ok": true,
+     "mean_luminance": 0.5233988165855408,
+     "path": "pictures/job-1/03_moss-none-faceted__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "03_moss-none-faceted__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.76,
+     "bytes": 34483,
+     "ok": true,
+     "mean_luminance": 0.4136245548725128,
+     "path": "pictures/job-1/03_moss-none-faceted__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "03_moss-none-faceted__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.78,
+     "bytes": 38801,
+     "ok": true,
+     "mean_luminance": 0.4415988326072693,
+     "path": "pictures/job-1/03_moss-none-faceted__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "leaning-rim",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.2,
+    "crown_scale": 1.2,
+    "density": 1.1,
+    "tone_olive": 0.4,
+    "golden": 2,
+    "moss_scale": 1.4,
+    "lump_detail": 2,
+    "lean_share": 0.4
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 1.86,
+   "seconds_draw": 3.22,
+   "seconds_reset": 0.0,
+   "job": 2,
+   "measures": {
+    "View wide": {
+     "p5": 0.125803142786026,
+     "p95": 0.8552730083465576,
+     "range": 0.7294698655605316,
+     "median": 0.4212266802787781,
+     "detail": 4.7009172439575195,
+     "mean_saturation": 0.22256243228912354,
+     "squint": 0.868977963924408,
+     "flat_windows": 0,
+     "colour_shift": 1.1837683732070994,
+     "saturation_shift": -0.000679314136505127,
+     "detail_change": 0.14333820343017578
+    },
+    "View road_eye": {
+     "p5": 0.11683215945959091,
+     "p95": 0.8502501845359802,
+     "range": 0.7334180250763893,
+     "median": 0.4660470485687256,
+     "detail": 4.826155185699463,
+     "mean_saturation": 0.20278359949588776,
+     "squint": 0.8424753546714783,
+     "flat_windows": 0,
+     "colour_shift": 0.3929731885129102,
+     "saturation_shift": 0.0010097026824951172,
+     "detail_change": -0.01874399185180664
+    },
+    "View stable_close": {
+     "p5": 0.07730823755264282,
+     "p95": 0.4947984516620636,
+     "range": 0.4174902141094208,
+     "median": 0.3060980439186096,
+     "detail": 4.443471908569336,
+     "mean_saturation": 0.2644593119621277,
+     "squint": 0.6361550688743591,
+     "flat_windows": 0,
+     "colour_shift": 1.4463826826191053,
+     "saturation_shift": 0.011365354061126709,
+     "detail_change": -1.119520664215088
+    },
+    "View cottage_close": {
+     "p5": 0.08658745884895325,
+     "p95": 0.8261702656745911,
+     "range": 0.7395828068256378,
+     "median": 0.4021756947040558,
+     "detail": 5.168313503265381,
+     "mean_saturation": 0.29330769181251526,
+     "squint": 0.5697587728500366,
+     "flat_windows": 0,
+     "colour_shift": 2.89955133915989,
+     "saturation_shift": 0.021876037120819092,
+     "detail_change": 0.10718441009521484
+    }
+   },
+   "average": {
+    "p5": 0.10163274966180325,
+    "p95": 0.7566229775547981,
+    "range": 0.6549902278929949,
+    "median": 0.39888686686754227,
+    "detail": 4.784714460372925,
+    "mean_saturation": 0.24577825888991356,
+    "squint": 0.7293417900800705,
+    "flat_windows": 0.0,
+    "colour_shift": 1.4806688958747514,
+    "saturation_shift": 0.008392944931983948,
+    "detail_change": -0.22193551063537598
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "04_leaning-rim__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.16,
+     "bytes": 41804,
+     "ok": true,
+     "mean_luminance": 0.43932148814201355,
+     "path": "pictures/job-2/04_leaning-rim__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "04_leaning-rim__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.66,
+     "bytes": 38273,
+     "ok": true,
+     "mean_luminance": 0.5087646842002869,
+     "path": "pictures/job-2/04_leaning-rim__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "04_leaning-rim__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.65,
+     "bytes": 38553,
+     "ok": true,
+     "mean_luminance": 0.29145532846450806,
+     "path": "pictures/job-2/04_leaning-rim__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "04_leaning-rim__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 0.69,
+     "bytes": 43188,
+     "ok": true,
+     "mean_luminance": 0.35903847217559814,
+     "path": "pictures/job-2/04_leaning-rim__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "dark-compact",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.12,
+    "crown_scale": 0.85,
+    "density": 1.45,
+    "tone_olive": 0.0,
+    "golden": 0,
+    "moss_scale": 0.5,
+    "lump_detail": 2,
+    "lean_share": 0.0
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 4.85,
+   "seconds_draw": 7.58,
+   "seconds_reset": 0.0,
+   "job": 3,
+   "measures": {
+    "View wide": {
+     "p5": 0.12327060103416443,
+     "p95": 0.8552730083465576,
+     "range": 0.7320024073123932,
+     "median": 0.4212266802787781,
+     "detail": 4.851968288421631,
+     "mean_saturation": 0.22739030420780182,
+     "squint": 0.8870251774787903,
+     "flat_windows": 0,
+     "colour_shift": 0.8373289850829709,
+     "saturation_shift": 0.004148557782173157,
+     "detail_change": 0.2943892478942871
+    },
+    "View road_eye": {
+     "p5": 0.11852627992630005,
+     "p95": 0.8502501845359802,
+     "range": 0.7317239046096802,
+     "median": 0.4651317596435547,
+     "detail": 5.50359582901001,
+     "mean_saturation": 0.20147691667079926,
+     "squint": 0.8923027515411377,
+     "flat_windows": 0,
+     "colour_shift": 0.3918574414446711,
+     "saturation_shift": -0.0002969801425933838,
+     "detail_change": 0.6586966514587402
+    },
+    "View stable_close": {
+     "p5": 0.08433333784341812,
+     "p95": 0.846328616142273,
+     "range": 0.7619952782988548,
+     "median": 0.3249082565307617,
+     "detail": 5.2070417404174805,
+     "mean_saturation": 0.22214534878730774,
+     "squint": 0.6400560736656189,
+     "flat_windows": 0,
+     "colour_shift": 10.499928362805251,
+     "saturation_shift": -0.030948609113693237,
+     "detail_change": -0.35595083236694336
+    },
+    "View cottage_close": {
+     "p5": 0.08238745480775833,
+     "p95": 0.8278737664222717,
+     "range": 0.7454863116145134,
+     "median": 0.40976080298423767,
+     "detail": 6.392960548400879,
+     "mean_saturation": 0.26532846689224243,
+     "squint": 0.7108420133590698,
+     "flat_windows": 0,
+     "colour_shift": 1.1187272610036125,
+     "saturation_shift": -0.006103187799453735,
+     "detail_change": 1.331831455230713
+    }
+   },
+   "average": {
+    "p5": 0.10212941840291023,
+    "p95": 0.8449313938617706,
+    "range": 0.7428019754588604,
+    "median": 0.40525687485933304,
+    "detail": 5.4888916015625,
+    "mean_saturation": 0.2290852591395378,
+    "squint": 0.7825565040111542,
+    "flat_windows": 0.0,
+    "colour_shift": 3.2119605125841266,
+    "saturation_shift": -0.0083000548183918,
+    "detail_change": 0.4822416305541992
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "03_dark-compact__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 2.02,
+     "bytes": 41939,
+     "ok": true,
+     "mean_luminance": 0.4448590874671936,
+     "path": "pictures/job-3/03_dark-compact__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "03_dark-compact__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.7,
+     "bytes": 39527,
+     "ok": true,
+     "mean_luminance": 0.5116230845451355,
+     "path": "pictures/job-3/03_dark-compact__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "03_dark-compact__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.78,
+     "bytes": 38995,
+     "ok": true,
+     "mean_luminance": 0.37649792432785034,
+     "path": "pictures/job-3/03_dark-compact__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "03_dark-compact__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 2.0,
+     "bytes": 44607,
+     "ok": true,
+     "mean_luminance": 0.37411415576934814,
+     "path": "pictures/job-3/03_dark-compact__view-cottage-close.jpg"
+    }
+   ]
+  },
+  {
+   "name": "mixed-broad",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.28,
+    "crown_scale": 1.3,
+    "density": 0.7,
+    "tone_olive": 0.65,
+    "golden": 4,
+    "moss_scale": 1.5,
+    "lump_detail": 3,
+    "lean_share": 0.25
+   },
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py",
+   "notes": [],
+   "ok": true,
+   "reset": null,
+   "seconds_apply": 4.65,
+   "seconds_draw": 4.98,
+   "seconds_reset": 0.0,
+   "job": 1,
+   "measures": {
+    "View wide": {
+     "p5": 0.1437278538942337,
+     "p95": 0.8575270771980286,
+     "range": 0.7137992233037949,
+     "median": 0.42514824867248535,
+     "detail": 4.130003452301025,
+     "mean_saturation": 0.22306941449642181,
+     "squint": 0.8750506639480591,
+     "flat_windows": 0,
+     "colour_shift": 0.6149263349576464,
+     "saturation_shift": -0.00017233192920684814,
+     "detail_change": -0.42757558822631836
+    },
+    "View road_eye": {
+     "p5": 0.12019843608140945,
+     "p95": 0.8502501845359802,
+     "range": 0.7300517484545708,
+     "median": 0.46820390224456787,
+     "detail": 4.847456455230713,
+     "mean_saturation": 0.2029339224100113,
+     "squint": 0.8564395904541016,
+     "flat_windows": 0,
+     "colour_shift": 0.33103101341463664,
+     "saturation_shift": 0.0011600255966186523,
+     "detail_change": 0.0025572776794433594
+    },
+    "View stable_close": {
+     "p5": 0.08515136688947678,
+     "p95": 0.8443779945373535,
+     "range": 0.7592266276478767,
+     "median": 0.31786274909973145,
+     "detail": 4.434057235717773,
+     "mean_saturation": 0.23102572560310364,
+     "squint": 0.5481579303741455,
+     "flat_windows": 0,
+     "colour_shift": 9.347672443859215,
+     "saturation_shift": -0.02206823229789734,
+     "detail_change": -1.1289353370666504
+    },
+    "View cottage_close": {
+     "p5": 0.09173333644866943,
+     "p95": 0.8300917744636536,
+     "range": 0.7383584380149841,
+     "median": 0.4091945290565491,
+     "detail": 5.308919906616211,
+     "mean_saturation": 0.31403058767318726,
+     "squint": 0.5441985726356506,
+     "flat_windows": 0,
+     "colour_shift": 2.172286550766484,
+     "saturation_shift": 0.04259893298149109,
+     "detail_change": 0.24779081344604492
+    }
+   },
+   "average": {
+    "p5": 0.11020274832844734,
+    "p95": 0.845561757683754,
+    "range": 0.7353590093553066,
+    "median": 0.40510235726833344,
+    "detail": 4.680109262466431,
+    "mean_saturation": 0.242764912545681,
+    "squint": 0.7059616893529892,
+    "flat_windows": 0.0,
+    "colour_shift": 3.116479085749496,
+    "saturation_shift": 0.0053795985877513885,
+    "detail_change": -0.3265407085418701
+   },
+   "flags": [],
+   "pictures": [
+    {
+     "camera": "View wide",
+     "file": "04_mixed-broad__view-wide.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.4,
+     "bytes": 39717,
+     "ok": true,
+     "mean_luminance": 0.46069738268852234,
+     "path": "pictures/job-1/04_mixed-broad__view-wide.jpg"
+    },
+    {
+     "camera": "View road_eye",
+     "file": "04_mixed-broad__view-road-eye.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.13,
+     "bytes": 38780,
+     "ok": true,
+     "mean_luminance": 0.5126869678497314,
+     "path": "pictures/job-1/04_mixed-broad__view-road-eye.jpg"
+    },
+    {
+     "camera": "View stable_close",
+     "file": "04_mixed-broad__view-stable-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.17,
+     "bytes": 36653,
+     "ok": true,
+     "mean_luminance": 0.3566724359989166,
+     "path": "pictures/job-1/04_mixed-broad__view-stable-close.jpg"
+    },
+    {
+     "camera": "View cottage_close",
+     "file": "04_mixed-broad__view-cottage-close.jpg",
+     "engine": "EEVEE",
+     "width": 600,
+     "height": 400,
+     "samples": 16,
+     "seconds": 1.22,
+     "bytes": 44216,
+     "ok": true,
+     "mean_luminance": 0.3663259744644165,
+     "path": "pictures/job-1/04_mixed-broad__view-cottage-close.jpg"
+    }
+   ]
+  }
+ ],
+ "pairs": [
+  {
+   "a": "baseline",
+   "b": "smooth-big-dark",
+   "mean_difference": 18.051348263888887,
+   "changed_share": 0.3036770833333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.71389861111111,
+     "changed_share": 0.20829166666666668
+    },
+    "View stable_close": {
+     "mean_difference": 25.596008333333334,
+     "changed_share": 0.3998541666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 27.086791666666667,
+     "changed_share": 0.4159041666666667
+    },
+    "View road_eye": {
+     "mean_difference": 10.808694444444445,
+     "changed_share": 0.19065833333333335
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "rough-small-olive",
+   "mean_difference": 17.74719548611111,
+   "changed_share": 0.275375,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.689558333333333,
+     "changed_share": 0.18422916666666667
+    },
+    "View stable_close": {
+     "mean_difference": 22.440094444444444,
+     "changed_share": 0.37406666666666666
+    },
+    "View cottage_close": {
+     "mean_difference": 31.70072777777778,
+     "changed_share": 0.37359166666666666
+    },
+    "View road_eye": {
+     "mean_difference": 9.158401388888889,
+     "changed_share": 0.1696125
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "dense-forest",
+   "mean_difference": 13.501938888888887,
+   "changed_share": 0.23877916666666665,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.986963888888889,
+     "changed_share": 0.1825375
+    },
+    "View stable_close": {
+     "mean_difference": 15.936434722222222,
+     "changed_share": 0.3012375
+    },
+    "View cottage_close": {
+     "mean_difference": 21.282930555555556,
+     "changed_share": 0.31319583333333334
+    },
+    "View road_eye": {
+     "mean_difference": 8.801426388888888,
+     "changed_share": 0.15814583333333335
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "sparse-olive",
+   "mean_difference": 17.073541666666667,
+   "changed_share": 0.29055,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.721195833333333,
+     "changed_share": 0.2035875
+    },
+    "View stable_close": {
+     "mean_difference": 22.922730555555557,
+     "changed_share": 0.41668333333333335
+    },
+    "View cottage_close": {
+     "mean_difference": 26.062575,
+     "changed_share": 0.3621083333333333
+    },
+    "View road_eye": {
+     "mean_difference": 10.587665277777777,
+     "changed_share": 0.17982083333333335
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "autumn-gold",
+   "mean_difference": 19.75095590277778,
+   "changed_share": 0.2780708333333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.3179791666666665,
+     "changed_share": 0.16675833333333334
+    },
+    "View stable_close": {
+     "mean_difference": 36.87314305555556,
+     "changed_share": 0.3858416666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 27.191145833333334,
+     "changed_share": 0.4007583333333333
+    },
+    "View road_eye": {
+     "mean_difference": 7.621555555555555,
+     "changed_share": 0.158925
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "moss-heavy",
+   "mean_difference": 15.062619097222223,
+   "changed_share": 0.27668333333333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.4436736111111115,
+     "changed_share": 0.19267083333333335
+    },
+    "View stable_close": {
+     "mean_difference": 20.026430555555557,
+     "changed_share": 0.36352083333333335
+    },
+    "View cottage_close": {
+     "mean_difference": 23.470695833333334,
+     "changed_share": 0.3801291666666667
+    },
+    "View road_eye": {
+     "mean_difference": 9.309676388888889,
+     "changed_share": 0.1704125
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "moss-none-faceted",
+   "mean_difference": 19.753478125,
+   "changed_share": 0.2605885416666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.088236111111112,
+     "changed_share": 0.17763333333333334
+    },
+    "View stable_close": {
+     "mean_difference": 36.702668055555556,
+     "changed_share": 0.38004166666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 24.484952777777778,
+     "changed_share": 0.321175
+    },
+    "View road_eye": {
+     "mean_difference": 9.738055555555556,
+     "changed_share": 0.16350416666666667
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "leaning-rim",
+   "mean_difference": 17.918985763888887,
+   "changed_share": 0.31122500000000003,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.633811111111111,
+     "changed_share": 0.21021666666666666
+    },
+    "View stable_close": {
+     "mean_difference": 22.175366666666665,
+     "changed_share": 0.4096375
+    },
+    "View cottage_close": {
+     "mean_difference": 29.08328472222222,
+     "changed_share": 0.4358916666666667
+    },
+    "View road_eye": {
+     "mean_difference": 10.783480555555556,
+     "changed_share": 0.18915416666666668
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "dark-compact",
+   "mean_difference": 16.652951388888887,
+   "changed_share": 0.28298958333333335,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.126633333333332,
+     "changed_share": 0.21364166666666667
+    },
+    "View stable_close": {
+     "mean_difference": 27.90846388888889,
+     "changed_share": 0.3718916666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 20.52817361111111,
+     "changed_share": 0.37442916666666665
+    },
+    "View road_eye": {
+     "mean_difference": 9.048534722222222,
+     "changed_share": 0.17199583333333332
+    }
+   }
+  },
+  {
+   "a": "baseline",
+   "b": "mixed-broad",
+   "mean_difference": 22.847132638888887,
+   "changed_share": 0.32176875,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.18355,
+     "changed_share": 0.2017375
+    },
+    "View stable_close": {
+     "mean_difference": 37.27565277777778,
+     "changed_share": 0.4321625
+    },
+    "View cottage_close": {
+     "mean_difference": 34.09674444444445,
+     "changed_share": 0.4589916666666667
+    },
+    "View road_eye": {
+     "mean_difference": 10.832583333333334,
+     "changed_share": 0.19418333333333335
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "rough-small-olive",
+   "mean_difference": 19.10206527777778,
+   "changed_share": 0.30768750000000006,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 10.038793055555555,
+     "changed_share": 0.22546666666666668
+    },
+    "View stable_close": {
+     "mean_difference": 27.29998888888889,
+     "changed_share": 0.3972041666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 27.748055555555556,
+     "changed_share": 0.4123833333333333
+    },
+    "View road_eye": {
+     "mean_difference": 11.321423611111111,
+     "changed_share": 0.19569583333333335
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "dense-forest",
+   "mean_difference": 13.959381597222222,
+   "changed_share": 0.28317395833333336,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 6.839098611111111,
+     "changed_share": 0.189825
+    },
+    "View stable_close": {
+     "mean_difference": 22.5970375,
+     "changed_share": 0.3779416666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 17.619233333333334,
+     "changed_share": 0.389325
+    },
+    "View road_eye": {
+     "mean_difference": 8.782156944444445,
+     "changed_share": 0.17560416666666667
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "sparse-olive",
+   "mean_difference": 17.49662534722222,
+   "changed_share": 0.2922489583333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.043669444444445,
+     "changed_share": 0.1972625
+    },
+    "View stable_close": {
+     "mean_difference": 24.553683333333332,
+     "changed_share": 0.39995
+    },
+    "View cottage_close": {
+     "mean_difference": 28.981202777777778,
+     "changed_share": 0.4134333333333333
+    },
+    "View road_eye": {
+     "mean_difference": 8.407945833333333,
+     "changed_share": 0.15835
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "autumn-gold",
+   "mean_difference": 21.60683333333333,
+   "changed_share": 0.308859375,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.234080555555556,
+     "changed_share": 0.20637916666666667
+    },
+    "View stable_close": {
+     "mean_difference": 36.98832083333333,
+     "changed_share": 0.388375
+    },
+    "View cottage_close": {
+     "mean_difference": 29.71422638888889,
+     "changed_share": 0.4537583333333333
+    },
+    "View road_eye": {
+     "mean_difference": 10.490705555555556,
+     "changed_share": 0.186925
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "moss-heavy",
+   "mean_difference": 13.46807222222222,
+   "changed_share": 0.2779552083333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.799533333333334,
+     "changed_share": 0.2004125
+    },
+    "View stable_close": {
+     "mean_difference": 22.453063888888888,
+     "changed_share": 0.36669583333333333
+    },
+    "View cottage_close": {
+     "mean_difference": 15.117070833333333,
+     "changed_share": 0.3798416666666667
+    },
+    "View road_eye": {
+     "mean_difference": 8.502620833333333,
+     "changed_share": 0.16487083333333333
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "moss-none-faceted",
+   "mean_difference": 24.65959166666667,
+   "changed_share": 0.3071041666666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 10.2129375,
+     "changed_share": 0.21815833333333334
+    },
+    "View stable_close": {
+     "mean_difference": 37.435209722222226,
+     "changed_share": 0.38119583333333334
+    },
+    "View cottage_close": {
+     "mean_difference": 39.641525,
+     "changed_share": 0.4394208333333333
+    },
+    "View road_eye": {
+     "mean_difference": 11.348694444444444,
+     "changed_share": 0.18964166666666665
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "leaning-rim",
+   "mean_difference": 14.985025694444444,
+   "changed_share": 0.29685000000000006,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.602195833333333,
+     "changed_share": 0.2022875
+    },
+    "View stable_close": {
+     "mean_difference": 19.42023888888889,
+     "changed_share": 0.37505
+    },
+    "View cottage_close": {
+     "mean_difference": 22.707904166666665,
+     "changed_share": 0.43280833333333335
+    },
+    "View road_eye": {
+     "mean_difference": 9.209763888888888,
+     "changed_share": 0.17725416666666666
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "dark-compact",
+   "mean_difference": 20.07357465277778,
+   "changed_share": 0.314871875,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.950206944444444,
+     "changed_share": 0.2305875
+    },
+    "View stable_close": {
+     "mean_difference": 32.17790277777778,
+     "changed_share": 0.3911833333333333
+    },
+    "View cottage_close": {
+     "mean_difference": 26.945504166666666,
+     "changed_share": 0.44402916666666664
+    },
+    "View road_eye": {
+     "mean_difference": 11.220684722222222,
+     "changed_share": 0.1936875
+    }
+   }
+  },
+  {
+   "a": "smooth-big-dark",
+   "b": "mixed-broad",
+   "mean_difference": 21.010221875000003,
+   "changed_share": 0.32250729166666664,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.375709722222222,
+     "changed_share": 0.2110375
+    },
+    "View stable_close": {
+     "mean_difference": 32.62607777777778,
+     "changed_share": 0.40602916666666666
+    },
+    "View cottage_close": {
+     "mean_difference": 30.559919444444443,
+     "changed_share": 0.47381666666666666
+    },
+    "View road_eye": {
+     "mean_difference": 11.479180555555555,
+     "changed_share": 0.19914583333333333
+    }
+   }
+  },
+  {
+   "a": "rough-small-olive",
+   "b": "dense-forest",
+   "mean_difference": 16.948346875,
+   "changed_share": 0.293059375,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.079036111111112,
+     "changed_share": 0.2138
+    },
+    "View stable_close": {
+     "mean_difference": 22.06517361111111,
+     "changed_share": 0.37957083333333336
+    },
+    "View cottage_close": {
+     "mean_difference": 26.332238888888888,
+     "changed_share": 0.39045
+    },
+    "View road_eye": {
+     "mean_difference": 10.316938888888888,
+     "changed_share": 0.18841666666666668
+    }
+   }
+  },
+  {
+   "a": "rough-small-olive",
+   "b": "sparse-olive",
+   "mean_difference": 16.77998159722222,
+   "changed_share": 0.27986354166666666,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.873993055555555,
+     "changed_share": 0.20632916666666667
+    },
+    "View stable_close": {
+     "mean_difference": 23.685644444444446,
+     "changed_share": 0.4003833333333333
+    },
+    "View cottage_close": {
+     "mean_difference": 24.49880277777778,
+     "changed_share": 0.339725
+    },
+    "View road_eye": {
+     "mean_difference": 10.061486111111112,
+     "changed_share": 0.17301666666666668
+    }
+   }
+  },
+  {
+   "a": "rough-small-olive",
+   "b": "autumn-gold",
+   "mean_difference": 20.340952083333335,
+   "changed_share": 0.2773333333333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.0249291666666664,
+     "changed_share": 0.16720416666666665
+    },
+    "View stable_close": {
+     "mean_difference": 33.56745138888889,
+     "changed_share": 0.3591416666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 30.917293055555554,
+     "changed_share": 0.403475
+    },
+    "View road_eye": {
+     "mean_difference": 9.854134722222222,
+     "changed_share": 0.1795125
+    }
+   }
+  },
+  {
+   "a": "rough-small-olive",
+   "b": "moss-heavy",
+   "mean_difference": 16.002377083333332,
+   "changed_share": 0.28549270833333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.393726388888888,
+     "changed_share": 0.2062
+    },
+    "View stable_close": {
+     "mean_difference": 22.016602777777777,
+     "changed_share": 0.366725
+    },
+    "View cottage_close": {
+     "mean_difference": 24.274615277777777,
+     "changed_share": 0.3912083333333333
+    },
+    "View road_eye": {
+     "mean_difference": 9.324563888888889,
+     "changed_share": 0.1778375
+    }
+   }
+  },
+  {
+   "a": "rough-small-olive",
+   "b": "moss-none-faceted",
+   "mean_difference": 19.54637222222222,
+   "changed_share": 0.24677812500000001,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 6.563272222222222,
+     "changed_share": 0.1503875
+    },
+    "View stable_close": {
+     "mean_difference": 30.150109722222222,
+     "changed_share": 0.3369083333333333
+    },
+    "View cottage_close": {
+     "mean_difference": 33.04956388888889,
+     "changed_share": 0.34227083333333336
+    },
+    "View road_eye": {
+     "mean_difference": 8.422543055555556,
+     "changed_share": 0.15754583333333333
+    }
+   }
+  },
+  {
+   "a": "rough-small-olive",
+   "b": "leaning-rim",
+   "mean_difference": 20.197264583333332,
+   "changed_share": 0.31733541666666665,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 10.710719444444445,
+     "changed_share": 0.22634583333333333
+    },
+    "View stable_close": {
+     "mean_difference": 26.47848888888889,
+     "changed_share": 0.40904583333333333
+    },
+    "View cottage_close": {
+     "mean_difference": 33.3513875,
+     "changed_share": 0.44227916666666667
+    },
+    "View road_eye": {
+     "mean_difference": 10.2484625,
+     "changed_share": 0.19167083333333335
+    }
+   }
+  },
+  {
+   "a": "rough-small-olive",
+   "b": "dark-compact",
+   "mean_difference": 19.884789930555556,
+   "changed_share": 0.28353854166666664,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.583338888888889,
+     "changed_share": 0.210375
+    },
+    "View stable_close": {
+     "mean_difference": 29.51505,
+     "changed_share": 0.3541416666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 31.29392361111111,
+     "changed_share": 0.39676666666666666
+    },
+    "View road_eye": {
+     "mean_difference": 9.146847222222222,
+     "changed_share": 0.17287083333333333
+    }
+   }
+  },
+  {
+   "a": "rough-small-olive",
+   "b": "mixed-broad",
+   "mean_difference": 22.077103125,
+   "changed_share": 0.307909375,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.34095,
+     "changed_share": 0.18571666666666667
+    },
+    "View stable_close": {
+     "mean_difference": 31.480066666666666,
+     "changed_share": 0.39584583333333334
+    },
+    "View cottage_close": {
+     "mean_difference": 37.854552777777776,
+     "changed_share": 0.4608041666666667
+    },
+    "View road_eye": {
+     "mean_difference": 10.632843055555556,
+     "changed_share": 0.18927083333333333
+    }
+   }
+  },
+  {
+   "a": "dense-forest",
+   "b": "sparse-olive",
+   "mean_difference": 17.22892361111111,
+   "changed_share": 0.3044385416666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.917776388888889,
+     "changed_share": 0.21305416666666666
+    },
+    "View stable_close": {
+     "mean_difference": 17.48933472222222,
+     "changed_share": 0.3973541666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 31.145941666666666,
+     "changed_share": 0.42270416666666666
+    },
+    "View road_eye": {
+     "mean_difference": 11.362641666666667,
+     "changed_share": 0.18464166666666668
+    }
+   }
+  },
+  {
+   "a": "dense-forest",
+   "b": "autumn-gold",
+   "mean_difference": 20.758428125000002,
+   "changed_share": 0.29983645833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.907845833333333,
+     "changed_share": 0.19864583333333333
+    },
+    "View stable_close": {
+     "mean_difference": 37.860591666666664,
+     "changed_share": 0.39602916666666665
+    },
+    "View cottage_close": {
+     "mean_difference": 26.467868055555556,
+     "changed_share": 0.42765416666666667
+    },
+    "View road_eye": {
+     "mean_difference": 9.797406944444445,
+     "changed_share": 0.17701666666666666
+    }
+   }
+  },
+  {
+   "a": "dense-forest",
+   "b": "moss-heavy",
+   "mean_difference": 12.763512847222222,
+   "changed_share": 0.27761041666666664,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.719534722222222,
+     "changed_share": 0.20215
+    },
+    "View stable_close": {
+     "mean_difference": 16.433465277777778,
+     "changed_share": 0.350575
+    },
+    "View cottage_close": {
+     "mean_difference": 17.57346527777778,
+     "changed_share": 0.3820791666666667
+    },
+    "View road_eye": {
+     "mean_difference": 9.327586111111112,
+     "changed_share": 0.1756375
+    }
+   }
+  },
+  {
+   "a": "dense-forest",
+   "b": "moss-none-faceted",
+   "mean_difference": 24.34660798611111,
+   "changed_share": 0.29983645833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.456741666666666,
+     "changed_share": 0.2085125
+    },
+    "View stable_close": {
+     "mean_difference": 41.999425,
+     "changed_share": 0.4075875
+    },
+    "View cottage_close": {
+     "mean_difference": 35.25035277777778,
+     "changed_share": 0.4008375
+    },
+    "View road_eye": {
+     "mean_difference": 10.6799125,
+     "changed_share": 0.18240833333333334
+    }
+   }
+  },
+  {
+   "a": "dense-forest",
+   "b": "leaning-rim",
+   "mean_difference": 15.222590625,
+   "changed_share": 0.30871770833333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.978755555555555,
+     "changed_share": 0.21222083333333333
+    },
+    "View stable_close": {
+     "mean_difference": 17.999670833333333,
+     "changed_share": 0.3895208333333333
+    },
+    "View cottage_close": {
+     "mean_difference": 23.43241527777778,
+     "changed_share": 0.44028333333333336
+    },
+    "View road_eye": {
+     "mean_difference": 10.479520833333334,
+     "changed_share": 0.19284583333333333
+    }
+   }
+  },
+  {
+   "a": "dense-forest",
+   "b": "dark-compact",
+   "mean_difference": 18.991500694444444,
+   "changed_share": 0.30590625,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.525075,
+     "changed_share": 0.22665
+    },
+    "View stable_close": {
+     "mean_difference": 33.0794875,
+     "changed_share": 0.4008541666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 23.065218055555555,
+     "changed_share": 0.4089291666666667
+    },
+    "View road_eye": {
+     "mean_difference": 10.296222222222223,
+     "changed_share": 0.18719166666666667
+    }
+   }
+  },
+  {
+   "a": "dense-forest",
+   "b": "mixed-broad",
+   "mean_difference": 21.218530555555557,
+   "changed_share": 0.32715208333333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.695141666666666,
+     "changed_share": 0.219725
+    },
+    "View stable_close": {
+     "mean_difference": 34.08927361111111,
+     "changed_share": 0.4285625
+    },
+    "View cottage_close": {
+     "mean_difference": 29.053175,
+     "changed_share": 0.4545416666666667
+    },
+    "View road_eye": {
+     "mean_difference": 12.036531944444445,
+     "changed_share": 0.20577916666666668
+    }
+   }
+  },
+  {
+   "a": "sparse-olive",
+   "b": "autumn-gold",
+   "mean_difference": 20.328052430555555,
+   "changed_share": 0.2869197916666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.114047222222222,
+     "changed_share": 0.19079166666666666
+    },
+    "View stable_close": {
+     "mean_difference": 37.2253625,
+     "changed_share": 0.39855833333333335
+    },
+    "View cottage_close": {
+     "mean_difference": 26.3612125,
+     "changed_share": 0.3871291666666667
+    },
+    "View road_eye": {
+     "mean_difference": 9.6115875,
+     "changed_share": 0.1712
+    }
+   }
+  },
+  {
+   "a": "sparse-olive",
+   "b": "moss-heavy",
+   "mean_difference": 15.506324652777776,
+   "changed_share": 0.2847864583333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.24803611111111,
+     "changed_share": 0.20129583333333334
+    },
+    "View stable_close": {
+     "mean_difference": 20.049688888888888,
+     "changed_share": 0.3839875
+    },
+    "View cottage_close": {
+     "mean_difference": 25.06154861111111,
+     "changed_share": 0.3947041666666667
+    },
+    "View road_eye": {
+     "mean_difference": 8.666025,
+     "changed_share": 0.15915833333333335
+    }
+   }
+  },
+  {
+   "a": "sparse-olive",
+   "b": "moss-none-faceted",
+   "mean_difference": 22.43004131944444,
+   "changed_share": 0.282728125,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.428351388888888,
+     "changed_share": 0.1937625
+    },
+    "View stable_close": {
+     "mean_difference": 38.996768055555556,
+     "changed_share": 0.40662916666666665
+    },
+    "View cottage_close": {
+     "mean_difference": 32.491775,
+     "changed_share": 0.3603875
+    },
+    "View road_eye": {
+     "mean_difference": 9.803270833333332,
+     "changed_share": 0.17013333333333333
+    }
+   }
+  },
+  {
+   "a": "sparse-olive",
+   "b": "leaning-rim",
+   "mean_difference": 16.27666076388889,
+   "changed_share": 0.2841875,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.3581625,
+     "changed_share": 0.19161666666666666
+    },
+    "View stable_close": {
+     "mean_difference": 21.79225277777778,
+     "changed_share": 0.40535
+    },
+    "View cottage_close": {
+     "mean_difference": 26.435143055555557,
+     "changed_share": 0.38353333333333334
+    },
+    "View road_eye": {
+     "mean_difference": 8.521084722222222,
+     "changed_share": 0.15625
+    }
+   }
+  },
+  {
+   "a": "sparse-olive",
+   "b": "dark-compact",
+   "mean_difference": 21.01564513888889,
+   "changed_share": 0.30726145833333335,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 10.44639861111111,
+     "changed_share": 0.2291
+    },
+    "View stable_close": {
+     "mean_difference": 34.91524444444445,
+     "changed_share": 0.41263333333333335
+    },
+    "View cottage_close": {
+     "mean_difference": 28.1020125,
+     "changed_share": 0.40567916666666665
+    },
+    "View road_eye": {
+     "mean_difference": 10.598925,
+     "changed_share": 0.18163333333333334
+    }
+   }
+  },
+  {
+   "a": "sparse-olive",
+   "b": "mixed-broad",
+   "mean_difference": 22.325413194444444,
+   "changed_share": 0.31748333333333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.289429166666666,
+     "changed_share": 0.20915833333333333
+    },
+    "View stable_close": {
+     "mean_difference": 28.09197222222222,
+     "changed_share": 0.4091958333333333
+    },
+    "View cottage_close": {
+     "mean_difference": 42.079230555555554,
+     "changed_share": 0.4731166666666667
+    },
+    "View road_eye": {
+     "mean_difference": 9.841020833333333,
+     "changed_share": 0.1784625
+    }
+   }
+  },
+  {
+   "a": "autumn-gold",
+   "b": "moss-heavy",
+   "mean_difference": 19.898583333333335,
+   "changed_share": 0.294684375,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.405275,
+     "changed_share": 0.1955375
+    },
+    "View stable_close": {
+     "mean_difference": 33.44352083333333,
+     "changed_share": 0.3651875
+    },
+    "View cottage_close": {
+     "mean_difference": 28.14196111111111,
+     "changed_share": 0.4408
+    },
+    "View road_eye": {
+     "mean_difference": 9.60357638888889,
+     "changed_share": 0.1772125
+    }
+   }
+  },
+  {
+   "a": "autumn-gold",
+   "b": "moss-none-faceted",
+   "mean_difference": 19.071093055555554,
+   "changed_share": 0.24681145833333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 5.5785486111111116,
+     "changed_share": 0.13744583333333332
+    },
+    "View stable_close": {
+     "mean_difference": 28.519155555555557,
+     "changed_share": 0.2849375
+    },
+    "View cottage_close": {
+     "mean_difference": 31.42632083333333,
+     "changed_share": 0.38961666666666667
+    },
+    "View road_eye": {
+     "mean_difference": 10.760347222222222,
+     "changed_share": 0.17524583333333332
+    }
+   }
+  },
+  {
+   "a": "autumn-gold",
+   "b": "leaning-rim",
+   "mean_difference": 19.985352083333332,
+   "changed_share": 0.310503125,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 10.455343055555556,
+     "changed_share": 0.21162916666666667
+    },
+    "View stable_close": {
+     "mean_difference": 34.58615972222222,
+     "changed_share": 0.4024041666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 24.344580555555556,
+     "changed_share": 0.4366791666666667
+    },
+    "View road_eye": {
+     "mean_difference": 10.555325,
+     "changed_share": 0.1913
+    }
+   }
+  },
+  {
+   "a": "autumn-gold",
+   "b": "dark-compact",
+   "mean_difference": 17.481955208333332,
+   "changed_share": 0.272871875,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 10.064881944444444,
+     "changed_share": 0.21135416666666668
+    },
+    "View stable_close": {
+     "mean_difference": 30.041168055555556,
+     "changed_share": 0.32135833333333336
+    },
+    "View cottage_close": {
+     "mean_difference": 21.317663888888887,
+     "changed_share": 0.3833416666666667
+    },
+    "View road_eye": {
+     "mean_difference": 8.504106944444445,
+     "changed_share": 0.17543333333333333
+    }
+   }
+  },
+  {
+   "a": "autumn-gold",
+   "b": "mixed-broad",
+   "mean_difference": 22.11074201388889,
+   "changed_share": 0.299759375,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.094809722222222,
+     "changed_share": 0.1667875
+    },
+    "View stable_close": {
+     "mean_difference": 36.52900972222222,
+     "changed_share": 0.37135833333333335
+    },
+    "View cottage_close": {
+     "mean_difference": 33.538493055555556,
+     "changed_share": 0.46074583333333335
+    },
+    "View road_eye": {
+     "mean_difference": 11.280655555555555,
+     "changed_share": 0.20014583333333333
+    }
+   }
+  },
+  {
+   "a": "moss-heavy",
+   "b": "moss-none-faceted",
+   "mean_difference": 22.891175000000004,
+   "changed_share": 0.2918,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.2823125,
+     "changed_share": 0.20547083333333332
+    },
+    "View stable_close": {
+     "mean_difference": 37.4052875,
+     "changed_share": 0.372975
+    },
+    "View cottage_close": {
+     "mean_difference": 35.68499027777778,
+     "changed_share": 0.4171708333333333
+    },
+    "View road_eye": {
+     "mean_difference": 9.192109722222222,
+     "changed_share": 0.17158333333333334
+    }
+   }
+  },
+  {
+   "a": "moss-heavy",
+   "b": "leaning-rim",
+   "mean_difference": 14.982800694444446,
+   "changed_share": 0.3005552083333334,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 8.552720833333334,
+     "changed_share": 0.20744166666666666
+    },
+    "View stable_close": {
+     "mean_difference": 18.768933333333333,
+     "changed_share": 0.37752083333333336
+    },
+    "View cottage_close": {
+     "mean_difference": 24.22877777777778,
+     "changed_share": 0.44407083333333336
+    },
+    "View road_eye": {
+     "mean_difference": 8.380770833333333,
+     "changed_share": 0.1731875
+    }
+   }
+  },
+  {
+   "a": "moss-heavy",
+   "b": "dark-compact",
+   "mean_difference": 18.394037152777777,
+   "changed_share": 0.2990770833333333,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.332031944444445,
+     "changed_share": 0.22079583333333333
+    },
+    "View stable_close": {
+     "mean_difference": 29.5807,
+     "changed_share": 0.37030416666666666
+    },
+    "View cottage_close": {
+     "mean_difference": 24.997541666666667,
+     "changed_share": 0.4259875
+    },
+    "View road_eye": {
+     "mean_difference": 9.665875,
+     "changed_share": 0.17922083333333333
+    }
+   }
+  },
+  {
+   "a": "moss-heavy",
+   "b": "mixed-broad",
+   "mean_difference": 21.41198159722222,
+   "changed_share": 0.32307916666666664,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.6787625,
+     "changed_share": 0.21727083333333333
+    },
+    "View stable_close": {
+     "mean_difference": 33.82496111111111,
+     "changed_share": 0.4060916666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 32.70523194444444,
+     "changed_share": 0.48020416666666665
+    },
+    "View road_eye": {
+     "mean_difference": 9.438970833333334,
+     "changed_share": 0.18875
+    }
+   }
+  },
+  {
+   "a": "moss-none-faceted",
+   "b": "leaning-rim",
+   "mean_difference": 24.687266666666666,
+   "changed_share": 0.315490625,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 10.280575,
+     "changed_share": 0.21062083333333334
+    },
+    "View stable_close": {
+     "mean_difference": 40.26655972222222,
+     "changed_share": 0.4174833333333333
+    },
+    "View cottage_close": {
+     "mean_difference": 38.517184722222225,
+     "changed_share": 0.45202916666666665
+    },
+    "View road_eye": {
+     "mean_difference": 9.684747222222223,
+     "changed_share": 0.18182916666666665
+    }
+   }
+  },
+  {
+   "a": "moss-none-faceted",
+   "b": "dark-compact",
+   "mean_difference": 18.461699652777774,
+   "changed_share": 0.2572760416666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.739975,
+     "changed_share": 0.19932916666666667
+    },
+    "View stable_close": {
+     "mean_difference": 24.47012361111111,
+     "changed_share": 0.28415416666666665
+    },
+    "View cottage_close": {
+     "mean_difference": 30.87020138888889,
+     "changed_share": 0.3821583333333333
+    },
+    "View road_eye": {
+     "mean_difference": 8.76649861111111,
+     "changed_share": 0.1634625
+    }
+   }
+  },
+  {
+   "a": "moss-none-faceted",
+   "b": "mixed-broad",
+   "mean_difference": 20.449663541666666,
+   "changed_share": 0.27861250000000004,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 7.003727777777778,
+     "changed_share": 0.164025
+    },
+    "View stable_close": {
+     "mean_difference": 31.498740277777777,
+     "changed_share": 0.33902916666666666
+    },
+    "View cottage_close": {
+     "mean_difference": 32.00036388888889,
+     "changed_share": 0.41734583333333336
+    },
+    "View road_eye": {
+     "mean_difference": 11.295822222222222,
+     "changed_share": 0.19405
+    }
+   }
+  },
+  {
+   "a": "leaning-rim",
+   "b": "dark-compact",
+   "mean_difference": 18.83483159722222,
+   "changed_share": 0.3176,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 9.940622222222222,
+     "changed_share": 0.23065833333333333
+    },
+    "View stable_close": {
+     "mean_difference": 30.162263888888887,
+     "changed_share": 0.4014041666666667
+    },
+    "View cottage_close": {
+     "mean_difference": 24.965155555555555,
+     "changed_share": 0.44358333333333333
+    },
+    "View road_eye": {
+     "mean_difference": 10.271284722222223,
+     "changed_share": 0.19475416666666667
+    }
+   }
+  },
+  {
+   "a": "leaning-rim",
+   "b": "mixed-broad",
+   "mean_difference": 21.075610763888886,
+   "changed_share": 0.3272760416666667,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 10.487016666666667,
+     "changed_share": 0.21668333333333334
+    },
+    "View stable_close": {
+     "mean_difference": 32.435266666666664,
+     "changed_share": 0.4202375
+    },
+    "View cottage_close": {
+     "mean_difference": 30.702820833333334,
+     "changed_share": 0.4782958333333333
+    },
+    "View road_eye": {
+     "mean_difference": 10.677338888888888,
+     "changed_share": 0.1938875
+    }
+   }
+  },
+  {
+   "a": "dark-compact",
+   "b": "mixed-broad",
+   "mean_difference": 23.930918749999996,
+   "changed_share": 0.324909375,
+   "nearly_the_same": false,
+   "faint": false,
+   "per_camera": {
+    "View wide": {
+     "mean_difference": 11.00756111111111,
+     "changed_share": 0.22786666666666666
+    },
+    "View stable_close": {
+     "mean_difference": 40.59953888888889,
+     "changed_share": 0.40596666666666664
+    },
+    "View cottage_close": {
+     "mean_difference": 33.45222916666667,
+     "changed_share": 0.4692458333333333
+    },
+    "View road_eye": {
+     "mean_difference": 10.664345833333334,
+     "changed_share": 0.19655833333333333
+    }
+   }
+  }
+ ],
+ "nearly_the_same": [],
+ "invisible": [],
+ "faint": [],
+ "faint_against_baseline": [],
+ "reset_check": null,
+ "sheet": {
+  "path": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/forest-variations-run/crown-lumpiness-crown-size-tree-density-sheet.jpg",
+  "bytes": 399895,
+  "quality": 58,
+  "scale": 0.9,
+  "width": 2230,
+  "height": 1704
+ },
+ "card_seconds": 398.1,
+ "card_lines": [
+  "Card seconds (work + wake-up + the idle tail): job 1: work 92.9 + wake-up 0.8 + idle tail 5 = 98.7 s; job 2: work 48.6 + wake-up 14.5 + idle tail 5 = 68.1 s; job 3: work 99.3 + wake-up 23.4 + idle tail 5 = 127.7 s; set-up and downloads 104 s (an estimate from the wall clock); in all 398 s, about US$0.12 (an estimate at the price of the day, US$1.1 an hour; not a bill).",
+  "The 3 job(s) ran side by side: from sending to the last result took 127 s. Wake-up times (waiting for a card to start): 0.8 s, 14.5 s, 23.4 s."
+ ],
+ "estimate_card_seconds": 382.0,
+ "estimate_elapsed_seconds": 158.0,
+ "where": "a rented card",
+ "helper": "builder-forest",
+ "role": "builder",
+ "ledger": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/card-time-ledger.jsonl",
+ "saved_values": {},
+ "scout": null
+}

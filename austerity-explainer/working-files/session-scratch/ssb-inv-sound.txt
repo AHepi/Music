@@ -1,0 +1,160 @@
+## Audio length after loudness step (192 kHz trap)
+  how_found : Lesson 5: the first sound check came out 3 s short. ffmpeg's loudnorm quietly switches audio to 192,000 samples/s and the padding after it miscounted. One fix, checked: 23 s asked, 23.04 s delivered.
+  final_value_or_rule : Resample to 48,000 right after any loudnorm (aresample=48000) and pad to an exact length with apad=whole_dur=<seconds>. Every kit audio file is 48 kHz.
+  evidence : Lessons.md:21-24 (lesson 5); film-kit/narration-tools/mix_voice_over_music.sh lines 7-8 and its filter chain
+  computable_from : the requested mix length (timeline end + 4.0 s tail)
+  proposed_calculation : After every audio step, read the duration with ffprobe and fail if |measured - requested| > 0.05 s, naming the step. Add this check to mix_*.sh and finish_film.sh.
+  already_automatic : The fix is written into mix_voice_over_music.sh and mix_narration_over_music.sh (both in the plugin kit). Nothing checks the length afterwards.
+  llm_tip : Never trust an audio filter chain's output length; measure it. If you add a loudnorm step, resample to 48 kHz straight after it.
+## Mix length after the loudness step (sample-rate trap)
+  how_found : Log 04: the mix came out 3 seconds short. The cause was ffmpeg's loudnorm, which silently switches the audio to 192,000 samples a second.
+  final_value_or_rule : Add aresample=48000 after every loudnorm. The output must be as long as the narration.
+  evidence : story L362-363 (log 04); film-kit/narration-tools/mix_voice_over_music.sh lines 8, 30
+  computable_from : the narration file and the finished mix
+  proposed_calculation : After every mix, assert |duration(mix) - duration(narration)| < 1/30 s, else stop with an error.
+  already_automatic : The resample fix is in both mix scripts (plugin kit). No length check exists.
+  llm_tip : After any ffmpeg loudness filter, resample to 48 kHz and compare the output length with the input.
+## Music level under the voice (ducking)
+  how_found : Lesson 6: the first ducking setting put the music 31 dB under Malina. Four settings were tried and measured. Decisions item 12: the user asked for 'slightly' louder music, so it went up 3 dB (-14 to -11 dB). That measured 18 dB under while she speaks (was about 21) and about 2 dB louder in the pauses.
+  final_value_or_rule : Music -11 dB overall, EQ -4 dB at 2.5 kHz (width 1.2), sidechaincompress threshold 0.08, ratio 2.5, attack 30 ms, release 1100 ms. Target: music about 18 dB under the voice while she speaks and about 12 dB under in the pauses.
+  evidence : Lessons.md:25-27; Decisions.md:61-63, 125-126; film-kit/narration-tools/mix_narration_over_music.sh lines 3-9, 20
+  computable_from : narration track, soundtrack file, timeline (word spans = speaking, gaps = pauses)
+  proposed_calculation : measure_duck_gap: render the voice-only and the ducked music-only stems through the same chain. Over word spans take the median of (voice dB - music dB) = gap_speaking; over gaps longer than 0.4 s take the same = gap_pause. Set music_level_db += (gap_speaking - 18) and run once more (the relation is linear in dB). Print both gaps. A new soundtrack then gets its own level without hand-searching.
+  already_automatic : No. The constants are fixed in mix_narration_over_music.sh (plugin kit). The gap is never measured or printed, so a different soundtrack would need the same search again.
+  llm_tip : Talk about music level as 'dB under the voice while she speaks' (18) and 'in pauses' (12), and measure it. 'Slightly louder' was 3 dB.
+## Music level under the voice (ducking depth)
+  how_found : Three rounds over three logs, measured by hand. Log 04: the first mix dipped the music 31 dB under the voice, so it nearly vanished; retuned to about 18 dB. Log 07: measured page by page, 18 to 21 dB under while she speaks and about 12 dB in pauses. Log 10: the user asked for the music 'slightly' louder, so it was raised 3 dB (music_level_db -14 to -11), back to about 18 dB under.
+  final_value_or_rule : Music sits about 18 dB (plus or minus 1) under Malina while she speaks and about 12 dB under in pauses. Current constants: music_level_db=-11, sidechaincompress threshold 0.08, ratio 2.5, attack 30 ms, release 1100 ms, makeup 1; the music gets a -4 dB EQ cut at 2500 Hz (Q 1.2); music fades in over 0.8 s and out over 4 s.
+  evidence : story L362-364 (log 04), L382-385 (log 07), L427-428 (log 10); film-kit/narration-tools/mix_narration_over_music.sh lines 5-7, 18, 26-28
+  computable_from : the soundtrack file, the levelled narration track, the timeline's word times
+  proposed_calculation : Render the ducked-music stem and the voice stem separately. Using the word times, measure the music's short-term LUFS inside speech windows and inside pauses of 0.5 s or more. Change music_level_db by (measured speech gap - 18 dB) and repeat until within 1 dB (2 or 3 ffmpeg passes). Report the pause gap and flag it outside 10 to 14 dB. If the user asks for 'slightly louder', move the target gap by 3 dB.
+  already_automatic : No. The -11 dB is a hand-set constant (its comment says 'was 14 until you asked for it slightly louder'), and the 18 and 12 dB gaps were measured by hand. The mix scripts are in the plugin kit (kit/narration-tools/mix_narration_over_music.sh) but have no measuring loop.
+  llm_tip : Never assume a fixed music gain fits another soundtrack. Measure the gap under speech and aim for about 18 dB. 'Slightly louder' means about 3 dB.
+## Page loudness, float narration and final peak
+  how_found : Lesson 11: turning every page to -16 LUFS left peaks at +0.2 dB, which would clip. Fix: keep the narration in floating-point samples and let the final mix's limiter hold delivered peaks at -1.6 dB, measured. Decisions: level by plain volume change, never a compressor.
+  final_value_or_rule : Each page -16 LUFS by gain only. Narration stored as float WAV. Whole mix -15 LUFS. alimiter limit=0.84 (about -1.5 dBFS). Delivered true peak under -1 dB.
+  evidence : Lessons.md:39-42; Decisions.md:65, 83-84; film-kit/narration-tools/assemble_chapter_narration.py (VOICE_LOUDNESS = -16.0); mix_narration_over_music.sh (alimiter); plugin/skills/film-and-finish/SKILL.md section 3
+  computable_from : the finished, encoded film
+  proposed_calculation : At the end of finish_film.sh run ebur128=peak=true on the sendable copy. Fail if integrated loudness is outside -15 +/- 0.5 LUFS or true peak > -1.0 dBTP. Measure the AAC file, not the WAV, because encoding can raise peaks.
+  already_automatic : Levelling and the limiter are automatic (plugin kit). The final measurement is a hand-typed command in the skill, not a gate.
+  llm_tip : Level pages by gain, not by compressor, and let only the final limiter touch the peaks. Report the measured LUFS and true peak of the encoded file.
+## Peak limiter ceiling and true peak of the sent copy
+  how_found : Log 07: levelling pushed the voice's peaks past full scale, so a limiter was added holding them at -1.6 dB. Log 08 measured -1.5 dB after encoding; later films measured -1.7 and -1.6.
+  final_value_or_rule : alimiter limit=0.84 (about -1.5 dBFS), attack 5 ms, release 60 ms, latency=1. The true peak of the encoded sendable copy stays below -1 dBTP (measured -1.5 to -1.8).
+  evidence : story L385-386 (log 07), L397-398 and L405-406 (log 08), L477 (log 13), L622 (log 19); mix_narration_over_music.sh line 33
+  computable_from : the encoded film
+  proposed_calculation : After finish_film.sh, run ebur128=peak=true on the sendable copy. If the true peak is above -1.0 dBTP, lower the limiter by (peak + 1.2 dB) and re-encode only the sound.
+  already_automatic : The limiter is a fixed constant in the plugin kit. The peak is measured by hand (film-and-finish SKILL.md step 3).
+  llm_tip : Measure true peak on the final AAC copy, not on the WAV. Encoding raises peaks by a few tenths of a dB.
+## Limiter look-ahead delay (5 ms)
+  how_found : Lesson 15: lining the film's sound up against the narration at every page showed it 5 ms late. The cause was the limiter's 5 ms look-ahead. Fix: the limiter's own delay compensation. Checked: 0.00 ms at all ten pages.
+  final_value_or_rule : alimiter ... latency=1. check_sound_alignment.py must read 0.00 ms (a few ms is tolerated).
+  evidence : Lessons.md:57-60; film-kit/narration-tools/mix_narration_over_music.sh; check_sound_alignment.py
+  computable_from : finished film + mix + timeline
+  proposed_calculation : Make check_sound_alignment.py exit non-zero if any page offset is over 2 ms or its correlation score is under 0.8, and call it from finish_film.sh so it always runs.
+  already_automatic : The fix is automatic. The alignment check is a separate tool (plugin kit) that someone has to remember to run.
+  llm_tip : Any audio filter with look-ahead adds delay. Always run the alignment check after finishing and report the milliseconds.
+## Sound delay from the limiter's look-ahead
+  how_found : Log 08 compared the film's sound with the mix and found it 5 ms late at every page (the limiter's look-ahead). Fixed, and measured 0.00 ms on every film since.
+  final_value_or_rule : alimiter latency=1 (compensated). check_sound_alignment.py must read 0.00 ms, or a few ms, at the first word of every page.
+  evidence : story L396-397, L405 (log 08), L478 (log 13), L621 (log 19); narration-tools/check_sound_alignment.py header
+  computable_from : the film, the mix and the timeline
+  proposed_calculation : This is already a calculation: cross-correlate 0.5 s of the mix at each page's first word with the film's sound. Make finish_film.sh run it automatically and fail above 10 ms.
+  already_automatic : Yes: check_sound_alignment.py is in the plugin kit, but it is run by hand.
+  llm_tip : Run the alignment check on every sendable copy. More than about 10 ms means some filter added delay.
+## Loudness targets: voice -16 LUFS per page, whole mix -15 LUFS
+  how_found : Settled in logs 07 and 08, then measured again in logs 13, 19 and 20 (always -15.0 or -15.1 LUFS). Each page is levelled to the same loudness so no page sounds louder than the next.
+  final_value_or_rule : Each page's voice is set to -16 LUFS by a plain volume change. The whole narrated mix is -15 LUFS integrated. The soundtrack itself is about -13 LUFS, so it must always be turned down.
+  evidence : story L383-384, L397-398, L477, L559, L622, L680, Traps L1412; film-kit/narration-tools/assemble_chapter_narration.py line 27 (VOICE_LOUDNESS=-16); mix_narration_over_music.sh line 18 (target -15)
+  computable_from : the recordings
+  proposed_calculation : Keep measure-then-gain as now. Also print each page's applied gain and flag any page needing more than 4 dB either way (a sign of a different delivery).
+  already_automatic : Yes, in the plugin kit (assemble_chapter_narration.py and mix_narration_over_music.sh).
+  llm_tip : Use -15 LUFS for narrated films. Never re-level the narration a second time inside the mix.
+## Loudness of music-only clips
+  how_found : Log 27 (the house) was at -17 LUFS and log 29 at -17.7. In log 32 a helper found -17.7 faint on a phone speaker, so it was raised to -14 (measured -13.7).
+  final_value_or_rule : -14 LUFS integrated, true peak at most -1 dB, for clips with music and no narration.
+  evidence : story L905 (log 27), L978 (log 29), L1234 and L1242 (log 32); paper-film/tools/add_music_bed.sh default LOUDNESS=-14
+  computable_from : rule (a constant)
+  proposed_calculation : Keep -14 as the default and check afterwards with ebur128.
+  already_automatic : Yes: add_music_bed.sh defaults to -14 (plugin kit).
+  llm_tip : Music-only clips need to be about 1 dB louder than narrated mixes (-14 against -15 LUFS) or they sound faint on a phone.
+## Mix and music loudness
+  how_found : Chapters 1-2 sound checks; log 32 helper found the music-only clip faint at -17.7 LUFS on a phone speaker.
+  final_value_or_rule : Pages levelled to -16 LUFS; music 11 dB down, ducked (threshold 0.08, ratio 2.5, attack 30 ms, release 1100 ms), fades 0.8 s in / 4 s out; whole mix -15 LUFS, true peak under -1 dB; music-only clips -14 LUFS (add_music_bed.sh, fade in 0.8, out 1.5).
+  evidence : film-kit/narration-tools/mix_narration_over_music.sh; paper-film/tools/add_music_bed.sh header
+  computable_from : recordings and the soundtrack
+  proposed_calculation : Already computed by the scripts; plugin skills should name add_music_bed.sh for narration-free clips.
+  already_automatic : Yes (both in plugin kit); add_music_bed.sh is undocumented in plugin skills.
+  llm_tip : Use -15 LUFS for narrated chapters and -14 for music-only clips; measure, never guess.
+## Which stretch of the soundtrack to use, and its fades
+  how_found : Log 27: the music came in at once, so a 2-second fade-in was added. Log 32: a quiet stretch starting at 3 min 36 s was chosen by its loudness, not by ear (nobody can listen here).
+  final_value_or_rule : The notice corner uses the music from 216 s. Fades: in 0.8 s (2 s on the house), out 1.5 s.
+  evidence : story L900-902 (log 27), L1223-1224 and L1251-1252 (log 32); add_music_bed.sh defaults FADE_IN=0.8, FADE_OUT=1.5
+  computable_from : the soundtrack file, the clip's length and the mood wanted (quiet or tense)
+  proposed_calculation : Compute 3-second short-term loudness along the soundtrack. Pick the window of the clip's length whose loudness is within 2 LU of the mood's target and varies least. Snap its start to the nearest detected onset so it doesn't start mid-note. Fade in 0.8 s when it starts on an onset, otherwise 2 s.
+  already_automatic : No. START is chosen by hand and passed to add_music_bed.sh.
+  llm_tip : Pick the music stretch by measurement and say so, since you can't listen. Never start music at full level.
+## Voice steadiness gate
+  how_found : Decisions item 11: the accent switched and there was random shouting. Item 20: steadiness is checked by measurement, not by ear: pitch spread across pages 2.2 semitones (chapter 1, which sounded unsteady: 3.0), and no word much louder than the rest.
+  final_value_or_rule : find_loud_words: a word more than 6 dB above its page's typical word. find_raised_voice: a word 5 or more semitones above the page's typical pitch. compare_voice_steadiness: spread of typical pitch across pages (2.2 accepted, 3.0 not), and bursts more than 7 semitones up.
+  evidence : Decisions.md:100-103, 302-305; film-kit/narration-tools/find_loud_words.py, find_raised_voice.py, compare_voice_steadiness.py
+  computable_from : recordings + word times
+  proposed_calculation : One gate script runs all three right after recording and prints PASS or RE-RECORD per page. Re-record a page when its typical pitch is more than 1.5 semitones from the chapter median, or when any unmarked word is over 6 dB or 5 or more semitones above its page.
+  already_automatic : The tools exist (plugin kit) with these defaults, but there is no single pass/fail gate.
+  llm_tip : Judge the voice by numbers, not by ear, and re-record only flagged pages. Each page is its own recording.
+## A steady voice across pages (accent and pitch)
+  how_found : Log 09 measured the pages at very different pitches (page 3 about 5 semitones above page 4), caused by mixed mood cues and capitals. The narration was rewritten so the same New Zealand accent instruction opens every page, with no other cues and no capitals: the gap fell from 5.3 to 1.8 semitones. Log 19 measured 2.2 semitones (chapter 1: 3.0).
+  final_value_or_rule : One identical accent instruction at the start of every page; no mood cues, no capitals; Mattei written in English sounds. Aim for a spread of typical pitch across pages of about 2.2 semitones or less. Flag words 5 or more semitones above the page's typical pitch, or 6 dB or more louder.
+  evidence : story L408-420 (log 09), L557-558 (log 19); narration-tools/compare_voice_steadiness.py, find_raised_voice.py (default 5), find_loud_words.py (default 6)
+  computable_from : the recordings and word times
+  proposed_calculation : After recording, run compare_voice_steadiness on every page and take the median typical pitch m. Flag pages more than 1.5 semitones from m, and words above the raised-voice or loud-word limits. Propose re-recording only the flagged pages, with their credit cost.
+  already_automatic : The tools are in the plugin kit but run by hand, with no pass/fail limit on the spread.
+  llm_tip : Fix voice consistency in the script (the same instruction every page, no capitals, no mood tags), not with retakes.
+## Paper mouth: shape and loudness thresholds
+  how_found : Lesson 24: the first paper mouth looked like a black bar (wide rectangular jaw, tipped toward the camera), and it hung open because the loudness thresholds were too low. Fix: narrower jaw with rounded top corners, smaller drop, no tipping, opens only on louder syllables.
+  final_value_or_rule : make_mouth_track.py: closed at or below -25 dB, fully open at -11 dB, 40 ms slices, opens fast (0.8) and closes slower (0.55).
+  evidence : Lessons.md:103-106; film-kit/paper-film/tools/make_mouth_track.py (QUIET_DB, LOUD_DB)
+  computable_from : the narration track for that page
+  proposed_calculation : Set the thresholds from the voice itself: QUIET = 40th percentile of voiced 40 ms slices (dB), LOUD = 90th percentile. Then the mouth is open past a fifth on about half the voiced frames for any narrator or level.
+  already_automatic : Fixed constants (plugin kit), tuned for Malina at -16 LUFS.
+  llm_tip : If the mouth hangs open or barely moves, the thresholds don't fit this voice; recompute them from percentiles.
+## Paper mouth from the voice's loudness
+  how_found : Log 11: the mouth looked like a black bar, so it became a narrower jaw that opens on louder syllables.
+  final_value_or_rule : 40 ms loudness slices; snaps open fast, closes a little slower.
+  evidence : story L450-451 (log 11); paper-film/tools/make_mouth_track.py
+  computable_from : the levelled narration track
+  proposed_calculation : Already computed.
+  already_automatic : Yes, make_mouth_track.py (plugin kit).
+  llm_tip : Drive mouths from the voice track, never by hand.
+## Captions and the sendable copy
+  how_found : Decisions (chapter 1): captions come as a separate file because phone apps put their own captions and buttons over the bottom. Decision 16: a file sent in chat can't be over 30 MB.
+  final_value_or_rule : Captions as .srt and .vtt: 42 letters at most, held 0.15 s after the last word, at least 0.8 s, new caption at each sentence end but not after an initial. Sendable copy 28 MB, two-pass H.264 with AAC 128 kbps; video kbps = (28 x 8000 x 0.97) / seconds - 128.
+  evidence : Decisions.md:89-91, 219-222; film-kit/narration-tools/make_captions.py; finish_film.sh
+  computable_from : timeline, film length
+  proposed_calculation : Already computed.
+  already_automatic : Yes, make_captions.py and finish_film.sh (plugin kit).
+  llm_tip : Don't burn captions into the picture; deliver the .srt and keep words on screen minimal.
+## Caption line length and splitting
+  how_found : Log 13: captions remade from the new word times; 'Clara E. Mattei' had been split at the 'E.'.
+  final_value_or_rule : At most 42 letters a caption, split at a comma near the middle or else the middle word, never after a single initial. Chapter 1 had 121 lines.
+  evidence : story L479-480 (log 13); narration-tools/make_captions.py lines 4-8, 20, 26
+  computable_from : the timeline
+  proposed_calculation : Already a calculation. The limit could instead come from the caption font: floor(usable width / average letter width).
+  already_automatic : Yes, make_captions.py (plugin kit).
+  llm_tip : Always make captions from the same timeline the film was made from.
+## Sendable copy under 30 MB
+  how_found : Log 08: the first film file (37 MB) was too big to send, so the sent copy was squeezed to 25 MB. Later copies came out at 28.2, 27, 27.6 and 26.5 MB, each checked against the master.
+  final_value_or_rule : A 28 MB default limit. Video kbps = 28 × 8000 × 0.97 / seconds - 128. Two-pass x264, preset slow, tune film; AAC sound at 128 kbps. The master copies the video untouched with AAC at 256 kbps.
+  evidence : story L403-406 (log 08), L477, L622-623, L680; narration-tools/finish_film.sh lines 16-27
+  computable_from : the film's duration
+  proposed_calculation : Already a calculation.
+  already_automatic : Yes, finish_film.sh (plugin kit).
+  llm_tip : Compare busy frames of the sendable copy with the master.
+## Sendable copy bitrate
+  how_found : Chapter 1-2 finishing: chat file limit 30 MB.
+  final_value_or_rule : Limit 28 MB; audio 128 kbps; video kbps = (28 x 8000 x 0.97)/seconds - 128; two-pass x264 preset slow, tune film; master keeps pictures untouched with 256 kbps AAC.
+  evidence : film-kit/narration-tools/finish_film.sh lines 13-25
+  computable_from : film length
+  proposed_calculation : Already computed.
+  already_automatic : Yes (in plugin kit).
+  llm_tip : Use finish_film.sh; never hand-pick a bitrate.

@@ -1,0 +1,8 @@
+FAIL the kit stopped with an error while running audit: [Errno 2] No such file or directory: 'python3'
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/runpod-volume/blender/5.2/python/lib/python3.13/subprocess.py", line 1991, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'python3'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)

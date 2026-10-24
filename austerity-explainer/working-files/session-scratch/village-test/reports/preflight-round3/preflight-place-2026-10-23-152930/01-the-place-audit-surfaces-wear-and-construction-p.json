@@ -1,0 +1,428 @@
+{
+ "about": "The judge of one place audit. Facts are in the audit; the verdict and every threshold are here and in film-settings.json (place_* sections).",
+ "verdict": "fail",
+ "place": "forest village",
+ "audit_file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/place-audit-round3.json",
+ "checks": [
+  {
+   "verdict": "pass",
+   "check": "place: quick output",
+   "where": "the audit",
+   "text": "not a quick trial",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: roles",
+   "where": "every object",
+   "text": "every visible object has a role (463 objects)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: object types",
+   "where": "every drawn object",
+   "text": "everything that is drawn is a mesh (or has a never role)",
+   "fix": ""
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "Cottage A earth",
+   "text": "role floor.earth: wanted but missing weathering, wetness.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "Cottage B earth",
+   "text": "role floor.earth: wanted but missing weathering, wetness.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "Cottage S floor.earth",
+   "text": "role floor.earth: wanted but missing weathering, wetness.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "PK ground.dirt_road / dirt_road",
+   "text": "role ground.dirt_road: wanted but missing moss_and_algae.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "PK ground.grass / grass",
+   "text": "role ground.grass: wanted but missing displacement.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "warn",
+   "check": "place: treatments",
+   "where": "Stable earth floor",
+   "text": "role floor.earth: wanted but missing weathering, wetness.",
+   "fix": "worth adding; not required."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: treatments",
+   "where": "every material",
+   "text": "every required treatment is there",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: layer amounts",
+   "where": "every object",
+   "text": "every layer amount is there and above its floor (state \"damp\")",
+   "fix": ""
+  },
+  {
+   "verdict": "known",
+   "check": "place: off reasons",
+   "where": "moss_and_algae off for floor.planks, floor.tile, floor.carpet, floor.earth, floor.concrete",
+   "text": "KNOWN: inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off) (the place type allows this)",
+   "fix": ""
+  },
+  {
+   "verdict": "known",
+   "check": "place: off reasons",
+   "where": "weathering off for floor.planks, floor.tile, floor.carpet, floor.earth, floor.concrete",
+   "text": "KNOWN: inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off) (the place type allows this)",
+   "fix": ""
+  },
+  {
+   "verdict": "known",
+   "check": "place: off reasons",
+   "where": "wetness off for floor.planks, floor.tile, floor.carpet, floor.earth, floor.concrete",
+   "text": "KNOWN: inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off) (the place type allows this)",
+   "fix": ""
+  },
+  {
+   "verdict": "known",
+   "check": "place: off reasons",
+   "where": "plants off for floor.planks, floor.tile, floor.carpet, floor.earth, floor.concrete",
+   "text": "KNOWN: inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off) (the place type allows this)",
+   "fix": ""
+  },
+  {
+   "verdict": "known",
+   "check": "place: off reasons",
+   "where": "litter_pieces off for floor.planks, floor.tile, floor.carpet, floor.earth, floor.concrete",
+   "text": "KNOWN: inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off) (the place type allows this)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: normal maps",
+   "where": "every normal map",
+   "text": "23 normal map(s): Non-Color, tangent, wired, pointing the right way",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: uv",
+   "where": "every object",
+   "text": "every normal-mapped object has UVs, none mirrored beyond the limit",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: displacement",
+   "where": "the displacement materials",
+   "text": "displacement is set where the role needs it, on a mesh that can show it",
+   "fix": ""
+  },
+  {
+   "verdict": "fail",
+   "check": "place: construction",
+   "where": "Cottage C ridge piece (3.50 m free; its role timber.beam allows 2.5 m)",
+   "text": "1 part(s) has a free span longer than its role allows.",
+   "fix": "add a support under the long span. Each role has its own limit (timber.floor and timber.plank 1.38 m, timber.beam and timber.fence 2.5 m, judged, in place-kit/data/roles.json). A real longer span (a hall's tie beam between its walls, a gallery bay of 3 m) is allowed when the place's own facts file holds a \"free_span\" fact for it with a source, for example {\"id\": \"hall_tie_beam_span\", \"applies_to_role\": \"^timber\\\\.beam$\", \"applies_to_name\": \"tie beam\", \"dimension\": \"free_span\", \"max\": 7.5, \"unit\": \"metres\", \"kind\": \"judged\", \"source\": \"WHERE THE SIZE COMES FROM\", \"confidence\": \"good\"}, and the audit is judged with --facts"
+  },
+  {
+   "verdict": "pass",
+   "check": "place: scale",
+   "where": "every sized object",
+   "text": "165 size(s) fit the real-world facts",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: plain boxes",
+   "where": "the objects",
+   "text": "0% plain boxes (at most 15%)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: shape damage",
+   "where": "siblings",
+   "text": "no role has most of its objects as exact copies",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: ground relief",
+   "where": "the roads",
+   "text": "2 road(s) have real relief and ruts",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: keep-out",
+   "where": "the scattered pieces",
+   "text": "no plant or litter on a wheel track, a crown, a puddle or a keep-out",
+   "fix": ""
+  },
+  {
+   "verdict": "warn",
+   "check": "place: budgets",
+   "where": "the plan masks",
+   "text": "making the masks took 151 s (budget 120 s).",
+   "fix": "use a larger cell (--mask-cell-metres) or --quick."
+  },
+  {
+   "verdict": "fail",
+   "check": "place: budgets",
+   "where": "the scene",
+   "text": "owner unowned: 2,723,900 triangles (at most 1,500,000).",
+   "fix": "thin out the scatter or simplify meshes; a card draws about 1.5 million triangles per builder comfortably."
+  },
+  {
+   "verdict": "pass",
+   "check": "place: light",
+   "where": "the scene",
+   "text": "the scene has light",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: renderer",
+   "where": "the scene",
+   "text": "renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: film frame",
+   "where": "the settings",
+   "text": "not marked for the film (\"for_film\" is not true in place-settings.json): any frame shape is allowed",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: world",
+   "where": "the views",
+   "text": "4 view camera(s): no empty sky below the horizon, every clip end reaches the farthest object, nothing far casts shadows (3 backdrop object(s))",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: sun",
+   "where": "the views",
+   "text": "no view has more than 50% of the ground it sees shadowed from the sun \"Sun\" (50 degrees up)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: sun",
+   "where": "the wear layers",
+   "text": "the wear layers' shade used the scene's sun lamp \"Sun\" (compass 315, 50 degrees up)",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: lettering",
+   "where": "signs and books",
+   "text": "no sign, notice, placard, poster, name board or book in the place",
+   "fix": ""
+  },
+  {
+   "verdict": "pass",
+   "check": "place: stale settings",
+   "where": "place-settings.json",
+   "text": "the audit was made with this exact settings file (place-settings.json)",
+   "fix": ""
+  }
+ ],
+ "calculator": "place_audit_check check",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "place_surfaces.normal_map_size_min_pixels": {
+   "value": 1024,
+   "unit": "pixels a side",
+   "kind": "judged"
+  },
+  "place_audit.unknown_role_objects_allowed": {
+   "value": 0,
+   "unit": "objects",
+   "kind": "judged"
+  },
+  "place_audit.required_treatments_missing_allowed": {
+   "value": 0,
+   "unit": "treatments",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.kept": {
+   "value": 0.15,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.lived_in": {
+   "value": 0.25,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.neglected": {
+   "value": 0.4,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.layer_amount_floor_by_look.derelict": {
+   "value": 0.5,
+   "unit": "amount",
+   "kind": "judged"
+  },
+  "place_audit.off_share_max": {
+   "value": 0.25,
+   "unit": "share of required role-and-treatment pairs",
+   "kind": "invented"
+  },
+  "place_surfaces.normal_direction_correlation_min": {
+   "value": 0.25,
+   "unit": "correlation",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_blue_mean_min": {
+   "value": 0.85,
+   "unit": "share of 1",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_red_green_mean_band": {
+   "value": [
+    0.47,
+    0.53
+   ],
+   "unit": "share of 1",
+   "kind": "judged"
+  },
+  "place_surfaces.bump_leftover_strength_max": {
+   "value": 0.3,
+   "unit": "strength",
+   "kind": "judged"
+  },
+  "place_surfaces.normal_maps_per_material_max": {
+   "value": 4,
+   "unit": "pictures",
+   "kind": "judged"
+  },
+  "place_surfaces.uv_mirrored_face_share_max": {
+   "value": 0.02,
+   "unit": "share of faces",
+   "kind": "judged"
+  },
+  "place_construction.float_gap_millimetres_fail": {
+   "value": 5,
+   "unit": "millimetres",
+   "kind": "judged"
+  },
+  "place_construction.ground_seat_metres_tolerance": {
+   "value": 0.02,
+   "unit": "metres",
+   "kind": "invented"
+  },
+  "place_construction.doorway_floor_gap_metres_max": {
+   "value": 0.3,
+   "unit": "metres",
+   "kind": "invented"
+  },
+  "place_scale.warn_factor": {
+   "value": 1.0,
+   "unit": "times the range",
+   "kind": "judged"
+  },
+  "place_scale.fail_factor": {
+   "value": 1.5,
+   "unit": "times the range",
+   "kind": "invented"
+  },
+  "place_audit.plain_box_share_max": {
+   "value": 0.15,
+   "unit": "share of objects",
+   "kind": "invented"
+  },
+  "place_wear.shape_sibling_min_count": {
+   "value": 4,
+   "unit": "objects",
+   "kind": "judged"
+  },
+  "place_wear.shape_sibling_copy_share_max": {
+   "value": 0.5,
+   "unit": "share of siblings",
+   "kind": "invented"
+  },
+  "place_wear.ground_relief_metres_min": {
+   "value": 0.03,
+   "unit": "metres",
+   "kind": "invented"
+  },
+  "place_audit.ground_area_growth_max": {
+   "value": 1.5,
+   "unit": "times",
+   "kind": "judged"
+  },
+  "place_audit.triangles_total_max": {
+   "value": 6000000,
+   "unit": "triangles",
+   "kind": "judged"
+  },
+  "place_audit.triangles_per_builder_max": {
+   "value": 1500000,
+   "unit": "triangles",
+   "kind": "judged"
+  },
+  "place_audit.scatter_pieces_max": {
+   "value": 400000,
+   "unit": "pieces",
+   "kind": "invented"
+  },
+  "place_audit.objects_total_max": {
+   "value": 1000,
+   "unit": "objects in the scene (every kind)",
+   "kind": "judged"
+  },
+  "place_audit.objects_total_fail": {
+   "value": 3000,
+   "unit": "objects in the scene (every kind)",
+   "kind": "judged"
+  },
+  "place_wear.plan_mask_time_budget_seconds": {
+   "value": 120,
+   "unit": "seconds",
+   "kind": "invented"
+  },
+  "place_audit.world": {
+   "value": {
+    "far_object_metres": 100,
+    "large_object_metres": 20,
+    "empty_below_horizon_share_max": 0.0,
+    "place_span_metres": 20
+   },
+   "unit": "metres from the nearest view camera, metres across, share of a view's rays that go below the horizon and hit nothing, metres across (the widest horizontal extent of the visible objects that are not backdrop)",
+   "kind": "invented"
+  },
+  "place_audit.sun": {
+   "value": {
+    "shadowed_share_look": 0.5,
+    "wear_shade_angle_look_degrees": 20
+   },
+   "unit": "share of the ground points a view sees that are shadowed from the sun; degrees between the sun the wear layers' shade used and the scene's sun lamp",
+   "kind": "invented"
+  }
+ }
+}

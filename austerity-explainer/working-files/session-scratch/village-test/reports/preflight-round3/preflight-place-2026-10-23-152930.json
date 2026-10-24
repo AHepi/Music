@@ -1,0 +1,323 @@
+{
+ "stage": "place",
+ "stage_means": "after building a place and before drawing its views (the order: shots, build the place, place, plates)",
+ "verdict": "fail",
+ "counts": {
+  "fail": 2,
+  "warn": 5,
+  "known": 1,
+  "info": 0,
+  "pass": 22
+ },
+ "guarded_step": "drawing this place's views and plates (the long step: a place that fails is drawn again)",
+ "step_kind": "long",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 0.5,
+ "changed_inputs": [],
+ "started": "2026-10-23 15:29:30",
+ "first_lines": [
+  "Preflight place (after building a place and before drawing its views (the order: shots, build the place, place, plates)): FAIL. 2 to fix, 5 to look at, 1 known and accepted, 0 input(s) missing; 3 check(s) in 0.5 s.",
+  "Long step BLOCKED: drawing this place's views and plates (the long step: a place that fails is drawn again). First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "aa7e89ed",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round3/preflight-place-2026-10-23-152930",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/film-settings.json": "45710aa3842a05147af19ae6b1aed2b69723d166",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json": "a5fef7dc0f7f343b19a5b72c643e641d08585739",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/place-audit-round3.json": "0f24fcf66b9de53f07e49b92c8fced9d06250f8e",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/scene/round3/finished.blend": "db41fe5317bc037c8ebfb2b3b1445e5a48c0eee8"
+ },
+ "missing": [],
+ "checks": [
+  {
+   "title": "the place audit: surfaces, wear and construction (place_audit_check.py)",
+   "tool": "calculators/place_audit_check.py",
+   "version": "2a7b446f",
+   "where": "",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_audit_check.py check /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/place-audit-round3.json --place-settings /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json --skip-freshness --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round3/preflight-place-2026-10-23-152930/01-the-place-audit-surfaces-wear-and-construction-p.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round3/preflight-place-2026-10-23-152930/01-the-place-audit-surfaces-wear-and-construction-p.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round3/preflight-place-2026-10-23-152930/01-the-place-audit-surfaces-wear-and-construction-p.txt",
+   "seconds": 0.08,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "place: quick output",
+     "where": "",
+     "text": "not a quick trial",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: roles",
+     "where": "",
+     "text": "every visible object has a role (463 objects)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: object types",
+     "where": "",
+     "text": "everything that is drawn is a mesh (or has a never role)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role floor.earth: wanted but missing weathering, wetness.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role ground.dirt_road: wanted but missing moss_and_algae.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: treatments",
+     "where": "",
+     "text": "role ground.grass: wanted but missing displacement.",
+     "fix": "worth adding; not required.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: treatments",
+     "where": "",
+     "text": "every required treatment is there",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: layer amounts",
+     "where": "",
+     "text": "every layer amount is there and above its floor (state \"damp\")",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "known",
+     "check": "place: off reasons",
+     "where": "",
+     "text": "KNOWN: inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off) (the place type allows this)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: normal maps",
+     "where": "",
+     "text": "23 normal map(s): Non-Color, tangent, wired, pointing the right way",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: uv",
+     "where": "",
+     "text": "every normal-mapped object has UVs, none mirrored beyond the limit",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: displacement",
+     "where": "",
+     "text": "displacement is set where the role needs it, on a mesh that can show it",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: construction",
+     "where": "",
+     "text": "1 part(s) has a free span longer than its role allows.",
+     "fix": "add a support under the long span. Each role has its own limit (timber.floor and timber.plank 1.38 m, timber.beam and timber.fence 2.5 m, judged, in place-kit/data/roles.json). A real longer span (a hall's tie beam between its walls, a gallery bay of 3 m) is allowed when the place's own facts file holds a \"free_span\" fact for it with a source, for example {\"id\": \"hall_tie_beam_span\", \"applies_t...",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: scale",
+     "where": "",
+     "text": "165 size(s) fit the real-world facts",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: plain boxes",
+     "where": "",
+     "text": "0% plain boxes (at most 15%)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: shape damage",
+     "where": "",
+     "text": "no role has most of its objects as exact copies",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: ground relief",
+     "where": "",
+     "text": "2 road(s) have real relief and ruts",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: keep-out",
+     "where": "",
+     "text": "no plant or litter on a wheel track, a crown, a puddle or a keep-out",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "place: budgets",
+     "where": "",
+     "text": "making the masks took 151 s (budget 120 s).",
+     "fix": "use a larger cell (--mask-cell-metres) or --quick.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "place: budgets",
+     "where": "",
+     "text": "owner unowned: 2,723,900 triangles (at most 1,500,000).",
+     "fix": "thin out the scatter or simplify meshes; a card draws about 1.5 million triangles per builder comfortably.",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: light",
+     "where": "",
+     "text": "the scene has light",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: renderer",
+     "where": "",
+     "text": "renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: film frame",
+     "where": "",
+     "text": "not marked for the film (\"for_film\" is not true in place-settings.json): any frame shape is allowed",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: world",
+     "where": "",
+     "text": "4 view camera(s): no empty sky below the horizon, every clip end reaches the farthest object, nothing far casts shadows (3 backdrop object(s))",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: sun",
+     "where": "",
+     "text": "no view has more than 50% of the ground it sees shadowed from the sun \"Sun\" (50 degrees up)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: sun",
+     "where": "",
+     "text": "the wear layers' shade used the scene's sun lamp \"Sun\" (compass 315, 50 degrees up)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: lettering",
+     "where": "",
+     "text": "no sign, notice, placard, poster, name board or book in the place",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "place: stale settings",
+     "where": "",
+     "text": "the audit was made with this exact settings file (place-settings.json)",
+     "fix": "",
+     "tool": "place_audit_check.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "the audit is about this scene file (freshness)",
+   "tool": "preflight.py place",
+   "version": "aa7e89ed",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "place: stale audit",
+     "where": "",
+     "text": "the audit was made from this exact scene file (finished.blend)",
+     "fix": "",
+     "tool": "preflight.py place"
+    }
+   ],
+   "verdict": "pass"
+  },
+  {
+   "title": "a fresh checker has looked",
+   "tool": "preflight.py place",
+   "version": "aa7e89ed",
+   "where": "",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "place: fresh checker",
+     "where": "",
+     "text": "not checked: no fresh checker has looked at this place (--fresh-check).",
+     "fix": "run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.",
+     "tool": "preflight.py place"
+    }
+   ],
+   "verdict": "warn"
+  }
+ ],
+ "known_lists": [],
+ "notes": [
+  "The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). A place that passes here has not been judged by eye: the fresh checkers and the person still look."
+ ],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round3/preflight-place-2026-10-23-152930.md"
+}

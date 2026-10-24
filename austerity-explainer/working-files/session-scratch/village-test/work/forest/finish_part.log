@@ -1,0 +1,45 @@
+PASS roles: 166 object(s), 8 role(s)
+PASS roads: 2 road(s) shaped into 7 ground object(s)
+PASS surfaces: 6 material(s) made for 6 role(s), 89 slot(s) replaced, 166 kept (they carry their own maps); normal maps 256 px, 156 object(s) got UVs, 8 bevelled, displacement on 4 object(s); kept (own picture): Forest leaf dark green, Forest leaf golden brown, Forest leaf mid green, Forest leaf olive green, Forest leaf pine green, Forest moss green
+PASS damage: 8 object(s) bent, leaned or lumped differently (148 left alone)
+PASS plan masks: 764 x 764 cells of 0.50 m in 53.05 s (part_only)
+PASS wear: layers dirt, grime, weathering, wetness, cracks_and_chips, edge_wear, moss_and_algae, rubbish in 6 material(s)
+PASS growth: 38082 plant piece(s) and 48391 litter piece(s) in 13 object(s); none on a wheel track, a worn path, a road crown, a puddle or within 5 cm of litter
+PASS light: the scene already has a lamp of its own (left as it is)
+PASS sun: the wear layers' shade used the scene's sun lamp "Sun" (compass 315, 50 up)
+Info: Saved as "part.blend"
+PASS saved: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/part.blend
+Place audit of forest village (lived_in, damp): WARN. 0 to fix, 4 to look at, 0 known (switched off on purpose), 23 passed.
+LOOK place: quick output [the audit]: the place was finished with --quick (trial sizes: maps 256 px, masks 0.5 m); allowed here, but it is not a final.
+PASS place: stale audit [/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/part.blend]: the audit was made from this exact scene file
+PASS place: roles [every object]: every visible object has a role (163 objects)
+PASS place: object types [every drawn object]: everything that is drawn is a mesh (or has a never role)
+LOOK place: treatments [PK ground.dirt_road / dirt_road]: role ground.dirt_road: wanted but missing moss_and_algae.  Fix: worth adding; not required.
+LOOK place: treatments [PK ground.grass / grass]: role ground.grass: wanted but missing displacement.  Fix: worth adding; not required.
+PASS place: treatments [every material]: every required treatment is there
+PASS place: layer amounts [every object]: every layer amount is there and above its floor (state "damp")
+PASS place: off reasons [the settings]: nothing is switched off
+LOOK place: normal maps [the test light]: the end-to-end test light (a bump on a plane lit from two sides) was not run.  Fix: run explainer-film-place normals-test (finish does it unless --quick).
+PASS place: normal maps [every normal map]: 7 normal map(s): Non-Color, tangent, wired, pointing the right way
+PASS place: uv [every object]: every normal-mapped object has UVs, none mirrored beyond the limit
+PASS place: displacement [the displacement materials]: displacement is set where the role needs it, on a mesh that can show it
+PASS place: construction [every part]: 156 part(s) carried from the ground up; nothing floats; scattered pieces are left out on purpose
+PASS place: scale [every sized object]: 29 size(s) fit the real-world facts
+PASS place: plain boxes [the objects]: 0% plain boxes (at most 15%)
+PASS place: shape damage [siblings]: no role has most of its objects as exact copies
+PASS place: ground relief [the roads]: 2 road(s) have real relief and ruts
+PASS place: keep-out [the scattered pieces]: no plant or litter on a wheel track, a crown, a puddle or a keep-out
+PASS place: budgets [the scene]: triangles and scattered pieces are within the budgets; 184 objects (at most 1,000)
+PASS place: light [the scene]: the scene has light
+PASS place: renderer [the scene]: renderer EEVEE: nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)
+PASS place: film frame [the settings]: not marked for the film ("for_film" is not true in place-settings.json): any frame shape is allowed
+PASS place: world [the views]: 4 view camera(s): no empty sky below the horizon, every clip end reaches the farthest object, nothing far casts shadows (0 backdrop object(s))
+PASS place: sun [the views]: no view has more than 50% of the ground it sees shadowed from the sun "Sun" (50 degrees up)
+PASS place: sun [the wear layers]: the wear layers' shade used the scene's sun lamp "Sun" (compass 315, 50 degrees up)
+PASS place: lettering [signs and books]: no sign, notice, placard, poster, name board or book in the place
+PASS audit written: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/place-audit.json
+NEXT run: explainer-film-preflight place --place-audit /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/place-audit.json --blend /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/part.blend --reports /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/work/forest/preflight-reports --place-settings /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json
+
+real	3m31.716s
+user	3m9.635s
+sys	0m23.355s

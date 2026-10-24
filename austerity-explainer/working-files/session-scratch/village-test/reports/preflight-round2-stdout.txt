@@ -1,0 +1,35 @@
+Preflight place (after building a place and before drawing its views (the order: shots, build the place, place, plates)): INPUTS MISSING. 0 to fix, 1 to look at, 0 known and accepted, 1 input(s) missing; 1 check(s) in 0.0 s.
+Long step BLOCKED: drawing this place's views and plates (the long step: a place that fails is drawn again). First make the missing inputs listed below, then run this stage again.
+
+Made 2026-10-23 15:17:47 by preflight.py version aa7e89ed; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round2/preflight-place-2026-10-23-151747.
+
+## Inputs missing or unusable (the stage cannot pass without them; exit 2)
+
+- --place-audit PLACE_AUDIT: the place audit (place-audit.json: the facts about the finished Blender scene). Needed by place_audit_check.py check. Given but not found: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/place-audit-round2.json.
+  Make it: explainer-film-place audit --scene SCENE.blend --settings place-settings.json --out place-audit.json (explainer-film-place finish writes one too)
+
+## To look at (they do not block; a person decides)
+
+- place: fresh checker: not checked: no fresh checker has looked at this place (--fresh-check). (preflight.py place)
+  Fix: run the workflow build-a-place (phase Check), or ask a helper who did not build the place to recompute its claims.
+
+## Inputs not given (the stage runs without them, but checks less)
+
+- --blend BLEND: the finished scene file the audit was made from (a changed file makes the audit stale).
+  Make it: explainer-film-place finish --scene SCENE.blend --save-as FINISHED.blend
+
+## Notes
+
+- The order of the stages: shots (before building), build the place, place (this stage), then plates (before paying for paintings). A place that passes here has not been judged by eye: the fresh checkers and the person still look.
+
+## Checks run
+
+- WARN  a fresh checker has looked: 0 fail, 1 look, 0 known, 0 pass, 0 info; exit 0, 0.0 s; preflight.py place version aa7e89ed
+  (inside the preflight)
+
+## Inputs (sha1 when the run ended)
+
+- 45710aa3842a05147af19ae6b1aed2b69723d166  /home/user/Music/plugins/explainer-film/kit/film-settings.json
+- a5fef7dc0f7f343b19a5b72c643e641d08585739  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/plan/place-settings.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/village-test/reports/preflight-round2/preflight-place-2026-10-23-151747.json

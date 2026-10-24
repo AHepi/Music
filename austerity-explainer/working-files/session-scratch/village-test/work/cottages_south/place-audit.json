@@ -1,0 +1,7294 @@
+{
+ "audit_version": 1,
+ "made": "2026-10-23T13:53:51",
+ "blender": "5.2.2 LTS",
+ "scene_file": "part.blend",
+ "scene_sha1": "e357cbb1fbf6340047a599927b0d5c8039d92a2b",
+ "settings_file": "place-settings.json",
+ "settings_sha1": "a5fef7dc0f7f343b19a5b72c643e641d08585739",
+ "place": "forest village",
+ "place_type": "village",
+ "look": "lived_in",
+ "state": "damp",
+ "quick": true,
+ "map_size_pixels": 256,
+ "mask": {
+  "cell_metres": 0.5,
+  "cells": [
+   764,
+   764
+  ],
+  "seconds": 56.76,
+  "source": "part_only",
+  "bounds": [
+   -191.0,
+   -191.0,
+   191.0,
+   191.0
+  ],
+  "sun": {
+   "compass_degrees": 315.0,
+   "height_degrees": 50.0,
+   "from": "the scene's sun lamp \"Sun\"",
+   "sun": "Sun"
+  }
+ },
+ "masks_from": "part_only",
+ "picture": {
+  "camera": "View wide",
+  "height_pixels": 800,
+  "set": true
+ },
+ "counts": {
+  "objects_visible": 57,
+  "objects_total": 78,
+  "materials": 17,
+  "triangles": 727390,
+  "triangles_by_owner": {
+   "ground_and_roads": 383270,
+   "cottages_south": 344120
+  },
+  "scatter_pieces": 87332,
+  "ground_area_m2": 113408.26
+ },
+ "roles": {
+  "unknown": [],
+  "fallback": [],
+  "by_role": {
+   "ground.forest_floor": 1,
+   "ground.grass": 3,
+   "ground.dirt_road": 2,
+   "ground.mud": 1,
+   "stone.footing": 2,
+   "timber.beam": 15,
+   "timber.post": 12,
+   "timber.door": 2,
+   "iron.fitting": 4,
+   "stone.step": 2,
+   "floor.earth": 2,
+   "timber.generic": 1,
+   "wall.timber_frame": 1,
+   "timber.shutter": 2,
+   "roof.thatch": 3,
+   "wall.cob": 1,
+   "roof.shingle": 3
+  }
+ },
+ "materials": [
+  {
+   "name": "Cottage S floor.earth",
+   "role": "floor.earth",
+   "roles": [
+    "floor.earth"
+   ],
+   "users": 2,
+   "objects": [
+    "Cottage C earth floor",
+    "Cottage D earth floor"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_packed_earth_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.8,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.78,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "wetness": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S iron.fitting",
+   "role": "iron.fitting",
+   "roles": [
+    "iron.fitting"
+   ],
+   "users": 4,
+   "objects": [
+    "Cottage C hinges",
+    "Cottage C shutter hinges",
+    "Cottage D hinges",
+    "Cottage D shutter hinges"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_iron_forged_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.8,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "rust": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.72,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S roof.shingle",
+   "role": "roof.shingle",
+   "roles": [
+    "roof.shingle"
+   ],
+   "users": 3,
+   "objects": [
+    "Cottage D shingles east",
+    "Cottage D shingles west",
+    "Cottage D shingle ridge"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_shingle_wood_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S roof.thatch",
+   "role": "roof.thatch",
+   "roles": [
+    "roof.thatch"
+   ],
+   "users": 3,
+   "objects": [
+    "Cottage C thatch north",
+    "Cottage C thatch south",
+    "Cottage C thatch ridge cap"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_thatch_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.05000000074505806,
+      "max_vertex_displacement": 0.05000000074505806,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5850000000000001,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S stone.footing",
+   "role": "stone.footing",
+   "roles": [
+    "stone.footing"
+   ],
+   "users": 2,
+   "objects": [
+    "Cottage C footing",
+    "Cottage D plinth"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_stone_rubble_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.9,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.54,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S stone.step",
+   "role": "stone.step",
+   "roles": [
+    "stone.step"
+   ],
+   "users": 2,
+   "objects": [
+    "Cottage C doorstep",
+    "Cottage D doorstep"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_stone_dressed_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.8,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.78,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.49500000000000005,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S timber.beam",
+   "role": "timber.beam",
+   "roles": [
+    "timber.beam"
+   ],
+   "users": 15,
+   "objects": [
+    "Cottage C sill",
+    "Cottage C studs",
+    "Cottage C rails",
+    "Cottage C loft window studs",
+    "Cottage C wall plate",
+    "Cottage C rafters",
+    "Cottage C principal rafters",
+    "Cottage C purlins",
+    "Cottage C collars",
+    "Cottage C ridge piece",
+    "Cottage D lintels and cill",
+    "Cottage D wall plate"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_beam_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.2,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S timber.door",
+   "role": "timber.door",
+   "roles": [
+    "timber.door"
+   ],
+   "users": 2,
+   "objects": [
+    "Cottage C door leaf",
+    "Cottage D door leaf"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_planks_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S timber.generic",
+   "role": "timber.generic",
+   "roles": [
+    "timber.generic"
+   ],
+   "users": 1,
+   "objects": [
+    "Cottage C wattle"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_weathered_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S timber.post",
+   "role": "timber.post",
+   "roles": [
+    "timber.post"
+   ],
+   "users": 12,
+   "objects": [
+    "Cottage C post NW",
+    "Cottage C post NE",
+    "Cottage C post SW",
+    "Cottage C post SE",
+    "Cottage C door posts",
+    "Cottage C window posts 1",
+    "Cottage C window posts 2",
+    "Cottage C king post 1",
+    "Cottage C king post 2",
+    "Cottage C king post 3",
+    "Cottage D door posts",
+    "Cottage D window posts"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_beam_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.2,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S timber.shutter",
+   "role": "timber.shutter",
+   "roles": [
+    "timber.shutter"
+   ],
+   "users": 2,
+   "objects": [
+    "Cottage C shutters",
+    "Cottage D shutter"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_timber_planks_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.5,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S wall.cob",
+   "role": "wall.cob",
+   "roles": [
+    "wall.cob"
+   ],
+   "users": 1,
+   "objects": [
+    "Cottage D cob walls"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_cob_wall_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "Cottage S wall.timber_frame",
+   "role": "wall.timber_frame",
+   "roles": [
+    "wall.timber_frame"
+   ],
+   "users": 1,
+   "objects": [
+    "Cottage C daub panels"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_plaster_lime_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "bevelled_edges": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.65,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.5,
+     "detail": {}
+    },
+    "edge_wear": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.55,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.45,
+     "detail": {}
+    },
+    "shape_damage": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.dirt_road / dirt_road",
+   "role": "ground.dirt_road",
+   "roles": [
+    "ground.dirt_road"
+   ],
+   "users": 2,
+   "objects": [
+    "Ground road high_road",
+    "Ground road stable_lane"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_dirt_road_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.54,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.05999999865889549,
+      "max_vertex_displacement": 0.05999999865889549,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 1.0,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6000000000000001,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37903,
+      "per_100_square_metres": 33.42172895529599
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49429,
+      "per_100_square_metres": 43.585010171525354
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.forest_floor / forest_floor",
+   "role": "ground.forest_floor",
+   "roles": [
+    "ground.forest_floor"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground forest floor"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_forest_floor_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.03999999910593033,
+      "max_vertex_displacement": 0.03999999910593033,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.8999999999999999,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37903,
+      "per_100_square_metres": 33.42172895529599
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49429,
+      "per_100_square_metres": 43.585010171525354
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.grass / grass",
+   "role": "ground.grass",
+   "roles": [
+    "ground.grass"
+   ],
+   "users": 3,
+   "objects": [
+    "Ground clearing",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_grass_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 1.0,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": false,
+     "wanted": true,
+     "has": false,
+     "amount": null,
+     "detail": {
+      "node": null,
+      "method": "BUMP",
+      "depth_metres": 0.0,
+      "max_vertex_displacement": 0.0,
+      "mesh": null
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.6,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37903,
+      "per_100_square_metres": 33.42172895529599
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49429,
+      "per_100_square_metres": 43.585010171525354
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  },
+  {
+   "name": "PK ground.mud / mud",
+   "role": "ground.mud",
+   "roles": [
+    "ground.mud"
+   ],
+   "users": 1,
+   "objects": [
+    "Ground yard"
+   ],
+   "treatments": {
+    "normal_map": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "images": 1,
+      "image_names": [
+       "pk_mud_nor"
+      ],
+      "space": "TANGENT",
+      "colourspace": "Non-Color",
+      "uv_map": "UVMap",
+      "reaches_normal": true,
+      "strength": 0.6,
+      "bump_leftover": 0.0,
+      "has_uv_node": true
+     }
+    },
+    "displacement": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "node": "PK Displacement",
+      "method": "BOTH",
+      "depth_metres": 0.05999999865889549,
+      "max_vertex_displacement": 0.05999999865889549,
+      "mesh": "dense",
+      "has_height_input": true
+     }
+    },
+    "roughness_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "colour_variation": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {}
+    },
+    "dirt": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.85,
+     "detail": {}
+    },
+    "grime": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "weathering": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.8,
+     "detail": {}
+    },
+    "wetness": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.78,
+     "detail": {}
+    },
+    "cracks_and_chips": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.7,
+     "detail": {}
+    },
+    "moss_and_algae": {
+     "required": false,
+     "wanted": true,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "rubbish": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": 0.75,
+     "detail": {}
+    },
+    "plants": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 37903,
+      "per_100_square_metres": 33.42172895529599
+     }
+    },
+    "litter_pieces": {
+     "required": true,
+     "wanted": false,
+     "has": true,
+     "amount": null,
+     "detail": {
+      "count": 49429,
+      "per_100_square_metres": 43.585010171525354
+     }
+    }
+   },
+   "missing": [],
+   "off_with_reason": {},
+   "glows": false
+  }
+ ],
+ "objects": [
+  {
+   "name": "Ground forest floor",
+   "role": "ground.forest_floor",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.forest_floor / forest_floor"
+   ],
+   "mesh_name": "Ground forest floor",
+   "size": [
+    380.0,
+    380.0,
+    1.7607
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "moss_and_algae": 0.8999999999999999,
+    "weathering": 0.8,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.6,
+    "grime": 0.8
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 64034,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.9773487870649863,
+    "subdivided": false,
+    "fine_edge_m": 0.2800014068817447,
+    "relief_m": 0.2472
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground clearing",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground clearing",
+   "size": [
+    112.8122,
+    84.4715,
+    1.0816
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "moss_and_algae": 0.75,
+    "weathering": 0.8,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.6,
+    "grime": 0.8
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 72624,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.48416115275905836,
+    "subdivided": false,
+    "fine_edge_m": 0.27831690631544204,
+    "relief_m": 0.0944
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground road high_road",
+   "role": "ground.dirt_road",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.dirt_road / dirt_road"
+   ],
+   "mesh_name": "Ground road high_road",
+   "size": [
+    284.9228,
+    41.0064,
+    1.5252
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "weathering": 0.8,
+    "dirt": 1.0,
+    "rubbish": 0.6000000000000001,
+    "wetness": 0.6,
+    "grime": 0.8
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 157634,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.14706922598428612,
+    "subdivided": false,
+    "fine_edge_m": 0.06505471175695714,
+    "relief_m": 0.1881,
+    "road_entry": true
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "scale": [
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "high_road"
+    },
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "stable_lane"
+    }
+   ]
+  },
+  {
+   "name": "Ground road stable_lane",
+   "role": "ground.dirt_road",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.dirt_road / dirt_road"
+   ],
+   "mesh_name": "Ground road stable_lane",
+   "size": [
+    6.7115,
+    19.8361,
+    0.2852
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "weathering": 0.8,
+    "dirt": 1.0,
+    "rubbish": 0.6000000000000001,
+    "wetness": 0.6,
+    "grime": 0.8
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 18996,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.09241720972962299,
+    "subdivided": false,
+    "fine_edge_m": 0.04600466086678256,
+    "relief_m": 0.074,
+    "road_entry": true
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "scale": [
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "high_road"
+    },
+    {
+     "fact": "cart_gauge",
+     "dimension": "gauge",
+     "value": 1.4,
+     "min": 1.2,
+     "max": 1.5,
+     "unit": "metres",
+     "confidence": "weak",
+     "road": "stable_lane"
+    }
+   ]
+  },
+  {
+   "name": "Ground yard",
+   "role": "ground.mud",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.mud / mud"
+   ],
+   "mesh_name": "Ground yard",
+   "size": [
+    20.2547,
+    12.2686,
+    0.2047
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "moss_and_algae": 0.75,
+    "weathering": 0.8,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.78,
+    "grime": 0.8
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 37319,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.1246981145269118,
+    "subdivided": false,
+    "fine_edge_m": 0.0701483907791053,
+    "relief_m": 0.0572
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground verge high_road",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground verge high_road",
+   "size": [
+    287.633,
+    43.3105,
+    1.3995
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "moss_and_algae": 0.75,
+    "weathering": 0.8,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.6,
+    "grime": 0.8
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 29406,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.27366980494659204,
+    "subdivided": false,
+    "fine_edge_m": 0.09610459464050147,
+    "relief_m": 0.1632
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Ground verge stable_lane",
+   "role": "ground.grass",
+   "owner": "ground_and_roads",
+   "collection": "Place: ground_and_roads",
+   "materials": [
+    "PK ground.grass / grass"
+   ],
+   "mesh_name": "Ground verge stable_lane",
+   "size": [
+    8.8853,
+    18.8589,
+    0.1831
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "neglected",
+   "layer_amounts": {
+    "cracks_and_chips": 0.7,
+    "moss_and_algae": 0.75,
+    "weathering": 0.8,
+    "dirt": 0.85,
+    "rubbish": 0.75,
+    "wetness": 0.6,
+    "grime": 0.8
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 3257,
+    "plain_box": false,
+    "bevel": false,
+    "shape_damage": false,
+    "mean_edge_m": 0.2100523644039661,
+    "subdivided": false,
+    "fine_edge_m": 0.09000262223830381,
+    "relief_m": 0.0061
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": []
+  },
+  {
+   "name": "Cottage C footing",
+   "role": "stone.footing",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S stone.footing"
+   ],
+   "mesh_name": "Cottage C footing",
+   "size": [
+    7.7396,
+    4.9556,
+    0.3649
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.54,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 42824,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.19260642388565005,
+    "subdivided": true,
+    "fine_edge_m": 0.19260642388565005
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": -0.001,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.294,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 32
+   }
+  },
+  {
+   "name": "Cottage C sill",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C sill",
+   "size": [
+    7.4148,
+    4.6102,
+    0.155
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 3168,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.8396253348375445,
+    "subdivided": true,
+    "fine_edge_m": 0.8396253348375445
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C footing",
+     "Cottage C footing:1",
+     "Cottage C footing:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 1.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.1,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 6
+   }
+  },
+  {
+   "name": "Cottage C post NW",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C post NW",
+   "size": [
+    0.1757,
+    0.1765,
+    1.5894
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 528,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.4106921586481588,
+    "subdivided": true,
+    "fine_edge_m": 0.4106921586481588
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill",
+     "Cottage C sill:4"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.2,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1773,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C post NE",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C post NE",
+   "size": [
+    0.1607,
+    0.1953,
+    1.5898
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 528,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.4080780948932114,
+    "subdivided": true,
+    "fine_edge_m": 0.4080780948932114
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill:1",
+     "Cottage C sill:5"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.2,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1959,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C post SW",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C post SW",
+   "size": [
+    0.1739,
+    0.1841,
+    1.589
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 528,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.4083735574430363,
+    "subdivided": true,
+    "fine_edge_m": 0.4083735574430363
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.16,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C post SE",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C post SE",
+   "size": [
+    0.1716,
+    0.1863,
+    1.5903
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 528,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.4075913078653798,
+    "subdivided": true,
+    "fine_edge_m": 0.4075913078653798
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill:3",
+     "Cottage C sill:5"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.2,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1713,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C studs",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C studs",
+   "size": [
+    7.4217,
+    4.6135,
+    3.8615
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 16896,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3675948387500222,
+    "subdivided": true,
+    "fine_edge_m": 0.3675948387500222
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 32
+   }
+  },
+  {
+   "name": "Cottage C rails",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C rails",
+   "size": [
+    7.3877,
+    4.5861,
+    2.7532
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 17712,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3019112300097458,
+    "subdivided": true,
+    "fine_edge_m": 0.3019112300097458
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C daub panels",
+     "joined into Cottage C post SW, Cottage C studs"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 41
+   }
+  },
+  {
+   "name": "Cottage C door posts",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C door posts",
+   "size": [
+    1.1352,
+    0.1687,
+    1.5988
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1056,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.39230449469683193,
+    "subdivided": true,
+    "fine_edge_m": 0.39230449469683193
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 2.6,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage C window posts 1",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C window posts 1",
+   "size": [
+    0.667,
+    0.1684,
+    1.5932
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1056,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.39118499208598784,
+    "subdivided": true,
+    "fine_edge_m": 0.39118499208598784
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 1.5,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage C window posts 2",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C window posts 2",
+   "size": [
+    0.6744,
+    0.1691,
+    1.5949
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1056,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.39161446186569293,
+    "subdivided": true,
+    "fine_edge_m": 0.39161446186569293
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 1.5,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage C loft window studs",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C loft window studs",
+   "size": [
+    0.1466,
+    0.664,
+    2.1335
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1056,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.49352522116396785,
+    "subdivided": true,
+    "fine_edge_m": 0.49352522116396785
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C wall plate:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage C wall plate",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C wall plate",
+   "size": [
+    7.4017,
+    4.6271,
+    0.2368
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 4512,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.4953783266799855,
+    "subdivided": true,
+    "fine_edge_m": 0.4953783266799855
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C post NW",
+     "Cottage C post SW",
+     "Cottage C studs:8"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 2.4,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 6
+   }
+  },
+  {
+   "name": "Cottage C rafters",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C rafters",
+   "size": [
+    6.1895,
+    5.7341,
+    3.3374
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 8640,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.4890259380725053,
+    "subdivided": true,
+    "fine_edge_m": 1.4890259380725053
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C wall plate:2",
+     "Cottage C purlins"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 22.2,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 1.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 20
+   }
+  },
+  {
+   "name": "Cottage C principal rafters",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C principal rafters",
+   "size": [
+    7.4033,
+    4.4646,
+    2.7229
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2592,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 1.242197852332583,
+    "subdivided": true,
+    "fine_edge_m": 1.242197852332583
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C studs:25",
+     "Cottage C studs:26",
+     "Cottage C studs:27"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 37.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 6
+   }
+  },
+  {
+   "name": "Cottage C purlins",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C purlins",
+   "size": [
+    7.2238,
+    2.3756,
+    0.1837
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 4416,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.27471556200560354,
+    "subdivided": true,
+    "fine_edge_m": 0.27471556200560354
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C principal rafters",
+     "Cottage C principal rafters:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 28.4,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Cottage C collars",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C collars",
+   "size": [
+    7.3852,
+    1.6529,
+    0.1276
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1296,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.6288682089911567,
+    "subdivided": true,
+    "fine_edge_m": 0.6288682089911567
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C daub panels:65",
+     "Cottage C daub panels:69",
+     "joined into Cottage C principal rafters, Cottage C principal rafters:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 23.9,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 3
+   }
+  },
+  {
+   "name": "Cottage C king post 1",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C king post 1",
+   "size": [
+    0.117,
+    0.1203,
+    0.9849
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3981123822343542,
+    "subdivided": true,
+    "fine_edge_m": 0.3981123822343542
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C collars"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1165,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C king post 2",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C king post 2",
+   "size": [
+    0.1195,
+    0.1238,
+    0.9843
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.4021120923488835,
+    "subdivided": true,
+    "fine_edge_m": 0.4021120923488835
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C collars:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1225,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C king post 3",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage C king post 3",
+   "size": [
+    0.1255,
+    0.129,
+    0.9827
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.40611243824627613,
+    "subdivided": true,
+    "fine_edge_m": 0.40611243824627613
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C collars:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "post_size",
+     "dimension": "width",
+     "value": 0.1285,
+     "min": 0.06,
+     "max": 0.45,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C door leaf",
+   "role": "timber.door",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.door"
+   ],
+   "mesh_name": "Cottage C door leaf",
+   "size": [
+    0.8993,
+    0.0718,
+    1.8043
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 15048,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.1425577122855652,
+    "subdivided": true,
+    "fine_edge_m": 0.1425577122855652
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C doorstep"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": 0.001,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "door_height",
+     "dimension": "height",
+     "value": 1.8,
+     "min": 1.5,
+     "max": 2.4,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_width",
+     "dimension": "width",
+     "value": 0.8961,
+     "min": 0.6,
+     "max": 2.6,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_thickness",
+     "dimension": "thickness",
+     "value": 0.07,
+     "min": 0.025,
+     "max": 0.1,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C hinges",
+   "role": "iron.fitting",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S iron.fitting"
+   ],
+   "mesh_name": "Cottage C hinges",
+   "size": [
+    0.8961,
+    0.06,
+    1.23
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "rust": 0.72,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 648,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.11338885128498077,
+    "subdivided": false,
+    "fine_edge_m": 0.11338885128498077
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 15.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 6
+   }
+  },
+  {
+   "name": "Cottage C doorstep",
+   "role": "stone.step",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S stone.step"
+   ],
+   "mesh_name": "Cottage C doorstep",
+   "size": [
+    1.1662,
+    0.7791,
+    0.2349
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.49500000000000005,
+    "weathering": 0.6,
+    "dirt": 0.78,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1536,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.2824692341927211,
+    "subdivided": true,
+    "fine_edge_m": 0.2824692341927211
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": 0.17,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "rise",
+     "value": 0.17,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C earth floor",
+   "role": "floor.earth",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S floor.earth"
+   ],
+   "mesh_name": "Cottage C earth floor",
+   "size": [
+    6.8,
+    4.04,
+    0.1383
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "dirt": 0.78,
+    "rubbish": 0.45,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [
+    "weathering",
+    "wetness",
+    "moss_and_algae"
+   ],
+   "geometry": {
+    "triangles": 2382,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.2824959462315725,
+    "subdivided": false,
+    "fine_edge_m": 0.2824959462315725
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.295,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Cottage C wattle",
+   "role": "timber.generic",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.generic"
+   ],
+   "mesh_name": "Cottage C wattle",
+   "size": [
+    7.3433,
+    4.5403,
+    2.4746
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 21168,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.19435047768816657,
+    "subdivided": true,
+    "fine_edge_m": 0.19435047768816657
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 49
+   }
+  },
+  {
+   "name": "Cottage C daub panels",
+   "role": "wall.timber_frame",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S wall.timber_frame"
+   ],
+   "mesh_name": "Cottage C daub panels",
+   "size": [
+    7.3763,
+    4.58,
+    4.1268
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 33364,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.11802054638899498,
+    "subdivided": false,
+    "fine_edge_m": 0.11802054638899498
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C sill:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 82
+   }
+  },
+  {
+   "name": "Cottage C shutters",
+   "role": "timber.shutter",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.shutter"
+   ],
+   "mesh_name": "Cottage C shutters",
+   "size": [
+    6.188,
+    2.5898,
+    2.5734
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 4428,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.25060226245925127,
+    "subdivided": true,
+    "fine_edge_m": 0.25060226245925127
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 5
+   }
+  },
+  {
+   "name": "Cottage C shutter hinges",
+   "role": "iron.fitting",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S iron.fitting"
+   ],
+   "mesh_name": "Cottage C shutter hinges",
+   "size": [
+    6.233,
+    2.288,
+    2.23
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "rust": 0.72,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2160,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.07716675202051798,
+    "subdivided": false,
+    "fine_edge_m": 0.07716675202051798
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 20
+   }
+  },
+  {
+   "name": "Cottage C thatch north",
+   "role": "roof.thatch",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S roof.thatch"
+   ],
+   "mesh_name": "Cottage C thatch north",
+   "size": [
+    8.0242,
+    2.8916,
+    3.9704
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "moss_and_algae": 0.5850000000000001,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 25596,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.2133231573858115,
+    "subdivided": true,
+    "fine_edge_m": 0.2133231573858115
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C rafters",
+     "Cottage C rafters:2",
+     "Cottage C rafters:4"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 50.4506,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    },
+    {
+     "fact": "thatch_pitch",
+     "dimension": "pitch",
+     "value": 50.4506,
+     "min": 45,
+     "max": 60,
+     "unit": "degrees",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C thatch south",
+   "role": "roof.thatch",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S roof.thatch"
+   ],
+   "mesh_name": "Cottage C thatch south",
+   "size": [
+    8.0111,
+    2.8887,
+    3.9662
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "moss_and_algae": 0.5850000000000001,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 25492,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.2133082139376616,
+    "subdivided": true,
+    "fine_edge_m": 0.2133082139376616
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C rafters:1",
+     "Cottage C rafters:3",
+     "Cottage C rafters:5"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.1,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 50.2915,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    },
+    {
+     "fact": "thatch_pitch",
+     "dimension": "pitch",
+     "value": 50.2915,
+     "min": 45,
+     "max": 60,
+     "unit": "degrees",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage C ridge piece",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage C ridge piece",
+   "size": [
+    7.3962,
+    0.1773,
+    0.2598
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2760,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.2901829769232392,
+    "subdivided": true,
+    "fine_edge_m": 0.2901829769232392
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C principal rafters",
+     "Cottage C principal rafters:1",
+     "Cottage C principal rafters:2"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 30.1,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 3.5,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage C thatch ridge cap",
+   "role": "roof.thatch",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S roof.thatch"
+   ],
+   "mesh_name": "Cottage C thatch ridge cap",
+   "size": [
+    8.0112,
+    0.9379,
+    0.8451
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "moss_and_algae": 0.5850000000000001,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 7256,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.24329080891266275,
+    "subdivided": true,
+    "fine_edge_m": 0.24329080891266275
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage C thatch north",
+     "Cottage C thatch south"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 39.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 55.7098,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    },
+    {
+     "fact": "thatch_pitch",
+     "dimension": "pitch",
+     "value": 55.7098,
+     "min": 45,
+     "max": 60,
+     "unit": "degrees",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage D plinth",
+   "role": "stone.footing",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S stone.footing"
+   ],
+   "mesh_name": "Cottage D plinth",
+   "size": [
+    3.712,
+    4.3905,
+    0.3431
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.54,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 27488,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.18719409108678275,
+    "subdivided": true,
+    "fine_edge_m": 0.18719409108678275
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.048,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 20
+   }
+  },
+  {
+   "name": "Cottage D cob walls",
+   "role": "wall.cob",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S wall.cob"
+   ],
+   "mesh_name": "Cottage D cob walls",
+   "size": [
+    3.8099,
+    4.5035,
+    3.2765
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 11606,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.1511061485966294,
+    "subdivided": false,
+    "fine_edge_m": 0.1511061485966294
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D plinth:11",
+     "Cottage D plinth:13",
+     "Cottage D plinth:15"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 1.8,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Cottage D door posts",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage D door posts",
+   "size": [
+    0.9752,
+    0.1685,
+    1.6276
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1056,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.3896013550269952,
+    "subdivided": true,
+    "fine_edge_m": 0.3896013550269952
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D doorstep"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 2.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage D lintels and cill",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage D lintels and cill",
+   "size": [
+    2.5227,
+    2.5519,
+    0.9646
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1296,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.5134442647298177,
+    "subdivided": true,
+    "fine_edge_m": 0.5134442647298177
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D cob walls:1",
+     "Cottage D door posts",
+     "Cottage D door posts:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 1.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.95,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 3
+   }
+  },
+  {
+   "name": "Cottage D doorstep",
+   "role": "stone.step",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S stone.step"
+   ],
+   "mesh_name": "Cottage D doorstep",
+   "size": [
+    1.169,
+    1.1096,
+    0.2165
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.49500000000000005,
+    "weathering": 0.6,
+    "dirt": 0.78,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1248,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.32703863939649824,
+    "subdivided": true,
+    "fine_edge_m": 0.32703863939649824
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": 0.15,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "step_rise",
+     "dimension": "rise",
+     "value": 0.15,
+     "min": 0.1,
+     "max": 0.25,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage D door leaf",
+   "role": "timber.door",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.door"
+   ],
+   "mesh_name": "Cottage D door leaf",
+   "size": [
+    0.7949,
+    0.0682,
+    1.6036
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 10944,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.1418550048104788,
+    "subdivided": true,
+    "fine_edge_m": 0.1418550048104788
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D doorstep"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": 0.001,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "door_height",
+     "dimension": "height",
+     "value": 1.6,
+     "min": 1.5,
+     "max": 2.4,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_width",
+     "dimension": "width",
+     "value": 0.792,
+     "min": 0.6,
+     "max": 2.6,
+     "unit": "metres",
+     "confidence": "weak"
+    },
+    {
+     "fact": "door_thickness",
+     "dimension": "thickness",
+     "value": 0.0671,
+     "min": 0.025,
+     "max": 0.1,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage D hinges",
+   "role": "iron.fitting",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S iron.fitting"
+   ],
+   "mesh_name": "Cottage D hinges",
+   "size": [
+    0.787,
+    0.055,
+    1.02
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "rust": 0.72,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 540,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.10899999340375265,
+    "subdivided": false,
+    "fine_edge_m": 0.10899999340375265
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 5
+   }
+  },
+  {
+   "name": "Cottage D window posts",
+   "role": "timber.post",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.post"
+   ],
+   "mesh_name": "Cottage D window posts",
+   "size": [
+    0.1458,
+    0.5049,
+    0.4548
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1056,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.14660130221974307,
+    "subdivided": true,
+    "fine_edge_m": 0.14660130221974307
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D cob walls",
+     "Cottage D lintels and cill:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 2.5,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage D shutter",
+   "role": "timber.shutter",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.shutter"
+   ],
+   "mesh_name": "Cottage D shutter",
+   "size": [
+    0.4806,
+    0.2287,
+    0.4804
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1080,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.23436393543897321,
+    "subdivided": true,
+    "fine_edge_m": 0.23436393543897321
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D cob walls"
+    ],
+    "hung": false,
+    "hang_allowed": true,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 10.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "shutter_height",
+     "dimension": "height",
+     "value": 0.48,
+     "min": 0.3,
+     "max": 2.0,
+     "unit": "metres",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Cottage D shutter hinges",
+   "role": "iron.fitting",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S iron.fitting"
+   ],
+   "mesh_name": "Cottage D shutter hinges",
+   "size": [
+    0.2175,
+    0.0953,
+    0.26
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "rust": 0.72,
+    "dirt": 0.65,
+    "edge_wear": 0.55,
+    "wetness": 0.5
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 432,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.06950002691140579,
+    "subdivided": false,
+    "fine_edge_m": 0.06950002691140579
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Cottage D cob walls, Cottage D shutter"
+    ],
+    "hung": true,
+    "hang_allowed": true,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 4
+   }
+  },
+  {
+   "name": "Cottage D earth floor",
+   "role": "floor.earth",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S floor.earth"
+   ],
+   "mesh_name": "Cottage D earth floor",
+   "size": [
+    2.68,
+    3.27,
+    0.1388
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "dirt": 0.78,
+    "rubbish": 0.45,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [
+    "weathering",
+    "wetness",
+    "moss_and_algae"
+   ],
+   "geometry": {
+    "triangles": 1028,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": false,
+    "mean_edge_m": 0.2682387296029231,
+    "subdivided": false,
+    "fine_edge_m": 0.2682387296029231
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "ground"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": 0.0,
+    "seat_ground_object": "Ground clearing",
+    "seat_ground_m": -0.049,
+    "needs_ground": true,
+    "rise_m": null,
+    "parts": 1
+   }
+  },
+  {
+   "name": "Cottage D wall plate",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage D wall plate",
+   "size": [
+    3.4041,
+    3.3846,
+    0.2111
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1632,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.40357033284245514,
+    "subdivided": true,
+    "fine_edge_m": 0.40357033284245514
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D cob walls"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage D rafters",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage D rafters",
+   "size": [
+    4.3882,
+    2.9715,
+    1.9466
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 5184,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.9961913184983122,
+    "subdivided": true,
+    "fine_edge_m": 0.9961913184983122
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D cob walls",
+     "Cottage D wall plate",
+     "Cottage D purlin"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 40.6,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.6,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 12
+   }
+  },
+  {
+   "name": "Cottage D purlin",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage D purlin",
+   "size": [
+    1.7724,
+    4.103,
+    0.1492
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2592,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.24762262115295183,
+    "subdivided": true,
+    "fine_edge_m": 0.24762262115295183
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "joined into Cottage D cob walls:1, Cottage D cob walls:3, Cottage D rafters"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": true,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 2
+   }
+  },
+  {
+   "name": "Cottage D ridge piece",
+   "role": "timber.beam",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S timber.beam"
+   ],
+   "mesh_name": "Cottage D ridge piece",
+   "size": [
+    0.165,
+    3.9981,
+    0.1908
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "edge_wear": 0.55,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 1380,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.295914000452157,
+    "subdivided": true,
+    "fine_edge_m": 0.295914000452157
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D rafters"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": 2.5,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "beam_size",
+     "dimension": "thickness",
+     "value": 0.16,
+     "min": 0.04,
+     "max": 0.4,
+     "unit": "metres",
+     "confidence": "weak"
+    }
+   ]
+  },
+  {
+   "name": "Cottage D shingles east",
+   "role": "roof.shingle",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S roof.shingle"
+   ],
+   "mesh_name": "Cottage D shingles east",
+   "size": [
+    2.2077,
+    4.7099,
+    2.0188
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 10636,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.08053476562843863,
+    "subdivided": false,
+    "fine_edge_m": 0.08053476562843863
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D cob walls:1",
+     "Cottage D cob walls:3",
+     "Cottage D rafters"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 3.0,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 38.8892,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    },
+    {
+     "fact": "shingle_pitch",
+     "dimension": "pitch",
+     "value": 38.8892,
+     "min": 30,
+     "max": 50,
+     "unit": "degrees",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Cottage D shingles west",
+   "role": "roof.shingle",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S roof.shingle"
+   ],
+   "mesh_name": "Cottage D shingles west",
+   "size": [
+    2.2061,
+    4.7096,
+    2.0152
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 10636,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.0805337259151818,
+    "subdivided": false,
+    "fine_edge_m": 0.0805337259151818
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D cob walls:1",
+     "Cottage D cob walls:3",
+     "Cottage D rafters:1"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 4.3,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 38.8971,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    },
+    {
+     "fact": "shingle_pitch",
+     "dimension": "pitch",
+     "value": 38.8971,
+     "min": 30,
+     "max": 50,
+     "unit": "degrees",
+     "confidence": "guess"
+    }
+   ]
+  },
+  {
+   "name": "Cottage D shingle ridge",
+   "role": "roof.shingle",
+   "owner": "cottages_south",
+   "collection": "Place: cottages_south",
+   "materials": [
+    "Cottage S roof.shingle"
+   ],
+   "mesh_name": "Cottage D shingle ridge",
+   "size": [
+    0.6185,
+    4.7082,
+    0.3288
+   ],
+   "has_normal_map": true,
+   "needs_uv": true,
+   "uv": {
+    "has": true,
+    "layer": "UVMap",
+    "mirrored_share": 0.0
+   },
+   "look": "lived_in",
+   "layer_amounts": {
+    "cracks_and_chips": 0.5,
+    "moss_and_algae": 0.45,
+    "weathering": 0.6,
+    "dirt": 0.65,
+    "wetness": 0.5,
+    "grime": 0.6
+   },
+   "layer_amounts_missing": [],
+   "layers_off": [],
+   "geometry": {
+    "triangles": 2760,
+    "plain_box": false,
+    "bevel": true,
+    "shape_damage": true,
+    "mean_edge_m": 0.2752564319485597,
+    "subdivided": true,
+    "fine_edge_m": 0.2752564319485597
+   },
+   "missing": [],
+   "visible": true,
+   "exempt": false,
+   "unsurfaced": false,
+   "surface_missing": [],
+   "construction": {
+    "carried": true,
+    "via": [
+     "Cottage D ridge piece",
+     "Cottage D shingles east",
+     "Cottage D shingles west"
+    ],
+    "hung": false,
+    "hang_allowed": false,
+    "framed": false,
+    "afloat_on": null,
+    "sunk_in_mm": 0.4,
+    "gap_mm": 0.0,
+    "floating": false,
+    "short_by_mm": 0,
+    "span_max_m": 0.0,
+    "max_span_m": null,
+    "inside_out": false,
+    "coplanar_faces": 0,
+    "buried_light": false,
+    "opening_floor_gap_m": null,
+    "seat_error_m": null,
+    "seat_ground_object": null,
+    "seat_ground_m": null,
+    "needs_ground": false,
+    "rise_m": null,
+    "parts": 1
+   },
+   "scale": [
+    {
+     "fact": "roof_pitch",
+     "dimension": "pitch",
+     "value": 41.8146,
+     "min": 28,
+     "max": 62,
+     "unit": "degrees",
+     "confidence": "weak"
+    },
+    {
+     "fact": "shingle_pitch",
+     "dimension": "pitch",
+     "value": 41.8146,
+     "min": 30,
+     "max": 50,
+     "unit": "degrees",
+     "confidence": "guess"
+    }
+   ]
+  }
+ ],
+ "siblings": {
+  "timber.beam": {
+   "count": 15,
+   "copies_share": 0.0,
+   "size_spread": 0.672,
+   "all_damaged": true
+  },
+  "timber.post": {
+   "count": 12,
+   "copies_share": 0.0,
+   "size_spread": 0.57,
+   "all_damaged": true
+  },
+  "iron.fitting": {
+   "count": 4,
+   "copies_share": 0.0,
+   "size_spread": 1.11,
+   "all_damaged": false
+  }
+ },
+ "scatter": {
+  "groups": [
+   {
+    "name": "leaf",
+    "group": "litter",
+    "objects": [
+     "PK scatter leaf 0",
+     "PK scatter leaf 1"
+    ],
+    "count": 24234,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "pine_needles",
+    "group": "litter",
+    "objects": [
+     "PK scatter pine_needles 0"
+    ],
+    "count": 10901,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "stick",
+    "group": "litter",
+    "objects": [
+     "PK scatter stick 0"
+    ],
+    "count": 8718,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "straw",
+    "group": "litter",
+    "objects": [
+     "PK scatter straw 0"
+    ],
+    "count": 3416,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "clod",
+    "group": "litter",
+    "objects": [
+     "PK scatter clod 0"
+    ],
+    "count": 2160,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "tuft",
+    "group": "plant",
+    "objects": [
+     "PK scatter tuft 0",
+     "PK scatter tuft 1"
+    ],
+    "count": 21561,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "clover",
+    "group": "plant",
+    "objects": [
+     "PK scatter clover 0"
+    ],
+    "count": 4608,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "nettle",
+    "group": "plant",
+    "objects": [
+     "PK scatter nettle 0"
+    ],
+    "count": 4324,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "fern",
+    "group": "plant",
+    "objects": [
+     "PK scatter fern 0"
+    ],
+    "count": 2870,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "bramble",
+    "group": "plant",
+    "objects": [
+     "PK scatter bramble 0"
+    ],
+    "count": 1115,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   },
+   {
+    "name": "moss_cushion",
+    "group": "plant",
+    "objects": [
+     "PK scatter moss_cushion 0"
+    ],
+    "count": 3425,
+    "in_keepout": 0,
+    "in_puddle": 0,
+    "on_crown": 0,
+    "on_wheel_track": 0,
+    "within_5cm_of_litter": 0
+   }
+  ],
+  "plants_per_100m2": 33.42172895529599,
+  "litter_per_100m2": 43.585010171525354,
+  "required": {
+   "plants": {
+    "required_by": [
+     "Ground forest floor",
+     "Ground clearing",
+     "Ground road high_road",
+     "Ground road stable_lane",
+     "Ground yard",
+     "Ground verge high_road",
+     "Ground verge stable_lane"
+    ],
+    "count": 37903,
+    "per_100_square_metres": 33.42172895529599,
+    "has": true
+   },
+   "litter_pieces": {
+    "required_by": [
+     "Ground forest floor",
+     "Ground clearing",
+     "Ground road high_road",
+     "Ground road stable_lane",
+     "Ground yard",
+     "Ground verge high_road",
+     "Ground verge stable_lane"
+    ],
+    "count": 49429,
+    "per_100_square_metres": 43.585010171525354,
+    "has": true
+   }
+  }
+ },
+ "normal_maps": {
+  "images": [
+   {
+    "name": "pk_packed_earth_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.500055730342865,
+     0.500090479850769,
+     0.9767031669616699
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_iron_forged_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000085830688477,
+     0.4997093081474304,
+     0.9927644729614258
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_shingle_wood_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000174045562744,
+     0.5011259317398071,
+     0.993240237236023
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_thatch_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999960660934448,
+     0.49998849630355835,
+     0.9812825322151184
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_stone_rubble_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49999701976776123,
+     0.5000177025794983,
+     0.9935925602912903
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_stone_dressed_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49997761845588684,
+     0.5000215172767639,
+     0.9935237765312195
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_beam_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000277161598206,
+     0.5000181794166565,
+     0.99078369140625
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_planks_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000197291374207,
+     0.5000577569007874,
+     0.9910684823989868
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_timber_weathered_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49998506903648376,
+     0.49999213218688965,
+     0.9909131526947021
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_cob_wall_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000512599945068,
+     0.49995318055152893,
+     0.993025004863739
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_plaster_lime_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.49998003244400024,
+     0.49997857213020325,
+     0.9943519830703735
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": "not informative",
+     "y": "not informative",
+     "method": "name"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_dirt_road_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4998356103897095,
+     0.500018298625946,
+     0.9774683117866516
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9989045262336731,
+     "y": 0.9988864064216614,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_forest_floor_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.4999009668827057,
+     0.5000139474868774,
+     0.9759030342102051
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9989592432975769,
+     "y": 0.9989268183708191,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_grass_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000083446502686,
+     0.49999162554740906,
+     0.9843347072601318
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9993100762367249,
+     "y": 0.9993526339530945,
+     "method": "height"
+    },
+    "verdict": "pass"
+   },
+   {
+    "name": "pk_mud_nor",
+    "size": [
+     256,
+     256
+    ],
+    "colourspace": "Non-Color",
+    "mean_rgb": [
+     0.5000390410423279,
+     0.4999043941497803,
+     0.9777207970619202
+    ],
+    "convention": "opengl",
+    "convention_from": "made by the kit",
+    "made_by_kit": true,
+    "direction": {
+     "x": 0.9985438585281372,
+     "y": 0.9986855387687683,
+     "method": "height"
+    },
+    "verdict": "pass"
+   }
+  ],
+  "test_light": null
+ },
+ "displacement": {
+  "materials": [
+   "Cottage S roof.thatch",
+   "PK ground.dirt_road / dirt_road",
+   "PK ground.forest_floor / forest_floor",
+   "PK ground.mud / mud"
+  ],
+  "objects": [
+   "Ground forest floor",
+   "Ground road high_road",
+   "Ground road stable_lane",
+   "Ground yard",
+   "Cottage C thatch north",
+   "Cottage C thatch south",
+   "Cottage C thatch ridge cap"
+  ],
+  "too_coarse": []
+ },
+ "roads": [
+  {
+   "name": "high_road",
+   "ground_objects": [
+    "Ground forest floor",
+    "Ground clearing",
+    "Ground road high_road",
+    "Ground road stable_lane",
+    "Ground yard",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "relief_m": 0.2472,
+   "ruts_found": true,
+   "rut_depth_m": 0.1016,
+   "gauge_m": 1.333,
+   "gauge_in_settings_m": 1.4
+  },
+  {
+   "name": "stable_lane",
+   "ground_objects": [
+    "Ground forest floor",
+    "Ground clearing",
+    "Ground road high_road",
+    "Ground road stable_lane",
+    "Ground yard",
+    "Ground verge high_road",
+    "Ground verge stable_lane"
+   ],
+   "relief_m": 0.2472,
+   "ruts_found": true,
+   "rut_depth_m": 0.0791,
+   "gauge_m": 1.417,
+   "gauge_in_settings_m": 1.4
+  }
+ ],
+ "renderer": {
+  "decision": "EEVEE",
+  "reasons": [
+   "nothing is lit: no lamp but the sun, no glowing material, no glow object (EEVEE is fine when the lights are off)"
+  ],
+  "settings_choice": "auto"
+ },
+ "light": {
+  "any_light": true,
+  "lamps": 1,
+  "suns": 1,
+  "world_light": true,
+  "emissive_materials": false,
+  "clip_share": null
+ },
+ "off": {
+  "entries": [
+   {
+    "layer": "moss_and_algae",
+    "roles": [
+     "floor.planks",
+     "floor.tile",
+     "floor.carpet",
+     "floor.earth",
+     "floor.concrete"
+    ],
+    "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)",
+    "reason_id": "floors_indoors"
+   },
+   {
+    "layer": "weathering",
+    "roles": [
+     "floor.planks",
+     "floor.tile",
+     "floor.carpet",
+     "floor.earth",
+     "floor.concrete"
+    ],
+    "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)",
+    "reason_id": "floors_indoors"
+   },
+   {
+    "layer": "wetness",
+    "roles": [
+     "floor.planks",
+     "floor.tile",
+     "floor.carpet",
+     "floor.earth",
+     "floor.concrete"
+    ],
+    "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)",
+    "reason_id": "floors_indoors"
+   },
+   {
+    "layer": "plants",
+    "roles": [
+     "floor.planks",
+     "floor.tile",
+     "floor.carpet",
+     "floor.earth",
+     "floor.concrete"
+    ],
+    "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)",
+    "reason_id": "floors_indoors"
+   },
+   {
+    "layer": "litter_pieces",
+    "roles": [
+     "floor.planks",
+     "floor.tile",
+     "floor.carpet",
+     "floor.earth",
+     "floor.concrete"
+    ],
+    "reason": "inside the buildings: dry, nothing grows (a flagstone floor, floor.stone, may be a patio or a step outdoors, so it is not switched off)",
+    "reason_id": "floors_indoors"
+   }
+  ],
+  "allowed_ids": [
+   "floors_indoors"
+  ],
+  "share": 0.0
+ },
+ "construction_summary": {
+  "parts_checked": 399,
+  "objects_checked": 50,
+  "carried": 50,
+  "floating": [],
+  "hung": [
+   "Cottage C hinges",
+   "Cottage C shutter hinges",
+   "Cottage C shutters",
+   "Cottage D hinges",
+   "Cottage D shutter hinges"
+  ],
+  "sample_spacing_metres": 0.02,
+  "sampled_coarser": false,
+  "scatter_exempt": 16,
+  "note": "scattered pieces (plants, leaves, litter) and never-roles are exempt on purpose: they stand on the ground by their own roots"
+ },
+ "non_mesh": [],
+ "problems": [],
+ "views": {
+  "for_film": false,
+  "render_size": [
+   1200,
+   800,
+   100
+  ],
+  "cameras": [
+   {
+    "name": "View wide",
+    "scene_camera": true,
+    "kind": "PERSP",
+    "lens_mm": 28.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 321.11,
+    "farthest_object": "Ground forest floor",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 480,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 406,
+    "sun": {
+     "ground_points": 406,
+     "shadowed": 5,
+     "shadowed_share": 0.012315270935960592,
+     "shadowed_by": [
+      {
+       "object": "PK scatter bramble 0",
+       "points": 1
+      },
+      {
+       "object": "Cottage C daub panels",
+       "points": 1
+      },
+      {
+       "object": "Cottage C sill",
+       "points": 1
+      },
+      {
+       "object": "Cottage C thatch south",
+       "points": 1
+      },
+      {
+       "object": "Cottage C wall plate",
+       "points": 1
+      }
+     ]
+    }
+   },
+   {
+    "name": "View road_eye",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 35.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 270.02,
+    "farthest_object": "Ground forest floor",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 320,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 308,
+    "sun": {
+     "ground_points": 308,
+     "shadowed": 0,
+     "shadowed_share": 0.0,
+     "shadowed_by": []
+    }
+   },
+   {
+    "name": "View stable_close",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 28.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 237.27,
+    "farthest_object": "Ground forest floor",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 352,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 347,
+    "sun": {
+     "ground_points": 347,
+     "shadowed": 0,
+     "shadowed_share": 0.0,
+     "shadowed_by": []
+    }
+   },
+   {
+    "name": "View cottage_close",
+    "scene_camera": false,
+    "kind": "PERSP",
+    "lens_mm": 35.0,
+    "clip_start_m": 0.1,
+    "clip_end_m": 3000.0,
+    "farthest_depth_m": 220.15,
+    "farthest_object": "Ground forest floor",
+    "view_size": [
+     1200,
+     800
+    ],
+    "rays": 672,
+    "ray_grid": [
+     32,
+     21
+    ],
+    "rays_below_horizon": 352,
+    "empty_below_horizon": 0,
+    "empty_below_horizon_share": 0.0,
+    "ground_points": 324,
+    "sun": {
+     "ground_points": 324,
+     "shadowed": 3,
+     "shadowed_share": 0.009259259259259259,
+     "shadowed_by": [
+      {
+       "object": "PK scatter nettle 0",
+       "points": 2
+      },
+      {
+       "object": "PK scatter tuft 0",
+       "points": 1
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "world": {
+  "backdrops": [],
+  "backdrops_casting_shadows": [],
+  "far_large_casting_shadows": [],
+  "haze_volume": false,
+  "place_span_m": 380.0
+ },
+ "sun": {
+  "name": "Sun",
+  "compass_degrees": 315.0,
+  "height_degrees": 50.0,
+  "energy": 4.5
+ },
+ "lettering": {
+  "checked": 0,
+  "objects": []
+ }
+}

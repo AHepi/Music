@@ -1,0 +1,344 @@
+{
+ "about": "Real-world sizes for the forest village (a mediaeval forest clearing: dirt roads driven by horse and cart, an empty stable, four cottages, scattered props). Written by the planner on 2026-10-23 from web searches (the sources are named in each row). Every row says its unit, its kind (judged = chosen from the named evidence, invented = a guess), its source in plain words and its confidence (weak or guess: NOTHING here is confirmed by a strong source, and no number is measured by us). The scale check reads 'facts' (a fact applies to an object when its role matches applies_to_role and, if given, its name matches applies_to_name; a row with the same id as a generic fact replaces the keys it gives). 'facts_not_read_by_the_scale_check' holds sizes the builders need that the scale check cannot read from one object (the builders still build to them). Facts set the SIZE; the style note sets how much detail.",
+ "facts": [
+  {
+   "id": "cart_gauge",
+   "what": "distance between the two wheel tracks (ruts) of a horse-drawn cart; the roads in place-settings.json use 1.4 m",
+   "applies_to_role": "^ground\\.dirt_road$",
+   "dimension": "gauge",
+   "min": 1.2,
+   "max": 1.5,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "No measured mediaeval figure was found. Roman-era Western Mediterranean ruts: hand and donkey carts 115 to 120 cm, one-horse carts 135 to 140 cm, pair-drawn carts 145 to 170 cm (popular summary, https://skeptoid.com/episodes/818); Bronze Age cart gauges settled at 140 to 145 cm (https://strangehistory.net/2011/05/02/from-ox-carts-to-railways). One-horse village cart chosen: 1.4 m.",
+   "confidence": "weak"
+  },
+  {
+   "id": "door_height",
+   "what": "height of a cottage door (low) or a stable door (taller, a horse goes through)",
+   "applies_to_role": "^timber\\.door$",
+   "dimension": "height",
+   "min": 1.5,
+   "max": 2.4,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Fifteenth-century doors of secular timber-framed houses are rarely over 1.8 m high (V&A catalogue entry, https://collections.vam.ac.uk/item/O84682/window-framework-window-frame-unknown/; about better-off houses, not peasant cottages). Stable doors: just over 7 ft (2.1 m) to 8 ft (2.4 m) high (Penn State Extension, https://extension.psu.edu/horse-stall-design). Cottage doors planned 1.6 to 1.8 m, stable doors 2.3 m.",
+   "confidence": "weak"
+  },
+  {
+   "id": "door_width",
+   "what": "width of one door leaf (cottage) or of one object holding a double stable door",
+   "applies_to_role": "^timber\\.door$",
+   "dimension": "width",
+   "min": 0.6,
+   "max": 2.6,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Horse door 42 to 45 inches (1.07 to 1.14 m) wide, traditional 4 ft (1.2 m) (Penn State Extension, https://extension.psu.edu/horse-stall-design); the stable's cart-wide double doorway is planned 2.4 m (invented, two leaves of 1.2 m). Cottage leaves from memory 0.7 to 1.0 m.",
+   "confidence": "weak"
+  },
+  {
+   "id": "thatch_pitch",
+   "what": "slope of a thatched roof (steep)",
+   "applies_to_role": "^roof\\.thatch$",
+   "dimension": "pitch",
+   "min": 45,
+   "max": 60,
+   "unit": "degrees",
+   "kind": "judged",
+   "source": "Pitch about 50 degrees is usual for thatch, 45 the minimum, 50 to 55 more desirable (thatching trade pages: https://www.thatchadvicecentre.co.uk/articles/7-thatch-design-points-for-architects-to-consider and https://thatchinginfo.com). Trade advice, not a standard.",
+   "confidence": "weak"
+  },
+  {
+   "id": "shingle_pitch",
+   "what": "slope of a wooden shingle roof (cottage D and the stable)",
+   "applies_to_role": "^roof\\.shingle$",
+   "dimension": "pitch",
+   "min": 30,
+   "max": 50,
+   "unit": "degrees",
+   "kind": "invented",
+   "source": "From memory (wood shingles are laid at roughly 30 to 50 degrees); no source found. The stable is planned at 40 degrees, cottage D at 42.",
+   "confidence": "guess"
+  },
+  {
+   "id": "thatch_thickness",
+   "what": "thickness of a laid thatch roof (a slab)",
+   "applies_to_role": "^roof\\.thatch$",
+   "dimension": "thickness",
+   "min": 0.15,
+   "max": 0.45,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Thatch is usually laid 220 to 400 mm thick (https://taylorandfrancis.com/knowledge/Engineering_and_technology/Materials_science/Thatch); new layers 15 to 20 cm and thinner after settling (FAO, https://www.fao.org/3/s1250e/S1250E0l.htm). Planned 0.25 to 0.4 m.",
+   "confidence": "weak",
+   "only_if_slab_like": true
+  },
+  {
+   "id": "wall_thickness",
+   "what": "thickness of a wall slab: wattle-and-daub infill, cob, or rubble stone",
+   "applies_to_role": "^wall\\.",
+   "dimension": "thickness",
+   "min": 0.1,
+   "max": 0.7,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Fourteenth-century houses at Wharram Percy stood on sleeper walls 18 inches (46 cm) wide (https://www.medievalists.net/2008/10/the-medieval-peasant-house/). Wattle-and-daub infill 0.10 to 0.20 and cob up to 0.6 are from memory (no thickness given by https://en.wikipedia.org/wiki/Wattle_and_daub). Stone cottage B planned 0.45 to 0.6.",
+   "confidence": "weak",
+   "only_if_slab_like": true
+  },
+  {
+   "id": "fence_height",
+   "what": "a fence, a rail, a hitching rail, a stall partition or a stall front (timber.fence role)",
+   "applies_to_role": "^timber\\.fence$",
+   "dimension": "height",
+   "min": 0.5,
+   "max": 2.5,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Stall partitions are at least 7.5 ft (2.3 m), 8 ft (2.4 m) standard so a horse cannot get a leg over (Penn State Extension, https://extension.psu.edu/horse-stall-design). Hitching rail about 1.1 to 1.3 m (invented).",
+   "confidence": "weak",
+   "skip_if_lying": true
+  },
+  {
+   "id": "barrel_height",
+   "what": "a cask: firkin, kilderkin, barrel or hogshead",
+   "applies_to_role": "^prop\\.barrel$",
+   "dimension": "height",
+   "min": 0.45,
+   "max": 1.0,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "English cask units of 1454: firkin 8 gal (about 37 L), kilderkin 16 gal (74 L), barrel 32 gal (148 L), hogshead 48 gal (222 L) (https://en.wikipedia.org/wiki/Hogshead). The heights are my own estimate from those volumes (a barrel about 0.7 m, a hogshead about 0.9 m); a later colonial tobacco hogshead was 122 cm long, 76 cm across the head (not mediaeval).",
+   "confidence": "guess"
+  },
+  {
+   "id": "cart_wheel_diameter",
+   "what": "diameter of a cart wheel with an iron tyre",
+   "applies_to_role": "^prop\\.wheel$",
+   "dimension": "height",
+   "min": 0.85,
+   "max": 1.3,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Museum cart wheels: 127 cm across with a 5.2 cm tyre (Museum Wales, https://museum.wales/collections/online/object/b57973b4-78a2-31bc-9909-8b3eff35269e), 97 cm with a 3.5 cm tyre (https://emuseum.aberdeencity.gov.uk/objects/153066/cartwheel); Iron Age wagon wheels about 85 to 91 cm. None is dated mediaeval.",
+   "confidence": "weak"
+  },
+  {
+   "id": "tree_height",
+   "what": "a tree trunk object (the crown is a separate plant object), a stump or a fallen log (low)",
+   "applies_to_role": "^tree\\.bark$",
+   "dimension": "height",
+   "min": 0.25,
+   "max": 38,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "English oak typically up to 20 m, sometimes 40 m (https://en.wikipedia.org/wiki/Quercus_robur); Scots pine up to 35 m, mature trunk about 1 m across (https://en.wikipedia.org/wiki/Pinus_sylvestris). Minimum lowered to 0.25 m so a stump or a fallen log (0.3 to 0.6 m high) is not read as a tiny tree.",
+   "confidence": "weak"
+  },
+  {
+   "id": "bay_free_span",
+   "what": "the longest free stretch of a wall plate, ridge piece, purlin, tie beam or summer beam between two trusses or walls (one bay)",
+   "applies_to_role": "^timber\\.beam$",
+   "applies_to_name": "plate|ridge|purlin|tie|collar|summer",
+   "dimension": "free_span",
+   "max": 3.9,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "At Sycamore Farm, Long Crendon, a bay measures about 12 ft (3.7 m) from truss to truss and 15 ft (4.6 m) front to back (Alcock and Miles, The Medieval Peasant House in Midland England, via the Archaeology Data Service, https://archaeologydataservice.ac.uk/catalogue/adsdata/arch-3012-1/dissemination/pdf/Buckinghamshire/LON-G.pdf; figures converted by me from feet). Cottage bays are planned 3.2 to 3.7 m, the stable's three bays 3.27 m; nothing needs more than 3.9 m.",
+   "confidence": "weak"
+  }
+ ],
+ "facts_not_read_by_the_scale_check": [
+  {
+   "id": "main_road_width",
+   "what": "width of the dirt strip of the main road (the ruts, the crown and the banks; the verge is extra)",
+   "min": 4.5,
+   "max": 6.1,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "A road had to be wide enough for two waggons to pass, put at about 20 ft (6.1 m) (https://www.designingbuildings.co.uk/wiki/The_history_of_the_dimensions_and_design_of_roads,_streets_and_carriageways; unclear if ever enforced). The 200 ft in the Statute of Winchester of 1285 is a clearance zone beside highways, not a width. Planned 5.0 m for an unkept village road.",
+   "confidence": "weak"
+  },
+  {
+   "id": "lane_width",
+   "what": "width of the dirt strip of the side lane to the stable",
+   "min": 3.0,
+   "max": 3.6,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "Invented: one cart wide with room for a horse; planned 3.4 m.",
+   "confidence": "guess"
+  },
+  {
+   "id": "rut_depth",
+   "what": "depth of a wheel rut below the surrounding road",
+   "min": 0.05,
+   "max": 0.15,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "The kit's house range (place_wear.rut_depth_metres 0.05 to 0.15); a coal-mine yard built earlier in this project has ruts 0.15 m deep (measured in its build code). Planned 0.12 m main road, 0.09 m lane. No mediaeval measurement was found.",
+   "confidence": "weak"
+  },
+  {
+   "id": "rut_width",
+   "what": "width of one wheel rut at its top",
+   "min": 0.15,
+   "max": 0.25,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "The kit's default is 0.18 m. Museum cart-wheel tyres are 3.5 to 5.2 cm wide (see cart_wheel_diameter), so a rut in soft ground is wider than the tyre; the exact number is a guess.",
+   "confidence": "guess"
+  },
+  {
+   "id": "hoof_print_width",
+   "what": "width of a forefoot hoof print in soft ground",
+   "min": 0.09,
+   "max": 0.15,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Measured forefoot print widths: 85 mm small Tokara pony, 105 mm medium Kiso horse, 132 mm Thoroughbred (a Japanese hoof-print study, https://sciencepress.mnhn.fr/en/periodiques/anthropozoologica/25-26/estimation-de-la-hauteur-au-garrot-des-anciens-chevaux-japonais-partir-de-leurs-empreintes-de-sabot); a draught horse is larger but no draught figure was found (the kit's dimple is about 0.13 m, one every 0.9 m, left and right in turn).",
+   "confidence": "weak"
+  },
+  {
+   "id": "horse_height_withers",
+   "what": "height of a horse at the withers (for the stable's rack and tie-ring heights)",
+   "min": 1.4,
+   "max": 1.93,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Modern draught breeds 163 to 193 cm (16 to 19 hands) (https://en.wikipedia.org/wiki/Draft_horse); mediaeval work horses were smaller, no figure found, so 1.4 m is a guess for the low end.",
+   "confidence": "weak"
+  },
+  {
+   "id": "cottage_bay",
+   "what": "one bay of a cottage: length between trusses, and depth front to back",
+   "min": 3.2,
+   "max": 4.6,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Sycamore Farm, Long Crendon: 12 ft (3.7 m) between trusses, 15 ft (4.6 m) front to back (Alcock and Miles, see bay_free_span). Cottages: A 3 bays of 3.7 m (11.1 x 4.8 m), B 2 bays of 3.2 m (6.4 x 4.6 m), C 2 bays of 3.7 m (7.4 x 4.6 m), D 1 bay (3.7 x 4.4 m).",
+   "confidence": "weak"
+  },
+  {
+   "id": "cottage_eaves_height",
+   "what": "height of a single-storey cottage wall up to its wall plate (the eaves)",
+   "min": 1.8,
+   "max": 2.6,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "An overall wall height of about 8 ft (2.4 m) seems to have been standard for single-storeyed mediaeval houses (Kent Archaeological Society, https://www.kentarchaeology.org.uk/journal/81/vanishing-houses-kent-6-old-cottage-upper-hardres). Thatched cottages planned 1.9 to 2.2 m, the stable 2.4 m.",
+   "confidence": "weak"
+  },
+  {
+   "id": "wattle_stud_spacing",
+   "what": "distance between the upright studs of a timber frame holding wattle and daub",
+   "min": 0.18,
+   "max": 0.4,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Close studding leaves 7 to 16 inches (18 to 40 cm) between timbers; horizontal ledgers every 2 to 3 ft (0.6 to 0.9 m) (https://en.wikipedia.org/wiki/Wattle_and_daub). Cottages A and C use wide panels, 0.45 to 0.9 m between studs (invented), with the wattle showing where plaster has chipped.",
+   "confidence": "weak"
+  },
+  {
+   "id": "sleeper_wall_width",
+   "what": "width of the low stone footing (sleeper wall) a timber frame stands on",
+   "min": 0.3,
+   "max": 0.5,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Sleeper walls 18 inches (46 cm) wide at Wharram Percy (https://www.medievalists.net/2008/10/the-medieval-peasant-house/).",
+   "confidence": "weak"
+  },
+  {
+   "id": "box_stall_size",
+   "what": "size of one box stall for a horse (width x depth)",
+   "min": 3.05,
+   "max": 3.7,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "10 x 10 ft (3.05 m) is the minimum box stall for a riding horse and 12 x 12 ft (3.7 m) the common one (University of Kentucky extension, https://horses.extension.org/equine-facilities-stall-dimensions/; Penn State Extension, https://extension.psu.edu/horse-stall-design). Modern advice for a horse of about 1000 lb; mediaeval horses were smaller, so the stable uses 3.05 m (invented reduction).",
+   "confidence": "weak"
+  },
+  {
+   "id": "stable_eaves_and_ceiling",
+   "what": "height of a stable wall up to its plate, and of the ceiling or roof structure over the aisle",
+   "min": 2.4,
+   "max": 3.7,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Barn ceilings are commonly 10 to 12 ft (3.0 to 3.7 m), 8 ft (2.4 m) the minimum (Penn State Extension, https://extension.psu.edu/horse-stall-design). The stable is open to its roof (no hay loft floor in the first build).",
+   "confidence": "weak"
+  },
+  {
+   "id": "manger_and_rack_height",
+   "what": "rim of a manger (feed trough) and bottom of a hay rack on a stall's back wall",
+   "min": 0.9,
+   "max": 1.6,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "Penn State Extension gives no numbers: a hay manger runs from the floor to above chest height; a hay rack's bottom end is at wither height (https://extension.psu.edu/horse-stall-design). So the manger rim about 1.0 to 1.2 m and the rack bottom about 1.4 to 1.6 m are my guesses from the horse's height.",
+   "confidence": "guess"
+  },
+  {
+   "id": "thatch_eave_overhang",
+   "what": "how far a thatched eave hangs beyond the wall",
+   "min": 0.3,
+   "max": 0.6,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "From memory; no source found.",
+   "confidence": "guess"
+  },
+  {
+   "id": "tree_crown_and_trunk",
+   "what": "forest trees: total height, trunk diameter, crown width",
+   "min": 14,
+   "max": 30,
+   "unit": "metres",
+   "kind": "judged",
+   "source": "Oak typically up to 20 m (https://en.wikipedia.org/wiki/Quercus_robur); Scots pine up to 35 m with a trunk about 1 m across (https://en.wikipedia.org/wiki/Pinus_sylvestris). Planned: broadleaf 14 to 24 m, conifer 16 to 30 m, trunk 0.3 to 0.9 m across; crown width about 0.4 times the height (invented).",
+   "confidence": "weak"
+  },
+  {
+   "id": "hurdle_size",
+   "what": "a woven wattle hurdle fence panel (length x height)",
+   "min": 0.9,
+   "max": 1.8,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "A modern metal sheep hurdle is 6 ft (1.8 m) long and 3 ft 1 in (0.94 m) high (https://en.wikipedia.org/wiki/Hurdle); no size was given for woven wattle ones. Panels planned 1.8 m long, 0.9 to 1.1 m high.",
+   "confidence": "guess"
+  },
+  {
+   "id": "well_curb_and_windlass",
+   "what": "height of the stone well curb, and of the two posts of the windlass frame",
+   "min": 0.8,
+   "max": 2.4,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "From memory (curb about 0.8 to 1.0 m, posts about 2.0 to 2.4 m); no source found.",
+   "confidence": "guess"
+  },
+  {
+   "id": "small_props",
+   "what": "woodpile (1.0 to 1.4 m high), chopping block (0.4 to 0.5 m), haystack (2.0 to 3.0 m), bucket (0.25 to 0.35 m), sack (0.6 to 0.9 m), crate or chest (0.4 to 1.0 m), bench seat (0.4 to 0.5 m)",
+   "min": 0.25,
+   "max": 3.0,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "All from memory; none was looked up.",
+   "confidence": "guess"
+  },
+  {
+   "id": "clearing_and_rings",
+   "what": "the village clearing and the world round it",
+   "min": 100,
+   "max": 900,
+   "unit": "metres",
+   "kind": "invented",
+   "source": "Invented layout: clearing about 110 x 82 m (x -50 to 60, y -32 to 50); near forest to about 150 m; ground to about 900 m each way; hill rings between 380 and 820 m from the middle, 25 to 110 m high, lighter and bluer when far.",
+   "confidence": "guess"
+  }
+ ]
+}

@@ -1,0 +1,91 @@
+{
+ "job": 1,
+ "scene": "/workspace/place-jobs/scenes/7ebb7efe/part.blend",
+ "settings": "/workspace/place-jobs/scenes/7ebb7efe/settings-dd8b4f3b-e8bf066e/place-settings.json",
+ "out_folder": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/job-1",
+ "cameras": [
+  "View wide",
+  "View road_eye",
+  "View stable_close",
+  "View cottage_close"
+ ],
+ "engine": "auto",
+ "size": [
+  600,
+  400
+ ],
+ "samples": null,
+ "quality": 85,
+ "check_reset": false,
+ "scout": false,
+ "entries": [
+  {
+   "name": "smooth-big-dark",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.06,
+    "crown_scale": 1.25,
+    "density": 1.0,
+    "tone_olive": 0.05,
+    "golden": 0,
+    "moss_scale": 1.0,
+    "lump_detail": 3,
+    "lean_share": 0.1
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  },
+  {
+   "name": "sparse-olive",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.22,
+    "crown_scale": 1.15,
+    "density": 0.5,
+    "tone_olive": 0.85,
+    "golden": 3,
+    "moss_scale": 1.2,
+    "lump_detail": 2,
+    "lean_share": 0.3
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  },
+  {
+   "name": "moss-none-faceted",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.3,
+    "crown_scale": 0.9,
+    "density": 0.8,
+    "tone_olive": 0.6,
+    "golden": 2,
+    "moss_scale": 0.3,
+    "lump_detail": 1,
+    "lean_share": 0.05
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  },
+  {
+   "name": "mixed-broad",
+   "is_baseline": false,
+   "set": {},
+   "args": {
+    "crown_lump": 0.28,
+    "crown_scale": 1.3,
+    "density": 0.7,
+    "tone_olive": 0.65,
+    "golden": 4,
+    "moss_scale": 1.5,
+    "lump_detail": 3,
+    "lean_share": 0.25
+   },
+   "reset": "reopen",
+   "script": "/workspace/place-jobs/variations-crown-lumpiness-crown-size-tree-density-1792757499/hooks/1-forest_hook.py"
+  }
+ ]
+}

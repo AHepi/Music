@@ -1,0 +1,5813 @@
+{
+ "file": "",
+ "camera": "camera-c1",
+ "camera_at": [
+  -0.1599999964237213,
+  -0.4000000059604645,
+  1.600000023841858
+ ],
+ "collections": {
+  "aisles": {
+   "children": [],
+   "objects": 22
+  },
+  "bill-cool reaches": {
+   "children": [],
+   "objects": 1
+  },
+  "bill-warm-bounce reaches": {
+   "children": [],
+   "objects": 1
+  },
+  "cameras": {
+   "children": [],
+   "objects": 1
+  },
+  "checkout": {
+   "children": [],
+   "objects": 107
+  },
+  "checkout-lights": {
+   "children": [],
+   "objects": 15
+  },
+  "counter-warm reaches": {
+   "children": [],
+   "objects": 2
+  },
+  "outside": {
+   "children": [],
+   "objects": 7
+  },
+  "room": {
+   "children": [],
+   "objects": 93
+  },
+  "signs": {
+   "children": [],
+   "objects": 8
+  },
+  "warm-lamp reaches": {
+   "children": [],
+   "objects": 1
+  }
+ },
+ "objects": [
+  {
+   "name": "shop",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "shop-floor",
+    "shop-walls",
+    "shop-front",
+    "window-frame",
+    "skirting"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -8.2,
+    -4.2,
+    0.0
+   ],
+   "high": [
+    6.2,
+    8.05,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "shop-ceiling"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -8.0,
+    -4.0,
+    3.4
+   ],
+   "high": [
+    6.0,
+    7.8,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-structure",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "ceiling-structure"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -8.0,
+    -3.08,
+    3.05
+   ],
+   "high": [
+    6.0,
+    6.08,
+    3.38
+   ]
+  },
+  {
+   "name": "ceiling-fitting-1",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -4.7,
+    -2.91,
+    3.15
+   ],
+   "high": [
+    -3.7,
+    -2.69,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-1-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    -2.547,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-1-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    -2.547,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights",
+    "tube-off"
+   ],
+   "location": [
+    -4.2,
+    -2.55,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    -2.87,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    -2.83,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights",
+    "tube-off"
+   ],
+   "location": [
+    -4.2,
+    -2.55,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    -2.77,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    -2.729,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-2",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -2.3,
+    -2.91,
+    3.15
+   ],
+   "high": [
+    -1.3,
+    -2.69,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-2-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    -2.547,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.001",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-2-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    -2.547,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.001",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.001",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.001",
+    "tube-off"
+   ],
+   "location": [
+    -1.8,
+    -2.55,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    -2.87,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    -2.83,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.001",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.001",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.001",
+    "tube-off"
+   ],
+   "location": [
+    -1.8,
+    -2.55,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    -2.77,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    -2.729,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-3",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    0.1,
+    -2.91,
+    3.15
+   ],
+   "high": [
+    1.1,
+    -2.69,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-3-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.6,
+    -2.547,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.002",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-3-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.6,
+    -2.547,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.002",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.002",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.002",
+    "tube-off"
+   ],
+   "location": [
+    0.6,
+    -2.55,
+    3.149
+   ],
+   "low": [
+    0.144,
+    -2.87,
+    3.114
+   ],
+   "high": [
+    1.056,
+    -2.83,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.002",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.002",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.002",
+    "tube-off"
+   ],
+   "location": [
+    0.6,
+    -2.55,
+    3.149
+   ],
+   "low": [
+    0.144,
+    -2.77,
+    3.114
+   ],
+   "high": [
+    1.056,
+    -2.729,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-4",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    2.5,
+    -2.91,
+    3.15
+   ],
+   "high": [
+    3.5,
+    -2.69,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-4-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    -2.547,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.003",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-4-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    -2.547,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.003",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.003",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.003",
+    "tube-off"
+   ],
+   "location": [
+    3.0,
+    -2.55,
+    3.149
+   ],
+   "low": [
+    2.544,
+    -2.87,
+    3.114
+   ],
+   "high": [
+    3.456,
+    -2.83,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.003",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.003",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.003",
+    "tube-off"
+   ],
+   "location": [
+    3.0,
+    -2.55,
+    3.149
+   ],
+   "low": [
+    2.544,
+    -2.77,
+    3.114
+   ],
+   "high": [
+    3.456,
+    -2.729,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-5",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -4.7,
+    -0.51,
+    3.15
+   ],
+   "high": [
+    -3.7,
+    -0.29,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-5-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    -0.147,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.004",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-5-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    -0.147,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.004",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.004",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.004",
+    "tube-off"
+   ],
+   "location": [
+    -4.2,
+    -0.15,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    -0.47,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    -0.43,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.004",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.004",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.004",
+    "tube-off"
+   ],
+   "location": [
+    -4.2,
+    -0.15,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    -0.37,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    -0.329,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-6",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -2.3,
+    -0.51,
+    3.15
+   ],
+   "high": [
+    -1.3,
+    -0.29,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-6-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    -0.147,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.005",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-6-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    -0.147,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.005",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.005",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.005",
+    "tube-off"
+   ],
+   "location": [
+    -1.8,
+    -0.15,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    -0.47,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    -0.43,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.005",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.005",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.005",
+    "tube-off"
+   ],
+   "location": [
+    -1.8,
+    -0.15,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    -0.37,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    -0.329,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-7",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    2.5,
+    -0.51,
+    3.15
+   ],
+   "high": [
+    3.5,
+    -0.29,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-7-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    -0.147,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.006",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-7-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    -0.147,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.006",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.006",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.006",
+    "tube-off"
+   ],
+   "location": [
+    3.0,
+    -0.15,
+    3.149
+   ],
+   "low": [
+    2.544,
+    -0.47,
+    3.114
+   ],
+   "high": [
+    3.456,
+    -0.43,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.006",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.006",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.006",
+    "tube-off"
+   ],
+   "location": [
+    3.0,
+    -0.15,
+    3.149
+   ],
+   "low": [
+    2.544,
+    -0.37,
+    3.114
+   ],
+   "high": [
+    3.456,
+    -0.329,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-8",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -4.7,
+    1.89,
+    3.15
+   ],
+   "high": [
+    -3.7,
+    2.11,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-8-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    2.253,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.007",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-8-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    2.253,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.007",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.007",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.007",
+    "tube-off"
+   ],
+   "location": [
+    -4.2,
+    2.25,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    1.93,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    1.97,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.007",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.007",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.007",
+    "tube-off"
+   ],
+   "location": [
+    -4.2,
+    2.25,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    2.03,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    2.071,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-9",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -2.3,
+    1.89,
+    3.15
+   ],
+   "high": [
+    -1.3,
+    2.11,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-9-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    2.253,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.008",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-9-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    2.253,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.008",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.008",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.008",
+    "tube-off"
+   ],
+   "location": [
+    -1.8,
+    2.25,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    1.93,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    1.97,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.008",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.008",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.008",
+    "tube-off"
+   ],
+   "location": [
+    -1.8,
+    2.25,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    2.03,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    2.071,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-10",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    2.5,
+    1.89,
+    3.15
+   ],
+   "high": [
+    3.5,
+    2.11,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-10-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    2.253,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.009",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-10-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    2.253,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.009",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.009",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.009",
+    "tube-off"
+   ],
+   "location": [
+    3.0,
+    2.25,
+    3.149
+   ],
+   "low": [
+    2.544,
+    1.93,
+    3.114
+   ],
+   "high": [
+    3.456,
+    1.97,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.009",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.009",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.009",
+    "tube-off"
+   ],
+   "location": [
+    3.0,
+    2.25,
+    3.149
+   ],
+   "low": [
+    2.544,
+    2.03,
+    3.114
+   ],
+   "high": [
+    3.456,
+    2.071,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-11",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -4.7,
+    4.29,
+    3.15
+   ],
+   "high": [
+    -3.7,
+    4.51,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-11-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    4.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.010",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-11-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    4.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.010",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.010",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.010",
+    "tube-off"
+   ],
+   "location": [
+    -4.2,
+    4.65,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    4.33,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    4.37,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.010",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.010",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.010",
+    "tube-off"
+   ],
+   "location": [
+    -4.2,
+    4.65,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    4.43,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    4.471,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-12",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -2.3,
+    4.29,
+    3.15
+   ],
+   "high": [
+    -1.3,
+    4.51,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-12-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    4.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.011",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-12-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    4.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.011",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.011",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.011",
+    "tube-off"
+   ],
+   "location": [
+    -1.8,
+    4.65,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    4.33,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    4.37,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.011",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.011",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.011",
+    "tube-off"
+   ],
+   "location": [
+    -1.8,
+    4.65,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    4.43,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    4.471,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-13",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    0.1,
+    4.29,
+    3.15
+   ],
+   "high": [
+    1.1,
+    4.51,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-13-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.6,
+    4.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.012",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-13-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.6,
+    4.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.012",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.012",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.012",
+    "tube-off"
+   ],
+   "location": [
+    0.6,
+    4.65,
+    3.149
+   ],
+   "low": [
+    0.144,
+    4.33,
+    3.114
+   ],
+   "high": [
+    1.056,
+    4.37,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.012",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.012",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.012",
+    "tube-off"
+   ],
+   "location": [
+    0.6,
+    4.65,
+    3.149
+   ],
+   "low": [
+    0.144,
+    4.43,
+    3.114
+   ],
+   "high": [
+    1.056,
+    4.471,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-14",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    2.5,
+    4.29,
+    3.15
+   ],
+   "high": [
+    3.5,
+    4.51,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-14-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    4.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.013",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-14-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    4.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.013",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.013",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.013",
+    "tube-off"
+   ],
+   "location": [
+    3.0,
+    4.65,
+    3.149
+   ],
+   "low": [
+    2.544,
+    4.33,
+    3.114
+   ],
+   "high": [
+    3.456,
+    4.37,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.013",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.013",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.013",
+    "tube-off"
+   ],
+   "location": [
+    3.0,
+    4.65,
+    3.149
+   ],
+   "low": [
+    2.544,
+    4.43,
+    3.114
+   ],
+   "high": [
+    3.456,
+    4.471,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-15",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -4.7,
+    6.29,
+    3.15
+   ],
+   "high": [
+    -3.7,
+    6.51,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-15-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    6.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.014",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-15-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    6.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.014",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.014",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.014",
+    "tube-lit"
+   ],
+   "location": [
+    -4.2,
+    6.65,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    6.33,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    6.37,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.014",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.014",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.014",
+    "tube-lit"
+   ],
+   "location": [
+    -4.2,
+    6.65,
+    3.149
+   ],
+   "low": [
+    -4.656,
+    6.43,
+    3.114
+   ],
+   "high": [
+    -3.744,
+    6.471,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-16",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -2.3,
+    6.29,
+    3.15
+   ],
+   "high": [
+    -1.3,
+    6.51,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-16-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    6.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.015",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-16-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    6.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.015",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.015",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.015",
+    "tube-lit"
+   ],
+   "location": [
+    -1.8,
+    6.65,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    6.33,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    6.37,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.015",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.015",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.015",
+    "tube-lit"
+   ],
+   "location": [
+    -1.8,
+    6.65,
+    3.149
+   ],
+   "low": [
+    -2.256,
+    6.43,
+    3.114
+   ],
+   "high": [
+    -1.344,
+    6.471,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-17",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    0.1,
+    6.29,
+    3.15
+   ],
+   "high": [
+    1.1,
+    6.51,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-17-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.6,
+    6.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.016",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-17-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.6,
+    6.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.016",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.016",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.016",
+    "tube-lit"
+   ],
+   "location": [
+    0.6,
+    6.65,
+    3.149
+   ],
+   "low": [
+    0.144,
+    6.33,
+    3.114
+   ],
+   "high": [
+    1.056,
+    6.37,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.016",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.016",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.016",
+    "tube-lit"
+   ],
+   "location": [
+    0.6,
+    6.65,
+    3.149
+   ],
+   "low": [
+    0.144,
+    6.43,
+    3.114
+   ],
+   "high": [
+    1.056,
+    6.471,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-fitting-18",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-batten",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    2.5,
+    6.29,
+    3.15
+   ],
+   "high": [
+    3.5,
+    6.51,
+    3.4
+   ]
+  },
+  {
+   "name": "ceiling-fitting-18-tubes",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    6.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted-fluorescent-lights.017",
+   "type": "EMPTY",
+   "parent": "ceiling-fitting-18-tubes",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    6.653,
+    3.114
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_a.017",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.017",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.017",
+    "tube-lit"
+   ],
+   "location": [
+    3.0,
+    6.65,
+    3.149
+   ],
+   "low": [
+    2.544,
+    6.33,
+    3.114
+   ],
+   "high": [
+    3.456,
+    6.37,
+    3.149
+   ]
+  },
+  {
+   "name": "mounted_fluorescent_lights_b.017",
+   "type": "MESH",
+   "parent": "mounted-fluorescent-lights.017",
+   "collections": [
+    "room"
+   ],
+   "hide_render": false,
+   "materials": [
+    "mounted_fluorescent_lights.017",
+    "tube-lit"
+   ],
+   "location": [
+    3.0,
+    6.65,
+    3.149
+   ],
+   "low": [
+    2.544,
+    6.43,
+    3.114
+   ],
+   "high": [
+    3.456,
+    6.471,
+    3.149
+   ]
+  },
+  {
+   "name": "ceiling-light-15",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.2,
+    6.4,
+    3.09
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 40.0
+   }
+  },
+  {
+   "name": "ceiling-light-16",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.8,
+    6.4,
+    3.09
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 40.0
+   }
+  },
+  {
+   "name": "ceiling-light-17",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.6,
+    6.4,
+    3.09
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 40.0
+   }
+  },
+  {
+   "name": "ceiling-light-18",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    3.0,
+    6.4,
+    3.09
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 40.0
+   }
+  },
+  {
+   "name": "street-light-1--4.5",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.5,
+    14.8,
+    6.65
+   ],
+   "light": {
+    "kind": "POINT",
+    "energy": 900.0
+   }
+  },
+  {
+   "name": "street-light-1--12",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -12.0,
+    20.2,
+    7.15
+   ],
+   "light": {
+    "kind": "POINT",
+    "energy": 900.0
+   }
+  },
+  {
+   "name": "street-light-1-13",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    13.0,
+    20.2,
+    7.15
+   ],
+   "light": {
+    "kind": "POINT",
+    "energy": 900.0
+   }
+  },
+  {
+   "name": "warm-lamp",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.4,
+    1.45,
+    3.35
+   ],
+   "light": {
+    "kind": "SPOT",
+    "energy": 300.0
+   }
+  },
+  {
+   "name": "bill-cool",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.15,
+    0.9,
+    3.1
+   ],
+   "light": {
+    "kind": "SPOT",
+    "energy": 140.0
+   }
+  },
+  {
+   "name": "bill-warm-bounce",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.15,
+    2.3,
+    0.98
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 10.0
+   }
+  },
+  {
+   "name": "ceiling-fill",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.0,
+    2.0,
+    3.3
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 50.0
+   }
+  },
+  {
+   "name": "counter-warm",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.55,
+    1.2,
+    3.35
+   ],
+   "light": {
+    "kind": "SPOT",
+    "energy": 200.0
+   }
+  },
+  {
+   "name": "operator-side-light",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.1,
+    3.2,
+    3.3
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 45.0
+   }
+  },
+  {
+   "name": "bounce-to-ceiling",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.0,
+    1.5,
+    1.0
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 8.0
+   }
+  },
+  {
+   "name": "canopy-light",
+   "type": "LIGHT",
+   "parent": null,
+   "collections": [
+    "checkout-lights"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -4.5,
+    35.0,
+    4.35
+   ],
+   "light": {
+    "kind": "AREA",
+    "energy": 300.0
+   }
+  },
+  {
+   "name": "counter",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout",
+    "counter-warm reaches"
+   ],
+   "hide_render": false,
+   "materials": [
+    "kick-plate",
+    "counter-laminate",
+    "ash-wood",
+    "counter-top",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -0.5,
+    -0.02,
+    0.0
+   ],
+   "high": [
+    0.8,
+    4.3,
+    0.904
+   ]
+  },
+  {
+   "name": "counter-belt",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout",
+    "counter-warm reaches"
+   ],
+   "hide_render": false,
+   "materials": [
+    "belt-rubber",
+    "brushed-steel",
+    "rail-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -0.262,
+    0.057,
+    0.84
+   ],
+   "high": [
+    0.322,
+    2.47,
+    0.919
+   ]
+  },
+  {
+   "name": "counter-scanner",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "scanner-glass",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -0.26,
+    2.85,
+    0.87
+   ],
+   "high": [
+    0.32,
+    3.17,
+    0.902
+   ]
+  },
+  {
+   "name": "neighbour-counter-1",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "kick-plate",
+    "counter-laminate",
+    "counter-top",
+    "ash-wood",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -2.05,
+    0.58,
+    0.0
+   ],
+   "high": [
+    -1.17,
+    4.3,
+    0.904
+   ]
+  },
+  {
+   "name": "neighbour-counter-2",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "kick-plate",
+    "counter-laminate",
+    "counter-top",
+    "ash-wood",
+    "brushed-steel"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    1.4,
+    0.58,
+    0.0
+   ],
+   "high": [
+    2.28,
+    4.3,
+    0.904
+   ]
+  },
+  {
+   "name": "basket",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "basket-wire",
+    "basket-grip"
+   ],
+   "location": [
+    0.03,
+    2.0,
+    0.885
+   ],
+   "low": [
+    -0.204,
+    1.811,
+    0.886
+   ],
+   "high": [
+    0.264,
+    2.189,
+    1.109
+   ]
+  },
+  {
+   "name": "basket-bread",
+   "type": "MESH",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bread-bag-paper"
+   ],
+   "location": [
+    -0.105,
+    2.062,
+    0.899
+   ],
+   "low": [
+    -0.179,
+    1.995,
+    0.899
+   ],
+   "high": [
+    -0.033,
+    2.129,
+    1.315
+   ]
+  },
+  {
+   "name": "basket-bread-print",
+   "type": "MESH",
+   "parent": "basket-bread",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bread-bag-print"
+   ],
+   "location": [
+    -0.105,
+    2.062,
+    0.899
+   ],
+   "low": [
+    -0.161,
+    1.996,
+    0.914
+   ],
+   "high": [
+    -0.038,
+    2.034,
+    1.235
+   ]
+  },
+  {
+   "name": "basket-milk",
+   "type": "MESH",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "milk-bottle-plastic"
+   ],
+   "location": [
+    0.075,
+    2.068,
+    0.991
+   ],
+   "low": [
+    0.016,
+    2.009,
+    0.987
+   ],
+   "high": [
+    0.135,
+    2.149,
+    1.309
+   ]
+  },
+  {
+   "name": "basket-milk-cap",
+   "type": "MESH",
+   "parent": "basket-milk",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "milk-cap"
+   ],
+   "location": [
+    0.075,
+    2.068,
+    0.991
+   ],
+   "low": [
+    0.056,
+    2.07,
+    1.301
+   ],
+   "high": [
+    0.096,
+    2.111,
+    1.324
+   ]
+  },
+  {
+   "name": "basket-milk-handle",
+   "type": "MESH",
+   "parent": "basket-milk",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "milk-bottle-plastic"
+   ],
+   "location": [
+    0.075,
+    2.068,
+    0.991
+   ],
+   "low": [
+    0.11,
+    2.112,
+    1.139
+   ],
+   "high": [
+    0.151,
+    2.16,
+    1.265
+   ]
+  },
+  {
+   "name": "basket-milk-print",
+   "type": "MESH",
+   "parent": "basket-milk",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "milk-label-print"
+   ],
+   "location": [
+    0.075,
+    2.068,
+    0.991
+   ],
+   "low": [
+    0.016,
+    2.019,
+    1.137
+   ],
+   "high": [
+    0.135,
+    2.144,
+    1.234
+   ]
+  },
+  {
+   "name": "basket-butter",
+   "type": "MESH",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "butter-wrapper-paper"
+   ],
+   "location": [
+    -0.065,
+    1.928,
+    1.09
+   ],
+   "low": [
+    -0.132,
+    1.889,
+    1.088
+   ],
+   "high": [
+    0.004,
+    1.967,
+    1.144
+   ]
+  },
+  {
+   "name": "basket-butter-print",
+   "type": "MESH",
+   "parent": "basket-butter",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "butter-wrapper-print"
+   ],
+   "location": [
+    -0.065,
+    1.928,
+    1.09
+   ],
+   "low": [
+    -0.123,
+    1.889,
+    1.089
+   ],
+   "high": [
+    0.001,
+    1.902,
+    1.143
+   ]
+  },
+  {
+   "name": "basket-cheese",
+   "type": "MESH",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "cheese"
+   ],
+   "location": [
+    0.092,
+    1.928,
+    1.089
+   ],
+   "low": [
+    -0.013,
+    1.872,
+    1.086
+   ],
+   "high": [
+    0.196,
+    1.984,
+    1.142
+   ]
+  },
+  {
+   "name": "basket-cheese-print",
+   "type": "MESH",
+   "parent": "basket-cheese",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "cheese-label-print"
+   ],
+   "location": [
+    0.092,
+    1.928,
+    1.089
+   ],
+   "low": [
+    0.026,
+    1.875,
+    1.087
+   ],
+   "high": [
+    0.148,
+    1.885,
+    1.141
+   ]
+  },
+  {
+   "name": "basket-fruit-1-apple",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.12,
+    1.92,
+    0.899
+   ]
+  },
+  {
+   "name": "apple",
+   "type": "EMPTY",
+   "parent": "basket-fruit-1-apple",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.12,
+    1.92,
+    0.899
+   ]
+  },
+  {
+   "name": "food_apple_01",
+   "type": "MESH",
+   "parent": "apple",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_apple_01"
+   ],
+   "location": [
+    -0.12,
+    1.922,
+    0.899
+   ],
+   "low": [
+    -0.169,
+    1.872,
+    0.899
+   ],
+   "high": [
+    -0.071,
+    1.968,
+    0.984
+   ]
+  },
+  {
+   "name": "basket-fruit-2-apple",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.02,
+    1.912,
+    0.899
+   ]
+  },
+  {
+   "name": "apple.001",
+   "type": "EMPTY",
+   "parent": "basket-fruit-2-apple",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.02,
+    1.912,
+    0.899
+   ]
+  },
+  {
+   "name": "food_apple_01.001",
+   "type": "MESH",
+   "parent": "apple.001",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_apple_01.001"
+   ],
+   "location": [
+    -0.022,
+    1.913,
+    0.899
+   ],
+   "low": [
+    -0.088,
+    1.844,
+    0.899
+   ],
+   "high": [
+    0.048,
+    1.98,
+    0.984
+   ]
+  },
+  {
+   "name": "basket-fruit-3-apple",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.08,
+    1.918,
+    0.899
+   ]
+  },
+  {
+   "name": "apple.002",
+   "type": "EMPTY",
+   "parent": "basket-fruit-3-apple",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.08,
+    1.918,
+    0.899
+   ]
+  },
+  {
+   "name": "food_apple_01.002",
+   "type": "MESH",
+   "parent": "apple.002",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_apple_01.002"
+   ],
+   "location": [
+    0.078,
+    1.917,
+    0.899
+   ],
+   "low": [
+    0.024,
+    1.862,
+    0.899
+   ],
+   "high": [
+    0.136,
+    1.974,
+    0.984
+   ]
+  },
+  {
+   "name": "basket-fruit-4-apple",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.18,
+    1.914,
+    0.899
+   ]
+  },
+  {
+   "name": "apple.003",
+   "type": "EMPTY",
+   "parent": "basket-fruit-4-apple",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.18,
+    1.914,
+    0.899
+   ]
+  },
+  {
+   "name": "food_apple_01.003",
+   "type": "MESH",
+   "parent": "apple.003",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_apple_01.003"
+   ],
+   "location": [
+    0.179,
+    1.912,
+    0.899
+   ],
+   "low": [
+    0.114,
+    1.848,
+    0.899
+   ],
+   "high": [
+    0.246,
+    1.98,
+    0.984
+   ]
+  },
+  {
+   "name": "basket-fruit-5-kiwifruit",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.03,
+    2.0,
+    0.899
+   ]
+  },
+  {
+   "name": "food_kiwi_01",
+   "type": "MESH",
+   "parent": "kiwifruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_kiwi_01"
+   ],
+   "location": [
+    -0.029,
+    1.999,
+    0.899
+   ],
+   "low": [
+    -0.074,
+    1.956,
+    0.899
+   ],
+   "high": [
+    0.014,
+    2.044,
+    0.989
+   ]
+  },
+  {
+   "name": "kiwifruit",
+   "type": "EMPTY",
+   "parent": "basket-fruit-5-kiwifruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.03,
+    2.0,
+    0.899
+   ]
+  },
+  {
+   "name": "basket-fruit-6-kiwifruit",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.05,
+    1.996,
+    0.899
+   ]
+  },
+  {
+   "name": "food_kiwi_01.001",
+   "type": "MESH",
+   "parent": "kiwifruit.001",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_kiwi_01.001"
+   ],
+   "location": [
+    0.051,
+    1.996,
+    0.899
+   ],
+   "low": [
+    0.006,
+    1.952,
+    0.899
+   ],
+   "high": [
+    0.094,
+    2.04,
+    0.989
+   ]
+  },
+  {
+   "name": "kiwifruit.001",
+   "type": "EMPTY",
+   "parent": "basket-fruit-6-kiwifruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.05,
+    1.996,
+    0.899
+   ]
+  },
+  {
+   "name": "basket-fruit-7-avocado",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.15,
+    2.0,
+    0.899
+   ]
+  },
+  {
+   "name": "avocado",
+   "type": "EMPTY",
+   "parent": "basket-fruit-7-avocado",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.15,
+    2.0,
+    0.899
+   ]
+  },
+  {
+   "name": "food_avocado_01",
+   "type": "MESH",
+   "parent": "avocado",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_avocado_01"
+   ],
+   "location": [
+    0.152,
+    1.998,
+    0.899
+   ],
+   "low": [
+    0.095,
+    1.945,
+    0.899
+   ],
+   "high": [
+    0.205,
+    2.055,
+    1.042
+   ]
+  },
+  {
+   "name": "basket-fruit-8-kiwifruit",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.075,
+    2.068,
+    0.899
+   ]
+  },
+  {
+   "name": "food_kiwi_01.002",
+   "type": "MESH",
+   "parent": "kiwifruit.002",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_kiwi_01.002"
+   ],
+   "location": [
+    0.076,
+    2.067,
+    0.899
+   ],
+   "low": [
+    0.028,
+    2.021,
+    0.899
+   ],
+   "high": [
+    0.122,
+    2.115,
+    0.989
+   ]
+  },
+  {
+   "name": "kiwifruit.002",
+   "type": "EMPTY",
+   "parent": "basket-fruit-8-kiwifruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.075,
+    2.068,
+    0.899
+   ]
+  },
+  {
+   "name": "basket-fruit-9-kiwifruit",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.1,
+    1.925,
+    0.985
+   ]
+  },
+  {
+   "name": "food_kiwi_01.003",
+   "type": "MESH",
+   "parent": "kiwifruit.003",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_kiwi_01.003"
+   ],
+   "location": [
+    -0.099,
+    1.924,
+    0.985
+   ],
+   "low": [
+    -0.149,
+    1.876,
+    0.985
+   ],
+   "high": [
+    -0.051,
+    1.974,
+    1.075
+   ]
+  },
+  {
+   "name": "kiwifruit.003",
+   "type": "EMPTY",
+   "parent": "basket-fruit-9-kiwifruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.1,
+    1.925,
+    0.985
+   ]
+  },
+  {
+   "name": "basket-fruit-10-apple",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.02,
+    1.93,
+    0.985
+   ]
+  },
+  {
+   "name": "apple.004",
+   "type": "EMPTY",
+   "parent": "basket-fruit-10-apple",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.02,
+    1.93,
+    0.985
+   ]
+  },
+  {
+   "name": "food_apple_01.004",
+   "type": "MESH",
+   "parent": "apple.004",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_apple_01.004"
+   ],
+   "location": [
+    -0.021,
+    1.932,
+    0.985
+   ],
+   "low": [
+    -0.082,
+    1.868,
+    0.985
+   ],
+   "high": [
+    0.042,
+    1.992,
+    1.07
+   ]
+  },
+  {
+   "name": "basket-fruit-11-apple",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.06,
+    1.925,
+    0.985
+   ]
+  },
+  {
+   "name": "apple.005",
+   "type": "EMPTY",
+   "parent": "basket-fruit-11-apple",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.06,
+    1.925,
+    0.985
+   ]
+  },
+  {
+   "name": "food_apple_01.005",
+   "type": "MESH",
+   "parent": "apple.005",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_apple_01.005"
+   ],
+   "location": [
+    0.061,
+    1.923,
+    0.985
+   ],
+   "low": [
+    -0.002,
+    1.863,
+    0.985
+   ],
+   "high": [
+    0.122,
+    1.987,
+    1.07
+   ]
+  },
+  {
+   "name": "basket-fruit-12-kiwifruit",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.14,
+    1.925,
+    0.985
+   ]
+  },
+  {
+   "name": "food_kiwi_01.004",
+   "type": "MESH",
+   "parent": "kiwifruit.004",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_kiwi_01.004"
+   ],
+   "location": [
+    0.141,
+    1.925,
+    0.985
+   ],
+   "low": [
+    0.106,
+    1.89,
+    0.985
+   ],
+   "high": [
+    0.174,
+    1.96,
+    1.075
+   ]
+  },
+  {
+   "name": "kiwifruit.004",
+   "type": "EMPTY",
+   "parent": "basket-fruit-12-kiwifruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.14,
+    1.925,
+    0.985
+   ]
+  },
+  {
+   "name": "basket-fruit-13-avocado",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.01,
+    2.01,
+    0.975
+   ]
+  },
+  {
+   "name": "avocado.001",
+   "type": "EMPTY",
+   "parent": "basket-fruit-13-avocado",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.01,
+    2.01,
+    0.975
+   ]
+  },
+  {
+   "name": "food_avocado_01.001",
+   "type": "MESH",
+   "parent": "avocado.001",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_avocado_01.001"
+   ],
+   "location": [
+    -0.009,
+    2.012,
+    0.975
+   ],
+   "low": [
+    -0.075,
+    1.945,
+    0.975
+   ],
+   "high": [
+    0.055,
+    2.075,
+    1.118
+   ]
+  },
+  {
+   "name": "basket-fruit-14-lemon-fruit",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.16,
+    2.04,
+    0.975
+   ]
+  },
+  {
+   "name": "lemon",
+   "type": "MESH",
+   "parent": "lemon-fruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "lemon"
+   ],
+   "location": [
+    0.162,
+    2.04,
+    1.027
+   ],
+   "low": [
+    0.118,
+    1.998,
+    0.975
+   ],
+   "high": [
+    0.202,
+    2.082,
+    1.07
+   ]
+  },
+  {
+   "name": "lemon-fruit",
+   "type": "EMPTY",
+   "parent": "basket-fruit-14-lemon-fruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.16,
+    2.04,
+    0.975
+   ]
+  },
+  {
+   "name": "basket-fruit-15-kiwifruit",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.005,
+    2.02,
+    1.07
+   ]
+  },
+  {
+   "name": "food_kiwi_01.005",
+   "type": "MESH",
+   "parent": "kiwifruit.005",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_kiwi_01.005"
+   ],
+   "location": [
+    0.006,
+    2.02,
+    1.07
+   ],
+   "low": [
+    -0.042,
+    1.973,
+    1.07
+   ],
+   "high": [
+    0.052,
+    2.067,
+    1.16
+   ]
+  },
+  {
+   "name": "kiwifruit.005",
+   "type": "EMPTY",
+   "parent": "basket-fruit-15-kiwifruit",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.005,
+    2.02,
+    1.07
+   ]
+  },
+  {
+   "name": "basket-fruit-16-avocado",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.165,
+    2.05,
+    1.055
+   ]
+  },
+  {
+   "name": "avocado.002",
+   "type": "EMPTY",
+   "parent": "basket-fruit-16-avocado",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.165,
+    2.05,
+    1.055
+   ]
+  },
+  {
+   "name": "food_avocado_01.002",
+   "type": "MESH",
+   "parent": "avocado.002",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_avocado_01.002"
+   ],
+   "location": [
+    0.163,
+    2.049,
+    1.055
+   ],
+   "low": [
+    0.104,
+    1.989,
+    1.055
+   ],
+   "high": [
+    0.226,
+    2.111,
+    1.198
+   ]
+  },
+  {
+   "name": "basket-fruit-17-apple",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.15,
+    1.99,
+    1.005
+   ]
+  },
+  {
+   "name": "apple.006",
+   "type": "EMPTY",
+   "parent": "basket-fruit-17-apple",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.15,
+    1.99,
+    1.005
+   ]
+  },
+  {
+   "name": "food_apple_01.006",
+   "type": "MESH",
+   "parent": "apple.006",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "food_apple_01.006"
+   ],
+   "location": [
+    -0.148,
+    1.991,
+    1.005
+   ],
+   "low": [
+    -0.216,
+    1.924,
+    1.005
+   ],
+   "high": [
+    -0.084,
+    2.056,
+    1.09
+   ]
+  },
+  {
+   "name": "basket-bananas",
+   "type": "EMPTY",
+   "parent": "basket",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.255,
+    2.035,
+    1.035
+   ]
+  },
+  {
+   "name": "bananas",
+   "type": "EMPTY",
+   "parent": "basket-bananas",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    0.255,
+    1.822,
+    0.94
+   ]
+  },
+  {
+   "name": "bananas_bunch",
+   "type": "MESH",
+   "parent": "bananas",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "Material.008"
+   ],
+   "location": [
+    0.247,
+    1.757,
+    0.953
+   ],
+   "low": [
+    0.154,
+    1.901,
+    1.008
+   ],
+   "high": [
+    0.377,
+    2.096,
+    1.226
+   ]
+  },
+  {
+   "name": "divider-bar",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "divider-plastic"
+   ],
+   "location": [
+    0.03,
+    1.847,
+    0.885
+   ],
+   "low": [
+    -0.2,
+    1.823,
+    0.885
+   ],
+   "high": [
+    0.26,
+    1.867,
+    0.935
+   ]
+  },
+  {
+   "name": "bill-stand",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "stand-wire",
+    "bill-backing"
+   ],
+   "location": [
+    0.15,
+    2.581,
+    0.9
+   ],
+   "low": [
+    -0.176,
+    2.457,
+    0.901
+   ],
+   "high": [
+    0.477,
+    2.705,
+    1.876
+   ]
+  },
+  {
+   "name": "bill-stand-papers",
+   "type": "MESH",
+   "parent": "bill-stand",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "newsprint-edge",
+    "newsprint"
+   ],
+   "location": [
+    0.15,
+    2.581,
+    0.9
+   ],
+   "low": [
+    0.0,
+    2.481,
+    0.906
+   ],
+   "high": [
+    0.3,
+    2.681,
+    0.945
+   ]
+  },
+  {
+   "name": "card-terminal",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "dark-steel"
+   ],
+   "location": [
+    0.69,
+    3.08,
+    0.9
+   ],
+   "low": [
+    0.66,
+    3.04,
+    0.896
+   ],
+   "high": [
+    0.721,
+    3.12,
+    1.144
+   ]
+  },
+  {
+   "name": "card-terminal-head",
+   "type": "MESH",
+   "parent": "card-terminal",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "terminal-plastic",
+    "terminal-screen",
+    "terminal-key"
+   ],
+   "location": [
+    0.725,
+    3.08,
+    1.145
+   ],
+   "low": [
+    0.652,
+    3.038,
+    1.055
+   ],
+   "high": [
+    0.783,
+    3.122,
+    1.225
+   ]
+  },
+  {
+   "name": "till",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "dark-steel",
+    "dark-plastic",
+    "till-screen"
+   ],
+   "location": [
+    -0.4,
+    3.1,
+    0.9
+   ],
+   "low": [
+    -0.46,
+    2.91,
+    0.9
+   ],
+   "high": [
+    -0.34,
+    3.29,
+    1.42
+   ]
+  },
+  {
+   "name": "divider-tray",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "rail-steel"
+   ],
+   "location": [
+    -0.38,
+    0.3,
+    0.9
+   ],
+   "low": [
+    -0.433,
+    0.04,
+    0.9
+   ],
+   "high": [
+    -0.327,
+    0.56,
+    0.93
+   ]
+  },
+  {
+   "name": "divider-tray-bar-1",
+   "type": "MESH",
+   "parent": "divider-tray",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "divider-plastic"
+   ],
+   "location": [
+    -0.402,
+    0.3,
+    0.906
+   ],
+   "low": [
+    -0.422,
+    0.07,
+    0.906
+   ],
+   "high": [
+    -0.378,
+    0.53,
+    0.956
+   ]
+  },
+  {
+   "name": "divider-tray-bar-2",
+   "type": "MESH",
+   "parent": "divider-tray",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "divider-plastic"
+   ],
+   "location": [
+    -0.358,
+    0.3,
+    0.906
+   ],
+   "low": [
+    -0.378,
+    0.07,
+    0.906
+   ],
+   "high": [
+    -0.334,
+    0.53,
+    0.956
+   ]
+  },
+  {
+   "name": "operator-stool",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "dark-steel",
+    "stool-seat"
+   ],
+   "location": [
+    -0.95,
+    4.0,
+    0.0
+   ],
+   "low": [
+    -1.15,
+    3.8,
+    0.0
+   ],
+   "high": [
+    -0.75,
+    4.2,
+    0.715
+   ]
+  },
+  {
+   "name": "bag-rack",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "dark-steel",
+    "brushed-steel"
+   ],
+   "location": [
+    1.8,
+    2.6,
+    0.0
+   ],
+   "low": [
+    1.64,
+    2.58,
+    0.0
+   ],
+   "high": [
+    1.96,
+    4.42,
+    1.44
+   ]
+  },
+  {
+   "name": "bag-rack-bag-1",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-0"
+   ],
+   "location": [
+    1.77,
+    2.75,
+    1.25
+   ],
+   "low": [
+    1.737,
+    2.547,
+    0.831
+   ],
+   "high": [
+    1.802,
+    2.935,
+    1.258
+   ]
+  },
+  {
+   "name": "bag-rack-bag-1-handles",
+   "type": "MESH",
+   "parent": "bag-rack-bag-1",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-0"
+   ],
+   "location": [
+    1.77,
+    2.75,
+    1.25
+   ],
+   "low": [
+    1.754,
+    2.638,
+    1.239
+   ],
+   "high": [
+    1.786,
+    2.869,
+    1.426
+   ]
+  },
+  {
+   "name": "bag-rack-hook-1",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "brushed-steel"
+   ],
+   "location": [
+    1.8,
+    2.6,
+    0.0
+   ],
+   "low": [
+    1.757,
+    2.748,
+    1.407
+   ],
+   "high": [
+    1.801,
+    2.753,
+    1.43
+   ]
+  },
+  {
+   "name": "bag-rack-bag-2",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-1"
+   ],
+   "location": [
+    1.77,
+    3.05,
+    1.25
+   ],
+   "low": [
+    1.751,
+    2.865,
+    0.838
+   ],
+   "high": [
+    1.79,
+    3.235,
+    1.25
+   ]
+  },
+  {
+   "name": "bag-rack-bag-2-handles",
+   "type": "MESH",
+   "parent": "bag-rack-bag-2",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-1"
+   ],
+   "location": [
+    1.77,
+    3.05,
+    1.25
+   ],
+   "low": [
+    1.764,
+    2.939,
+    1.244
+   ],
+   "high": [
+    1.776,
+    3.161,
+    1.421
+   ]
+  },
+  {
+   "name": "bag-rack-hook-2",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "brushed-steel"
+   ],
+   "location": [
+    1.8,
+    2.6,
+    0.0
+   ],
+   "low": [
+    1.757,
+    3.048,
+    1.407
+   ],
+   "high": [
+    1.801,
+    3.053,
+    1.43
+   ]
+  },
+  {
+   "name": "bag-rack-bag-3",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-2"
+   ],
+   "location": [
+    1.77,
+    3.35,
+    1.25
+   ],
+   "low": [
+    1.736,
+    3.164,
+    0.831
+   ],
+   "high": [
+    1.802,
+    3.553,
+    1.258
+   ]
+  },
+  {
+   "name": "bag-rack-bag-3-handles",
+   "type": "MESH",
+   "parent": "bag-rack-bag-3",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-2"
+   ],
+   "location": [
+    1.77,
+    3.35,
+    1.25
+   ],
+   "low": [
+    1.754,
+    3.231,
+    1.239
+   ],
+   "high": [
+    1.786,
+    3.462,
+    1.426
+   ]
+  },
+  {
+   "name": "bag-rack-hook-3",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "brushed-steel"
+   ],
+   "location": [
+    1.8,
+    2.6,
+    0.0
+   ],
+   "low": [
+    1.757,
+    3.348,
+    1.407
+   ],
+   "high": [
+    1.801,
+    3.353,
+    1.43
+   ]
+  },
+  {
+   "name": "bag-rack-bag-4",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-3"
+   ],
+   "location": [
+    1.77,
+    3.65,
+    1.25
+   ],
+   "low": [
+    1.732,
+    3.446,
+    0.831
+   ],
+   "high": [
+    1.806,
+    3.836,
+    1.258
+   ]
+  },
+  {
+   "name": "bag-rack-bag-4-handles",
+   "type": "MESH",
+   "parent": "bag-rack-bag-4",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-3"
+   ],
+   "location": [
+    1.77,
+    3.65,
+    1.25
+   ],
+   "low": [
+    1.754,
+    3.538,
+    1.239
+   ],
+   "high": [
+    1.786,
+    3.769,
+    1.426
+   ]
+  },
+  {
+   "name": "bag-rack-hook-4",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "brushed-steel"
+   ],
+   "location": [
+    1.8,
+    2.6,
+    0.0
+   ],
+   "low": [
+    1.757,
+    3.648,
+    1.407
+   ],
+   "high": [
+    1.801,
+    3.653,
+    1.43
+   ]
+  },
+  {
+   "name": "bag-rack-bag-5",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-4"
+   ],
+   "location": [
+    1.77,
+    3.95,
+    1.25
+   ],
+   "low": [
+    1.754,
+    3.765,
+    0.838
+   ],
+   "high": [
+    1.786,
+    4.135,
+    1.25
+   ]
+  },
+  {
+   "name": "bag-rack-bag-5-handles",
+   "type": "MESH",
+   "parent": "bag-rack-bag-5",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-4"
+   ],
+   "location": [
+    1.77,
+    3.95,
+    1.25
+   ],
+   "low": [
+    1.764,
+    3.839,
+    1.244
+   ],
+   "high": [
+    1.776,
+    4.061,
+    1.421
+   ]
+  },
+  {
+   "name": "bag-rack-hook-5",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "brushed-steel"
+   ],
+   "location": [
+    1.8,
+    2.6,
+    0.0
+   ],
+   "low": [
+    1.757,
+    3.948,
+    1.407
+   ],
+   "high": [
+    1.801,
+    3.953,
+    1.43
+   ]
+  },
+  {
+   "name": "bag-rack-bag-6",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-5"
+   ],
+   "location": [
+    1.77,
+    4.25,
+    1.25
+   ],
+   "low": [
+    1.732,
+    4.064,
+    0.831
+   ],
+   "high": [
+    1.806,
+    4.454,
+    1.258
+   ]
+  },
+  {
+   "name": "bag-rack-bag-6-handles",
+   "type": "MESH",
+   "parent": "bag-rack-bag-6",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bag-cloth-5"
+   ],
+   "location": [
+    1.77,
+    4.25,
+    1.25
+   ],
+   "low": [
+    1.754,
+    4.131,
+    1.239
+   ],
+   "high": [
+    1.786,
+    4.362,
+    1.426
+   ]
+  },
+  {
+   "name": "bag-rack-hook-6",
+   "type": "MESH",
+   "parent": "bag-rack",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "brushed-steel"
+   ],
+   "location": [
+    1.8,
+    2.6,
+    0.0
+   ],
+   "low": [
+    1.757,
+    4.248,
+    1.407
+   ],
+   "high": [
+    1.801,
+    4.253,
+    1.43
+   ]
+  },
+  {
+   "name": "crate-1",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    2.05,
+    4.7,
+    0.0
+   ]
+  },
+  {
+   "name": "plastic-crate",
+   "type": "EMPTY",
+   "parent": "crate-1",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    2.05,
+    4.7,
+    0.0
+   ]
+  },
+  {
+   "name": "plastic_crate_02",
+   "type": "MESH",
+   "parent": "plastic-crate",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "plastic_crate_02.001"
+   ],
+   "location": [
+    2.05,
+    4.7,
+    0.0
+   ],
+   "low": [
+    1.787,
+    4.484,
+    0.0
+   ],
+   "high": [
+    2.313,
+    4.916,
+    0.254
+   ]
+  },
+  {
+   "name": "crate-2",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    2.05,
+    4.7,
+    0.254
+   ]
+  },
+  {
+   "name": "plastic-crate.001",
+   "type": "EMPTY",
+   "parent": "crate-2",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    2.05,
+    4.7,
+    0.254
+   ]
+  },
+  {
+   "name": "plastic_crate_02.001",
+   "type": "MESH",
+   "parent": "plastic-crate.001",
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "plastic_crate_02.003"
+   ],
+   "location": [
+    2.05,
+    4.7,
+    0.254
+   ],
+   "low": [
+    1.79,
+    4.489,
+    0.254
+   ],
+   "high": [
+    2.31,
+    4.911,
+    0.508
+   ]
+  },
+  {
+   "name": "checkout-sign",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "sign-edge",
+    "sign-trim"
+   ],
+   "location": [
+    0.25,
+    4.4,
+    2.85
+   ],
+   "low": [
+    -0.3,
+    4.384,
+    2.59
+   ],
+   "high": [
+    0.8,
+    4.416,
+    2.85
+   ]
+  },
+  {
+   "name": "cables-of-checkout-sign",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "checkout"
+   ],
+   "hide_render": false,
+   "materials": [
+    "brushed-steel"
+   ],
+   "location": [
+    0.25,
+    4.4,
+    2.85
+   ],
+   "low": [
+    -0.222,
+    4.398,
+    2.85
+   ],
+   "high": [
+    0.722,
+    4.402,
+    3.4
+   ]
+  },
+  {
+   "name": "aisle-end-1-shelf-1",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -2.56,
+    6.6,
+    0.0
+   ]
+  },
+  {
+   "name": "steel-frame-shelves",
+   "type": "EMPTY",
+   "parent": "aisle-end-1-shelf-1",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -2.56,
+    6.6,
+    0.0
+   ]
+  },
+  {
+   "name": "steel_frame_shelves_01",
+   "type": "MESH",
+   "parent": "steel-frame-shelves",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "steel_frame_shelves_01"
+   ],
+   "location": [
+    -2.56,
+    6.6,
+    0.001
+   ],
+   "low": [
+    -3.109,
+    6.349,
+    0.0
+   ],
+   "high": [
+    -2.011,
+    6.851,
+    2.141
+   ]
+  },
+  {
+   "name": "aisle-end-1-packs-1",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "packs-0.80",
+    "packs-1.00",
+    "packs-0.88",
+    "packs-0.95",
+    "packs-0.70"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -3.04,
+    6.4,
+    0.57
+   ],
+   "high": [
+    -2.02,
+    6.65,
+    1.91
+   ]
+  },
+  {
+   "name": "aisle-end-1-shelf-2",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.44,
+    6.6,
+    0.0
+   ]
+  },
+  {
+   "name": "steel-frame-shelves.001",
+   "type": "EMPTY",
+   "parent": "aisle-end-1-shelf-2",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -1.44,
+    6.6,
+    0.0
+   ]
+  },
+  {
+   "name": "steel_frame_shelves_01.001",
+   "type": "MESH",
+   "parent": "steel-frame-shelves.001",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "steel_frame_shelves_01.001"
+   ],
+   "location": [
+    -1.44,
+    6.6,
+    0.001
+   ],
+   "low": [
+    -1.989,
+    6.349,
+    0.0
+   ],
+   "high": [
+    -0.891,
+    6.851,
+    2.141
+   ]
+  },
+  {
+   "name": "aisle-end-1-packs-2",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "packs-0.80",
+    "packs-0.88",
+    "packs-0.70",
+    "packs-1.00",
+    "packs-0.95"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -1.92,
+    6.4,
+    0.57
+   ],
+   "high": [
+    -0.95,
+    6.65,
+    1.91
+   ]
+  },
+  {
+   "name": "aisle-end-1-box",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -2.3,
+    6.55,
+    0.06
+   ]
+  },
+  {
+   "name": "cardboard-box",
+   "type": "EMPTY",
+   "parent": "aisle-end-1-box",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -2.3,
+    6.55,
+    0.06
+   ]
+  },
+  {
+   "name": "cardboard_box_01",
+   "type": "MESH",
+   "parent": "cardboard-box",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "cardboard_box_01"
+   ],
+   "location": [
+    -2.333,
+    6.549,
+    0.067
+   ],
+   "low": [
+    -2.558,
+    6.356,
+    0.06
+   ],
+   "high": [
+    -2.042,
+    6.744,
+    0.402
+   ]
+  },
+  {
+   "name": "aisle-end-2-shelf-1",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -3.86,
+    6.6,
+    0.0
+   ]
+  },
+  {
+   "name": "steel-frame-shelves.002",
+   "type": "EMPTY",
+   "parent": "aisle-end-2-shelf-1",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -3.86,
+    6.6,
+    0.0
+   ]
+  },
+  {
+   "name": "steel_frame_shelves_01.002",
+   "type": "MESH",
+   "parent": "steel-frame-shelves.002",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "steel_frame_shelves_01.002"
+   ],
+   "location": [
+    -3.86,
+    6.6,
+    0.001
+   ],
+   "low": [
+    -4.409,
+    6.349,
+    0.0
+   ],
+   "high": [
+    -3.311,
+    6.851,
+    2.141
+   ]
+  },
+  {
+   "name": "aisle-end-2-packs-1",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "packs-0.80",
+    "packs-0.88",
+    "packs-0.70",
+    "packs-0.95",
+    "packs-1.00"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -4.34,
+    6.4,
+    0.57
+   ],
+   "high": [
+    -3.37,
+    6.65,
+    1.83
+   ]
+  },
+  {
+   "name": "aisle-end-2-shelf-2",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -2.74,
+    6.6,
+    0.0
+   ]
+  },
+  {
+   "name": "steel-frame-shelves.003",
+   "type": "EMPTY",
+   "parent": "aisle-end-2-shelf-2",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -2.74,
+    6.6,
+    0.0
+   ]
+  },
+  {
+   "name": "steel_frame_shelves_01.003",
+   "type": "MESH",
+   "parent": "steel-frame-shelves.003",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "steel_frame_shelves_01.003"
+   ],
+   "location": [
+    -2.74,
+    6.6,
+    0.001
+   ],
+   "low": [
+    -3.289,
+    6.349,
+    0.0
+   ],
+   "high": [
+    -2.191,
+    6.851,
+    2.141
+   ]
+  },
+  {
+   "name": "aisle-end-2-packs-2",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "packs-0.80",
+    "packs-0.70",
+    "packs-0.95",
+    "packs-1.00",
+    "packs-0.88"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -3.22,
+    6.4,
+    0.57
+   ],
+   "high": [
+    -2.25,
+    6.65,
+    1.91
+   ]
+  },
+  {
+   "name": "aisle-end-2-box",
+   "type": "EMPTY",
+   "parent": null,
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -3.6,
+    6.55,
+    0.06
+   ]
+  },
+  {
+   "name": "cardboard-box.001",
+   "type": "EMPTY",
+   "parent": "aisle-end-2-box",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -3.6,
+    6.55,
+    0.06
+   ]
+  },
+  {
+   "name": "cardboard_box_01.001",
+   "type": "MESH",
+   "parent": "cardboard-box.001",
+   "collections": [
+    "aisles"
+   ],
+   "hide_render": false,
+   "materials": [
+    "cardboard_box_01.001"
+   ],
+   "location": [
+    -3.633,
+    6.549,
+    0.067
+   ],
+   "low": [
+    -3.858,
+    6.356,
+    0.06
+   ],
+   "high": [
+    -3.342,
+    6.744,
+    0.402
+   ]
+  },
+  {
+   "name": "outside-ground",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "outside"
+   ],
+   "hide_render": false,
+   "materials": [
+    "asphalt",
+    "footpath",
+    "road",
+    "road-line"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -61.5,
+    8.05,
+    -0.15
+   ],
+   "high": [
+    61.5,
+    90.0,
+    -0.03
+   ]
+  },
+  {
+   "name": "petrol-station",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "outside"
+   ],
+   "hide_render": false,
+   "materials": [
+    "canopy-grey",
+    "canopy-white",
+    "kiosk-wall",
+    "kiosk-window"
+   ],
+   "location": [
+    -4.5,
+    31.0,
+    -0.15
+   ],
+   "low": [
+    -9.5,
+    31.0,
+    -0.15
+   ],
+   "high": [
+    0.5,
+    47.0,
+    5.35
+   ]
+  },
+  {
+   "name": "petrol-station-underside",
+   "type": "MESH",
+   "parent": "petrol-station",
+   "collections": [
+    "outside"
+   ],
+   "hide_render": false,
+   "materials": [
+    "canopy-lights"
+   ],
+   "location": [
+    -4.5,
+    31.0,
+    -0.15
+   ],
+   "low": [
+    -9.5,
+    31.0,
+    4.44
+   ],
+   "high": [
+    0.5,
+    39.0,
+    4.44
+   ]
+  },
+  {
+   "name": "petrol-station-fascia-print",
+   "type": "MESH",
+   "parent": "petrol-station",
+   "collections": [
+    "outside"
+   ],
+   "hide_render": false,
+   "materials": [
+    "petrol-fascia-print"
+   ],
+   "location": [
+    -4.5,
+    31.0,
+    -0.15
+   ],
+   "low": [
+    -9.0,
+    30.988,
+    4.45
+   ],
+   "high": [
+    0.0,
+    30.988,
+    5.35
+   ]
+  },
+  {
+   "name": "petrol-station-price-board",
+   "type": "MESH",
+   "parent": "petrol-station",
+   "collections": [
+    "outside"
+   ],
+   "hide_render": false,
+   "materials": [
+    "canopy-grey",
+    "price-board-edge"
+   ],
+   "location": [
+    4.0,
+    29.5,
+    -0.15
+   ],
+   "low": [
+    3.87,
+    28.6,
+    -0.15
+   ],
+   "high": [
+    4.13,
+    30.4,
+    5.85
+   ]
+  },
+  {
+   "name": "houses-beyond",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "outside"
+   ],
+   "hide_render": false,
+   "materials": [
+    "house-wall",
+    "house-roof",
+    "house-window"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -18.3,
+    57.7,
+    -0.15
+   ],
+   "high": [
+    30.3,
+    70.3,
+    5.2
+   ]
+  },
+  {
+   "name": "light-poles",
+   "type": "MESH",
+   "parent": null,
+   "collections": [
+    "outside"
+   ],
+   "hide_render": false,
+   "materials": [
+    "light-pole"
+   ],
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "low": [
+    -12.3,
+    14.68,
+    -0.15
+   ],
+   "high": [
+    13.3,
+    20.32,
+    7.47
+   ]
+  },
+  {
+   "name": "petrol-station-fascia-lettering",
+   "type": "MESH",
+   "parent": "petrol-station",
+   "collections": [
+    "signs"
+   ],
+   "hide_render": false,
+   "materials": [
+    "petrol-fascia-lettering"
+   ],
+   "location": [
+    -4.5,
+    31.0,
+    -0.15
+   ],
+   "low": [
+    -7.204,
+    30.958,
+    4.668
+   ],
+   "high": [
+    -1.787,
+    30.958,
+    5.136
+   ]
+  },
+  {
+   "name": "basket-bread-lettering",
+   "type": "MESH",
+   "parent": "basket-bread",
+   "collections": [
+    "signs"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bread-bag-lettering"
+   ],
+   "location": [
+    -0.105,
+    2.062,
+    0.899
+   ],
+   "low": [
+    -0.156,
+    1.995,
+    1.173
+   ],
+   "high": [
+    -0.042,
+    2.026,
+    1.23
+   ]
+  },
+  {
+   "name": "basket-milk-lettering",
+   "type": "MESH",
+   "parent": "basket-milk",
+   "collections": [
+    "signs"
+   ],
+   "hide_render": false,
+   "materials": [
+    "milk-label-lettering"
+   ],
+   "location": [
+    0.075,
+    2.068,
+    0.991
+   ],
+   "low": [
+    0.022,
+    2.02,
+    1.166
+   ],
+   "high": [
+    0.126,
+    2.042,
+    1.213
+   ]
+  },
+  {
+   "name": "basket-butter-lettering",
+   "type": "MESH",
+   "parent": "basket-butter",
+   "collections": [
+    "signs"
+   ],
+   "hide_render": false,
+   "materials": [
+    "butter-wrapper-lettering"
+   ],
+   "location": [
+    -0.065,
+    1.928,
+    1.09
+   ],
+   "low": [
+    -0.11,
+    1.89,
+    1.101
+   ],
+   "high": [
+    -0.011,
+    1.9,
+    1.131
+   ]
+  },
+  {
+   "name": "basket-cheese-lettering",
+   "type": "MESH",
+   "parent": "basket-cheese",
+   "collections": [
+    "signs"
+   ],
+   "hide_render": false,
+   "materials": [
+    "cheese-label-lettering"
+   ],
+   "location": [
+    0.092,
+    1.928,
+    1.089
+   ],
+   "low": [
+    0.036,
+    1.875,
+    1.097
+   ],
+   "high": [
+    0.138,
+    1.884,
+    1.131
+   ]
+  },
+  {
+   "name": "bill-stand-bill-lettering",
+   "type": "MESH",
+   "parent": "bill-stand",
+   "collections": [
+    "bill-cool reaches",
+    "bill-warm-bounce reaches",
+    "signs",
+    "warm-lamp reaches"
+   ],
+   "hide_render": false,
+   "materials": [
+    "bill-lettering"
+   ],
+   "location": [
+    0.15,
+    2.581,
+    0.9
+   ],
+   "low": [
+    -0.16,
+    2.6,
+    1.14
+   ],
+   "high": [
+    0.46,
+    2.6,
+    1.86
+   ]
+  },
+  {
+   "name": "checkout-sign-lettering",
+   "type": "MESH",
+   "parent": "checkout-sign",
+   "collections": [
+    "signs"
+   ],
+   "hide_render": false,
+   "materials": [
+    "checkout-sign-lettering"
+   ],
+   "location": [
+    0.25,
+    4.4,
+    2.85
+   ],
+   "low": [
+    -0.288,
+    4.388,
+    2.602
+   ],
+   "high": [
+    0.788,
+    4.388,
+    2.838
+   ]
+  },
+  {
+   "name": "checkout-sign-back-lettering",
+   "type": "MESH",
+   "parent": "checkout-sign",
+   "collections": [
+    "signs"
+   ],
+   "hide_render": false,
+   "materials": [
+    "checkout-sign-lettering"
+   ],
+   "location": [
+    0.25,
+    4.4,
+    2.85
+   ],
+   "low": [
+    -0.288,
+    4.412,
+    2.602
+   ],
+   "high": [
+    0.788,
+    4.412,
+    2.838
+   ]
+  },
+  {
+   "name": "camera-c1",
+   "type": "CAMERA",
+   "parent": null,
+   "collections": [
+    "cameras"
+   ],
+   "hide_render": false,
+   "materials": [],
+   "location": [
+    -0.16,
+    -0.4,
+    1.6
+   ]
+  }
+ ]
+}

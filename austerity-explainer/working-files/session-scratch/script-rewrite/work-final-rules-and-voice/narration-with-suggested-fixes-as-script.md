@@ -1,0 +1,47 @@
+### Page 1 - The question
+You've felt it at the checkout. The same basket of shopping costs more than it did a year ago. That's inflation... prices in general, going up. Not one price tag. The whole basket. You've heard the warning too. If the government creates new money... prices will go up. Is that always true? It matters... because when prices go up too fast, the usual cure makes loans cost more. And that can put people out of work.
+
+### Page 2 - Who can create new money
+Who can create new money? Here in New Zealand, the Reserve Bank can. It also tries to stop prices going up too fast. There are economists who study how modern money works. They argue that a government like ours can't run out of its own money. But it can run out of workers, materials and machines.
+
+### Page 3 - The quiet factory
+Picture two factories. Think of each one as a whole country... all its workers, materials and machines. In the first, the machines stand still. Workers wait at the gate, hoping for a job. Call it the quiet factory. Now new money is spent on what the factory makes. The workers go in. The machines start. More things get made... and prices barely move.
+
+### Page 4 - The flat-out factory
+In the second factory, every worker and every machine is already busy... working as hard as they can. No one waits at the gate. Call it the flat-out factory. The same new money is spent on what this factory makes. What do you think happens? Have a guess.
+
+### Page 5 - The rule
+No spare workers, materials or machines... so no extra things get made. Just more money, offered for the same things... and prices go up. Most economists agree on this much. So when there are spare workers, materials and machines... once new money is spent, it mostly gets more things made. When there aren't any spare... it mostly pushes prices up.
+
+### Page 6 - Britain at war
+Now a real case. Britain, during the First World War. Millions were in uniform. Soon, fewer than one worker in a hundred was out of work. German submarines sank ships carrying food and materials. And the war was paid for partly with new money. More money... and fewer things to buy. By the end of the war, prices had roughly doubled. Britain at war was close to the flat-out factory.
+
+### Page 7 - Glasgow's homes
+By nineteen fifteen, crowds of war workers had come to Glasgow, a British city, where homes were already short. With builders and materials gone to the war, few new homes were built. So for homes, Glasgow was like the flat-out factory. Landlords raised the rent... in places by up to a quarter. By November, about twenty thousand families were refusing to pay the extra. Within weeks, Britain's Parliament brought rents on small homes back to what they were before the war.
+
+### Page 8 - Japan, the guess
+Japan, twenty thirteen. Japan's version of our Reserve Bank set out to double the money it had created... in two years. If the warning is right, prices should go up fast. What do you think happened? Have a guess.
+
+### Page 9 - Japan, the answer
+Prices barely moved... for about eight years. On average, they went up about half a percent a year. Why? One reason economists give... most of the new money just sat in the banks. In our picture, most of it never reached the factory. So it's not just how much new money there is. It's whether it's spent... and on what. Are there spare workers, materials and machines to make what it buys?
+
+### Page 10 - New Zealand, the guess
+Now, here. When Covid hit in twenty twenty, the Reserve Bank created new money. And the government spent more... including help with wages. By the end of twenty twenty-one, almost everyone looking for work had found it. Only about three in a hundred were out of work. That was the lowest in more than thirty years. Which factory was New Zealand closer to? Have a guess.
+
+### Page 11 - New Zealand, the answer
+Close to the flat-out factory. Almost no one was waiting at the gate. And prices here went up fast... partly from that, and partly from prices overseas, like oil. The biggest push came from homes... building new ones, and rents.
+
+### Page 12 - The usual cure
+So what's the usual cure? The Reserve Bank raises its interest rate. Interest is the extra you pay back when you borrow. Many loans cost more... so people have less to spend. Businesses sell less, and hire fewer people. And prices go up more slowly. Not down... just more slowly. In our picture, the flat-out factory slows... and more workers wait at the gate.
+
+### Page 13 - Who pays, here
+Who pays for the cure? From late twenty twenty-one into twenty twenty-three, the Reserve Bank raised its interest rate again and again. Loans cost more, and jobs got harder to find. By the middle of twenty twenty-six... nearly six in a hundred were out of work. That's about a hundred and seventy thousand people. The interest rate isn't the only reason for that.
+
+### Page 14 - Two views
+To our Reserve Bank, and others like it, putting people out of work is unfortunate... but not the goal. Clara E. /məˈteɪi/ is the economist whose book this series follows. She argues that putting people out of work is the main goal. With more workers waiting at the gate, she says, those inside have less power to ask for higher wages.
+
+### Page 15 - Back at the checkout
+And the checkout? In the year to June twenty twenty-six, prices here went up four point one percent. If petrol and diesel prices hadn't changed... prices in general would have gone up two point nine percent. When fuel like that costs more, almost everything that's made or moved costs more... in both factories. So part of what you felt at the checkout wasn't new money being spent.
+
+### Page 16 - Spent on what?
+Does new money always push prices up? No. When there are spare workers, materials and machines... once new money is spent, it mostly gets more things made. When there aren't any spare... it mostly pushes prices up. So next time you hear the warning... ask two questions. Spent on what? And who pays for the cure?

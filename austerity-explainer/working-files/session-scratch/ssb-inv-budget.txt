@@ -1,0 +1,248 @@
+## Painting and service costs
+  how_found : Workflows and Decisions: Flux 3 big pictures about 10 US cents, small objects about 2.5; Flux 3 edit repaint about 10; Nano Banana Pro 15; MiniMax video 6 s samples about 90 cents for five; chapter 1: 47 pictures for about US$2.55 (planned 70 for US$5-8); chapter 2: 11 paintings about US$1.06; narration about US$1.10 a chapter (chapter 1 about 3,000 credits); Seedance draft at 480 px can be finished within 7 days without re-making; Flux takes at most ten pictures.
+  final_value_or_rule : Budget per film = backgrounds x 0.10 + objects x 0.025 + repaints x 0.10 x 2 (main + behind) + Nano sketches x 0.15 + narration about 1.10, plus retries.
+  evidence : Workflows.md:55-57, 178-179, 205-206; Decisions.md:129, 153-154, 180-182, 320-322, 555-559, 622
+  computable_from : shot plan (painting list) + script length
+  proposed_calculation : cost_estimate reads the shot plan's paintings by type and multiplies by the price table, adds 10% for retries (chapter 1 threw away 2 of 47; Flux strength reruns), and compares with the budget. Read prices live from the service where possible; the table is a fallback.
+  already_automatic : No.
+  llm_tip : Show the cost estimate and get approval before any paid call.
+## Painting prices
+  how_found : Logs 30-34: plan assumed 2.4 c/MP (about 25 c a painting); the next day fal charged 4.8 c/MP; people test about 85 c for two; pictures sent are charged too (log 32: 20-45 c for two). Lesson 139.
+  final_value_or_rule : Flux 3 edit about 4.8 US cents a megapixel of output plus inputs; a 2k painting about 4 MP plus inputs about 42-45 c; style picture sent at about 1 MP saves about 7 c; Nano Banana Pro about 15 c a picture; Seedance 10 s draft about US$2.06; SAM 3D about 12 c a painting; narration about 1 ElevenLabs credit per character (about US$1.10 for 6,300). Plugin still says 10 c per 2k painting, 2.5 c per 1k.
+  evidence : people-test-paintings.json note; 34 Plan 'Plates, paintings and money'; Lessons 139; plugins/explainer-film/skills/paint-and-cut/SKILL.md section 1; make-explainer-film SKILL.md 'Timings and costs'
+  computable_from : fal price list or estimate tool, image sizes sent and returned
+  proposed_calculation : cost = rate_per_MP x (output_MP + sum(input_MP)); fetch the rate with the fal pricing/estimate tool before every batch; write the estimate and the running total to the paintings ledger; ask the user when the batch total is new or larger than agreed.
+  already_automatic : No; prices are hard-coded in plugin text and out of date.
+  llm_tip : Get the live price from fal before each paid batch and count the images you send, not only the one you get back.
+## Fal painting price on the day
+  how_found : Plan: fal's price list said 2.4 US cents a megapixel and log 32's 20 to 45 cents for two showed input pictures are charged too, so 25 cents a painting. People test ledger (log 34): 4.8 cents a megapixel on the day, about 85 cents for two.
+  final_value_or_rule : cost = rate x (megapixels returned + megapixels of every picture sent). 2k return 1504 x 2672 = 4.0 MP; plate 1536 x 2730 = 4.2 MP; style picture 768 x 1368 = 1.05 MP. At 4.8 c/MP: about 44 c with a style picture, about 39 c without. Sending the style picture at about 1 MP saved about 7 c at 2.4 c/MP.
+  evidence : PLAN lines 1131-1133 and 1416 (F10); KIT/assets/models/inflation-chapter-2-newcomers/people-test/people-test-paintings.json 'note'
+  computable_from : prices (fetched live), planned paintings list with their input pictures
+  proposed_calculation : Before each paid batch: read today's rate (fal get_pricing); sum per request rate x (W_out x H_out + sum W_in x H_in)/1e6; add repaint reserve; refuse if over the user's line.
+  already_automatic : No.
+  llm_tip : Check today's price per megapixel before every paid batch and count the pictures you send, not only the one returned.
+## Picture and model costs (fal), and the spend ledger
+  how_found : Learnt from bills, logs 10 to 34. Log 12 planned 70 pictures for about US$5 (up to US$8); log 13 actually painted 47 for US$2.55, with 2 failures (about 4%). Log 26 had told helpers about US$3 was left when about US$8.70 was; corrected.
+  final_value_or_rule : 2k painting about 10 US cents; 1k about 2.5 cents; cut-out mask about 0.2 cents; depth map a fraction of a cent; Flux 3 edit repaint about 10 cents (may also charge for the pictures sent: 20 to 45 cents for two); Nano Banana Pro about 15 cents a picture; Seedance 2.5 10-second draft about US$2.06 (480 px wide, finishable at full size within 7 days); MiniMax 6-second video about 18 cents; SAM 3D about 2 cents; Tripo 20 to 40 cents (never its free plan); World Labs about US$1.26 a world with a US$5 minimum. Allowances: 'up to $10' from chapter 2's start, then a new US$20 from log 34.
+  evidence : story L429, L443-444, L456-458, L461-462, L563-564, L726-727, L835-838, L849-851, L989-990, L1077-1078, L1255-1256, L1346; Status L301-313
+  computable_from : the shot plan (plates to paint, masks, edits, videos) and a price table
+  proposed_calculation : Projected cost = sum over kinds of count × unit price × 1.25 (re-paint margin). Keep a ledger summed from fal's request history, with spend counted from the date the current allowance began. Refuse to plan beyond what is left.
+  already_automatic : No. Prices are prose in the plugin skills (paint-and-cut SKILL.md line 20, make-explainer-film SKILL.md line 44, make-3d-models SKILL.md lines 129, 140).
+  llm_tip : Keep a running spend ledger against the user's current allowance. Recompute what is left from the allowance's start date, never from memory.
+## Recording cost (ElevenLabs)
+  how_found : Logs 04, 07, 19 and 33, worked out from bills: about 1 credit per letter (2,950 credits for pages 2 to 10; 4,300 credits for about 75 US cents; 6,300 credits planned for about US$1.10). Transcripts were free, and later re-recordings showed 0 credits charged.
+  final_value_or_rule : Credits are about the number of letters of page text sent, including the accent instruction. US$ is about credits × 0.000175.
+  evidence : story L257, L359-360, L378-379, L626-627; Status L285, L312-313
+  computable_from : the narration JSON
+  proposed_calculation : credits = sum of len(page text including the instruction); cost = credits × 0.175 / 1000 USD. Print both before asking the user.
+  already_automatic : No tool. The rule of thumb is prose in the plugin skills (make-explainer-film SKILL.md line 43, record-narration SKILL.md line 17).
+  llm_tip : State the credits and dollars and get a clear yes before any ElevenLabs call. Download each recording at once: the links expire after 2 hours.
+## Budget lines and reserves
+  how_found : Plan's money table after the feasibility critic.
+  final_value_or_rule : Repaint reserve about one in two paintings (lesson 97: Flux's strength varies); up to 4 Nano Banana Pro sketches at 15 c only where the checker can't settle a view; narration about 6,300 characters about US$1.10; re-record reserve one page US$0.30; ask per batch; stay under the user's line (US$12 of US$20).
+  evidence : PLAN lines 1135-1155
+  computable_from : plan's paintings list, narration character count, prices
+  proposed_calculation : total = paintings x per-painting cost x 1.5 + sketches x 0.15 + narration_chars x price_per_char + one page re-record; split into batches by place; print before asking.
+  already_automatic : No.
+  llm_tip : Budget one repaint for every two paintings and ask for each paid batch separately.
+## Reuse one painting across pages
+  how_found : Decisions item 15: 47 pictures were painted, not 70: one painting can serve several pages, and words, cards, signs and boards are drawn by code.
+  final_value_or_rule : Paint each recurring thing once; draw text things in code.
+  evidence : Decisions.md:180-182
+  computable_from : page plan (prop list per page)
+  proposed_calculation : List every prop across pages, merge duplicates, and remove anything that is text (cards, signs, boards) from the paint list before costing.
+  already_automatic : No.
+  llm_tip : Count unique things to paint, not pages.
+## Spending ledger and approval
+  how_found : Decision 40: a new budget of US$20 from log 34 covers narration and paintings; spending is reported in each log entry; paid steps were refused by the safety check and wait for approval. Decision 30: 'That's ok' was not a yes to spending. Decision 31: helpers were told US$3 by mistake.
+  final_value_or_rule : Every paid request recorded (00-requests.json); running total vs budget in every report; ask before spending.
+  evidence : Decisions.md:614-628, 492, 511-512; Workflows.md:57
+  computable_from : 00-requests.json files
+  proposed_calculation : spent = sum of recorded costs since the budget's start date; print remaining before any paid call and refuse when the call would exceed the budget.
+  already_automatic : No.
+  llm_tip : Keep a running total and quote it; never treat a vague reply as approval to spend.
+## Paid steps need the user's own yes
+  how_found : Log 34: this session's automatic safety check refused the first ElevenLabs call despite the budget. Logs 21 and 25: the safety check also blocked saving files to the repository.
+  final_value_or_rule : Ask the user; never work around a refusal.
+  evidence : story L1347-1349 (log 34), L710-715 (log 21), L815-817 (log 25)
+  computable_from : judgement only
+  proposed_calculation : None.
+  already_automatic : House rules in the plugin.
+  llm_tip : Do every free step first, then ask once, with the exact cost.
+## Filming time estimates
+  how_found : Workflows: paper film about 0.85 s a frame (about 95 minutes for chapter 1). Cinema chapter 2: 35 chunks, two at a time, about 6 hours with detailed models. Lesson 60: Blender's renderer 35-90 s a frame (80-200 hours for a chapter), so Blender builds and the stage films. Plate in EEVEE about 10 minutes at 1536 x 2730. Rooms by glow 1.8 s.
+  final_value_or_rule : Paper 0.85 s/frame; cinema 1.4-2.4 s; model pages 12-15 s; held shots 1.2 s; plate 10 min.
+  evidence : Workflows.md:78-80, 122-126, 176; Lessons.md:241-245, 315-317; Decisions.md:403-407
+  computable_from : timeline length x 30 fps + per-page profile
+  proposed_calculation : estimate = sum over pages(frames x profiled s/frame) / workers x 1.1, printed before filming along with the number of 2-hour stretches.
+  already_automatic : No.
+  llm_tip : Tell the user the filming time before starting.
+## Filming time, worker count and stretch size
+  how_found : Measured in many logs. Log 11: 23 s took about 12 minutes. Log 13: chapter 1's 6,641 frames took about 80 minutes one page at a time (two at once was no faster). Log 19: two workers on 4 processors are 17% faster (1.44 against 1.68 s a frame). Log 20: detailed-model pages 12 to 16 s a frame, others about 3; about 7 hours in all. Log 26: Blender's fast drawing about 20 s a picture (fine for one background per shot). Log 27: 1.8 s a frame. Log 29: about 12 s a frame (40 minutes for 360 frames, two at once). Log 32: about 41 minutes per filming of 13 s. Log 34: held shots 1.1 to 1.3 s; round 4 at 1.4 s.
+  final_value_or_rule : 1 worker on 2 processors, 2 on 4; chunks of 240 frames; check the first finished stretch at once.
+  evidence : story L452, L474, L619, L674-676, L833-835, L903, L979-980, L987-988, L1235, L1254, L1359-1360, L1380; paper-film/tools/film-chapter-parallel.sh lines 2-5; plugin skills/film-and-finish/SKILL.md lines 20-35
+  computable_from : the page files' frame counts, profile_frame timings and the processor count
+  proposed_calculation : Before filming, time two frames per page (one held, one moving). Total time = sum over pages of frames × seconds a frame ÷ speed-up (1.17 for 2 workers on 4 processors, 1.0 on 2). Report the hours, and split into FILM_FROM/FILM_TO stretches of at most about 100 minutes each.
+  already_automatic : No estimator. profile_frame is run by hand, and the numbers are prose in the plugin skill.
+  llm_tip : Estimate filming time before you start and tell the user. Check the first finished stretch at once so a fault doesn't waste hours.
+## Seconds a frame and filming time
+  how_found : Plan used notice-corner measurements (F3); round 3 and round 4 filmed pages 3 to 5 and measured from logs.
+  final_value_or_rule : Held, nothing live: 0.57 s (two helpers) to 0.8 s; held with smoke or flicker: 0.9 to 1.3 s alone (1.05 two helpers, 2.0 to 2.3 while another Blender runs); slides 2.9 to 6.6 s; loading 20 to 45 s a piece. Pages 3 to 5 (2,283 frames): 70 min (1.83 s/frame) in round 3, 53 min (1.4 s/frame) in round 4.
+  evidence : PLAN lines 616-618 and 1198-1208; round3-result.json pages.summary 'Seconds a frame'; round4-result.json film.summary
+  computable_from : shot list (held/effect/slide frames), timeline
+  proposed_calculation : hours = (held_plain x 0.8 + held_live x 1.3 + slide x 6 + pieces x 40 s) / 3600, with a 1.5 x margin if another heavy job runs; split into stretches under 2 hours.
+  already_automatic : No.
+  llm_tip : Estimate filming from the shot list before starting, and never film while Blender is drawing.
+## Workers, frame costs and filming time estimate
+  how_found : Chapter 2 (2 workers 17% faster on 4 CPUs: 1.44 vs 1.68 s/frame; 1 worker on 2 CPUs); log 34 measurements on the notice corner and Works pages; a machine restart lost round 4's filming.
+  final_value_or_rule : Held, nothing live 0.57 s/frame (two at once) or 0.8 (one); held with smoke/flames 1.05 (two) or 1.5 (one); moving 5.6-7 s with no gain from two at once; page peels about double; loading 30-90 s a piece; Works pages 3-5 filmed at 1.4 s/frame; stretches under 2 h (FILM_FROM/FILM_TO); wait for about 6 GB free before each piece when Blender runs alongside.
+  evidence : 34 Plan 'Computer time' table; film-chapter-parallel.sh header; scratchpad/redesign/round4-pages/tools/film_pieces.sh; Lessons 56, 71
+  computable_from : camera plans (moving windows), still keys, live-effects flags per page, page edges (render-paper-film.mjs --info)
+  proposed_calculation : plan_filming.py: classify each frame (moving if inside a stillShot move or no still key; live if any moving-layer object visible; peel if inside a join), sum frames x cost per class, split into stretches of < 100 min, assign 1 worker to moving stretches and 2 to held ones, print FILM_FROM/FILM_TO commands and total hours.
+  already_automatic : No; film-chapter-parallel.sh uses one fixed WORKERS for the whole run and the estimate was made by hand.
+  llm_tip : Film moving stretches with one worker and held stretches with two, and keep each run under 2 hours of a cloud session.
+## Workers per machine
+  how_found : Lesson 34: two browsers on a 2-processor machine took as long as one. Workflows traps: on 4 processors two at once is about 17% faster (1.44 vs 1.68 s a frame); three not worth it.
+  final_value_or_rule : 1 worker on 2 processors; 2 on 4.
+  evidence : Lessons.md:147-150; Workflows.md:281-282; film-chapter-parallel.sh header
+  computable_from : nproc
+  proposed_calculation : WORKERS default = 1 if nproc <= 2 else 2.
+  already_automatic : No; WORKERS defaults to 2.
+  llm_tip : Check the processor count before choosing workers.
+## Fit filming into the 2-hour limit and survive restarts
+  how_found : Lesson 69: background jobs stop after 2 hours; chapter 2's 5-hour filming lost two pieces. Lesson 71: the machine restarted at 02:53 and lost about 30 minutes. Fix: FILM_FROM/FILM_TO stretches and 60-frame pieces (at most about 13 minutes lost on the slowest page).
+  final_value_or_rule : Stretches that fit under 2 hours; PIECE_FRAMES 60; rerun carries on.
+  evidence : Lessons.md:275-278, 283-286; Workflows.md:122-126; film-chapter-parallel.sh header
+  computable_from : render-paper-film --info (page frame ranges) + profiled seconds a frame per page + workers
+  proposed_calculation : plan_stretches: for pages in order, add frames until sum(frames x s_per_frame(page)) / workers reaches 6,600 s (2 h minus 10 min). Print the FILM_FROM/FILM_TO commands. PIECE_FRAMES = floor(900 s / s_per_frame of the slowest page) to cap loss at 15 minutes.
+  already_automatic : The pieces are automatic; the stretches are chosen by hand.
+  llm_tip : Compute stretches from measured speed before starting a long film.
+## Surviving restarts and the 2-hour job limit
+  how_found : Log 19: the cloud machine restarted and silently stopped filming for about 90 minutes. Log 20: stopped by the 2-hour limit on background jobs, then a restart lost about 30 minutes of page 3; the tool now keeps every 60 frames as soon as they are drawn. Log 34: a restart overnight lost only the filming.
+  final_value_or_rule : PIECE_FRAMES 60. Run the same command again and it carries on. Watch for a job stopping, not only for it finishing.
+  evidence : story L619-621 (log 19), L676-680 (log 20), L1384-1385 (log 34), Traps L1432-1433
+  computable_from : the measured seconds a frame
+  proposed_calculation : PIECE_FRAMES = round(300 s / seconds a frame), kept between 30 and 240, so a stop loses at most about 5 minutes. A check every 30 minutes that the newest piece file is younger than twice the time one piece takes; if not, restart.
+  already_automatic : PIECE_FRAMES=60 is fixed (plugin kit). No watchdog.
+  llm_tip : Watch for filming stopping, not only finishing; a cloud machine can restart without warning.
+## Watching and stopping filming jobs
+  how_found : Lesson 56: filming stopped silently for 90 minutes after a restart; the watcher only looked for 'finished'. Lessons 54 and 115: pkill -f with the script's name killed this session's own shell (exit 144), twice.
+  final_value_or_rule : The watcher also stops when the script is no longer running. Stop jobs only by their own process number.
+  evidence : Lessons.md:224-227, 215-217, 431-432; plugin/skills/film-and-finish/SKILL.md
+  computable_from : PID file + log
+  proposed_calculation : The filming script writes out/SCENE.pid and a heartbeat line every minute; a 'status' command reports running, stalled (no heartbeat for 5 min) or stopped; a 'stop' command kills by the saved PIDs.
+  already_automatic : Documented, not built in.
+  llm_tip : Never use pkill -f; stop by the PID you saved.
+## Running out of memory: lazy chapters
+  how_found : Log 34: 16 heavy pages ran the computer out of memory, so chapters now load only the pages a piece of film needs (about 2.8 GB a piece).
+  final_value_or_rule : lazy=true for long chapters of heavy sets.
+  evidence : story L1361-1362 (log 34); Status L268-269; film-kit/paper-film/scenes/cinema-chapter.js lines 17-22, 35
+  computable_from : the page count, models per page and the machine's memory
+  proposed_calculation : Turn lazy on when the summed model file sizes × about 4 exceed half of free memory, or when there are more than 8 heavy pages.
+  already_automatic : In the film kit only. The plugin's cinema-chapter.js (69 lines against 100) has no lazy loading.
+  llm_tip : Use lazy chapters whenever pages carry Blender sets.
+## Lazy chapters and filming piece size
+  how_found : Log 34: opening one painted set took 20-31 s and about 2.6 GB browser memory; loading 16 heavy pages per 60-frame piece would run out of memory (16 GB, no swap) or add 4-7 h.
+  final_value_or_rule : buildCinemaChapter({ lazy: true }); pages export join; window.prepareFrame(t) before every frame; PIECE_FRAMES=240 for lazy chapters (pieces 240-300 frames); at most two views per page.
+  evidence : film-kit/paper-film/scenes/cinema-chapter.js lines 17-55; render-paper-film.mjs prepareFrame calls; Workflows.md 'Making a long chapter ...'; 34 Plan 'Computer time' F1
+  computable_from : page count, per-page load time and memory (measured once), free memory
+  proposed_calculation : piece_frames = max(240, ceil(load_seconds_per_piece / (target_overhead 5%) / seconds_per_frame)); with 30 s load and 1.2 s/frame -> 500; cap by memory: pages_per_piece x 2.6 GB <= free/workers.
+  already_automatic : Lazy loading yes (film kit only); piece size chosen by hand.
+  llm_tip : For chapters with painted sets, build lazily and film in pieces of at least 240 frames so each piece loads its pages once.
+## Pieces, loading and memory
+  how_found : Feasibility critic F1 and F12: every 60-frame piece loaded all 16 pages; one painted set took 20 to 31 s and about 2.6 GB of browser memory; jump finder on the whole chapter about 19 GB. Round 4 pages helper ran out of memory when two Blender jobs used about 12 GB.
+  final_value_or_rule : Load only the pages a piece covers (plus the next during a peel); pieces 240 to 300 frames (PIECE_FRAMES 240 used); stretches under 2 hours (FILM_FROM, FILM_TO); jump finder one piece or page at a time; no more than two views a page; two views of one place share one set; one heavy job at a time on 16 GB.
+  evidence : PLAN lines 1212-1221 and 1407, 1418; round4-result.json pageFixes.tested; KIT/paper-film/tools/film-chapter-parallel.sh lines 10-15
+  computable_from : page list, set sizes, machine memory
+  proposed_calculation : workers = floor((free_GB - 2) / (2.6 x views_per_page)); piece_frames = 270; refuse to start filming while a Blender process is running.
+  already_automatic : Partly: film-chapter-parallel.sh takes FILM_FROM/FILM_TO and PIECE_FRAMES; lazy page loading is in the film kit's chapter scene, not the plugin kit's template.
+  llm_tip : Film in pieces of about 270 frames, one heavy job at a time, and load only the pages each piece needs.
+## Lazy chapters need the newer renderer
+  how_found : Workflows (log 34): buildCinemaChapter({lazy: true}) builds only the pages a moment shows; film with PIECE_FRAMES=240. The film kit's render-paper-film.mjs calls window.prepareFrame for this; the plugin's copy does not.
+  final_value_or_rule : lazy: true + PIECE_FRAMES=240; renderer must call prepareFrame(t) before each frame.
+  evidence : Workflows.md:249-250; diff of film-kit vs plugin render-paper-film.mjs (prepareFrame lines)
+  computable_from : none
+  proposed_calculation : Sync the plugin's render-paper-film.mjs with the film kit's.
+  already_automatic : In the film kit only.
+  llm_tip : Use the film kit's renderer for long chapters.
+## Drawing time comes from surfaces, not shapes
+  how_found : Lesson 70: profile_frame.mjs showed the realistic materials of the works and town were most of page 3's 12 s a picture; matte halves it but looked flatter, so the time was accepted. Lesson 59: 22,000-triangle factory is still light enough.
+  final_value_or_rule : Model pages 12-15 s a frame vs about 2.7 s for others; matte materials about halve it.
+  evidence : Lessons.md:279-282, 237-240, 275-278
+  computable_from : profile_frame.mjs per page
+  proposed_calculation : Profile one frame of every page before filming and keep a table of seconds per frame; it feeds the filming-time estimate.
+  already_automatic : profile_frame.mjs exists (plugin copy is older).
+  llm_tip : Profile before filming; surfaces cost more than triangles.
+## Model detail against filming speed
+  how_found : Log 20: the works went from about 2,000 to 22,000 to 34,000 triangles; the town about 63,000; the props about 5,600; 232 parts joined into 19; bevels shade smoothly. Pages with detailed models drew at 12 to 16 s a picture, the others at about 3. Log 34: the FOUNDRY library was about 7 times slower (223 against 33 s for two views) and made the road icy; not used.
+  final_value_or_rule : Join parts to cut draw calls; keep detail where it is seen.
+  evidence : story L643-645, L657-668, L675-676 (log 20), L1386-1389 (log 34)
+  computable_from : triangle counts, draw calls and profile_frame timings
+  proposed_calculation : Fit seconds per frame ≈ a + b × triangles + c × draw calls from profile_frame on a few pages. Join or simplify parts until the estimated filming time fits.
+  already_automatic : profile_frame.mjs (plugin kit), by hand.
+  llm_tip : Profile one frame before adding detail, and join parts.
+## Model size budgets for painted sets
+  how_found : Log 20 set the plugin's budget (models <= 25,000 triangles, sets about 70,000) for card-model pages; log 34 sets are far larger (props export 38.9 MB) but held frames are cached and matte materials halve drawing.
+  final_value_or_rule : Budget by frame time, not triangles: held frame <= about 1.5 s, moving frame 5.6-7 s accepted for slides of 3-4 s.
+  evidence : plugins/explainer-film/skills/make-3d-models/SKILL.md 'Keep each model under about 25,000 triangles'; works export sizes; 34 Plan 'Cost of a frame'
+  computable_from : profile_frame.mjs on the view's held and moving frames
+  proposed_calculation : Report triangles, textures (MB) and measured ms per frame per view; warn when a held frame > 2 s or a moving frame > 8 s.
+  already_automatic : No; plugin guidance is out of date for painted sets.
+  llm_tip : Measure a held and a moving frame per view instead of counting triangles.
+## Frame profiler and portability
+  how_found : Chapter 2 round 20: profile_frame showed realistic materials were most of 12 s a frame (matte halves it; realistic kept); log 34 added PROFILE_SCENE.
+  final_value_or_rule : Tests: sprites, points, point lights, shadows, transparent, no-normal-maps, no-receive-shadow, lambert; 3 timed frames after 2 warm-ups. Browser path hard-coded to /opt/pw-browsers (render-paper-film.mjs has findBrowser).
+  evidence : film-kit/paper-film/tools/profile_frame.mjs lines 1-40
+  computable_from : a page or scene
+  proposed_calculation : Reuse findBrowser from render-paper-film.mjs; add PROFILE_SCENE to the plugin copy.
+  already_automatic : Yes, but the plugin copy lacks PROFILE_SCENE and both copies fail on machines without /opt/pw-browsers.
+  llm_tip : Profile a slow page before filming; the biggest drop shows what to simplify.
+## Plate render time and its checks
+  how_found : Round 1/2 people test: 1536 x 2730 EEVEE at 48 samples about 11 minutes each. Round 3: 25 minutes with all lights shadowing, 6 with three shadowing lights. Plan: read render logs for shadow memory faults (lesson 110).
+  final_value_or_rule : Plates 1536 x 2730, EEVEE, about 6 to 11 min; check each render log for 'Shadow buffer full' and 'Could not allocate shadow atlas'; previews 540 x 960 about 1 minute; checker runs at 1080 x 1920, 16 samples.
+  evidence : round1-result.json built[1].tested 'Plates'; round3-result.json works.summary 'Speed'; round4-result.json set.tested
+  computable_from : light list, plate list
+  proposed_calculation : Estimate plate minutes = 4 + 6 x shadow-casting lights / 3; after every render, grep the log for the two fault strings and refuse the plate if found.
+  already_automatic : Partly: check_shot.py reads render logs (RENDER_FAULTS); plate estimate not.
+  llm_tip : Read the render log of every plate for shadow memory faults before judging its light.
+## Disk and repository size limits
+  how_found : Feasibility critic F2 and F15: film with grain is 3.5 MB a second even on held frames; notice corner's blend and export 83 and 62 MB.
+  final_value_or_rule : One full chapter copy 1.4 to 1.6 GB; peak about 6.5 to 7.5 GB; delete pieces after the silent film is checked; split exports (lane 15.6, factories 8.5, town 6.7, props 38.9 MB); keep pictures outside .blend; .blend1 backups off; every repository file under 90 MB (GitHub limit 100 MB).
+  evidence : PLAN lines 1225-1251, 1408, 1421; round3-result.json works.summary 'Film files'
+  computable_from : film length, set file sizes
+  proposed_calculation : film_GB = seconds x 3.5 / 1000 x 2 (pieces plus joined); check free space before each export and stretch; refuse a save over 90 MB.
+  already_automatic : No.
+  llm_tip : Check free disk before every export and filming stretch; a chapter needs about four times its final file size.
+## Disk budget and repository limits
+  how_found : Log 34 plan F2/F15: kit's grain makes about 3.5 MB/s even on held frames; notice corner exports 62-83 MB per view; GitHub refuses > 100 MB; old masters 808 MB.
+  final_value_or_rule : One full-quality chapter copy about 1.4-1.6 GB; peak about 6.5-7.5 GB; delete pieces after the silent film is checked; split exports (factories, lane, town, props); pictures outside .blend; .blend1 backups off and *.blend1 ignored; check file sizes before saving.
+  evidence : 34 Plan 'Disk' and 'The repository'; works export sizes (works-set-props.glb 38.9 MB, works-set-lane.glb 15.7 MB)
+  computable_from : chapter length, number of copies, export sizes
+  proposed_calculation : disk_needed = seconds x 3.5 MB x copies + exports + stills; check free space before every export and stretch; fail any repo add of a file > 95 MB.
+  already_automatic : No.
+  llm_tip : Check free disk before filming and before exporting; one chapter copy is about 1.5 GB.
+## File size limits: repository and kit parts
+  how_found : Log 14: the kit went in three zips under 30 MB (20.8, 17.5 and 24.8 MB). Log 21: masters of about 800 MB are over GitHub's 100 MB limit. Log 25: uploaded in four batches; the repository grew to 1.6 GB, more than GitHub's suggested 1 GB.
+  final_value_or_rule : No file over 100 MB in git; parts of 28 MB or less for sending in chat; no video or audio in the repository (the user's rule).
+  evidence : story L493-494 (log 14), L707-709 (log 21), L812-813, L818-819 (log 25)
+  computable_from : the list of file sizes
+  proposed_calculation : Pack files into parts of at most 28 MB (first-fit, largest first). A pre-commit check that refuses files over 100 MB and video or audio files.
+  already_automatic : No.
+  llm_tip : Check sizes before committing or zipping, not after a refusal.
+## Public repository saving
+  how_found : Lesson 72: the repository is public, so the soundtrack stayed out and new files were searched for keys; when the safety check blocks, take out what it likely objects to and ask. Decisions 27 and 30: GitHub refuses files over 100 MB; batches under 400 MB; no audio or video; no other people's work.
+  final_value_or_rule : Check visibility; scan for secrets; under 100 MB per file; batches under 400 MB; no audio or video.
+  evidence : Lessons.md:287-290; Decisions.md:434-451, 485-491; Workflows.md:265-267
+  computable_from : git status + file list
+  proposed_calculation : pre_push: read visibility (gh repo view); refuse audio and video extensions; regex-scan text files for keys and tokens; split into batches under 400 MB; list files over 100 MB.
+  already_automatic : No.
+  llm_tip : Check what you push and ask when the safety check blocks.
+## Jump finder settings and memory
+  how_found : Logs 27-34: popping pieces and peel dimming only showed in motion (Lesson 86); planned cuts were measured (46.5 vs 0.49); the first peel frame 5.8 vs 0.4 led to the shading ramp; the plan found the tool would need about 19 GB for a whole chapter (F12).
+  final_value_or_rule : Frames compared at 270x480 grey; JUMP = 4 x median change of the 5 frames either side, floor 0.05 and change > 1.0; planned cuts given in seconds; run per piece or page, not the whole chapter.
+  evidence : film-kit/paper-film/tools/find_jumps.py (identical in plugin kit); scratchpad/redesign/round3-pages/tools/check_jumps.sh; 34 Plan F12
+  computable_from : the filmed pieces, planned cut times (stillShot names, still-key steps, page joins)
+  proposed_calculation : Planned cuts listed automatically from the scene (render-paper-film --camera plans plus still-key changes); memory = frames x 270 x 480 x 4 bytes, so pieces <= free_memory/(518 kB x 4) frames; wrapper loops over chunks.
+  already_automatic : find_jumps.py yes (in plugin kit, but no plugin skill mentions it); planned-cut list and chunking manual (scratch check_jumps.sh).
+  llm_tip : Run find_jumps.py on every filmed piece with its planned cuts; any unplanned JUMP is a must-fix.
