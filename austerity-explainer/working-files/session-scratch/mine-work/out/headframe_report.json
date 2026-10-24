@@ -1,0 +1,15 @@
+{
+  "object_count": 5,
+  "triangle_count": 50324,
+  "uses_real_displacement": [],
+  "build_seconds": 0.48,
+  "known_flaws": [
+    "The two hanging ropes drop from the FRONT TANGENT of the wheels, so they land at y = centre_y - 2.335 (about -5.73), not exactly at y = centre_y; the timber landing is centred under them.",
+    "The back ropes end on small steel posts standing on the roof slope at x = +-1.55, y = 6 (rope end at 7.65 m); the roof height there is taken from mc.LAYOUT (6.41 m), so the posts only seat exactly if the engine-house roof follows the plan.",
+    "The top deck is wider than the plan (deck 4.4 x 3.2 m, wheel pits between girders) so the wheels have somewhere to dip; legs still end at the planned 3.0 x 2.5 m top.",
+    "No real displacement on the steel (normal map only); footing stone is a procedural noise material, not a supplied picture.",
+    "The track curve passes x = 0.6 to 1.4 at the headframe front (y -5 to -6.7), so its right rail runs right where the right rope lands; the landing is flat and 0.10 m high so rails can cross it.",
+    "Previews were lit by the neutral test sun, so the dusk look and exact tint of the steel are not judged yet.",
+    "The ladder has no safety cage, ropes do not sag, and the wheel spokes are plain tapered timbers with iron shoes and bands, not carved."
+  ]
+}

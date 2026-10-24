@@ -1,0 +1,61 @@
+Script check before recording: /home/user/Music/austerity-explainer/chapter-2-inflation/33 Narration script - chapter 2 for newcomers.json (16 pages): FIX BEFORE RECORDING
+  sentences: 9.0 words on average, longest 20
+  spoken figures: 22 in 6.1 minutes of speech (3.6 a minute)
+  speed: median page 166 words a minute; chapter 401.7 s
+  page  words  seconds  words a minute
+     1     72     25.9     167
+     2     54     18.1     179
+     3     67     25.9     155
+     4     47     16.3     173
+     5     63     24.9     152
+     6     70     25.2     166
+     7     87     31.5     166
+     8     38     14.0     162
+     9     72     25.5     169
+    10     57     21.1     162
+    11     49     17.9     164
+    12     66     24.8     160
+    13     76     26.2     174
+    14     65     22.5     173
+    15     74     25.1     177
+    16     64     23.1     166
+  pauses after pages: 4: 4.0 s (a guess: hold the picture still), 8: 4.0 s (a guess: hold the picture still), 10: 4.0 s (a guess: hold the picture still)
+  recording: 6,287 letters = about 6,287 credits, about US$1.10 (an estimate by text length; ask the user before recording)
+ERROR key page: no page is marked "key": true (the page carrying the main idea; it gets a card hold and must not be faster than the median page)
+LOOK  main rule: no main_rule named; these sentences are said word for word on more than one page: "when new money is spent and there are spare workers materials and machines it mostly gets more things made" (pages 5, 16); "when nothing is spare it mostly pushes prices up" (pages 5, 16). Name the rule with main_rule.
+LOOK  speed, page 2: 179 words a minute (over 170): fewer words, or shorter sentences
+LOOK  speed, page 4: 173 words a minute (over 170): fewer words, or shorter sentences
+LOOK  speed, page 13: 174 words a minute (over 170): fewer words, or shorter sentences
+LOOK  speed, page 14: 173 words a minute (over 170): fewer words, or shorter sentences
+LOOK  speed, page 15: 177 words a minute (over 170): fewer words, or shorter sentences
+LOOK  stakes: the first 30 s say: "p. Is that always true? It matters... because when prices go up too fast, the usual cure makes many loans cost more. And that can put people out of work. Who can create new money? Here in New Zealand,"; words about what is at stake: cost, costs, cure, loan, loans, money, out of work, price, prices, work (a person judges whether the stakes are said this early)
+LOOK  unfamiliar words: 7 words a newcomer may not know (no common-words list given: words of 9 letters or more are listed): inflation, economists, submarines, Landlords, America's, unfortunate, economist. Each needs an explanation within two sentences, or cut it.
+LOOK  names: names and places (is each introduced? will the voice say it right?): New, Zealand, Reserve, Bank, First, World, War, Glasgow, November, Britain's, Parliament, Covid, Mattei, June
+LOOK  one word, one meaning: repeated words, to read with their sentences (each should mean one thing): price x19, money x17, worker x13, factory x13, machine x9, work x8, material x8, cost x7, cure x7, bank x7, spent x7, spare x7, people x6, reserve x6, fewer x6
+LOOK  guess holds, page 9: ends on a question without a guess phrase ("Are there spare workers, materials and machines to make what"): if the viewer should think, end with "Have a guess." or mark "guess": true
+INFO  who says it: lines that quote someone (check each against its source): page 14: Reserve Bank; page 14: She; page 14: she
+INFO  guess holds, page 4: ends on a guess: 4.0 s held after it (hold the shot still through it)
+INFO  guess holds, page 8: ends on a guess: 4.0 s held after it (hold the shot still through it)
+INFO  guess holds, page 10: ends on a guess: 4.0 s held after it (hold the shot still through it)
+Estimated timeline written to /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-script-2026-10-16-104922/estimated-timeline.json
+
+Settings used (film-settings.json):
+  script_gate.allowed_capitals = ["NZ", "GDP", "UK", "US", "USA", "OK", "TV", "I"] short forms allowed in capitals (judged)
+  script_gate.sentence_words_max = 20 words in one sentence (judged)
+  script_gate.sentence_words_mean_max = 12 words a sentence on average (judged)
+  script_gate.repeated_sentence_words_min = 5 words (judged)
+  script.main_rule_said_times = 2 times, in identical words (judged)
+  timing.default_page_pause_seconds = 1.4 seconds (judged)
+  timing.guess_hold_seconds = 4.0 seconds (judged)
+  timing.rule_hold_seconds = 2.0 seconds (judged)
+  script_gate.guess_phrases = ["have a guess", "take a guess", "make a guess", "guess what", "what do you think", "think about it", "take a moment"] phrases in a page's last two sentences (judged)
+  script_gate.page_words_a_minute_max = 170 words a minute on one page (judged)
+  script_gate.page_speed_over_median_share = 1.1 times the chapter's median page (judged)
+  script_gate.figures_per_minute_max = 6 spoken figures a minute of speech (judged)
+  script_gate.figures_per_minute_look = 5 spoken figures a minute of speech (judged)
+  script.stakes_within_seconds = 30 seconds (judged)
+  script_gate.stake_words = ["job", "jobs", "out of work", "work", "loan", "loans", "rent", "pay", "wage", "wages", "cost", "costs", "price", "prices", "cure", "money", "afford", "poor", "lose", "lost"] words that say what is at stake (invented)
+  script_gate.year_direction_changes_max = 1 changes of direction in the years said (judged)
+  script_gate.long_word_letters = 9 letters (invented)
+  money.elevenlabs_credits_per_letter = 1.0 credits a letter of page text (accent instruction included) (measured)
+  money.elevenlabs_dollars_per_credit = 0.000175 US dollars a credit (judged)

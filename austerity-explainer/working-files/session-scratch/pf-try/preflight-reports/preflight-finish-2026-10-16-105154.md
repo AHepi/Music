@@ -1,0 +1,32 @@
+Preflight finish (after finishing): FAIL. 1 to fix, 0 to look at, 0 known and accepted, 0 input(s) missing; 4 check(s) in 45.1 s.
+Next step BLOCKED: sending or publishing the film. First fix the failures below (or accept them, with who and when), then run this stage again.
+
+Made 2026-10-16 10:51:54 by preflight.py version 0358e5fd; kit /home/user/Music/plugins/explainer-film/kit; every tool's own output is in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-finish-2026-10-16-105154.
+
+## To fix (these block the next step)
+
+- the tool stopped: it stopped with an error: (find_jumps.py)
+
+## Notes
+
+- Planned cuts read from the newest pages report (preflight-pages-2026-10-16-105008.json).
+
+## Checks run
+
+- PASS  loudness and true peak of the film (sound_gates.py loudness): 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 3.1 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py loudness '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-finish-2026-10-16-105154/01-loudness-and-true-peak-of-the-film-sound-gates-p.json
+- PASS  the film is as long as the timeline (sound_gates.py length): 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 0.1 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py length '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' --expected 270.3333 --step finishing --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-finish-2026-10-16-105154/02-the-film-is-as-long-as-the-timeline-sound-gates-.json
+- PASS  the film's sound against the mix at every page (sound_gates.py alignment): 0 fail, 0 look, 0 known, 0 pass, 0 info; exit 0, 2.3 s; narration-tools/sound_gates.py version deb50241
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/narration-tools/sound_gates.py alignment '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' /home/user/Music/austerity-explainer/chapter-2-inflation/mix/chapter-2-mix.flac /home/user/Music/austerity-explainer/chapter-2-inflation/narration/timeline.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-finish-2026-10-16-105154/03-the-film-s-sound-against-the-mix-at-every-page-s.json
+- FAIL  jumps between frames, outside the planned cuts (find_jumps.py): 1 fail, 0 look, 0 known, 0 pass, 0 info; exit -9, 39.4 s; paper-film/tools/find_jumps.py version 25733920
+  /usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/paper-film/tools/find_jumps.py '/home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4' /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-finish-2026-10-16-105154/jumps-sheet.jpg 4 55.100 67.267 68.767 69.033 69.300 71.200 72.000 74.275 107.167 122.608
+
+## Inputs (sha1 when the run ended)
+
+- 8154fd50aa5fdce97153553f0bacce5e5a2ed02f  /home/user/Music/austerity-explainer/chapter-2-inflation/deliver/20 Chapter 2 - what really causes inflation.mp4
+- 4058fc094252cf32dd53a7049c37b7ac19806921  /home/user/Music/austerity-explainer/chapter-2-inflation/mix/chapter-2-mix.flac
+- a772cb61857c680d0d8d1f370df9f4fd681da8e4  /home/user/Music/austerity-explainer/chapter-2-inflation/narration/timeline.json
+- e18460279f4596d494060dfe494e110d2a03ba58  /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-pages-2026-10-16-105008/01-timing-and-words-on-screen-plan-page-timing-py-c.json
+
+The same report as JSON: /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-finish-2026-10-16-105154.json

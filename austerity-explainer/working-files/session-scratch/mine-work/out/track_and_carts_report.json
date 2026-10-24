@@ -1,0 +1,34 @@
+{
+ "object_count": 9,
+ "triangle_count": 114232,
+ "uses_real_displacement": [
+  "Track stone bed",
+  "Track sleepers"
+ ],
+ "build_seconds": 1.9,
+ "objects": [
+  "Track stone bed",
+  "Track sleepers",
+  "Track rails",
+  "Track chairs and bolts",
+  "Track loose stones",
+  "Cart steel",
+  "Cart iron parts",
+  "Coal in carts",
+  "Coal heaps and spill"
+ ],
+ "largest_difference_between_rail_foot_height_and_ground_under_centre_line_m": 0.006,
+ "largest_height_step_between_neighbouring_rail_samples_m": 0.0051,
+ "known_flaws": [
+  "In the standard camera frame (-9.5,-21,1.7 -> 1,2,5.5, lens 28, 9:16) only the cart on the track (right third) and the tipped cart (lower left) can be seen; the second cart (about 4.3 m further along the curve), both coal heaps (x 6..14) and the track beyond about y=-9 lie outside the right edge of that frame. They sit where the layout puts them; a wider or shifted camera is needed to show them.",
+  "Beside the headframe front-right leg (track distance about 7.3 to 8.9 m from the doorway, y about -6.3 to -7.4) the stone bed is pulled in and the sleeper ends are shortened, because the track centre line passes only about 1.7 m from that footing centre. I assumed the footing is at most 0.4 m half-size (kept 0.65 m clear). A bigger footing would touch the track.",
+  "Rails inside the doorway (y 1 to 4) sit at mc.ground_height (0 m). If the engine house builds a raised floor or a sill there, the rails and stone bed will need to be lifted or trimmed to match.",
+  "The tipped cart rests on its wheels and rim as a plausible pose, not a physics result; from the front (the standard camera side) its wheels are hidden behind the body, so it reads as an overturned open box with rim, rivets and coupling.",
+  "Coal and loose stones are flat-shaded convex lumps in plain materials; up close their faces look a little CG-sharp and the bright highlights can glint. There is no coal dust or rust staining on the ground around the heaps.",
+  "Rails are 1.45 times a real mine rail and the carts are large (1.9 m long, about 1.6 m tall with coal) so everything reads from far away; this is a stylised choice and the gauge follows the layout (1.1 m).",
+  "Metal walls of the carts show an enlarged (about 2.4 times) plain rusty patch of the metal picture on purpose, so the rivet rows of the picture do not double up with the modelled rivets; rivets are modelled six-sided and small.",
+  "Wheels are 28-sided; spokes, hubs and back discs use plain dark cast-iron colour, only tread and flange use the rusty metal picture.",
+  "Real displacement (stone bed, sleepers) makes renders slower: a 900 px preview at 36 samples took about 1 to 2 minutes with -t 2. Sleeper boxes have separate corners, so no cracks showed at the edges in the previews but extreme close-ups were not checked.",
+  "Previews were taken on a stand-in ground with neutral light, not in the final dusk lighting or with the other parts. The track ends abruptly at t=1 (no buffer stop or tapering)."
+ ]
+}

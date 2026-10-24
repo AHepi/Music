@@ -1,0 +1,116 @@
+{
+ "about": "What this file is: the shot check for the notice corner (log 31): which objects make up each prop, their parts in the story, the street's direction, where titles go, and the picture the user liked as the reference. Used by paper-film/blender/shot_facts.py and paper-film/tools/check_shot.py.",
+ "size": [
+  1080,
+  1920
+ ],
+ "groups": {
+  "notice": [
+   "notice",
+   "notice.0*"
+  ],
+  "board": [
+   "notice-board*",
+   "tacks*"
+  ],
+  "drum": [
+   "brazier-drum*",
+   "brazier_coal_*"
+  ],
+  "chair": [
+   "kitchen-chair*"
+  ],
+  "lantern": [
+   "hurricane-lantern*",
+   "lantern_flame*"
+  ],
+  "pail": [
+   "wooden-pail*"
+  ],
+  "lamp post": [
+   "gas-lamp-post*"
+  ],
+  "handcart": [
+   "handcart*"
+  ],
+  "sacks": [
+   "coal-sacks*"
+  ],
+  "barrel": [
+   "wooden-barrel*"
+  ],
+  "dustbins": [
+   "dustbins*"
+  ],
+  "winding wheels": [
+   "winding_wheel_*"
+  ],
+  "chimney": [
+   "colliery_chimney*"
+  ],
+  "gates": [
+   "iron-gates-pair*"
+  ]
+ },
+ "subject": "notice",
+ "support": "board",
+ "story": [
+  "board",
+  "drum",
+  "chair",
+  "lantern",
+  "pail"
+ ],
+ "pairs_also": [
+  "lamp post",
+  "winding wheels"
+ ],
+ "work": [
+  "handcart",
+  "sacks",
+  "barrel",
+  "dustbins"
+ ],
+ "on_ground": [
+  "board",
+  "drum",
+  "chair",
+  "pail",
+  "lamp post",
+  "handcart",
+  "barrel",
+  "dustbins"
+ ],
+ "must_read": [
+  "notice"
+ ],
+ "lines": {
+  "street": [
+   0,
+   1,
+   0.069927
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "street",
+ "title_zone": [
+  0.05,
+  0.02,
+  0.62,
+  0.12
+ ],
+ "stands_on": {
+  "lantern": "chair"
+ },
+ "eye_height": [
+  1.5,
+  1.9
+ ],
+ "box_excludes": [
+  "board"
+ ]
+}

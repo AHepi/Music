@@ -1,0 +1,38 @@
+{
+ "parts": {
+  "ground_and_yard": {
+   "seconds": 5.6,
+   "objects": 4,
+   "notes": "Terrain object \"Ground terrain\" (mud, real displacement at 2 px; ground_mesh_object() returns it), \"Ground puddles\" (8 water sheets), \"Yard coal and stones\" (coal and stones: 2084 scattered + 3 heaps), \"Yard props (timber, fence, barrels, cart, lamp)\" (timber rack at x -9..-7 y -6..-3, fence x 10..20 y -4..6, 2 barrels, handcart, sleeper pile, lamp post). Lantern glass is at (7.4, -1.0, 4.15)."
+  },
+  "engine_house": {
+   "seconds": 0.3,
+   "objects": 9,
+   "notes": "engine house; 6617 triangles before displacement; displaced objects: ['Engine house brick walls (displaced)', 'Engine house slate roof (displaced)']"
+  },
+  "headframe": {
+   "seconds": 0.4,
+   "objects": 5,
+   "notes": "Headframe: four legs on footings at (+-3.1, -3.4 +-2.7), horizontal frames at 6.5 / 10.6 / 13.8 m, top deck 14.5 m, wheel centres at x = -1.55 and 1.55, 16.6 m high, radius 2.4. Back ropes run to small steel posts on the engine-house roof at y = 6 (x = +-1.55, top 7.65 m). The front ropes hang vertically from the front of the wheels at y = -5.73 onto a flat timber landing (top 0.10 m) across the track route. Low V braces leave the middle 3 m clear to 3.7 m high."
+  },
+  "chimney_and_smoke": {
+   "seconds": 1.3,
+   "objects": 5,
+   "notes": "Chimney centred at (-6.0, 7.0), 17.0 m to the top of the coping. Brick shaft 1.95 m wide at the stone base tapering to 1.25 m under the cap, real displacement (adaptive subdivision, 2 px). Stone plinth 0-1.15 m of separate blocks with a flue recess on the front (-Y) face; pale stone band course at 13.55-13.9 m; iron bands at [3.6, 6.8, 10.0, 12.2, 15.1] m; corbelled brick cap and stone coping with an open flue mouth. A low brick flue stub joins the chimney to the engine-house left wall (x = -3.9), 1.5 m high. SMOKE: 588 puffs in one object called Chimney smoke, rising from the flue mouth at z = 17.2, leaning right (+X) and rising. It passes x = 0 at y = 4.5, z = 26.2 (so about 8 m BEHIND the headframe wheels and 7 m above their top) and ends near x = 24, y = -5, z = 36. Smallest gap between any puff and a headframe wheel disc: 8.0 m. In a camera that looks along +Y the smoke can still cross behind the wheels on screen; it never touches them in space."
+  },
+  "track_and_carts": {
+   "seconds": 2.1,
+   "objects": 9,
+   "notes": "Track, three carts and two coal heaps built in 2.1 s; heaps at (0.5, -16.2) and (-3.7, -23.4); cart 1 centre s=8.03 m, cart 2 s=12.33 m, tipped cart at (-5.4, -8.2). 115124 triangles."
+  },
+  "village_and_sky": {
+   "seconds": 0.6,
+   "objects": 11,
+   "notes": "World: painted dusk sky picture (village_and_sky_dusk_sky_4096x2048.png) on world \"Dusk sky\"; tune node \"Sky strength\" (default 4.00), node \"Sky turn\" (rotation Z; if you turn it, turn the sun too) and node \"Glow boost\". Lights: \"Village low sun\" (SUN, orange, 6 degrees above the horizon, from compass 50 = right-back, strength 8.0) and \"Village cool fill\" (SUN, blue, from front-left, strength 3.0). Recommended exposure: +0.0 stops with AgX. Hills: objects \"Near hills\", \"Middle hills\", \"Far hills\" (shadow-casting turned off); the camera needs clip end of at least 1000 m."
+  }
+ },
+ "total_objects": 46,
+ "total_triangles_before_displacement": 712905,
+ "build_seconds": 10.6,
+ "render_seconds": 164.5
+}

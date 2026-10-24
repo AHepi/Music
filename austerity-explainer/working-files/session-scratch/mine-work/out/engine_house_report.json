@@ -1,0 +1,20 @@
+{
+  "object_count": 9,
+  "triangle_count": 6617,
+  "uses_real_displacement": [
+    "Engine house brick walls (displaced)",
+    "Engine house slate roof (displaced)"
+  ],
+  "build_seconds": 0.3,
+  "known_flaws": [
+    "The headframe footings (LAYOUT says legs at x=+-3.1, y=-0.7) will probably overlap the crate (x -4.1 to -3.2, y -0.8 to -0.2) and the two plank piles (x -3.1 to -2.6 and 2.6 to 3.7, feet out to y -0.7); move them with the numbers in add_crate / add_leaning_planks if they clash.",
+    "No floor is built inside the doorway or the building: the yard ground (mud) must run under the whole footprint at about z = 0.",
+    "From the standard camera the left wall is seen at only about 12 degrees, so the two glowing windows show as narrow slivers and the shed hides the low part of that wall; they read well from the side and 3/4 views.",
+    "The window panes and lamp bulb are one-sided light-giving surfaces facing outward: the inside of the building is dark and is not lit by them. Their strength (materials Window glow A/B/C and Lamp bulb) was tuned by eye for a bright preview and a dim dusk preview, so tune it in the final light.",
+    "Stone (plinth, doorway jambs and lintel, window sills, chimney cap) is a procedural grey stone made inside the module, not one of the uploaded pictures.",
+    "Real displacement is only on the front gable wall, the long left wall and the two slate roof slopes; the right wall, back wall and small parts use the normal map only. The brick picture repeats every 1.5 m so its dark soot blotches show a repeat on the long plain walls.",
+    "The interior is only a dark shell with a few timber frames and a plank partition at y=6.4 (no machinery); the design picture shows lighter timbers lit from inside.",
+    "The chimney stack shaft passes about 0.3 m below the roof underside near the ridge (visible only from inside the roof space).",
+    "Gutters and downpipes are low-polygon (12 and 10 sides): fine at the camera distances of the film, faceted if filmed from under 1 m."
+  ]
+}

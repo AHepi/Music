@@ -1,0 +1,1488 @@
+{
+ "stage": "shots",
+ "stage_means": "before building or drawing a place's views",
+ "verdict": "fail",
+ "counts": {
+  "fail": 11,
+  "warn": 34,
+  "known": 0,
+  "info": 48,
+  "pass": 66
+ },
+ "guarded_step": "building and rendering the place's views and plates",
+ "step_kind": "long",
+ "blocked": true,
+ "cost_dollars": null,
+ "costs": [],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 1.0,
+ "changed_inputs": [],
+ "started": "2026-10-16 10:49:45",
+ "first_lines": [
+  "Preflight shots (before building or drawing a place's views): FAIL. 11 to fix, 34 to look at, 0 known and accepted, 0 input(s) missing; 12 check(s) in 1.0 s.",
+  "Long step BLOCKED: building and rendering the place's views and plates. First fix the failures below (or accept them, with who and when), then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "dab9a964",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945",
+ "inputs": {
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json": "dd2e91ebbe86150e0de41b0caf22224064f1e05a",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-w1-shot-check.json": "08489d7ab72d9c38e19ab4209e4ce6afeadf2bcf",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-w2-shot-check.json": "04cd28abb1e76e94b8f59a5534c3f32fd77898fd",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-w3-shot-check.json": "afb5aae361f3f07b99a5c512adf21d1fb77cb0c6",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-w4-shot-check.json": "7dd0cddd242d4cf7f9fa7f818cc251a6fb4d8880"
+ },
+ "missing": [
+  {
+   "input": "shot_list",
+   "option": "--shot-list",
+   "what": "a shot list for plan_shot.py (subject, story things, kind of shot; format in calculators/plan_shot.py's note)",
+   "make": "write it by hand; without one each view in the place facts is judged as built",
+   "needed_by": "plan_shot.py",
+   "required": false,
+   "why": "without a shot list each view is judged as built from its place facts",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "place facts are complete (place_facts.py check)",
+   "tool": "calculators/place_facts.py",
+   "version": "39a4b4fe",
+   "where": "works",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/place_facts.py check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/01-place-facts-are-complete-place-facts-py-check.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/01-place-facts-are-complete-place-facts-py-check.txt",
+   "seconds": 0.09,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  },
+  {
+   "title": "camera, reach, slide and people for w3 (plan_shot.py)",
+   "tool": "calculators/plan_shot.py",
+   "version": "6a7fabb5",
+   "where": "works w3",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w3 --strict --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/02-camera-reach-slide-and-people-for-w3-plan-shot-p.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/02-camera-reach-slide-and-people-for-w3-plan-shot-p.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/02-camera-reach-slide-and-people-for-w3-plan-shot-p.txt",
+   "seconds": 0.08,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "rule2_eye_height",
+     "where": "w3",
+     "text": "The eye stands 5.60 m above the view's floor (height 0.14 m) (allowed 0.8 to 7.0 m for overview).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule2_level",
+     "where": "w3",
+     "text": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "rule1_meeting_point_gap",
+     "where": "w3",
+     "text": "Not judged: two gates and the wall between has no size (give it under the shot's \"things\").",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "rule7_story_reaches_down",
+     "where": "w3",
+     "text": "The lowest story thing is no-2-man-6, reaching 0.673 down (limit 0.7).",
+     "fix": "Bring the camera 3.92 m nearer along its view (or no-2-man-6 that much nearer the camera): it may stand at most 24.71 m from no-2-man-6's front (its feet are now 28.63 m away); or, for an overview, raise the eye to 6.65 m (never tilt).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "overview_eye_for_story",
+     "where": "w3",
+     "text": "For the story itself (no-2-man-6) to reach 0.7 down, the eye would have to stand 6.65 m high (it stands 5.74 m).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_story_right_edge",
+     "where": "w3",
+     "text": "Story things in the button strip (0.45 to 0.95 down) end at: two gates and the wall between 0.50, brazier 0.38, man-1 0.30, man-2 0.37, man-3 0.34, man-4 0.24, man-5 0.27, man-6 0.31, man-7 0.35, no-2-man-1 0.64, no-2-man-2 0.68, no-2-man-3 0.72, no-2-man-4 0.76, no-2-man-5 0.63, no-2-man-6 0.67, no-2-man-7 0.71, no-2-man-8 0.79 across (limit 0.95).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_box",
+     "where": "w3",
+     "text": "The story things fill a box 0.58 wide and 0.07 tall (limit 0.8 x 0.5 for overview + crowd); edges: man-4 (left), no-2-man-8 (right), two gates and the wall between (top), no-2-man-6 (bottom).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_together_metres",
+     "where": "w3",
+     "text": "The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 2.0 m between footprints).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "main_rule_spot_box",
+     "where": "w3",
+     "text": "The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of two gates and the wall between 0.50, 0.61; middle of the story things 0.50, 0.64) span 0.00 x 0.14 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule8_bottom_left_share",
+     "where": "w3",
+     "text": "In the bottom-left quarter, where the eye enters, the boxes cover: man-1 0.2%, man-2 0.2%, man-3 0.2%, man-4 0.2%, man-5 0.2%, man-6 0.2%, man-7 0.2%, no-1-drum-petrol 0.1%, no-1-drum-diesel 0.1%, no-1-worker-1 0.1%, no-1-worker-2 0.1% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "people_face_shows",
+     "where": "w3",
+     "text": "no-1-worker-2's face or profile shows (it faces 84 degrees from the camera); its head is 9 px tall at 41.15 m (composed spot); the house limit 24 px is invented and untested.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "people_face_shows",
+     "where": "w3",
+     "text": "no-2-worker-2's face or profile shows (it faces 93 degrees from the camera); its head is 9 px tall at 43.00 m (composed spot); the house limit 24 px is invented and untested.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "people_backs_distance",
+     "where": "w3",
+     "text": "Figures with their backs to the camera, at the nearest camera place along the slide: man-6 28.57 m, no-2-man-6 28.63 m, man-5 28.67 m, no-2-man-5 28.73 m, no-2-man-7 28.75 m, man-7 28.77 m, no-2-man-8 28.90 m, man-2 29.24 m, man-4 29.40 m, no-2-man-3 29.43 m, no-2-man-1 29.45 m, man-3 29.50 m, no-2-man-4 29.53 m, no-2-man-2 29.57 m, man-1 29.81 m, no-1-worker-1 39.13 m, no-2-worker-1 39.44 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "this shot (w3)",
+     "text": "Crowd \"men at No. 1\" from this shot (w3): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "view w1 (composed)",
+     "text": "Crowd \"men at No. 1\" from view w1 (composed): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_rows",
+     "where": "w3",
+     "text": "Crowd \"men at No. 1\": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_shoulder_gaps",
+     "where": "w3",
+     "text": "Crowd \"men at No. 1\": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).",
+     "fix": "Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_head_spacing",
+     "where": "w3",
+     "text": "Crowd \"men at No. 1\" from this shot: the closest two heads, man-1 and man-6, are 1.12 head widths apart on screen (at least 1.0, so each head can be counted).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_visible_share",
+     "where": "w3",
+     "text": "Crowd \"men at No. 1\": the most hidden figure, man-1, shows about 19% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this).",
+     "fix": "Move man-1 sideways into a gap, or check on the render.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "this shot (w3)",
+     "text": "Crowd \"men at No. 2\" from this shot (w3): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "view w2 (composed)",
+     "text": "Crowd \"men at No. 2\" from view w2 (composed): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "view w4 (composed)",
+     "text": "Crowd \"men at No. 2\" from view w4 (composed): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_rows",
+     "where": "w3",
+     "text": "Crowd \"men at No. 2\": 2 rows deep from this view (front to back: no-2-man-6, no-2-man-5, no-2-man-7, no-2-man-8; no-2-man-3, no-2-man-1, no-2-man-4, no-2-man-2).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_shoulder_gaps",
+     "where": "w3",
+     "text": "Crowd \"men at No. 2\": gaps between neighbours' shoulders in a row (0.47 m shoulders): no-2-man-5-no-2-man-6 0.13 m, no-2-man-6-no-2-man-7 0.33 m, no-2-man-7-no-2-man-8 1.03 m, no-2-man-1-no-2-man-2 0.33 m, no-2-man-2-no-2-man-3 0.33 m, no-2-man-3-no-2-man-4 0.33 m (house range 0.3 to 0.5 m).",
+     "fix": "Check by eye: no-2-man-5-no-2-man-6 0.13 m, no-2-man-7-no-2-man-8 1.03 m (a back-row man standing between two of the front row fills a wide gap).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_head_spacing",
+     "where": "w3",
+     "text": "Crowd \"men at No. 2\" from this shot: the closest two heads, no-2-man-1 and no-2-man-5, are 1.25 head widths apart on screen (at least 1.0, so each head can be counted).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_visible_share",
+     "where": "w3",
+     "text": "Crowd \"men at No. 2\": the most hidden figure, no-2-man-1, shows about 5% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this).",
+     "fix": "Move no-2-man-1 sideways into a gap, or check on the render.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "slide_magnification",
+     "where": "w3",
+     "text": "A still shot: no slide.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "camera, reach, slide and people for w1 (plan_shot.py)",
+   "tool": "calculators/plan_shot.py",
+   "version": "6a7fabb5",
+   "where": "works w1",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w1 --strict --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/03-camera-reach-slide-and-people-for-w1-plan-shot-p.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/03-camera-reach-slide-and-people-for-w1-plan-shot-p.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/03-camera-reach-slide-and-people-for-w1-plan-shot-p.txt",
+   "seconds": 0.07,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "rule2_eye_height",
+     "where": "w1",
+     "text": "The eye stands 1.70 m above the view's floor (height 0.14 m) (allowed 1.5 to 1.9 m for still_life).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule2_level",
+     "where": "w1",
+     "text": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "rule1_meeting_point_gap",
+     "where": "w1",
+     "text": "Not judged: no-1 gate has no size (give it under the shot's \"things\").",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule7_story_reaches_down",
+     "where": "w1",
+     "text": "The lowest story thing is man-2, reaching 0.697 down (limit 0.7); a figure's shoes reach up to 0.012 lower than its feet's point, so it may just make it: confirm with the shot checker.",
+     "fix": "Bring the camera 0.10 m nearer along its view (or man-2 that much nearer the camera): it may stand at most 7.99 m from man-2's front (its feet are now 8.09 m away).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_story_right_edge",
+     "where": "w1",
+     "text": "Story things in the button strip (0.45 to 0.95 down) end at: no-1 gate 0.53, brazier 0.74, man-1 0.47, man-2 0.74, man-3 0.60, man-4 0.27, man-5 0.35, man-6 0.52, man-7 0.68 across (limit 0.95).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_box",
+     "where": "w1",
+     "text": "The story things fill a box 0.61 wide and 0.22 tall (limit 0.8 x 0.5 for crowd); edges: man-4 (left), brazier (right), man-6 (top), man-2 (bottom).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_together_metres",
+     "where": "w1",
+     "text": "The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 0.3 m between footprints).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "main_rule_spot_box",
+     "where": "w1",
+     "text": "The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of no-1 gate 0.53, 0.53; middle of the story things 0.45, 0.60) span 0.09 x 0.10 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_bottom_left_share",
+     "where": "w1",
+     "text": "In the bottom-left quarter, where the eye enters, the boxes cover: man-1 2.1% (over its 2%), man-3 0.4%, man-4 2.5% (over its 2%), man-5 2.9% (over its 2%), man-6 2.4% (over its 2%), no-1-drum-petrol 1.8% (over its 1%), no-1-drum-diesel 1.9% (over its 1%), no-1-worker-2 0.4% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds).",
+     "fix": "Confirm on the render (the shot checker measures the real outlines); if it holds, move man-1, man-4, man-5, man-6, no-1-drum-petrol, no-1-drum-diesel out of the bottom-left quarter.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "people_face_shows",
+     "where": "w1",
+     "text": "no-1-worker-2's face or profile shows (it faces 88 degrees from the camera); its head is 19 px tall at 20.00 m (composed spot (end)); the house limit 24 px is invented and untested.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "people_backs_distance",
+     "where": "w1",
+     "text": "Figures with their backs to the camera, at the nearest camera place along the slide: man-6 7.42 m, man-5 7.52 m, man-7 7.62 m, man-2 8.09 m, man-4 8.25 m, man-3 8.35 m, man-1 8.66 m, no-1-worker-1 17.98 m, no-2-worker-1 18.29 m, no-2-worker-2 21.85 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot (end)).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "this shot (w1)",
+     "text": "Crowd \"men at No. 1\" from this shot (w1): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "view w3 (plate)",
+     "text": "Crowd \"men at No. 1\" from view w3 (plate): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_rows",
+     "where": "w1",
+     "text": "Crowd \"men at No. 1\": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_shoulder_gaps",
+     "where": "w1",
+     "text": "Crowd \"men at No. 1\": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).",
+     "fix": "Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_head_spacing",
+     "where": "w1",
+     "text": "Crowd \"men at No. 1\" from this shot: the closest two heads, man-1 and man-6, are 1.60 head widths apart on screen (at least 1.0, so each head can be counted).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_visible_share",
+     "where": "w1",
+     "text": "Crowd \"men at No. 1\": the most hidden figure, man-3, shows about 22% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this).",
+     "fix": "Move man-3 sideways into a gap, or check on the render.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "slide_magnification",
+     "where": "w1",
+     "text": "The 1.20 m slide brings the nearest painted thing, no-1-drum-diesel (its nearest corner 6.50 m away at the end), 1.185 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 1.86 m.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "slide_magnification_ground",
+     "where": "w1",
+     "text": "The painted ground at the frame's bottom edge (2.92 m away) comes 1.411 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_lens",
+     "where": "w1",
+     "text": "Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_rows",
+     "where": "w1",
+     "text": "For the slide's worst magnification the plate would need 2462 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "camera, reach, slide and people for w2 (plan_shot.py)",
+   "tool": "calculators/plan_shot.py",
+   "version": "6a7fabb5",
+   "where": "works w2",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w2 --strict --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/04-camera-reach-slide-and-people-for-w2-plan-shot-p.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/04-camera-reach-slide-and-people-for-w2-plan-shot-p.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/04-camera-reach-slide-and-people-for-w2-plan-shot-p.txt",
+   "seconds": 0.08,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "rule2_eye_height",
+     "where": "w2",
+     "text": "The eye stands 1.70 m above the view's floor (height 0.14 m) (allowed 1.5 to 1.9 m for still_life).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule2_level",
+     "where": "w2",
+     "text": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "rule1_meeting_point_gap",
+     "where": "w2",
+     "text": "Not judged: no-2 gateway has no size (give it under the shot's \"things\").",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule7_story_reaches_down",
+     "where": "w2",
+     "text": "The lowest story thing is no-2-man-6, reaching 0.712 down (limit 0.7).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_story_right_edge",
+     "where": "w2",
+     "text": "Story things in the button strip (0.45 to 0.95 down) end at: no-2 gateway 0.47, no-2-man-1 0.32, no-2-man-2 0.46, no-2-man-3 0.61, no-2-man-4 0.76, no-2-man-5 0.26, no-2-man-6 0.38, no-2-man-7 0.54, no-2-man-8 0.84 across (limit 0.95).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_box",
+     "where": "w2",
+     "text": "The story things fill a box 0.73 wide and 0.23 tall (limit 0.8 x 0.5 for crowd); edges: no-2-man-5 (left), no-2-man-8 (right), no-2-man-2 (top), no-2-man-6 (bottom).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_together_metres",
+     "where": "w2",
+     "text": "The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 0.3 m between footprints).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "main_rule_spot_box",
+     "where": "w2",
+     "text": "The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of no-2 gateway 0.47, 0.53; middle of the story things 0.44, 0.60) span 0.06 x 0.10 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_bottom_left_share",
+     "where": "w2",
+     "text": "In the bottom-left quarter, where the eye enters, the boxes cover: no-2-man-1 2.5% (over its 2%), no-2-man-2 2.2% (over its 2%), no-2-man-3 0.2%, no-2-man-5 3.1% (over its 2%), no-2-man-6 3.1% (over its 2%), no-2-man-7 1.9%, no-2-worker-1 0.5%, no-2-worker-2 0.3% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds).",
+     "fix": "Confirm on the render (the shot checker measures the real outlines); if it holds, move no-2-man-1, no-2-man-2, no-2-man-5, no-2-man-6 out of the bottom-left quarter.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "people_face_shows",
+     "where": "w2",
+     "text": "no-2-worker-2's face or profile shows (it faces 86 degrees from the camera); its head is 17 px tall at 21.85 m (composed spot (end)); the house limit 24 px is invented and untested.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "people_backs_distance",
+     "where": "w2",
+     "text": "Figures with their backs to the camera, at the nearest camera place along the slide: no-2-man-6 7.48 m, no-2-man-5 7.58 m, no-2-man-7 7.60 m, no-2-man-8 7.75 m, no-2-man-3 8.28 m, no-2-man-1 8.30 m, no-2-man-4 8.38 m, no-2-man-2 8.42 m, no-2-worker-1 18.29 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest no-2-man-6 at composed spot (end)).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "this shot (w2)",
+     "text": "Crowd \"men at No. 2\" from this shot (w2): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "view w3 (plate)",
+     "text": "Crowd \"men at No. 2\" from view w3 (plate): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "view w4 (composed)",
+     "text": "Crowd \"men at No. 2\" from view w4 (composed): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_rows",
+     "where": "w2",
+     "text": "Crowd \"men at No. 2\": 2 rows deep from this view (front to back: no-2-man-6, no-2-man-5, no-2-man-7, no-2-man-8; no-2-man-3, no-2-man-1, no-2-man-4, no-2-man-2).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_shoulder_gaps",
+     "where": "w2",
+     "text": "Crowd \"men at No. 2\": gaps between neighbours' shoulders in a row (0.47 m shoulders): no-2-man-5-no-2-man-6 0.13 m, no-2-man-6-no-2-man-7 0.33 m, no-2-man-7-no-2-man-8 1.03 m, no-2-man-1-no-2-man-2 0.33 m, no-2-man-2-no-2-man-3 0.33 m, no-2-man-3-no-2-man-4 0.33 m (house range 0.3 to 0.5 m).",
+     "fix": "Check by eye: no-2-man-5-no-2-man-6 0.13 m, no-2-man-7-no-2-man-8 1.03 m (a back-row man standing between two of the front row fills a wide gap).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_head_spacing",
+     "where": "w2",
+     "text": "Crowd \"men at No. 2\" from this shot: the closest two heads, no-2-man-1 and no-2-man-6, are 1.91 head widths apart on screen (at least 1.0, so each head can be counted).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_visible_share",
+     "where": "w2",
+     "text": "Crowd \"men at No. 2\": the most hidden figure, no-2-man-1, shows about 0% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this).",
+     "fix": "Move no-2-man-1 sideways into a gap, or check on the render.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "slide_magnification",
+     "where": "w2",
+     "text": "The 1.20 m slide brings the nearest painted thing, no-2-drum-diesel (its nearest corner 6.50 m away at the end), 1.185 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 1.86 m.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "slide_magnification_ground",
+     "where": "w2",
+     "text": "The painted ground at the frame's bottom edge (2.92 m away) comes 1.411 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_lens",
+     "where": "w2",
+     "text": "Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_rows",
+     "where": "w2",
+     "text": "For the slide's worst magnification the plate would need 2462 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "camera, reach, slide and people for w4 (plan_shot.py)",
+   "tool": "calculators/plan_shot.py",
+   "version": "6a7fabb5",
+   "where": "works w4",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_shot.py --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w4 --strict --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/05-camera-reach-slide-and-people-for-w4-plan-shot-p.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/05-camera-reach-slide-and-people-for-w4-plan-shot-p.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/05-camera-reach-slide-and-people-for-w4-plan-shot-p.txt",
+   "seconds": 0.08,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "pass",
+     "check": "rule2_eye_height",
+     "where": "w4",
+     "text": "The eye stands 1.70 m above the view's floor (height 0.02 m) (allowed 1.5 to 1.9 m for still_life).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule2_level",
+     "where": "w4",
+     "text": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "rule1_meeting_point_gap",
+     "where": "w4",
+     "text": "The street's lines meet behind the camera: it faces down the street.",
+     "fix": "Turn the camera to face up the street.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule7_story_reaches_down",
+     "where": "w4",
+     "text": "The lowest story thing is no-2-man-1, reaching 0.715 down (limit 0.7).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule12_story_right_edge",
+     "where": "w4",
+     "text": "Story things in the button strip (0.45 to 0.95 down) end at: no-2 gate 0.51, no-2-man-1 0.50, no-2-man-2 0.32, no-2-man-3 0.16, no-2-man-5 0.54, no-2-man-6 0.42, no-2-man-7 0.26 across (limit 0.95).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_box",
+     "where": "w4",
+     "text": "The story things fill a box 0.54 wide and 0.25 tall (limit 0.8 x 0.5 for crowd); edges: no-2-man-3 (left), no-2-man-5 (right), no-2-man-2 (top), no-2-man-1 (bottom).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "rule3_story_together_metres",
+     "where": "w4",
+     "text": "The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 0.3 m between footprints).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "main_rule_spot_box",
+     "where": "w4",
+     "text": "The spots that can be worked out before rendering (middle of no-2 gate 0.51, 0.53; middle of the story things 0.29, 0.60) span 0.22 x 0.07 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "rule8_bottom_left_share",
+     "where": "w4",
+     "text": "In the bottom-left quarter, where the eye enters, the boxes cover: no-2-man-1 3.4% (over its 2%), no-2-man-2 3.6% (over its 2%), no-2-man-3 3.2% (over its 2%), no-2-man-5 1.9%, no-2-man-6 2.8% (over its 2%), no-2-man-7 2.9% (over its 2%), no-2-drum-diesel 1.4% (over its 1%) (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds).",
+     "fix": "Confirm on the render (the shot checker measures the real outlines); if it holds, move no-2-man-1, no-2-man-2, no-2-man-3, no-2-man-6, no-2-man-7, no-2-drum-diesel out of the bottom-left quarter.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "people_face_shows",
+     "where": "w4",
+     "text": "no-2-man-1's face or profile shows (it faces 3 degrees from the camera); its head is 56 px tall at 6.80 m (composed spot (end)); the house limit 24 px is invented and untested.",
+     "fix": "Add \"face lost in shadow\" to the painter's words for no-2-man-1 and check the head for skin pixels after painting (the people test's facing man at 7 m got no features that way), or turn him at least 98 degrees further away. Never a black silhouette (lesson 137).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "people_face_shows",
+     "where": "w4",
+     "text": "no-2-man-2's face or profile shows (it faces 18 degrees from the camera); its head is 57 px tall at 6.68 m (composed spot (end)); the house limit 24 px is invented and untested.",
+     "fix": "Add \"face lost in shadow\" to the painter's words for no-2-man-2 and check the head for skin pixels after painting (the people test's facing man at 7 m got no features that way), or turn him at least 84 degrees further away. Never a black silhouette (lesson 137).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "people_face_shows",
+     "where": "w4",
+     "text": "no-2-man-3's face or profile shows (it faces 6 degrees from the camera); its head is 56 px tall at 6.82 m (composed spot (end)); the house limit 24 px is invented and untested.",
+     "fix": "Add \"face lost in shadow\" to the painter's words for no-2-man-3 and check the head for skin pixels after painting (the people test's facing man at 7 m got no features that way), or turn him at least 96 degrees further away. Never a black silhouette (lesson 137).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "people_face_shows",
+     "where": "w4",
+     "text": "no-2-man-5's face or profile shows (it faces 11 degrees from the camera); its head is 50 px tall at 7.52 m (composed spot (end)); the house limit 24 px is invented and untested.",
+     "fix": "Add \"face lost in shadow\" to the painter's words for no-2-man-5 and check the head for skin pixels after painting (the people test's facing man at 7 m got no features that way), or turn him at least 90 degrees further away. Never a black silhouette (lesson 137).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "people_face_shows",
+     "where": "w4",
+     "text": "no-2-man-6's face or profile shows (it faces 17 degrees from the camera); its head is 50 px tall at 7.62 m (composed spot (end)); the house limit 24 px is invented and untested.",
+     "fix": "Add \"face lost in shadow\" to the painter's words for no-2-man-6 and check the head for skin pixels after painting (the people test's facing man at 7 m got no features that way), or turn him at least 84 degrees further away. Never a black silhouette (lesson 137).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "people_face_shows",
+     "where": "w4",
+     "text": "no-2-man-7's face or profile shows (it faces 7 degrees from the camera); its head is 51 px tall at 7.50 m (composed spot (end)); the house limit 24 px is invented and untested.",
+     "fix": "Add \"face lost in shadow\" to the painter's words for no-2-man-7 and check the head for skin pixels after painting (the people test's facing man at 7 m got no features that way), or turn him at least 94 degrees further away. Never a black silhouette (lesson 137).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "this shot (w4)",
+     "text": "Crowd \"men at No. 2\" from this shot (w4): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "view w3 (plate)",
+     "text": "Crowd \"men at No. 2\" from view w3 (plate): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_axis_angle",
+     "where": "view w2 (composed)",
+     "text": "Crowd \"men at No. 2\" from view w2 (composed): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_rows",
+     "where": "w4",
+     "text": "Crowd \"men at No. 2\": 2 rows deep from this view (front to back: no-2-man-2, no-2-man-4, no-2-man-1, no-2-man-3; no-2-man-8, no-2-man-7, no-2-man-5, no-2-man-6).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_shoulder_gaps",
+     "where": "w4",
+     "text": "Crowd \"men at No. 2\": gaps between neighbours' shoulders in a row (0.47 m shoulders): no-2-man-4-no-2-man-3 0.33 m, no-2-man-3-no-2-man-2 0.33 m, no-2-man-2-no-2-man-1 0.33 m, no-2-man-8-no-2-man-7 1.03 m, no-2-man-7-no-2-man-6 0.33 m, no-2-man-6-no-2-man-5 0.13 m (house range 0.3 to 0.5 m).",
+     "fix": "Check by eye: no-2-man-8-no-2-man-7 1.03 m, no-2-man-6-no-2-man-5 0.13 m (a back-row man standing between two of the front row fills a wide gap).",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "crowd_head_spacing",
+     "where": "w4",
+     "text": "Crowd \"men at No. 2\" from this shot: the closest two heads, no-2-man-1 and no-2-man-5, are 1.51 head widths apart on screen (at least 1.0, so each head can be counted).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "crowd_visible_share",
+     "where": "w4",
+     "text": "Crowd \"men at No. 2\": the most hidden figure, no-2-man-7, shows about 0% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this).",
+     "fix": "Move no-2-man-7 sideways into a gap, or check on the render.",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "slide_magnification",
+     "where": "w4",
+     "text": "The 1.20 m slide brings the nearest painted thing, wages envelope (its nearest corner 5.13 m away at the end), 1.234 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 1.47 m.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "info",
+     "check": "slide_magnification_ground",
+     "where": "w4",
+     "text": "The painted ground at the frame's bottom edge (2.92 m away) comes 1.411 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_lens",
+     "where": "w4",
+     "text": "Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.",
+     "fix": "",
+     "tool": "plan_shot.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "plate_rows",
+     "where": "w4",
+     "text": "For the slide's worst magnification the plate would need 2564 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).",
+     "fix": "",
+     "tool": "plan_shot.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "letters, loud signs, heads and landmarks (view_audit.py)",
+   "tool": "calculators/view_audit.py",
+   "version": "79e3d2f9",
+   "where": "works",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/view_audit.py audit --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/06-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/06-letters-loud-signs-heads-and-landmarks-view-audi.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/06-letters-loud-signs-heads-and-landmarks-view-audi.txt",
+   "seconds": 0.08,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.3214, \"down\": 0.5476, \"depth\": 29.93, \"in_front\": true, \"in_frame\": true, \"distance\": 30.1796, \"facing\": 0.9917, \"across_facing\": 0.9932, \"back_shows\": false, \"letter_pixels\": 14.6593, \"letter_width_pixels\": 14.6593, \"face_on_pixels\": 14.6593, \"height_factor\": 1.0, \"width_factor\": 1.0,",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.6786, \"down\": 0.5476, \"depth\": 29.93, \"in_front\": true, \"in_frame\": true, \"distance\": 30.1796, \"facing\": 0.9917, \"across_facing\": 0.9932, \"back_shows\": false, \"letter_pixels\": 13.7775, \"letter_width_pixels\": 13.7775, \"face_on_pixels\": 13.7775, \"height_factor\": 1.0, \"width_factor\": 1.0,",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.1271, \"down\": 0.5984, \"depth\": 17.37, \"in_front\": true, \"in_frame\": true, \"distance\": 17.9906, \"facing\": 0.9655, \"across_facing\": 0.9715, \"back_shows\": false, \"letter_pixels\": 28.9626, \"letter_width_pixels\": 28.9626, \"face_on_pixels\": 28.9626, \"height_factor\": 1.0, \"width_factor\": 1.0,",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.098, \"down\": 0.6844, \"depth\": 19.735, \"in_front\": true, \"in_frame\": true, \"distance\": 20.8421, \"facing\": 0.2493, \"across_facing\": 0.2546, \"back_shows\": false, \"letter_pixels\": 5.4327, \"letter_width_pixels\": 1.8451, \"face_on_pixels\": 5.4327, \"height_factor\": 1.0, \"width_factor\": 0.3396,",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.215, \"down\": 0.6555, \"depth\": 28.4, \"in_front\": true, \"in_frame\": true, \"distance\": 29.3443, \"facing\": 0.9842, \"across_facing\": 0.9997, \"back_shows\": false, \"letter_pixels\": 5.6337, \"letter_width_pixels\": 5.7331, \"face_on_pixels\": 5.6337, \"height_factor\": 1.0, \"width_factor\": 1.0176, \"n",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.265, \"down\": 0.6585, \"depth\": 27.95, \"in_front\": true, \"in_frame\": true, \"distance\": 28.745, \"facing\": 0.9837, \"across_facing\": 0.9999, \"back_shows\": false, \"letter_pixels\": 6.2555, \"letter_width_pixels\": 6.3306, \"face_on_pixels\": 6.2555, \"height_factor\": 1.0, \"width_factor\": 1.012, \"ne",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.7796, \"down\": 0.6556, \"depth\": 28.4, \"in_front\": true, \"in_frame\": true, \"distance\": 29.3268, \"facing\": 0.9841, \"across_facing\": 0.9996, \"back_shows\": false, \"letter_pixels\": 5.6337, \"letter_width_pixels\": 5.729, \"face_on_pixels\": 5.6337, \"height_factor\": 1.0, \"width_factor\": 1.0169, \"n",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.735, \"down\": 0.6585, \"depth\": 27.95, \"in_front\": true, \"in_frame\": true, \"distance\": 28.745, \"facing\": 0.9837, \"across_facing\": 0.9999, \"back_shows\": false, \"letter_pixels\": 6.2555, \"letter_width_pixels\": 6.3306, \"face_on_pixels\": 6.2555, \"height_factor\": 1.0, \"width_factor\": 1.012, \"ne",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.6613, \"down\": 0.6385, \"depth\": 32.2, \"in_front\": true, \"in_frame\": true, \"distance\": 32.7923, \"facing\": 0.9819, \"across_facing\": 0.9945, \"back_shows\": false, \"letter_pixels\": 3.2272, \"letter_width_pixels\": 3.2272, \"face_on_pixels\": 3.2272, \"height_factor\": 1.0, \"width_factor\": 1.0, \"nee",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.5893, \"down\": 0.6441, \"depth\": 31.12, \"in_front\": true, \"in_frame\": true, \"distance\": 31.6072, \"facing\": -0.9846, \"across_facing\": -0.9983, \"back_shows\": true, \"letter_pixels\": 0.954, \"letter_width_pixels\": 0.954, \"face_on_pixels\": 0.954, \"height_factor\": 1.0, \"width_factor\": 1.0, \"need",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.5348, \"down\": 0.2803, \"depth\": 8.78, \"in_front\": true, \"in_frame\": true, \"distance\": 9.0647, \"facing\": 0.9686, \"across_facing\": 0.9997, \"back_shows\": false, \"letter_pixels\": 49.9718, \"letter_width_pixels\": 49.9718, \"face_on_pixels\": 49.9718, \"height_factor\": 1.0, \"width_factor\": 1.0, \"n",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.1629, \"down\": 0.6466, \"depth\": 7.25, \"in_front\": true, \"in_frame\": true, \"distance\": 7.5268, \"facing\": 0.9864, \"across_facing\": 1.0, \"back_shows\": false, \"letter_pixels\": 22.0684, \"letter_width_pixels\": 22.6124, \"face_on_pixels\": 22.0684, \"height_factor\": 1.0, \"width_factor\": 1.0246, \"n",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.3652, \"down\": 0.658, \"depth\": 6.8, \"in_front\": true, \"in_frame\": true, \"distance\": 6.9401, \"facing\": 0.9823, \"across_facing\": 0.9987, \"back_shows\": false, \"letter_pixels\": 25.7119, \"letter_width_pixels\": 25.7859, \"face_on_pixels\": 25.7119, \"height_factor\": 1.0, \"width_factor\": 1.0029, \"",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.4652, \"down\": 0.2803, \"depth\": 8.78, \"in_front\": true, \"in_frame\": true, \"distance\": 9.0647, \"facing\": 0.9686, \"across_facing\": 0.9997, \"back_shows\": false, \"letter_pixels\": 46.966, \"letter_width_pixels\": 46.966, \"face_on_pixels\": 46.966, \"height_factor\": 1.0, \"width_factor\": 1.0, \"need",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.816, \"down\": 0.6468, \"depth\": 7.25, \"in_front\": true, \"in_frame\": true, \"distance\": 7.5065, \"facing\": 0.9863, \"across_facing\": 1.0, \"back_shows\": false, \"letter_pixels\": 22.0684, \"letter_width_pixels\": 22.5492, \"face_on_pixels\": 22.0684, \"height_factor\": 1.0, \"width_factor\": 1.0218, \"ne",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.6348, \"down\": 0.658, \"depth\": 6.8, \"in_front\": true, \"in_frame\": true, \"distance\": 6.9401, \"facing\": 0.9823, \"across_facing\": 0.9987, \"back_shows\": false, \"letter_pixels\": 25.7119, \"letter_width_pixels\": 25.7859, \"face_on_pixels\": 25.7119, \"height_factor\": 1.0, \"width_factor\": 1.0029, \"",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.4585, \"down\": 0.5999, \"depth\": 11.05, \"in_front\": true, \"in_frame\": true, \"distance\": 11.1285, \"facing\": 0.9929, \"across_facing\": 0.9996, \"back_shows\": false, \"letter_pixels\": 9.4041, \"letter_width_pixels\": 9.4041, \"face_on_pixels\": 9.4041, \"height_factor\": 1.0, \"width_factor\": 1.0, \"ne",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.212, \"down\": 0.6133, \"depth\": 9.97, \"in_front\": true, \"in_frame\": true, \"distance\": 10.2306, \"facing\": -0.9745, \"across_facing\": -0.9827, \"back_shows\": true, \"letter_pixels\": 2.9779, \"letter_width_pixels\": 2.9779, \"face_on_pixels\": 2.9779, \"height_factor\": 1.0, \"width_factor\": 1.0, \"nee",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.1448, \"down\": 0.1792, \"depth\": 6.32, \"in_front\": true, \"in_frame\": true, \"distance\": 6.9046, \"facing\": -0.9153, \"across_facing\": -0.974, \"back_shows\": true, \"letter_pixels\": 65.247, \"letter_width_pixels\": 65.247, \"face_on_pixels\": 65.247, \"height_factor\": 1.0, \"width_factor\": 1.0, \"need",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.0823, \"down\": 0.6176, \"depth\": 8.3, \"in_front\": true, \"in_frame\": true, \"distance\": 8.6795, \"facing\": -0.9106, \"across_facing\": -0.9185, \"back_shows\": true, \"letter_pixels\": 21.0652, \"letter_width_pixels\": 20.0624, \"face_on_pixels\": 21.0652, \"height_factor\": 1.0, \"width_factor\": 0.9524,",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "works",
+     "text": "{\"across\": 0.5625, \"down\": 0.701, \"depth\": 5.13, \"in_front\": true, \"in_frame\": true, \"distance\": 5.2727, \"facing\": 0.9729, \"across_facing\": 0.9992, \"back_shows\": false, \"letter_pixels\": 5.7875, \"letter_width_pixels\": 5.7875, \"face_on_pixels\": 5.7875, \"height_factor\": 1.0, \"width_factor\": 1.0, \"neede",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w3",
+     "text": "{\"view\": \"w3\", \"spot\": \"plate\", \"landmark\": \"no-1-chimney-top\", \"across\": 0.3754, \"down\": 0.2281, \"depth\": 64.95, \"top_height\": 26.3, \"height_for_clear\": 25.3969, \"verdict\": \"just under the band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w3",
+     "text": "{\"view\": \"w3\", \"spot\": \"plate\", \"landmark\": \"no-2-chimney-a-top\", \"across\": 0.6246, \"down\": 0.2413, \"depth\": 64.95, \"top_height\": 25.3, \"height_for_clear\": 25.3969, \"verdict\": \"below the words band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w3",
+     "text": "{\"view\": \"w3\", \"spot\": \"plate\", \"landmark\": \"no-2-chimney-b-top\", \"across\": 0.6919, \"down\": 0.2796, \"depth\": 68.45, \"top_height\": 23.3, \"height_for_clear\": 26.4562, \"verdict\": \"below the words band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w3",
+     "text": "{\"view\": \"w3\", \"spot\": \"plate\", \"landmark\": \"no-2-tank-top\", \"across\": 0.8125, \"down\": 0.3104, \"depth\": 41.05, \"top_height\": 14.8, \"height_for_clear\": 18.1637, \"verdict\": \"below the words band\"}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w1",
+     "text": "{\"view\": \"w1\", \"spot\": \"plate\", \"landmark\": \"no-1-chimney-top\", \"across\": 0.4457, \"down\": 0.0329, \"depth\": 45.0, \"top_height\": 26.3, \"height_for_clear\": 15.4541, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w1",
+     "text": "{\"view\": \"w1\", \"spot\": \"plate\", \"landmark\": \"no-2-chimney-a-top\", \"across\": 0.8055, \"down\": 0.052, \"depth\": 45.0, \"top_height\": 25.3, \"height_for_clear\": 15.4541, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w1",
+     "text": "{\"view\": \"w1\", \"spot\": \"plate\", \"landmark\": \"no-2-chimney-b-top\", \"across\": 0.8873, \"down\": 0.1198, \"depth\": 48.5, \"top_height\": 23.3, \"height_for_clear\": 16.5134, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w1",
+     "text": "{\"view\": \"w1\", \"spot\": \"composed\", \"landmark\": \"no-1-chimney-top\", \"across\": 0.4442, \"down\": 0.0201, \"depth\": 43.8, \"top_height\": 26.3, \"height_for_clear\": 15.0909, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w1",
+     "text": "{\"view\": \"w1\", \"spot\": \"composed\", \"landmark\": \"no-2-chimney-a-top\", \"across\": 0.8138, \"down\": 0.0398, \"depth\": 43.8, \"top_height\": 25.3, \"height_for_clear\": 15.0909, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w1",
+     "text": "{\"view\": \"w1\", \"spot\": \"composed\", \"landmark\": \"no-2-chimney-b-top\", \"across\": 0.8972, \"down\": 0.1101, \"depth\": 47.3, \"top_height\": 23.3, \"height_for_clear\": 16.1502, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w2",
+     "text": "{\"view\": \"w2\", \"spot\": \"plate\", \"landmark\": \"no-1-chimney-top\", \"across\": 0.1945, \"down\": 0.0329, \"depth\": 45.0, \"top_height\": 26.3, \"height_for_clear\": 15.4541, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w2",
+     "text": "{\"view\": \"w2\", \"spot\": \"plate\", \"landmark\": \"no-2-chimney-a-top\", \"across\": 0.5543, \"down\": 0.052, \"depth\": 45.0, \"top_height\": 25.3, \"height_for_clear\": 15.4541, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w2",
+     "text": "{\"view\": \"w2\", \"spot\": \"plate\", \"landmark\": \"no-2-chimney-b-top\", \"across\": 0.6543, \"down\": 0.1198, \"depth\": 48.5, \"top_height\": 23.3, \"height_for_clear\": 16.5134, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w2",
+     "text": "{\"view\": \"w2\", \"spot\": \"plate\", \"landmark\": \"no-2-tank-top\", \"across\": 0.8402, \"down\": -0.0279, \"depth\": 21.1, \"top_height\": 14.8, \"height_for_clear\": 8.2209, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w2",
+     "text": "{\"view\": \"w2\", \"spot\": \"composed\", \"landmark\": \"no-1-chimney-top\", \"across\": 0.1862, \"down\": 0.0201, \"depth\": 43.8, \"top_height\": 26.3, \"height_for_clear\": 15.0909, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w2",
+     "text": "{\"view\": \"w2\", \"spot\": \"composed\", \"landmark\": \"no-2-chimney-a-top\", \"across\": 0.5558, \"down\": 0.0398, \"depth\": 43.8, \"top_height\": 25.3, \"height_for_clear\": 15.0909, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w2",
+     "text": "{\"view\": \"w2\", \"spot\": \"composed\", \"landmark\": \"no-2-chimney-b-top\", \"across\": 0.6582, \"down\": 0.1101, \"depth\": 47.3, \"top_height\": 23.3, \"height_for_clear\": 16.1502, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "",
+     "where": "w2",
+     "text": "{\"view\": \"w2\", \"spot\": \"composed\", \"landmark\": \"no-2-tank-top\", \"across\": 0.8607, \"down\": -0.0597, \"depth\": 19.9, \"top_height\": 14.8, \"height_for_clear\": 7.8577, \"verdict\": \"in the words band (dark band)\", \"dark_band\": true}",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-1 board (\"No. 1\") in w3 (plate spot): letters 14.7 px tall, under 20 px. Make the letters 0.363 m tall for 20 px (0.454 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-2 board (\"No. 2\") in w3 (plate spot): letters 13.8 px tall, under 20 px. Make the letters 0.363 m tall for 20 px (0.454 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-1-drum-petrol (\"PETROL\") in w3 (plate spot): letters 5.6 px tall, under 20 px. Make the letters 0.344 m tall for 20 px (0.430 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-1-drum-diesel (\"DIESEL\") in w3 (plate spot): letters 6.3 px tall, under 20 px. Make the letters 0.339 m tall for 20 px (0.424 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-2-drum-petrol (\"PETROL\") in w3 (plate spot): letters 5.6 px tall, under 20 px. Make the letters 0.344 m tall for 20 px (0.430 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-2-drum-diesel (\"DIESEL\") in w3 (plate spot): letters 6.3 px tall, under 20 px. Make the letters 0.339 m tall for 20 px (0.424 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-2 crates (\"THIS WAY UP\") in w3 (plate spot): letters 3.2 px tall, under 20 px. Make the letters 0.390 m tall for 20 px (0.488 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-2 crates (\"THIS WAY UP\") in w2 (composed spot): letters 9.4 px tall, under 20 px. Make the letters 0.134 m tall for 20 px (0.167 m for 25 px), bring it nearer, or let a typed label carry the word.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "problems",
+     "where": "works",
+     "text": "no-2 board (\"No. 2\") shows its back in w4 (composed spot), as big as 65 px letters would be: a blank plank on screen (round 4, W4). Letter its back too, or turn it.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "no-1-drum-petrol (\"PETROL\") in w1 (composed spot): letters 22.1 px, between 20 and 25 px (PETROL and DIESEL read at 22 px in round 4). 0.110 m letters would give 25 px.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "no-2-drum-petrol (\"PETROL\") in w2 (composed spot): letters 22.1 px, between 20 and 25 px (PETROL and DIESEL read at 22 px in round 4). 0.110 m letters would give 25 px.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "no-1-chimney-top in w3 (plate): its top lands 0.228 down, within 0.02 of the words band; 25.4 m tall (now 26.3) clears 0.24. Look at the plate.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top rise through the words band in w1 (plate) (tops 0.033, 0.052, 0.120 down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 15.5 m or put the words beside them.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top rise through the words band in w1 (composed) (tops 0.020, 0.040, 0.110 down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 15.1 m or put the words beside them.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top, no-2-tank-top rise through the words band in w2 (plate) (tops 0.033, 0.052, 0.120, above the frame down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 8.2 m or put the words beside them.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "no-1-chimney-top, no-2-chimney-a-top, no-2-chimney-b-top, no-2-tank-top rise through the words band in w2 (composed) (tops 0.020, 0.040, 0.110, above the frame down). This kind of shot (crowd, dark_subject) puts the words over a soft dark band (safe_area.top_shade); otherwise lower them to about 7.9 m or put the words beside them.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "8 of men at No. 2 in w4 (plate) can show their faces, heads 43-48 px (over 24 px): look at the painted faces (the people test's facing man got a blank face, the far walkers face dots; silhouettes were rejected, lesson 137), or turn them away.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "warnings",
+     "where": "works",
+     "text": "6 of men at No. 2 in w4 (composed) can show their faces, heads 50-57 px (over 24 px): look at the painted faces (the people test's facing man got a blank face, the far walkers face dots; silhouettes were rejected, lesson 137), or turn them away.",
+     "fix": "",
+     "tool": "view_audit.py"
+    },
+    {
+     "verdict": "info",
+     "check": "notes",
+     "where": "works",
+     "text": "Loud unnamed signs: not checked (give --named or --timeline with --page: the check needs what the page says).",
+     "fix": "",
+     "tool": "view_audit.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "wind and chimney smoke in every view (plan_effects.py wind)",
+   "tool": "calculators/plan_effects.py",
+   "version": "116ecf19",
+   "where": "works",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_effects.py wind --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/07-wind-and-chimney-smoke-in-every-view-plan-effect.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/07-wind-and-chimney-smoke-in-every-view-plan-effect.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/07-wind-and-chimney-smoke-in-every-view-plan-effect.txt",
+   "seconds": 0.11,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  },
+  {
+   "title": "lights for w3 (plan_lights.py plan)",
+   "tool": "calculators/plan_lights.py",
+   "version": "18f07cdd",
+   "where": "works w3",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w3 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/08-lights-for-w3-plan-lights-py-plan.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/08-lights-for-w3-plan-lights-py-plan.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/08-lights-for-w3-plan-lights-py-plan.txt",
+   "seconds": 0.09,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  },
+  {
+   "title": "lights for w1 (plan_lights.py plan)",
+   "tool": "calculators/plan_lights.py",
+   "version": "18f07cdd",
+   "where": "works w1",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w1 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/09-lights-for-w1-plan-lights-py-plan.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/09-lights-for-w1-plan-lights-py-plan.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/09-lights-for-w1-plan-lights-py-plan.txt",
+   "seconds": 0.15,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "problems",
+     "where": "works w1",
+     "text": "lantern_light: lights no-1-drum-diesel (its housing; lesson 120, log 32): skip them",
+     "fix": "",
+     "tool": "plan_lights.py"
+    }
+   ],
+   "verdict": "warn"
+  },
+  {
+   "title": "lights for w2 (plan_lights.py plan)",
+   "tool": "calculators/plan_lights.py",
+   "version": "18f07cdd",
+   "where": "works w2",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w2 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/10-lights-for-w2-plan-lights-py-plan.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/10-lights-for-w2-plan-lights-py-plan.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/10-lights-for-w2-plan-lights-py-plan.txt",
+   "seconds": 0.07,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  },
+  {
+   "title": "lights for w4 (plan_lights.py plan)",
+   "tool": "calculators/plan_lights.py",
+   "version": "18f07cdd",
+   "where": "works w4",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/plan_lights.py plan --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json --view w4 --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/11-lights-for-w4-plan-lights-py-plan.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/11-lights-for-w4-plan-lights-py-plan.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945/11-lights-for-w4-plan-lights-py-plan.txt",
+   "seconds": 0.07,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  },
+  {
+   "title": "each view's check file carries its kinds, figures and accepted list",
+   "tool": "preflight.py",
+   "version": "dab9a964",
+   "where": "works",
+   "command": "(inside the preflight)",
+   "seconds": 0.0,
+   "exit": 0,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "kind_of_shot",
+     "where": "works w3",
+     "text": "works-w3-shot-check.json names no \"kind_of_shot\": the shot checker judges it as a still life (the place facts say overview + crowd + dark_subject)",
+     "fix": "add \"kind_of_shot\": [...] (still_life, crowd, overview, interior, dark_subject)",
+     "tool": "preflight.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "kind_of_shot",
+     "where": "works w1",
+     "text": "works-w1-shot-check.json names no \"kind_of_shot\": the shot checker judges it as a still life (the place facts say crowd + dark_subject)",
+     "fix": "add \"kind_of_shot\": [...] (still_life, crowd, overview, interior, dark_subject)",
+     "tool": "preflight.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "kind_of_shot",
+     "where": "works w2",
+     "text": "works-w2-shot-check.json names no \"kind_of_shot\": the shot checker judges it as a still life (the place facts say crowd + dark_subject)",
+     "fix": "add \"kind_of_shot\": [...] (still_life, crowd, overview, interior, dark_subject)",
+     "tool": "preflight.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "kind_of_shot",
+     "where": "works w4",
+     "text": "works-w4-shot-check.json names no \"kind_of_shot\": the shot checker judges it as a still life (the place facts say crowd)",
+     "fix": "add \"kind_of_shot\": [...] (still_life, crowd, overview, interior, dark_subject)",
+     "tool": "preflight.py"
+    }
+   ],
+   "verdict": "warn"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-shots-2026-10-16-104945.md"
+}

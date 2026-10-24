@@ -1,0 +1,22 @@
+Lights of works for view w4 (subject: no-2 gate): 0 light(s).
+No key light found for the subject (a light whose reaches_only names it, or that is aimed at it): give --reference.
+
+Lamps on the frame (3 checked): none in the way.
+
+Shadows: only (none: name a key, fire, doorway or sky light) cast shadows; every other light none. Figures: visible_shadow off, each with a soft foot patch 0.5 x 0.35 m.
+EEVEE for a 1536-wide plate: shadow_pool_size '1024', shadow_resolution_scale 0.703. After every render run plan_lights.py render-log on its log; a shadow fault draws false black wedges (lesson 110).
+Plate time: measure and record it (round 3: about 25 minutes with every light casting, about 6 with three).
+
+0 problem(s).
+
+Settings used (film-settings.json):
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  light_planner.shadow_casting_kinds = ["key", "fire", "doorway", "sky"] kinds of light that cast shadows (every other light casts none) (judged)
+  light_planner.foot_patch_metres = [0.5, 0.35] metres (width, depth) of the soft shadow under a figure that casts no shadow (judged)
+  light_planner.lamp_clear_of_subject_pixels = 18 pixels on the film frame between a lamp and the subject's outline box (judged)
+  camera.meeting_point_gap_share_of_width = 0.03 share of the frame width (judged)
+  light_planner.near_ground_light_max = 0.025 W/m2 a light behind the camera may put on the ground at the frame's bottom edge (judged)
+  frame.plate_width_pixels = 1536 pixels (judged)
+  light.shadow_resolution_reference_width = 1080 pixels (scale = min(1, 1080 / width)) (judged)
+  light.shadow_pool_size = 1024 EEVEE setting (measured)

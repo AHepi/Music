@@ -1,0 +1,23 @@
+{
+ "parts": {
+  "ground_and_yard": {
+   "seconds": 5.9,
+   "objects": 4,
+   "notes": "Terrain object \"Ground terrain\" (mud, real displacement at 2 px; ground_mesh_object() returns it), \"Ground puddles\" (8 water sheets), \"Yard coal and stones\" (coal and stones: 2084 scattered + 3 heaps), \"Yard props (timber, fence, barrels, cart, lamp)\" (timber rack at x -9..-7 y -6..-3, fence x 10..20 y -4..6, 2 barrels, handcart, sleeper pile, lamp post). Lantern glass is at (7.4, -1.0, 4.15)."
+  },
+  "engine_house": {
+   "seconds": 0.3,
+   "objects": 9,
+   "notes": "engine house; 6617 triangles before displacement; displaced objects: ['Engine house brick walls (displaced)', 'Engine house slate roof (displaced)']"
+  },
+  "village_and_sky": {
+   "seconds": 0.6,
+   "objects": 11,
+   "notes": "World: painted dusk sky picture (village_and_sky_dusk_sky_4096x2048.png) on world \"Dusk sky\"; tune node \"Sky strength\" (default 4.00), node \"Sky turn\" (rotation Z; if you turn it, turn the sun too) and node \"Glow boost\". Lights: \"Village low sun\" (SUN, orange, 6 degrees above the horizon, from compass 50 = right-back, strength 8.0) and \"Village cool fill\" (SUN, blue, from front-left, strength 3.0). Recommended exposure: +0.0 stops with AgX. Hills: objects \"Near hills\", \"Middle hills\", \"Far hills\" (shadow-casting turned off); the camera needs clip end of at least 1000 m."
+  }
+ },
+ "total_objects": 27,
+ "total_triangles_before_displacement": 373213,
+ "build_seconds": 6.8,
+ "render_seconds": 229.5
+}

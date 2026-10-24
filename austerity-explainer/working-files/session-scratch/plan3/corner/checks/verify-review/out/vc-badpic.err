@@ -1,0 +1,11 @@
+[ WARN:0@3.426] global loadsave.cpp:278 findDecoder imread_('/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/does-not-exist.png'): can't open/read file: check file path/integrity
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-review/check_shot.snapshot.py", line 1630, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-review/check_shot.snapshot.py", line 1579, in main
+    shot = Shot(args)
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-review/check_shot.snapshot.py", line 139, in __init__
+    if self.picture.shape[:2] != (self.height, self.width):
+       ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'shape'

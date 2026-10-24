@@ -1,0 +1,33 @@
+Filming plan for inflation-chapter-2-newcomers, frames 1407 to 3703 (2297 frames):
+   2051 frames held, live effects at 0.90 s
+    175 frames moving (a slide) at 4.30 s
+     71 frames a page join (two pages drawn) at 1.80 s
+  loading: 10 pieces x 34 s
+  rates from: the table in film-settings.json (round 4, one worker): a fallback, not measured on this film
+Predicted: 50.7 min with 1 worker(s) on 4 processors (speed-up 1.00).
+Pieces of 287 frames (loading stays under its share: 287; a restart loses at most 758 frames), chunks of 287.
+Lazy loading: off
+1 stretch(es), each under 1 h 50 min (run each as its own job; running a command again carries on where it stopped):
+      50.7 min  FILM_FROM=1421 FILM_TO=3704 PIECE_FRAMES=287 bash paper-film/tools/film-chapter-parallel.sh inflation-chapter-2-newcomers 1 287
+Disk: about 536 MB of film; 6.83 GB free.
+NOTE  memory allows only 1 worker(s) (6.8 GB free)
+Watch it with: python3 kit/calculators/plan_budget.py status paper-film/out/SCENE-chunks (stalled = no new file for twice a piece's time). Stop a run only by its own process number, never with pkill -f.
+
+Settings used (film-settings.json):
+  filming.seconds_per_frame_held_nothing_live = {"one_worker": 0.8, "two_workers": 0.57} seconds a frame (measured)
+  filming.seconds_per_frame_held_live_effects = 0.9 seconds a frame, one worker (measured)
+  filming.seconds_per_frame_sliding = 4.3 seconds a frame, one worker (measured)
+  filming.peel_frames_cost_factor = 2 times a held frame (judged)
+  filming.seconds_loading_a_piece = 34 seconds a piece (measured)
+  filming.workers = {"two_processors": 1, "four_processors": 2, "two_workers_speed_gain": 0.17} workers (measured)
+  filming.memory_per_piece_gb = [2.6, 2.8] GB of browser memory (measured)
+  budget_planner.memory_reserve_gb = 2 GB kept free for the system (invented)
+  budget_planner.piece_load_share_max = 0.1 share of a piece's time spent loading (invented)
+  budget_planner.restart_loss_max_seconds = 900 seconds of filming a restart may lose (judged)
+  budget_planner.piece_frames_min = 60 frames (judged)
+  filming.stretch_max_hours = 2 hours (measured)
+  budget_planner.stretch_margin_minutes = 10 minutes kept spare in each 2-hour stretch (judged)
+  frame.frames_per_second = 30 frames a second (judged)
+  filming.film_with_grain_megabytes_per_second = 3.5 MB a second (measured)
+  budget_planner.film_copies = 2 copies of the film on disk at once (pieces and the joined film) (judged)
+  budget_planner.disk_free_reserve_gb = 4 GB (judged)

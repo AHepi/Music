@@ -1,0 +1,1420 @@
+{
+ "place_facts": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/checkout-c1/checkout-c1-place-facts.json",
+ "shots": [
+  {
+   "camera": {
+    "composed": [
+     -0.16,
+     -0.4,
+     1.6
+    ],
+    "plate": [
+     -0.16,
+     -1.1,
+     1.6
+    ],
+    "turn_degrees": 0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_above_floor_metres": 1.6,
+    "floor": "the view's floor (height 0.00 m)"
+   },
+   "meeting_point": {
+    "across": 0.5,
+    "down": 0.5
+   },
+   "slide": {
+    "length_metres": 0.7,
+    "limit": 1.2862,
+    "painting_rows": 2672,
+    "nearest_painted_thing": "basket",
+    "depth_end": 2.211,
+    "magnification": 1.3166,
+    "longest_slide_metres": 0.633,
+    "plate_lens_needed_degrees": 63.529,
+    "plate_rows_needed": 2736,
+    "turn_allowance_degrees": 1.378,
+    "sideways_allowance_metres": 0.0593
+   },
+   "name": "c1",
+   "planned": false,
+   "kind_of_shot": [
+    "interior"
+   ],
+   "subject": "bill",
+   "support": "bill stand",
+   "story": [
+    "basket",
+    "divider"
+   ],
+   "must_read": [
+    "bill",
+    "bread label",
+    "milk label",
+    "butter label",
+    "cheese label",
+    "checkout sign",
+    "petrol fascia"
+   ],
+   "steps": [
+    "Camera as given: composed spot (-0.160, -0.400, 1.600), turned 0.00 degrees; the plate's spot (the slide's start) (-0.160, -1.100, 1.600)."
+   ],
+   "checks": [
+    {
+     "rule": "rule2_eye_height",
+     "about": "The eye stands 1.60 m above the view's floor (height 0.00 m) (allowed 1.5 to 1.7 m for interior).",
+     "verdict": "pass",
+     "measured": 1.6,
+     "limit": [
+      1.5,
+      1.7
+     ],
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "rule2_level",
+     "about": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "verdict": "pass",
+     "measured": -0.0,
+     "limit": 0.5,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "rule1_meeting_point_gap",
+     "about": "The lines meet 0.500 across, 0.500 down; the nearest edge of bill stand is 0.009 of the width away (10 px across, 0 px down, inside its outline); bill stand's outline (an upright box); limit 0.03.",
+     "verdict": "pass",
+     "measured": 0.0088,
+     "limit": 0.03,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bill stand"
+     ],
+     "dark": false,
+     "gap_share": 0.0088,
+     "sideways_metres": 0.016
+    },
+    {
+     "rule": "rule7_story_reaches_down",
+     "about": "The lowest story thing is basket, reaching 0.777 down (limit 0.7).",
+     "verdict": "pass",
+     "measured": 0.7774,
+     "limit": 0.7,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "basket"
+     ],
+     "nearer_metres": null
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "bill (to read) ends 0.816 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.8156,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bill"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "bread label (to read) ends 0.576 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.5756,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bread label"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "milk label (to read) ends 0.680 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.6805,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "milk label"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "butter label (to read) ends 0.600 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.5997,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "butter label"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "cheese label (to read) ends 0.700 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.7004,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "cheese label"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "checkout sign (to read) ends 0.806 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.8065,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "checkout sign"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "petrol fascia (to read) ends 0.508 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.5078,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "petrol fascia"
+     ]
+    },
+    {
+     "rule": "rule12_story_right_edge",
+     "about": "Story things in the button strip (0.45 to 0.95 down) end at: basket 0.86, divider 0.79 across (limit 0.95).",
+     "verdict": "pass",
+     "measured": 0.8575,
+     "limit": 0.95,
+     "fix": "",
+     "estimate": true,
+     "things": [],
+     "rows": [
+      {
+       "thing": "basket",
+       "right": 0.8575
+      },
+      {
+       "thing": "divider",
+       "right": 0.7883
+      }
+     ]
+    },
+    {
+     "rule": "rule3_story_box",
+     "about": "The story things fill a box 0.40 wide and 0.35 tall (limit 0.4 x 0.5 for still_life); edges: basket (left), basket (right), bill (top), basket (bottom).",
+     "verdict": "pass",
+     "measured": [
+      0.396,
+      0.352
+     ],
+     "limit": [
+      0.4,
+      0.5
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bill",
+      "basket",
+      "divider"
+     ]
+    },
+    {
+     "rule": "rule3_story_together_metres",
+     "about": "The story things stand together in the street: the loneliest, basket, is 0.00 m from divider (limit 0.3 m between footprints).",
+     "verdict": "pass",
+     "measured": 0.0,
+     "limit": 0.3,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "basket",
+      "divider"
+     ]
+    },
+    {
+     "rule": "main_rule_spot_box",
+     "about": "The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of bill 0.66, 0.53; middle of the story things 0.66, 0.62) span 0.16 x 0.12 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "verdict": "pass",
+     "measured": [
+      0.158,
+      0.118
+     ],
+     "limit": [
+      0.3,
+      0.4
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": []
+    },
+    {
+     "rule": "subject_frame_share",
+     "about": "bill fills about 6.5% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life).",
+     "verdict": "info",
+     "measured": 0.0651,
+     "limit": [
+      0.029,
+      0.033
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bill"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_band",
+     "about": "till's middle is 0.61 down (the middle band is 0.45 to 0.62).",
+     "verdict": "pass",
+     "measured": 0.612,
+     "limit": [
+      0.45,
+      0.62
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "till"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_share",
+     "about": "till covers at most 0.9% of the frame (its box; limit 2%).",
+     "verdict": "pass",
+     "measured": 0.0089,
+     "limit": 0.02,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "till"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_band",
+     "about": "bag rack's middle is 0.75 down (the middle band is 0.45 to 0.62).",
+     "verdict": "look",
+     "measured": 0.747,
+     "limit": [
+      0.45,
+      0.62
+     ],
+     "fix": "Move bag rack into the middle band, unless only a part of it shows (the checker takes the middle of what shows).",
+     "estimate": true,
+     "things": [
+      "bag rack"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_share",
+     "about": "bag rack covers at most 3.3% of the frame (its box; limit 2%).",
+     "verdict": "look",
+     "measured": 0.0329,
+     "limit": 0.02,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bag rack"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_band",
+     "about": "crates does not show.",
+     "verdict": "info",
+     "measured": null,
+     "limit": null,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "crates"
+     ]
+    },
+    {
+     "rule": "rule8_bottom_left_share",
+     "about": "In the bottom-left quarter, where the eye enters, the boxes cover: basket 0.7%, divider 0.1%, till 0.9%, bill stand 0.2% (limit 1% a thing; a box covers more than the thing in it, so these are upper bounds).",
+     "verdict": "pass",
+     "measured": 0.0089,
+     "limit": 0.01,
+     "fix": "",
+     "estimate": true,
+     "things": [],
+     "rows": [
+      {
+       "thing": "basket",
+       "share": 0.0071,
+       "limit": 0.01
+      },
+      {
+       "thing": "divider",
+       "share": 0.0005,
+       "limit": 0.01
+      },
+      {
+       "thing": "till",
+       "share": 0.0089,
+       "limit": 0.01
+      },
+      {
+       "thing": "bill stand",
+       "share": 0.0019,
+       "limit": 0.01
+      }
+     ]
+    },
+    {
+     "rule": "sign_facing",
+     "about": "bill's lettered face points 5.9 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 5.9,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "bill"
+     ],
+     "turn_to_face_camera_degrees": -5.9
+    },
+    {
+     "rule": "sign_facing",
+     "about": "bread label's lettered face points 1.4 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 1.45,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "bread label"
+     ],
+     "turn_to_face_camera_degrees": -1.45
+    },
+    {
+     "rule": "sign_facing",
+     "about": "milk label's lettered face points 5.5 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 5.5,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "milk label"
+     ],
+     "turn_to_face_camera_degrees": -5.5
+    },
+    {
+     "rule": "sign_facing",
+     "about": "butter label's lettered face points 2.5 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 2.49,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "butter label"
+     ],
+     "turn_to_face_camera_degrees": -2.49
+    },
+    {
+     "rule": "sign_facing",
+     "about": "cheese label's lettered face points 6.2 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 6.19,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "cheese label"
+     ],
+     "turn_to_face_camera_degrees": -6.19
+    },
+    {
+     "rule": "sign_facing",
+     "about": "checkout sign's lettered face points 4.9 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 4.88,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "checkout sign"
+     ],
+     "turn_to_face_camera_degrees": -4.88
+    },
+    {
+     "rule": "sign_facing",
+     "about": "petrol fascia's lettered face points 7.9 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 7.87,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "petrol fascia"
+     ],
+     "turn_to_face_camera_degrees": 7.87
+    },
+    {
+     "rule": "slide_magnification",
+     "about": "The 0.70 m slide brings the nearest painted thing, basket (its nearest corner 2.21 m away at the end), 1.317 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 0.63 m.",
+     "verdict": "fail",
+     "measured": 1.3166,
+     "limit": 1.2862,
+     "fix": "Shorten the slide to 0.63 m, or move basket back 0.05 m.",
+     "estimate": false,
+     "things": [
+      "basket"
+     ]
+    },
+    {
+     "rule": "slide_magnification_ground",
+     "about": "The painted ground at the frame's bottom edge (2.75 m away) comes 1.255 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).",
+     "verdict": "info",
+     "measured": 1.2546,
+     "limit": 1.2862,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "plate_lens",
+     "about": "Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.",
+     "verdict": "pass",
+     "measured": 63.529,
+     "limit": 64.4,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "plate_rows",
+     "about": "For the slide's worst magnification the plate would need 2736 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).",
+     "verdict": "info",
+     "measured": 2736,
+     "limit": 2672,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    }
+   ],
+   "closed_forms": {
+    "one_degree_of_turn_share": 0.0267,
+    "meeting_point_down": 0.5,
+    "eye_above_floor": 1.6,
+    "deepest_for_reach_on_the_floor_metres": 6.8727,
+    "figure_quarter_height_distance_metres": 6.0136,
+    "head_pixels_at_6_metres": 63.2287,
+    "slide_limit": 1.2862,
+    "rule4_clear_overlap_metres_per_metre_of_depth": 0.0091,
+    "rule4_clear_gap_metres_per_metre_of_depth": 0.0109,
+    "deepest_for_reach_per_story_thing_metres": {
+     "bill": 1.976,
+     "basket": 3.067,
+     "divider": 3.071
+    }
+   },
+   "counts": {
+    "pass": 26,
+    "info": 4,
+    "look": 2,
+    "fail": 1
+   },
+   "verdict": "fail",
+   "assumptions": [
+    "bill: \"at\" read as its middle",
+    "bill stand: \"at\" read as its middle",
+    "basket: \"at\" read as its middle",
+    "divider: \"at\" read as its middle",
+    "till: \"at\" read as its middle",
+    "bag rack: \"at\" read as its middle",
+    "crates: \"at\" read as its middle"
+   ]
+  },
+  {
+   "camera": {
+    "composed": [
+     -0.1765,
+     -0.9771,
+     1.6
+    ],
+    "plate": [
+     -0.2401,
+     -1.6742,
+     1.6
+    ],
+    "turn_degrees": 0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_above_floor_metres": 1.6,
+    "floor": "floor",
+    "lined_up_across_metres": -0.1765,
+    "buttons_slide_metres": 0.0
+   },
+   "meeting_point": {
+    "across": 0.5,
+    "down": 0.5
+   },
+   "slide": {
+    "length_metres": 0.7,
+    "limit": 1.2862,
+    "painting_rows": 2672,
+    "nearest_painted_thing": "basket",
+    "depth_end": 2.788,
+    "magnification": 1.25,
+    "longest_slide_metres": 0.798,
+    "plate_lens_needed_degrees": 63.529,
+    "plate_rows_needed": 2597,
+    "turn_allowance_degrees": 1.378,
+    "sideways_allowance_metres": 0.0748
+   },
+   "name": "c1 planned",
+   "planned": true,
+   "kind_of_shot": [
+    "interior"
+   ],
+   "subject": "bill",
+   "support": "bill stand",
+   "story": [
+    "basket",
+    "divider"
+   ],
+   "must_read": [
+    "bill",
+    "bread label",
+    "milk label",
+    "butter label",
+    "cheese label",
+    "checkout sign",
+    "petrol fascia"
+   ],
+   "steps": [
+    "Rule 1: stand in line with bill stand's near (left) edge: -0.177 m across the street's lines (the line through it along the street then lands exactly where the lines meet, whatever the turn).",
+    "Rule 7: basket reaches 0.72 down (the rule's 0.70 plus a 0.02 margin for the render) with the camera 2.98 m back from its middle along the street: the furthest back the camera may stand.",
+    "Turn: straight along the lines.",
+    "The slide: 0.7 m toward bill's middle, level (the same height) and the same turn; it starts (the plate's spot) at (-0.240, -1.674, 1.600).",
+    "Planned camera: composed spot (-0.177, -0.977, 1.600), turned 0.00 degrees, eye 1.60 m above the floor."
+   ],
+   "checks": [
+    {
+     "rule": "rule2_eye_height",
+     "about": "The eye stands 1.60 m above floor (allowed 1.5 to 1.7 m for interior).",
+     "verdict": "pass",
+     "measured": 1.6,
+     "limit": [
+      1.5,
+      1.7
+     ],
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "rule2_level",
+     "about": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "verdict": "pass",
+     "measured": -0.0,
+     "limit": 0.5,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "rule1_meeting_point_gap",
+     "about": "The lines meet 0.500 across, 0.500 down; the nearest edge of bill stand is 0.000 of the width away (0 px across, 0 px down, inside its outline); bill stand's outline (an upright box); limit 0.03.",
+     "verdict": "pass",
+     "measured": 0.0,
+     "limit": 0.03,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bill stand"
+     ],
+     "dark": false,
+     "gap_share": 0.0,
+     "sideways_metres": 0.0
+    },
+    {
+     "rule": "rule7_story_reaches_down",
+     "about": "The lowest story thing is basket, reaching 0.720 down (limit 0.7).",
+     "verdict": "pass",
+     "measured": 0.72,
+     "limit": 0.7,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "basket"
+     ],
+     "nearer_metres": null
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "bill (to read) ends 0.772 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.7718,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bill"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "bread label (to read) ends 0.569 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.5694,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bread label"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "milk label (to read) ends 0.654 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.6541,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "milk label"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "butter label (to read) ends 0.588 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.5884,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "butter label"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "cheese label (to read) ends 0.669 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.6687,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "cheese label"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "checkout sign (to read) ends 0.778 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.7782,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "checkout sign"
+     ]
+    },
+    {
+     "rule": "rule12_must_read_right_edge",
+     "about": "petrol fascia (to read) ends 0.508 across (limit 0.9).",
+     "verdict": "pass",
+     "measured": 0.5084,
+     "limit": 0.9,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "petrol fascia"
+     ]
+    },
+    {
+     "rule": "rule12_story_right_edge",
+     "about": "Story things in the button strip (0.45 to 0.95 down) end at: basket 0.79, divider 0.74 across (limit 0.95).",
+     "verdict": "pass",
+     "measured": 0.7925,
+     "limit": 0.95,
+     "fix": "",
+     "estimate": true,
+     "things": [],
+     "rows": [
+      {
+       "thing": "basket",
+       "right": 0.7925
+      },
+      {
+       "thing": "divider",
+       "right": 0.7379
+      }
+     ]
+    },
+    {
+     "rule": "rule3_story_box",
+     "about": "The story things fill a box 0.31 wide and 0.28 tall (limit 0.4 x 0.5 for still_life); edges: basket (left), basket (right), bill (top), basket (bottom).",
+     "verdict": "pass",
+     "measured": [
+      0.314,
+      0.282
+     ],
+     "limit": [
+      0.4,
+      0.5
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bill",
+      "basket",
+      "divider"
+     ]
+    },
+    {
+     "rule": "rule3_story_together_metres",
+     "about": "The story things stand together in the street: the loneliest, basket, is 0.00 m from divider (limit 0.3 m between footprints).",
+     "verdict": "pass",
+     "measured": 0.0,
+     "limit": 0.3,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "basket",
+      "divider"
+     ]
+    },
+    {
+     "rule": "main_rule_spot_box",
+     "about": "The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of bill 0.64, 0.52; middle of the story things 0.64, 0.59) span 0.14 x 0.09 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "verdict": "pass",
+     "measured": [
+      0.139,
+      0.09
+     ],
+     "limit": [
+      0.3,
+      0.4
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": []
+    },
+    {
+     "rule": "subject_frame_share",
+     "about": "bill fills about 4.6% of the frame (its box; the liked picture's notice 2.9% to 3.3%; judged only for a still life).",
+     "verdict": "info",
+     "measured": 0.0458,
+     "limit": [
+      0.029,
+      0.033
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bill"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_band",
+     "about": "till's middle is 0.60 down (the middle band is 0.45 to 0.62).",
+     "verdict": "pass",
+     "measured": 0.595,
+     "limit": [
+      0.45,
+      0.62
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "till"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_share",
+     "about": "till covers at most 0.6% of the frame (its box; limit 2%).",
+     "verdict": "pass",
+     "measured": 0.0063,
+     "limit": 0.02,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "till"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_band",
+     "about": "bag rack's middle is 0.71 down (the middle band is 0.45 to 0.62).",
+     "verdict": "look",
+     "measured": 0.708,
+     "limit": [
+      0.45,
+      0.62
+     ],
+     "fix": "Move bag rack into the middle band, unless only a part of it shows (the checker takes the middle of what shows).",
+     "estimate": true,
+     "things": [
+      "bag rack"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_share",
+     "about": "bag rack covers at most 4.2% of the frame (its box; limit 2%).",
+     "verdict": "look",
+     "measured": 0.0422,
+     "limit": 0.02,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "bag rack"
+     ]
+    },
+    {
+     "rule": "rule8_work_prop_band",
+     "about": "crates does not show.",
+     "verdict": "info",
+     "measured": null,
+     "limit": null,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "crates"
+     ]
+    },
+    {
+     "rule": "rule8_bottom_left_share",
+     "about": "In the bottom-left quarter, where the eye enters, the boxes cover: basket 0.3%, divider 0.0%, till 0.6% (limit 1% a thing; a box covers more than the thing in it, so these are upper bounds).",
+     "verdict": "pass",
+     "measured": 0.0063,
+     "limit": 0.01,
+     "fix": "",
+     "estimate": true,
+     "things": [],
+     "rows": [
+      {
+       "thing": "basket",
+       "share": 0.0031,
+       "limit": 0.01
+      },
+      {
+       "thing": "divider",
+       "share": 0.0002,
+       "limit": 0.01
+      },
+      {
+       "thing": "till",
+       "share": 0.0063,
+       "limit": 0.01
+      }
+     ]
+    },
+    {
+     "rule": "sign_facing",
+     "about": "bill's lettered face points 5.2 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 5.22,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "bill"
+     ],
+     "turn_to_face_camera_degrees": -5.22
+    },
+    {
+     "rule": "sign_facing",
+     "about": "bread label's lettered face points 1.5 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 1.49,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "bread label"
+     ],
+     "turn_to_face_camera_degrees": -1.49
+    },
+    {
+     "rule": "sign_facing",
+     "about": "milk label's lettered face points 4.8 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 4.76,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "milk label"
+     ],
+     "turn_to_face_camera_degrees": -4.76
+    },
+    {
+     "rule": "sign_facing",
+     "about": "butter label's lettered face points 2.3 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 2.32,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "butter label"
+     ],
+     "turn_to_face_camera_degrees": -2.32
+    },
+    {
+     "rule": "sign_facing",
+     "about": "cheese label's lettered face points 5.3 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 5.27,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "cheese label"
+     ],
+     "turn_to_face_camera_degrees": -5.27
+    },
+    {
+     "rule": "sign_facing",
+     "about": "checkout sign's lettered face points 4.5 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 4.54,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "checkout sign"
+     ],
+     "turn_to_face_camera_degrees": -4.54
+    },
+    {
+     "rule": "sign_facing",
+     "about": "petrol fascia's lettered face points 7.7 degrees away from the camera (allowed 70: beyond it the face is seen edge-on).",
+     "verdict": "pass",
+     "measured": 7.7,
+     "limit": 70,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "petrol fascia"
+     ],
+     "turn_to_face_camera_degrees": 7.7
+    },
+    {
+     "rule": "slide_magnification",
+     "about": "The 0.70 m slide brings the nearest painted thing, basket (its nearest corner 2.79 m away at the end), 1.250 times nearer; the painting's 2672 rows allow 1.286; the longest slide for it is 0.80 m.",
+     "verdict": "pass",
+     "measured": 1.25,
+     "limit": 1.2862,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "basket"
+     ]
+    },
+    {
+     "rule": "slide_magnification_ground",
+     "about": "The painted ground at the frame's bottom edge (2.75 m away) comes 1.254 times nearer (not counted: nobody has judged whether its softness shows; --count-ground counts it).",
+     "verdict": "info",
+     "measured": 1.2536,
+     "limit": 1.2862,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "plate_lens",
+     "about": "Casting the film frame's corners and edge middles onto the floor every 10% of the slide, the plate needs a lens of at least 63.53 degrees (with the 0.03 fade band at its edge); the house plate lens is 64.4 (film 60.4 + 4.0); the camera may turn 1.38 degrees each way inside it.",
+     "verdict": "pass",
+     "measured": 63.529,
+     "limit": 64.4,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "plate_rows",
+     "about": "For the slide's worst magnification the plate would need 2597 rows of real detail; the painter returns 2672 (the house plate is 1536 x 2730).",
+     "verdict": "pass",
+     "measured": 2597,
+     "limit": 2672,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    }
+   ],
+   "closed_forms": {
+    "one_degree_of_turn_share": 0.0267,
+    "meeting_point_down": 0.5,
+    "eye_above_floor": 1.6,
+    "deepest_for_reach_on_the_floor_metres": 6.8727,
+    "figure_quarter_height_distance_metres": 6.0136,
+    "head_pixels_at_6_metres": 63.2287,
+    "slide_limit": 1.2862,
+    "rule4_clear_overlap_metres_per_metre_of_depth": 0.0091,
+    "rule4_clear_gap_metres_per_metre_of_depth": 0.0109,
+    "deepest_for_reach_per_story_thing_metres": {
+     "bill": 1.976,
+     "basket": 3.067,
+     "divider": 3.071
+    }
+   },
+   "counts": {
+    "pass": 28,
+    "info": 3,
+    "look": 2
+   },
+   "verdict": "look",
+   "assumptions": [
+    "bill: \"at\" read as its middle",
+    "bill stand: \"at\" read as its middle",
+    "basket: \"at\" read as its middle",
+    "divider: \"at\" read as its middle",
+    "till: \"at\" read as its middle",
+    "bag rack: \"at\" read as its middle",
+    "crates: \"at\" read as its middle"
+   ]
+  }
+ ],
+ "verdict": "fail",
+ "calculator": "plan_shot",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "shot_planner.figure_shoulder_width_metres": {
+   "value": 0.47,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "shot_planner.figure_box_metres": {
+   "value": [
+    0.64,
+    0.54
+   ],
+   "unit": "metres [across, front to back]",
+   "kind": "measured"
+  },
+  "people.figure_height_metres": {
+   "value": 1.75,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.film_vertical_fov_degrees": {
+   "value": 60.4,
+   "unit": "degrees, top to bottom",
+   "kind": "measured"
+  },
+  "frame.plate_vertical_fov_degrees": {
+   "value": 64.4,
+   "unit": "degrees, top to bottom",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.main_rule_spot_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule1_meeting_point_gap": {
+   "value": 0.03,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.interior.rules.rule2_eye_height": {
+   "value": [
+    1.5,
+    1.7
+   ],
+   "unit": "metres above the floor",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule3_story_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule3_story_together_metres": {
+   "value": 0.3,
+   "unit": "metres between footprints",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_near_touch": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_between_figures": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_subject_brightness_ratio": {
+   "value": 1.8,
+   "unit": "times the frame's mean",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_brightest_share_on_subject": {
+   "value": 0.4,
+   "unit": "share of the brightest 3%",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_brightest_share_in_story_box": {
+   "value": 0.75,
+   "unit": "share of the brightest 3%",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_nothing_in_story_as_bright": {
+   "value": 0.05,
+   "unit": "brightness below the subject's median",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.interior.rules.rule5_top_third_brightness": {
+   "value": 0.36,
+   "unit": "mean brightness (0 to 1)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_warm_share": {
+   "value": [
+    0.015,
+    0.03
+   ],
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_lit_from_below": {
+   "value": 0.1,
+   "unit": "(r - b)/(r + b) bottom minus top",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.interior.rules.rule7_story_reaches_down": {
+   "value": 0.7,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_work_prop_share": {
+   "value": 0.02,
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_bottom_left_share": {
+   "value": 0.01,
+   "unit": "share of the frame per thing",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule10_quiet_side_weight": {
+   "value": [
+    0.4,
+    0.48
+   ],
+   "unit": "share of the weight",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule10_nothing_on_quiet_side_outshines": {
+   "value": 1.0,
+   "unit": "times the subject's brightness",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_must_read_right_edge": {
+   "value": 0.9,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_story_right_edge": {
+   "value": 0.95,
+   "unit": "share of the width (in 0.45-0.95 down)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_title_zone_sky_share": {
+   "value": 0.85,
+   "unit": "share of the title zone that is sky",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.interior.rules.resting_on": {
+   "value": 0.03,
+   "unit": "metres of air above a declared support surface (floor, counter, shelf, table)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.slide_magnification": {
+   "value": "painting limit",
+   "unit": "times nearer at the nearest painted surface",
+   "kind": "measured"
+  },
+  "camera.eye_height_fix_margin_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "camera.level_tolerance_degrees": {
+   "value": 0.5,
+   "unit": "degrees of tilt or lean",
+   "kind": "judged"
+  },
+  "shot_planner.figure_shoes_below_feet_down": {
+   "value": 0.012,
+   "unit": "down the frame",
+   "kind": "measured"
+  },
+  "shot_planner.reach_aim_margin_down": {
+   "value": 0.02,
+   "unit": "down the frame, past rule 7's reach",
+   "kind": "judged"
+  },
+  "safe_area.button_strip_down": {
+   "value": [
+    0.45,
+    0.95
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "composing.story_depth_behind_support_metres": {
+   "value": 0.1,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "shot_planner.planning_spot_box": {
+   "value": [
+    0.3,
+    0.4
+   ],
+   "unit": "share of width x height",
+   "kind": "invented"
+  },
+  "composing.subject_frame_share": {
+   "value": [
+    0.029,
+    0.033
+   ],
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "composing.work_prop_middle_band_down": {
+   "value": [
+    0.45,
+    0.62
+   ],
+   "unit": "down the frame",
+   "kind": "measured"
+  },
+  "shot_planner.slide_sample_steps": {
+   "value": 10,
+   "unit": "steps along a slide",
+   "kind": "judged"
+  },
+  "people.backs_to_camera_min_distance_metres": {
+   "value": 6.0,
+   "unit": "metres from every camera spot along a slide",
+   "kind": "judged"
+  },
+  "people.head_height_metres": {
+   "value": 0.23,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "people.facing_head_max_pixels": {
+   "value": 24,
+   "unit": "pixels tall",
+   "kind": "invented"
+  },
+  "shot_planner.face_visible_dot_min": {
+   "value": -0.2,
+   "unit": "cosine between the figure's facing and the way to the camera",
+   "kind": "invented"
+  },
+  "shot_planner.crowd_min_figures": {
+   "value": 3,
+   "unit": "figures",
+   "kind": "invented"
+  },
+  "people.crowd_axis_min_angle_to_view_degrees": {
+   "value": 60,
+   "unit": "degrees",
+   "kind": "invented"
+  },
+  "shot_planner.crowd_axis_min_elongation": {
+   "value": 1.5,
+   "unit": "spread along the long axis over the spread across it",
+   "kind": "invented"
+  },
+  "shot_planner.sign_edge_on_degrees": {
+   "value": 70,
+   "unit": "degrees between a sign's facing and the way to the camera",
+   "kind": "judged"
+  },
+  "frame.painting_returned_size_pixels": {
+   "value": [
+    1504,
+    2672
+   ],
+   "unit": "pixels [width, height]",
+   "kind": "measured"
+  },
+  "camera.slide_magnification_borderline_share": {
+   "value": 0.01,
+   "unit": "share over the limit",
+   "kind": "invented"
+  },
+  "frame.plate_frame_edge_fade_share": {
+   "value": 0.03,
+   "unit": "share of the frame",
+   "kind": "judged"
+  },
+  "frame.plate_lens_extra_degrees": {
+   "value": 4.0,
+   "unit": "degrees",
+   "kind": "judged"
+  },
+  "frame.plate_width_pixels": {
+   "value": 1536,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.plate_height_pixels": {
+   "value": 2730,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "composing.clear_overlap_pixels_at_1536": {
+   "value": 20,
+   "unit": "pixels on a frame 1536 wide (scaled to the frame)",
+   "kind": "judged"
+  },
+  "composing.clear_gap_pixels_at_1536": {
+   "value": 25,
+   "unit": "pixels on a frame 1536 wide",
+   "kind": "judged"
+  }
+ }
+}

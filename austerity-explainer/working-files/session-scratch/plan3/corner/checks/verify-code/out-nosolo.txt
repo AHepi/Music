@@ -1,0 +1,11 @@
+[ WARN:0@2.005] global loadsave.cpp:278 findDecoder imread_('f-nosolo/solo/pail.png'): can't open/read file: check file path/integrity
+Traceback (most recent call last):
+  File "/home/user/work/paper-pop-up-film-kit/paper-film/tools/check_shot.py", line 1360, in <module>
+    main()
+    ~~~~^^
+  File "/home/user/work/paper-pop-up-film-kit/paper-film/tools/check_shot.py", line 1322, in main
+    shot = Shot(args)
+  File "/home/user/work/paper-pop-up-film-kit/paper-film/tools/check_shot.py", line 132, in __init__
+    self.alone[g] = solo.max(axis=2) > 8
+                    ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'max'

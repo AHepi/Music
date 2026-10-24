@@ -1,0 +1,99 @@
+Shot w3 (overview + crowd + dark_subject): subject two gates and the wall between; story brazier, man-1, man-2, man-3, man-4, man-5, man-6, man-7, no-2-man-1, no-2-man-2, no-2-man-3, no-2-man-4, no-2-man-5, no-2-man-6, no-2-man-7, no-2-man-8.
+Judged: Camera as given: composed spot (0.000, -7.950, 5.740), turned -0.00 degrees; no slide.
+Camera: composed spot [0.0, -7.95, 5.74], turned -0.0 degrees, eye 5.6 m above the view's floor (height 0.14 m); no slide; the lines meet 0.500 across, 0.500 down.
+Verdict: FAIL (1 FAIL, 3 info, 4 look, 19 ok). "look" = an estimate from boxes near its limit, or a judgement: confirm with the shot checker on the render.
+  [FAIL] rule7_story_reaches_down: The lowest story thing is no-2-man-6, reaching 0.673 down (limit 0.7). (estimate)
+         fix: Bring the camera 3.92 m nearer along its view (or no-2-man-6 that much nearer the camera): it may stand at most 24.71 m from no-2-man-6's front (its feet are now 28.63 m away); or, for an overview, raise the eye to 6.65 m (never tilt).
+  [look] crowd_shoulder_gaps: Crowd "men at No. 1": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).
+         fix: Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).
+  [look] crowd_visible_share: Crowd "men at No. 1": the most hidden figure, man-1, shows about 19% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move man-1 sideways into a gap, or check on the render.
+  [look] crowd_shoulder_gaps: Crowd "men at No. 2": gaps between neighbours' shoulders in a row (0.47 m shoulders): no-2-man-5-no-2-man-6 0.13 m, no-2-man-6-no-2-man-7 0.33 m, no-2-man-7-no-2-man-8 1.03 m, no-2-man-1-no-2-man-2 0.33 m, no-2-man-2-no-2-man-3 0.33 m, no-2-man-3-no-2-man-4 0.33 m (house range 0.3 to 0.5 m).
+         fix: Check by eye: no-2-man-5-no-2-man-6 0.13 m, no-2-man-7-no-2-man-8 1.03 m (a back-row man standing between two of the front row fills a wide gap).
+  [look] crowd_visible_share: Crowd "men at No. 2": the most hidden figure, no-2-man-1, shows about 5% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this). (estimate)
+         fix: Move no-2-man-1 sideways into a gap, or check on the render.
+  [ok] rule2_eye_height: The eye stands 5.60 m above the view's floor (height 0.14 m) (allowed 0.8 to 7.0 m for overview).
+  [ok] rule2_level: The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.
+  [ok] rule12_story_right_edge: Story things in the button strip (0.45 to 0.95 down) end at: two gates and the wall between 0.50, brazier 0.38, man-1 0.30, man-2 0.37, man-3 0.34, man-4 0.24, man-5 0.27, man-6 0.31, man-7 0.35, no-2-man-1 0.64, no-2-man-2 0.68, no-2-man-3 0.72, no-2-man-4 0.76, no-2-man-5 0.63, no-2-man-6 0.67, no-2-man-7 0.71, no-2-man-8 0.79 across (limit 0.95). (estimate)
+  [ok] rule3_story_box: The story things fill a box 0.58 wide and 0.07 tall (limit 0.8 x 0.5 for overview + crowd); edges: man-4 (left), no-2-man-8 (right), two gates and the wall between (top), no-2-man-6 (bottom). (estimate)
+  [ok] rule3_story_together_metres: The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 2.0 m between footprints). (estimate)
+  [ok] main_rule_spot_box: The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of two gates and the wall between 0.50, 0.61; middle of the story things 0.50, 0.64) span 0.00 x 0.14 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5). (estimate)
+  [ok] rule8_bottom_left_share: In the bottom-left quarter, where the eye enters, the boxes cover: man-1 0.2%, man-2 0.2%, man-3 0.2%, man-4 0.2%, man-5 0.2%, man-6 0.2%, man-7 0.2%, no-1-drum-petrol 0.1%, no-1-drum-diesel 0.1%, no-1-worker-1 0.1%, no-1-worker-2 0.1% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds). (estimate)
+  [ok] people_face_shows: no-1-worker-2's face or profile shows (it faces 84 degrees from the camera); its head is 9 px tall at 41.15 m (composed spot); the house limit 24 px is invented and untested.
+  [ok] people_face_shows: no-2-worker-2's face or profile shows (it faces 93 degrees from the camera); its head is 9 px tall at 43.00 m (composed spot); the house limit 24 px is invented and untested.
+  [ok] people_backs_distance: Figures with their backs to the camera, at the nearest camera place along the slide: man-6 28.57 m, no-2-man-6 28.63 m, man-5 28.67 m, no-2-man-5 28.73 m, no-2-man-7 28.75 m, man-7 28.77 m, no-2-man-8 28.90 m, man-2 29.24 m, man-4 29.40 m, no-2-man-3 29.43 m, no-2-man-1 29.45 m, man-3 29.50 m, no-2-man-4 29.53 m, no-2-man-2 29.57 m, man-1 29.81 m, no-1-worker-1 39.13 m, no-2-worker-1 39.44 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from this shot (w3): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 1" from view w1 (composed): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).
+  [ok] crowd_rows: Crowd "men at No. 1": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).
+  [ok] crowd_head_spacing: Crowd "men at No. 1" from this shot: the closest two heads, man-1 and man-6, are 1.12 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+  [ok] crowd_axis_angle: Crowd "men at No. 2" from this shot (w3): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 2" from view w2 (composed): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).
+  [ok] crowd_axis_angle: Crowd "men at No. 2" from view w4 (composed): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).
+  [ok] crowd_rows: Crowd "men at No. 2": 2 rows deep from this view (front to back: no-2-man-6, no-2-man-5, no-2-man-7, no-2-man-8; no-2-man-3, no-2-man-1, no-2-man-4, no-2-man-2).
+  [ok] crowd_head_spacing: Crowd "men at No. 2" from this shot: the closest two heads, no-2-man-1 and no-2-man-5, are 1.25 head widths apart on screen (at least 1.0, so each head can be counted). (estimate)
+  [info] rule1_meeting_point_gap: Not judged: two gates and the wall between has no size (give it under the shot's "things").
+  [info] overview_eye_for_story: For the story itself (no-2-man-6) to reach 0.7 down, the eye would have to stand 6.65 m high (it stands 5.74 m).
+  [info] slide_magnification: A still shot: no slide.
+  Assumed: brazier: a point (no size in the place facts); man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-2: a figure 1.51 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-3: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-4: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-5: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-6: a figure 1.83 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-2-man-1: a figure 1.76 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-2-man-2: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-2-man-3: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-2-man-4: a figure 1.73 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-2-man-5: a figure 1.72 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-2-man-6: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-2-man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); no-2-man-8: a figure 1.74 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given); two gates and the wall between: a point (the view's subject point; give its size under the shot's "things")
+
+
+Settings used (film-settings.json):
+  shot_planner.figure_shoulder_width_metres = 0.47 metres (judged)
+  shot_planner.figure_box_metres = [0.64, 0.54] metres [across, front to back] (measured)
+  people.figure_height_metres = 1.75 metres (judged)
+  frame.width_pixels = 1080 pixels (judged)
+  frame.height_pixels = 1920 pixels (judged)
+  frame.film_vertical_fov_degrees = 60.4 degrees, top to bottom (measured)
+  frame.plate_vertical_fov_degrees = 64.4 degrees, top to bottom (judged)
+  shot_kind_profiles.still_life.rules.main_rule_spot_box = [0.4, 0.5] share of width x height (measured)
+  shot_kind_profiles.dark_subject.rules.rule1_meeting_point_gap = 0.03 share of the width, across only (judged)
+  shot_kind_profiles.overview.rules.rule2_eye_height = [0.8, 7.0] metres above the surface the checker finds under the camera (judged)
+  shot_kind_profiles.overview.rules.rule3_story_box = [0.6, 0.5] share of width x height (judged)
+  shot_kind_profiles.crowd.rules.rule3_story_box = [0.8, 0.5] share of width x height (judged)
+  shot_kind_profiles.overview.rules.rule3_story_together_metres = 2.0 metres between footprints (judged)
+  shot_kind_profiles.still_life.rules.rule4_near_touch = {"overlap_min": 20, "gap_min": 25} pixels at 1536 wide (judged)
+  shot_kind_profiles.crowd.rules.rule4_between_figures = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_subject_brightness_ratio = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_brightest_share_on_subject = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_brightest_share_in_story_box = None replaced (judged)
+  shot_kind_profiles.dark_subject.rules.rule5_nothing_in_story_as_bright = None replaced (judged)
+  shot_kind_profiles.still_life.rules.rule5_top_third_brightness = 0.36 mean brightness (0 to 1) (measured)
+  shot_kind_profiles.still_life.rules.rule6_warm_share = [0.015, 0.03] share of the frame (measured)
+  shot_kind_profiles.dark_subject.rules.rule6_lit_from_below = None off (judged)
+  shot_kind_profiles.overview.rules.rule7_story_reaches_down = 0.7 down the frame (judged)
+  shot_kind_profiles.still_life.rules.rule8_work_prop_share = 0.02 share of the frame (measured)
+  shot_kind_profiles.crowd.rules.rule8_bottom_left_share = 0.02 share of the frame per story thing (the subject or a story prop) (judged)
+  shot_kind_profiles.overview.rules.rule10_quiet_side_weight = [0.4, 0.6] share of the weight (judged)
+  shot_kind_profiles.crowd.rules.rule10_quiet_side_weight = [0.4, 0.5] share of the weight (judged)
+  shot_kind_profiles.dark_subject.rules.rule10_nothing_on_quiet_side_outshines = None off (judged)
+  shot_kind_profiles.still_life.rules.rule12_must_read_right_edge = 0.9 share of the width (judged)
+  shot_kind_profiles.still_life.rules.rule12_story_right_edge = 0.95 share of the width (in 0.45-0.95 down) (judged)
+  shot_kind_profiles.crowd.rules.rule12_title_zone_sky_share = None replaced (judged)
+  shot_kind_profiles.still_life.rules.resting_on = the street (ground rays; "landed high" over 0.5 m) rule (judged)
+  shot_kind_profiles.still_life.rules.slide_magnification = painting limit times nearer at the nearest painted surface (measured)
+  shot_kind_profiles.dark_subject.rules.silhouette_contrast = 2.2 (surround + 0.05)/(subject + 0.05) over a band round the subject (measured)
+  camera.eye_height_fix_margin_metres = 0.05 metres (judged)
+  camera.level_tolerance_degrees = 0.5 degrees of tilt or lean (judged)
+  shot_planner.figure_shoes_below_feet_down = 0.012 down the frame (measured)
+  shot_planner.reach_aim_margin_down = 0.02 down the frame, past rule 7's reach (judged)
+  safe_area.button_strip_down = [0.45, 0.95] down the frame (judged)
+  shot_planner.planning_spot_box = [0.3, 0.4] share of width x height (invented)
+  composing.work_prop_middle_band_down = [0.45, 0.62] down the frame (measured)
+  shot_kind_profiles.still_life.rules.rule8_bottom_left_share = 0.01 share of the frame per thing (judged)
+  shot_planner.slide_sample_steps = 10 steps along a slide (judged)
+  people.backs_to_camera_min_distance_metres = 6.0 metres from every camera spot along a slide (judged)
+  people.head_height_metres = 0.23 metres (judged)
+  people.facing_head_max_pixels = 24 pixels tall (invented)
+  shot_planner.face_visible_dot_min = -0.2 cosine between the figure's facing and the way to the camera (invented)
+  shot_planner.crowd_min_figures = 3 figures (invented)
+  people.crowd_axis_min_angle_to_view_degrees = 60 degrees (invented)
+  shot_planner.crowd_axis_min_elongation = 1.5 spread along the long axis over the spread across it (invented)
+  people.crowd_back_row_behind_metres = 0.8 metres (judged)
+  people.crowd_shoulder_gap_metres = [0.3, 0.5] metres (judged)
+  shot_planner.figure_head_width_metres = 0.155 metres (measured)
+  people.crowd_head_spacing_head_widths = 1.0 head widths between head centres on screen (judged)
+  people.crowd_figure_visible_share_min = 0.5 share of each figure (judged)
+  shot_planner.sign_edge_on_degrees = 70 degrees between a sign's facing and the way to the camera (judged)
+  frame.painting_returned_size_pixels = [1504, 2672] pixels [width, height] (measured)
+  composing.clear_overlap_pixels_at_1536 = 20 pixels on a frame 1536 wide (scaled to the frame) (judged)
+  composing.clear_gap_pixels_at_1536 = 25 pixels on a frame 1536 wide (judged)

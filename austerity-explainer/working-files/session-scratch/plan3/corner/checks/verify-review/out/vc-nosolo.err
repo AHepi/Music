@@ -1,0 +1,11 @@
+[ WARN:0@1.507] global loadsave.cpp:278 findDecoder imread_('/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-code/f-nosolo/solo/pail.png'): can't open/read file: check file path/integrity
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-review/check_shot.snapshot.py", line 1630, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-review/check_shot.snapshot.py", line 1579, in main
+    shot = Shot(args)
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-review/check_shot.snapshot.py", line 135, in __init__
+    self.alone[g] = solo.max(axis=2) > 8
+                    ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'max'

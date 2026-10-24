@@ -1,0 +1,160 @@
+============================================================
+NAME: State picture thresholds | from: lessons-and-notes
+ * how_found : Workflows log 34 and make_state_picture.py: thresholds measured on the people test: 6 levels alone left man-shaped shadow ends over 6.8% of the frame; adding a blurred 3-level 'faint' test left under 4 levels everywhere but 0.04%.
+ * final_value_or_rule : --threshold 6, --faint 3 (blurred 10 px), widen 12, soften 5, outline widen 6; PNG only; must equal the main painting outside the mask.
+ * evidence : Workflows.md:251-254; film-kit/paper-film/tools/make_state_picture.py header
+ * computable_from : both plates + both paintings + outlines
+ * proposed_calculation : Already computed, including a noise re-measure per view (warns if threshold < 3 x noise).
+ * already_automatic : In the film kit only (not in the plugin kit).
+============================================================
+NAME: State-picture mask thresholds | from: redesign-rounds
+ * how_found : Round 2 compared thresholds 4, 6, 8, 10 and 14, alone and with a lower threshold for faint smooth changes, and mapped what each left behind; measured render noise (0.2 to 0.6) and JPEG noise (99th percentile 2 after blur).
+ * final_value_or_rule : Blur both plates 2 px; difference = largest colour channel; changed if > 6 levels, or if the 10 px-blurred difference > 3 (faint shadows). Clear specks, widen 12 px, soften 5 px, outline widen 6 px (for a 1536-wide plate; scales with width). 6 alone left 6.8% of the frame > 3 levels off; 10 alone left 0.48% > 8; chosen settings leave 0.04% > 4. Tool warns if a threshold is under 3 x measured noise.
+ * evidence : KIT/paper-film/tools/make_state_picture.py docstring lines 19-50; round2-result.json figures.summary item 2
+ * computable_from : plate and helper plate, figure outlines
+ * proposed_calculation : Keep as is; also print the swap area at 4/6/8 and faint 2/3/4 for the view so the choice is visible.
+ * already_automatic : Yes (make_state_picture.py, film kit only).
+============================================================
+NAME: State picture mask thresholds (make_state_picture.py) | from: notice-corner-and-checker
+ * how_found : Round 2 of log 34 (people test): two renders of the same set differ under 1 level (99th percentile 0.2 to 0.6), JPEG adds up to 2; with 6 levels alone, man-shaped shadow ends (3 to 8 levels) stayed over 6.8% of the frame; 10 levels left 8 to 12; adding a smooth 3-level difference left under 4 levels except 0.04%.
+ * final_value_or_rule : Difference = largest channel after a 2 px blur; changed if over 6 levels, or if the 10 px-blurred difference is over 3. Specks opened by a 1.5 px disc, pieces under 60 px squared dropped, gaps closed by a 6 px disc; outlines widened 6; mask widened 12 then softened 5 (all for a 1536-wide plate, scaled by width/1536). Warn if a threshold is under 3 times the measured noise (99th percentile fine grain in the quarter of the frame furthest from the change).
+ * evidence : paper-film/tools/make_state_picture.py lines 20-47, 128-177
+ * computable_from : the plate and helper plate
+ * proposed_calculation : Already computed; make the noise measurement choose the thresholds automatically: threshold = max(6, 3*noise), faint = max(3, 3*noise_smooth).
+ * already_automatic : Tool in the kit only (not in the plugin kit).
+============================================================
+NAME: State picture mask thresholds (make_state_picture.py) | from: tools-and-plugin-gap
+ * how_found : Log 34 round 2: measured render noise (99th pct 0.2-0.6 levels) and JPEG noise (up to 2); 6 levels alone left man-shaped shadow ends over 6.8% of the frame; adding a 10-px-blurred difference down to 3 levels left < 4 levels everywhere but 0.04%. JPEG output changed every pixel (0.48 avg, up to 9) so output is lossless.
+ * final_value_or_rule : --threshold 6, --faint 3 (on a 10 px blur), plates blurred 2 px first, max of RGB channels, --widen 12, --soften 5, --outline-widen 6; output PNG/lossless WebP; residual outside mask must be exactly 0; warns if threshold < 3x measured noise.
+ * evidence : film-kit/paper-film/tools/make_state_picture.py lines 8-50, 128-136
+ * computable_from : main painting, second painting, plate, helper plate, figure outlines
+ * proposed_calculation : Already self-calibrating (noise measured per view); expose the printed coverage table in the plugin skill.
+ * already_automatic : Yes, in the film kit; missing from the plugin kit.
+============================================================
+NAME: State pictures are lossless and read back exactly | from: redesign-rounds
+ * how_found : Round 2 check: writing the state picture as JPEG 93 moved the whole frame 0.48 levels on average and up to 9 outside the mask.
+ * final_value_or_rule : Write PNG or lossless WebP only (JPEG refused); read back; largest difference from the main painting where the mask is zero must be 0 levels (stops otherwise).
+ * evidence : make_state_picture.py docstring lines 41-46; round2-result.json checked.findings[8]; round3-result.json fixes.summary
+ * computable_from : the files
+ * proposed_calculation : Already automatic.
+ * already_automatic : Yes (film kit only).
+============================================================
+NAME: State pictures must be lossless and exact outside the mask | from: notice-corner-and-checker
+ * how_found : Round 2: saving again as JPEG changed every pixel (0.48 levels on average, up to 9 outside the mask).
+ * final_value_or_rule : Write PNG (compression 6) or lossless WebP (quality 101); read back; the largest difference from the main painting where the mask is 0 must be 0 levels, else stop. Paintings used as main paintings are kept as PNG too.
+ * evidence : make_state_picture.py lines 70-71, 124-127, 194-225; make_behind_picture.py lines 78-79, 100-106; people-test-paintings.json kept_lossless
+ * computable_from : file type
+ * proposed_calculation : Automatic; extend the rule to every painting saved for the film.
+ * already_automatic : Yes inside both tools (kit only).
+============================================================
+NAME: Second paintings differ everywhere: swap only inside a mask | from: redesign-rounds
+ * how_found : Round 1 check: the free test swapped the whole picture; with two real paintings every brushstroke would change at the cut. People test paintings: the two paintings differ by 8.5 levels on average outside the mask.
+ * final_value_or_rule : Never cut to a whole second painting; a state picture = main painting outside the mask + second painting inside it. Paid test mask: 38.3% fully plus 8.2% partly.
+ * evidence : round1-result.json checked.findings[1]; people-test-paintings.json state_picture.measured
+ * computable_from : two paintings, two plates
+ * proposed_calculation : make_state_picture.py (below); assert the cut swaps no pixel outside the mask.
+ * already_automatic : Yes in the film kit (make_state_picture.py); not in the plugin kit.
+============================================================
+NAME: Changes on a held shot (state pictures) | from: story-log
+ * how_found : Log 34: changes on a held shot (the men gone, the windows lit) are made by swapping only the area that changes. Measured on the people test's plates: two renders of the same set differ by under 1 level of grain.
+ * final_value_or_rule : make_state_picture.py: a pixel counts as changed if, after a 2 px blur, its largest colour difference is over 6 levels, or over 3 levels after a 10 px blur. The mask is cleared of specks, widened, then softened.
+ * evidence : story L1363 (log 34); film-kit/paper-film/tools/make_state_picture.py lines 1-25
+ * computable_from : two plates (with and without the change) and the outlines
+ * proposed_calculation : Already a calculation.
+ * already_automatic : In the film kit only. make_state_picture.py and make_behind_picture.py are NOT in the plugin kit.
+============================================================
+NAME: Cut or blend, from the size of the change | from: redesign-rounds
+ * how_found : Swap areas measured every round: people test 42% (long shadows); Works round 3 men gone 6.5 to 8%, slowed 5.2 to 6.5%, working 41 to 50%; round 4 men gone 9.3%, slowed 8.5%, behind 5.6%, working 75.7% once No. 1's beam lit the lane.
+ * final_value_or_rule : A time cut where the mask is small (about 10% or less: the men going); a blend (0.8 to 1.5 s) where it is large (windows lighting, 41 to 76%). States reached by a cut keep the spill lights of the state before, so plates differ only where the men stood.
+ * evidence : round3-result.json works.summary and NOT DONE 'working state picture swaps 41%'; round4-result.json set.summary 'State pictures'; assemble_works.py lines 222-230 (STATES note on spill)
+ * computable_from : plate pairs per change, script events
+ * proposed_calculation : area = mask share; if area <= 0.12 -> time cut; else blend over 0.8 s + 0.7 s x (area/0.75); warn if a cut is asked for over 0.12. Check that lights not tied to the change have identical settings in both plates.
+ * already_automatic : No.
+============================================================
+NAME: One helper plate per separately timed change | from: redesign-rounds
+ * how_found : Round 3 effects: 'go' needed W1 'men gone, windows still dark' or the mask couldn't keep the windows dark until 'start'. Round 3 pages: No. 1's doorway lit as soon as the slide started (behind picture had it lit) -> 'quiet, no men' plate. Round 4 pages: one slowed picture held both the dark windows and the men, so a window blend on 'slows' would fade the men in as ghosts -> needs a windows-only slowed picture.
+ * final_value_or_rule : Every change that happens on its own word needs its own plate pair: men gone (windows dark), working (windows lit), quiet-no-men (behind picture), slowed-windows-only, slowed-with-men.
+ * evidence : round3-result.json effects.summary 'One more helper plate'; round3-result.json pages.summary item 2; round4-result.json pageFixes.summary 'One thing page 12 will need'
+ * computable_from : script events (state changes and their words) per view
+ * proposed_calculation : From the page events, list per view the ordered state changes; each distinct (view, state after change k) needs a plate; derive the plate list and the state-picture commands automatically; flag a state change that bundles two changes timed on different words.
+ * already_automatic : No.
+============================================================
+NAME: Behind picture is the same state as the main picture | from: redesign-rounds
+ * how_found : Round 3 pages: during page 3's slide No. 1's doorway lit up as soon as the camera moved, long before 'go', because the behind picture came from the working plate.
+ * final_value_or_rule : The behind picture (shown where near things stood once the camera moves) is made from a plate of the same state with only the near things left out ('quiet, no men'); swap area 5.6 to 5.7%.
+ * evidence : round3-result.json pages.summary item 2; assemble_works.py STATES 'quiet, no men' lines 243-246
+ * computable_from : view's main state
+ * proposed_calculation : For each sliding view: behind plate = main state with the near story things hidden; check the behind mask touches only areas behind those things.
+ * already_automatic : No.
+============================================================
+NAME: Behind picture by filling in (make_behind_picture.py) | from: notice-corner-and-checker
+ * how_found : Round 3 of log 34: using another picture of the view as the behind picture also lit windows and a doorway behind the waiting men the moment the slide began.
+ * final_value_or_rule : Main painting everywhere except inside the near things' outlines widened 10 px, filled from round about (OpenCV Telea, radius 9), sizes for a 1536-wide plate; written as PNG and checked 0 levels off outside. A state picture from a helper plate drawn without the near things is truer when one exists.
+ * evidence : paper-film/tools/make_behind_picture.py lines 1-31, 84-106
+ * computable_from : the main painting and near outlines
+ * proposed_calculation : Automatic when no helper plate exists for the near things; otherwise use make_state_picture.py with that helper plate.
+ * already_automatic : Tool in kit only (not in the plugin kit).
+============================================================
+NAME: Time cut is the default; fade only as fallback | from: redesign-rounds
+ * how_found : Plan T9; round 3 and 4 tested the go=swing fallback: men see-through for about a second while fading.
+ * final_value_or_rule : Default: a time cut on the spoken word to the state picture; fallback: gate swings in 0.8 s and men fade in 1.2 s inside the swing (two set draws). A state changes only while the camera holds; cards may change during a slide.
+ * evidence : PLAN lines 132-143 and 1467; round4-result.json pageFixes.summary item 5
+ * computable_from : script events, camera moves
+ * proposed_calculation : Reject any state change scheduled inside a slide's time span; schedule cuts on the named word's start time.
+ * already_automatic : No (camera_audit.py checks the camera, not state timing).
+============================================================
+NAME: Keep state changes small: no long shadows from things that come and go | from: notice-corner-and-checker
+ * how_found : Round 2: the people-test mask covered 42% of the frame (32% at 6 levels alone) because the men's long shadows and the fire light they blocked changed. Round 3: men drawn casting no long shadows with a small soft patch at their feet: mask 7% (W1 men gone) and 5% (W2 slowed). Plates fell from 25 to about 6 minutes when only the fire, the lit doorways and the sky cast shadows.
+ * final_value_or_rule : Things that come and go cast no long shadows and don't block the fire's light; each gets a small soft shadow at its feet; helper plates keep the yards' lighting the same as the main plate. Flag a mask over about 15% (W1 working swapped 76% at 'start', round 4).
+ * evidence : round2-result.json; round3-result.json 'State pictures' and 'Speed'; round4-result.json finding 15; make_state_picture.py docstring lines 44-46
+ * computable_from : which groups differ between the two states and which lights cast shadows on them
+ * proposed_calculation : Before rendering a helper plate: turn off shadow casting for the changing groups (Blender visible_shadow false) and add contact shadows; predict the mask as outlines widened 12 px; after rendering, fail if the mask exceeds 15% of the frame.
+ * already_automatic : No; done by hand in the Works scripts.
+============================================================
+NAME: People and their long shadows; the state area must stay small | from: tools-and-plugin-gap
+ * how_found : People test (log 34): the painter left the men's long shadows when asked to remove them and the swap area grew to 46% of the frame for people covering 6% (round 2: 42%). Plates were redrawn with no long shadows from the men (a small soft patch at their feet). Lesson 135.
+ * final_value_or_rule : Figures cast no long shadows from fire or lamps in plates; foot shadow patch only; state mask should cover little more than the figures and feet.
+ * evidence : works-shot.json decisions.men_shadows; make_state_picture.py docstring ('Cost'); round2-result.json finding 17
+ * computable_from : plate and helper plate, figure outlines (shot_facts)
+ * proposed_calculation : make_state_picture.py already prints mask coverage; add a ratio check: mask area / figure-outline area <= 3, else warn 'figures throw shadows or block light'; in the Blender assembly set cast_shadow False for figures on every light except a foot-patch.
+ * already_automatic : Coverage is printed by make_state_picture.py (film kit only); the ratio rule and shadow switch are manual.
+============================================================
+NAME: Which groups to pass as --outlines for a state picture | from: notice-corner-and-checker
+ * how_found : Works check files for each state (w1 quiet vs w1 working: men 1 to 7 vs 'people at work' and 'pop-up crates').
+ * final_value_or_rule : The groups present in one state and absent or changed in the other, measured for the plate's own camera and lens (shot_facts.py --fov plate lens).
+ * evidence : examples/inflation-chapter-2-newcomers/works-w1-shot-check.json and works-w1-working-shot-check.json; make_state_picture.py lines 104-119
+ * computable_from : the two states' check files
+ * proposed_calculation : outlines = symmetric difference of the two check files' group lists, plus groups whose facts (position, visible area) differ by more than 1%.
+ * already_automatic : No.
+============================================================
+NAME: The window group that flickers must be in the frame | from: redesign-rounds
+ * how_found : Round 3 check: No. 2's mill windows were not in W2's frame at all (the gable had a loft door), so 'windows blazing' could not be seen. Round 4 replaced the loft door with three tall mill windows in the window groups.
+ * final_value_or_rule : Each state's visible cue (lit windows, smoke, gate) must project inside the frame, below the title band, in every view that shows that state.
+ * evidence : round3-result.json checked.findings[2]; round4-result.json set.summary 'No. 2's gable'
+ * computable_from : window group bounding boxes, camera, script states per view
+ * proposed_calculation : For each (view, state) list the cue objects; project their boxes; require at least 60% of each cue's area inside [0, 1] x [title bottom, 1] at the composed spot.
+ * already_automatic : No.
+============================================================
+NAME: Show people at work where the story says 'flat out' or 'they go in' | from: redesign-rounds
+ * how_found : Round 4 critic: both lit doorways showed an empty cream room; the men vanished at 'go' but never appeared inside; the flat-out factory read 'open late or deserted'. Round 5 added workers.
+ * final_value_or_rule : Two dark figures at the machines inside each lit doorway (No. 2 in every No. 2 plate, one in the slowed state; No. 1 only in the working and men-gone plates), from behind or side-on, cloth 0.025/0.024/0.026, 17 m or more from every camera (heads 20 to 24 px), spill lights linked to skip them so they stay dark against the lit back wall.
+ * evidence : round5-set/tools/new_layout.txt WORKERS; assemble_works.py lines 959-973 and 1206-1212; round4-result.json critique.findings[0]
+ * computable_from : script (which states need 'busy' or 'going in'), scene
+ * proposed_calculation : From the script's state list, any state described as busy or working must contain at least one figure inside a lit area of the frame; check its projected head <= 24 px and its luminance below the lit wall behind it by a ratio of at least 3.
+ * already_automatic : No.
+============================================================
+NAME: Windows in step groups; no merged glow | from: redesign-rounds
+ * how_found : Plan F4 (build_factory merged all windows); round 2 built separate panes in three named thirds per factory.
+ * final_value_or_rule : Every pane its own piece in groups <prefix>-windows-step-1 to 3 (No. 1: 25, 23, 26; No. 2: 26, 27, 27 plus the doorway); lit and dark glass materials kept; windows change in steps, the set redrawn once per step.
+ * evidence : round2-result.json factories.summary and tested; works-effects.js header
+ * computable_from : script states (fractions lit)
+ * proposed_calculation : Split panes into N groups by x order where N = the number of distinct lit fractions in the script's states.
+ * already_automatic : Yes in build_factories.py (film kit).
+============================================================
+NAME: A time cut of people alone reads as a glitch | from: tools-and-plugin-gap
+ * how_found : People test (log 34): a first-time viewer read the men blinking out as a fault; nothing else changed and the fire even looked bigger. Lesson 136. Fix in the Works: men appear working inside, windows light, chimney smokes.
+ * final_value_or_rule : Something else must change with the people (light later, fire lower, the people seen elsewhere); fallback a 1.2 s blend inside a 0.8 s gate swing in 6 steps.
+ * evidence : Lessons 136; page-3.js (inflation-chapter-2-newcomers) GO 'swing' fallback; 34 Plan 'How the men come and go'
+ * computable_from : judgement only (a planning rule)
+ * proposed_calculation : Planning checklist only: for each state change listed in the shot list, require at least one non-figure change in the same moment.
+ * already_automatic : No.

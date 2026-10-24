@@ -1,0 +1,17 @@
+{
+ "object_count": 11,
+ "triangle_count": 153378,
+ "uses_real_displacement": [],
+ "build_seconds": 0.9,
+ "known_flaws": [
+  "From the standard tall camera only a few houses at the right edge show, and the headframe leg, track and coal heaps hide part of them; the rest of the village shows from other angles.",
+  "The village stands on a gently rising hillside that this part adds on top of the shared ground (Village hillside, about 10 cm below the ground where it begins). It relies on the real ground being there; if the ground part ends before x = 84, y = 100 the hillside edge could show.",
+  "The ground_height() bank (about 12 m high 100 m out) can cover the lowest hills; the ground part should fade its bank out beyond about 60 m, or the near hills show only their tops.",
+  "The sky picture is 8-bit (no true bright sun): the orange glow is brightened inside the world nodes (\"Glow boost\"), and the sun is a separate light. At 4096 x 2048 it is soft when enlarged into a tall frame (about 2.5 times).",
+  "Brick and slate on the houses use the normal maps only (no real displacement): they are 40 m or more from the standard camera. Close up (under about 10 m) the brick relief is flat.",
+  "Window glass is a dark opaque pane or a glow, so there are no interiors and no curtains; lit windows are plain rectangles of light.",
+  "All houses follow one template (mirrored in pairs); the variety comes from tints, heights, door and frame colours and which windows glow. No gutters, downpipes, gardens or people.",
+  "The hills are smooth procedural rings with colours painted on their points (no rock texture, no trees); the far ring is lighter and bluer to fake haze. They need the camera clip end at 1000 m (the Blender default).",
+  "Four real point lights on the street lamps add a little render noise at low sample counts."
+ ]
+}

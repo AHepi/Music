@@ -1,0 +1,384 @@
+{
+ "about": "The painting tools' own numbers (kit/calculators/paint_request.py, after_painting.py, plan_states.py; log 35). Before a painting: the plate preflight and the prompt's choices. After it: the line-up, figure, tone and style checks. For held shots: which helper plates, cut or blend. Numbers shared with other tools are read from their sections (painting, state_pictures, people, money, composing).",
+ "paint_request": {
+  "about": "Plate preflight and prompt building (paint_request.py).",
+  "keep_min_frame_share": {
+   "value": 0.0005,
+   "unit": "share of the frame",
+   "kind": "judged",
+   "source": "Design (log 35) said 0.1%; the people test's ledger kept the colliery's shut gates, which show 0.08% of its plate, so the limit is 0.05%. Hidden groups (the notice corner's barrel, 0%) still drop out"
+  },
+  "far_metres": {
+   "value": 10,
+   "unit": "metres from the plate camera",
+   "kind": "judged",
+   "source": "Design (log 35): 'small, far up the street' beyond 10 m; notice corner plate facts: handcart 12.2 m, sacks 15.2 m, dustbins 20.8 m were written 'far up on the left'"
+  },
+  "near_figure_metres": {
+   "value": 15,
+   "unit": "metres from the plate camera",
+   "kind": "judged",
+   "source": "Design (log 35): people split into near (under 15 m) and far; people test near men 6.6 to 8.9 m, walkers 42 to 55 m"
+  },
+  "thin_share_named": {
+   "value": 0.03,
+   "unit": "share of a group's showing pixels that are thin",
+   "kind": "judged",
+   "source": "Set on the notice corner plate (scratchpad plan3/corner/final/plate-facts-3): the chair's rungs are 4.7% of the chair and the ledger named them; nothing the ledger left out lies between 3% and 4.7% except the handcart (7.3%)"
+  },
+  "thin_share_remove_or_thicken": {
+   "value": 0.05,
+   "unit": "share of a story group's showing pixels that are thin",
+   "kind": "judged",
+   "source": "Design (log 35): thin over 5% of a group: remove or thicken, else name it in the prompt (log 31 removed the pail's wire handle)"
+  },
+  "pair_band_factor": {
+   "value": 2,
+   "unit": "times the clear overlap (20 px) and clear gap (25 px) at 1536 wide",
+   "kind": "judged",
+   "source": "Design (log 35): edges that meet or nearly meet = signed distance between -2 x overlap and 2 x gap"
+  },
+  "warm_owner_share_min": {
+   "value": 0.015,
+   "unit": "share of the plate's warm pixels",
+   "kind": "judged",
+   "source": "Design (log 35) said 10%; on the notice corner plate the notice owns 79% of the warm pixels, so 10% named only the board and the lamps against the five places the ledger named. At 1.5% (with every group holding a fire or a lamp, place facts emitters) the tool names the ledger's five places on the notice corner (its lit windows hold 1.9% of the warm pixels; the nearest group not named holds 1.2%) and the people test's four"
+  },
+  "darker_than_subject_share": {
+   "value": 0.5,
+   "unit": "a story prop's 95th-percentile brightness over the subject's median",
+   "kind": "judged",
+   "source": "Notice corner plate 3: the ledger wrote 'darker than the notice' only for the pale chair (0.55); the drum (0.37) and pail (0.25) did not get it; lights (the lantern) are left out. One case"
+  },
+  "hollow_glow": {
+   "value": {
+    "top_share": 0.3,
+    "brighter_than_body": 2.0,
+    "share_max": 0.02
+   },
+   "unit": "top share of the prop's height; times the prop's median brightness; share of that top",
+   "kind": "judged",
+   "source": "Lesson 138 and the skeptic (log 35). Measured on the two plates painted: people test brazier 8.2% of its top 30% over 2 x its body (painted as a band), notice corner drum 0.4% (painted as a dark hollow). Two cases only"
+  },
+  "even_disc": {
+   "value": {
+    "spread_levels_max": 2,
+    "saturation_min": 0.5,
+    "value_min": 0.25,
+    "frame_share_min": 0.003,
+    "window_pixels_at_1080": 7
+   },
+   "unit": "levels, shares (0-1), share of the frame, pixels",
+   "kind": "judged",
+   "source": "Design (log 35) preflight (e); log 32 (an even orange disc in the drum's mouth would be painted as soup or a lid)"
+  },
+  "dark_hole_levels_max": {
+   "value": 5,
+   "unit": "levels of 255",
+   "kind": "judged",
+   "source": "Design (log 35) preflight (e); log 32 (a pure-black doorway made the shut gate read as open)"
+  },
+  "figure_surround_ratio_max_plate": {
+   "value": 0.5,
+   "unit": "a figure's brightness over its surround's, in the plate",
+   "kind": "judged",
+   "source": "People test (scratchpad redesign/people-paint/check-looks): the painter lifted the dark men from about 0.15 to 0.50; the two men already at 0.64 in the plate came out pale khaki (0.77 to 0.85) and were the weakest read"
+  },
+  "head_band_over_coat_max": {
+   "value": 1.0,
+   "unit": "head band brightness over coat brightness",
+   "kind": "judged",
+   "source": "Design (log 35) preflight (g): flag a head as bright as its coat (round 1: heads 80/54/35 over coats 39/25/14 read as bald dummies; round 3: band 12 against coat 25 passed)"
+  },
+  "coat_band_share_of_height": {
+   "value": [
+    0.2,
+    0.55
+   ],
+   "unit": "share of the figure's height from its top",
+   "kind": "invented",
+   "source": "The torso of a standing figure below the collar. Through the film's finish its lit half reproduces round 2's red coats (21/0/0 against 26/1/0 filmed) and round 3's olive coats (28/17/3 against 27/16/3)"
+  },
+  "red_hue_band_degrees": {
+   "value": [
+    345,
+    15
+   ],
+   "unit": "degrees of hue",
+   "kind": "judged",
+   "source": "Design (log 35) preflight (h); round 2 (coats sampled 26/1/0, 19/1/1, 23/2/1 in the film, pure red)"
+  },
+  "red_saturation_min": {
+   "value": 0.5,
+   "unit": "saturation (0-1) of the colour as filmed",
+   "kind": "judged",
+   "source": "Design (log 35) preflight (h)"
+  },
+  "film_look": {
+   "value": {
+    "exposure": 1.0,
+    "contrast": 1.04,
+    "saturation": 1.0,
+    "shadow_tint": [
+     0.44,
+     0.52,
+     0.56
+    ],
+    "highlight_tint": [
+     0.56,
+     0.5,
+     0.42
+    ],
+    "tint_amount": 0.35,
+    "lift": 0.015
+   },
+   "unit": "the stage's finish settings",
+   "kind": "judged",
+   "source": "paper-film/stage/cinema-stage.js finish pass (shader defaults; pages' LOOK contrast 1.04, DEFAULT_LOOK 1.05). A page's own exposure is given with --exposure (page 3's W1: 1.6)"
+  },
+  "megapixel_pixels": {
+   "value": 1000000,
+   "unit": "pixels a megapixel",
+   "kind": "judged",
+   "source": "Design (log 35): 1504 x 2672 = 4.02 MP, the plate 4.19 MP, the style picture 1.05 MP"
+  },
+  "head_band_pale_min_levels": {
+   "value": 40,
+   "unit": "levels of 255 (brightness of the band under the cap)",
+   "kind": "judged",
+   "source": "Round 1 (log 34): the faulty heads measured 80/54/35 (brightness about 58) over coats 39/25/14 (about 27). The round 2 and 3 plates' men by the fire have rim-lit head bands of 15 to 22 over near-black coats (7 to 10) and were painted with dark heads, so a head band is flagged only when it is also pale"
+  },
+  "dark_hole_frame_share_min": {
+   "value": 0.001,
+   "unit": "share of the frame (one connected near-black patch, anywhere)",
+   "kind": "judged",
+   "source": "Log 32: the doorway behind the colliery's gates was 0.21% of the plate under 5 levels in plates 1 and 2 (scratchpad plan3/corner/final) and read as an open gate; plate 3 (painted, kept) has 1 such pixel there. The design's 0.3% would have missed it"
+  }
+ },
+ "after_painting": {
+  "about": "Checks on a returned painting (after_painting.py).",
+  "align_floor": {
+   "value": 0.85,
+   "unit": "share of outline points on painting edges after lining up",
+   "kind": "judged",
+   "source": "Design and skeptic (log 35): fail if it ends under 0.85 (notice corner ended 0.956, people test 0.903)"
+  },
+  "align_gain_min": {
+   "value": 0.005,
+   "unit": "share",
+   "kind": "invented",
+   "source": "Skeptic (log 35): fail if lining up is no better than before; a gain under this counts as none (an already lined-up painting gains 0.001 and passes only if it is over the floor and the aim)"
+  },
+  "figure_edges": {
+   "value": {
+    "painting_canny": [
+     20,
+     50
+    ],
+    "plate_canny": [
+     8,
+     24
+    ],
+    "blur": 1.5,
+    "within_pixels": 3
+   },
+   "unit": "Canny thresholds, blur pixels, pixels",
+   "kind": "judged",
+   "source": "scratchpad redesign/people-paint/check-figures/scripts/chamfer.py (the figures helper's outline measure, log 34)"
+  },
+  "figure_outline_drop_max": {
+   "value": 0.05,
+   "unit": "share of the figure's outline within 3 px, below its own plate baseline",
+   "kind": "judged",
+   "source": "Skeptic (log 35): pass when within-3-px is no more than 0.05 below that figure's plate baseline (the hand-on-bar man's plate baseline is only 0.838)"
+  },
+  "figure_ring_pixels_at_1536": {
+   "value": {
+    "erode": 7,
+    "ring_inner": 13,
+    "ring_outer": 61
+   },
+   "unit": "pixels on a plate 1536 wide",
+   "kind": "judged",
+   "source": "scratchpad redesign/people-paint/check-looks/scripts/measure1.py (the looks helper's figure-to-surround measure)"
+  },
+  "figure_surround_ratio_max": {
+   "value": 0.35,
+   "unit": "a figure's brightness over its surround's, in the painting",
+   "kind": "invented",
+   "source": "People test: plate about 0.15, painting about 0.50, which 'turn mid-grey and blend into the road' (looks helper, log 34); the film gave the front men back about 0.20. Set between them; not yet tested on a painting a person approved"
+  },
+  "figure_surround_lift_max": {
+   "value": 1.5,
+   "unit": "times the plate's ratio",
+   "kind": "invented",
+   "source": "As figure_surround_ratio_max: the people test's dark men were lifted 3 to 3.6 times"
+  },
+  "head_widen_share_of_height": {
+   "value": 0.03,
+   "unit": "share of the figure's height",
+   "kind": "invented",
+   "source": "Widens the head region so ears and cheeks the painter put just outside the plate's outline count (painted outlines were about 3.6 px wider all round, log 34)"
+  },
+  "new_skin_pixels_look": {
+   "value": 50,
+   "unit": "skin-coloured pixels added on one head, at 1536 wide",
+   "kind": "invented",
+   "source": "People test: the hand-on-bar man's head went from 0 to 183 skin pixels (figures helper, log 34), judged invisible on a phone but not wanted; this asks a person to look"
+  },
+  "style_standard": {
+   "value": {
+    "brightness": 77.4,
+    "spread": 26.1,
+    "colour": 49.8,
+    "ink_share": 0.0671,
+    "line_width_pixels": 2.94,
+    "warm_ground_share": 0.197
+   },
+   "unit": "mean brightness and its spread (0-255), mean HSV saturation (0-255), share of ink lines, line width (px at 1536), warm share of the lower 45%",
+   "kind": "measured",
+   "source": "The notice corner painting the user kept (film-kit/assets/models/pit-village/notice-corner-painted.jpg), measured with the people test looks helper's measures (check-looks/scripts measure1.py, lines.py, warm.py): 77.4, 26.1, 50, 6.7%, 2.9 px, 19.7%"
+  },
+  "style_tolerance": {
+   "value": {
+    "brightness": 12,
+    "spread": 6,
+    "colour": 12,
+    "ink_share": 0.012,
+    "line_width_ratio": 1.3,
+    "warm_ground_ratio_min": 0.75
+   },
+   "unit": "levels, levels, levels, share, times, times",
+   "kind": "invented",
+   "source": "Set between the plate (brightness 48.9, colour 69, ink 5.3%, lines 4.2 px) and the paintings (people test 77.4, 45, 6.4%); the people test's warm ground (10.0% of the whole painting against 19.7%) was a must-fix. Warnings only (skeptic, log 35)"
+  },
+  "ink_line": {
+   "value": {
+    "blackhat_pixels": 21,
+    "blackhat_min": 18,
+    "dark_max": 45
+   },
+   "unit": "pixels and levels",
+   "kind": "judged",
+   "source": "scratchpad redesign/people-paint/check-looks/scripts/lines.py"
+  },
+  "warm_ground": {
+   "value": {
+    "red_minus_blue_min": 18,
+    "brightness_min": 45,
+    "ground_from_down": 0.55
+   },
+   "unit": "levels and share of the height",
+   "kind": "judged",
+   "source": "scratchpad redesign/people-paint/check-looks/scripts/warm.py"
+  },
+  "added_figure_blob": {
+   "value": {
+    "darker_than_surround": 0.6,
+    "surround_pixels_at_1536": 201,
+    "height_range_factor": [
+     0.6,
+     1.5
+    ],
+    "aspect_range": [
+     1.5,
+     6.0
+    ],
+    "fill_min": 0.45
+   },
+   "unit": "share of the surround's brightness, pixels, times the height of a 1.75 m person standing at the blob's feet (from the plate camera's eye and horizon), height over width, share of the box",
+   "kind": "invented",
+   "source": "Skeptic (log 35): count figure-sized blobs to catch added people. Tested only on the people test (the painter added nobody: 0 found) and on a planted figure; the street's own dark verticals (downpipes, doorways) are rejected because they are not a person's height for where they stand. The fill (0.45 of the box) rejects the people test's one dark door panel (0.36), which is a person's height for where it stands"
+  },
+  "shadow_band_pixels_at_1536": {
+   "value": [
+    10,
+    30
+   ],
+   "unit": "pixels beside each near prop",
+   "kind": "judged",
+   "source": "Design (log 35): the ground band 10-30 px beside each near prop"
+  },
+  "shadow_band_change_max_levels": {
+   "value": 2,
+   "unit": "levels between the main and the combined behind picture",
+   "kind": "judged",
+   "source": "Log 32 (lesson 122, 125): the pavement patch beside the pail stayed 70 to 71 once the shadows were kept, against 89 before"
+  },
+  "leftover_shadow": {
+   "value": {
+    "plate_over_helper_max": 0.75,
+    "brightening_share_min": 0.5,
+    "expected_min_levels": 3
+   },
+   "unit": "plate over helper plate brightness, share of the expected brightening, levels",
+   "kind": "judged",
+   "source": "People test painter-faults helper (log 34): the men's cast-shadow area is where the plate is under 0.75 of the helper plate; the people-out painting brightened it 0.7 L where the helper plate is 11.3 L brighter (lesson 135)"
+  }
+ },
+ "plan_states": {
+  "about": "Planning the helper plates and state pictures of held shots (plan_states.py).",
+  "cut_when_change_share_max": {
+   "value": 0.12,
+   "unit": "share of the frame the state picture swaps",
+   "kind": "judged",
+   "source": "Skeptic (log 35): 0.12 separates the men-gone cuts (round 3 7.2%, round 4 9.3%, round 5 10.3%) from the window blends (41 to 76%). NOTE: state_pictures.cut_when_mask_share_max says 0.10, which would make round 5's men-gone (10.3%) a blend"
+  },
+  "come_and_go_mask_over_outline_max": {
+   "value": 3.0,
+   "unit": "mask share over the changing things' outline share",
+   "kind": "judged",
+   "source": "Design (log 35); one bad case: the people test, 42.2% over 7.5% (5.6 times; 46% over 6% = 7.7 by the painter-faults helper). Works round 5 helper plates with no long shadows: men gone 1.9, behind 1.3"
+  },
+  "cue_inside_share_min": {
+   "value": 0.6,
+   "unit": "share of the cue's box inside the frame and below the title band",
+   "kind": "judged",
+   "source": "Design (log 35); round 3 (No. 2's windows were not in W2's frame)"
+  },
+  "near_parallax_pixels": {
+   "value": 10,
+   "unit": "pixels a near thing slides against what lies 1 m behind it, over the slide",
+   "kind": "judged",
+   "source": "Design (log 35) said 1 px. For props: on the notice corner's 1.5 m slide the ledger painted out pail 79, lantern 49, chair 48, drum 36, board 29 and lamp post 27 px (place facts) and kept the handcart (5.7 px), barrel, sacks and dustbins; any limit between 5.7 and 27 separates them. One case only"
+  },
+  "behind_gap_metres": {
+   "value": 1.0,
+   "unit": "metres between a near thing and what lies behind it, when not known",
+   "kind": "invented",
+   "source": "Without Blender's rays the tool assumes the set lies 1 m behind a near thing (a lower bound on how much it slides)"
+  },
+  "people_field_words": {
+   "value": [
+    "men",
+    "workers",
+    "people",
+    "figures",
+    "walkers",
+    "crowd",
+    "queue"
+   ],
+   "unit": "words in a state field's name that make it a people field",
+   "kind": "judged",
+   "source": "Lesson 136 (a time cut of people alone reads as a glitch); the Works' state fields men_1, men_2, workers_1, workers_2"
+  },
+  "busy_words": {
+   "value": [
+    "working",
+    "flat out",
+    "busy",
+    "at work",
+    "slowed"
+   ],
+   "unit": "words in a state's description that need people seen at work",
+   "kind": "judged",
+   "source": "Round 4 critic (log 34): a flat-out factory with nobody at work read as 'open late or deserted'; round 5 added workers"
+  },
+  "near_parallax_pixels_figures": {
+   "value": 2,
+   "unit": "pixels a near figure slides against what lies 1 m behind it, over the slide",
+   "kind": "judged",
+   "source": "The Works W1 (round 3 to 5): the behind picture hides all seven waiting men, who slide 2.2 to 4.9 px over the 1.2 m slide, and not the workers inside the doorways (0.3 to 1.6 px). People leave ghosts more readily than props (their painted outlines are about 3.7 px against 2.9 elsewhere, people test)"
+  }
+ }
+}

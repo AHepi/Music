@@ -1,0 +1,115 @@
+ "page_timing": {
+  "about": "Page timing and words on screen: calculators/plan_page_timing.py, paper-film/tools/page_events.mjs and paper-film/tools/check_page_layout.mjs (log 35). The other numbers these tools read live in timing, safe_area, camera and checking. Added by the page timing helper.",
+  "settle_after_join_seconds": {
+   "value": 0.15,
+   "unit": "seconds after a join ends, before the next page's first word",
+   "kind": "judged",
+   "source": "Skeptic (log 35): the pause after a page = join.after + join.length + about 0.15 s to settle, plus any hold; clamped to 1.1-1.7 s only for plain peels"
+  },
+  "join_clear_of_next_word_seconds": {
+   "value": 0.1,
+   "unit": "seconds",
+   "kind": "judged",
+   "source": "Design (log 35), 'Page turn timing': each join must end at least 0.1 s before the next page's first word"
+  },
+  "pause_longer_than_needed_seconds": {
+   "value": 0.3,
+   "unit": "seconds",
+   "kind": "invented",
+   "source": "plan_page_timing.py: a pause this much longer than its join needs is reported as information (the extra is a rest before the next page)"
+  },
+  "conclusion_on_screen_seconds": {
+   "value": 1.2,
+   "unit": "seconds from when it starts to appear until the cut (one frame short allowed)",
+   "kind": "judged",
+   "source": "Round 3 check (round3-result.json checked.findings[4]): '-> PRICES UP' on 'up' was up 0.65 s and could not be read; moved to 'prices' it was up 1.19 s before the cut and passed. That 1.2 s counts from appearing: at full strength it is 1.05 s (skeptic, log 35). timing.conclusion_full_strength_seconds names the same number but says full strength, which the accepted fix does not meet."
+  },
+  "typed_word_window_seconds": {
+   "value": 6.0,
+   "unit": "seconds either side of when the words show",
+   "kind": "judged",
+   "source": "Inventory (log 35) 'Words on screen are short forms of what is said' (+-6 s). The design's +-3 s would fail round 4's accepted FLAT OUT = WORKING AS HARD AS THEY CAN, shown 4.7 s after 'working'."
+  },
+  "overlap_opacity_min": {
+   "value": 0.1,
+   "unit": "strength (0 to 1) both lines must have to count as overlapping",
+   "kind": "judged",
+   "source": "Design (log 35) overlay lint: two text boxes overlapping with both alpha above 0.1"
+  },
+  "overlap_pixels_min": {
+   "value": 2,
+   "unit": "pixels two boxes must overlap by, across and down",
+   "kind": "invented",
+   "source": "plan_page_timing.py and check_page_layout.mjs: ignores boxes that only touch"
+  },
+  "number_hold_seconds": {
+   "value": [
+    0.5,
+    0.15
+   ],
+   "unit": "seconds, plus seconds per character shown",
+   "kind": "judged",
+   "source": "Log 19 (page 10's 5.6% never held still); inventory 'Numbers on screen held still and true to the ledger': 0.5 s + 0.15 s a character, about 1.5 s for 5.6%; at least timing.key_number_hold_seconds"
+  },
+  "count_end_after_word_max_seconds": {
+   "value": 0.1,
+   "unit": "seconds after the number's spoken word",
+   "kind": "judged",
+   "source": "Lesson 53 and the plugin guide 'Hold the key number still': a count finishes on its word (design: count end <= the number word + 0.1 s)"
+  },
+  "still_after_event_seconds": {
+   "value": 0.25,
+   "unit": "seconds after an event (or 0.05 s after its words are full, if later)",
+   "kind": "judged",
+   "source": "Design (log 35) 'Automatic still lists': every event + 0.25 s"
+  },
+  "page_turn_stills_after_last_word_seconds": {
+   "value": [
+    0.3,
+    0.7,
+    1.2
+   ],
+   "unit": "seconds after each page's last word",
+   "kind": "judged",
+   "source": "Workflows.md lines 120-121 (each last word + 0.7 s, drawn in one run of the chapter); design (log 35) adds 0.3 and 1.2 s"
+  },
+  "merge_stills_within_seconds": {
+   "value": 0.1,
+   "unit": "seconds",
+   "kind": "invented",
+   "source": "plan_page_timing.py: still times closer than this are drawn once"
+  },
+  "layout": {
+   "about": "check_page_layout.mjs: what it calls a pop, a hold and a moving camera.",
+   "pop_frames_max": {
+    "value": 2,
+    "unit": "frames: a thing that comes or goes in this many frames or fewer, outside a planned cut, is a pop",
+    "kind": "judged",
+    "source": "Design (log 35) page pose sampler: any change completed in under 3 frames that is not a planned cut (log 27's one-frame faults: the scissors' jump, the padlock's glow switching on); lesson 86"
+   },
+   "pop_strength_change": {
+    "value": 0.8,
+    "unit": "change in strength (0 to 1) that counts as coming or going",
+    "kind": "invented",
+    "source": "check_page_layout.mjs"
+   },
+   "hold_without_still_key_frames": {
+    "value": 15,
+    "unit": "frames of a held camera with no still key before it is reported",
+    "kind": "invented",
+    "source": "check_page_layout.mjs; a held shot without a still key draws the whole set every frame, about 5 times slower (design, log 35; filming.seconds_per_frame_* measured 0.9 s held against 4.3 s sliding)"
+   },
+   "camera_still_tolerance": {
+    "value": 0.0001,
+    "unit": "metres (and quaternion parts) a camera may differ between frames and still count as holding",
+    "kind": "invented",
+    "source": "check_page_layout.mjs (page_events.mjs rounds the camera to 0.0001 m)"
+   },
+   "jump_pixels_min": {
+    "value": 40,
+    "unit": "pixels a drawn thing's middle may move in one frame before it counts as a jump",
+    "kind": "invented",
+    "source": "check_page_layout.mjs; log 27's one-frame faults (the scissors' jump); old chapter 2's BARELY MOVE label flips 580 px between two frames"
+   }
+  }
+ }

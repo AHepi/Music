@@ -1,0 +1,110 @@
+{
+ "place": "works",
+ "view": "w4",
+ "subject": "no-2 gate",
+ "dark_subject": false,
+ "lights": [],
+ "lamps": [
+  {
+   "lamp": "no-1 gate lamp",
+   "box": [
+    2.0085245892233665,
+    0.29590119081557686,
+    2.0085245892233665,
+    0.29590119081557686
+   ],
+   "depth": 6.519999999999999,
+   "problems": []
+  },
+  {
+   "lamp": "no-2 gate lamp",
+   "box": [
+    -0.057498217756461356,
+    0.29590119081557686,
+    -0.057498217756461356,
+    0.29590119081557686
+   ],
+   "depth": 6.52,
+   "problems": []
+  },
+  {
+   "lamp": "lantern",
+   "box": [
+    1.6391592846146958,
+    0.5717589494152987,
+    1.6391592846146958,
+    0.5717589494152987
+   ],
+   "depth": 8.5,
+   "problems": []
+  }
+ ],
+ "shadow_casters": [],
+ "eevee": {
+  "shadow_pool_size": "1024",
+  "shadow_resolution_scale": 0.703125
+ },
+ "problems": [],
+ "calculator": "plan_lights plan",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light_planner.shadow_casting_kinds": {
+   "value": [
+    "key",
+    "fire",
+    "doorway",
+    "sky"
+   ],
+   "unit": "kinds of light that cast shadows (every other light casts none)",
+   "kind": "judged"
+  },
+  "light_planner.foot_patch_metres": {
+   "value": [
+    0.5,
+    0.35
+   ],
+   "unit": "metres (width, depth) of the soft shadow under a figure that casts no shadow",
+   "kind": "judged"
+  },
+  "light_planner.lamp_clear_of_subject_pixels": {
+   "value": 18,
+   "unit": "pixels on the film frame between a lamp and the subject's outline box",
+   "kind": "judged"
+  },
+  "camera.meeting_point_gap_share_of_width": {
+   "value": 0.03,
+   "unit": "share of the frame width",
+   "kind": "judged"
+  },
+  "light_planner.near_ground_light_max": {
+   "value": 0.025,
+   "unit": "W/m2 a light behind the camera may put on the ground at the frame's bottom edge",
+   "kind": "judged"
+  },
+  "frame.plate_width_pixels": {
+   "value": 1536,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "light.shadow_resolution_reference_width": {
+   "value": 1080,
+   "unit": "pixels (scale = min(1, 1080 / width))",
+   "kind": "judged"
+  },
+  "light.shadow_pool_size": {
+   "value": "1024",
+   "unit": "EEVEE setting",
+   "kind": "measured"
+  }
+ }
+}

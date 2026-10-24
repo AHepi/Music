@@ -1,0 +1,28 @@
+PASS  spread of typical pitch across pages: 2.2 semitones (at most 2.6; chapter 2 measured 2.2 and was accepted, chapter 1 3.0 and was not)
+  page  1: typical 139 Hz (+1.5 semitones), 6 raised, 0 loud words
+  page  2: typical 124 Hz (-0.5 semitones), 6 raised, 0 loud words
+  page  3: typical 124 Hz (-0.5 semitones), 10 raised, 0 loud words
+  page  4: typical 129 Hz (+0.2 semitones), 6 raised, 0 loud words
+  page  5: typical 122 Hz (-0.7 semitones), 12 raised, 0 loud words
+  page  6: typical 124 Hz (-0.6 semitones), 8 raised, 0 loud words
+  page  7: typical 133 Hz (+0.7 semitones), 4 raised, 0 loud words
+  page  8: typical 126 Hz (-0.2 semitones), 9 raised, 0 loud words
+  page  9: typical 133 Hz (+0.7 semitones), 7 raised, 0 loud words
+  page 10: typical 138 Hz (+1.3 semitones), 9 raised, 0 loud words
+LOOK  page 1: listen to "won't" +8.1, "inflation?" +9.0, "You've" +6.9, "felt" +8.8, "same" +6.9, "see" +9.3 (higher or louder than the page; a person decides)
+LOOK  page 2: listen to "Unemployment," +7.8, "war" +7.1, "partly" +6.4, "more" +8.6, "end" +10.1, "prices" +6.0 (higher or louder than the page; a person decides)
+LOOK  page 3: listen to "Now" +10.0, "picture" +10.9, "two" +6.2, "first," +8.3, "machines" +5.0, "in," +7.6, "second," +9.9, "every" +5.0 ... (higher or louder than the page; a person decides)
+LOOK  page 4: listen to "Homes" +8.7, "1915," +9.3, "pushed" +5.2, "quarter." +5.2, "twenty" +8.1, "Homes" +6.8 (higher or louder than the page; a person decides)
+LOOK  page 5: listen to "central" +9.4, "sets" +7.4, "double" +5.5, "new" +10.1, "own" +6.2, "soar." +5.2, "eight" +8.9, "After" +11.1 ... (higher or louder than the page; a person decides)
+LOOK  page 6: listen to "Prices" +6.4, "Then" +6.1, "French" +6.6, "government" +10.2, "keeps" +6.5, "paying" +7.7, "November," +7.4, "new" +6.8 (higher or louder than the page; a person decides)
+LOOK  page 7: listen to "Prices" +6.8, "everything" +6.0, "latest" +9.6, "prices" +6.1 (higher or louder than the page; a person decides)
+LOOK  page 8: listen to "new" +8.9, "or" +8.3, "on" +6.1, "twenty" +10.2, "our" +5.5, "House" +7.0, "independent" +5.8, "support" +7.3 ... (higher or louder than the page; a person decides)
+LOOK  page 9: listen to "usual" +9.1, "Bank" +8.3, "Loans" +5.0, "Within" +6.9, "Prices" +9.3, "Mattei" +8.9, "fewer" +9.3 (higher or louder than the page; a person decides)
+LOOK  page 10: listen to "our" +7.2, "pushed" +7.9, "quarter" +6.4, "end" +8.1, "two" +5.8, "ask" +9.1, "Spent" +7.4, "pays" +7.3 ... (higher or louder than the page; a person decides)
+Fix steadiness in the script first (one identical cue on every page, no capitals, no mood cues), then re-record only these pages.
+
+Settings used (film-settings.json):
+  sound.raised_voice_semitones = 5 semitones above the page's typical pitch (judged)
+  sound.loud_word_db = 6 dB above the page's typical word (judged)
+  sound_gates.page_pitch_from_median_semitones = 1.5 semitones (judged)
+  sound_gates.pitch_spread_max_semitones = 2.6 semitones across pages (judged)

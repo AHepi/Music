@@ -1,0 +1,85 @@
+{
+ "object_count": 4,
+ "objects": [
+  "Ground terrain",
+  "Ground puddles",
+  "Yard coal and stones",
+  "Yard props (timber, fence, barrels, cart, lamp)"
+ ],
+ "triangle_count": 215876,
+ "triangles_by_object": {
+  "Ground terrain": 138780,
+  "Ground puddles": 354,
+  "Yard coal and stones": 72660,
+  "Yard props (timber, fence, barrels, cart, lamp)": 4082
+ },
+ "uses_real_displacement": [
+  "Ground terrain (mud, adaptive subdivision, 2 px per facet)"
+ ],
+ "build_seconds": 6.6,
+ "puddles": [
+  {
+   "name": "front left pool",
+   "water_level": -0.048,
+   "lowest_ground": -0.063,
+   "nearest_track_distance": 12.48
+  },
+  {
+   "name": "road E flooded",
+   "water_level": -0.038,
+   "lowest_ground": -0.053,
+   "nearest_track_distance": 11.62
+  },
+  {
+   "name": "road A flooded, middle",
+   "water_level": -0.068,
+   "lowest_ground": -0.083,
+   "nearest_track_distance": 5.29
+  },
+  {
+   "name": "middle pool",
+   "water_level": 0.008,
+   "lowest_ground": -0.007,
+   "nearest_track_distance": 2.03
+  },
+  {
+   "name": "far left pool",
+   "water_level": -0.085,
+   "lowest_ground": -0.1,
+   "nearest_track_distance": 10.64
+  },
+  {
+   "name": "back yard pool",
+   "water_level": -0.16,
+   "lowest_ground": -0.175,
+   "nearest_track_distance": 4.12
+  },
+  {
+   "name": "right yard pool",
+   "water_level": -0.089,
+   "lowest_ground": -0.104,
+   "nearest_track_distance": 4.46
+  },
+  {
+   "name": "road B flooded",
+   "water_level": -0.305,
+   "lowest_ground": -0.32,
+   "nearest_track_distance": 9.67
+  }
+ ],
+ "lamp_glass_position": [
+  7.4,
+  -1.0,
+  4.14917803703928
+ ],
+ "known_flaws": [
+  "The mud picture repeats every 5 m; it is hidden by a second, shifted lookup mixed in by big noise patches, but a faint repeat of the painted puddle patches can still be seen from high above.",
+  "The terrain is a rectangle (x -45..60, y -45..90) with hard edges: the hills / village / sky part must cover the rim, and the back bank is 8 m high at y = 90.",
+  "Real displacement of the terrain is heavy: measured peak memory was about 1.8 GB at 540x960 and 4.7 GB at 1080x1920 (8 samples) with TERRAIN_DICING_PIXELS = 2; raise that number (3 or 4) if memory is short.",
+  "Water sheets are perfectly flat and only faintly rippled; what they reflect depends entirely on the sky the assembler builds.",
+  "The lamp post only has a glowing lantern (emission); it does not cast real light, put a point light at lamp_light_position() if a pool of light is wanted.",
+  "The engine-house floor area is dug 7 cm below mc.ground_height (inside x -3.8..3.8, y 0.1..10.9) so a floor at ground level does not fight the mud; the engine house should have its own floor or it will see mud below the sleepers.",
+  "Barrels, fence, handcart and sleepers are plain boxes and cylinders (chunky, no nails or bands); close up they are simpler than the headframe or engine house.",
+  "Small pebbles are 20-80 triangle low-poly lumps; seen from closer than about 3 m the faceting shows."
+ ]
+}

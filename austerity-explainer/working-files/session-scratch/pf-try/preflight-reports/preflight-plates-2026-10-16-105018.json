@@ -1,0 +1,196 @@
+{
+ "stage": "plates",
+ "stage_means": "before paying for paintings",
+ "verdict": "inputs missing",
+ "counts": {
+  "fail": 2,
+  "warn": 5,
+  "known": 0,
+  "info": 0,
+  "pass": 5
+ },
+ "guarded_step": "asking the painter for these paintings",
+ "step_kind": "paid",
+ "blocked": true,
+ "cost_dollars": 0.84,
+ "costs": [
+  {
+   "what": "painting people test and its behind painting",
+   "dollars": 0.84,
+   "note": "an estimate: 4.8 c a megapixel (read 2026-10-16) x the megapixels returned and sent"
+  }
+ ],
+ "times": [],
+ "allowance": null,
+ "preflight_seconds": 11.6,
+ "changed_inputs": [],
+ "started": "2026-10-16 10:50:18",
+ "first_lines": [
+  "Preflight plates (before paying for paintings): INPUTS MISSING. 2 to fix, 5 to look at, 0 known and accepted, 2 input(s) missing; 2 check(s) in 11.6 s.",
+  "Paid step BLOCKED: asking the painter for these paintings (about US$0.84: an estimate: 4.8 c a megapixel (read 2026-10-16) x the megapixels returned and sent). First make the missing inputs listed below, then run this stage again."
+ ],
+ "kit": "/home/user/Music/plugins/explainer-film/kit",
+ "preflight_version": "506b93bc",
+ "plan": null,
+ "work_folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018",
+ "inputs": {
+  "/home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-helper-plate.jpg": "a79f81e49c3dccbe0eb6854cbf1838f245b5e40e",
+  "/home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg": "4b7693247f825d779a165259e2457c97019d8ae0",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/budget/spend-ledger-logs-10-to-34.json": "359c110a8ee7b928c0949aade1a5af6fcd82d7bf",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-brief.json": "3ede925f3c3e6b73b1c07c8915c964d7afa5f53a",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-paint-check.json": "6bef7584707c4b83a90a09e36a3be7e942fbab72",
+  "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/people-test/people-test-place-facts.json": "971987b5c9aab628b1b6359ad9da1807e7da3e85",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/plate-facts": "8ccc610588650dc9b9917badcb80aee729c4a300"
+ },
+ "missing": [
+  {
+   "input": "render_log",
+   "option": "--render-log",
+   "what": "the log Blender wrote while drawing the plate",
+   "make": "render the plate with its output kept: blender -b ... > plate.log 2>&1",
+   "needed_by": "plan_lights.py render-log; paint_request.py (a paid repaint needs a clean render, decision 37)",
+   "required": true,
+   "why": "",
+   "given_but_absent": []
+  },
+  {
+   "input": "shot_report",
+   "option": "--shot-report",
+   "what": "the shot checker's report.md for this view (with known.json beside it)",
+   "make": "BLEND=SCENE.blend paper-film/tools/check-shot.sh SHOT_SCRIPT CHECK_FILE OUT_FOLDER PLATE",
+   "needed_by": "paint_request.py (a paid repaint needs the light rules passed, decision 37)",
+   "required": true,
+   "why": "",
+   "given_but_absent": []
+  }
+ ],
+ "checks": [
+  {
+   "title": "the plate is ready to paint (paint_request.py preflight)",
+   "tool": "calculators/paint_request.py",
+   "version": "aef5911c",
+   "where": "people test",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/paint_request.py preflight --check /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-paint-check.json --facts /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/people-paint/plate-facts --plate /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg --work-folder /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018/paint-work --helper-plate /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-helper-plate.jpg --brief /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/painting/people-test-brief.json --place-facts /home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/people-test/people-test-place-facts.json --view still --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018/01-the-plate-is-ready-to-paint-paint-request-py-pre.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018/01-the-plate-is-ready-to-paint-paint-request-py-pre.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018/01-the-plate-is-ready-to-paint-paint-request-py-pre.txt",
+   "seconds": 11.28,
+   "exit": 1,
+   "findings": [
+    {
+     "verdict": "warn",
+     "check": "render log",
+     "where": "people test",
+     "text": "No render log given (--render-log).",
+     "fix": "",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "light rules",
+     "where": "people test",
+     "text": "No shot-check report given (--shot-report): run check_shot.py on the plate first.",
+     "fix": "",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "thin parts",
+     "where": "people test",
+     "text": "No story prop has much thin detail; the prompt names lamp post, gates and winding wheels as thin.",
+     "fix": "",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "lettering",
+     "where": "people test",
+     "text": "No lettered group shows in the plate.",
+     "fix": "",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "even discs and dark holes",
+     "where": "people test",
+     "text": "No even bright disc or near-black hole round the story.",
+     "fix": "",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "glow inside a hollow",
+     "where": "people test",
+     "text": "brazier: 8.0% of the top is lit (limit 2%): the painter lifts a glowing hollow into a bright band (lesson 138). Darken the glow inside it in the plate first.",
+     "fix": "Lower the coals' glow or hide it behind the front rim, then draw the plate again.",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "heads from behind",
+     "where": "people test",
+     "text": "No near figure seen from behind has a pale head brighter than its coat (4 checked).",
+     "fix": "",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "pass",
+     "check": "cloth through the film's finish",
+     "where": "people test",
+     "text": "No figure's cloth turns red through the film's finish (exposure 1.0).",
+     "fix": "",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "figures against their surround",
+     "where": "people test",
+     "text": "man hand on bar and man leaning are barely darker than what surrounds them in the plate (over 0.5 of its brightness); the painter lifts figures about three times toward their surround (people test 0.15 to 0.50), so these will read pale.",
+     "fix": "Darken their cloth or stand them against a lighter background.",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "fail",
+     "check": "figures casting long shadows",
+     "where": "people test",
+     "text": "Removing the figures changes 42.3% of the frame against 7.5% for the figures themselves (5.6 times; limit 3): they cast long shadows or block light. Asked to remove them, the painter leaves the shadows (lesson 135).",
+     "fix": "Draw the plates with the figures casting no long shadows (a small soft patch at their feet), as the Works do.",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "hidden figures",
+     "where": "people test",
+     "text": "walker 6 do not show in the plate at all; the prompt does not count them.",
+     "fix": "",
+     "tool": "paint_request.py"
+    },
+    {
+     "verdict": "warn",
+     "check": "real people",
+     "where": "people test",
+     "text": "No list of real people given (--real-names).",
+     "fix": "",
+     "tool": "paint_request.py"
+    }
+   ],
+   "verdict": "fail"
+  },
+  {
+   "title": "the painting's price (paint_request.py price)",
+   "tool": "calculators/paint_request.py",
+   "version": "aef5911c",
+   "where": "people test",
+   "command": "/usr/bin/python3 -I -B /home/user/Music/plugins/explainer-film/kit/calculators/paint_request.py price --behind --out /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018/02-the-painting-s-price-paint-request-py-price.json",
+   "output_json": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018/02-the-painting-s-price-paint-request-py-price.json",
+   "output_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018/02-the-painting-s-price-paint-request-py-price.txt",
+   "seconds": 0.27,
+   "exit": 0,
+   "findings": [],
+   "verdict": "pass"
+  }
+ ],
+ "known_lists": [],
+ "notes": [],
+ "accepted_entries": [],
+ "report_text": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/pf-try/preflight-reports/preflight-plates-2026-10-16-105018.md"
+}

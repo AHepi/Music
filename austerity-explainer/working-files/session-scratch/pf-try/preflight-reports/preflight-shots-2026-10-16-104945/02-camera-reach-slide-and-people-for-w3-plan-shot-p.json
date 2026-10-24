@@ -1,0 +1,1087 @@
+{
+ "place_facts": "/home/user/Music/plugins/explainer-film/kit/calculators/tests/fixtures/works/works-place-facts.json",
+ "shots": [
+  {
+   "camera": {
+    "composed": [
+     0.0,
+     -7.95,
+     5.74
+    ],
+    "plate": null,
+    "turn_degrees": -0.0,
+    "film_vertical_fov_degrees": 60.4,
+    "plate_vertical_fov_degrees": 64.4,
+    "eye_above_floor_metres": 5.6,
+    "floor": "the view's floor (height 0.14 m)"
+   },
+   "meeting_point": {
+    "across": 0.5,
+    "down": 0.5
+   },
+   "slide": null,
+   "name": "w3",
+   "planned": false,
+   "kind_of_shot": [
+    "overview",
+    "crowd",
+    "dark_subject"
+   ],
+   "subject": "two gates and the wall between",
+   "support": null,
+   "story": [
+    "brazier",
+    "man-1",
+    "man-2",
+    "man-3",
+    "man-4",
+    "man-5",
+    "man-6",
+    "man-7",
+    "no-2-man-1",
+    "no-2-man-2",
+    "no-2-man-3",
+    "no-2-man-4",
+    "no-2-man-5",
+    "no-2-man-6",
+    "no-2-man-7",
+    "no-2-man-8"
+   ],
+   "must_read": [],
+   "steps": [
+    "Camera as given: composed spot (0.000, -7.950, 5.740), turned -0.00 degrees; no slide."
+   ],
+   "checks": [
+    {
+     "rule": "rule2_eye_height",
+     "about": "The eye stands 5.60 m above the view's floor (height 0.14 m) (allowed 0.8 to 7.0 m for overview).",
+     "verdict": "pass",
+     "measured": 5.6,
+     "limit": [
+      0.8,
+      7.0
+     ],
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "rule2_level",
+     "about": "The camera is level (tilt -0.00 degrees): the planner never tilts; an overview raises the eye.",
+     "verdict": "pass",
+     "measured": -0.0,
+     "limit": 0.5,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "rule1_meeting_point_gap",
+     "about": "Not judged: two gates and the wall between has no size (give it under the shot's \"things\").",
+     "verdict": "info",
+     "measured": null,
+     "limit": null,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    },
+    {
+     "rule": "rule7_story_reaches_down",
+     "about": "The lowest story thing is no-2-man-6, reaching 0.673 down (limit 0.7).",
+     "verdict": "fail",
+     "measured": 0.6726,
+     "limit": 0.7,
+     "fix": "Bring the camera 3.92 m nearer along its view (or no-2-man-6 that much nearer the camera): it may stand at most 24.71 m from no-2-man-6's front (its feet are now 28.63 m away); or, for an overview, raise the eye to 6.65 m (never tilt).",
+     "estimate": true,
+     "things": [
+      "no-2-man-6"
+     ],
+     "nearer_metres": 3.918
+    },
+    {
+     "rule": "overview_eye_for_story",
+     "about": "For the story itself (no-2-man-6) to reach 0.7 down, the eye would have to stand 6.65 m high (it stands 5.74 m).",
+     "verdict": "info",
+     "measured": 6.652,
+     "limit": null,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "no-2-man-6"
+     ]
+    },
+    {
+     "rule": "rule12_story_right_edge",
+     "about": "Story things in the button strip (0.45 to 0.95 down) end at: two gates and the wall between 0.50, brazier 0.38, man-1 0.30, man-2 0.37, man-3 0.34, man-4 0.24, man-5 0.27, man-6 0.31, man-7 0.35, no-2-man-1 0.64, no-2-man-2 0.68, no-2-man-3 0.72, no-2-man-4 0.76, no-2-man-5 0.63, no-2-man-6 0.67, no-2-man-7 0.71, no-2-man-8 0.79 across (limit 0.95).",
+     "verdict": "pass",
+     "measured": 0.7865,
+     "limit": 0.95,
+     "fix": "",
+     "estimate": true,
+     "things": [],
+     "rows": [
+      {
+       "thing": "two gates and the wall between",
+       "right": 0.5
+      },
+      {
+       "thing": "brazier",
+       "right": 0.3794
+      },
+      {
+       "thing": "man-1",
+       "right": 0.3024
+      },
+      {
+       "thing": "man-2",
+       "right": 0.3718
+      },
+      {
+       "thing": "man-3",
+       "right": 0.3374
+      },
+      {
+       "thing": "man-4",
+       "right": 0.2437
+      },
+      {
+       "thing": "man-5",
+       "right": 0.2652
+      },
+      {
+       "thing": "man-6",
+       "right": 0.3088
+      },
+      {
+       "thing": "man-7",
+       "right": 0.3517
+      },
+      {
+       "thing": "no-2-man-1",
+       "right": 0.6397
+      },
+      {
+       "thing": "no-2-man-2",
+       "right": 0.6809
+      },
+      {
+       "thing": "no-2-man-3",
+       "right": 0.7236
+      },
+      {
+       "thing": "no-2-man-4",
+       "right": 0.7646
+      },
+      {
+       "thing": "no-2-man-5",
+       "right": 0.6325
+      },
+      {
+       "thing": "no-2-man-6",
+       "right": 0.6653
+      },
+      {
+       "thing": "no-2-man-7",
+       "right": 0.7075
+      },
+      {
+       "thing": "no-2-man-8",
+       "right": 0.7865
+      }
+     ]
+    },
+    {
+     "rule": "rule3_story_box",
+     "about": "The story things fill a box 0.58 wide and 0.07 tall (limit 0.8 x 0.5 for overview + crowd); edges: man-4 (left), no-2-man-8 (right), two gates and the wall between (top), no-2-man-6 (bottom).",
+     "verdict": "pass",
+     "measured": [
+      0.581,
+      0.067
+     ],
+     "limit": [
+      0.8,
+      0.5
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "two gates and the wall between",
+      "brazier",
+      "man-1",
+      "man-2",
+      "man-3",
+      "man-4",
+      "man-5",
+      "man-6",
+      "man-7",
+      "no-2-man-1",
+      "no-2-man-2",
+      "no-2-man-3",
+      "no-2-man-4",
+      "no-2-man-5",
+      "no-2-man-6",
+      "no-2-man-7",
+      "no-2-man-8"
+     ]
+    },
+    {
+     "rule": "rule3_story_together_metres",
+     "about": "The story things stand together in the street: the loneliest, man-4, is 0.19 m from man-5 (limit 2.0 m between footprints).",
+     "verdict": "pass",
+     "measured": 0.19,
+     "limit": 2.0,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "man-4",
+      "man-5"
+     ]
+    },
+    {
+     "rule": "main_rule_spot_box",
+     "about": "The spots that can be worked out before rendering (where the lines meet 0.50, 0.50; middle of two gates and the wall between 0.50, 0.61; middle of the story things 0.50, 0.64) span 0.00 x 0.14 (the plan keeps them inside 0.3 x 0.4 so the brightest parts and the warm light have room within the rule's 0.4 x 0.5).",
+     "verdict": "pass",
+     "measured": [
+      0.0,
+      0.141
+     ],
+     "limit": [
+      0.3,
+      0.4
+     ],
+     "fix": "",
+     "estimate": true,
+     "things": []
+    },
+    {
+     "rule": "rule8_bottom_left_share",
+     "about": "In the bottom-left quarter, where the eye enters, the boxes cover: man-1 0.2%, man-2 0.2%, man-3 0.2%, man-4 0.2%, man-5 0.2%, man-6 0.2%, man-7 0.2%, no-1-drum-petrol 0.1%, no-1-drum-diesel 0.1%, no-1-worker-1 0.1%, no-1-worker-2 0.1% (limit 1% a thing, 2% for a story thing in a crowd shot; a box covers more than the thing in it, so these are upper bounds).",
+     "verdict": "pass",
+     "measured": 0.0022,
+     "limit": 0.02,
+     "fix": "",
+     "estimate": true,
+     "things": [],
+     "rows": [
+      {
+       "thing": "man-1",
+       "share": 0.002,
+       "limit": 0.02
+      },
+      {
+       "thing": "man-2",
+       "share": 0.0017,
+       "limit": 0.02
+      },
+      {
+       "thing": "man-3",
+       "share": 0.002,
+       "limit": 0.02
+      },
+      {
+       "thing": "man-4",
+       "share": 0.002,
+       "limit": 0.02
+      },
+      {
+       "thing": "man-5",
+       "share": 0.0021,
+       "limit": 0.02
+      },
+      {
+       "thing": "man-6",
+       "share": 0.0022,
+       "limit": 0.02
+      },
+      {
+       "thing": "man-7",
+       "share": 0.002,
+       "limit": 0.02
+      },
+      {
+       "thing": "no-1-drum-petrol",
+       "share": 0.0012,
+       "limit": 0.01
+      },
+      {
+       "thing": "no-1-drum-diesel",
+       "share": 0.0012,
+       "limit": 0.01
+      },
+      {
+       "thing": "no-1-worker-1",
+       "share": 0.0011,
+       "limit": 0.01
+      },
+      {
+       "thing": "no-1-worker-2",
+       "share": 0.001,
+       "limit": 0.01
+      }
+     ]
+    },
+    {
+     "rule": "people_face_shows",
+     "about": "no-1-worker-2's face or profile shows (it faces 84 degrees from the camera); its head is 9 px tall at 41.15 m (composed spot); the house limit 24 px is invented and untested.",
+     "verdict": "pass",
+     "measured": 9.2,
+     "limit": 24,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "no-1-worker-2"
+     ]
+    },
+    {
+     "rule": "people_face_shows",
+     "about": "no-2-worker-2's face or profile shows (it faces 93 degrees from the camera); its head is 9 px tall at 43.00 m (composed spot); the house limit 24 px is invented and untested.",
+     "verdict": "pass",
+     "measured": 8.8,
+     "limit": 24,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "no-2-worker-2"
+     ]
+    },
+    {
+     "rule": "people_backs_distance",
+     "about": "Figures with their backs to the camera, at the nearest camera place along the slide: man-6 28.57 m, no-2-man-6 28.63 m, man-5 28.67 m, no-2-man-5 28.73 m, no-2-man-7 28.75 m, man-7 28.77 m, no-2-man-8 28.90 m, man-2 29.24 m, man-4 29.40 m, no-2-man-3 29.43 m, no-2-man-1 29.45 m, man-3 29.50 m, no-2-man-4 29.53 m, no-2-man-2 29.57 m, man-1 29.81 m, no-1-worker-1 39.13 m, no-2-worker-1 39.44 m (at least 6.0 m: a 1.75 m man is a quarter of the frame there; nearest man-6 at composed spot).",
+     "verdict": "pass",
+     "measured": 28.57,
+     "limit": 6.0,
+     "fix": "",
+     "estimate": false,
+     "things": [],
+     "rows": [
+      {
+       "figure": "man-1",
+       "depth": 29.813,
+       "at": "composed spot"
+      },
+      {
+       "figure": "man-2",
+       "depth": 29.238,
+       "at": "composed spot"
+      },
+      {
+       "figure": "man-3",
+       "depth": 29.5,
+       "at": "composed spot"
+      },
+      {
+       "figure": "man-4",
+       "depth": 29.4,
+       "at": "composed spot"
+      },
+      {
+       "figure": "man-5",
+       "depth": 28.67,
+       "at": "composed spot"
+      },
+      {
+       "figure": "man-6",
+       "depth": 28.57,
+       "at": "composed spot"
+      },
+      {
+       "figure": "man-7",
+       "depth": 28.77,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-man-1",
+       "depth": 29.45,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-man-2",
+       "depth": 29.57,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-man-3",
+       "depth": 29.43,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-man-4",
+       "depth": 29.53,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-man-5",
+       "depth": 28.73,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-man-6",
+       "depth": 28.63,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-man-7",
+       "depth": 28.75,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-man-8",
+       "depth": 28.9,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-1-worker-1",
+       "depth": 39.135,
+       "at": "composed spot"
+      },
+      {
+       "figure": "no-2-worker-1",
+       "depth": 39.435,
+       "at": "composed spot"
+      }
+     ]
+    },
+    {
+     "rule": "crowd_axis_angle",
+     "about": "Crowd \"men at No. 1\" from this shot (w3): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).",
+     "verdict": "pass",
+     "measured": 87.1,
+     "limit": 60,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "man-1",
+      "man-2",
+      "man-3",
+      "man-4",
+      "man-5",
+      "man-6",
+      "man-7"
+     ],
+     "view": "this shot (w3)"
+    },
+    {
+     "rule": "crowd_axis_angle",
+     "about": "Crowd \"men at No. 1\" from view w1 (composed): its long axis makes 87 degrees with the view (at least 60; it spreads 1.9 times as far along it as across).",
+     "verdict": "pass",
+     "measured": 87.1,
+     "limit": 60,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "man-1",
+      "man-2",
+      "man-3",
+      "man-4",
+      "man-5",
+      "man-6",
+      "man-7"
+     ],
+     "view": "view w1 (composed)"
+    },
+    {
+     "rule": "crowd_rows",
+     "about": "Crowd \"men at No. 1\": 2 rows deep from this view (front to back: man-6, man-5, man-7; man-2, man-4, man-3, man-1).",
+     "verdict": "pass",
+     "measured": 2,
+     "limit": 2,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "man-1",
+      "man-2",
+      "man-3",
+      "man-4",
+      "man-5",
+      "man-6",
+      "man-7"
+     ]
+    },
+    {
+     "rule": "crowd_shoulder_gaps",
+     "about": "Crowd \"men at No. 1\": gaps between neighbours' shoulders in a row (0.47 m shoulders): man-5-man-6 0.37 m, man-6-man-7 0.32 m, man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (house range 0.3 to 0.5 m).",
+     "verdict": "look",
+     "measured": [
+      0.223,
+      0.617
+     ],
+     "limit": [
+      0.3,
+      0.5
+     ],
+     "fix": "Check by eye: man-4-man-1 0.62 m, man-1-man-3 0.25 m, man-3-man-2 0.22 m (a back-row man standing between two of the front row fills a wide gap).",
+     "estimate": false,
+     "things": [
+      "man-1",
+      "man-2",
+      "man-3",
+      "man-4",
+      "man-5",
+      "man-6",
+      "man-7"
+     ]
+    },
+    {
+     "rule": "crowd_head_spacing",
+     "about": "Crowd \"men at No. 1\" from this shot: the closest two heads, man-1 and man-6, are 1.12 head widths apart on screen (at least 1.0, so each head can be counted).",
+     "verdict": "pass",
+     "measured": 1.118,
+     "limit": 1.0,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "man-1",
+      "man-6"
+     ]
+    },
+    {
+     "rule": "crowd_visible_share",
+     "about": "Crowd \"men at No. 1\": the most hidden figure, man-1, shows about 19% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this).",
+     "verdict": "look",
+     "measured": 0.193,
+     "limit": 0.5,
+     "fix": "Move man-1 sideways into a gap, or check on the render.",
+     "estimate": true,
+     "things": [
+      "man-1"
+     ]
+    },
+    {
+     "rule": "crowd_axis_angle",
+     "about": "Crowd \"men at No. 2\" from this shot (w3): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "verdict": "pass",
+     "measured": 84.6,
+     "limit": 60,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "no-2-man-1",
+      "no-2-man-2",
+      "no-2-man-3",
+      "no-2-man-4",
+      "no-2-man-5",
+      "no-2-man-6",
+      "no-2-man-7",
+      "no-2-man-8"
+     ],
+     "view": "this shot (w3)"
+    },
+    {
+     "rule": "crowd_axis_angle",
+     "about": "Crowd \"men at No. 2\" from view w2 (composed): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "verdict": "pass",
+     "measured": 84.6,
+     "limit": 60,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "no-2-man-1",
+      "no-2-man-2",
+      "no-2-man-3",
+      "no-2-man-4",
+      "no-2-man-5",
+      "no-2-man-6",
+      "no-2-man-7",
+      "no-2-man-8"
+     ],
+     "view": "view w2 (composed)"
+    },
+    {
+     "rule": "crowd_axis_angle",
+     "about": "Crowd \"men at No. 2\" from view w4 (composed): its long axis makes 85 degrees with the view (at least 60; it spreads 2.7 times as far along it as across).",
+     "verdict": "pass",
+     "measured": 84.6,
+     "limit": 60,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "no-2-man-1",
+      "no-2-man-2",
+      "no-2-man-3",
+      "no-2-man-4",
+      "no-2-man-5",
+      "no-2-man-6",
+      "no-2-man-7",
+      "no-2-man-8"
+     ],
+     "view": "view w4 (composed)"
+    },
+    {
+     "rule": "crowd_rows",
+     "about": "Crowd \"men at No. 2\": 2 rows deep from this view (front to back: no-2-man-6, no-2-man-5, no-2-man-7, no-2-man-8; no-2-man-3, no-2-man-1, no-2-man-4, no-2-man-2).",
+     "verdict": "pass",
+     "measured": 2,
+     "limit": 2,
+     "fix": "",
+     "estimate": false,
+     "things": [
+      "no-2-man-1",
+      "no-2-man-2",
+      "no-2-man-3",
+      "no-2-man-4",
+      "no-2-man-5",
+      "no-2-man-6",
+      "no-2-man-7",
+      "no-2-man-8"
+     ]
+    },
+    {
+     "rule": "crowd_shoulder_gaps",
+     "about": "Crowd \"men at No. 2\": gaps between neighbours' shoulders in a row (0.47 m shoulders): no-2-man-5-no-2-man-6 0.13 m, no-2-man-6-no-2-man-7 0.33 m, no-2-man-7-no-2-man-8 1.03 m, no-2-man-1-no-2-man-2 0.33 m, no-2-man-2-no-2-man-3 0.33 m, no-2-man-3-no-2-man-4 0.33 m (house range 0.3 to 0.5 m).",
+     "verdict": "look",
+     "measured": [
+      0.13,
+      1.03
+     ],
+     "limit": [
+      0.3,
+      0.5
+     ],
+     "fix": "Check by eye: no-2-man-5-no-2-man-6 0.13 m, no-2-man-7-no-2-man-8 1.03 m (a back-row man standing between two of the front row fills a wide gap).",
+     "estimate": false,
+     "things": [
+      "no-2-man-1",
+      "no-2-man-2",
+      "no-2-man-3",
+      "no-2-man-4",
+      "no-2-man-5",
+      "no-2-man-6",
+      "no-2-man-7",
+      "no-2-man-8"
+     ]
+    },
+    {
+     "rule": "crowd_head_spacing",
+     "about": "Crowd \"men at No. 2\" from this shot: the closest two heads, no-2-man-1 and no-2-man-5, are 1.25 head widths apart on screen (at least 1.0, so each head can be counted).",
+     "verdict": "pass",
+     "measured": 1.253,
+     "limit": 1.0,
+     "fix": "",
+     "estimate": true,
+     "things": [
+      "no-2-man-1",
+      "no-2-man-5"
+     ]
+    },
+    {
+     "rule": "crowd_visible_share",
+     "about": "Crowd \"men at No. 2\": the most hidden figure, no-2-man-1, shows about 5% of its box (at least 50%; boxes, so a figure behind a gap between two others shows more than this).",
+     "verdict": "look",
+     "measured": 0.05,
+     "limit": 0.5,
+     "fix": "Move no-2-man-1 sideways into a gap, or check on the render.",
+     "estimate": true,
+     "things": [
+      "no-2-man-1"
+     ]
+    },
+    {
+     "rule": "slide_magnification",
+     "about": "A still shot: no slide.",
+     "verdict": "info",
+     "measured": null,
+     "limit": null,
+     "fix": "",
+     "estimate": false,
+     "things": []
+    }
+   ],
+   "closed_forms": {
+    "one_degree_of_turn_share": 0.0267,
+    "meeting_point_down": 0.5,
+    "eye_above_floor": 5.6,
+    "deepest_for_reach_on_the_floor_metres": 24.0544,
+    "figure_quarter_height_distance_metres": 6.0136,
+    "head_pixels_at_6_metres": 63.2287,
+    "slide_limit": 1.2862,
+    "rule4_clear_overlap_metres_per_metre_of_depth": 0.0091,
+    "rule4_clear_gap_metres_per_metre_of_depth": 0.0109,
+    "deepest_for_reach_per_story_thing_metres": {
+     "man-1": 24.042,
+     "man-2": 24.759,
+     "man-3": 24.089,
+     "man-4": 23.977,
+     "man-5": 24.011,
+     "man-6": 24.059,
+     "man-7": 24.097,
+     "no-2-man-1": 24.574,
+     "no-2-man-2": 24.097,
+     "no-2-man-3": 24.059,
+     "no-2-man-4": 24.011,
+     "no-2-man-5": 24.531,
+     "no-2-man-6": 24.712,
+     "no-2-man-7": 24.084,
+     "no-2-man-8": 23.994
+    }
+   },
+   "counts": {
+    "pass": 19,
+    "info": 3,
+    "fail": 1,
+    "look": 4
+   },
+   "verdict": "fail",
+   "assumptions": [
+    "brazier: a point (no size in the place facts)",
+    "man-1: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "man-2: a figure 1.51 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "man-3: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "man-4: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "man-5: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "man-6: a figure 1.83 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "no-2-man-1: a figure 1.76 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "no-2-man-2: a figure 1.78 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "no-2-man-3: a figure 1.70 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "no-2-man-4: a figure 1.73 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "no-2-man-5: a figure 1.72 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "no-2-man-6: a figure 1.79 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "no-2-man-7: a figure 1.69 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "no-2-man-8: a figure 1.74 m tall in a 0.64 x 0.54 m box (the median of the waiting men's models; feet as given)",
+    "two gates and the wall between: a point (the view's subject point; give its size under the shot's \"things\")"
+   ]
+  }
+ ],
+ "verdict": "fail",
+ "calculator": "plan_shot",
+ "settings_file": "/home/user/Music/plugins/explainer-film/kit/film-settings.json",
+ "settings_used": {
+  "shot_planner.figure_shoulder_width_metres": {
+   "value": 0.47,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "shot_planner.figure_box_metres": {
+   "value": [
+    0.64,
+    0.54
+   ],
+   "unit": "metres [across, front to back]",
+   "kind": "measured"
+  },
+  "people.figure_height_metres": {
+   "value": 1.75,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "frame.width_pixels": {
+   "value": 1080,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.height_pixels": {
+   "value": 1920,
+   "unit": "pixels",
+   "kind": "judged"
+  },
+  "frame.film_vertical_fov_degrees": {
+   "value": 60.4,
+   "unit": "degrees, top to bottom",
+   "kind": "measured"
+  },
+  "frame.plate_vertical_fov_degrees": {
+   "value": 64.4,
+   "unit": "degrees, top to bottom",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.main_rule_spot_box": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule1_meeting_point_gap": {
+   "value": 0.03,
+   "unit": "share of the width, across only",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule2_eye_height": {
+   "value": [
+    0.8,
+    7.0
+   ],
+   "unit": "metres above the surface the checker finds under the camera",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule3_story_box": {
+   "value": [
+    0.6,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule3_story_box": {
+   "value": [
+    0.8,
+    0.5
+   ],
+   "unit": "share of width x height",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule3_story_together_metres": {
+   "value": 2.0,
+   "unit": "metres between footprints",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule4_near_touch": {
+   "value": {
+    "overlap_min": 20,
+    "gap_min": 25
+   },
+   "unit": "pixels at 1536 wide",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule4_between_figures": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_subject_brightness_ratio": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_brightest_share_on_subject": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_brightest_share_in_story_box": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule5_nothing_in_story_as_bright": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule5_top_third_brightness": {
+   "value": 0.36,
+   "unit": "mean brightness (0 to 1)",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule6_warm_share": {
+   "value": [
+    0.015,
+    0.03
+   ],
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule6_lit_from_below": {
+   "value": null,
+   "unit": "off",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule7_story_reaches_down": {
+   "value": 0.7,
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_work_prop_share": {
+   "value": 0.02,
+   "unit": "share of the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.crowd.rules.rule8_bottom_left_share": {
+   "value": 0.02,
+   "unit": "share of the frame per story thing (the subject or a story prop)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.overview.rules.rule10_quiet_side_weight": {
+   "value": [
+    0.4,
+    0.6
+   ],
+   "unit": "share of the weight",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule10_quiet_side_weight": {
+   "value": [
+    0.4,
+    0.5
+   ],
+   "unit": "share of the weight",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.dark_subject.rules.rule10_nothing_on_quiet_side_outshines": {
+   "value": null,
+   "unit": "off",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_must_read_right_edge": {
+   "value": 0.9,
+   "unit": "share of the width",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.rule12_story_right_edge": {
+   "value": 0.95,
+   "unit": "share of the width (in 0.45-0.95 down)",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.crowd.rules.rule12_title_zone_sky_share": {
+   "value": null,
+   "unit": "replaced",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.resting_on": {
+   "value": "the street (ground rays; \"landed high\" over 0.5 m)",
+   "unit": "rule",
+   "kind": "judged"
+  },
+  "shot_kind_profiles.still_life.rules.slide_magnification": {
+   "value": "painting limit",
+   "unit": "times nearer at the nearest painted surface",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.dark_subject.rules.silhouette_contrast": {
+   "value": 2.2,
+   "unit": "(surround + 0.05)/(subject + 0.05) over a band round the subject",
+   "kind": "measured"
+  },
+  "camera.eye_height_fix_margin_metres": {
+   "value": 0.05,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "camera.level_tolerance_degrees": {
+   "value": 0.5,
+   "unit": "degrees of tilt or lean",
+   "kind": "judged"
+  },
+  "shot_planner.figure_shoes_below_feet_down": {
+   "value": 0.012,
+   "unit": "down the frame",
+   "kind": "measured"
+  },
+  "shot_planner.reach_aim_margin_down": {
+   "value": 0.02,
+   "unit": "down the frame, past rule 7's reach",
+   "kind": "judged"
+  },
+  "safe_area.button_strip_down": {
+   "value": [
+    0.45,
+    0.95
+   ],
+   "unit": "down the frame",
+   "kind": "judged"
+  },
+  "shot_planner.planning_spot_box": {
+   "value": [
+    0.3,
+    0.4
+   ],
+   "unit": "share of width x height",
+   "kind": "invented"
+  },
+  "composing.work_prop_middle_band_down": {
+   "value": [
+    0.45,
+    0.62
+   ],
+   "unit": "down the frame",
+   "kind": "measured"
+  },
+  "shot_kind_profiles.still_life.rules.rule8_bottom_left_share": {
+   "value": 0.01,
+   "unit": "share of the frame per thing",
+   "kind": "judged"
+  },
+  "shot_planner.slide_sample_steps": {
+   "value": 10,
+   "unit": "steps along a slide",
+   "kind": "judged"
+  },
+  "people.backs_to_camera_min_distance_metres": {
+   "value": 6.0,
+   "unit": "metres from every camera spot along a slide",
+   "kind": "judged"
+  },
+  "people.head_height_metres": {
+   "value": 0.23,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "people.facing_head_max_pixels": {
+   "value": 24,
+   "unit": "pixels tall",
+   "kind": "invented"
+  },
+  "shot_planner.face_visible_dot_min": {
+   "value": -0.2,
+   "unit": "cosine between the figure's facing and the way to the camera",
+   "kind": "invented"
+  },
+  "shot_planner.crowd_min_figures": {
+   "value": 3,
+   "unit": "figures",
+   "kind": "invented"
+  },
+  "people.crowd_axis_min_angle_to_view_degrees": {
+   "value": 60,
+   "unit": "degrees",
+   "kind": "invented"
+  },
+  "shot_planner.crowd_axis_min_elongation": {
+   "value": 1.5,
+   "unit": "spread along the long axis over the spread across it",
+   "kind": "invented"
+  },
+  "people.crowd_back_row_behind_metres": {
+   "value": 0.8,
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "people.crowd_shoulder_gap_metres": {
+   "value": [
+    0.3,
+    0.5
+   ],
+   "unit": "metres",
+   "kind": "judged"
+  },
+  "shot_planner.figure_head_width_metres": {
+   "value": 0.155,
+   "unit": "metres",
+   "kind": "measured"
+  },
+  "people.crowd_head_spacing_head_widths": {
+   "value": 1.0,
+   "unit": "head widths between head centres on screen",
+   "kind": "judged"
+  },
+  "people.crowd_figure_visible_share_min": {
+   "value": 0.5,
+   "unit": "share of each figure",
+   "kind": "judged"
+  },
+  "shot_planner.sign_edge_on_degrees": {
+   "value": 70,
+   "unit": "degrees between a sign's facing and the way to the camera",
+   "kind": "judged"
+  },
+  "frame.painting_returned_size_pixels": {
+   "value": [
+    1504,
+    2672
+   ],
+   "unit": "pixels [width, height]",
+   "kind": "measured"
+  },
+  "composing.clear_overlap_pixels_at_1536": {
+   "value": 20,
+   "unit": "pixels on a frame 1536 wide (scaled to the frame)",
+   "kind": "judged"
+  },
+  "composing.clear_gap_pixels_at_1536": {
+   "value": 25,
+   "unit": "pixels on a frame 1536 wide",
+   "kind": "judged"
+  }
+ }
+}

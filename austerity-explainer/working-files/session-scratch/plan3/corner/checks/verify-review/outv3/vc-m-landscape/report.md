@@ -1,0 +1,63 @@
+# Shot check: m-landscape
+
+8 problems found in 22 checks, numbered worst first (the camera first, because it moves everything on screen).
+
+How to read this: places are fractions of the frame (0 across is the left edge, 1 the right; 0 down is the top, 1 the bottom). Pixels are this frame's (1920 wide). Metres are metres in the street; "Blender x, y" is a spot on the street's map (x across the street, y up it). On marked.jpg each problem's place is boxed, with its number on a dark tag (red: a small place; orange: a large area). Dashed lines: the 0.90 and 0.95 limits of rule 12. Cyan arrows: from where a prop is to where the reference has it. Circles (main rule): purple, where the lines meet; white, the centre of the brightest parts; pink, the centre of the warm light; blue, the centre of the story props; green, the centre of the subject. A camera problem has no box: it changes the whole frame.
+
+Words used: "where the lines meet" is the spot where the street's straight edges (kerbs, gutters, roof lines) run together in the distance. The subject is the thing the shot is about; story props are the props that tell the story; work props are the rest (the check file names them). Weight (rule 10) is how strongly a part of the picture pulls the eye, from its size, brightness and detail. The reference is the picture the shot is meant to match. The flat-colour picture shows each prop in one plain colour, as measured in Blender.
+
+Made by check_shot.py version d911c430; a report made by another version may give other numbers.
+
+No finished picture was given, so marked.jpg is drawn on the flat-colour picture and the light rules (5, 6, 10, the main rule, and the dark shape in rule 8) are not checked.
+
+## Fix first
+
+Problem 1 (props rest where they should). Raise dustbins by 0.03 m so it stands on top.
+
+## Problems
+
+1. **props rest where they should.** dustbins is sunk 0.03 m into the pavement or road (at Blender x -3.60, y 27.20).
+   - Fix: Raise dustbins by 0.03 m so it stands on top.
+2. **rule 4: overlap clearly or leave a clear gap.** board and lantern almost touch: 9 pixels apart. Edges that just meet make near and far things look stuck together (a clear overlap is at least 25 pixels deep; a clear gap at least 32). (at 0.59 across, 0.68 down; lantern is nearer the camera)
+   - Fix: Move chair (with lantern on it) about 0.07 m to the left and about 0.58 m further from the camera (but board stands there) so it clearly overlaps board, or move chair (with lantern on it) about 0.05 m to the right and about 0.33 m nearer to the camera (but pail stands there) to leave a clear gap.
+3. **rule 4: overlap clearly or leave a clear gap.** drum only just overlaps board: it reaches 11 pixels into it. Edges that just meet make near and far things look stuck together (a clear overlap is at least 25 pixels deep; a clear gap at least 32). (at 0.57 across, 0.68 down; drum is nearer the camera)
+   - Fix: Move drum about 0.06 m to the right and about 0.21 m further from the camera so it clearly overlaps board, or move drum about 0.16 m to the left and about 0.45 m nearer to the camera (but lantern stands there) to leave a clear gap.
+4. **rule 4: overlap clearly or leave a clear gap.** notice and drum almost touch: 21 pixels apart. Edges that just meet make near and far things look stuck together (a clear overlap is at least 25 pixels deep; a clear gap at least 32). (at 0.57 across, 0.64 down; drum is nearer the camera)
+   - Fix: Move drum about 0.23 m to the right so it clearly overlaps notice, or move drum about 0.07 m to the left to leave a clear gap.
+5. **rule 4: overlap clearly or leave a clear gap.** drum and lantern almost touch: 28 pixels apart. Edges that just meet make near and far things look stuck together (a clear overlap is at least 25 pixels deep; a clear gap at least 32). (at 0.58 across, 0.72 down; lantern is nearer the camera)
+   - Fix: Move chair (with lantern on it) about 0.24 m to the left so it clearly overlaps drum, or move chair (with lantern on it) about 0.04 m to the right to leave a clear gap.
+6. **rule 12: titles in dim sky.** Only 59% of the title area is sky (need 85%). (59% of the title area is sky)
+   - Fix: Move the title area into darker, emptier sky, or move what is in it.
+7. **rule 4: overlap clearly or leave a clear gap.** lantern only just overlaps lamp post: it reaches 6 pixels into it. Edges that just meet make near and far things look stuck together (a clear overlap is at least 25 pixels deep; a clear gap at least 32). (at 0.60 across, 0.72 down; lantern is nearer the camera)
+   - Fix: Move chair (with lantern on it) about 0.09 m to the right so it clearly overlaps lamp post, or move chair (with lantern on it) about 0.17 m to the left to leave a clear gap.
+8. **rule 4: overlap clearly or leave a clear gap.** chair only just overlaps lamp post: it reaches 17 pixels into it. Edges that just meet make near and far things look stuck together (a clear overlap is at least 25 pixels deep; a clear gap at least 32). (at 0.61 across, 0.67 down; chair is nearer the camera)
+   - Fix: Move chair about 0.21 m further from the camera so it clearly overlaps lamp post, or move chair about 0.67 m nearer to the camera (but pail stands there) to leave a clear gap.
+
+## Passed
+
+- rule 2: keep the camera level: The camera is level (tilt 0.0, lean 0.0 degrees).
+- rule 2: stand at eye height: The camera's eye is 1.81 m above the pavement under it (a standing person: 1.50 to 1.90 m).
+- reference: the camera: Our camera is within 0.02 m in height, 0.01 m sideways, 0.1 degrees of turn and 0.7 degrees of view of the camera that best matches the reference. Even that best camera misses the reference's landmarks by up to 110 pixels (the reference is a painting, not an exact photo), so differences this small mean nothing.
+- props rest where they should: board, drum, chair, pail, lamp post, handcart, barrel stand on the pavement or road (within 3 cm).
+- props rest where they should: lantern rests on chair.
+- rule 1: aim the street at the story: The street's lines meet at 0.558 across, 0.439 down; the nearest edge of board is 0.003 of the frame width away (limit 0.03).
+- rule 3: one touching group: Every story prop that shows touches or overlaps another.
+- rule 3: story props close together: The story props (leaving out board) fill a box 0.14 of the frame wide and 0.42 tall (limit 0.40 x 0.50). Its edges: drum's left side (0.50 across), chair's right side (0.64), notice's top (0.51 down) and pail's bottom (0.93).
+- rule 3: nothing hides the words: 3% of notice's words are hidden (its bottom fifth, the signature, may be covered).
+- rule 12: room for phone buttons: Everything to read is left of 0.90 across, and the story props left of 0.95 where the buttons are (board 0.65, drum 0.57, chair 0.64, lantern 0.60, pail 0.63, notice 0.64).
+- rule 8: work props small, far and dim: handcart covers 0.2% of the frame, its middle 0.52 down.
+- rule 8: work props small, far and dim: sacks covers 0.1% of the frame, its middle 0.55 down.
+- rule 8: work props small, far and dim: dustbins covers 0.5% of the frame, its middle 0.56 down.
+- rule 8: nothing big where the eye enters: No prop fills more than 1% of the frame in the bottom-left quarter.
+
+## Notes
+
+- reference: The reference picture is 1536 x 2752, a different shape from this frame (1920 x 1080), so its places can't be compared as fractions of the frame: only its landmarks are used.
+- rule 8: work props small, far and dim: barrel does not show in this frame.
+
+## Not checked by this tool
+
+- rule 7 (story props stacked in upright columns, something in the top third): judge by eye.
+- rule 9 beyond the lantern resting on the chair: that the chair stands right under the notice, its seat shows and the lantern is lit.
+- rule 11 (the camera slides without turning): check where the lines meet in the first, middle and last frames of the film.
+- whether a prop pokes into a wall or another prop in 3D: only what shows on screen is measured.

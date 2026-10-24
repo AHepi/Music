@@ -1,0 +1,224 @@
+============================================================
+NAME: Line the painting up with the plate | from: lessons-and-notes
+ * how_found : Lesson 123: Flux returned the notice corner 0.65% larger and 3 px off; shone back, every painted edge would sit beside the real one. align_painting.py lined it up: 96% of outlines on the painting's edges vs 70% before.
+ * final_value_or_rule : Run align_painting.py on every painting (and --against for the behind painting).
+ * evidence : Lessons.md:460-462; film-kit/paper-film/tools/align_painting.py header
+ * computable_from : check file + plate facts + painting
+ * proposed_calculation : Already computed. Make it fail if fewer than 85% of outlines line up after warping.
+ * already_automatic : Yes (align_painting.py is in the plugin kit tools, but no plugin skill mentions it).
+============================================================
+NAME: Lining a painting up with its plate | from: story-log
+ * how_found : Log 32: the shot checker's new test showed every prop lining up better once slid about 4 px. The painter had stretched the picture by 0.65% and shifted it 3 px. align_painting.py undoes it: 96% of outlines then sit on the painting's edges, against 70% before.
+ * final_value_or_rule : Always line up the main painting with its plate, then the behind painting against the lined-up main one. Aim for 95% or more of outlines on edges.
+ * evidence : story L1209-1214 (log 32); paper-film/tools/align_painting.py header
+ * computable_from : the plate's shot facts and the painting
+ * proposed_calculation : Already a calculation: the scale and shift that best fit the props' outlines to the painting's edges.
+ * already_automatic : Yes, align_painting.py (plugin kit). Run by hand.
+============================================================
+NAME: Lining a painting up with its plate (align_painting.py) | from: notice-corner-and-checker
+ * how_found : Log 32: every prop lined up better slid about 4 px; Flux had stretched the notice corner 0.65% and shifted it 3 px (lesson 123).
+ * final_value_or_rule : Coarse search: stretch 0.985 to 1.015 in 0.0025 steps, shift -12 to +12 px in 2 px steps (frame basis 1080 wide); fine: +-0.002 in 0.0005 and +-2 px in 0.5. Edges as above, widened 5 x 5. Results: notice corner 1.0065, +3, +3 (outlines on edges 0.70 to 0.96); people test 1.0010, +1.0, +0.5 (0.874 to 0.903).
+ * evidence : paper-film/tools/align_painting.py lines 29-33 and 65-70; notice-corner-paintings.json; people-test-paintings.json
+ * computable_from : the painting, the plate camera's facts (shot_facts.py with the plate's lens)
+ * proposed_calculation : Run automatically on every returned painting; accept if agreement >= 0.85 and stretch within 1%; else re-ask the painter.
+ * already_automatic : Tool exists in the kit and plugin kit; run by hand.
+============================================================
+NAME: Painting alignment to the plate (align_painting.py) | from: tools-and-plugin-gap
+ * how_found : Log 32: the checker's 'out of date' test showed every prop lining up better slid about 4 px; Flux had stretched the plate 0.65% and shifted it 3 px; aligned, 96% of outlines sat on painting edges vs 70%. People test: 1.0010x, +1/+0.5 px, 0.874 -> 0.903. Lesson 123.
+ * final_value_or_rule : Every painting is resized to the plate (1536x2730) and aligned against the props' outlines measured by shot_facts for the plate camera and lens (64.4 deg); the behind painting aligned --against the aligned main painting; aim >= 0.90 of outlines on edges.
+ * evidence : film-kit/paper-film/tools/align_painting.py docstring; people-test-paintings.json 'lined_up'; Workflows.md 'A built place, painted over' step 4
+ * computable_from : painting, plate facts (shot_facts.py --camera-at ... --fov PLATE_LENS), check file
+ * proposed_calculation : Already a calculation; make it a mandatory step that fails if the post-alignment edge share < 0.85.
+ * already_automatic : Yes; the file is in the plugin kit (identical) but no plugin skill mentions it, and it needs shot_facts plus a check file the plugin does not ship.
+============================================================
+NAME: Painting size and line-up | from: redesign-rounds
+ * how_found : People test ledger: Flux returned 1504 x 2672 at '2k'; resized to the plate and lined up with align_painting.py against the props' outlines from shot_facts.py at the plate's own lens (64.4). Log 32 found 0.65% stretch and 3 px.
+ * final_value_or_rule : Resize to the plate (1536 x 2730), then align: stretch 1.0010 and shift +1.0, +0.5 px; outline agreement 0.874 before, 0.903 after. The behind painting aligned with --against the lined-up painting (0.999). Keep the painting lossless (PNG).
+ * evidence : people-test-paintings.json paintings[0].lined_up, paintings[1].lined_up; PLAN line 1381
+ * computable_from : plate, painting, shot facts outlines
+ * proposed_calculation : Already automatic: align_painting.py; make it a required step that refuses to continue if agreement after < 0.85 or stretch > 1%.
+ * already_automatic : Yes (align_painting.py in film kit and plugin kit); not enforced.
+============================================================
+NAME: Lining up the behind painting against the main one | from: notice-corner-and-checker
+ * how_found : Log 32 and people test.
+ * final_value_or_rule : --against: edges of the lined-up painting (Canny 40/100 on lightness) except round the removed props (their outlines widened 25 x 25 px). Notice corner 0.990 to 0.991 (shift -0.5, -1.0); people test 0.999.
+ * evidence : align_painting.py lines 35-45; paintings ledgers
+ * computable_from : both paintings and the near groups
+ * proposed_calculation : Run automatically after every behind painting, naming the same groups that were painted out.
+ * already_automatic : Tool exists; run by hand.
+============================================================
+NAME: Keep painted shadows in the behind painting | from: lessons-and-notes
+ * how_found : Lesson 122: the painter removed the props' shadows with the props, so they faded off the pavement 2 s into the slide. Lesson 125: keeping them left a pale strip round the pail, since the gap round each prop had no shadow. Fix: carry the darkening into the gap.
+ * final_value_or_rule : keep_painted_shadows.py: main painting everywhere except inside the near props' outlines widened 10 px, soft join, darkened inward.
+ * evidence : Lessons.md:455-459, 466-469; keep_painted_shadows.py header
+ * computable_from : check file + plate facts + both paintings
+ * proposed_calculation : Already computed; run it automatically after align_painting --against.
+ * already_automatic : Yes (plugin kit has the tool; no skill mentions it).
+============================================================
+NAME: Keeping painted shadows when the film switches to the behind painting | from: story-log
+ * how_found : Log 32 motion check: 2 seconds in, the fire's long shadows from the pail and chair faded off the pavement. Fixed by keeping the main painting except inside the props' own outlines (keep_painted_shadows.py). A fresh helper then found a pale 10 to 15 px outline round the pail (the gap had no shadow); the shadows' darkening was carried into the gap. The pavement patch stayed at 70 to 71 levels, where before it rose to 89. Log 29: the barrel's painted scorch ring faded, so a soft 3D shadow was put under it.
+ * final_value_or_rule : Main painting everywhere except inside near props' outlines widened 10 px; shadow darkening carried inward; soft 3D contact shadows under props whose painted shadow goes.
+ * evidence : story L971-973 (log 29), L1228-1243 (log 32); paper-film/tools/keep_painted_shadows.py (WIDEN_PIXELS=10)
+ * computable_from : the plates, the paintings and the props' outlines
+ * proposed_calculation : Already a calculation. Add a check: pavement brightness just beside each prop, before and after the handover, changes by at most 2 levels.
+ * already_automatic : Yes, keep_painted_shadows.py (plugin kit). Run by hand.
+============================================================
+NAME: Keeping painted shadows round the near props (keep_painted_shadows.py) | from: notice-corner-and-checker
+ * how_found : Log 32: the fire's shadows of the pail and chair faded off the pavement 2 s into the slide (lesson 122); the first fix left a pale 10 to 15 px strip round the pail (lesson 125); pavement held at 70 to 71 (was rising to 89).
+ * final_value_or_rule : Main painting everywhere except inside the near props' outlines widened 10 px (painting pixels), soft join sigma widen/3; inside, the behind painting darkened by the ratio painting/behind (plus 8, clipped 0.25 to 1, blurred 3) measured outside and spread inward (quarter size, Telea radius 12, blurred 4). Default groups: subject, support, story props and 'lamp post'.
+ * evidence : paper-film/tools/keep_painted_shadows.py lines 102-127
+ * computable_from : check file core groups and the plate facts; which props are near enough to need it
+ * proposed_calculation : Default groups = every group whose parallax over the slide exceeds 1 px (see the behind-painting item) instead of the hard-coded 'lamp post'; widen = the painter's outline width (measure the dark rim width round props, about 10 px).
+ * already_automatic : Tool exists in kit and plugin kit; groups partly hard-coded.
+============================================================
+NAME: Keep painted shadows in the behind painting (keep_painted_shadows.py) | from: tools-and-plugin-gap
+ * how_found : Log 32: the long shadows from pail and chair faded off the pavement 2 s into the slide; first fix left a pale 10-15 px outline round the pail; third filming clean (pavement patch 70-71 levels vs 89). Lessons 122, 125.
+ * final_value_or_rule : Main painting everywhere except inside near props' own outlines widened 10 px; behind painting inside, with soft join and shadow darkening carried inward.
+ * evidence : film-kit/paper-film/tools/keep_painted_shadows.py lines 1-12 (WIDEN_PIXELS=10)
+ * computable_from : check file, plate facts, painting, behind painting
+ * proposed_calculation : Already automatic; add to the plugin's paint step and to a pipeline script.
+ * already_automatic : Yes (in plugin kit, identical), undocumented in plugin skills.
+============================================================
+NAME: Handing a painted set over to the 'behind' painting (ghost outlines) | from: story-log
+ * how_found : Log 29: moving the camera uncovered the painter's outlines of the sacks and cart left on the road (pale jagged copies, then dark ink lines). Fixed with a props-removed painting handed over round the props as soon as the camera moves. Finding why the handover didn't work took three tries: it waited for too much camera movement, and a helper step was half thrown away by leftover depth in a working picture. Painted clouds had nowhere to land, then the sky showed a pale double edge, so the painted sky went alone on a far card.
+ * final_value_or_rule : projected-set.js defaults: the behind painting is used round near props out to reach 0.05 of the frame height, handed over at quickMove 0.00003 (about half a degree); seam fades full at moveAngle 0.01 (about 8 degrees); frontStretch [1.3, 1.9]; edgeWidth 0.006; stretch [2.5, 5]; frameEdge 0.03; unseen surfaces darken 0.75, tint 0.6, fill 0.35; sky on its own far card.
+ * evidence : story L946-955 (log 29), L322 and L325 (word list); film-kit/paper-film/scenes/projected-set.js lines 512-545
+ * computable_from : the set and the plates
+ * proposed_calculation : Keep the defaults. Work out reach from the measured width of the painter's outlines: reach = (outline px + 10 px) / H.
+ * already_automatic : Yes in the film kit's projected-set.js. NOT in the plugin kit (the plugin has only painted-projection.js).
+============================================================
+NAME: Behind picture for what near props hid | from: lessons-and-notes
+ * how_found : Lesson 91: moving the camera uncovered pale jagged copies of the coal sacks' and cart's outlines. Fix: a second painting with near props painted out, worn by those surfaces, and warm light at the fire. Workflows log 34: make_behind_picture.py is the free fill; make_state_picture.py from a helper plate is truer.
+ * final_value_or_rule : Every near prop with a moving camera needs a behind picture.
+ * evidence : Lessons.md:351-354; Workflows.md:185-193; make_behind_picture.py header
+ * computable_from : plate facts outlines + main painting (or helper plate)
+ * proposed_calculation : Already computed (inpaint widened 10 px, radius 9; lossless PNG; checked equal outside).
+ * already_automatic : In the film kit only (make_behind_picture.py and make_state_picture.py are NOT in the plugin kit).
+============================================================
+NAME: Painted figures keep their outlines (people test result) | from: redesign-rounds
+ * how_found : Paid people test (log 34, about 85 cents): plate painted by Flux 3 edit, then measured each figure's outline against the plate's (shape-match and outline distance per figure).
+ * final_value_or_rule : Near men: painted outline matched the plate's at IoU 0.88 to 0.92, median outline error 1 px, 91 to 99.9% of outline points within 3 px; small walkers 63 to 99% within 3 px. Silhouette version contrast ratio 2.98 against 2.2 painted.
+ * evidence : SCRATCH/redesign/people-paint/check-figures/shape-match.json, outline-chamfer.json, film-figure-contrast.json; KIT/assets/models/inflation-chapter-2-newcomers/people-test/people-test-paintings.json
+ * computable_from : plate outlines (shot facts) and the painting
+ * proposed_calculation : After every painting: per figure, chamfer distance from plate outline to painting edges; flag a figure if within-3-px share < 0.90 (near) or < 0.70 (far) or IoU < 0.85, meaning the painter moved, added or lost it.
+ * already_automatic : No (scratch scripts).
+============================================================
+NAME: Count figures and props in a painting against the plate | from: notice-corner-and-checker
+ * how_found : Plan 34: 'Caught by counting the figures in each painting against the plate's outlines (the shot checker lists each figure as a prop)'.
+ * final_value_or_rule : Each figure is its own group; after alignment every figure's outline agreement should be high; a missing or extra figure shows as low agreement or unexplained edges.
+ * evidence : 34 Plan lines 148-151; people-test shot-check.json
+ * computable_from : aligned painting, plate facts
+ * proposed_calculation : Per-figure outline agreement (as picture_mismatch) after alignment; flag any figure under 0.6 and any strong edge blob of figure size outside all outlines.
+ * already_automatic : Partly (picture_mismatch flags props that don't line up).
+============================================================
+NAME: Out-of-date or shifted picture detection | from: notice-corner-and-checker
+ * how_found : Log 31: a picture made before the scene changed was judged as current. Log 32: brightness-only edges missed a rusty drum on a blue-grey road (lesson 117); colour edges added; the test then found Flux's 3-pixel shift.
+ * final_value_or_rule : Edges: LAB blurred 1.5, Canny 20/60 on lightness and 10/30 on both colour channels, widened 7 x 7. Each story prop (and others over 0.5% of the frame, at least 400 px) is slid up to 1/30 of the width in steps of max(2, W/270) px. Out of date if the best agreement gains at least 0.08 or stays under 0.45 (up-to-date pictures gained 0; moved props gained 0.09 to 0.23).
+ * evidence : check_shot.py picture_mismatch lines 416-451; experiments/31 .../tools/shift_trial.py, colour_edges_trial.py
+ * computable_from : the picture and the facts
+ * proposed_calculation : Already computed; run it on every painting as it arrives and route a failure to align_painting.py.
+ * already_automatic : Yes in check_shot.py (kit and plugin kit).
+============================================================
+NAME: Colour continuity between paintings of one place | from: tools-and-plugin-gap
+ * how_found : Plan 34 'One painting chain': W3 painted first as master; every other Works painting gets it as style picture; then a colour check; match_model_colours.py judged only rough (circular, log 22).
+ * final_value_or_rule : Average colour of each factory's brick, roofs, gates and sky inside their outlines, new painting vs master; a clear mismatch means a repaint.
+ * evidence : 34 Plan ... .md 'How the two factories stay the same' point 6; film-kit/paper-film/tools/match_model_colours.py header
+ * computable_from : two aligned paintings and shot_facts masks for each view
+ * proposed_calculation : Per group mean CIELAB inside the visible mask; delta E vs master; flag delta E > 8 (to tune on the first pair).
+ * already_automatic : No.
+============================================================
+NAME: Colour rules for real places | from: redesign-rounds
+ * how_found : Plan's lettering and colour rules (election on 7 November); round 2 found two red coats were the eye's target.
+ * final_value_or_rule : No large flat areas of a party's, supermarket chain's or bank's colour; hi-vis orange, never yellow-and-black; no banknotes or coins (portraits).
+ * evidence : PLAN lines 190-191, 1387, 1473-1474; round2-result.json checked.findings[3]
+ * computable_from : plate and filmed still
+ * proposed_calculation : Convert to HSV; flag connected regions over 1.5% of the frame with saturation > 0.45 in listed party/chain hues; check yellow+black stripe patterns.
+ * already_automatic : No.
+============================================================
+NAME: Meaningful colours and symbols | from: lessons-and-notes
+ * how_found : Decision 22: a blue tie read as a party colour in an election period; the top-hatted caricature added a claim. Decision 24: the price tag climbs in arrows, not pounds, until the film reaches New Zealand. Lesson 19: placards and flags with real political meaning.
+ * final_value_or_rule : Charcoal, grey or ivory for invented officials; blank placards; no currency before the place is set.
+ * evidence : Decisions.md:348-351, 371-372; Lessons.md:78-84
+ * computable_from : page files + cut list
+ * proposed_calculation : Lint currency symbols against the page's place; measure the dominant hue of officials' clothing and flag party colours.
+ * already_automatic : No.
+============================================================
+NAME: Contact sheets before cutting | from: lessons-and-notes
+ * how_found : Lesson 26: shells came out like rifle cartridges and a tank an odd shape; found on contact sheets before cutting. Lesson 19: video samples added flags and wrong-era tanks.
+ * final_value_or_rule : Check every painting on a contact sheet for history mistakes, symbols and flags before cutting.
+ * evidence : Lessons.md:112-116, 78-84; Workflows.md:57-59
+ * computable_from : paintings folder
+ * proposed_calculation : save_fal_paintings.py makes the sheet automatically after each batch, captioned with each request's prompt and the ledger id it shows.
+ * already_automatic : Contact sheet tools exist; not run automatically.
+============================================================
+NAME: Masks over magenta, and remover repairs | from: lessons-and-notes
+ * how_found : Lesson 27: the remover dropped the lectern, made Sardinia faint and left a coal heap half see-through. Found by laying cut-outs over magenta. Fixes: lectern from its outline (measured from colours); map printed on a card; lower 'solid' threshold for the pithead.
+ * final_value_or_rule : Every cut-out over magenta before use; thin or island shapes go on a card.
+ * evidence : Lessons.md:117-122, 504; contact_sheet_masks.py
+ * computable_from : painting + mask (objects painted on plain grey)
+ * proposed_calculation : Per mask: pixels differing from the grey background by > 30 levels but with alpha < 0.5 = missing paint; flag if > 1% of the object. Share of alpha between 0.1 and 0.9 inside the hull > 3% = see-through; lower the solid threshold. More than 3 separate pieces = print on a card.
+ * already_automatic : The magenta sheet exists (plugin kit); judging is by eye.
+============================================================
+NAME: What the background remover drops from cut-outs | from: story-log
+ * how_found : Log 13: laying every cut-out over magenta showed what the remover had dropped: the politician's lectern (put back), Sardinia on the map (the map went on a paper card) and part of a coal heap (kept with a lower threshold). Log 11: a small pale fin that could read as a flag was cut away.
+ * final_value_or_rule : A magenta contact sheet of every cut-out; a threshold per piece in the cut list.
+ * evidence : story L464-466 (log 13), L444-445 (log 11)
+ * computable_from : the painting and its mask
+ * proposed_calculation : Flag pieces where more than 2% of the pixels that differ from the grey backdrop (by more than 12 levels) fall outside the mask, or where the mask has islands.
+ * already_automatic : contact_sheet_masks.py, which is visual only.
+============================================================
+NAME: Sheet must be bigger than what is drawn on it | from: lessons-and-notes
+ * how_found : Lesson 38: the oak's sheet was narrower than its crown, so leaves past the edge were missing (cut off in a straight line). Fix: wider sheet, tree shape measured from its height.
+ * final_value_or_rule : Sheet = drawing's bounding box + margin; shape sized from height.
+ * evidence : Lessons.md:166-168, 509-510
+ * computable_from : the drawn content's alpha bounds
+ * proposed_calculation : Compute the drawing's alpha>0 bounding box and set the sheet to that plus a 4% margin; fail if any drawn pixel touches the sheet edge.
+ * already_automatic : No.
+============================================================
+NAME: Over-colourful faces and pieces | from: lessons-and-notes
+ * how_found : Decisions item 25 (user screenshot 1): one face was over-saturated next to the others. tone_piece.py measured it at about 1.7 times as colourful as the other people.
+ * final_value_or_rule : tone_piece defaults: saturation 0.62, contrast 0.9, lift 0.03, the same on every layer of a piece (face, jaw, mouth).
+ * evidence : Decisions.md:376-377; film-kit/paper-film/tools/tone_piece.py header
+ * computable_from : all cut-out pieces on a page
+ * proposed_calculation : tone_piece --measure every piece. For any piece whose mean saturation is over 1.2 x the page's median, set saturation = median / piece's own value, and apply the same factor to all its layers.
+ * already_automatic : Measure mode exists (plugin kit); the factor is chosen by hand.
+============================================================
+NAME: Colourfulness of painted people and figures | from: story-log
+ * how_found : Log 20: the politician's face was about 1.7 times as colourful as the other painted people; all three layers (face, jaw, mouth) were calmed to match. Log 34 round 2: the figures' coats were too red, with a toy-like look.
+ * final_value_or_rule : tone_piece.py --saturation 0.62 --contrast 0.9 --lift 0.03, the same on every layer of one figure.
+ * evidence : story L638-639 (log 20), L1369-1371 (log 34); paper-film/tools/tone_piece.py header
+ * computable_from : all pieces and figure materials
+ * proposed_calculation : Measure every piece with tone_piece --measure. For pieces above 1.2 × the median colour strength, saturation factor = median / piece. Apply it to all layers of that figure. For 3D figures, cap saturation at 1.2 × the scene's median.
+ * already_automatic : Measuring yes; the factor is set by hand (tone_piece.py, plugin kit).
+============================================================
+NAME: Depth picture spread and blur | from: lessons-and-notes
+ * how_found : Lesson 41: the built-in distance drawing squeezed near and far into a few shades, and a strong blur turned leaves and hills to mush. Fix: custom depth spread evenly, gentler blur. Workflows: prepare_relief --blur 3.
+ * final_value_or_rule : Even spread of depth values; blur 3 px.
+ * evidence : Lessons.md:176-179; Workflows.md:95-97; prepare_relief.py
+ * computable_from : depth picture
+ * proposed_calculation : Histogram-equalise depth before use; warn if 90% of pixels fall in under 20 grey levels.
+ * already_automatic : Blur is a parameter; spread isn't checked.
+============================================================
+NAME: Fitting shapes to AI paintings | from: lessons-and-notes
+ * how_found : Lesson 80: a true rectangle fitted to the canopy missed its painted edges by about 45 px; fit shapes to painted corners. Faces seen nearly edge-on must still wear the painting or they draw dark. Lesson 74: models wearing the projected painting brought back its glow and brushwork. Lesson 75: SAM 3D files have no normals. Lesson 76: fit the ground from around the base.
+ * final_value_or_rule : Fit by painted corners; project the painting onto models; compute normals on load; ground fitted from a ring round the base.
+ * evidence : Lessons.md:311-313, 294-302; fit_station_proxies.py; ground_under_objects.py
+ * computable_from : painting + masks + depth
+ * proposed_calculation : Already in fit_station_proxies.py and ground_under_objects.py; loader computes normals when missing.
+ * already_automatic : ground_under_objects in the plugin; fit_station_proxies only in the film kit.
+============================================================
+NAME: Paint-out masks and stand-ins in AI paintings | from: story-log
+ * how_found : Log 24: the canopy wouldn't fit as a rectangle because the painting's perspective isn't consistent, so it was fitted to its four painted corners. Ghosts of a post and the kiosk showed until the painted-out areas were widened. A grey block stood in front of the kiosk until the painted-out part was pushed further back. The canopy's underside drew dark until surfaces seen almost edge-on could wear the painting. Stand-ins drew brighter until both they and the background showed the painting with no lamp.
+ * final_value_or_rule : Match from the painting's view: mean about 4 levels off, 6.4% of pixels more than 12 off (the pass mark). Widen paint-out masks. Fit shapes to painted corners. No lamp on painted surfaces.
+ * evidence : story L771-783 (log 24); Status L157-158
+ * computable_from : the painting and the fitted boxes
+ * proposed_calculation : Score automatically: render from the projector's view and compare with the painting; pass if mean difference ≤ 5 levels and share over 12 levels ≤ 7%. Widen masks by the painter's outline width + 4 px.
+ * already_automatic : fit_station_proxies.py and station_plates.py are in the film kit only, not in the plugin kit. No general score.
+============================================================
+NAME: Keeping the painting's own light on 3D objects | from: story-log
+ * how_found : Logs 22 and 24: one colour over each whole model turned chrome and headlights cyan; colour handling was wrong twice; models drew as black blocks (no surface directions in their files); models floated. The painting's own light is kept exactly; the 3D car and pumps take a small share of the lamp, and their shadows fall on a see-through ground that shows only shadows.
+ * final_value_or_rule : Painted surfaces unlit. 3D objects get a small lamp share. Car colour within a few levels of the painting; pumps about 10% darker.
+ * evidence : story L728-737 (log 22), L768-770, L775-776 (log 24)
+ * computable_from : the painting, the model masks and a render from the painting's view
+ * proposed_calculation : Use projected-set's calibrate (draw the set from the projector with and without the painting) and a per-object gain to match the painting inside each mask; two rounds.
+ * already_automatic : Partly: projected-set calibrate (film kit only). match_model_colours.py is superseded (its check was circular).

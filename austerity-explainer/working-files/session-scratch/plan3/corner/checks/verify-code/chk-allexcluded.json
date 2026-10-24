@@ -1,0 +1,338 @@
+{
+ "about": "What this file is: the shot check for the notice corner (log 31): which objects make up each prop, their parts in the story, the street's direction, where titles go, and the picture the user liked as the reference. Used by paper-film/blender/shot_facts.py and paper-film/tools/check_shot.py.",
+ "size": [
+  1080,
+  1920
+ ],
+ "groups": {
+  "notice": [
+   "notice",
+   "notice.0*"
+  ],
+  "board": [
+   "notice-board*",
+   "tacks*"
+  ],
+  "drum": [
+   "brazier-drum*",
+   "brazier_coal_*"
+  ],
+  "chair": [
+   "kitchen-chair*"
+  ],
+  "lantern": [
+   "hurricane-lantern*",
+   "lantern_flame*"
+  ],
+  "pail": [
+   "wooden-pail*"
+  ],
+  "lamp post": [
+   "gas-lamp-post*"
+  ],
+  "handcart": [
+   "handcart*"
+  ],
+  "sacks": [
+   "coal-sacks*"
+  ],
+  "barrel": [
+   "wooden-barrel*"
+  ],
+  "dustbins": [
+   "dustbins*"
+  ],
+  "winding wheels": [
+   "winding_wheel_*"
+  ],
+  "chimney": [
+   "colliery_chimney*"
+  ],
+  "gates": [
+   "iron-gates-pair*"
+  ]
+ },
+ "subject": "notice",
+ "support": "board",
+ "story": [
+  "board",
+  "drum",
+  "chair",
+  "lantern",
+  "pail"
+ ],
+ "pairs_also": [
+  "lamp post",
+  "winding wheels"
+ ],
+ "work": [
+  "handcart",
+  "sacks",
+  "barrel",
+  "dustbins"
+ ],
+ "on_ground": [
+  "board",
+  "drum",
+  "chair",
+  "pail",
+  "lamp post",
+  "handcart",
+  "barrel",
+  "dustbins"
+ ],
+ "must_read": [
+  "notice"
+ ],
+ "lines": {
+  "street": [
+   0,
+   1,
+   0.069927
+  ],
+  "level": [
+   0,
+   1,
+   0
+  ]
+ },
+ "lines_key": "street",
+ "title_zone": [
+  0.05,
+  0.02,
+  0.62,
+  0.12
+ ],
+ "reference": {
+  "picture": "experiments/30 Test - composed by Nano Banana - own camera.jpg",
+  "lines_meet": [
+   0.7064,
+   0.4241
+  ],
+  "boxes": {
+   "notice": {
+    "box": [
+     0.744,
+     0.4525,
+     0.914,
+     0.645
+    ]
+   },
+   "drum": {
+    "box": [
+     0.504,
+     0.6525,
+     0.683,
+     0.825
+    ]
+   },
+   "chair": {
+    "box": [
+     0.703,
+     0.6025,
+     0.968,
+     0.84
+    ]
+   },
+   "lantern": {
+    "box": [
+     0.772,
+     0.65,
+     0.842,
+     0.735
+    ]
+   },
+   "pail": {
+    "box": [
+     0.823,
+     0.765,
+     0.961,
+     0.895
+    ]
+   },
+   "lamp post": {
+    "box": [
+     0.726,
+     0.105,
+     0.847,
+     0.235
+    ],
+    "compare": "top"
+   },
+   "handcart": {
+    "box": [
+     0.125,
+     0.48,
+     0.33,
+     0.5725
+    ]
+   },
+   "winding wheels": {
+    "box": [
+     0.526,
+     0.191,
+     0.721,
+     0.243
+    ],
+    "landmark": true
+   },
+   "chimney": {
+    "box": [
+     0.433,
+     0.12,
+     0.472,
+     0.34
+    ],
+    "compare": "top",
+    "landmark": true
+   }
+  },
+  "camera_match": {
+   "about": "Landmarks read off the reference picture (pixels) and the same things in our street (Blender metres): see log 31.",
+   "picture_size": [
+    1536,
+    2752
+   ],
+   "points": {
+    "left wheel hub": {
+     "seen": [
+      878,
+      600
+     ],
+     "at": [
+      -2.275,
+      86.0,
+      24.31
+     ]
+    },
+    "right wheel hub": {
+     "seen": [
+      1038,
+      595
+     ],
+     "at": [
+      2.275,
+      86.0,
+      24.31
+     ]
+    },
+    "chimney top": {
+     "seen": [
+      695,
+      330
+     ],
+     "at": [
+      -9.5,
+      108.0,
+      47.1
+     ]
+    },
+    "gate bottom left": {
+     "seen": [
+      795,
+      1290
+     ],
+     "at": [
+      -2.975,
+      71.5,
+      5.0
+     ]
+    },
+    "gate top left": {
+     "seen": [
+      795,
+      1170
+     ],
+     "at": [
+      -2.975,
+      71.5,
+      7.93
+     ]
+    }
+   },
+   "lines": {
+    "left roofline": {
+     "seen": [
+      [
+       100,
+       560
+      ],
+      [
+       700,
+       940
+      ]
+     ],
+     "through": [
+      -4.3,
+      0,
+      6.44
+     ],
+     "along": [
+      0,
+      1,
+      0.069927
+     ]
+    },
+    "left kerb": {
+     "seen": [
+      [
+       0,
+       1650
+      ],
+      [
+       800,
+       1295
+      ]
+     ],
+     "through": [
+      -2.5,
+      0,
+      0.13
+     ],
+     "along": [
+      0,
+      1,
+      0.069927
+     ]
+    },
+    "right kerb": {
+     "seen": [
+      [
+       1030,
+       1300
+      ],
+      [
+       890,
+       1700
+      ]
+     ],
+     "through": [
+      2.5,
+      0,
+      0.13
+     ],
+     "along": [
+      0,
+      1,
+      0.069927
+     ]
+    }
+   }
+  }
+ },
+ "stands_on": {
+  "lantern": "chair"
+ },
+ "eye_height": [
+  1.5,
+  1.9
+ ],
+ "box_excludes": [
+  "notice",
+  "board",
+  "drum",
+  "chair",
+  "lantern",
+  "pail"
+ ]
+}

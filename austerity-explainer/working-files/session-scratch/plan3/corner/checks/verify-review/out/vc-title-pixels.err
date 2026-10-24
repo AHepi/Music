@@ -1,0 +1,6 @@
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-review/check_shot.snapshot.py:1080: RuntimeWarning: Mean of empty slice
+  sky = float(shot.sky[t:b, l:r].mean())
+/usr/local/lib/python3.13/dist-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/plan3/corner/checks/verify-review/check_shot.snapshot.py:1081: RuntimeWarning: Mean of empty slice
+  crossing = [g for g in shot.core if shot.shows(g) and shot.visible[g][t:b, l:r].mean() > 0.01]

@@ -1,0 +1,49 @@
+# Shot check: composed-end
+
+6 problems found in 17 checks, numbered worst first (the camera first, because it moves everything on screen).
+
+How to read this: places are fractions of the frame (0 across is the left edge, 1 the right; 0 down is the top, 1 the bottom). Pixels are this frame's (1080 wide). Metres are metres in the street; "Blender x, y" is a spot on the street's map (x across the street, y up it). Boxes on marked.jpg carry the problem's number (red: a small place; orange: a large area). Dashed lines: the 0.90 and 0.95 limits of rule 12. Yellow arrows: from where a prop is to where the reference has it. Circles (main rule): purple, where the lines meet; white, the centre of the brightest parts; orange, the warm light; blue, the story props; green, the subject.
+
+## Fix first
+
+Problem 1 (rule 6: lit from below). Bring the lantern or the fire's light closer below notice, or turn down the cool light from above.
+
+## Problems
+
+1. **rule 6: lit from below.** The bottom of notice is 0.02 warmer than its top, on a scale where 0 is the same colour and 1 is pure red against pure blue; it needs 0.10 (the picture the user liked measures about 0.17).
+   - Fix: Bring the lantern or the fire's light closer below notice, or turn down the cool light from above.
+2. **rule 1: aim the street at the story.** The street's lines meet at 0.684 across, 0.439 down; the nearest edge of notice is 0.140 of the frame width away (limit 0.03): 74 pixels to the right and 131 pixels below. (notice spans 0.75 to 0.93 across, 0.51 to 0.64 down)
+   - Fix: Turning the camera won't help: it moves where the lines meet and the props together. Lower the camera about 0.39 m (notice then rises on screen while where the lines meet stays put), or move notice about 0.39 m higher; and move the camera about 0.22 m to the right, or move notice about 0.22 m to the left.
+3. **rule 6: warm light from the people's own lights.** Warm light covers 7.6% of the frame, 2.5 times the most allowed (3%). (warm: red clearly stronger than blue in a lit part (the same measure as measure_composition.py))
+   - Fix: 27% of the warm light is away from the story props; the largest patch is on the ground and walls at 0.20 across, 0.76 down (marked). The warm lights lighting it most: brazier_light (1.8 m from it, in the frame; about 90% of the warm light reaching it if nothing shades it); lantern_light (2.1 m from it, in the frame; about 4% of the warm light reaching it if nothing shades it). Shorten their reach (lower their strength or the distance their light travels) first.
+4. **rule 10: the quiet side keeps the frame from tipping.** The left half (away from notice) holds 32% of the weight (aim for 40 to 48%).
+   - Fix: Add a few small dim lights or details in the left half (a lit window, a distant lamp) until it holds about 42%.
+5. **rule 3: story props close together.** The story props fill a box 0.50 of the frame wide and 0.51 tall (limit 0.40 x 0.50). Its edges: drum's left side (0.50 across), board's right side (1.00), board's top (0.42 down) and pail's bottom (0.93).
+   - Fix: Move drum about 0.28 m to the right; move pail about 0.06 m higher.
+6. **rule 12: room for phone buttons.** board reaches 0.99 across (limit 0.95). Video apps put their buttons down the right edge, from a little above the middle to near the bottom.
+   - Fix: Move board about 0.14 m to the left.
+
+## Passed
+
+- rule 2: keep the camera level: The camera is level (tilt 0.0, lean 0.0 degrees).
+- rule 2: stand at eye height: The camera's eye is 1.81 m above the pavement under it (a standing person: 1.50 to 1.90 m).
+- rule 4: overlap clearly or leave a clear gap: No two of notice, board, drum, chair, lantern, pail just touch (overlaps at least 14 pixels deep, gaps at least 18).
+- rule 3: one touching group: Every story prop that shows touches or overlaps another.
+- rule 8: nothing big where the eye enters: No prop fills more than 1% of the frame in the bottom-left quarter.
+- rule 8: nothing big and dark where the eye enters: The biggest dark shape where the eye enters (the bottom-left quarter) covers 0.6% of the frame (limit 1%): brightness 0.15 against 0.36 for the lit ground around it. It is not a prop: probably a shadow cast across the ground.
+- rule 5: notice is the biggest bright thing: Of the brightest parts (the brightest 3% of the frame), 60% lie on notice (need 40%) and 93% in the story props' box (need 75%). The largest bright patch belongs to notice.
+- rule 5: notice is bright: notice is 3.06 times as bright as the frame's average (need 1.8).
+- rule 5: keep the sky dim: The top third's brightness, left to right: 0.22, 0.25, 0.24 (limit 0.36).
+- rule 10: nothing on the quiet side outshines the subject: Nothing in the left half is as bright as notice, and no prop there covers more than 2%.
+- main rule: every strong thing points at the same place: where the lines meet 0.68 across, 0.44 down; centre of the brightest parts 0.81 across, 0.57 down; centre of the warm light 0.71 across, 0.72 down; centre of the story props 0.77 across, 0.67 down; centre of notice 0.84 across, 0.57 down. Together they span 0.15 of the frame wide and 0.28 tall (limit 0.40 x 0.50, holding notice).
+
+## Notes
+
+- rule 12: titles in dim sky: Not checked: the check file has no "title_zone".
+
+## Not checked by this tool
+
+- rule 7 (story props stacked in upright columns, something in the top third): judge by eye.
+- rule 9 beyond the lantern resting on the chair: that the chair stands right under the notice, its seat shows and the lantern is lit.
+- rule 11 (the camera slides without turning): check where the lines meet in the first, middle and last frames of the film.
+- whether a prop pokes into a wall or another prop in 3D: only what shows on screen is measured.
