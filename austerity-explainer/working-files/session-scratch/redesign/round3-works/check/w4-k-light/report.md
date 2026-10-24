@@ -1,0 +1,62 @@
+# Shot check: w4 (light rules)
+
+12 problems found in 20 checks, numbered worst first (the camera first, because it moves everything on screen).
+
+How to read this: places are fractions of the frame (0 across is the left edge, 1 the right; 0 down is the top, 1 the bottom). Pixels are this frame's (1080 wide). Metres are metres in the street; "Blender x, y" is a spot on the street's map (x across the street, y up it). On marked.jpg each problem's place is boxed, with its number on a dark tag (red: a small place; orange: a large area). Dashed lines: the 0.90 and 0.95 limits of rule 12. Cyan arrows: from where a prop is to where the reference has it. Circles (main rule): purple, where the lines meet; white, the centre of the brightest parts; pink, the centre of the warm light; blue, the centre of the story props; green, the centre of the subject. A camera problem has no box: it changes the whole frame.
+
+Words used: "where the lines meet" is the spot where the street's straight edges (kerbs, gutters, roof lines) run together in the distance. The subject is the thing the shot is about; story props are the props that tell the story; work props are the rest (the check file names them). Weight (rule 10) is how strongly a part of the picture pulls the eye, from its size, brightness and detail. The reference is the picture the shot is meant to match. The flat-colour picture shows each prop in one plain colour, as measured in Blender.
+
+Made by check_shot.py version a8d2fe4a; a report made by another version may give other numbers.
+
+## Fix first
+
+Problem 1 (set-up: the finished picture matches the scene). Render a new finished picture of the scene as it is now, and check again.
+
+## Problems
+
+1. **set-up: the finished picture matches the scene.** The finished picture does not match the scene as measured: mug and wages (30% of its outline lines up; 84% when slid 36 pixels left and 12 pixels up) stands somewhere else in it. It was probably made before the scene changed, so the light rules were not judged.
+   - Fix: Render a new finished picture of the scene as it is now, and check again.
+2. **rule 3: one touching group.** Standing apart from the others: jacket and cap, upturned crate, mug and wages.
+   - Fix: Move jacket and cap about 0.47 m to the left so it overlaps man 8; move upturned crate about 0.28 m further from the camera so it overlaps mug and wages; move upturned crate (with mug and wages on it) about 0.29 m further from the camera so it overlaps upturned crate.
+3. **rule 3: story props close together.** The story props fill a box 0.73 of the frame wide and 0.52 tall (limit 0.40 x 0.50). Its edges: man 2's left side (0.01 across), jacket and cap's right side (0.74), no-2 gate's top (0.29 down) and upturned crate's bottom (0.81).
+   - Fix: Move jacket and cap about 1.21 m to the left; move no-2 gate about 0.12 m lower.
+4. **rule 4: overlap clearly or leave a clear gap.** man 4 and man 6 almost touch: 4 pixels apart. Edges that just meet make near and far things look stuck together (a clear overlap is at least 15 pixels deep; a clear gap at least 18). (at 0.25 across, 0.60 down; man 4 is nearer the camera)
+   - Fix: Move man 4 about 0.12 m to the right so it clearly overlaps man 6, or move man 4 about 0.09 m to the left to leave a clear gap.
+5. **rule 8: nothing big where the eye enters.** no-2 gate fills 2.5% of the frame in the bottom-left quarter, where the eye enters (limit 1%).
+   - Fix: Move no-2 gate out of the bottom-left quarter.
+6. **rule 4: overlap clearly or leave a clear gap.** man 1's edge runs right along no-2 gate's edge for 63 pixels, without clearly passing behind it. Edges that just meet make near and far things look stuck together. (from 0.62 to 0.65 down, around 0.17 across; no-2 gate is nearer the camera)
+   - Fix: Move man 1 about 0.07 m to the right so man 1 clearly passes behind no-2 gate, or move man 1 about 0.09 m to the left to leave a clear gap.
+7. **rule 8: nothing big where the eye enters.** man 1 fills 2.0% of the frame in the bottom-left quarter, where the eye enters (limit 1%).
+   - Fix: Move man 1 out of the bottom-left quarter.
+8. **rule 4: overlap clearly or leave a clear gap.** man 6 and man 8 almost touch: 14 pixels apart. Edges that just meet make near and far things look stuck together (a clear overlap is at least 15 pixels deep; a clear gap at least 18). (at 0.35 across, 0.62 down; man 6 is nearer the camera)
+   - Fix: Move man 6 about 0.12 m to the right and about 1.18 m further from the camera (but man 7 stands there) so it clearly overlaps man 8, or move man 6 about 0.03 m to the left and about 0.24 m nearer to the camera to leave a clear gap.
+9. **rule 4: overlap clearly or leave a clear gap.** man 5's edge runs right along man 4's edge for 38 pixels, without clearly passing behind it. Edges that just meet make near and far things look stuck together. (from 0.58 to 0.59 down, around 0.24 across; man 4 is nearer the camera)
+   - Fix: Move man 5 about 0.10 m to the left so man 5 clearly passes behind man 4, or move man 5 about 0.12 m to the right to leave a clear gap.
+10. **rule 8: nothing big where the eye enters.** upturned crate fills 1.1% of the frame in the bottom-left quarter, where the eye enters (limit 1%).
+   - Fix: Move upturned crate out of the bottom-left quarter.
+11. **rule 4: overlap clearly or leave a clear gap.** man 2's edge runs right along man 1's edge for 29 pixels, without clearly passing behind it. Edges that just meet make near and far things look stuck together. (from 0.66 to 0.67 down, around 0.11 across; man 1 is nearer the camera)
+   - Fix: Move man 2 about 0.08 m to the left so man 2 clearly passes behind man 1, or move man 2 about 0.09 m to the right to leave a clear gap.
+12. **rule 12: titles in dim sky.** Only 28% of the title area is sky (need 85%). (28% of the title area is sky; its brightness 0.26)
+   - Fix: Move the title area into darker, emptier sky, or move what is in it.
+
+## Passed
+
+- set-up: the finished picture rendered cleanly: The render's log shows no shadow-memory faults.
+- rule 2: keep the camera level: The camera is level (tilt 0.0, lean 0.0 degrees).
+- rule 2: stand at eye height: The camera's eye is 1.70 m above the pavement under it (a standing person: 1.50 to 1.90 m).
+- props rest where they should: upturned crate, crates, handcart, man 1, man 2, man 3, man 4, man 5, man 6, man 7, man 8 stand on the pavement or road (within 3 cm).
+- props rest where they should: mug and wages rests on upturned crate.
+- rule 1: aim the street at the story: The street's lines meet at 0.500 across, 0.500 down; the nearest edge of no-2 gate is 0.006 of the frame width away (limit 0.03).
+- rule 3: story props together in the street: upturned crate, man 1, man 2, man 3, man 4, man 5, man 6, man 7, man 8 stand in front of None and within 0.3 m of each other.
+- rule 12: room for phone buttons: Everything to read is left of 0.90 across, and the story props left of 0.95 where the buttons are (jacket and cap 0.74, upturned crate 0.58, mug and wages 0.58, man 1 0.18, man 2 0.14, man 3 0.17, man 4 0.25, man 5 0.33, man 6 0.32, man 7 0.38, man 8 0.41).
+
+## Notes
+
+- rule 4: overlap clearly or leave a clear gap: man 1 overlaps man 4 by 17 pixels: it passes, but only just (the limit is 15); a small move of the camera could make the overlap too shallow.
+
+## Not checked by this tool
+
+- rule 7 (story props stacked in upright columns, something in the top third): judge by eye.
+- rule 9 beyond the lantern resting on the chair: that the chair stands right under the notice, its seat shows and the lantern is lit.
+- rule 11 (the camera slides without turning): check where the lines meet in the first, middle and last frames of the film.
+- whether a prop pokes into a wall or another prop in 3D: only what shows on screen is measured.

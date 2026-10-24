@@ -1,0 +1,1170 @@
+{
+ "about": "The Works (assemble_works.py; plan 34 part 1 \"A. The Works\"): where things are, Blender space (x, y, z), metres; three.js is (x, z, -y). x across the lane (No. 1 at minus x, always on the left looking up the lane), y up the lane from its mouth, z up.",
+ "lane": {
+  "built_with": "build_street.py -- --colliery off --carriageway 6 --pavement 2.2 --length 22 --behind 0 --slope 0 --cottages 4",
+  "works_wall_face_y": 22.0,
+  "kerb_face_x": 3.0,
+  "house_front_x": 5.2,
+  "terraces_end_y": 18.0,
+  "cross_street": {
+   "north_kerb_y": -1.5,
+   "south_kerb_y": -6.5,
+   "far_side_y": -8.0
+  },
+  "gate_views": "pavement",
+  "gate_shift": 0.0
+ },
+ "film_fov_degrees": 60.4,
+ "plate_fov_degrees": 64.4,
+ "decisions": {
+  "w1_w2_camera_places": "Settled with the shot checker (round 3), four ways: (A) the pavement's middle, 1.1 m from the house fronts, gates 7 m apart: 12 problems in W1 and 4 in W2, the lines meeting on the gate (0.004 away), nothing past the phone buttons; (B) gates moved 0.9 m toward the lane's middle, camera in line with the outer pier: 15 and 5, the queue's nearest man past 0.95 across; (C) gates moved 0.5 m: 15 and 5, the same, the lantern hidden; (D) the first plan's spot in line with the outer pier, 0.2 m from the house fronts: inside the bank's bay window, everything hidden. Kept: (A).",
+  "w4_camera": "in line with No. 2's inner hinge post: from the outer one the eight men stood one behind another and read as one",
+  "lane_head_corners": "the drums stand in a flagged corner in front of each outer pier: along the house fronts' line they hid the brazier from W1",
+  "men_shadows": "the men cast no long shadows (each has a small soft patch at his feet), so a state picture swaps only the men and their feet (round 2: long shadows made the swap area 42% of the frame)"
+ },
+ "views": {
+  "w3": {
+   "plate": [
+    0.0,
+    -7.95,
+    4.74
+   ],
+   "composed": null,
+   "subject": [
+    0.0,
+    22.0,
+    2.0
+   ],
+   "faces": "+y (up the lane)",
+   "eye_height_metres": 4.6,
+   "stands_on": "the end house's upstairs floor (the eye 4.6 m above the street)",
+   "about": "both gates, from the end house's upstairs window across the cross street",
+   "camera_file": "works-camera-w3.json"
+  },
+  "w1": {
+   "plate": [
+    -4.1,
+    9.0,
+    1.841
+   ],
+   "composed": [
+    -4.1,
+    10.2,
+    1.841
+   ],
+   "subject": [
+    -3.5,
+    22.3,
+    1.5
+   ],
+   "faces": "+y (up the lane)",
+   "eye_height_metres": 1.7,
+   "stands_on": "the pavement",
+   "about": "No. 1's shut gate at the head of the queue",
+   "camera_file": "works-camera-w1.json"
+  },
+  "w2": {
+   "plate": [
+    4.1,
+    9.0,
+    1.841
+   ],
+   "composed": [
+    4.1,
+    10.2,
+    1.841
+   ],
+   "subject": [
+    3.5,
+    22.3,
+    1.5
+   ],
+   "faces": "+y (up the lane)",
+   "eye_height_metres": 1.7,
+   "stands_on": "the pavement",
+   "about": "No. 2's open gate with nobody waiting",
+   "camera_file": "works-camera-w2.json"
+  },
+  "w4": {
+   "plate": [
+    2.03,
+    29.5,
+    1.72
+   ],
+   "composed": [
+    2.03,
+    28.3,
+    1.72
+   ],
+   "subject": [
+    2.0,
+    22.3,
+    1.5
+   ],
+   "faces": "-y (down the lane)",
+   "eye_height_metres": 1.7,
+   "stands_on": "No. 2's yard",
+   "about": "No. 2's gate from inside its yard, looking out down the lane",
+   "camera_file": "works-camera-w4.json"
+  }
+ },
+ "gates": {
+  "no-1": {
+   "centre": [
+    -3.5,
+    22.3,
+    0.0
+   ],
+   "width": 2.95,
+   "hinges": {
+    "left": [
+     -4.934,
+     22.3,
+     0.0
+    ],
+    "right": [
+     -2.066,
+     22.3,
+     0.0
+    ]
+   },
+   "leaf_height": 2.929,
+   "opening": [
+    -5.0,
+    -2.0
+   ],
+   "chain": [
+    -3.5,
+    22.3,
+    1.3
+   ]
+  },
+  "no-2": {
+   "centre": [
+    3.5,
+    22.3,
+    0.0
+   ],
+   "width": 2.95,
+   "hinges": {
+    "left": [
+     2.066,
+     22.3,
+     0.0
+    ],
+    "right": [
+     4.934,
+     22.3,
+     0.0
+    ]
+   },
+   "leaf_height": 2.929,
+   "opening": [
+    2.0,
+    5.0
+   ]
+  }
+ },
+ "chimney_tops": {
+  "no-1-chimney-top": [
+   -5.3,
+   57.0,
+   26.3
+  ],
+  "no-2-chimney-a-top": [
+   5.3,
+   57.0,
+   25.3
+  ],
+  "no-2-chimney-b-top": [
+   8.6,
+   60.5,
+   23.3
+  ]
+ },
+ "no-2-tank-top": [
+  8.4,
+  33.1,
+  14.8
+ ],
+ "doorway_feet": {
+  "no-1": [
+   -3.4,
+   29.0,
+   0.0
+  ],
+  "no-2": [
+   2.9,
+   29.0,
+   0.0
+  ]
+ },
+ "gate_lamps": {
+  "no-1": [
+   -5.45,
+   21.67,
+   3.62
+  ],
+  "no-2": [
+   5.45,
+   21.67,
+   3.62
+  ]
+ },
+ "brazier": [
+  -4.88,
+  21.52,
+  0.152
+ ],
+ "coals_z": 1.004,
+ "fire_light": [
+  -4.88,
+  21.52,
+  1.554
+ ],
+ "lantern": [
+  -5.54,
+  20.76,
+  1.021
+ ],
+ "lantern_light": [
+  -5.54,
+  20.76,
+  1.181
+ ],
+ "lunch_tin": [
+  -5.62,
+  21.46,
+  1.021
+ ],
+ "drums": {
+  "no-1-drum-petrol": [
+   -5.58,
+   21.5,
+   0.155
+  ],
+  "no-1-drum-diesel": [
+   -5.6,
+   20.88,
+   0.155
+  ],
+  "no-2-drum-petrol": [
+   5.58,
+   21.5,
+   0.155
+  ],
+  "no-2-drum-diesel": [
+   5.6,
+   20.88,
+   0.155
+  ]
+ },
+ "boards": {
+  "no-1-board": [
+   -3.5,
+   21.98,
+   4.08
+  ],
+  "no-2-board": [
+   3.5,
+   21.98,
+   4.08
+  ]
+ },
+ "bank": {
+  "front_x": -5.2,
+  "y": [
+   9.0,
+   13.5
+  ],
+  "window": {
+   "centre": [
+    -4.9,
+    10.45,
+    1.855
+   ],
+   "from": [
+    -5.2,
+    9.45,
+    0.9050874710083008
+   ],
+   "to": [
+    -4.7,
+    11.45,
+    2.8050874710083007
+   ],
+   "glass_material": "bank-window-glass",
+   "room_light": "bank_room_light"
+  },
+  "sign": [
+   -4.241,
+   9.42,
+   3.75
+  ],
+  "sign_board_centre": [
+   -4.041,
+   9.42,
+   4.125
+  ],
+  "brass_plate": [
+   -5.195,
+   11.785,
+   1.505
+  ],
+  "door": [
+   -5.2,
+   12.725000000000001,
+   0.15508747100830078
+  ]
+ },
+ "no-2-crates": [
+  4.3,
+  24.25,
+  0.75
+ ],
+ "handcart": [
+  2.05,
+  7.5,
+  0.034
+ ],
+ "no-1-pop-up-crates": [
+  [
+   -3.95,
+   23.4,
+   0.02
+  ],
+  [
+   -3.1,
+   23.5,
+   0.02
+  ],
+  [
+   -3.55,
+   23.45,
+   0.52
+  ]
+ ],
+ "no-1-gateway": [
+  -3.5,
+  23.4,
+  0.0
+ ],
+ "w4": {
+  "jacket_and_cap": [
+   1.55,
+   22.831,
+   1.0
+  ],
+  "upturned_crate": [
+   2.05,
+   23.22,
+   0.52
+  ],
+  "mug_and_wages": [
+   1.82,
+   23.17,
+   0.52
+  ]
+ },
+ "men": [
+  "man-1",
+  "man-2",
+  "man-3",
+  "man-4",
+  "man-5",
+  "man-6",
+  "man-7"
+ ],
+ "men_at_no_1": [
+  {
+   "name": "man-1",
+   "figure": "worker-hand-on-bar",
+   "feet": [
+    -3.703,
+    21.863,
+    0.135
+   ],
+   "turn_degrees": 0,
+   "height_metres": 1.786
+  },
+  {
+   "name": "man-2",
+   "figure": "worker-stooped-to-brazier",
+   "feet": [
+    -4.562,
+    21.202,
+    0.148
+   ],
+   "turn_degrees": 45,
+   "height_metres": 1.544
+  },
+  {
+   "name": "man-3",
+   "figure": "worker-arms-folded",
+   "feet": [
+    -4.07,
+    20.25,
+    0.141
+   ],
+   "turn_degrees": 6,
+   "height_metres": 1.725
+  },
+  {
+   "name": "man-4",
+   "figure": "worker-hands-in-pockets",
+   "feet": [
+    -3.74,
+    19.47,
+    0.136
+   ],
+   "turn_degrees": -8,
+   "height_metres": 1.757
+  },
+  {
+   "name": "man-5",
+   "figure": "worker-arms-folded",
+   "feet": [
+    -3.43,
+    18.69,
+    0.132
+   ],
+   "turn_degrees": 14,
+   "height_metres": 1.725
+  },
+  {
+   "name": "man-6",
+   "figure": "worker-hands-in-pockets",
+   "feet": [
+    -3.48,
+    17.91,
+    0.132
+   ],
+   "turn_degrees": 4,
+   "height_metres": 1.757
+  },
+  {
+   "name": "man-7",
+   "figure": "worker-hands-in-pockets",
+   "feet": [
+    -3.19,
+    17.13,
+    0.128
+   ],
+   "turn_degrees": -14,
+   "height_metres": 1.757
+  }
+ ],
+ "men_at_no_2": [
+  {
+   "name": "no-2-man-1",
+   "figure": "worker-hands-in-pockets",
+   "feet": [
+    3.75,
+    21.55,
+    0.136
+   ],
+   "turn_degrees": -6,
+   "height_metres": 1.757
+  },
+  {
+   "name": "no-2-man-2",
+   "figure": "worker-arms-folded",
+   "feet": [
+    4.05,
+    20.85,
+    0.14
+   ],
+   "turn_degrees": 8,
+   "height_metres": 1.725
+  },
+  {
+   "name": "no-2-man-3",
+   "figure": "worker-hands-in-pockets",
+   "feet": [
+    4.07,
+    20.25,
+    0.141
+   ],
+   "turn_degrees": -12,
+   "height_metres": 1.757
+  },
+  {
+   "name": "no-2-man-4",
+   "figure": "worker-arms-folded",
+   "feet": [
+    3.74,
+    19.47,
+    0.136
+   ],
+   "turn_degrees": 4,
+   "height_metres": 1.725
+  },
+  {
+   "name": "no-2-man-5",
+   "figure": "worker-hands-in-pockets",
+   "feet": [
+    3.43,
+    18.69,
+    0.132
+   ],
+   "turn_degrees": 10,
+   "height_metres": 1.757
+  },
+  {
+   "name": "no-2-man-6",
+   "figure": "worker-arms-folded",
+   "feet": [
+    3.48,
+    17.91,
+    0.132
+   ],
+   "turn_degrees": -16,
+   "height_metres": 1.725
+  },
+  {
+   "name": "no-2-man-7",
+   "figure": "worker-hands-in-pockets",
+   "feet": [
+    3.19,
+    17.13,
+    0.128
+   ],
+   "turn_degrees": 2,
+   "height_metres": 1.757
+  },
+  {
+   "name": "no-2-man-8",
+   "figure": "worker-arms-folded",
+   "feet": [
+    2.95,
+    16.32,
+    -0.013
+   ],
+   "turn_degrees": -20,
+   "height_metres": 1.725
+  }
+ ],
+ "no_2_men": [
+  "no-2-man-1",
+  "no-2-man-2",
+  "no-2-man-3",
+  "no-2-man-4",
+  "no-2-man-5",
+  "no-2-man-6",
+  "no-2-man-7",
+  "no-2-man-8"
+ ],
+ "queue_front": [
+  -3.703,
+  21.863,
+  0.135
+ ],
+ "lights": {
+  "no-2-doorway-spill": [
+   2.9,
+   28.6,
+   2.6
+  ],
+  "no-2-gateway-spill": [
+   3.5,
+   23.8,
+   2.7
+  ],
+  "no-2-yard-spill": [
+   4.1,
+   28.2,
+   2.2
+  ],
+  "no-1-doorway-spill": [
+   -3.4,
+   28.6,
+   2.6
+  ],
+  "no-1-gateway-spill": [
+   -3.5,
+   23.8,
+   2.7
+  ]
+ },
+ "states": {
+  "quiet": {
+   "about": "No. 1 quiet (7 men waiting, windows dark, gate shut and chained), No. 2 flat out (all lit, gate wide open)",
+   "men_1": true,
+   "men_2": false,
+   "windows_1": [],
+   "doorway_1": false,
+   "doors_open_1": false,
+   "windows_2": [
+    1,
+    2,
+    3
+   ],
+   "doorway_2": true,
+   "gate_1": 0,
+   "gate_2": 96,
+   "chained": true,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  },
+  "working": {
+   "about": "No. 1 working (the men gone in, every window lit, cart doors open, gate open), No. 2 flat out",
+   "men_1": false,
+   "men_2": false,
+   "windows_1": [
+    1,
+    2,
+    3
+   ],
+   "doorway_1": true,
+   "doors_open_1": true,
+   "windows_2": [
+    1,
+    2,
+    3
+   ],
+   "doorway_2": true,
+   "gate_1": 84,
+   "gate_2": 96,
+   "chained": false,
+   "spill_1": 0.7,
+   "spill_2": 1.0
+  },
+  "men gone": {
+   "about": "No. 1 the moment after \"go\" (the men gone in, the gate open, its cart doors open and doorway lit, its windows still dark), No. 2 flat out",
+   "men_1": false,
+   "men_2": false,
+   "windows_1": [],
+   "doorway_1": true,
+   "doors_open_1": true,
+   "windows_2": [
+    1,
+    2,
+    3
+   ],
+   "doorway_2": true,
+   "gate_1": 84,
+   "gate_2": 96,
+   "chained": false,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  },
+  "slowed": {
+   "about": "No. 2 slowed (8 men waiting, a third of its windows lit, gate half shut); No. 1 quiet",
+   "men_1": true,
+   "men_2": true,
+   "windows_1": [],
+   "doorway_1": false,
+   "doors_open_1": false,
+   "windows_2": [
+    1
+   ],
+   "doorway_2": true,
+   "gate_2": 42,
+   "gate_1": 0,
+   "chained": true,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  },
+  "w4": {
+   "about": "page 14: No. 2 slowed seen from inside its yard, the 8 men outside its half-shut gate",
+   "men_1": false,
+   "men_2": true,
+   "windows_1": [],
+   "doorway_1": false,
+   "doors_open_1": false,
+   "windows_2": [
+    1
+   ],
+   "doorway_2": true,
+   "gate_2": 42,
+   "gate_1": 0,
+   "chained": true,
+   "spill_1": 0.0,
+   "spill_2": 1.0
+  }
+ },
+ "plates": {
+  "works-w3-plate": {
+   "view": "w3",
+   "state": "quiet",
+   "no_2_men": false,
+   "what": "W3, the master: No. 1 quiet with its queue of 7, No. 2 flat out"
+  },
+  "works-w1-plate": {
+   "view": "w1",
+   "state": "quiet",
+   "no_2_men": false,
+   "what": "W1 main: the 7 men waiting, No. 1's windows dark"
+  },
+  "works-w1-working-plate": {
+   "view": "w1",
+   "state": "working",
+   "no_2_men": false,
+   "what": "W1 helper: the men gone, No. 1's windows lit, its cart doors open"
+  },
+  "works-w1-men-gone-plate": {
+   "view": "w1",
+   "state": "men gone",
+   "no_2_men": false,
+   "what": "W1 helper (for page 3's \"go\"): the men gone, No. 1's cart doors open, its windows still dark"
+  },
+  "works-w2-plate": {
+   "view": "w2",
+   "state": "quiet",
+   "no_2_men": false,
+   "what": "W2 main: No. 2 flat out, nobody at the gate"
+  },
+  "works-w2-slowed-plate": {
+   "view": "w2",
+   "state": "slowed",
+   "no_2_men": true,
+   "what": "W2 helper: No. 2 slowed, 8 men waiting, two thirds of its windows dark"
+  },
+  "works-w4-plate": {
+   "view": "w4",
+   "state": "w4",
+   "no_2_men": false,
+   "what": "W4: inside No. 2's yard, no men (they are own-surface silhouettes), no gate leaves"
+  }
+ },
+ "state_pictures": {
+  "about": "made from the plates standing in for the paintings, with paper-film/tools/make_state_picture.py (outlines from the shot checker at each plate camera, --fov 64.4); make them again from the paintings once they are approved",
+  "works-w1-men-gone-state.png": "W1 main plate, with the men-gone helper plate where the men stood and the cart doorway opened (mask works-w1-men-gone-mask.png, about 7% of the frame): the time cut on \"go\"",
+  "works-w1-working-state.png": "W1 main plate, with the working helper plate wherever they differ (about 41% of the frame: the windows and the yard's light): the blend on \"start\"",
+  "works-w2-slowed-state.png": "W2 main plate, with the slowed helper plate where the eight men stand and the windows go dark (about 5% of the frame): page 12"
+ },
+ "letter_pixels": {
+  "about": "letter heights on the film's 1080 x 1920 frame at each view's composed spot (letters: gate boards 0.266 and 0.25 m, the bank's sign 0.305 m, PETROL 0.097 m, DIESEL 0.106 m)",
+  "w3 bank sign": 29.0,
+  "w3 No. 1 board": 14.7,
+  "w3 No. 2 board": 13.8,
+  "w1 No. 1 board": 37.2,
+  "w2 No. 2 board": 35.0,
+  "w1 PETROL": 14.2,
+  "w2 PETROL": 14.2
+ },
+ "men_seen": {
+  "w1 composed": [
+   {
+    "name": "man-7",
+    "distance_metres": 6.99,
+    "film_frame_box": [
+     0.616,
+     0.494,
+     0.793,
+     0.721
+    ]
+   },
+   {
+    "name": "man-6",
+    "distance_metres": 7.73,
+    "film_frame_box": [
+     0.55,
+     0.494,
+     0.702,
+     0.697
+    ]
+   },
+   {
+    "name": "man-5",
+    "distance_metres": 8.52,
+    "film_frame_box": [
+     0.554,
+     0.498,
+     0.692,
+     0.679
+    ]
+   },
+   {
+    "name": "man-4",
+    "distance_metres": 9.28,
+    "film_frame_box": [
+     0.5,
+     0.495,
+     0.623,
+     0.663
+    ]
+   },
+   {
+    "name": "man-3",
+    "distance_metres": 10.05,
+    "film_frame_box": [
+     0.448,
+     0.498,
+     0.561,
+     0.649
+    ]
+   },
+   {
+    "name": "man-2",
+    "distance_metres": 11.01,
+    "film_frame_box": [
+     0.354,
+     0.511,
+     0.499,
+     0.638
+    ]
+   },
+   {
+    "name": "man-1",
+    "distance_metres": 11.67,
+    "film_frame_box": [
+     0.505,
+     0.494,
+     0.602,
+     0.628
+    ]
+   }
+  ],
+  "w1 plate": [
+   {
+    "name": "man-7",
+    "distance_metres": 8.18,
+    "film_frame_box": [
+     0.6,
+     0.495,
+     0.748,
+     0.687
+    ]
+   },
+   {
+    "name": "man-6",
+    "distance_metres": 8.93,
+    "film_frame_box": [
+     0.543,
+     0.495,
+     0.674,
+     0.67
+    ]
+   },
+   {
+    "name": "man-5",
+    "distance_metres": 9.71,
+    "film_frame_box": [
+     0.547,
+     0.499,
+     0.668,
+     0.656
+    ]
+   },
+   {
+    "name": "man-4",
+    "distance_metres": 10.48,
+    "film_frame_box": [
+     0.5,
+     0.495,
+     0.608,
+     0.644
+    ]
+   },
+   {
+    "name": "man-3",
+    "distance_metres": 11.25,
+    "film_frame_box": [
+     0.454,
+     0.498,
+     0.554,
+     0.633
+    ]
+   },
+   {
+    "name": "man-2",
+    "distance_metres": 12.21,
+    "film_frame_box": [
+     0.368,
+     0.51,
+     0.499,
+     0.624
+    ]
+   },
+   {
+    "name": "man-1",
+    "distance_metres": 12.87,
+    "film_frame_box": [
+     0.504,
+     0.494,
+     0.592,
+     0.616
+    ]
+   }
+  ],
+  "w3": [
+   {
+    "name": "man-7",
+    "distance_metres": 25.28,
+    "film_frame_box": [
+     0.281,
+     0.596,
+     0.33,
+     0.66
+    ]
+   },
+   {
+    "name": "man-6",
+    "distance_metres": 26.09,
+    "film_frame_box": [
+     0.271,
+     0.594,
+     0.318,
+     0.655
+    ]
+   },
+   {
+    "name": "man-5",
+    "distance_metres": 26.86,
+    "film_frame_box": [
+     0.28,
+     0.592,
+     0.326,
+     0.65
+    ]
+   },
+   {
+    "name": "man-4",
+    "distance_metres": 27.67,
+    "film_frame_box": [
+     0.269,
+     0.588,
+     0.314,
+     0.646
+    ]
+   },
+   {
+    "name": "man-3",
+    "distance_metres": 28.49,
+    "film_frame_box": [
+     0.257,
+     0.587,
+     0.301,
+     0.641
+    ]
+   },
+   {
+    "name": "man-2",
+    "distance_metres": 29.51,
+    "film_frame_box": [
+     0.231,
+     0.588,
+     0.285,
+     0.637
+    ]
+   },
+   {
+    "name": "man-1",
+    "distance_metres": 30.04,
+    "film_frame_box": [
+     0.29,
+     0.58,
+     0.331,
+     0.634
+    ]
+   }
+  ],
+  "w2 composed (slowed)": [
+   {
+    "name": "no-2-man-8",
+    "distance_metres": 6.23,
+    "film_frame_box": [
+     0.104,
+     0.517,
+     0.312,
+     0.773
+    ]
+   },
+   {
+    "name": "no-2-man-7",
+    "distance_metres": 6.99,
+    "film_frame_box": [
+     0.207,
+     0.494,
+     0.384,
+     0.721
+    ]
+   },
+   {
+    "name": "no-2-man-6",
+    "distance_metres": 7.73,
+    "film_frame_box": [
+     0.298,
+     0.498,
+     0.45,
+     0.697
+    ]
+   },
+   {
+    "name": "no-2-man-5",
+    "distance_metres": 8.52,
+    "film_frame_box": [
+     0.308,
+     0.495,
+     0.446,
+     0.679
+    ]
+   },
+   {
+    "name": "no-2-man-4",
+    "distance_metres": 9.28,
+    "film_frame_box": [
+     0.377,
+     0.498,
+     0.5,
+     0.663
+    ]
+   },
+   {
+    "name": "no-2-man-3",
+    "distance_metres": 10.05,
+    "film_frame_box": [
+     0.438,
+     0.495,
+     0.552,
+     0.649
+    ]
+   },
+   {
+    "name": "no-2-man-2",
+    "distance_metres": 10.65,
+    "film_frame_box": [
+     0.439,
+     0.498,
+     0.546,
+     0.641
+    ]
+   },
+   {
+    "name": "no-2-man-1",
+    "distance_metres": 11.36,
+    "film_frame_box": [
+     0.402,
+     0.496,
+     0.501,
+     0.632
+    ]
+   }
+  ],
+  "w4 composed (silhouettes)": [
+   {
+    "name": "no-2-man-1",
+    "distance_metres": 6.97,
+    "film_frame_box": [
+     0.007,
+     0.477,
+     0.205,
+     0.711
+    ]
+   },
+   {
+    "name": "no-2-man-2",
+    "distance_metres": 7.72,
+    "film_frame_box": [
+     -0.008,
+     0.482,
+     0.173,
+     0.69
+    ]
+   },
+   {
+    "name": "no-2-man-3",
+    "distance_metres": 8.3,
+    "film_frame_box": [
+     0.027,
+     0.48,
+     0.193,
+     0.676
+    ]
+   },
+   {
+    "name": "no-2-man-4",
+    "distance_metres": 8.99,
+    "film_frame_box": [
+     0.129,
+     0.486,
+     0.274,
+     0.659
+    ]
+   },
+   {
+    "name": "no-2-man-5",
+    "distance_metres": 9.71,
+    "film_frame_box": [
+     0.211,
+     0.484,
+     0.34,
+     0.647
+    ]
+   },
+   {
+    "name": "no-2-man-6",
+    "distance_metres": 10.49,
+    "film_frame_box": [
+     0.226,
+     0.488,
+     0.344,
+     0.636
+    ]
+   },
+   {
+    "name": "no-2-man-7",
+    "distance_metres": 11.23,
+    "film_frame_box": [
+     0.286,
+     0.487,
+     0.393,
+     0.626
+    ]
+   },
+   {
+    "name": "no-2-man-8",
+    "distance_metres": 12.02,
+    "film_frame_box": [
+     0.333,
+     0.5,
+     0.43,
+     0.628
+    ]
+   }
+  ]
+ },
+ "files": {
+  "works-set-lane.glb": {
+   "holds": "the lane, its terraces and gas lamps, the cross street and the end terrace, the bank, the low walls, the works wall with its piers and gate arches, the dividing wall (the painting is shone onto it)",
+   "objects": 183,
+   "megabytes": 15.6
+  },
+  "works-set-factories.glb": {
+   "holds": "the two factories (their window groups, chimney-top markers and cart doors by name)",
+   "objects": 207,
+   "megabytes": 8.5
+  },
+  "works-set-town.glb": {
+   "holds": "the far town",
+   "objects": 111,
+   "megabytes": 6.7
+  },
+  "works-set-props.glb": {
+   "holds": "the props and No. 1's seven waiting men (in the paintings; the men are hidden when they go in)",
+   "objects": 119,
+   "megabytes": 38.9
+  },
+  "works-signs.glb": {
+   "holds": "own surfaces: the lettered things (gate boards, drums, the bank's sign and plate)",
+   "objects": 29,
+   "megabytes": 7.2
+  },
+  "works-gates.glb": {
+   "holds": "own surfaces, never in a plate: the gate leaves (no-1-gate, no-2-gate) and No. 1's chain (no-1-chain)",
+   "objects": 14,
+   "megabytes": 11.6
+  },
+  "works-pop-up.glb": {
+   "holds": "own surfaces, never in a plate: the crates that pop up in No. 1's gateway (no-1-crate-1 to 3)",
+   "objects": 15,
+   "megabytes": 3.6
+  },
+  "works-no-2-men.glb": {
+   "holds": "No. 2's eight waiting men: painted in W2's slowed helper plate, dark own-surface silhouettes in W4",
+   "objects": 32,
+   "megabytes": 9.5
+  }
+ }
+}

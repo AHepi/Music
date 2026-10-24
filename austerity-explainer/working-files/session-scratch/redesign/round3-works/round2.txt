@@ -1,0 +1,574 @@
+<class 'dict'> ['props_fixes', 'factories', 'figures', 'checked']
+props_fixes:
+  summary: I fixed all of round 1's prop findings and rebuilt the chapter 2 prop library. I also proved the kept notice corner is unchanged: its preview is identical in all 518,400 pixels, and all 102 files in the pit village folder are untouched.
+
+**What changed in the props**
+- **Root names.** The 8 props with a "prop.001" root now have one root named after the prop. The joined parts are renamed, for example "gate-board-no-1-body" and "wages-envelope-paper". I also added a guard to the shared prop_library.stand_on_ground: it now stops with a plain message if a part already has the prop's name. None of the 46 pit village props has that clash, so their rebuilds aren't affected.
+- **Jacket and cap.** The cap now hangs on its own short nail, 0.4 m to the right of the jacket's nail and 0.2 m lower. Its top is 16 cm below the collar. It is swung and turned a little on the nail, so the peak sticks out. Nothing sits above the collar now: the top of the hung jacket comes to a point at the nail. I drew it at the film's lens from 6.5 m (W4's distance) on a dark wall: it reads as a coat on a nail with a cap beside it. On the contact sheet's angle from the side, with no wall, the cap looks more like a round disc.
+- **Hand truck.** convert_poly_haven.py now has a "paint out" step, set in chapter_2_choices.py (PAINT_OUT). It works on a copy of the download and covers the maker's sticker with the bare steel just above it. It does this in the colour, roughness and relief pictures, and saves them as PNG, so nothing else in the pictures changes (0 pixels differ outside the patch). index.json now says "red-painted frame" and has a "painted_out" note. A close view of the toe plate shows the label gone with no visible seam. The file grew from 3.1 to 6.2 MB because of the PNG pictures.
+- **Measurements in index.json are now taken from the saved models.** Every size, letter height, nail position and loop position is measured just before saving. The painter writes where the letters fall in each picture to lettering-sizes.json, next to the pictures. Each licence line now names only the font that prop uses, and only says "Poly Haven" when the prop wears a Poly Haven surface. My checker reads the .glb files directly and agrees with index.json for all 13 props. Measuring turned up two more wrong figures from round 1:
+  - The bank sign's letters are **0.2 m** high, not 0.29 m. The plan's estimate of "about 22 pixels a letter" for the bank sign in W3 should be checked again.
+  - The crate's stencil letters are 0.063 m high, not 0.085 m.
+- **Lunch tin.** It is now dull, darkened tinplate with dents in the lid and the front.
+- **Mug.** It is now dark blue-black enamel, chipped to the black iron at the rim and the foot.
+- **Envelope.** It is now thin paper, about 2 mm at its fullest. The ruled border is gone, and there is a faint fold 1.5 cm in from the bottom edge, below the word.
+- **Gate boards.** They now have three planks: a wide middle plank carries all the lettering, and the joints sit 3 to 4 cm clear of the letters. Both the painter and the builder stop if a joint would cross a letter.
+- **Short names.** r, h, t, a and f are renamed in build_chapter_2_props.py. hx, hy and hz in build_figures.py had already been renamed by the figures helper, who is working on that file this round, so I didn't touch it.
+
+**The film folder setting**
+- export_for_film in set_dressing.py no longer has a default folder. Called without one, it stops with a plain message; I tested that it stops, and that it writes all three files when given a folder.
+- assemble_notice_corner.py and assemble_lockout.py now pass folder=SET_FOLDER.
+
+**Contact sheet:** redrawn and looked at; all 13 props are on it.
+  files:
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/props/build_chapter_2_props.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/props/paint_chapter_2_pictures.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/props/chapter_2_choices.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/pit-village/props/convert_poly_haven.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/pit-village/props/prop_library.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/pit-village/set_dressing.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/pit-village/assemble_notice_corner.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/pit-village/assemble_lockout.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/props/index.json
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/props/ (all 13 .glb rebuilt: gate-board-no-1, gate-board-no-2, bank-hanging-sign, bank-brass-plate, steel-drum-petrol, steel-drum-diesel, crate-this-way-up, chain-and-padlock, lunch-tin, jacket-and-cap-on-nail, tin-mug, wages-envelope, hand-truck)
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/contact-sheet.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/notice-corner/before.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/notice-corner/after.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/tools/check_props.py
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/tools/view_hung_prop.py
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/tools/view_close.py
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/tools/export_guard_test.py
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/scratch/pictures/lettering-sizes.json
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/props-before (round 1's library, kept for comparison)
+  tested: **The kept shot**
+- I drew the notice corner preview (540 x 960) with assemble_notice_corner.py --preview on the kept street.blend twice: before any change, and after every shared-script change (set_dressing, both assemble scripts, prop_library, the converter). No pixel differs in all 518,400; the largest difference is 0. The two PNG files differ only in their file data, not in any pixel.
+- All 102 files in assets/models/pit-village have the same fingerprints at the end as at the start. No .blend1 files were made.
+- export_for_film with no folder stopped with its plain message. With a scratch folder it wrote the set, signs and camera files, and nothing in the pit village folder was touched.
+
+**The props**
+- My checker reads every .glb directly, without Blender. All 13 have exactly one root, named after the file, and no part carries the prop's name. The size, nail positions, chain loop and gate-board joint positions in index.json all match the saved models to within 1.5 mm. No lettering has a digit except "No. 1" and "No. 2". Each licence line names only the fonts that prop uses.
+- The same checker on the pit village library (read only) found every root correct. So the new stand_on_ground guard can't stop a rebuild of any pit village prop.
+- chain-and-padlock rebuilt byte-identical to round 1's file. The bank sign and crate differ only by Blender's usual run-to-run noise (at most 0.0001), so the renamed variables changed no shapes.
+
+**Pictures looked at**
+- The pictures: gate boards (joints clear of the letters), envelope front and back, tinplate, enamel.
+- The full contact sheet, twice: trial and final.
+- The jacket and cap at the film's lens from 6.5 m, and from 2 m at an angle.
+- Hand truck toe plate, before and after (label gone, no seam). The patch changed 0 pixels outside its box in all three pictures.
+- Close views of the envelope, lunch tin (redrawn after deepening the dents) and mug.
+
+**Sizes and disk**
+- The library is 36 MB in 13 files; the largest is hand-truck.glb at 6.2 MB. No file in the repository is over 90 MB.
+- Free disk stayed at about 10 GB. My scratch folder holds 138 MB.
+  not_done_or_unsure: - **Overlap with the other helper:** two of my small renders ran while their Blender was busy: the first trial contact sheet ran during their small people-test preview, and the two jacket views during their full-size plate render. After that I waited for them before every render.
+- **The cap on the contact sheet:** seen from the sheet's angle (from the side and above, with no wall), the hung cap reads more like a round disc than a cap. From the front, as W4 would see it, it reads as a cap. If the W4 painting still turns it into something else, "cap" is a separate object and could be moved onto the crate instead.
+- **The frozen test scene:** paper-film/blender/tests/notice_corner_test_scene.py (kept unchanged on purpose for the shot checker's tests) still calls export_for_film without a folder. Its --export now stops instead of writing an old version over the kept notice corner's files. The checker tests don't use --export, and I left the file as it is.
+- **The hand truck's pictures:** they are now saved without loss (PNG), which doubled its file to 6.2 MB.
+- **Things I noticed but didn't change:**
+  - The bank sign's letters are 0.2 m high, not the 0.29 m round 1 recorded, so the plan's W3 letter-size estimate for the bank needs checking.
+  - The kept pit village index.json lists every font licence on every prop, and its coal-pile depth is 1.885 m against 1.873 m in the model. Those are kept files, so I left them.
+- **Notes not updated:** the project notes (Workflows.md, Status.md) don't yet say that export_for_film needs a folder, that the hand truck now has a paint-out step, or that the painter writes lettering-sizes.json, which the builder needs before it runs. That is for whoever updates the notes when committing.
+- **Not repository files:** the painted pictures and lettering-sizes.json live in my scratch folder, as round 1's did. Nothing is committed.
+  pictures:
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/contact-sheet.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/look/jacket-at-6.5m-x3.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/look/jacket-at-2m-turned.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/look/toe-plate-before-after.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/look/hand-truck-label-before-after.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/look/close-three.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/look/close-lunch-tin.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/look/pictures-check.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/notice-corner/before.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-props/notice-corner/after.png
+factories:
+  summary: I built the Works' two factories and the far town as separate files in the film kit. In the plan's upstairs-window view (W3) the two are told apart at a glance at phone size: on the left one dark chimney over a dark red sawtooth roof; on the right two pale square chimneys and a tank on legs over pale gables.
+
+**What's built** (in assets/models/inflation-chapter-2-newcomers/works/)
+- **No. 1, the quiet factory (left):** dark red-brown brick (castle_brick_02_red, darkened); a two-storey mill front with upper windows; a four-bay sawtooth roof whose teeth show along the front's top; ONE ROUND chimney 26 m tall (2.9 m across at the base, 1.84 m at the top) 35 m behind the wall; no tank; cart doors behind the gate shut.
+- **No. 2, the flat-out factory (right):** pale buff-grey (white_sandstone_bricks, toned); a two-storey mill front with upper windows; three long pitched spans with glazed roof lanterns; TWO SQUARE chimneys, 25 m and 23 m (2 m square at the base, 1.36 m at the top); a 3 x 3 x 2.8 m water tank on a steel trestle standing over the roof (top 14.8 m); cart doors open on a lit works; a taking-in door with a hoist beam.
+- **The far town:** 132 terraced rows, four tall mills, eight chimneys (36 to 55 m), a gasholder (34 m across, 36 m high) and a church spire (58 m), 60 to 450 m behind the wall.
+
+**Sizes and placement**
+- Each mill is 22 m wide and 22 m deep, its front 8 m behind the wall, running outwards from 0.5 m beside the lane's centre line.
+- Eaves are at 7.8 m. No. 1's sawtooth peaks are at 10.2 m; No. 2's ridges are 8.9 to 9.8 m and its lanterns reach 10.9 m.
+- Each chimney is in line with its gate's outer pier.
+- Each model is one .glb with one root (6.1, 7.0 and 6.7 MB) plus a 0.2 MB .blend. The .blend files pack no pictures and no .blend1 backups were made.
+- index.json lists each model's measured sizes, markers (chimney tops for smoke, the tank, the doorways) and glass.
+
+**Other requirements met**
+- Windows: every pane is its own piece, in three named groups of a third each (no-1-windows-step-1 to -3, the same for No. 2), with lit and dark glass materials. works_kit.set_windows lights all, a third or none; set_doorway lights the doorway.
+- Surfaces are mapped at true scale and there is no shading bake.
+- There are no sign boards and no lettering or numbers anywhere.
+
+**A conflict in the plan, and what I did about it**
+- The plan says a chimney "set that far back shows in every view from the lane". A block-out showed that a full-height mill 8 m behind the wall hides most of a 25 m chimney 35 m back from lane-level eyes.
+- So I kept the mills to two storeys, lined up a low part of each roof with each gate view, and measured by casting rays.
+- **W3:** 13.2 m of No. 1's chimney shows, and 12.2 m and 12.0 m of No. 2's. Their tops sit 0.22 to 0.27 of the way down, just under the band kept for typed words. The tank's top is 0.29 down, 0.81 across.
+- **W1 and W2:** only the top 8 to 9 m of each gate's own chimney shows, and 4 to 5.5 m of No. 2's second chimney. Their tops fall inside the typed-words band (0.07 to 0.14 down).
+- I placed the far town's chimneys so none rises over a factory roof in W3, where it could be counted as a factory's own. W3 shows only the gasholder's edge (left) and the spire with one chimney (right); the rooftops are hidden behind the mills.
+
+New scripts (paint_works_pictures, works_kit, build_factories, build_far_town, draw_works_views, make_works_sheet) are in paper-film/blender/inflation-chapter-2-newcomers/works/. I left build_factory.py, build_town.py and the old models exactly as they were.
+  files:
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/works/paint_works_pictures.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/works/works_kit.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/works/build_factories.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/works/build_far_town.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/works/draw_works_views.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/inflation-chapter-2-newcomers/works/make_works_sheet.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/no-1-quiet-factory.glb
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/no-1-quiet-factory.blend
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/no-2-flat-out-factory.glb
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/no-2-flat-out-factory.blend
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/far-town.glb
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/far-town.blend
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/index.json
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/textures/ (10 glass pictures: mill-window-narrow, mill-window-wide, north-light, lantern-light, doorway-inside, each -lit.jpg and -dark.jpg)
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/measured.json
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/blockout/blockout.py
+  tested: **Builds**
+- Both factories and the town build by script in about 3 seconds each.
+- A second build into scratch gave byte-identical .glb files and an identical index.json. The glass pictures also repaint byte-identically.
+
+**The .glb files**
+- Read directly: one root each (no-1-quiet-factory, no-2-flat-out-factory, far-town), and every node name is unique. Some parts had been given ".001" names because they shared a group's name; I renamed them.
+- Glass: No. 1 has 75 pieces (25, 23 and 26 by step, plus the doorway); No. 2 has 81 (26, 27, 27 plus the doorway). Each piece carries its step as glTF extras.
+- Sizes are 6.1, 7.0 and 6.7 MB, all far under 90 MB.
+
+**The .blend files**
+- Opened in Blender: no packed pictures (all linked from textures folders outside the files), and both lit and dark glass materials are kept for every type. No .blend1 files anywhere.
+
+**Drawings and measurements**
+- I loaded the .glb files the way an assemble script would, into the round 1 test Works lane (from scratch) with a plain stand-in 4 m wall with two gateways. I drew eight 540 x 960 EEVEE views one at a time: each factory from the front at 40 m, each from 15 m (brick and slate sizes look right), W1, W2, W3, and W3 with No. 1 working and No. 2 slowed.
+- The lit and dark switching worked on the imported models.
+- Chimney visibility was measured by ray casting, over the factories alone and with the lane in front.
+- W3 drawn again from the final repository files matches the contact sheet's W3 in every pixel.
+- I judged the views by eye at about 300 pixels wide (phone size).
+
+**Earlier fixes found by looking**
+- Lit glass glowed white: I lowered the glow.
+- Dark glass caught nearby lamps and looked lit: I made it duller.
+- The gasholder loomed beside No. 1's chimney: I moved it to W3's left edge.
+- A far chimney poked up beside No. 2's lantern: I moved the far chimneys out of W3's middle.
+- No. 1's brick matched the lane's red cottages: I darkened it.
+
+**Repository and money**
+- git status shows no change to any kept notice corner file, to the pit village models, to the old chapter 2 models, or to build_factory.py and build_town.py. The other files git lists as changed (figures, props, people test) are the other helpers' work, and the changed pit-village scripts are round 1's uncommitted edits. All my files are new.
+- I changed no shared script, so no notice corner pixel comparison was needed.
+- Free disk stayed at about 9.8 GB. No paid service was called.
+  not_done_or_unsure: **Not built here**
+- The works wall, gate arches, gates and the dividing wall are not in these files; the contact sheet uses a plain stand-in wall in scratch only.
+- The gate boards, drums, crates, bank and people are not placed.
+- No plates were drawn at full size and nothing was painted.
+
+**Departures from the plan's numbers (the shot checker may want to revisit them)**
+- The mills are two storeys (eaves 7.8 m). The plan's W1 text implies upper windows up to about 10.5 m, but a taller mill would hide the chimneys from the lane. Settings exist for chimney positions and heights (--chimney-1, --chimneys-2) and for the wall-to-mill distance; others are named constants at the top of build_factories.py.
+- From the gate views (eye 1.7 m) only the top 8 to 9 m of each gate's own chimney shows, and 4 to 5.5 m of No. 2's second. In W1 and W2 the chimney tops fall inside the top band kept for typed words (0.07 to 0.14 down).
+- The tank stands over No. 2's roof. W3 sees it well (top 0.29 down, 0.81 across). W1 does not see it, and in W2 it is at the frame's top edge and, in the test lane, hidden behind the houses.
+
+**Problems in the plan's camera places, not the factories**
+- W1 and W2 stand 0.2 m from the house fronts. In the round 1 test lane the near house and its downpipe fill about 40% of the frame, and in W2 a downpipe hides No. 2's own chimney.
+
+**Looks I'm unsure of**
+- At phone size, round versus square comes across more through count (one versus two), chimney colour (dark versus pale) and the tank than through the shape itself.
+- The open doorway's lit inside reads pale, close to white.
+- white_sandstone_bricks looks like stone blocks with about 18 cm courses rather than small bricks, as the plan chose.
+- The far town shows in W3 only at its edges (gasholder at the left, spire and one chimney at the right); its rooftops are hidden behind the mills. Its windows are not separate pieces.
+
+**Other limits**
+- Each .glb holds only its saved window state (No. 1 dark, No. 2 lit); works_kit.set_windows rebuilds the other material from the picture files when needed.
+- The yard setts sit 2 cm above the ground and may need matching to the lane's ground.
+- Project notes (Workflows.md, Status.md, log) are not updated, and nothing is committed.
+  pictures:
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/works-contact-sheet.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/phone-size-check.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/w3.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/w3-working.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/w1.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/w2.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/no-1-front.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/no-2-front.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/no-1-close.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/no-2-close.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/glass-pictures.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/blockout/blockout-sheet.png
+figures:
+  summary: All three parts are done, nothing was paid for, and the kept notice corner was not touched. The fixes worked: from behind, the men's heads now read as dark hair under a cap. The new state-picture step makes a cut where only the men go. The cut is the only jump in the 4-second film, and at full size there is no ghost and no shadow left where the men stood. Nothing is committed.
+
+**1. Figures (all 11 rebuilt in `paper-film/blender/figures/build_figures.py`)**
+- **Why the heads looked bald:** the hair was there, but its shiny finish reflected the sky and the street lamps, so it came out paler than the coats. The hair is now matt and dark, with fine streaks so it reads as hair. It covers the back and sides of every head, from under the cap down into the collar. The skin is less shiny too.
+- **Necks:** turned-up collars are higher, and mufflers sit high at the back. No neck shows from behind.
+- **Caps:** they sit about 1.5 cm lower, with the band just over the ears. Ears are a little smaller and flatter.
+- **Stooped man:** his hands are about 12 cm higher and now hover about 15 cm above the brazier's rim. The index now records the hands' height, so a later shot can check it.
+- **Women:** all three are bare-headed, hair pinned up (two buns, one low knot), shawls round their shoulders. Nothing nun-like.
+- **Cloth pictures:** seeded with zlib.crc32, and each file name carries a fingerprint of its colour. A fresh rebuild gives identical pictures.
+- **Short names:** renamed to plain words (`hz` and similar).
+- **Contact sheets:** back, side, front and silhouettes, redrawn and looked at at full size. I added a fifth view to `figure_sheet.py`: from behind, lit by a lamp from the camera's side. That is the light that made the heads look bald, and the old sheets never showed it.
+
+**2. The state-picture tool (new: `paper-film/tools/make_state_picture.py`)**
+- It writes the main painting everywhere except inside a mask, and the second painting inside it. The mask is where the two plates really differ, joined with the men's outlines (from `shot_facts.py`, measured for the plate's own camera and lens). It is cleared of specks, widened, then softened, so the soft join lies on unchanged paint. It also writes the mask, a picture to judge it by, and coverage numbers.
+- **How the threshold was chosen** (explained in its note, with numbers):
+  - Noise between two renders is under 1 level; saving as JPEG adds up to 2. So 6 levels is clear of both.
+  - With 6 alone, the faint ends of the men's long shadows (3 to 8 levels) stayed behind as man-shaped marks over 6.8% of the frame.
+  - So smooth, wide changes are also taken down to 3 levels (on a heavily blurred copy). Then what stays behind is under 4 levels everywhere except 0.04% of the frame.
+
+**3. The people test, rebuilt**
+- **Walkers** turned 25 to 35 degrees across the street; the men's strides now show.
+- **The hand-on-bar man:** I moved him and his lamp post off the kerb line to the right. The smoke column now rises between him and the stooped man.
+- **The rest:** plate and helper plate redrawn (clean render log), the set exported, the state picture made.
+- **The page:** `people-test.js` now cuts to the state picture, not the whole helper plate.
+- **Stills:** drawn at 1.0, 1.95, 2.05 and 3.0 s.
+- **Jump finder:** one change only, the planned cut at 2.00 s (8.43 against a usual 0.51; the next largest is 0.61).
+
+**Things you should know**
+- **Big mask:** it covers 42% of the frame. The men's shadows from the fire and the lamps, and the fire light they keep off the right-hand wall, really do cover that much. So with two real paintings, the brushwork will change over that area at the cut. I tested this with two cheap filtered copies of the plates standing in for the paintings: there is no hard seam, but where the two differ a lot you can see a patch with a different texture. To shrink the mask, draw both plates with the men casting no shadows and give each a small shadow at his feet.
+- **Faces in profile:** the arms-folded man and the stooped man face the fire, so a lit cheek and ear show. The painter might paint faces there. Turning them a little away from the fire would help.
+- **Shot checker (22 problems):**
+  - The hand-on-bar man's brightness warning is gone.
+  - It still says the stooped man "rests on" the brazier. That is a quirk of how it measures: his leaning body sits over the drum. His hands are 15 cm above the rim.
+  - Moving the lamp post and turning the walkers caused new "edges just touching" warnings: the two right-hand men are 13 pixels apart, the lamp post sits close to two men, and a walker is close to the hand-on-bar man. I didn't fix these; each fix needs the plates redrawn (about 25 minutes).
+- **Repeat builds:** a fresh rebuild of a figure has the same shapes and pictures, but the files are not byte-identical (only the order of some parts in the file differs).
+- **Not done:** project notes (`Status.md`, the log, `Workflows.md`) are not updated, and the silhouette film was not re-filmed. One still was drawn and looks right.
+- **Other helper:** they changed `set_dressing.py` and other shared scripts while I worked; none of that affects my files.
+
+The best single picture to open is `people-test-before-after-mask.jpg` (before the cut, after it, and the mask); it is listed with the other pictures below.
+  files:
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/figures/build_figures.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/figures/figure_sheet.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/figures/index.json
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/figures/ (all 11 .glb rebuilt)
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/tools/make_state_picture.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/blender/pit-village/assemble_people_test.py
+    -
+      /home/user/Music/austerity-explainer/film-kit/paper-film/scenes/people-test.js
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-helper-plate.jpg
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-state.jpg
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-state-mask.png
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-set.glb
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-figures.glb
+    -
+      /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/people-test/people-test-shot.json
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/people-test-painted.mp4
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/state/people-test-state.log
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/check/report.md
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/sheets/
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/stills-painted/
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/tools/stand_in_paintings.py
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/tools/head_closeup.py
+  tested: **Figures**
+- Rebuilt all 11 and checked them in close-ups of the head and shoulders, from behind, three-quarter behind and the side, under fire light; looked at every one.
+- Redrew the contact sheets (back, back lamp-lit, side, front, silhouettes) and looked at them at full size, in halves.
+- Rays cast at the old heads showed the hair was present. Pixel readings then showed it came out brighter than the cap and the coat (22-25 against 7-12), so the problem was shine, not missing hair.
+- In the new plate, measured the band just below each cap against the coat:
+  - Men seen from behind: hand-on-bar 12 against 25; leaning 15 against 28. The head is darker than the coat.
+  - The facing man's face is dark under the cap. The stooped and arms-folded men show a fire-lit cheek and ear in profile.
+- The stooped man's hands' lowest point is 1.045 m above his feet: 2.714 m in the scene, against the drum's rim at about 2.56 m (0.856 m tall on the ground at 1.708 m), so about 15 cm above it.
+- Rebuilt into a fresh scratch folder: all 25 cloth pictures are byte-identical. The .glb files have the same triangles (0.000 mm apart); only the order of some parts differs.
+
+**The state-picture tool**
+- Ran it on round 1's plates first. On the new plates I compared thresholds 4, 6, 8, 10 and 14, alone and with a lower threshold for faint, smooth changes, and drew maps of what each leaves behind:
+  - 6 alone: 6.8% of the frame left more than 3 levels off.
+  - 10 alone: 0.48% left more than 8 levels off.
+  - Chosen settings: 0.04% left more than 4 levels off.
+- Measured the plates' JPEG noise (99th percentile 2 levels after blurring) and the render noise (0.2 to 0.6).
+- Test with two different stand-in "paintings" (filtered copies of the plate and helper plate): no hard seam, but texture patches where the two differ a lot (9 levels across the soft join).
+
+**The people test**
+- One small preview (540 x 960) to place the figures, then the plate and helper plate at 1536 x 2730 (48 samples, no shadow-memory faults in the log).
+- Export, and the outlines for the plate's camera (`shot_facts.py --fov 64.4`).
+- Stills at 1.0, 1.95, 2.05 and 3.0 s; full-size crops of where the men stood after the cut; frames 58 to 61 of the film.
+- Tried three smoke drifts on stills. Kept round 1's (0.9): with the man moved it no longer covers him, and it keeps most walkers visible.
+- Filmed 4 s (120 frames, 147 s). Jump finder: one change only, the planned cut at 2.00 s (8.43 against a usual 0.51; next largest 0.61).
+- One still of the silhouette version, which still draws correctly.
+- Shot checker on the film view.
+
+**Safety and the kept shot**
+- No file under `assets/models/pit-village` is newer than my start, and no .blend1 files were made.
+- I ran no shared notice-corner script and changed none.
+- Disk stays at 10 GB free. Scratch is about 140 MB.
+- I checked before each Blender run that no other Blender was drawing; only small previews and the two required plates were drawn.
+  not_done_or_unsure: - **Mask size:** it covers 42% of the frame, because the men's shadows and the fire light they block reach that far. With two real Flux paintings, the brushwork will change over that area at the cut, and a patch could show if the two paintings differ in tone. The stand-in test showed no hard seam, but it can't predict Flux. Shrinking it means drawing the plates with the men casting no shadows and adding small shadows at their feet; not done.
+- **Lit profile faces:** the arms-folded man and the stooped man face the fire, so a lit cheek and ear show. The painter could paint faces there. Not changed.
+- **Composition warnings not fixed** (each fix needs the plates redrawn, about 25 minutes):
+  - New "edges just touching" warnings: hand-on-bar and leaning men 13 px apart; the lamp post close to two men; walker 4 3 px from the hand-on-bar man; some walkers.
+  - The checker still says the stooped man "rests on brazier". That is how it measures (one of its five test spots falls inside the drum's footprint under his leaning body), not his hands: they are about 15 cm above the rim.
+  - The other composing-rule problems, carried over from the notice corner's rules, are unchanged.
+- **The lamp post** now stands about 0.7 m in from the kerb. That is unusual for a gas lamp; it is only a stand-in for a gate bar.
+- **Coat colour on film:** the two right-hand men look reddish-brown in the film, warmer than in the plate. They are dull, not a party colour.
+- **Women walkers:** their long skirts hide the stride.
+- **Repeat builds:** rebuilt figures are not byte-identical (same shapes and pictures, some parts in a different order in the file).
+- **Not done:** the silhouette film was not re-filmed (one still only). Project notes (`Status.md`, the log, `Workflows.md` for the new tool and commands) are not updated. Nothing is committed. No fresh-viewer check of whether the cut reads as a glitch. No paid paintings, so whether Flux paints faces is still a prediction.
+  pictures:
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/people-test-before-after-mask.jpg
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/plate-group-full.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/plate-heads-right-x2.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/plate-heads-left-x2.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/heads-before/worker-hand-on-bar.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/heads-1/all.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/heads-2/all.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/sheets/back-lamplit-waiting.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/sheets/back-lamplit-walkers.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/sheets/side-waiting.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/sheets/side-walkers.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/sheets/silhouettes-waiting.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/sheets/silhouettes-walkers.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/frame-60-men-area-full.jpg
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/cut-frames-58-61.jpg
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/jumps-painted.jpg
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/state/left-behind-6-10.jpg
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/state/look-and-left-6f3.jpg
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/stand-in/a-state-b-crop.jpg
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/wind-compare.jpg
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/plate-walkers-x3.png
+    -
+      /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-figures/look/silhouettes-crop.jpg
+checked:
+  summary: I checked all three reports against the files and pictures, and every picture at full size. The main claims hold. I found no must-fix problem, but there are six things to fix before plates are drawn or paintings paid for.
+
+**What I confirmed**
+- **The kept notice corner is unchanged.**
+  - git shows no change under assets/models/pit-village. All 102 files there have the same fingerprints before and after my checks, and no .blend1 backups exist anywhere.
+  - I redrew its preview (540 x 960) with today's scripts. It matches round 1's drawing from the committed scripts, and the prop helper's before and after pictures, in every one of the 518,400 pixels.
+  - The shared-script changes are safe: export_for_film now needs a folder, the two notice corner scripts pass it, and stand_on_ground stops if a part already has the prop's name.
+- **Props.**
+  - Read straight from the files, all 13 have exactly one root named after the prop. There are no ".001" names and no part carries the prop's name.
+  - The sizes and file sizes in index.json match the saved models to under 0.1 mm.
+  - I took every picture out of the models and looked at it. The lettering reads only BANK, THIS WAY UP, PETROL, DIESEL, WAGES, "No. 1" and "No. 2". The hand truck's maker's sticker is gone, with no seam, and there is no lettering on its tyres. I found no other digits, logos or labels.
+  - The gate boards' plank joints sit about 4 cm clear of the letters. The mug reads as chipped enamel and the envelope as thin paper.
+- **Factories.**
+  - Each of the three files has one root and is 6 to 7 MB.
+  - They are true size: mills 22 x 22 m, eaves 7.8 m, No. 1's chimney 26 m and 35 m behind the wall.
+  - The bricks are a believable size in the 15 m views, there is no shading bake, and there are no sign boards or lettering.
+  - Every window pane is its own piece, in three named step groups per factory plus the doorway.
+  - The .blend files link all 20 of their pictures from the repository (none missing, none packed).
+  - In the upstairs-window view (W3) at phone size the two read apart at once: one dark round chimney over red sawtooth roofs, against two pale chimneys and a tank on legs.
+- **File sizes.** The largest file in the repository is people-test-set.glb at 36.7 MB, well under 90 MB.
+- **State picture and cut.**
+  - Inside the mask the state picture equals the helper plate (99% of pixels within 3 levels). Where the men stood, it differs from the helper plate by at most 5.6 levels after a 3-pixel blur.
+  - I ran the jump finder again: the only jump is the planned cut at 2.00 s (8.43 against a usual 0.51).
+  - At full size there is no ghost and no shadow left where the men stood.
+- **Figures.** From behind, every head now shows dark matt hair under the cap, with no pale neck. They no longer look bald, the women's hair is pinned up with no head shawls (nothing nun-like), and all 11 figure files have one root each.
+
+**The problems, in order of importance**
+1. The W1 and W2 street-level cameras stand 0.2 m from the house fronts, so a house and its downpipe fill about 40% of the frame.
+2. In W1, No. 2's two chimneys look like No. 1's own.
+3. The state-picture mask covers 42% of the frame. With two real paintings, the brushwork will change over that whole area at the cut.
+4. In the film the two right-hand men's coats turn deep red, against the plan's dull browns and greys.
+5. The figures still look toy-like at the plate's size.
+6. The WAGES envelope can't be read from the W4 camera.
+
+There are also several minor points (listed with the others below).
+
+Scratch work, the redrawn preview and the measurements are in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/check-round-2. Nothing was paid for, nothing was committed, and I changed no repository file.
+  findings:
+    -
+      where: The plan's W1 and W2 camera places; seen in /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round2-factories/contact-sheet/w1.png and w2.png
+      problem: The plan puts each street-level camera in line with its gate's outer pier, and that pier sits at the back of the pavement. So the camera ends up 0.2 m from the house fronts:
+- The near house and its downpipe fill about 40% of the frame.
+- In W2 a downpipe hides No. 2's own chimney.
+- Each gate's own chimney top falls 0.07 down, inside the top band kept for typed words.
+The factories helper reported this, and I confirmed it in both pictures. It is a fault in the plan's layout, not in the factory files.
+      fix: Before any W1 or W2 plate is drawn, have the shot checker compare two cameras:
+- one at the middle of the pavement, about 1.1 m out from the house fronts;
+- one with both gates moved about 0.5 m toward the lane's centre, so the outer pier lines up with the middle of the pavement.
+Also move the near downpipe off the camera's line. Then check where the chimney tops land. If they still sit in the typed-words band, put the typed words in the sky beside the chimney, not over it.
+      severity: should-fix
+    -
+      where: assets/models/inflation-chapter-2-newcomers/works/no-2-flat-out-factory.glb (the chimney brick); w1.png and phone-size-check.png
+      problem: In W1 at phone size, No. 2's two chimneys stand at 0.83 and 0.90 across, with their tops 0.08 down. That is nearly the same height in the frame as No. 1's chimney (0.07 down). Seen from street level against the dusk sky they come out dark red-brown, not pale, and they seem to rise out of No. 1's own roof. So No. 1 looks as if it has three chimneys. The plan expects them "small at the upper right", but at about 48 m they are as big as No. 1's own chimney.
+      fix: 1. Make No. 2's chimneys paler: lighter buff brick, with a warm lit side from its own yard's glow, so they stay pale against the sky from street level.
+2. Move them a little further out, so sky shows between them and the end of No. 1's roof in W1.
+3. Check W1 again at phone size with the film's live smoke (No. 2 smoking heavily, No. 1 cold) and with the dividing wall in place.
+      severity: should-fix
+    -
+      where: paper-film/tools/make_state_picture.py (how the mask is chosen); assets/models/inflation-chapter-2-newcomers/people-test/people-test-state-mask.png
+      problem: On the free plates the cut is clean. But the mask is 42% of the frame: 38% swaps fully and 8% partly. It takes in the men's long shadows from the fire and the lamps, the road below them and the whole right-hand wall.
+- With two real Flux paintings, the brushwork changes over all of that area at the cut. That is far more than the plan's "only the men and their shadows".
+- The mask comes only from the plates. If the painter paints a man's shadow or halo bigger than the plate's, the part outside the mask stays after the men go: a painted ghost.
+      fix: Before paying for the two paintings:
+1. Redraw the plate and helper plate with the men casting no long shadows from the fire and the lamps (switch the shadow off for those lights), and give each man a small soft shadow at his feet. Then check that the mask shrinks to the men and their feet.
+2. Add a third part to the mask: within about 60 pixels of the men, where the two paintings' heavily blurred brightness differs by more than a few levels. That catches shadows that exist only in the painting.
+3. Have a fresh helper judge the cut.
+      severity: should-fix
+    -
+      where: Coat colours in paper-film/blender/figures/build_figures.py (the hand-on-bar and leaning men); seen in round2-figures/people-test-painted.mp4 at 1.0 s
+      problem: In the plate the two right-hand men's coats are tan-brown. In the film they come out deep crimson. A sample of the right man's coat reads 26/1/0, a pure red hue with no green at all. Next to three near-black men, two red coats are what the eye goes to, and the plan forbids large red areas and party colours.
+      fix: Tone both coats down to a dull grey-brown or olive-brown, with less colour, since the film's grade pushes warm browns toward red. Film one still and check the coats are brown, not red, before the Works shots.
+      severity: should-fix
+    -
+      where: paper-film/blender/figures/build_figures.py; assets/models/inflation-chapter-2-newcomers/people-test/people-test-plate.jpg (round2-figures/look/plate-group-full.png, plate-heads-left-x2.png and plate-heads-right-x2.png)
+      problem: No longer bald, but still toy-like at the plate's full size:
+- The arms are smooth tubes ending in rounded mitts, and the hand on the bar reads as a stump by the head.
+- No coat folds show: the script's note claims coat skirts with folds, but they are too shallow to see. The hems are dead straight and the boots are big flat blocks.
+- The stooped man and the arms-folded man face the fire, so a pale lit cheek and ear show in profile, which the painter may turn into a face.
+The plan names "shop dummies" as a risk to catch.
+      fix: 1. Deepen the coat folds two to three times, and add creases at the elbows and the back.
+2. Break up the hem line a little and make the boots smaller.
+3. Bend the visible hands round the bar or the cuff.
+4. Turn the two profile heads 15 to 20 degrees away from the fire.
+5. Look at the plate crop at full size again before the first paid painting.
+      severity: should-fix
+    -
+      where: assets/models/inflation-chapter-2-newcomers/props/wages-envelope.glb, and the plan's W4 view
+      problem: The envelope is real size (0.114 x 0.076 m) with letters 1.8 cm high, and it lies flat on the crate. W4's camera is about 6 m from the crate. There the letters are about 5 pixels tall, and only 1 to 2 pixels foreshortened lying flat. Nobody can read WAGES, and the painter will garble it. The plan's fix for "nothing shows wages" (T8) depends on that word.
+      fix: 1. Stand the envelope up against the mug, facing the camera, and keep it as its own surface so its edges stay sharp.
+2. Don't rely on reading it in the picture: point the typed WAGES words (page 14's LESS POWER TO ASK FOR HIGHER WAGES) at it with a thin line, or bring the crate group closer to the camera if the frame allows.
+3. Record the measured letter size in the plan.
+      severity: should-fix
+    -
+      where: assets/models/inflation-chapter-2-newcomers/props/jacket-and-cap-on-nail.glb (round2-props/look/jacket-at-6.5m-x3.png and the contact sheet)
+      problem: The headless-man reading is gone, but:
+- At W4's distance the cap reads as a round disc or plaque on the wall.
+- The jacket has no collar, and its top comes to a tent-like point at the nail.
+      fix: 1. Hang the cap tilted, so its peak sticks down and out in profile and the crown is seen at an angle, not face-on. Or lay it on the crate beside the mug.
+2. Give the jacket a collar, and let it hang from its loop with the shoulders slumping.
+      severity: minor
+    -
+      where: assets/models/inflation-chapter-2-newcomers/props/lunch-tin.glb (round2-props/look/close-lunch-tin.png)
+      problem: The report says the tin was dented, but at the close view no dents show. It still reads as a smooth, modern grey plastic box with a clip.
+      fix: Make dents deep enough to catch the light, add a rolled rim on the lid, a wire hinge at the back, and bright worn edges with a few rust spots. Look at it again at the coping's distance in W1.
+      severity: minor
+    -
+      where: paper-film/tools/make_state_picture.py (it writes the state picture as a JPEG at quality 93)
+      problem: Saving as a JPEG again changes the whole frame, so the state picture is not exactly the main painting outside the mask:
+- on average 0.48 levels off, and up to 9;
+- 0.3% of the pixels outside the mask are off by more than 3 levels.
+You can't see this on a phone, but the tool promises "every other brushstroke stays exactly where it was".
+      fix: Write the state picture losslessly (PNG or lossless WebP), or at JPEG quality 100. Add a printed check: the largest difference from the main painting where the mask is zero.
+      severity: minor
+    -
+      where: assets/models/inflation-chapter-2-newcomers/works/ (no-1-yard-setts, no-2-yard-setts: top only 2 cm above ground 0); contact-sheet/no-1-close.png, no-2-close.png and w2.png
+      problem: The 15 m views show hard-edged, odd-shaped dark patches across the yard setts, and W2 shows a dark oval at the foot of No. 2's lit doorway. They look like the test lane's own ground showing through the setts, which are only 2 cm thick above height 0. The same thing will show through the open gate in W2 if the real lane's ground isn't flat under the yards. This is likely, not proven.
+      fix: In the Works assembly script, cut or lower the lane's ground under both yards, or make it level below the setts. Then check W2's gateway floor at full size.
+      severity: minor
+    -
+      where: assets/models/inflation-chapter-2-newcomers/props/bank-hanging-sign.glb and the plan's W3 notes
+      problem: The sign's letters measure 0.2 m. At the film's lens, from 20 to 22 m in W3, that is about 15 to 17 pixels a letter, not the plan's 22. That is marginal for page 9, where the bank has to be found.
+      fix: Either make the board and its letters larger (0.3 m letters gives about 22 to 25 pixels), or correct the plan and let page 9's NEW MONEY tag do the naming.
+      severity: minor
+    -
+      where: assets/models/inflation-chapter-2-newcomers/works/far-town.glb as seen in contact-sheet/w3.png
+      problem: The far town barely shows in W3: only the top of the gasholder's frame, cut by the left edge and sitting right on the left terrace's roof line (where it reads as a fence on the roof), and the spire at the right edge. The plan's "chimneys, a gasholder, a spire" beyond the works hardly comes across.
+      fix: Put the town on rising ground, or move the gasholder so all of it shows with sky round it, clear of the terrace roofs. If a nearly hidden town is enough, say so in the plan.
+      severity: minor
+    -
+      where: Repository ignore list (film-kit/.gitignore; there is none at the austerity-explainer level)
+      problem: The plan says Blender's .blend1 backups are "added to the ignore list", but no ignore file lists them (git check-ignore confirms). The new scripts do turn backups off.
+      fix: Add the line *.blend1 to film-kit/.gitignore when committing.
+      severity: minor
+    -
+      where: paper-film/blender/figures/build_figures.py lines 523-529 and 881; paper-film/blender/inflation-chapter-2-newcomers/works/build_factories.py (lines 106-119, 273, 279, 347, 545-547); works_kit.py line 311
+      problem: Short names are left that the house rule forbids:
+- "for r in rings" and "r * 0.8 for r in radii" (r is named in the rule);
+- u, d, yy, xx, a, b, u0/u1, d0/d1 and a0/a1.
+The x0/x1 and bm style already exists in build_street.py, so those can stay.
+      fix: Rename them to plain words, for example ring, radius, along, depth, row_y, column_x, start_along and end_along, near_depth and far_depth.
+      severity: minor
+    -
+      where: project-notes/Workflows.md and Status.md; paper-film/blender/tests/notice_corner_test_scene.py
+      problem: The notes don't yet describe:
+- that export_for_film now needs a folder;
+- the hand truck's paint-out step;
+- that the painter must write lettering-sizes.json before the builder runs;
+- the new make_state_picture.py and its command;
+- the Works build scripts.
+Also, the frozen test scene's --export now stops instead of writing.
+      fix: Write these into Workflows.md and Status.md when committing, including a line saying the test scene's --export stops on purpose.
+      severity: minor

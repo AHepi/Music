@@ -1,0 +1,69 @@
+{
+  "about": "Main camera of the pit village street set (works-lane.glb). Blender space is z-up; three.js space is y-up: positions convert as (x, y, z) -> (x, z, -y); the camera quaternion converts as q_three = rotation(-90 degrees about x) * q_blender, because a camera looks down its own -z with +y up in both. (For ordinary objects the glTF exporter instead writes (w, x, z, -y), since their vertices are converted too.) The camera is also inside works-lane.glb as the node \"main_camera\" (and \"side_camera\", 2 m to the right).",
+  "frame": {
+    "width": 1080,
+    "height": 1920,
+    "aspect": 0.5625
+  },
+  "vertical_fov_degrees": 40.0,
+  "horizontal_fov_degrees": 23.140917140577795,
+  "near": 0.1,
+  "far": 1500.0,
+  "blender": {
+    "location": [
+      0.0,
+      3.0,
+      1.68
+    ],
+    "rotation_quaternion_wxyz": [
+      0.665882,
+      0.746057,
+      0.0,
+      0.0
+    ],
+    "rotation_euler_xyz_degrees": [
+      96.5,
+      -0.0,
+      0.0
+    ]
+  },
+  "threejs": {
+    "position": [
+      0.0,
+      1.68,
+      -3.0
+    ],
+    "quaternion_xyzw": [
+      0.056693,
+      0.0,
+      0.0,
+      0.998392
+    ],
+    "rotation_euler_xyz_degrees": [
+      6.5,
+      -0.0,
+      0.0
+    ],
+    "fov": 40.0
+  },
+  "set_notes": {
+    "street_slope_degrees": 0.0,
+    "street_runs_along": "Blender +y (three.js -z), level",
+    "street_half_width": 3.0,
+    "house_front_x": 5.2,
+    "ground_height_formula": "z = min(y, 26) * tan(0 deg) (channel line); pavement top = that + 0.13; road crown + 0.08",
+    "markers": "empties: lamp_N (lamp heads), <row>_cottage_NN_doorway, <row>_cottage_NN_chimney_top",
+    "glowing_material_names": "window_lit_glow_0..2 (lit cottage windows), lamp_glass_glow, sky_dome_glow",
+    "built_with": "build_street.py -- --colliery off --carriageway 6 --pavement 2.2 --length 22 --behind 0 --slope 0 --cottages 4",
+    "lane": {
+      "starts_y": 0.0,
+      "setts_end_y": 22.0,
+      "level_from_y": 26.0,
+      "terrace_rows": [
+        4
+      ],
+      "terraces_start_y": 0.0,
+      "colliery": false
+    }
+  }
+}

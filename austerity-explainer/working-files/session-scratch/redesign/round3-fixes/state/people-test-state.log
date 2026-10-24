@@ -1,0 +1,17 @@
+make_state_picture: 1536 x 2730; threshold 6 levels, faint 3 levels (smooth changes); noise between the plates (their fine grain, far from the change) 0.2 levels (99th percentile)
+  the mask at other settings (share of the frame, after widening):
+    threshold   4, faint none:  39.0%
+    threshold   6, faint none:  32.5%
+    threshold   8, faint none:  29.1%
+    threshold  10, faint none:  26.4%
+    threshold  14, faint none:  22.7%
+    threshold   6, faint    2:  48.5%
+    threshold   6, faint    3:  42.3%   <- used
+    threshold   6, faint    4:  37.4%
+    threshold   6, faint    5:  34.3%
+  used: plates differ over 37.9% of the frame; outlines 7.5%; second painting fully over 38.3%, partly over 8.2%
+  left with the main painting although the plates differ by more than 2 levels: 4.2% of the frame, by 2.6 levels on average, 9.4 at most
+  the two paintings across the soft join differ by 1.5 levels on average (a large number here shows as a seam)
+  largest difference from the main painting where the mask is zero (53.5% of the frame), read back from the written picture: 0 levels (must be 0)
+  wrote assets/models/inflation-chapter-2-newcomers/people-test/people-test-state.png (lossless) and assets/models/inflation-chapter-2-newcomers/people-test/people-test-state-mask.png
+  wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round3-fixes/state/people-test-state-look.jpg

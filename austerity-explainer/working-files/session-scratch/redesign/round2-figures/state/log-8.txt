@@ -1,0 +1,14 @@
+make_state_picture: 1536 x 2730; threshold 8 levels; noise between the plates (their fine grain, far from the change) 0.7 levels (99th percentile)
+  the mask at other thresholds (share of the frame, after widening):
+      2 levels:  49.6%
+      4 levels:  39.0%
+      6 levels:  32.3%
+      8 levels:  28.8%   <- used
+     10 levels:  26.3%
+     14 levels:  22.6%
+     20 levels:  18.4%
+  used: plates differ by more than 8 levels over 22.8% of the frame; outlines 7.5%; second painting fully over 24.3%, partly over 9.1%
+  left with the main painting although the plates differ by more than 2 levels: 15.6% of the frame, by 3.8 levels on average, 12.1 at most
+  the two paintings across the soft join differ by 2.8 levels on average (a large number here shows as a seam)
+  wrote state/state-8.jpg and state/mask-8.png
+  wrote state/look-8.jpg

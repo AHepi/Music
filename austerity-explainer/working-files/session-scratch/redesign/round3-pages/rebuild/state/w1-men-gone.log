@@ -1,0 +1,17 @@
+make_state_picture: 1536 x 2730; threshold 6 levels, faint 3 levels (smooth changes); noise between the plates (their fine grain, far from the change) 0.0 levels (99th percentile)
+  the mask at other settings (share of the frame, after widening):
+    threshold   4, faint none:   6.9%
+    threshold   6, faint none:   6.8%
+    threshold   8, faint none:   6.8%
+    threshold  10, faint none:   6.8%
+    threshold  14, faint none:   6.6%
+    threshold   6, faint    2:   7.3%
+    threshold   6, faint    3:   7.2%   <- used
+    threshold   6, faint    4:   7.1%
+    threshold   6, faint    5:   7.0%
+  used: plates differ over 6.5% of the frame; outlines 4.0%; second painting fully over 6.5%, partly over 1.5%
+  left with the main painting although the plates differ by more than 2 levels: 0.0% of the frame, by 0.0 levels on average, 0.0 at most
+  the two paintings across the soft join differ by 0.3 levels on average (a large number here shows as a seam)
+  largest difference from the main painting where the mask is zero (92.0% of the frame), read back from the written picture: 0 levels (must be 0)
+  wrote final/works-w1-men-gone-state.png (lossless) and final/works-w1-men-gone-mask.png
+  wrote state/w1-men-gone-look.jpg
