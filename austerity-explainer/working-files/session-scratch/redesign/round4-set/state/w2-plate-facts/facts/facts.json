@@ -1,0 +1,986 @@
+{
+ "about": "Written by shot_facts.py. Screen positions are fractions: across 0 = left edge, down 0 = top edge. Blender metres.",
+ "size": [
+  1080,
+  1920
+ ],
+ "camera": {
+  "at": [
+   3.7,
+   9.0,
+   1.835
+  ],
+  "eye_height": 1.7,
+  "turn_degrees": -0.0,
+  "tilt_degrees": 0.0,
+  "roll_degrees": -0.0,
+  "vertical_fov_degrees": 64.4
+ },
+ "lines_meet": {
+  "lane": [
+   0.5,
+   0.5
+  ],
+  "level": [
+   0.5,
+   0.5
+  ]
+ },
+ "lights": [
+  {
+   "name": "right_row_a_cottage_01_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    4.75,
+    3.2,
+    1.905
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_01_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    4.75,
+    1.1,
+    4.505
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "right_row_a_cottage_02_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    4.75,
+    5.8,
+    1.905
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_01_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -4.75,
+    3.4,
+    4.505
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_01_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    -4.75,
+    1.3,
+    4.505
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_02_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -4.75,
+    7.7,
+    1.905
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "left_row_a_cottage_02_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -4.75,
+    5.6,
+    4.505
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "dusk_skylight",
+   "kind": "SUN",
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "on_screen": null,
+   "energy": 0.3,
+   "colour": [
+    0.62,
+    0.72,
+    0.9
+   ]
+  },
+  {
+   "name": "afterglow",
+   "kind": "SUN",
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "on_screen": null,
+   "energy": 0.2,
+   "colour": [
+    1.0,
+    0.62,
+    0.36
+   ]
+  },
+  {
+   "name": "gas_lamp_0_light",
+   "kind": "POINT",
+   "at": [
+    -3.53,
+    1.0,
+    3.213
+   ],
+   "on_screen": null,
+   "energy": 200.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ]
+  },
+  {
+   "name": "gas_lamp_1_light",
+   "kind": "POINT",
+   "at": [
+    3.53,
+    0.6,
+    3.213
+   ],
+   "on_screen": null,
+   "energy": 200.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.4
+   ]
+  },
+  {
+   "name": "end_row_cottage_01_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -11.6,
+    -7.55,
+    2.905
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "end_row_cottage_01_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -13.7,
+    -7.55,
+    5.505
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "end_row_cottage_02_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -9.0,
+    -7.55,
+    2.905
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "end_row_cottage_02_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    -6.9,
+    -7.55,
+    5.505
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "end_row_cottage_03_window_light_ground",
+   "kind": "POINT",
+   "at": [
+    -4.5,
+    -7.55,
+    2.905
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "end_row_cottage_06_window_light_upper_0",
+   "kind": "POINT",
+   "at": [
+    8.8,
+    -7.55,
+    5.505
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "end_row_cottage_06_window_light_upper_1",
+   "kind": "POINT",
+   "at": [
+    10.9,
+    -7.55,
+    5.505
+   ],
+   "on_screen": null,
+   "energy": 45.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.34
+   ]
+  },
+  {
+   "name": "no-1-gate-lamp-light",
+   "kind": "POINT",
+   "at": [
+    -5.45,
+    21.67,
+    3.62
+   ],
+   "on_screen": [
+    -0.51938,
+    0.38814
+   ],
+   "energy": 14.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.45
+   ]
+  },
+  {
+   "name": "no-2-gate-lamp-light",
+   "kind": "POINT",
+   "at": [
+    5.45,
+    21.67,
+    3.62
+   ],
+   "on_screen": [
+    0.69496,
+    0.38814
+   ],
+   "energy": 14.0,
+   "colour": [
+    1.0,
+    0.72,
+    0.45
+   ]
+  },
+  {
+   "name": "brazier_light",
+   "kind": "POINT",
+   "at": [
+    -5.0,
+    21.55,
+    1.544
+   ],
+   "on_screen": [
+    -0.47851,
+    0.51843
+   ],
+   "energy": 110.0,
+   "colour": [
+    1.0,
+    0.55,
+    0.25
+   ],
+   "skips": []
+  },
+  {
+   "name": "lantern_light",
+   "kind": "POINT",
+   "at": [
+    -3.83,
+    21.15,
+    1.162
+   ],
+   "on_screen": [
+    -0.3748,
+    0.54397
+   ],
+   "energy": 22.0,
+   "colour": [
+    1.0,
+    0.6,
+    0.3
+   ]
+  },
+  {
+   "name": "no-2-doorway-spill",
+   "kind": "POINT",
+   "at": [
+    2.9,
+    28.6,
+    2.6
+   ],
+   "on_screen": [
+    0.44239,
+    0.46901
+   ],
+   "energy": 900.0,
+   "colour": [
+    1.0,
+    0.62,
+    0.32
+   ]
+  },
+  {
+   "name": "no-2-gateway-spill",
+   "kind": "POINT",
+   "at": [
+    3.5,
+    23.8,
+    2.7
+   ],
+   "on_screen": [
+    0.48093,
+    0.45359
+   ],
+   "energy": 420.0,
+   "colour": [
+    1.0,
+    0.62,
+    0.32
+   ]
+  },
+  {
+   "name": "no-2-yard-spill",
+   "kind": "POINT",
+   "at": [
+    4.1,
+    28.2,
+    2.2
+   ],
+   "on_screen": [
+    0.52941,
+    0.48491
+   ],
+   "energy": 260.0,
+   "colour": [
+    1.0,
+    0.62,
+    0.32
+   ]
+  },
+  {
+   "name": "no-1-yard-dusk",
+   "kind": "POINT",
+   "at": [
+    -3.5,
+    25.6,
+    5.2
+   ],
+   "on_screen": [
+    -0.11223,
+    0.33905
+   ],
+   "energy": 260.0,
+   "colour": [
+    0.55,
+    0.68,
+    1.0
+   ],
+   "reaches_only": []
+  },
+  {
+   "name": "no-2-gateway-beam",
+   "kind": "SPOT",
+   "at": [
+    3.3,
+    28.8,
+    3.4
+   ],
+   "on_screen": [
+    0.47148,
+    0.43724
+   ],
+   "energy": 4000.0,
+   "colour": [
+    1.0,
+    0.64,
+    0.34
+   ],
+   "spot_degrees": 64.0,
+   "aim": [
+    0.0408,
+    -0.9793,
+    -0.1982
+   ]
+  },
+  {
+   "name": "no-2-room-light",
+   "kind": "POINT",
+   "at": [
+    2.9,
+    32.2,
+    3.9
+   ],
+   "on_screen": [
+    0.45133,
+    0.42933
+   ],
+   "energy": 160.0,
+   "colour": [
+    1.0,
+    0.66,
+    0.36
+   ],
+   "reaches_only": []
+  }
+ ],
+ "groups": {
+  "no-2 gateway": {
+   "objects": 15,
+   "centre": [
+    3.62,
+    23.49,
+    1.464
+   ],
+   "bottom": 0.0,
+   "top": 2.929,
+   "width": 3.157,
+   "depth": 2.453,
+   "height": 2.929,
+   "distance": 14.49,
+   "metres_per_pixel": 0.009505,
+   "stands_above_surface_below": -0.02,
+   "stands_above_ground": 0.08,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.3244,
+    0.4345,
+    0.6353,
+    0.6099
+   ],
+   "colour": [
+    230,
+    25,
+    75
+   ]
+  },
+  "no-2 board": {
+   "objects": 1,
+   "centre": [
+    3.5,
+    21.98,
+    4.42
+   ],
+   "bottom": 4.08,
+   "top": 4.76,
+   "width": 1.48,
+   "depth": 0.086,
+   "height": 0.68,
+   "distance": 12.98,
+   "metres_per_pixel": 0.008515,
+   "stands_above_surface_below": 3.942,
+   "stands_above_ground": 4.171,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.3974,
+    0.3205,
+    0.5589,
+    0.3631
+   ],
+   "colour": [
+    60,
+    180,
+    75
+   ]
+  },
+  "petrol drum": {
+   "objects": 2,
+   "centre": [
+    5.15,
+    21.5,
+    0.596
+   ],
+   "bottom": 0.156,
+   "top": 1.036,
+   "width": 0.676,
+   "depth": 0.676,
+   "height": 0.88,
+   "distance": 12.5,
+   "metres_per_pixel": 0.0082,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.223,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.6283,
+    0.5494,
+    0.699,
+    0.6096
+   ],
+   "colour": [
+    255,
+    225,
+    25
+   ]
+  },
+  "diesel drum": {
+   "objects": 2,
+   "centre": [
+    4.28,
+    21.22,
+    0.584
+   ],
+   "bottom": 0.144,
+   "top": 1.024,
+   "width": 0.637,
+   "depth": 0.637,
+   "height": 0.88,
+   "distance": 12.22,
+   "metres_per_pixel": 0.008016,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.199,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.5309,
+    0.5514,
+    0.6029,
+    0.6128
+   ],
+   "colour": [
+    0,
+    130,
+    200
+   ]
+  },
+  "gate lamp": {
+   "objects": 1,
+   "centre": [
+    5.45,
+    21.477,
+    3.388
+   ],
+   "bottom": 2.55,
+   "top": 4.225,
+   "width": 0.386,
+   "depth": 0.807,
+   "height": 1.675,
+   "distance": 12.477,
+   "metres_per_pixel": 0.008185,
+   "stands_above_surface_below": 1.528,
+   "stands_above_ground": 2.617,
+   "stands_on": "petrol drum",
+   "screen_box_unclipped": [
+    0.6706,
+    0.3428,
+    0.7272,
+    0.4559
+   ],
+   "colour": [
+    245,
+    130,
+    48
+   ]
+  },
+  "hand truck": {
+   "objects": 1,
+   "centre": [
+    4.6,
+    25.3,
+    0.721
+   ],
+   "bottom": 0.02,
+   "top": 1.423,
+   "width": 0.794,
+   "depth": 0.854,
+   "height": 1.403,
+   "distance": 16.3,
+   "metres_per_pixel": 0.010692,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.1,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.543,
+    0.5196,
+    0.6139,
+    0.5908
+   ],
+   "colour": [
+    145,
+    30,
+    180
+   ]
+  },
+  "man 1": {
+   "objects": 2,
+   "centre": [
+    3.38,
+    21.56,
+    1.011
+   ],
+   "bottom": 0.132,
+   "top": 1.89,
+   "width": 0.72,
+   "depth": 0.619,
+   "height": 1.757,
+   "distance": 12.56,
+   "metres_per_pixel": 0.008239,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.213,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.4217,
+    0.4965,
+    0.5046,
+    0.6101
+   ],
+   "colour": [
+    70,
+    240,
+    240
+   ]
+  },
+  "man 2": {
+   "objects": 2,
+   "centre": [
+    3.2,
+    20.854,
+    0.992
+   ],
+   "bottom": 0.13,
+   "top": 1.854,
+   "width": 0.72,
+   "depth": 0.609,
+   "height": 1.725,
+   "distance": 11.854,
+   "metres_per_pixel": 0.007776,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.206,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.3949,
+    0.4987,
+    0.4837,
+    0.6169
+   ],
+   "colour": [
+    240,
+    50,
+    230
+   ]
+  },
+  "man 3": {
+   "objects": 2,
+   "centre": [
+    3.094,
+    20.175,
+    1.01
+   ],
+   "bottom": 0.131,
+   "top": 1.889,
+   "width": 0.732,
+   "depth": 0.649,
+   "height": 1.757,
+   "distance": 11.175,
+   "metres_per_pixel": 0.00733,
+   "stands_above_surface_below": 0.001,
+   "stands_above_ground": 0.223,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.3751,
+    0.4961,
+    0.4704,
+    0.6243
+   ],
+   "colour": [
+    210,
+    245,
+    60
+   ]
+  },
+  "man 4": {
+   "objects": 2,
+   "centre": [
+    3.04,
+    19.45,
+    0.993
+   ],
+   "bottom": 0.131,
+   "top": 1.856,
+   "width": 0.72,
+   "depth": 0.6,
+   "height": 1.725,
+   "distance": 10.45,
+   "metres_per_pixel": 0.006855,
+   "stands_above_surface_below": 0.001,
+   "stands_above_ground": 0.23,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.3582,
+    0.4984,
+    0.4606,
+    0.6329
+   ],
+   "colour": [
+    250,
+    190,
+    212
+   ]
+  },
+  "man 5": {
+   "objects": 2,
+   "centre": [
+    2.97,
+    18.717,
+    0.875
+   ],
+   "bottom": -0.004,
+   "top": 1.754,
+   "width": 0.74,
+   "depth": 0.633,
+   "height": 1.757,
+   "distance": 9.717,
+   "metres_per_pixel": 0.006374,
+   "stands_above_surface_below": 0.004,
+   "stands_above_ground": 0.105,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.3378,
+    0.5064,
+    0.4492,
+    0.6549
+   ],
+   "colour": [
+    0,
+    128,
+    128
+   ]
+  },
+  "man 6": {
+   "objects": 2,
+   "centre": [
+    2.92,
+    17.968,
+    0.843
+   ],
+   "bottom": -0.019,
+   "top": 1.706,
+   "width": 0.72,
+   "depth": 0.635,
+   "height": 1.725,
+   "distance": 8.968,
+   "metres_per_pixel": 0.005883,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.096,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.314,
+    0.5111,
+    0.4359,
+    0.6697
+   ],
+   "colour": [
+    220,
+    190,
+    255
+   ]
+  },
+  "man 7": {
+   "objects": 2,
+   "centre": [
+    2.86,
+    17.15,
+    0.855
+   ],
+   "bottom": -0.024,
+   "top": 1.734,
+   "width": 0.72,
+   "depth": 0.6,
+   "height": 1.757,
+   "distance": 8.15,
+   "metres_per_pixel": 0.005346,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.099,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.2842,
+    0.5095,
+    0.4198,
+    0.6875
+   ],
+   "colour": [
+    170,
+    110,
+    40
+   ]
+  },
+  "man 8": {
+   "objects": 2,
+   "centre": [
+    2.8,
+    16.373,
+    0.838
+   ],
+   "bottom": -0.024,
+   "top": 1.701,
+   "width": 0.72,
+   "depth": 0.647,
+   "height": 1.725,
+   "distance": 7.373,
+   "metres_per_pixel": 0.004837,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.107,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.2477,
+    0.5139,
+    0.4004,
+    0.7088
+   ],
+   "colour": [
+    255,
+    250,
+    200
+   ]
+  },
+  "no-1 chimney": {
+   "objects": 1,
+   "centre": [
+    -5.291,
+    57.0,
+    13.5
+   ],
+   "bottom": 0.0,
+   "top": 27.0,
+   "width": 3.917,
+   "depth": 3.9,
+   "height": 27.0,
+   "distance": 48.0,
+   "metres_per_pixel": 0.031487,
+   "stands_above_surface_below": -0.02,
+   "stands_above_ground": 0.08,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.1644,
+    0.0661,
+    0.3013,
+    0.5316
+   ],
+   "colour": [
+    128,
+    0,
+    0
+   ]
+  },
+  "no-2 chimneys": {
+   "objects": 2,
+   "centre": [
+    6.95,
+    58.75,
+    12.5
+   ],
+   "bottom": 0.0,
+   "top": 25.0,
+   "width": 6.5,
+   "depth": 6.7,
+   "height": 25.0,
+   "distance": 49.75,
+   "metres_per_pixel": 0.032635,
+   "stands_above_surface_below": -0.02,
+   "stands_above_ground": 0.08,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.5,
+    0.1036,
+    0.6839,
+    0.5314
+   ],
+   "colour": [
+    170,
+    255,
+    195
+   ]
+  }
+ },
+ "missing_groups": [],
+ "support_tops": {}
+}

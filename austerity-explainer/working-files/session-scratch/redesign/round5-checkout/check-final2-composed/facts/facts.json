@@ -1,0 +1,754 @@
+{
+ "about": "Written by shot_facts.py. Screen positions are fractions: across 0 = left edge, down 0 = top edge. Blender metres.",
+ "size": [
+  1080,
+  1920
+ ],
+ "camera": {
+  "at": [
+   -0.16,
+   -0.4,
+   1.6
+  ],
+  "eye_height": 1.6,
+  "turn_degrees": -0.0,
+  "tilt_degrees": 0.0,
+  "roll_degrees": -0.0,
+  "vertical_fov_degrees": 60.4
+ },
+ "lines_meet": {
+  "belt": [
+   0.5,
+   0.5
+  ],
+  "level": [
+   0.5,
+   0.5
+  ]
+ },
+ "lights": [
+  {
+   "name": "ceiling-light-15",
+   "kind": "AREA",
+   "at": [
+    -4.2,
+    6.4,
+    3.09
+   ],
+   "on_screen": [
+    -0.40737,
+    0.31176
+   ],
+   "energy": 40.0,
+   "colour": [
+    0.88,
+    0.93,
+    1.0
+   ]
+  },
+  {
+   "name": "ceiling-light-16",
+   "kind": "AREA",
+   "at": [
+    -1.8,
+    6.4,
+    3.09
+   ],
+   "on_screen": [
+    0.13166,
+    0.31176
+   ],
+   "energy": 40.0,
+   "colour": [
+    0.88,
+    0.93,
+    1.0
+   ]
+  },
+  {
+   "name": "ceiling-light-17",
+   "kind": "AREA",
+   "at": [
+    0.6,
+    6.4,
+    3.09
+   ],
+   "on_screen": [
+    0.67069,
+    0.31176
+   ],
+   "energy": 40.0,
+   "colour": [
+    0.88,
+    0.93,
+    1.0
+   ]
+  },
+  {
+   "name": "ceiling-light-18",
+   "kind": "AREA",
+   "at": [
+    3.0,
+    6.4,
+    3.09
+   ],
+   "on_screen": [
+    1.20973,
+    0.31176
+   ],
+   "energy": 40.0,
+   "colour": [
+    0.88,
+    0.93,
+    1.0
+   ]
+  },
+  {
+   "name": "street-light-1--4.5",
+   "kind": "POINT",
+   "at": [
+    -4.5,
+    14.8,
+    6.65
+   ],
+   "on_screen": [
+    0.06393,
+    0.21458
+   ],
+   "energy": 900.0,
+   "colour": [
+    1.0,
+    0.86,
+    0.68
+   ]
+  },
+  {
+   "name": "street-light-1--12",
+   "kind": "POINT",
+   "at": [
+    -12.0,
+    20.2,
+    7.15
+   ],
+   "on_screen": [
+    -0.37781,
+    0.26855
+   ],
+   "energy": 900.0,
+   "colour": [
+    1.0,
+    0.86,
+    0.68
+   ]
+  },
+  {
+   "name": "street-light-1-13",
+   "kind": "POINT",
+   "at": [
+    13.0,
+    20.2,
+    7.15
+   ],
+   "on_screen": [
+    1.47567,
+    0.26855
+   ],
+   "energy": 900.0,
+   "colour": [
+    1.0,
+    0.86,
+    0.68
+   ]
+  },
+  {
+   "name": "warm-lamp",
+   "kind": "SPOT",
+   "at": [
+    0.4,
+    1.45,
+    3.35
+   ],
+   "on_screen": [
+    0.96231,
+    -0.31265
+   ],
+   "energy": 300.0,
+   "colour": [
+    1.0,
+    0.46,
+    0.19
+   ],
+   "spot_degrees": 110.0,
+   "aim": [
+    0.0392,
+    0.2745,
+    -0.9608
+   ],
+   "skips": [
+    "bill"
+   ]
+  },
+  {
+   "name": "bill-cool",
+   "kind": "SPOT",
+   "at": [
+    0.15,
+    0.9,
+    3.1
+   ],
+   "on_screen": [
+    0.86419,
+    -0.49125
+   ],
+   "energy": 140.0,
+   "colour": [
+    0.8,
+    0.87,
+    1.0
+   ],
+   "spot_degrees": 30.0,
+   "aim": [
+    0.0,
+    0.8283,
+    -0.5603
+   ],
+   "reaches_only": [
+    "bill"
+   ]
+  },
+  {
+   "name": "bill-warm-bounce",
+   "kind": "AREA",
+   "at": [
+    0.15,
+    2.3,
+    0.98
+   ],
+   "on_screen": [
+    0.67535,
+    0.69727
+   ],
+   "energy": 10.0,
+   "colour": [
+    1.0,
+    0.4,
+    0.14
+   ],
+   "reaches_only": [
+    "bill"
+   ]
+  },
+  {
+   "name": "ceiling-fill",
+   "kind": "AREA",
+   "at": [
+    -1.0,
+    2.0,
+    3.3
+   ],
+   "on_screen": [
+    -0.03454,
+    -0.10852
+   ],
+   "energy": 50.0,
+   "colour": [
+    0.8,
+    0.86,
+    0.95
+   ]
+  },
+  {
+   "name": "counter-warm",
+   "kind": "SPOT",
+   "at": [
+    0.55,
+    1.2,
+    3.35
+   ],
+   "on_screen": [
+    1.17772,
+    -0.43963
+   ],
+   "energy": 200.0,
+   "colour": [
+    1.0,
+    0.46,
+    0.19
+   ],
+   "spot_degrees": 85.0,
+   "aim": [
+    0.0392,
+    0.2745,
+    -0.9608
+   ],
+   "reaches_only": []
+  },
+  {
+   "name": "operator-side-light",
+   "kind": "AREA",
+   "at": [
+    -1.1,
+    3.2,
+    3.3
+   ],
+   "on_screen": [
+    0.10121,
+    0.09432
+   ],
+   "energy": 45.0,
+   "colour": [
+    0.85,
+    0.9,
+    1.0
+   ]
+  },
+  {
+   "name": "bounce-to-ceiling",
+   "kind": "AREA",
+   "at": [
+    0.0,
+    1.5,
+    1.0
+   ],
+   "on_screen": [
+    0.62861,
+    0.77129
+   ],
+   "energy": 8.0,
+   "colour": [
+    0.95,
+    0.9,
+    0.85
+   ]
+  },
+  {
+   "name": "canopy-light",
+   "kind": "AREA",
+   "at": [
+    -4.5,
+    35.0,
+    4.35
+   ],
+   "on_screen": [
+    0.31276,
+    0.43326
+   ],
+   "energy": 300.0,
+   "colour": [
+    0.92,
+    0.95,
+    1.0
+   ]
+  }
+ ],
+ "groups": {
+  "bread label": {
+   "objects": 1,
+   "centre": [
+    -0.099,
+    2.011,
+    1.201
+   ],
+   "bottom": 1.173,
+   "top": 1.23,
+   "width": 0.115,
+   "depth": 0.031,
+   "height": 0.058,
+   "distance": 2.411,
+   "metres_per_pixel": 0.001462,
+   "stands_above_surface_below": 0.042,
+   "stands_above_ground": 1.173,
+   "stands_on": "basket",
+   "screen_box_unclipped": [
+    0.5022,
+    0.6309,
+    0.575,
+    0.6533
+   ],
+   "colour": [
+    230,
+    25,
+    75
+   ]
+  },
+  "milk label": {
+   "objects": 1,
+   "centre": [
+    0.074,
+    2.031,
+    1.189
+   ],
+   "bottom": 1.166,
+   "top": 1.213,
+   "width": 0.104,
+   "depth": 0.021,
+   "height": 0.047,
+   "distance": 2.431,
+   "metres_per_pixel": 0.001474,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 1.166,
+   "stands_on": "basket",
+   "screen_box_unclipped": [
+    0.6141,
+    0.6365,
+    0.6796,
+    0.6539
+   ],
+   "colour": [
+    60,
+    180,
+    75
+   ]
+  },
+  "butter label": {
+   "objects": 1,
+   "centre": [
+    -0.06,
+    1.895,
+    1.116
+   ],
+   "bottom": 1.101,
+   "top": 1.131,
+   "width": 0.099,
+   "depth": 0.01,
+   "height": 0.03,
+   "distance": 2.295,
+   "metres_per_pixel": 0.001391,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 1.101,
+   "stands_on": "basket",
+   "screen_box_unclipped": [
+    0.5334,
+    0.676,
+    0.5989,
+    0.6864
+   ],
+   "colour": [
+    255,
+    225,
+    25
+   ]
+  },
+  "cheese label": {
+   "objects": 1,
+   "centre": [
+    0.087,
+    1.879,
+    1.114
+   ],
+   "bottom": 1.097,
+   "top": 1.131,
+   "width": 0.103,
+   "depth": 0.009,
+   "height": 0.033,
+   "distance": 2.279,
+   "metres_per_pixel": 0.001382,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 1.097,
+   "stands_on": "basket",
+   "screen_box_unclipped": [
+    0.6308,
+    0.6773,
+    0.7004,
+    0.6891
+   ],
+   "colour": [
+    0,
+    130,
+    200
+   ]
+  },
+  "bill": {
+   "objects": 1,
+   "centre": [
+    0.15,
+    2.6,
+    1.5
+   ],
+   "bottom": 1.14,
+   "top": 1.86,
+   "width": 0.62,
+   "depth": 0.0,
+   "height": 0.72,
+   "distance": 3.0,
+   "metres_per_pixel": 0.001819,
+   "stands_above_surface_below": 0.009,
+   "stands_above_ground": 1.14,
+   "stands_on": "bill stand",
+   "screen_box_unclipped": [
+    0.5,
+    0.4255,
+    0.8156,
+    0.6317
+   ],
+   "colour": [
+    245,
+    130,
+    48
+   ]
+  },
+  "bill stand": {
+   "objects": 2,
+   "centre": [
+    0.15,
+    2.581,
+    1.388
+   ],
+   "bottom": 0.901,
+   "top": 1.876,
+   "width": 0.653,
+   "depth": 0.248,
+   "height": 0.975,
+   "distance": 2.981,
+   "metres_per_pixel": 0.001807,
+   "stands_above_surface_below": 0.001,
+   "stands_above_ground": 0.901,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.4912,
+    0.417,
+    0.8403,
+    0.7103
+   ],
+   "colour": [
+    145,
+    30,
+    180
+   ]
+  },
+  "basket": {
+   "objects": 29,
+   "centre": [
+    0.081,
+    2.0,
+    1.105
+   ],
+   "bottom": 0.886,
+   "top": 1.324,
+   "width": 0.593,
+   "depth": 0.378,
+   "height": 0.438,
+   "distance": 2.4,
+   "metres_per_pixel": 0.001455,
+   "stands_above_surface_below": 0.001,
+   "stands_above_ground": 0.886,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.4645,
+    0.5955,
+    0.8564,
+    0.7776
+   ],
+   "colour": [
+    70,
+    240,
+    240
+   ]
+  },
+  "divider": {
+   "objects": 1,
+   "centre": [
+    0.03,
+    1.845,
+    0.91
+   ],
+   "bottom": 0.885,
+   "top": 0.935,
+   "width": 0.46,
+   "depth": 0.044,
+   "height": 0.05,
+   "distance": 2.245,
+   "metres_per_pixel": 0.001361,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.885,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.4725,
+    0.752,
+    0.7885,
+    0.7763
+   ],
+   "colour": [
+    240,
+    50,
+    230
+   ]
+  },
+  "card terminal": {
+   "objects": 2,
+   "centre": [
+    0.718,
+    3.08,
+    1.061
+   ],
+   "bottom": 0.896,
+   "top": 1.225,
+   "width": 0.13,
+   "depth": 0.084,
+   "height": 0.329,
+   "distance": 3.48,
+   "metres_per_pixel": 0.00211,
+   "stands_above_surface_below": -0.004,
+   "stands_above_ground": 0.896,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.8523,
+    0.5914,
+    0.9188,
+    0.6758
+   ],
+   "colour": [
+    210,
+    245,
+    60
+   ]
+  },
+  "checkout sign": {
+   "objects": 3,
+   "centre": [
+    0.25,
+    4.4,
+    2.72
+   ],
+   "bottom": 2.59,
+   "top": 2.85,
+   "width": 1.1,
+   "depth": 0.032,
+   "height": 0.26,
+   "distance": 4.8,
+   "metres_per_pixel": 0.00291,
+   "stands_above_surface_below": 2.59,
+   "stands_above_ground": 2.59,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.4553,
+    0.2755,
+    0.8065,
+    0.3234
+   ],
+   "colour": [
+    250,
+    190,
+    212
+   ]
+  },
+  "petrol fascia": {
+   "objects": 1,
+   "centre": [
+    -4.495,
+    30.958,
+    4.902
+   ],
+   "bottom": 4.668,
+   "top": 5.136,
+   "width": 5.416,
+   "depth": 0.0,
+   "height": 0.468,
+   "distance": 31.358,
+   "metres_per_pixel": 0.019011,
+   "stands_above_surface_below": 4.808,
+   "stands_above_ground": 4.808,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.157,
+    0.4031,
+    0.4207,
+    0.4159
+   ],
+   "colour": [
+    0,
+    128,
+    128
+   ]
+  },
+  "till": {
+   "objects": 1,
+   "centre": [
+    -0.4,
+    3.1,
+    1.16
+   ],
+   "bottom": 0.9,
+   "top": 1.42,
+   "width": 0.12,
+   "depth": 0.38,
+   "height": 0.52,
+   "distance": 3.5,
+   "metres_per_pixel": 0.002122,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.9,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    0.3616,
+    0.5419,
+    0.4255,
+    0.6817
+   ],
+   "colour": [
+    220,
+    190,
+    255
+   ]
+  },
+  "bag rack": {
+   "objects": 19,
+   "centre": [
+    1.8,
+    3.5,
+    0.72
+   ],
+   "bottom": 0.0,
+   "top": 1.44,
+   "width": 0.32,
+   "depth": 1.907,
+   "height": 1.44,
+   "distance": 3.9,
+   "metres_per_pixel": 0.002365,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": -0.0,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    1.0703,
+    0.5285,
+    1.5865,
+    0.9613
+   ],
+   "colour": [
+    170,
+    110,
+    40
+   ]
+  },
+  "crates": {
+   "objects": 2,
+   "centre": [
+    2.05,
+    4.7,
+    0.254
+   ],
+   "bottom": 0.0,
+   "top": 0.508,
+   "width": 0.526,
+   "depth": 0.431,
+   "height": 0.508,
+   "distance": 5.1,
+   "metres_per_pixel": 0.003092,
+   "stands_above_surface_below": 0.0,
+   "stands_above_ground": 0.0,
+   "stands_on": "the set",
+   "screen_box_unclipped": [
+    1.0622,
+    0.6766,
+    1.2691,
+    0.7814
+   ],
+   "colour": [
+    255,
+    250,
+    200
+   ]
+  }
+ },
+ "missing_groups": [],
+ "support_tops": {}
+}
