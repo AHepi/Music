@@ -1,0 +1,47 @@
+{
+ "reference": "metal",
+ "candidate": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/metal/variations/seed_8",
+ "colour_mae_levels": 19.88,
+ "colour_psnr_db": 19.91,
+ "colour_ssim": 0.3874,
+ "colour_mean_delta_e": 14.07,
+ "colour_p95_delta_e": 30.32,
+ "edge_precision_2px": 0.403,
+ "edge_recall_2px": 0.385,
+ "edge_f1_2px": 0.394,
+ "edge_f1_by_luck": 0.395,
+ "edge_skill_2px": 0.0,
+ "height_mae_levels": 49.19,
+ "height_mae_best_fit_levels": 32.48,
+ "height_best_fit_gain_offset": [
+  0.035,
+  115.5
+ ],
+ "height_ssim": 0.1406,
+ "height_correlation": 0.0352,
+ "normal_mean_angle_degrees": 18.42,
+ "normal_median_angle_degrees": 14.76,
+ "normal_p95_angle_degrees": 46.46,
+ "tier_reached": "none",
+ "tier_rules": {
+  "layout": {
+   "edge_skill_2px": "min 0.3",
+   "colour_mean_delta_e": "max 20.0",
+   "height_mae_best_fit_levels": "max 40.0"
+  },
+  "close": {
+   "edge_skill_2px": "min 0.55",
+   "colour_ssim": "min 0.6",
+   "colour_mean_delta_e": "max 10.0",
+   "height_mae_best_fit_levels": "max 20.0",
+   "normal_mean_angle_degrees": "max 12.0"
+  },
+  "exact": {
+   "edge_skill_2px": "min 0.85",
+   "colour_ssim": "min 0.92",
+   "colour_mean_delta_e": "max 3.0",
+   "height_mae_best_fit_levels": "max 6.0",
+   "normal_mean_angle_degrees": "max 4.0"
+  }
+ }
+}

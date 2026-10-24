@@ -1,0 +1,116 @@
+{
+ "_note": "Plain words: the independent look checker's verdict on the slate after the tuner applied the first look checker's fixes (round 1). Statuses are fixed / better / same / worse compared with the BEFORE tile. All numbers were measured by me from the pictures; the tuner's numbers were re-run and match.",
+ "problems_status": [
+  {
+   "problem": "1 Paint handling (liquified flame tongues, wavy edges)",
+   "status": "better",
+   "evidence": "Crops (crop_paint_1to1.jpg, crop_lower_edge_zoom.jpg): the ripple is gone, patches are flat with crisp edges like the reference. Tuner's median gradient at 900 dots 9.44 -> 7.54 (reference 5.55), rerun matches. My own, plain grey Scharr slope inside slates at native 1254: 3.10 -> 1.31 (reference 1.86), so at full size it is now slightly smoother than the reference, not busier. Flat-patch dots 8.8% -> 16.7% (reference 23.1%). Side-to-side over up-down slope 2.44 -> 1.89 (reference 1.61). Left over: tongues are still pointed flame shapes, fine grain fell (std 0.715 -> 0.506, reference 0.695), hard-edge share 24.7% vs 15.1% reference."
+  },
+  {
+   "problem": "2 Moss (too much, flat khaki stain, rows of teeth)",
+   "status": "better",
+   "evidence": "Amount, flat stain and teeth are fixed: olive share 10.4% -> 5.7% (reference 6.4%), my hue rule 12.0% -> 7.0% (reference 6.0%); largest clump 16,056 -> 9,294 dots (reference 7,013); lightness spread inside moss 4.4 -> 5.8 (reference 6.0); slates with moss over 1%: 88% -> 78% (reference 64%); no teeth rows in crop_moss_zoom.jpg. Not the same hand yet: the moss is now small crisp khaki flakes and hatched slivers (thin vertical strokes) instead of the reference's soft broad mottled olive clouds, so it reads like peeling paint or rust."
+  },
+  {
+   "problem": "3 Chips and damage (big tan L-shapes at lower corners)",
+   "status": "fixed",
+   "evidence": "L-shapes are gone (full_after.jpg, crop_hair_line.jpg). Tan share (my HSV rule) 2.23% -> 1.18% (reference 1.56%); share of tan sitting in pieces of 300+ dots 52.9% -> 13.7% (reference 35.6%); largest tan piece 1,637 -> 834 dots (reference 1,047). Pale lip: share of lower-rim dots 22+ grey levels above the slate face 29.8% -> 41.1% (reference 34.4%), so the broken pale rim now shows. Left over: chips are now too small and thin (an orange-pink line rather than the reference's chunky cream flakes), and a thin tan strip remains along some side joints."
+  },
+  {
+   "problem": "4 Slate shape (square corners, ruler-straight rows)",
+   "status": "better",
+   "evidence": "Lower corners are visibly rounder (crop_lower_edge_zoom.jpg, full_after.jpg). My measures over 35 whole slates: corner rise at the lower corners 6.8 -> 12.3 dots (reference 17.7); lower-edge wobble 1.33 -> 1.78 dots (reference 2.98). Rows are still straight (tuner's own row wander 3.8 -> 4.1 dots vs 5.0)."
+  },
+  {
+   "problem": "5 Relief under a raking light (rippled plastic, rims and chips and moss carry little relief)",
+   "status": "better",
+   "evidence": "My own Cycles renders with verify_look/lit_preview.py (lit_full_side_by_side.jpg, lit_zoom_side_by_side.jpg, reference | before | after): the ripple is less plank-like, the lower lips now catch light with a dark groove under them, moss is visibly raised and crumbly. But the relief is weaker overall and still wrong in character: thin scratch-like vertical ridges from the paint outlines, not the reference's chunky chip edges. Normal-map numbers: tilt p99 98.7 -> 103.0 (reference 112.6, better); mean tilt 22.5 -> 19.7 (reference 23.7, worse); up-down slope 11.2 -> 10.3 (reference 13.5, worse); side slope 16.4 -> 13.7 (reference 15.6, now below). Faint horizontal contour lines appear across slate faces."
+  },
+  {
+   "problem": "6 Shadow under each row (black drips, 4 grey tiers)",
+   "status": "fixed",
+   "evidence": "crop_shadow_band_4x.jpg and crop_shadow_band_b.jpg: the band is clean black with one soft grey step below, no drips, no stepped tiers. Dark dots (grey under 30) 10.9% -> 12.5% (reference 11.3%): the band is a little heavier but acceptable."
+  },
+  {
+   "problem": "7 Pale flat outlier slates",
+   "status": "same",
+   "evidence": "Only the one top-left slate changed. Per-slate face lightness (my labelling): lightest slate 90.7 -> 88.8 (reference max 79.4), but three other slates are still 84-88 (x0 y865; x556 y710; x81 y556). Slate-to-slate spread 8.5 -> 8.9 (reference 5.5), tuner's version 3.84 -> 3.84 (reference 2.51). Slates more than 12 grey levels off the middle: 11 of 59 -> 9 of 59 (reference 3 of 45). Plain slates (inner spread under 8): 1 -> 4. They are still the repeat landmarks in tiled3x3_after.jpg."
+  },
+  {
+   "problem": "8 Lone crack",
+   "status": "fixed",
+   "evidence": "The crack across the row-7 slate is gone (crop_crack_area.jpg: before shows it, after does not). Left over, same as before: one short pale hairline at about x1175-1254, y660 (crop_hair_line.jpg), which the tuner did not touch."
+  },
+  {
+   "problem": "9 Lichen discs (polka dots)",
+   "status": "fixed",
+   "evidence": "Small round tan dots inside slates (my count: area 15-160 dots, roundish) 39 -> 29, reference 28. A few are still visible in crop_lower_edge_zoom.jpg but at the reference's rate."
+  },
+  {
+   "problem": "10 Variations (v6 burnt patches, v5, v4, v2)",
+   "status": "same",
+   "evidence": "Not attempted. variations/ was last baked at 02:5x, before the fixes (files dated before 07:45), and variations.json is unchanged (v6 still stain_amount 0.9, stain_cover 0.5, tone_centre 2.3). They still show the old default look. I did not bake any to test how they behave on the new default."
+  },
+  {
+   "problem": "11 Moss cut straight at side joints",
+   "status": "same",
+   "evidence": "Share of moss dots within 14 dots of a side joint: 12.8% -> 14.5% (reference 6.5%). crop_side_joint_moss.jpg and full_after.jpg (e.g. x460-505, y400-500) show the same vertical moss strip hugging the left joint. The tuner confirmed settings cannot fix it (moss.joint_preference 0 only lowers olive)."
+  }
+ ],
+ "new_problems": [
+  "Moss now reads as small crisp khaki flakes and hatched slivers, like peeling paint or rust, not soft mottled clouds concentrated in a few slates (crop_paint_1to1.jpg, crop_moss_zoom.jpg). The numbers (share, clump size, tone spread) are near the reference, so the tuner's measures cannot see this.",
+  "Chips and lip are now thin: a continuous grey lip with a thin orange-pink edge line (looks like a rust outline) instead of the reference's pale cream chunky chips; large tan pieces fell from 52.9% to 13.7% of tan (reference 35.6%).",
+  "Relief is flatter overall (mean tilt 19.7 against 23.7 in the reference and 22.5 before; up-down slope 10.3 against 13.5) and shows faint horizontal contour lines across slate faces and thin scratch-like vertical ridges under the raking light.",
+  "Fine paint grain has gone (std in flat patches 0.50 against 0.70 in the reference and 0.72 before), and slates have less contrast inside (inner spread 10.8 against 12.3), so the paint looks a little vector-flat or plastic at 1:1.",
+  "More completely plain slates (4 of 59 have inner spread under 8, was 1): flat pale or dark slates stand out, and the slate-to-slate spread is still about 60% above the reference. The slate hue also varies less than in the reference (std of b* between slates 1.16 against 1.61), so there are fewer teal-green slates.",
+  "A tuner claim to correct: the median colour gradient 7.54 against 5.55 is a 900-dot artefact. At native 1254 dots the after tile (3.37) is already below the reference (4.00), so the paint is slightly too smooth, not too busy. The tuner's 'darker and bluer' tile is mostly the removed moss: slate faces alone are L 27.4 against 27.9 and b* -3.1 against -2.5 in the reference (before: 27.6 and -3.1), a difference too small to see.",
+  "Tiled 3x3 (tiled3x3_after.jpg): no seam at 1:1 and no seam in the crop on the tile lines. Repeat landmarks exist: the pale flat blue slate with moss at the left of row 4, the dark mossy slate at the bottom (x556-725, y1031-1175) and the pale slate at the left edge of row 6. The reference also repeats at 3x3 but with less obvious outliers."
+ ],
+ "reads_as_same_hand": "nearly",
+ "should_iterate": true,
+ "suggested_changes": [
+  "colour_and_fade.tone_spread 1 -> 0.6 (tested on a colour-only 900-dot tile: slate-to-slate spread 3.83 -> 3.06, reference 2.51; slate range 54-81 grey against reference 55-79; nothing else moved) because the pale and dark outlier slates were not changed by the first round.",
+  "colour_and_fade.outlier_share 0.15 -> 0.10 (in the same tested set) so fewer slates are pushed pale or dark.",
+  "colour_and_fade.grain_amount 0.02 -> 0.04 (tested: fine grain std 0.56 -> 0.77, reference 0.73; costs 0.2 on the tuner's gradient number, 7.46 -> 7.70, which is a 900-dot artefact) to bring back the reference's not-perfectly-flat paint.",
+  "Moss softness (tested, small gain only): moss.edge_raggedness 1.0 -> 0.6, moss.cluster_size 0.04 -> 0.055, moss.tone_patch_size 0.008 -> 0.012. Clumps got a little larger and softer (largest clump 8,673 -> 5,592 dots, reference 7,013; spread inside moss 5.98 -> 6.25) but it still looked like khaki camouflage. Keep moss.coverage at 0.17 (I tested 0.15 and olive fell to 4.8%). Do not expect this to fix the flaky look; a real fix needs soft moss edges or a lower-contrast moss colour, which I did not test.",
+  "Not tested, lower confidence: damage.chip_frequency 160 -> 130 with damage.chip_amount 0.72 -> 0.6 (fewer, chunkier chips, keep corner_gain 0.3); damage.sink_depth 1.6 -> 2.2 and outline_and_shadow.lip_height 0.1 -> 0.14 (more level-edge relief; the first round found tone_blend 0.45 made it worse, so keep 0.7).",
+  "Code change needed for problem 11: fade moss growth within about 12 dots of side joints in layers/moss.py (settings cannot do it).",
+  "Before the next round, re-bake the 8 variations on the new default and look at v6 and v2, because their overrides (v6 stain_amount 0.9, v2 coverage 0.34) were never retested."
+ ],
+ "pictures": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/compare_full_reference_before_after.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/full_ref.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/full_before.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/full_after.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_paint_1to1.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_paint2_1to1.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_moss_zoom.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_lower_edge_zoom.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_shadow_band_4x.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_shadow_band_b.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_crack_area.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_hair_line.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/crop_side_joint_moss.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/lit_full_side_by_side.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/lit_zoom_side_by_side.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/tiled3x3_after.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/tiled3x3_reference.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/tiled3x3_after_centre_1to1.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/test_full_side_by_side.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/test_crop_moss_zoom.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/verify_look_after_fixes/round_1/test_crop_topleft.jpg"
+ ],
+ "what_i_ran": [
+  "Looked at the reference, BEFORE and AFTER colour tiles at full size and as matching 1:1, 2x, 3x and 4x crops (paint, moss, lower edge, shadow band, crack, side joints).",
+  "Re-ran the tuner's measure_look.py on reference, before and after: its numbers match the tuner's report (gradient 5.55 / 9.44 / 7.54, olive 6.4 / 10.4 / 5.7, tan 1.00 / 1.91 / 0.88).",
+  "Wrote my own independent measures (my_measures.py, my_gradient_check.py, my_slates_and_rims.py, my_moss_spread.py, my_colour_balance.py): grey Scharr slopes at 1254 and 900, flat and hard-edge shares, fine grain, per-slate lightness and spread, moss pieces by HSV hue, moss near joints, tan pieces, round dots, lower-edge wobble and corner rise, rim lightness, face colour, normal-map tilt.",
+  "Rendered the raking-light check with verify_look/lit_preview.py unchanged (Cycles, 2 threads, one Blender at a time) for the reference, BEFORE and AFTER, full tile and 0.4 window.",
+  "Tiled the after and reference tiles 3 x 3 and looked at 1:1 across the tile lines.",
+  "Baked four colour-only 900-dot test tiles in one Blender run each (baseline, moss softness, slate spread, spread plus grain) with look_fixes/bake_variants.py into my folder only, and measured them."
+ ],
+ "not_tested": [
+  "Other seeds, the variations, 2x2 and 4x4 areas, and a 3D roof render were not re-checked.",
+  "Test tiles were colour only at 900 dots; their height and normal maps and a 1254 bake were not made, so the spread and grain suggestions are not yet checked at full size or for relief.",
+  "My moss, tan and round-dot counts use my own colour rules; they agree in direction with the tuner's rules but the absolute numbers differ."
+ ]
+}

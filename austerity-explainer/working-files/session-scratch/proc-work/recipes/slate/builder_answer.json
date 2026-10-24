@@ -1,0 +1,182 @@
+{
+ "surface": "slate",
+ "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate",
+ "classes": [
+  {
+   "class_name": "S0 layout only (class S)",
+   "description_bytes": 2762,
+   "tier": "none",
+   "colour_ssim": 0.7113,
+   "colour_mean_delta_e": 8.07,
+   "edge_skill": 0.29,
+   "height_mae_best_fit": 35.1,
+   "normal_mean_angle": 11.89,
+   "texture_compare_overall": 0.398
+  },
+  {
+   "class_name": "S1 layout + stamps (class S)",
+   "description_bytes": 6597,
+   "tier": "none",
+   "colour_ssim": 0.569,
+   "colour_mean_delta_e": 9.06,
+   "edge_skill": 0.188,
+   "height_mae_best_fit": 35.02,
+   "normal_mean_angle": 16.79,
+   "texture_compare_overall": 0.707
+  },
+  {
+   "class_name": "S2 layout + stamps + grain (class S, best same-kind)",
+   "description_bytes": 6667,
+   "tier": "none",
+   "colour_ssim": 0.569,
+   "colour_mean_delta_e": 9.06,
+   "edge_skill": 0.188,
+   "height_mae_best_fit": 35.06,
+   "normal_mean_angle": 17.87,
+   "texture_compare_overall": 0.725
+  },
+  {
+   "class_name": "M tiny (traced outlines + biggest patches, 8 colours)",
+   "description_bytes": 17294,
+   "tier": "layout",
+   "colour_ssim": 0.7212,
+   "colour_mean_delta_e": 7.31,
+   "edge_skill": 0.374,
+   "height_mae_best_fit": 31.43,
+   "normal_mean_angle": 11.66,
+   "texture_compare_overall": 0.51
+  },
+  {
+   "class_name": "M small (12 colours)",
+   "description_bytes": 39916,
+   "tier": "layout",
+   "colour_ssim": 0.7201,
+   "colour_mean_delta_e": 6.35,
+   "edge_skill": 0.413,
+   "height_mae_best_fit": 26.86,
+   "normal_mean_angle": 11.95,
+   "texture_compare_overall": 0.527
+  },
+  {
+   "class_name": "M coarse (class M, 16 colours)",
+   "description_bytes": 61707,
+   "tier": "layout",
+   "colour_ssim": 0.7313,
+   "colour_mean_delta_e": 5.67,
+   "edge_skill": 0.44,
+   "height_mae_best_fit": 23.24,
+   "normal_mean_angle": 11.79,
+   "texture_compare_overall": 0.605
+  },
+  {
+   "class_name": "L small (patches over 100 dots, 24 colours)",
+   "description_bytes": 150279,
+   "tier": "layout",
+   "colour_ssim": 0.7508,
+   "colour_mean_delta_e": 4.02,
+   "edge_skill": 0.54,
+   "height_mae_best_fit": 16.07,
+   "normal_mean_angle": 11.91,
+   "texture_compare_overall": 0.769
+  },
+  {
+   "class_name": "L medium (patches over 30 dots)",
+   "description_bytes": 269986,
+   "tier": "close",
+   "colour_ssim": 0.7924,
+   "colour_mean_delta_e": 3.28,
+   "edge_skill": 0.666,
+   "height_mae_best_fit": 12.44,
+   "normal_mean_angle": 11.03,
+   "texture_compare_overall": 0.815
+  },
+  {
+   "class_name": "L fine (class L, patches over 12 dots)",
+   "description_bytes": 453054,
+   "tier": "close",
+   "colour_ssim": 0.8355,
+   "colour_mean_delta_e": 2.85,
+   "edge_skill": 0.741,
+   "height_mae_best_fit": 10.34,
+   "normal_mean_angle": 9.68,
+   "texture_compare_overall": 0.828
+  }
+ ],
+ "variation_result": "Eight new tiles (seeds 101-108) made by sampler.sample_description from spreads measured on the reference (fitted_distributions.json, 4.8 KB; never reads the picture); each description is about 6.7 KB. Same-kind score (texture_compare overall) mean 0.735, range 0.722-0.753 with the optional grain (0.716, range 0.705-0.733 without grain); tiling part 1.0 for seven tiles, 0.90 for one (false alarm on a seam ratio of 1.21). Against the reference dot for dot every tile is tier none: colour SSIM 0.49-0.52, Delta E 10.2-11.3, edge skill 0.01-0.13, normal error about 19 degrees. Between two new tiles: colour SSIM 0.47-0.51 (mean 0.49), average difference 20 brightness steps - as different from each other as from the reference. Bake 246 s for all eight (30.7 s each). Contact sheet: variations/contact_sheet.png. Reading: right layout, patch sizes, drips, moss, brightness spread; a little darker and more even than the reference, because the sampler does not model long-range tone differences between neighbouring slates.",
+ "area_result": "One sampled description for a 2 x 2-tile roof of new unique content (tile=2508, 16 rows x 12 slates, 14.5 KB, seed 201) baked in 131 s at 2508 x 2508 (26 327 faces). Wrap-around seam ratio 0.75 sideways / 0.58 up-down (1.0 = as smooth as the rest; the reference tile repeated 2x2 reads 1.70 / 1.87); middle-line ratio 0.86 / 0.59; strongest match between two of the four quarters 0.37 (1.0 = copy; the repeated reference tile gives 1.0). No seam and no repeat at tile scale (area/area_preview_1254.png). 4 x 4 not baked, but the same sampler takes tile=5016.",
+ "resolution_result": "Same sampled description (resolution/sample_1.json) at 512 / 1254 / 2508 dots: bake 13.6 s / 31.6 s / 100.7 s for all six pictures (colour render 3.5 / 10.7 / 33.7 s); colour png 0.35 / 1.5 / 4.5 MB; mean brightness step between neighbouring dots 4.55 / 2.49 / 1.49. At 512 small patches go blocky; 2508 gives sharper edges but the same shapes (polygon facets of 4-8 dots become visible as straight lines): resolution scales edges, not detail. Time grows slower than the dot count (6x dots = 2.3x time from 512 to 1254; 4x dots = 3.2x time from 1254 to 2508). Half-tile slide test passed for S1 (mean difference 0.67 of 255, 0.0 percent of dots over 40; wrong-roll control 19.4 and 13.2 percent), a sampled tile (0.61), L medium (0.67), cedar shingles (0.93) and fish-scale tiles (0.99). Crop sheet: resolution/crop_sheet.png.",
+ "transfer_result": "Transferred to weathered cedar roof shingles and clay fish-scale roof tiles by changing only numbers in the fitted description (transfer/make_transfer_descriptions.py, about 90 lines): palette (14 colours), family lists, rows x pieces (14 x 12; 17 x 12), piece width/height, gaps, corner radius and raggedness, tone and top-to-bottom tone gradient, patch size factors, moss and lichen shares, and the height stretch. Cedar needed NO generator code change; fish-scale needed one new setting (layout.bottom_round, about 12 lines) plus two sampler options (alternate row phase, a fitted= argument). One number does not carry over: the height stretch (slate 9.5-111.5 left the cedar height map all white); rule found: stretch the 1st to 99th percentile of the picture's own brightness (gives 9-114 on the slate, fitted 9.5-111.5). Time: one script, numpy preview 10 s, Blender bake 25 s per set; half-tile test passed. No reference exists for these, so they are judged by eye and the seam test, not texture_compare. Known flaw: fish-scale rows do not overlap, so the gap between scales is black instead of the next row's tile. Pictures: transfer/transfer_sheet.png.",
+ "lessons_that_transfer": [
+  "Prove the derivation first: fit brightness recipe + straight stretch + blur from colour to height (2.5 x (brightness - 9.5), blur 0.5) and the normal as the slope of the 8-bit height at whole-number strength (7). It removes height and normal from the problem and gives the ceiling (height about 3 steps, normal about 2.8 degrees).",
+  "A painted picture is a label map: 16-24 palette colours reproduce it to Delta E 2.0-2.3. Describe flat patches, not shading.",
+  "Find the layout first (rows, pieces, joints, leans, edge raggedness): the black joints are 7 percent of the dots but decide most of the edge measures.",
+  "Measure patches by size class: on the slate every doubling of size covers about the same share of the area (scale-free paint). Remove the top-to-bottom gradient before using tone spreads.",
+  "Build the generator as a painter that draws flat polygons back to front (flat meshes at tiny height steps under an orthographic camera, Emission material per channel, Standard view transform for colour, Raw 16-bit for data, 9 wrap copies, fold shapes into the tile before sliding).",
+  "Cycles' Gaussian pixel filter is a blur tool: width 2 = 0.5-dot Gaussian, 4 = 0.9, 6 = 1.4 (about 4 x the wanted blur, measure it once).",
+  "Calibrate stamp counts by the share that stays VISIBLE per size class, use the tone spread left after removing the vertical gradient, add a slow smooth tone drift, and set a contrast factor so the brightness spread equals the reference's.",
+  "SSIM hardly notices paint (flat slates + black joints already score 0.71, fully traced 0.84): judge with Delta E, edge skill, height error, the same-kind score and your eyes together; the two comparison tools read different heights (8-bit upload vs 0.8-dot smoothed copy), so score a smoothed copy too.",
+  "When a sampled tile scores worse than the fitted one, swap components one at a time between them (found a forgotten setting: 0.63 vs 0.70).",
+  "Find pieces by fitted lines, not by connected areas: a 1-3 dot break in a faint joint merged slates (4, 7, 16, 46 found instead of 48).",
+  "A new surface of the same family is new numbers; a new piece shape is one new setting; a new arrangement (overlap, non-row) is new code. Re-find the height stretch for every surface (1st-99th percentile of brightness).",
+  "Always run the half-tile slide test (bake shifted by half a tile, compare with the rolled first picture), not the seam ratio of texture_compare which gives false alarms on joint layouts."
+ ],
+ "known_gaps": [
+  "Tier exact not reached: best colour SSIM 0.84 (needs 0.92), edge skill 0.74 (0.85), height error 10.3 (6), normal error 9.7 degrees (4). The ceiling for derived maps is height 3, normal 2.8 degrees. The remaining error is 1-dot border placement and the faint grain, which a polygon description of 450 KB cannot capture.",
+  "Tier close needs 150-264 KB: M (62 KB) and L small (150 KB, edge skill 0.54 vs the 0.55 limit) stay at tier layout.",
+  "The 450 KB L class is tracing the reference (the reference's own patches cut into polygons); only S0/S1/S2 and the layout/paint blocks are procedural.",
+  "The made-up S paint does not reproduce the reference dot for dot (tier none) and sampled tiles are a little darker and more even than the reference; no long-range tone differences between neighbouring slates.",
+  "The faint grain of the reference (75 percent of neighbouring dots differ by half a step) is only imitated statistically in the height (optional), not in the colour, and not dot for dot.",
+  "Roughness is a documented choice (no reference map); metallic is 0 everywhere. AO is a cheap cavity map from the height, not geometry AO.",
+  "One traced slate has a dark paint blotch merged into the joint network, so its outline has a black notch (trace error, visible in the L difference sheets).",
+  "Fish-scale transfer has no overlap (black gaps between scales). No 4 x 4 area, no Geometry Nodes outline maker, no overlap option.",
+  "The harness refused to write analysis/analysis_findings.md (rejects findings/report files from helpers), so the measured findings are section 2 of the recipe guide.",
+  "Baked roughness/metallic/ao of variation, area, resolution, transfer and the non-final classes were deleted to keep the folder under 400 MB (it is 332 MB); the generator remakes them in the same bake."
+ ],
+ "guide_files": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate/04 Recipe - slate - how it is made.md",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate/04 Lessons - slate - what carries over to other surfaces.md",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate/final_report.json"
+ ],
+ "derivation_ceiling": "Height = brightness of the colour picture (0.299 R + 0.587 G + 0.114 B on sRGB numbers), straight stretch 2.5 x (brightness - 9.5) cut off at 0 and 255, blurred by a Gaussian of 0.5 dots: matches the uploaded height to 2.95 steps of 255 (correlation 0.9967); a 0.8-dot blur gives 3.5, no blur 4.1, a 4-point tone curve 18. Normal = slope across 2 dots of the 8-bit height, strength 7: reproduces the uploaded normal from the uploaded height to 0.34 degrees (correlation 0.9999); from the reference colour chain 2.76 degrees; a flat normal would be 11.3 degrees. So even perfect colour cannot beat height about 3 and normal about 2.8 degrees.",
+ "geometry_route_verdict": "Real geometry route (generator/geometry_route_slabs.py, adapted from the research recipe, reads the same layout block; Geometry Nodes: Instance on Points, Realize Instances, Mesh Bevel, Subdivide Mesh, Set Position with seamless noise, overhead photo booth with ambient occlusion). Same structure as the painter route but colour SSIM 0.68, Delta E 10.2, edge skill 0.24, height error 33.8 (hybrid half true height / half brightness: 34.9), normal error 12.2 degrees (15.8 with the true normal), same-kind score 0.32-0.37 against 0.71 for painted stamps; 88 s per set (colour with ambient occlusion alone 76 s) against 28 s. Verdict: real geometry gives true overlap, shadows and a true normal, but its height (smooth ramps) does not match the reference's brightness-derived height and its colour is soft blobs; it costs about 3x the time. Use it when the texture sits on a 3D roof and overlap/shadow must be real; for matching the painted reference the flat painter route wins.",
+ "what_each_layer_bought": [
+  "Layout only (2.7 KB): the structure - colour SSIM 0.71 and a picture that reads as a roof - but edge skill 0.29 and height error 35 (flat slates).",
+  "+ paint stamps from measured statistics (6.4 KB): same-kind score 0.40 -> 0.71 (the right kind of surface), but dot for dot no better (SSIM 0.57).",
+  "+ faint seamless 4D noise grain in the height (6.5 KB): same-kind normal score 0.51 -> 0.57, overall 0.707 -> 0.725; dot-for-dot normal error 1 degree worse.",
+  "+ traced outlines and biggest patches (17-62 KB): Delta E 8.1 -> 5.7, height error 35 -> 23, edge skill 0.29 -> 0.44 (tier layout).",
+  "+ patches over 100 dots (147 KB): Delta E 4.0, edge skill 0.54, height error 16.",
+  "+ patches over 30 dots (264 KB): tier close (edge 0.67, height error 12.4, Delta E 3.3).",
+  "+ patches over 12 dots (442 KB): Delta E 2.85, edge 0.74, height error 10.3, normal 9.7 degrees, colour SSIM 0.84."
+ ],
+ "dead_ends": [
+  "Finding slates as connected not-black areas with one threshold: 4, 7, 16, 46 slates instead of 48 (joints leak); fixed with fitted straight joint lines.",
+  "First paint model (independent random patches, raw tone spread, uncalibrated counts): confetti, same-kind 0.62; fixed by calibrating visible coverage, upright drips, residual tone spread, smooth drift, contrast factor (0.71).",
+  "Hybrid of traced big patches plus stamps for small ones: same-kind 0.71 but dot-for-dot worse than traced coarse alone (SSIM 0.62 vs 0.72, edge 0.27 vs 0.42).",
+  "Wrong Cycles Gaussian filter formula (width/12): height blurred about 3x too much; measured table says width = 4 x blur.",
+  "Half-tile test broken by shapes running past the tile (18 percent of dots differed) until each shape's middle was folded into the tile first.",
+  "Sampler export forgot the smooth tone drift: sampled tiles 0.63 vs 0.70.",
+  "A stamp library of 32 real patch outlines instead of made-up drips: same-kind 0.692 vs 0.707, 2.7 KB more - not used.",
+  "description_audit false alarm on long patch rows (looks like an image): worked around with [colour, [numbers]].",
+  "Straight per-slate slants gave a black wedge at a chipped joint; fixed with one shared joint line per pair and the lean clipped to plus or minus 0.06.",
+  "First cedar bake used the slate height stretch: whole height map white; fixed by the percentile rule.",
+  "The Write tool refused analysis/analysis_findings.md; findings moved into the recipe guide."
+ ],
+ "changes_wanted_in_lib": [
+  "description_audit.py: the 'grid' test fires on ragged lists (first five rows long); require rows of EQUAL length before calling a list an image, then [colour, flat-number-list] is not needed.",
+  "texture_compare.py: it reads the reference height.png smoothed 0.8 dots and stretched, while pixel_compare reads the 8-bit upload; its normal_height_agreement scores 0.0 for a normal derived exactly from its own height. Offer a flag to compare with the unsmoothed height (analysis/score_folder.py works around this with a smoothed copy).",
+  "bake_harness.py: add an option for a fixed whole-number normal strength and for rounding the height to 8 bits before the normal (what the reference used), a height-blur option based on the measured Cycles Gaussian filter table (width = 4 x blur), and document that photograph_geometry/normal_reference reads the reference slope spread.",
+  "sweep_tools.py: accept any render function (not only shader node groups) so polygon/geometry recipes can make sweep strips.",
+  "Add the percentile rule (1st-99th percentile of brightness) for the height stretch to the shared notes, and a half-tile test that also accepts a --shift option for non-shader generators."
+ ],
+ "blender_tools_used": [
+  "Cycles (CPU) with an orthographic camera over a 1 x 1 square (overhead photo booth)",
+  "bpy mesh.from_pydata and face attributes (flat polygons, painter's-order height steps)",
+  "Attribute node + Emission shader (one channel per picture)",
+  "Map Range node (height stretch) and view transforms Standard/Raw, 16-bit PNG",
+  "Cycles pixel filter (Box for colour, Gaussian width as blur for height) and Cycles samples (edge anti-aliasing)",
+  "lib recipe_tools.tileable_noise_group (4D donut Noise Texture) for the seamless grain",
+  "Geometry Nodes (geometry route): Instance on Points, Random Value, Realize Instances, Mesh Bevel, Subdivide Mesh, Set Position with tileable noise, Store Named Attribute, Join Geometry, Set Material, plus Ambient Occlusion in the colour shader",
+  "bake_harness/gn_tools photograph_geometry and new_bake_scene",
+  "numpy for normal and ambient-occlusion derivation inside Blender (no OpenCV there); plain Python numpy/OpenCV only for analysis and scoring"
+ ]
+}

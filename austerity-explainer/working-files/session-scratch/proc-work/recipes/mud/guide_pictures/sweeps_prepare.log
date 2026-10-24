@@ -1,0 +1,15 @@
+prepared clod_count
+prepared zone_weight
+prepared rut_scale
+prepared rut_width
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/generator/sweeps_for_guide.py", line 50, in <module>
+    json.dump(make(value), open(os.path.join(folder, f'desc_{i:02d}.json'), 'w'), separators=(',', ':'))
+              ~~~~^^^^^^^
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/generator/sweeps_for_guide.py", line 40, in <lambda>
+    'stone_scale': ('Number of stones', [0.0, 0.4, 1.0, 1.8, 3.0], lambda v: sampler.sample_description(2, stone_scale=v)),
+                                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/generator/sampler.py", line 229, in sample_description
+    j = big_order[i]
+        ~~~~~~~~~^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0

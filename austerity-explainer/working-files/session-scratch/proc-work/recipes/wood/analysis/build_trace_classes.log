@@ -1,0 +1,22 @@
+{"name": "T_n150", "n": 150, "eps": 1.0, "hybrid": false, "bytes": 129809, "kilobytes": 126.8, "colour_ssim": 0.534, "colour_mean_delta_e": 7.58, "edge_skill_2px": 0.212, "height_mae_best_fit_levels": 26.49, "normal_mean_angle_degrees": 20.39, "tier_reached": "none", "texture_compare_overall": 0.271, "seconds": 6}
+{"name": "T_n400", "n": 400, "eps": 1.0, "hybrid": false, "bytes": 193263, "kilobytes": 188.7, "colour_ssim": 0.5848, "colour_mean_delta_e": 6.43, "edge_skill_2px": 0.304, "height_mae_best_fit_levels": 22.42, "normal_mean_angle_degrees": 19.21, "tier_reached": "layout", "texture_compare_overall": 0.343, "seconds": 6}
+{"name": "T_n800", "n": 800, "eps": 1.0, "hybrid": false, "bytes": 253884, "kilobytes": 247.9, "colour_ssim": 0.6193, "colour_mean_delta_e": 5.8, "edge_skill_2px": 0.367, "height_mae_best_fit_levels": 20.17, "normal_mean_angle_degrees": 18.42, "tier_reached": "layout", "texture_compare_overall": 0.381, "seconds": 8}
+{"name": "T_n1500", "n": 1500, "eps": 1.0, "hybrid": false, "bytes": 316935, "kilobytes": 309.5, "colour_ssim": 0.6503, "colour_mean_delta_e": 5.37, "edge_skill_2px": 0.44, "height_mae_best_fit_levels": 18.43, "normal_mean_angle_degrees": 17.69, "tier_reached": "layout", "texture_compare_overall": 0.445, "seconds": 8}
+{"name": "T_n2500", "n": 2500, "eps": 1.0, "hybrid": false, "bytes": 381417, "kilobytes": 372.5, "colour_ssim": 0.6761, "colour_mean_delta_e": 5.06, "edge_skill_2px": 0.505, "height_mae_best_fit_levels": 17.18, "normal_mean_angle_degrees": 17.09, "tier_reached": "layout", "texture_compare_overall": 0.476, "seconds": 10}
+{"name": "T_n3500", "n": 3500, "eps": 1.0, "hybrid": false, "bytes": 437679, "kilobytes": 427.4, "colour_ssim": 0.6884, "colour_mean_delta_e": 4.91, "edge_skill_2px": 0.542, "height_mae_best_fit_levels": 16.63, "normal_mean_angle_degrees": 16.82, "tier_reached": "layout", "texture_compare_overall": 0.491, "seconds": 11}
+{"name": "T_n5000", "n": 5000, "eps": 1.0, "hybrid": false, "bytes": 508267, "kilobytes": 496.4, "colour_ssim": 0.6999, "colour_mean_delta_e": 4.75, "edge_skill_2px": 0.583, "height_mae_best_fit_levels": 16.04, "normal_mean_angle_degrees": 16.53, "tier_reached": "layout", "texture_compare_overall": 0.508, "seconds": 11}
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/analysis/build_trace_classes.py", line 41, in <module>
+    r = pv.run(path, os.path.join(OUT, 'preview_' + job['name']), 2, True)
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/analysis/preview.py", line 47, in run
+    picture, count = paint(description, scale)
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/analysis/preview.py", line 26, in paint
+    shapes = wl.make_shape_list(description)
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/analysis/../generator/wood_layers.py", line 444, in make_shape_list
+    shapes += expand_pebbles(layer, tile, rng, gap_lines_of(description['layers'], tile))
+              ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/analysis/../generator/wood_layers.py", line 252, in expand_pebbles
+    centre_y = float(row['y'])
+                     ~~~^^^^^
+KeyError: 'y'

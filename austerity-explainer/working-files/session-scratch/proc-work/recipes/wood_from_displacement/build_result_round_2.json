@@ -1,0 +1,337 @@
+{
+ "what_this_is": "Structured result of round 2 of the wood-from-displacement-and-colour-maps job (the round in which the two checkers' findings of round 1 were fixed). Written by hand from the files in scores/ (final_scores_round2.json, checks_round2.json, repeat_tests_round2.json, joints_found_round2.json, neighbour_count_default_tile_seed1.json); the guide 08 Recipe ... how it is made.md, section 11, has the same content in plain words.",
+ "summary": "Round 2 fixed the look findings (brick-wall look, landmarks coming back, ruled row gaps, antenna half joints, beaded pebbles, smudges, uniform joints, flat COMPARISON colour) and the honesty findings (false neighbour claim, first tile of an area equal to the default tile, mislabelled pixel column, wrong control, scripts that could not be re-run, unfair score comparison, wording, missing notes). Same recipe file, still nodes only, still both maps read at the same place. Seen at full size the tile and the area crops now read as stacked logs with stepped butt joints; the look checker's own twin test finds a twin over 0.7 for 2 and 0 percent of pieces (two draws) against 14 and 18 percent for round 1 on the same test; the same-kind score is 0.839 (MAIN) and 0.760 (COMPARISON) against 0.801 and 0.715, with the earlier pure-node recipe at 0.665. Not fixed or not reached: boards longer than 0.9 tile (a source row is one tile wide), a masonry look when the whole 4 x 4 area is seen very small, a hole in the neighbour rule at the edge of the default tile (5 rows), tiling part of the score 0.75 to 0.93 instead of 1.0. 18 Blender runs against a budget of about 15. No person has looked.",
+ "method": "Kept recipe/round1 for comparison and rebuilt recipe/wood_from_maps_recipe.py: 5 rows with heights differing by 20 percent and waving edges (the tile edge waves too, both signs handled); 2 boards per row with cuts jittering by 40 percent of a board and a staircase step of up to 90 dots in 7 joints of 10 (sideways crack along the grain); source row (2 x row + board + constant) mod 4 with no fallback; windows always shown from gap middle to gap middle and stretched along the board by up to 25 percent, bent by slow noise (12 dots along, 5 across), tilted up to 3.5 degrees with the shift capped at 8 dots; 12 landmarks (3 knots, 9 other places, chosen by eye) painted out of every window by reading both maps a second time at a clean place found by tools/find_landmark_replacements.py, shown with chance 0.15 (knots) or 0.12 (others); both maps always read at the same position; dark band along row edges only where the source is not already dark; joint widths 1.4 to 5.8 dots, faint and strong joints, wedge half joints, pebbles of different sizes in groups; stain stamps with dark_limit 100, softness 30, hard edge, 15 dots away from joints; tone mostly per row; area mode salted differently from tile mode; COMPARISON uses three palettes (grey-brown, brown, orange) mixed by two cloud patterns. Baked with the standard harness command (seed 1) and the job driver (everything else), 1254 dots, areas up to 2508 dots across; one Blender at a time with -t 2. Tests: same-kind score and pixel numbers, half-tile slide test, source-unchanged test, tile-edge jumps against ordinary row boundaries, window squeeze measure, shift test with an exact control, source reuse and touching-pair count from exact debug pictures, two near-copy tests (research test and the look checker's own test) on round 1 and round 2 areas, landmark counts, switched-off areas, exact joint sheets, lit pictures, sweeps. All numbers in the guides are filled in by tools/fill_guides_round2.py from the JSON files.",
+ "controls": "New or changed settings in recipe/settings.json (audit passes, 6065 bytes): layout.row_height_variation 0.2 (0 to 0.35); layout.boards_per_row 2 (2,3,4); layout.board_length_variation 0.8; windows.zoom 0.25 (stretch along the board only); windows.warp_along 12, warp_across 5, warp_size 200, tilt 3.5, tilt_max 8, edge_margin 28; landmarks.knot_chance 0.15, mark_chance 0.12, edge_ragged 0.3, landmarks.list (12 entries); boards.tone_variation 0.12, row_tone_variation 0.16; joints.width 3.6, width_variation 0.6, step_share 0.7, step_size 90, darkness 0.9, darkness_variation 0.5, wobble 2, wobble_length 22, raggedness 0.8, notches 0.6, edge_lip 0.4, pebbles 0.45, edge_shade 0.2, half_share 0.35, half_depth 0.32, half_run 70, half_width 5; gaps.band_width 3.2, band_variation 0.9, wobble 4, wobble_length 140; stains.amount 0.16, dark_limit 100, dark_softness 30, keep_away 15, edge_hardness 0.8; colour.warm_cool_amount 1 with palette_cool/mid/warm; unchanged: recipe.tiles_across, tile_repeats, seed, masks.*, roughness.*, bake.*, debug.source_unchanged. Removed: layout.joined_share, joined_max_length, windows.knot_share, joints.gap_band_width, source.slice_length/free_low/free_high/knot_x. Special parameters: shift, window, debug_view (boards, rows, flips, landmarks, source_x, source_y), settings_file. Every setting with what it does and its range is in section 4 of the recipe guide; sweeps of boards per row, joint steps, landmarks, window bending and row height are in sheets/.",
+ "scores": {
+  "same_kind_tool": {
+   "MAIN_seed1_2_3_overall": [
+    0.828,
+    0.858,
+    0.83
+   ],
+   "MAIN_mean": {
+    "overall": 0.839,
+    "colour": 0.803,
+    "height": 0.888,
+    "normal": 0.851,
+    "tiling": 0.838
+   },
+   "COMPARISON_seed1_2_3_overall": [
+    0.745,
+    0.778,
+    0.756
+   ],
+   "COMPARISON_mean": {
+    "overall": 0.76,
+    "colour": 0.653,
+    "height": 0.872,
+    "normal": 0.851,
+    "tiling": 0.805
+   },
+   "earlier_wood_best_new_tile_seed105": {
+    "overall": 0.665,
+    "colour": 0.655,
+    "height": 0.634,
+    "normal": 0.588,
+    "tiling": 1.0
+   },
+   "round1_for_comparison": {
+    "MAIN_mean": 0.801,
+    "COMPARISON_mean": 0.715
+   },
+   "per_seed_groups_MAIN": {
+    "seed1": {
+     "colour": 0.778,
+     "height": 0.876,
+     "normal": 0.835,
+     "tiling": 0.934
+    },
+    "seed2": {
+     "colour": 0.837,
+     "height": 0.888,
+     "normal": 0.875,
+     "tiling": 0.829
+    },
+    "seed3": {
+     "colour": 0.794,
+     "height": 0.899,
+     "normal": 0.842,
+     "tiling": 0.751
+    }
+   },
+   "per_seed_groups_COMPARISON": {
+    "seed1": {
+     "colour": 0.614,
+     "height": 0.87,
+     "normal": 0.835,
+     "tiling": 0.895
+    },
+    "seed2": {
+     "colour": 0.689,
+     "height": 0.865,
+     "normal": 0.875,
+     "tiling": 0.807
+    },
+    "seed3": {
+     "colour": 0.656,
+     "height": 0.882,
+     "normal": 0.842,
+     "tiling": 0.713
+    }
+   },
+   "cautions": "The new tile is made from the reference's own dots and the earlier recipe used nodes only (not like for like); amounts were partly chosen against this score. The tiling part fell from 1.00 (round 1) to 0.75-0.93 because the tile edge now keeps the real gap rubble; the tile edge jumps no more than ordinary row boundaries of the same tile (see seam_evidence)."
+  },
+  "pixel_numbers_for_transparency": {
+   "MAIN_seed1": {
+    "colour_SSIM": 0.2023,
+    "colour_delta_E": 15.28,
+    "edge_skill": 0.013,
+    "height_error_plain": 58.41,
+    "height_error_after_best_fit_flat_grey_same_for_all": 41.59,
+    "normal_angle_deg": 34.83
+   },
+   "MAIN_seed2": {
+    "colour_SSIM": 0.1943,
+    "colour_delta_E": 15.33,
+    "edge_skill": 0.005,
+    "height_error_plain": 58.48,
+    "normal_angle_deg": 35.24
+   },
+   "MAIN_seed3": {
+    "colour_SSIM": 0.2093,
+    "colour_delta_E": 15.05,
+    "edge_skill": 0.027,
+    "height_error_plain": 57.8,
+    "normal_angle_deg": 34.6
+   },
+   "COMPARISON_seed1": {
+    "colour_SSIM": 0.2134,
+    "colour_delta_E": 15.24,
+    "edge_skill": 0.014,
+    "height_error_plain": 58.41,
+    "normal_angle_deg": 34.83
+   },
+   "earlier_recipe_tile": {
+    "colour_SSIM": 0.201,
+    "colour_delta_E": 14.19,
+    "edge_skill": 0.0,
+    "height_error_plain": 54.17,
+    "normal_angle_deg": 33.73
+   },
+   "tier": "none for all (low on purpose: the new boards are not where the reference boards are)"
+  },
+  "other": {
+   "colour_brightness_vs_height_correlation_MAIN_seeds": [
+    0.978,
+    0.98,
+    0.979
+   ],
+   "uploaded_maps": 0.982,
+   "COMPARISON_vs_height": 0.988,
+   "MAIN_vs_COMPARISON_colour_delta_E_seed1_mean_and_p95": [
+    5.88,
+    13.79
+   ],
+   "share_of_dots_bluer_than_red_MAIN_COMPARISON_uploaded": [
+    0.007,
+    0.0,
+    0.006
+   ],
+   "seed_height_correlations": [
+    0.028,
+    -0.01,
+    0.034
+   ]
+  }
+ },
+ "repetition_evidence": {
+  "shift_test_4x4_height_one_tile_across": {
+   "new": 0.066,
+   "exact_plain_repeat_control": 1.0,
+   "round1_control_was_wrong": 0.972,
+   "background_sideways_highest": 0.117,
+   "one_tile_down": 0.017,
+   "diagonal": 0.043
+  },
+  "look_checker_test_200x380_dots_all_four_ways_round_50_pieces": {
+   "share_with_twin_over_0.7_new_two_draws": [
+    0.02,
+    0.0
+   ],
+   "round1_two_draws": [
+    0.14,
+    0.18
+   ],
+   "share_over_0.6_new": [
+    0.02,
+    0.0
+   ],
+   "round1": [
+    0.28,
+    0.36
+   ],
+   "plain_repeat": 1.0
+  },
+  "research_test_36x80": {
+   "new_area_share_over_0.8": 0.0,
+   "round1": 0.2,
+   "feature_size_24x40_new": 0.15
+  },
+  "landmarks_shown_in_16_tiles": {
+   "total_of_12": 64,
+   "knots": 13,
+   "round1_knots": 24,
+   "discarded_first_chain": {
+    "total": 98,
+    "knots": 25
+   }
+  },
+  "touching_pairs_4x4_area": {
+   "pairs": 467,
+   "same_source_row_share": 0.011,
+   "round1": 0.19,
+   "same_row_and_half_or_more_same_stretch": 4
+  },
+  "default_tile_seed1_neighbour_hole": "2 of 25 touching pairs take the same source row, both across the tile edge (2 of 3 pairs there): 5 rows is odd. Not fixed.",
+  "first_tile_of_area_vs_default_tile_correlation": 0.049,
+  "round1": 0.76,
+  "source_reuse": "used dots appear about 30.7 times in 16 tiles (not comparable with round 1's 22.2: different sampling; cannot be below 19)",
+  "what_each_part_buys_look_checker_test_share_over_0.6": {
+   "default": 0.0,
+   "landmarks_all_shown": 0.0,
+   "no_bending_tilt_stretch": 0.225,
+   "windows_only": 0.4,
+   "three_boards_per_row": 0.0
+  },
+  "honest_reading": "The bending/tilt/stretch of the windows is what the near-copy tests reward; painting out landmarks does not show in them (a landmark is a small part of a 200 x 380 piece); its effect is in the landmark counts and the pictures. Tests use 40 to 50 pieces: differences of a few points are noise."
+ },
+ "seam_evidence": {
+  "half_tile_slide_test": {
+   "height_mean_abs_difference": 1e-05,
+   "colour_mean_abs_difference": 0.00154,
+   "wrong_slide_controls": {
+    "height": 0.2307,
+    "colour": 0.1056
+   }
+  },
+  "source_unchanged_test": {
+   "height_difference": 3e-05,
+   "normal_x_y_z_difference": [
+    0.0039,
+    0.0039,
+    0.0041
+   ],
+   "same_as_the_rule_applied_to_the_uploaded_height_itself": true
+  },
+  "wrap_jumps_over_typical_jump_colour_LR_TB": {
+   "seed1": [
+    1.12,
+    1.08
+   ],
+   "seed2": [
+    1.0,
+    1.4
+   ],
+   "seed3": [
+    0.95,
+    1.61
+   ]
+  },
+  "wrap_jumps_height_TB": {
+   "seed1": 1.27,
+   "seed2": 1.51,
+   "seed3": 1.8
+  },
+  "uploaded_height_LR_TB": [
+   3.97,
+   2.76
+  ],
+  "tile_edge_vs_ordinary_row_boundaries_in_the_same_tile_colour": {
+   "tile_edge": [
+    1.08,
+    1.4,
+    1.61
+   ],
+   "ordinary_row_boundaries": "1.65 to 2.60"
+  },
+  "tile_repeated_2x2_jumps_colour_vertical_horizontal_line": [
+   1.13,
+   1.46
+  ],
+  "largest_ordinary_row_boundary": 2.1,
+  "tiling_score_of_the_tool_MAIN": [
+   0.934,
+   0.829,
+   0.751
+  ],
+  "round1": 1.0,
+  "faults_found_and_fixed": "thin wrong strip at the tile edge when the waving edge was pushed up (found by the tool's seam measure, not the slide test); smeared strips from a large tilt (1.6 percent of 15-dot blocks magnified; now 0.09 percent)",
+  "joints_looked_at": "exact joint sheets from the board numbers: 17/17/14 joint parts, 10/12/11 crops for seeds 1/2/3; looked at every crop, no plain wood-against-wood cut seen; faint joints show a hairline and a change of grain; some vertical parts are straight over 60 to 90 dots",
+  "not_tested": "a variant with a uniform dark band only at the tile edge, to confirm that the kept gap rubble is the whole reason for the tiling score"
+ },
+ "pictures": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/wood_sheet.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/before_after.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/steps_round2.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/area_crops.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/area_4x4.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/area_2x2.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/seam_2x2.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/seeds.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/maps.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/lit.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/joints_seed1.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/joints_seed2.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/joints_seed3.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/landmarks.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/sweep_step_share.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/sweep_boards_per_row.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/sweep_landmarks.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/sweep_warp.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/sheets/sweep_row_height.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/outputs/main_seed1/colour.png",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/outputs/main_seed2/colour.png",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/outputs/main_seed3/colour.png",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/outputs/comparison_seed1/colour.png",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/area/area_4x4/colour.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/area/crop_a/colour.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/area/crop_b/colour.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/area/crop_c/colour.jpg"
+ ],
+ "files": {
+  "recipe": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/recipe/wood_from_maps_recipe.py",
+  "node_kit": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/recipe/wood_node_kit.py",
+  "settings": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/recipe/settings.json",
+  "round1_recipe": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/recipe/round1/",
+  "recipe_guide": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/08 Recipe - wood from your displacement and colour maps - how it is made.md",
+  "lessons_guide": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/08 Lessons - wood from your displacement and colour maps - what carries over to other surfaces.md",
+  "scores": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/scores/",
+  "tools": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood_from_displacement/tools/"
+ },
+ "failures": [
+  "First arrangement (2 boards per row, rows of different height, straight joints with a 6-dot step) still read as a brick wall.",
+  "Automatic search for the most recognisable places of the map found none that stand out (all places about equally unlike each other); landmarks were chosen by eye.",
+  "First clean-grain search used one patch for five landmarks and found no place for the rust cloud; a soft cross-fade left ghosts; fixed (used patches marked, hard ragged edge).",
+  "Thin wrong strip at the bottom edge of the default tile (waving edge corrected in one direction only); found by the project's seam measure, not by the slide test; the first chain of final bakes (tiles and part of the areas) was stopped and thrown away.",
+  "Large tilt that fades at the row edges magnified the source up to 2 times there (smeared strips, 1.6 percent of blocks); capped at 8 dots; 0.09 percent now.",
+  "First final chain showed 98 landmark showings in 16 tiles (25 knots, as many as round 1); chances lowered from 30/20 to 15/12 percent.",
+  "Neighbour rule hole in the default tile: with 5 rows the last and first row get the same rule value; 2 of 25 touching pairs of the seed 1 tile share a source row, both across the tile edge; found after the final bakes, not fixed (needs all tile bakes again; 6 rows per tile would fix it but was not baked).",
+  "Tiling part of the same-kind score is 0.75 to 0.93 instead of 1.0 (explained, partly checked).",
+  "The near-copy tests hardly notice painting out of landmarks; its benefit is shown by counts and pictures only.",
+  "Boards longer than 0.9 tile were not made (a source row is one tile wide); the whole 4 x 4 area still looks masonry-like when seen very small.",
+  "COMPARISON colour is still plainer than MAIN; no COMPARISON dot is bluer than red.",
+  "Used 18 Blender runs against a budget of about 15 (7 look and diagnostic runs, 3 for the discarded first chain, 8 final).",
+  "A cleanup command with relative paths ran from the wrong folder and deleted nothing only because the paths did not exist there; repeated with absolute paths.",
+  "Disk: free space stayed at 1.5 GB or more; folder 136 MB (limit 150)."
+ ],
+ "untested": [
+  "Any look by a person (only my own looking and the two round 1 checkers' earlier judgement of round 1).",
+  "Other seeds of the areas; areas larger than 4 x 4 in round 2 (8 x 8 not baked); other tile sizes.",
+  "rows_per_tile 6 (would fix the neighbour hole), a uniform dark band at the tile edge only, boards_per_row 5 or more in tile mode.",
+  "Settings not swept: joints.wobble*, raggedness, notches, edge_lip, pebbles, edge_shade, half_*, gaps.*, stains.size/zoom/dark_limit/dark_softness/keep_away/edge_hardness, masks.*, boards.*, roughness.*, landmarks.edge_ragged, windows.warp_size, edge_margin, the palettes.",
+  "Whether the painted-out places can be found by eye in the baked area (visible in the numpy picture of the painted-out source; not looked for one by one in the tiles).",
+  "Roughness and normal maps against any reference (none exists); use in a 3D scene; other Blender versions, GPU, other renderers.",
+  "The LATER moss and damage test (not started, as instructed); the shared slate layers (not used)."
+ ]
+}

@@ -1,0 +1,89 @@
+{
+ "what_this_is": "Small checks on the finished wood-from-maps pictures (tools/analyse_final.py). Seed 1 unless it says otherwise.",
+ "source_unchanged_check": {
+  "height_mean_absolute_difference_to_uploaded_0_to_1": 3e-05,
+  "height_share_of_dots_differing_by_more_than_2_of_255": 0.0,
+  "colour_mean_absolute_difference_to_uploaded_0_to_1": 0.0064,
+  "normal_from_baked_height_strength_8_mean_absolute_difference_x_y_z": [
+   0.0039,
+   0.0039,
+   0.0041
+  ],
+  "for_comparison_the_normal_rule_on_the_uploaded_height_itself_x_y_z": [
+   0.0039,
+   0.0039,
+   0.0041
+  ]
+ },
+ "half_tile_shift_test_1254": {
+  "colour": {
+   "slid_bake_versus_slid_picture_mean_absolute_difference_0_to_1": 0.00179,
+   "share_of_dots_differing_by_more_than_0.1": 0.0007,
+   "wrong_slide_control_mean": 0.106,
+   "wrong_slide_control_share_over_0.1": 0.4417
+  },
+  "height": {
+   "slid_bake_versus_slid_picture_mean_absolute_difference_0_to_1": 0.00069,
+   "share_of_dots_differing_by_more_than_0.1": 0.00208,
+   "wrong_slide_control_mean": 0.2353,
+   "wrong_slide_control_share_over_0.1": 0.7351
+  }
+ },
+ "colour_brightness_versus_height_correlation": {
+  "main_seed1": 0.978,
+  "main_seed2": 0.978,
+  "main_seed3": 0.979,
+  "comparison_seed1_(colour_from_height)": 0.988,
+  "uploaded_maps": 0.982
+ },
+ "main_versus_comparison_colour": {
+  "seed1": {
+   "mean_delta_e": 4.68,
+   "ninety_fifth_percent_delta_e": 10.95,
+   "mean_colour_main_0_255": [
+    84.4,
+    63.5,
+    50.9
+   ],
+   "mean_colour_comparison_0_255": [
+    83.7,
+    63.3,
+    51.2
+   ]
+  },
+  "seed2": {
+   "mean_delta_e": 4.8,
+   "ninety_fifth_percent_delta_e": 10.97,
+   "mean_colour_main_0_255": [
+    84.7,
+    64.2,
+    51.9
+   ],
+   "mean_colour_comparison_0_255": [
+    84.0,
+    64.0,
+    52.3
+   ]
+  },
+  "seed3": {
+   "mean_delta_e": 4.67,
+   "ninety_fifth_percent_delta_e": 11.05,
+   "mean_colour_main_0_255": [
+    84.7,
+    64.1,
+    51.7
+   ],
+   "mean_colour_comparison_0_255": [
+    84.2,
+    63.9,
+    51.8
+   ]
+  }
+ },
+ "seed_difference_height": {
+  "mean_absolute_difference_seed1_seed2": 0.228,
+  "mean_absolute_difference_seed1_seed3": 0.227,
+  "correlation_seed1_seed2": 0.019,
+  "correlation_seed1_seed3": 0.037
+ }
+}

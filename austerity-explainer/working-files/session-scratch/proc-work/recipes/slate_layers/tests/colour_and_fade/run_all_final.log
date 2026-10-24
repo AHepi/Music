@@ -1,0 +1,154 @@
+== layer tests
+{
+ "tiling, tiles_across 1": {
+  "colour: shifted vs rolled": {
+   "mean difference (of 255)": 1.417,
+   "share of dots over 40 (%)": 0.016
+  },
+  "colour: WRONG roll (control)": {
+   "mean difference (of 255)": 18.526,
+   "share of dots over 40 (%)": 8.596
+  },
+  "fade strength: shifted vs rolled": {
+   "mean difference (of 255)": 4.602,
+   "share of dots over 40 (%)": 1.7315
+  },
+  "colour: share of dots over 10/255 inside the 6-dot band along the old tile edge vs elsewhere (%)": [
+   1.081,
+   1.257
+  ]
+ },
+ "tiling, tiles_across 2": {
+  "colour: shifted vs rolled": {
+   "mean difference (of 255)": 1.398,
+   "share of dots over 40 (%)": 0.014
+  },
+  "colour: WRONG roll (control)": {
+   "mean difference (of 255)": 18.248,
+   "share of dots over 40 (%)": 7.8866
+  },
+  "fade strength: shifted vs rolled": {
+   "mean difference (of 255)": 4.664,
+   "share of dots over 40 (%)": 1.7579
+  },
+  "colour: share of dots over 10/255 inside the 6-dot band along the old tile edge vs elsewhere (%)": [
+   0.775,
+   1.154
+  ]
+ },
+ "new content in the 2 x 2 area": {
+  "picture vs itself rolled by one base tile (a repeat would be near 0.9)": {
+   "mean difference (of 255)": 18.325,
+   "share of dots over 40 (%)": 8.2678
+  }
+ },
+ "independence": {
+  "this layer seed 11 -> 12 (colour)": {
+   "changed inside slates (% of slate dots)": 91.8,
+   "changed in joints (% of joint dots)": 0.0
+  },
+  "this layer seed 11 -> 12 (height, exact 16 bit): changed in joints (% of joint dots, > 0.0005)": 0.0,
+  "layout seed 1 -> 2 (the slates move): colour changed in joints (% of the old joint dots)": 51.0265,
+  "the layer's own tone relief inside slates (height): lowest / highest / spread": [
+   -0.323,
+   0.367,
+   0.11
+  ],
+  "amount 0: height minus layout height, largest absolute value (must be 0)": 0.0,
+  "amount 0: roughness, lowest / highest (must both be the base 0.8; the 8-bit picture has a dither of plus or minus 1/255)": [
+   0.7961,
+   0.8039
+  ],
+  "amount 1: roughness inside slates, lowest / highest": [
+   0.639,
+   0.984
+  ],
+  "amount 0: fade strength picture, largest value (must be 0; 8-bit dither 0.004)": 0.0039,
+  "amount 0 (colour): % of slate dots that are not the single flat middle tone": 0.0
+ }
+}
+== full stack independence
+{
+ "size": 384,
+ "joint dots": 322,
+ "slate dots (3+ dots from a joint)": 110183,
+ "seed12": {
+  "colour changed in joints (% of joint dots)": 0.0,
+  "colour changed on slates (% of slate dots)": 89.35,
+  "colour changed where damage fully covers (% of 3281 dots)": 0.0,
+  "colour changed where moss fully covers (% of 0 dots)": "no such dots (layer empty here)",
+  "colour changed where outline_and_shadow fully covers (% of 0 dots)": "no such dots (layer empty here)",
+  "height changed in joints (% of joint dots, > 0.0005)": 0.0,
+  "height changed on slates (% of slate dots, > 0.0005)": 99.45
+ },
+ "amount0": {
+  "colour changed in joints (% of joint dots)": 0.0,
+  "colour changed on slates (% of slate dots)": 88.02,
+  "colour changed where damage fully covers (% of 3281 dots)": 0.0,
+  "colour changed where moss fully covers (% of 0 dots)": "no such dots (layer empty here)",
+  "colour changed where outline_and_shadow fully covers (% of 0 dots)": "no such dots (layer empty here)",
+  "height changed in joints (% of joint dots, > 0.0005)": 0.0,
+  "height changed on slates (% of slate dots, > 0.0005)": 98.74
+ },
+ "the other layers' masks after changing this layer's seed: largest difference (must be 0; 16 bit)": {
+  "damage": 0.0,
+  "moss": 0.0,
+  "outline_and_shadow": 0.0
+ }
+}
+== sheets
+wrote before_after.png
+wrote variations
+== score
+colour group 0.642 | parts {'colour_distribution': 0.794, 'colour_spectrum': 0.527, 'colour_orientation': 0.737, 'colour_scale': 0.315, 'colour_gradient': 0.865}
+== dev/final/colour.png
+   brightness percentiles 1/10/25/50/75/90/99 [33, 44, 55, 66, 77, 81, 101]
+   mean lab (L, a, b)                         [27.200000762939453, -1.899999976158142, -3.4000000953674316]
+   top to bottom (10 bands)                   [49, 55, 58, 60, 62, 65, 67, 69, 72, 76]
+   rise (last band - first)                   27.0
+   edge density %                             1.8
+   flat share % (spread <1 / <2)              [7.0, 38.0]
+   sideways / upright jumps %                 [16.9, 10.0, 1.69]
+   long range std                             9.5
+== sweeps
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/fade_amount.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/fade_length.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/streak_width.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/patch_hardness.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/fade_direction.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/streak_contrast.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/streak_bend.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/sun_bleach.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/damp_stain.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/tone_spread.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/tone_centre.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/tint.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/seed.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/amount.png
+wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/controls_sweeps/colour_and_fade/grain.png
+== brick reuse
+00:17.560  render           | Saved: 'reuse_brick/brick_colour.png'
+00:33.747  render           | Saved: 'reuse_brick/brick_height.png'
+== full recipe, harness, 1254
+00:53.740  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/tests/colour_and_fade/full_stack_1254/colour.png'
+01:52.872  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/tests/colour_and_fade/full_stack_1254/height.png'
+02:39.595  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/tests/colour_and_fade/full_stack_1254/roughness.png'
+02:40.802  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/tests/colour_and_fade/full_stack_1254/metallic.png'
+05:39.346  render           | Saved: '/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/tests/colour_and_fade/full_stack_1254/normal_bumpnode.png'
+[bake] {"size": 1254, "parameters": {}, "sobel_strength": 9.327756986273366, "bump_node_distance": 0.0074384027003774845, "seconds": 338.6}
+== debug views and comparison
+wrote debug views and comparison
+== resolution crops
+wrote resolution
+== timing (user seconds of CPU, 1254 dots, colour only): layout alone, then layout + this layer
+real	0m19.326s user	0m19.305s 
+real	0m43.443s user	0m42.782s 
+NODES colour_and_fade 419
+NODES layout 307
+== controls table and settings
+wrote controls_colour_and_fade.md with 41 controls
+wrote 41 settings
+ "bytes": 1571,
+ "numbers": 30,
+ "problems": []
+ALL DONE

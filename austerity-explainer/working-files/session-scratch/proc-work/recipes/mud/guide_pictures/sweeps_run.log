@@ -1,0 +1,56 @@
+00:01.964  render           | Saved: 'guide_pictures/sweep_clod_count/bake_00/colour.png'
+00:02.728  render           | Saved: 'guide_pictures/sweep_clod_count/bake_00/roughness.png'
+00:03.549  render           | Saved: 'guide_pictures/sweep_clod_count/bake_00/metallic.png'
+00:11.089  render           | Saved: 'guide_pictures/sweep_clod_count/bake_01/colour.png'
+00:12.218  render           | Saved: 'guide_pictures/sweep_clod_count/bake_01/roughness.png'
+00:13.438  render           | Saved: 'guide_pictures/sweep_clod_count/bake_01/metallic.png'
+00:20.789  render           | Saved: 'guide_pictures/sweep_clod_count/bake_02/colour.png'
+00:22.159  render           | Saved: 'guide_pictures/sweep_clod_count/bake_02/roughness.png'
+00:23.470  render           | Saved: 'guide_pictures/sweep_clod_count/bake_02/metallic.png'
+00:32.459  render           | Saved: 'guide_pictures/sweep_clod_count/bake_03/colour.png'
+00:33.862  render           | Saved: 'guide_pictures/sweep_clod_count/bake_03/roughness.png'
+00:35.170  render           | Saved: 'guide_pictures/sweep_clod_count/bake_03/metallic.png'
+00:43.092  render           | Saved: 'guide_pictures/sweep_clod_count/bake_04/colour.png'
+00:44.529  render           | Saved: 'guide_pictures/sweep_clod_count/bake_04/roughness.png'
+00:46.004  render           | Saved: 'guide_pictures/sweep_clod_count/bake_04/metallic.png'
+sweep done sweep_clod_count
+00:51.099  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_00/colour.png'
+00:52.535  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_00/roughness.png'
+00:53.680  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_00/metallic.png'
+01:00.415  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_01/colour.png'
+01:01.709  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_01/roughness.png'
+01:03.071  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_01/metallic.png'
+01:12.303  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_02/colour.png'
+01:13.930  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_02/roughness.png'
+01:15.474  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_02/metallic.png'
+01:27.560  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_03/colour.png'
+01:29.871  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_03/roughness.png'
+01:32.224  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_03/metallic.png'
+01:47.327  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_04/colour.png'
+01:49.597  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_04/roughness.png'
+01:51.954  render           | Saved: 'guide_pictures/sweep_rut_scale/bake_04/metallic.png'
+sweep done sweep_rut_scale
+02:03.613  render           | Saved: 'guide_pictures/sweep_rut_width/bake_00/colour.png'
+02:05.807  render           | Saved: 'guide_pictures/sweep_rut_width/bake_00/roughness.png'
+02:08.034  render           | Saved: 'guide_pictures/sweep_rut_width/bake_00/metallic.png'
+02:19.346  render           | Saved: 'guide_pictures/sweep_rut_width/bake_01/colour.png'
+02:21.142  render           | Saved: 'guide_pictures/sweep_rut_width/bake_01/roughness.png'
+02:22.744  render           | Saved: 'guide_pictures/sweep_rut_width/bake_01/metallic.png'
+02:33.305  render           | Saved: 'guide_pictures/sweep_rut_width/bake_02/colour.png'
+02:35.222  render           | Saved: 'guide_pictures/sweep_rut_width/bake_02/roughness.png'
+02:37.099  render           | Saved: 'guide_pictures/sweep_rut_width/bake_02/metallic.png'
+02:47.464  render           | Saved: 'guide_pictures/sweep_rut_width/bake_03/colour.png'
+02:49.334  render           | Saved: 'guide_pictures/sweep_rut_width/bake_03/roughness.png'
+02:50.973  render           | Saved: 'guide_pictures/sweep_rut_width/bake_03/metallic.png'
+03:00.271  render           | Saved: 'guide_pictures/sweep_rut_width/bake_04/colour.png'
+03:02.015  render           | Saved: 'guide_pictures/sweep_rut_width/bake_04/roughness.png'
+03:03.762  render           | Saved: 'guide_pictures/sweep_rut_width/bake_04/metallic.png'
+sweep done sweep_rut_width
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/generator/sweeps_for_guide.py", line 58, in <module>
+    info = json.load(open(os.path.join(folder, 'sweep.json')))
+                     ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'guide_pictures/sweep_stone_scale/sweep.json'
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:34:58)
+
+Blender quit

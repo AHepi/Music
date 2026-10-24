@@ -1,0 +1,77 @@
+{
+ "_note": "Plain note: the structured result of the generated mask stamps test (20 October 2026); the same content as returned to the caller. Full story: notes - generated mask stamps test.md.",
+ "summary": "MASK TEST (20 Oct 2026): generated stamp sheets of moss clumps and chips (6 pictures, flux/dev, US$0.354 by the price list, at most US$0.45 counted at rounded-up price; limit US$1.00) were cleaned into masks, cut into grid atlases (moss C: 16 stamps of 256 x 256; chips C: 20 stamps of 300 x 120; also moss A+B 32 stamps, chips A/B 16 each) and plugged into the MOSS and DAMAGE layers of a COPY of the current slate recipe (original never written; copy 13:12 UTC with checksums; copy in 'nodes' mode is pixel-identical to the original). Four versions were baked at 1254 dots (node-made, moss stamps, chip stamps, both) plus a multiplied-mask extra and compared with the look measures, texture_compare and 1:1 crops. The stamps are seamless (half-tile shift test at 512), obey the seed and the Amount off-switch, but did not beat the node-made masks. 8 Blender runs. Notes: mask_test/notes - generated mask stamps test.md.",
+ "generations": [
+  {
+   "model": "fal-ai/flux/dev",
+   "prompt": "A sprite sheet of sixteen separate isolated moss clumps laid out in a loose 4 by 4 grid with wide empty gaps between them. Each clump is a soft, mottled, irregular patch of moss, some round and some stretched downward into hanging drips and tongues with ragged brush-stroke edges. Hand-painted flat gouache style with visible vertical brush strokes. Every clump is rendered as light grey and white mottled paint on a completely plain pure black background, high contrast mask, no shadows, no ground, no text, no border, nothing touching the edges.",
+   "cost_usd": 0.059,
+   "file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/stamps/originals/moss_sheet_A_flux-dev_seed4101.png",
+   "usable": "yes: 16 round fuzzy clumps; usable as silhouettes (round, all alike); tried at 640 dots in the A+B atlas only"
+  },
+  {
+   "model": "fal-ai/flux/dev",
+   "prompt": "A sprite sheet of sixteen separate isolated chipped paint and flaked slate fragments laid out in a loose 4 by 4 grid with wide empty gaps between them. Each piece is a flat irregular shape like a broken-off flake or a strip of chipped edge: a straight flat lower side and a ragged, jagged, toothed upper edge with small holes and loose flecks, some wide and low, some with sharp upward teeth. Hand-painted flat gouache style, no shading. Every shape is pale cream and tan flat paint on a completely plain pure black background, high contrast mask, no shadows, no ground, no text, no border, nothing touching the edges.",
+   "cost_usd": 0.059,
+   "file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/stamps/originals/chips_sheet_A_flux-dev_seed4102.png",
+   "usable": "shape poor: 16 chunky blocky flakes; cleaned to an atlas but not used in the comparison"
+  },
+  {
+   "model": "fal-ai/flux/dev",
+   "prompt": "A flat 2D sprite sheet of sixteen separate isolated moss stains laid out in a loose 4 by 4 grid with wide empty black gaps between them. Each stain is a flat, tall, irregular blotch of hand-painted moss, wider at the top and running downward in thin ragged drips, tongues and streaks like paint that has dribbled, with torn ragged brush-stroke edges, small holes and loose flecks. Some stains are small, some large, no two alike, none round, nothing fluffy or three-dimensional. Flat gouache paint in two or three olive green tones with visible vertical brush strokes, on a completely plain pure black background, no shadows, no ground, no text, no border, nothing touching the edges.",
+   "cost_usd": 0.059,
+   "file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/stamps/originals/moss_sheet_B_flux-dev_seed4103.png",
+   "usable": "yes: 16 ink-splat shapes on a cream ground (cleaned by difference from the ground); tried at 640 dots in the A+B atlas only"
+  },
+  {
+   "model": "fal-ai/flux/dev",
+   "prompt": "A flat 2D sprite sheet of sixteen separate isolated thin strips of flaked paint chips laid out in a loose 4 by 4 grid with wide empty black gaps between them. Each strip is long, low and narrow, much wider than tall, like a ragged border of peeled paint: a straight flat lower edge and a jagged, saw-toothed, broken upper edge with small pointed teeth, notches, holes and loose small flecks above it. Some strips are short, some long, no two alike. Flat hand-painted gouache in pale cream and tan with a darker brown tip, no shading, on a completely plain pure black background, no shadows, no ground, no text, no border, nothing touching the edges.",
+   "cost_usd": 0.059,
+   "file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/stamps/originals/chips_sheet_B_flux-dev_seed4104.png",
+   "usable": "no: asked for thin strips, got 16 squarish paper pieces; not used"
+  },
+  {
+   "model": "fal-ai/flux/dev",
+   "prompt": "Eight long thin horizontal strips stacked one above the other with wide empty black gaps between them, each strip spanning most of the picture width. Every strip is a ragged border of chipped, flaking paint seen flat from the front: a solid straight flat lower edge, and above it a jagged broken edge of many small sharp teeth, notches and irregular flakes, with a few tiny loose flecks floating just above. Each strip is only about one eighth of the picture tall. Flat hand-painted gouache, pale cream with tan patches, no shading, no shadow, on a completely plain pure black background, no text, no border.",
+   "cost_usd": 0.059,
+   "file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/stamps/originals/chips_sheet_C_flux-dev_seed4105.png",
+   "usable": "yes, after cutting the five long strips into 20 short pieces (atlas 4 x 6 cells of 300 x 120); used for the chip stamps"
+  },
+  {
+   "model": "fal-ai/flux/dev",
+   "prompt": "A flat 2D sprite sheet of sixteen separate isolated hanging moss shapes laid out in a loose 4 by 4 grid with wide empty black gaps between them. Each shape hangs from a straight flat horizontal top edge like a ragged curtain: a broad band along the top that breaks into several long uneven tongues and thin strands of different lengths running straight downward, with torn vertical brush-stroke edges and a few small holes and flecks. Some shapes are wide and short, some narrow and long, no two alike, not round, not circular, no blobs, nothing three-dimensional. Flat olive green gouache paint in two tones with visible vertical brush strokes, on a completely plain pure black background, no shading, no shadows, no text, no border, nothing touching the edges.",
+   "cost_usd": 0.059,
+   "file": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/stamps/originals/moss_sheet_C_flux-dev_seed4106.png",
+   "usable": "yes, after removing a brown rod and a red scribble by colour and shape (atlas 4 x 4 cells of 256 x 256); used for the moss stamps"
+  }
+ ],
+ "total_cost_usd": 0.354,
+ "total_cost_note": "exact by the price list (6 x 2.359 megapixels x US$0.025); at most US$0.45 if each picture is counted at 3 megapixels; limit US$1.00",
+ "how_it_plugs_in": "New helper layers/stamps.py in the slate COPY (slate_copy/) plus small additions to the copies of moss.py and damage.py (slate_copy/changes_moss.diff, changes_damage.diff; every other file byte-for-byte the original; with the mode left at 'nodes' the copy equals the original recipe, 0 dots differ at 512). A setting moss.mask_mode / damage.mask_mode = nodes | stamps | both (both = node mask x stamp mask) chooses the 'where' of the layer; the layer's own colour, height and roughness are still made by its own nodes from that mask. Atlas = grid picture of separate stamps (red = mask, green = depth inside), described by a JSON file named in moss.stamp_atlas / damage.stamp_atlas. Per slate, from the layer's Seed, each of 4 moss slots (2 on the upper edge, 1 on a side joint, 1 low; chance from Drip / Joint / Lower Part Preference, big mossy areas and the slate's own mossiness) and 6 chip slots (4 on the lower edge, 1 per lower corner; chance from Chip Amount and slate damage) draws: used or not, place along the slate, size, turn, mirror, which atlas cell. Each dot's place on its own slate (local x, distance from top edge or from lower edge) is turned into stamp coordinates and the atlas is read there; the largest slot value is the mask. Because the place is measured on the slate itself, stamps wrap with the tile (proved by the half-tile shift test at 512). Five new controls per layer: Stamp Amount, Stamp Width, Stamp Turn, Stamp Overhang, Stamp Edge Softness.",
+ "measures_table_markdown": "Look measures (measure_look.py; reference = the person's picture), 1254 dots:\n\n| picture | gradient | stripiness | olive % | tan % | moss spread | largest moss clump | brightest slate | slate spread | tilt p99 | up-down slope | side slope |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| reference | 5.55 | 0.827 | 6.4 | 1.00 | 6.03 | 7013 | 34.6 | 2.51 | 112.6 | 13.47 | 15.57 |\n| 1 node-made masks (copy unchanged) | 7.54 | 0.984 | 4.0 | 1.19 | 5.63 | 8439 | 34.1 | 2.65 | 103.5 | 10.60 | 14.17 |\n| 2 generated stamps for moss | 7.40 | 0.995 | 3.8 | 1.18 | 5.45 | 5568 | 34.1 | 2.55 | 103.5 | 10.40 | 14.17 |\n| 3 generated stamps for chips | 7.54 | 0.840 | 4.1 | 1.07 | 6.39 | 8480 | 34.7 | 2.64 | 103.9 | 10.57 | 14.07 |\n| 4 stamps for moss and chips | 7.40 | 0.850 | 3.9 | 1.06 | 6.31 | 5568 | 34.7 | 2.54 | 103.9 | 10.37 | 14.07 |\n| 5 node mask x stamp mask (extra, uncalibrated) | 7.29 | 0.966 | 3.5 | 0.35 | 5.23 | 8340 | 34.1 | 2.61 | 102.8 | 10.38 | 14.05 |\n\nSame-kind score against the slate reference (lib/texture_compare.py; 0 = as different as another surface, 1 = indistinguishable):\n\n| version | overall | colour | height | normal | tiling |\n|---|---|---|---|---|---|\n| 1 node-made | 0.778 | 0.822 | 0.735 | 0.616 | 1.000 |\n| 2 moss stamps | 0.783 | 0.830 | 0.739 | 0.615 | 1.000 |\n| 3 chip stamps | 0.770 | 0.812 | 0.729 | 0.604 | 1.000 |\n| 4 both stamps | 0.775 | 0.819 | 0.734 | 0.604 | 1.000 |\n| 5 node x stamp | 0.777 | 0.814 | 0.738 | 0.624 | 1.000 |\n",
+ "pictures": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/sheets/masks_compare.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/sheets/masks_compare_all_versions.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/sheets/stamp_atlases.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/sheets/generated_originals.jpg",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/mask_test/sheets/half_tile_test.jpg"
+ ],
+ "verdict": "No: the generated shapes did NOT look better than the node-made masks in this test. Moss from stamps (hanging-drip curtains): same share of olive dots (3.8 vs 4.0 %), same overall same-kind score within noise (0.783 vs 0.778), largest clump 21 % smaller than the reference where the node-made one is 20 % bigger; by eye the stamp moss has neat long hanging drips that the node moss lacks, but smoother-edged washes and fewer separate clumps than the node moss, so I rate it slightly worse. Chips from stamps (cut ragged strips): closer on stripiness (0.84 vs node 0.98, reference 0.827) and a broader paler rim, but a too-continuous 'frosting' band with no loose islands; score 0.770 vs 0.778; a toss-up. Both together 0.775. All score differences (max 0.013) are about the size of ordinary seed noise (0.005 to 0.011 per the slate tuners; I did not measure seed spread myself). Why: the generator produced generic silhouettes (round blobs, curtains, plaster strips) with none of the torn brush-stroke edge of the reference, the layer's own colour streaks dominate once the shape is clipped by the slate, and the node masks had many tuning rounds while the stamps had one hour. So: the machinery works and is seamless; better shapes (for instance generated from the reference picture) are the thing to try next.",
+ "failures": [
+  "Chips B ignored \"thin strips\" and returned 16 squarish paper pieces; chips A returned chunky blocks: both poor shapes, not used.",
+  "First moss prompts gave round fluffy balls / ink splats: as stamps they read as polka dots in the first 640-dot bake; the hanging-drip sheet (moss C) was a third try.",
+  "Moss C arrived hung on a brown rod with a red scribble; removed by colour (green only) plus a thin-bar filter.",
+  "First chip stamps were L-shaped (legs climbing the side joints) because edge_distance was used as height above the lower edge and near a side joint it measures the side; fixed by using the straight distance from the lower edge near the sides. Corners were not inspected closely (real edge can differ from the straight line by an estimated ~15 dots).",
+  "The raw half-tile numbers first looked like a seam in the moss mask (7.7 % of dots differing along the old tile edge vs 3.3 % elsewhere); the difference picture showed only render-sampling speckle on thin drips and a blurred test showed 0 dots over the limit along the edge. The node-made control shows the same speckle level.",
+  "Version 5 (node mask x stamp mask) lost most chips (tan 0.35 %) because multiplying two masks keeps only where both agree; not calibrated.",
+  "Not a failure but a limit: none of the six generated pictures was in the hand-painted style of the slate reference; only silhouettes were used."
+ ],
+ "untested": [
+  "Other surfaces (brick, wood, metal, mud, gravel) and the street-view wet/specular idea (stamps driving a roughness change) - idea only",
+  "A 2 x 2 area of new slates (recipe.tiles_across 2), 2508 dots, and the half-tile test at 1254 dots (done at 512 as asked)",
+  "Roughness and normal maps of the stamp versions were not looked at (colour and height baked; normal made from height and scored)",
+  "Any seed other than the default; the real seed-to-seed spread of the scores",
+  "The multiplied (both) mode beyond one uncalibrated 1254-dot bake; moss atlas A+B at 1254; image-to-image generation from the reference; stamp control sweeps",
+  "Moss avoiding chips (declared link) in stamp mode; corners of stamped chips; the real account balance (cost is from the price list)"
+ ]
+}

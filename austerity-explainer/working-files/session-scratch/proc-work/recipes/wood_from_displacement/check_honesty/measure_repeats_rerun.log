@@ -1,0 +1,232 @@
+{
+ "what_this_is": "Repeat tests of the wood-from-maps recipe, written by tools/measure_repeats.py (see the note at the top of that file). Seed 1, default settings.",
+ "shift_test": {
+  "control_plain_source_repeated_4x4_height": {
+   "picture": "the uploaded height map repeated 4 x 4 (what we want to get away from)",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.972,
+    "one_tile_down": 0.836,
+    "one_tile_diagonal": 0.812,
+    "two_tiles_across": 0.911,
+    "half_tile_across": 0.106,
+    "one_and_a_half_tiles_across": 0.106
+   },
+   "background_random_shifts": {
+    "mean": -0.001,
+    "std": 0.021,
+    "highest": 0.083,
+    "ninety_ninth_percent": 0.058,
+    "count": 400
+   },
+   "background_sideways_only": {
+    "mean": 0.121,
+    "highest": 0.204,
+    "count": 51
+   }
+  },
+  "new_area_4x4_height": {
+   "picture": "new 4 x 4 area, height",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.082,
+    "one_tile_down": 0.027,
+    "one_tile_diagonal": 0.024,
+    "two_tiles_across": 0.07,
+    "half_tile_across": 0.073,
+    "one_and_a_half_tiles_across": 0.088
+   },
+   "background_random_shifts": {
+    "mean": -0.0,
+    "std": 0.009,
+    "highest": 0.04,
+    "ninety_ninth_percent": 0.026,
+    "count": 400
+   },
+   "background_sideways_only": {
+    "mean": 0.078,
+    "highest": 0.096,
+    "count": 51
+   }
+  },
+  "new_area_4x4_colour_brightness": {
+   "picture": "new 4 x 4 area, colour brightness",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.043,
+    "one_tile_down": 0.013,
+    "one_tile_diagonal": 0.01,
+    "two_tiles_across": 0.031,
+    "half_tile_across": 0.034,
+    "one_and_a_half_tiles_across": 0.05
+   },
+   "background_random_shifts": {
+    "mean": -0.001,
+    "std": 0.009,
+    "highest": 0.032,
+    "ninety_ninth_percent": 0.022,
+    "count": 400
+   },
+   "background_sideways_only": {
+    "mean": 0.039,
+    "highest": 0.059,
+    "count": 51
+   }
+  },
+  "new_area_2x2_height_(one_tile_is_627_dots)": {
+   "picture": "new 2 x 2 area, height",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.093,
+    "one_tile_down": 0.035,
+    "one_tile_diagonal": 0.084,
+    "two_tiles_across": NaN,
+    "half_tile_across": 0.075,
+    "one_and_a_half_tiles_across": 0.066
+   },
+   "background_random_shifts": {
+    "mean": 0.001,
+    "std": 0.011,
+    "highest": 0.06,
+    "ninety_ninth_percent": 0.039,
+    "count": 400
+   },
+   "background_sideways_only": {
+    "mean": 0.078,
+    "highest": 0.092,
+    "count": 53
+   }
+  },
+  "default_tile_repeated_2x2_on_purpose_height": {
+   "picture": "the default tile repeated on purpose (it must score 1.0 at one tile)",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.996,
+    "one_tile_down": 1.0,
+    "one_tile_diagonal": 0.996,
+    "two_tiles_across": NaN,
+    "half_tile_across": 0.078,
+    "one_and_a_half_tiles_across": 0.079
+   },
+   "background_random_shifts": {
+    "mean": -0.001,
+    "std": 0.017,
+    "highest": 0.127,
+    "ninety_ninth_percent": 0.04,
+    "count": 400
+   },
+   "background_sideways_only": {
+    "mean": 0.093,
+    "highest": 0.168,
+    "count": 53
+   }
+  }
+ },
+ "source_reuse_4x4": {
+  "dots_of_the_area": 25160256,
+  "source_dots_in_the_map": 1572516,
+  "share_of_source_dots_used_at_least_once": 0.72,
+  "times_a_used_source_dot_appears_in_the_area_(mean_median_90th_percent)": [
+   22.2,
+   20.0,
+   44.0
+  ],
+  "by_source_row": {
+   "R1_(not_used_by_design)": {
+    "share_used": 0.0,
+    "mean_times_per_used_dot": 0.0
+   },
+   "R2": {
+    "share_used": 0.934,
+    "mean_times_per_used_dot": 18.2
+   },
+   "R3": {
+    "share_used": 0.936,
+    "mean_times_per_used_dot": 33.3
+   },
+   "R4": {
+    "share_used": 0.599,
+    "mean_times_per_used_dot": 12.0
+   },
+   "R5": {
+    "share_used": 0.929,
+    "mean_times_per_used_dot": 23.1
+   }
+  },
+  "boards": {
+   "number_of_boards_counted": 227,
+   "share_of_boards_that_show_at_least_half_of_the_same_source_piece_as_another_board": 1.0,
+   "share_with_at_least_80_percent_the_same_piece": 1.0,
+   "share_with_nearly_nothing_in_common_(under_25_percent)": 0.0,
+   "pairs_sharing_half_or_more": 4105,
+   "pairs_sharing_80_percent_or_more": 2825,
+   "distance_between_such_pairs_in_tiles_(median_and_closest)": [
+    2.09,
+    0.19
+   ],
+   "closest_pair_sharing_80_percent_in_tiles": 0.19,
+   "share_of_the_close_pairs_(sharing_half)_that_are_less_than_one_tile_apart": 0.13
+  },
+  "knots": {
+   "knot_boards_in_the_area": 24,
+   "rows_in_the_area_(each_4_tiles_wide)": 20,
+   "K2_from_row_R2": {
+    "boards": 16,
+    "closest_two_in_tiles": 0.45
+   },
+   "K3_from_row_R4": {
+    "boards": 8,
+    "closest_two_in_tiles": 0.47
+   }
+  }
+ },
+ "near_copies_research_test_4x4": [
+  {
+   "picture": "plain source repeated 4 x 4, height",
+   "board_size_36x80": {
+    "median_best_match": 1.0,
+    "ninetieth_percent": 1.0,
+    "worst": 1.0,
+    "share_with_a_near_copy_over_0.8": 1.0,
+    "templates": 40
+   },
+   "feature_size_24x40": {
+    "median_best_match": 1.0,
+    "ninetieth_percent": 1.0,
+    "worst": 1.0,
+    "share_with_a_near_copy_over_0.8": 1.0,
+    "templates": 40
+   }
+  },
+  {
+   "picture": "new 4 x 4 area (default settings, seed 1), height",
+   "board_size_36x80": {
+    "median_best_match": 0.68,
+    "ninetieth_percent": 0.84,
+    "worst": 0.9,
+    "share_with_a_near_copy_over_0.8": 0.2,
+    "templates": 40
+   },
+   "feature_size_24x40": {
+    "median_best_match": 0.81,
+    "ninetieth_percent": 0.98,
+    "worst": 0.99,
+    "share_with_a_near_copy_over_0.8": 0.53,
+    "templates": 40
+   }
+  },
+  {
+   "picture": "plain source repeated 4 x 4, colour brightness",
+   "board_size_36x80": {
+    "median_best_match": 1.0,
+    "ninetieth_percent": 1.0,
+    "worst": 1.0,
+    "share_with_a_near_copy_over_0.8": 1.0,
+    "templates": 40
+   },
+   "feature_size_24x40": {
+    "median_best_match": 1.0,
+    "ninetieth_percent": 1.0,
+    "worst": 1.0,
+    "share_with_a_near_copy_over_0.8": 1.0,
+    "templates": 40
+   }
+  },
+  {
+   "picture": "new 4 x 4 area, colour brightness",
+   "bo

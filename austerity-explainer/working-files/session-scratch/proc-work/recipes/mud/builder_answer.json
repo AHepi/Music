@@ -1,0 +1,159 @@
+{
+ "surface": "mud",
+ "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud",
+ "classes": [
+  {
+   "class_name": "S (layout numbers + ruts + clods; 6 puddles, 16 stones, 22 ruts)",
+   "description_bytes": 7367,
+   "tier": "none",
+   "colour_ssim": 0.3672,
+   "colour_mean_delta_e": 12.52,
+   "edge_skill": 0.074,
+   "height_mae_best_fit": 45.16,
+   "normal_mean_angle": 28.27,
+   "texture_compare_overall": 0.267
+  },
+  {
+   "class_name": "M (puddle water tones, 590 stones with faces, 34 ruts, clods)",
+   "description_bytes": 63885,
+   "tier": "none",
+   "colour_ssim": 0.4027,
+   "colour_mean_delta_e": 9.75,
+   "edge_skill": 0.193,
+   "height_mae_best_fit": 40.05,
+   "normal_mean_angle": 28,
+   "texture_compare_overall": 0.362
+  },
+  {
+   "class_name": "L smaller (traced ground 2000 patches + fine puddles and stones)",
+   "description_bytes": 299544,
+   "tier": "layout",
+   "colour_ssim": 0.6327,
+   "colour_mean_delta_e": 5.8,
+   "edge_skill": 0.564,
+   "height_mae_best_fit": 21.71,
+   "normal_mean_angle": 20.44,
+   "texture_compare_overall": 0.383
+  },
+  {
+   "class_name": "L first (traced ground 5000 patches)",
+   "description_bytes": 453360,
+   "tier": "layout",
+   "colour_ssim": 0.6884,
+   "colour_mean_delta_e": 5.26,
+   "edge_skill": 0.644,
+   "height_mae_best_fit": 19.05,
+   "normal_mean_angle": 18.63,
+   "texture_compare_overall": 0.44
+  },
+  {
+   "class_name": "L final (traced ground 5000 + correction layer painted last)",
+   "description_bytes": 503014,
+   "tier": "layout",
+   "colour_ssim": 0.6976,
+   "colour_mean_delta_e": 5,
+   "edge_skill": 0.685,
+   "height_mae_best_fit": 17.57,
+   "normal_mean_angle": 18.59,
+   "texture_compare_overall": 0.483
+  },
+  {
+   "class_name": "golden S (colour only)",
+   "description_bytes": 7144,
+   "tier": "none",
+   "colour_ssim": 0.2719,
+   "colour_mean_delta_e": 16.57,
+   "edge_skill": 0.041,
+   "texture_compare_overall": 0.366
+  },
+  {
+   "class_name": "golden M (colour only)",
+   "description_bytes": 59853,
+   "tier": "none",
+   "colour_ssim": 0.3122,
+   "colour_mean_delta_e": 13.07,
+   "edge_skill": 0.147,
+   "texture_compare_overall": 0.425
+  },
+  {
+   "class_name": "golden L final (colour only; tier uses colour measures only; 513.7 KB: inside 512 KiB but not under 512,000 bytes)",
+   "description_bytes": 513735,
+   "tier": "close",
+   "colour_ssim": 0.6038,
+   "colour_mean_delta_e": 6.84,
+   "edge_skill": 0.6,
+   "texture_compare_overall": 0.503
+  }
+ ],
+ "blender_tools_used": [
+  "Cycles (CPU, orthographic top-down camera, box filter 1.0, 8 samples)",
+  "Mesh from corner lists (from_pydata) with FACE attributes (colour, brightness, roughness)",
+  "Emission shader + Attribute node (exact flat colours)",
+  "Curve objects with bevel depth (ruts, geometry route)",
+  "Geometry Nodes: Mesh to Points, Instance on Points, Random Value, Noise Texture, Set Position, Set Shade Smooth, Realize Instances, Set Material (stones, geometry route)",
+  "Sun lamp + Diffuse BSDF + World colour (geometry-route stones)",
+  "numpy after the render: height from colour (stretch 20..128, blur 0.5), normal from 8-bit height (strength 9), cheap AO"
+ ],
+ "changes_wanted_in_lib": [
+  "A shared flat-shape painter in lib/contrib (build_tile_mesh, channel_material, derive_normal_from_height): the wood and mud generators are about 90 per cent the same code",
+  "Move merge_trace.py / trace_tools.py (now in recipes/wood/analysis) and the colour-axis element finder (recipes/mud/analysis/element_tools.py) into lib/contrib",
+  "description_audit.py: also print the number of polygon corners (a fairer size measure than JSON bytes)",
+  "texture_compare.py: colour_gradient and normal_tilt are 0 unless fine-edge density matches almost exactly (soften); the seam measure reads 2.0-2.5 for anything traced from a reference with its own mild seam; the tiling group is 0 for a crop of a bigger picture",
+  "pixel_compare.py: option to ignore a band of N dots at the edge; say in the report when a tier skipped measures because the reference has no maps (mud_golden)"
+ ],
+ "dead_ends": [
+  "Sorting stones and water by palette colour failed (a stone's lit face is blue-grey like water, pale stones are tan like earth): replaced by a Lab b < 7 pixel test + hole fill + shape tests + watershed",
+  "Watershed marker bug (added 1 to every dot so nothing was undecided: every stone one dot big, '0 stones found')",
+  "Thin groove lines at scale 3 found only fragments (25 curves); broad rut paths appear at scale 10",
+  "Stone clusters first called puddles; fixed by requiring at least 40 per cent clearly blue dots",
+  "Smooth ground tone fields buy colour difference but no SSIM (0.49 until the blur is under 3 dots); invented clods lower dot-for-dot scores and make the normal worse than flat (28 vs 23.5 degrees)",
+  "Lower normal strengths did not help (19.3 vs 19.9 degrees); tier 'close' unreachable at 512 KB because normal angle stays about 18.6 (palette-snapped 16 colours reach 9.8 only with a per-dot label map)",
+  "Geometry Nodes stones: attribute named 'radius' overwritten by Mesh to Points, Vector Math Scale socket mistake, then smooth low-contrast round lumps that do not match the painted look",
+  "First sampled puddles amoeba-like, ruts spaghetti with square ends, sampler needs OpenCV (not in Blender): sampling and baking are two steps",
+  "False alarm in my own seam test (compared bakes from two code versions); area quarters scored low only because the tiling group is 0 for a crop; I first wrongly blamed a distance grid (fixed anyway)",
+  "Own-script mistakes: golden score files overwrote mud's (same names); pkill -f with text from my own command killed my shell",
+  "Pebble clusters around big stones did not change the kind score (cannot see it) though they look closer by eye"
+ ],
+ "derivation_ceiling": "Height = (0.299R+0.587G+0.114B - 20)/108 cut to 0..1, blurred 0.5 dot: mean error 3.32 levels (correlation 0.997); normal = central slope of the 8-bit height x 9: 0.35 degrees from the uploaded height; from colour-derived height 3.7 degrees (smoother filter, strength 10) or 4.8 (plain, strength 8); flat normal would be 23.5 degrees off. Palette-only ceiling (16 colours snapped, no description): SSIM 0.916, delta E 3.29, edge skill 0.854, height 8.9, normal 9.8 degrees (tier close); a 3x3 median clean-up drops it to SSIM 0.82 / 13.4 degrees.",
+ "geometry_route_verdict": "Tried in Blender on the M description (590 stones, 34 ruts). Stones by Geometry Nodes (Mesh to Points + Instance on Points + noise Set Position + sun-lit flat shading): 8.4 s vs 3.4 s for flat polygons; needs only 3 numbers per stone and gets lit/shaded faces free, but came out as smooth, low-contrast round lumps without the painted dark rim, so the flat-polygon painter stays the default. Ruts as Blender curve objects (bevel): 3.2 s vs 4.6 s, equal picture but one width/colour per curve (3 curves per rut) and no easy wobble/fade. Height from geometry (hybrid) not tested because the reference height is derived from colour.",
+ "variation_result": "8 new tiles from sample_description(seed 101-108) baked at 1254 with the same generator (final sampler: 36,000 smaller clods, pebble clusters): same-kind score mean 0.383 (0.353-0.416; reference-fitted L class 0.483, M 0.362, S 0.267, another surface about 0.1); SSIM against the reference only 0.283 (max 0.288) so none is a copy; SSIM between tiles mean 0.343 (max 0.352, 28 pairs), mean colour difference between tiles 28 levels; seam ratio 0.86-1.18; bake 33-54 s. By eye same family (ruts with banks, ragged puddles, dark angular stones, crumbly ground) but flatter and sparser than the reference: ruts read as scratches rather than flowing bands. Contact sheet: variations/contact_sheet.png.",
+ "area_result": "One description for 2508 x 2508 dots (sample_description(201, tile=2508), 4x the content, wrapped at 2508), baked at 2508 in 228 s with 114,875 shapes: seam ratio across the wrap edges 0.876 (left/right) and 1.044 (top/bottom) (1.0 = invisible); strongest repeat in the picture's own correlation at 40+ dots 0.176 (ordinary correlation length, not a repeat); the four quarters differ from each other (pairwise SSIM 0.34-0.35). Quarter overall kind scores 0.29-0.31 are low only because a crop is not a wrapping tile (tiling group 0); their colour/height/normal groups match the 1254 tiles. Pictures: guide_pictures/area_2508_small.png and area_seam_closeup.png.",
+ "resolution_result": "Same description (seed 101) at 512 / 1254 / 2508 dots: bake 15.4 s / 33.3 s / 77.8 s (colour render 3.8 / 10.7 / 27.2 s, 28,757 shapes at every size; shared CPU, times vary ~30 per cent); content identical: SSIM to the 2508 bake shrunk to the same size 0.987 / 0.993 / 1.0. A bigger bake only gives finer anti-aliasing of the same shapes; no extra detail below the description's dot size. Half-tile seam test: sampled tile 0.757 mean levels difference (0.98 per cent of dots over 8 levels); M 0.652 (0.74 per cent); L final 0.793 (1.09 per cent); spread evenly, no seam line.",
+ "transfer_result": "(1) Snowy track, a surface nobody gave me: same generator and sampler, only a new 16-colour palette, naming which palette entries play band/groove/bank/wet/water, stone_scale 0.35, puddle_scale 0.7, clod_count 9000, zone_weight 0.85 and height stretch 60..245 (one small new sampler option, 'maps'); about ten minutes of work, description in 0.6 s, bake about 40 s; judged by eye only: reads as compacted snow with grey slush tracks, white banks, blue meltwater, dark rocks; weak: rut ends fade like claws, clods too small. (2) mud_golden re-fit (colour only) with the same analysis chain and generator, one number changed (non-earth threshold 3 instead of 7), about 6 minutes of computer time: S 7.1 KB SSIM 0.272 / kind 0.366; M 59.9 KB SSIM 0.312 / kind 0.425; L final 513.7 KB SSIM 0.604, delta E 6.84, edge skill 0.60, kind 0.503 (tier close on colour measures only). Pictures: guide_pictures/transfer_snow.png and transfer_golden.png.",
+ "what_each_layer_bought": [
+  "Flat ground (0.4 KB): SSIM 0.443, delta E 14.2, kind 0.11",
+  "+ 8 puddle outlines (3.2 KB) and + 40 big stones (7.1 KB): delta E 14.2 -> 11.0, edge skill 0 -> 0.03, SSIM unchanged (0.45)",
+  "+ 34 wheel ruts (11.2 KB): kind 0.16 -> 0.22, SSIM 0.447 -> 0.423",
+  "S class, ruts + 14,000 invented clods in 7.4 KB: looks like mud (kind 0.267) but SSIM 0.367 and normal 28 degrees (worse than flat 23.5): invented ground lowers dot-for-dot scores, raises the kind score",
+  "M class (63.9 KB, water tones + 590 stones with faces): delta E 9.75, edge skill 0.19, kind 0.362, SSIM 0.403",
+  "Traced ground 2000 patches (299.5 KB): SSIM 0.633, edge skill 0.564, normal 20.4; 5000 patches (453.4 KB): SSIM 0.688, edge 0.644, normal 18.6",
+  "Correction layer painted last (503 KB): SSIM 0.698, delta E 5.0, edge skill 0.685, height 17.6, kind 0.483: cheapest accuracy per byte (+0.03 SSIM for +50 KB vs +0.055 for +154 KB of ground patches)",
+  "Blur ladder: smooth ground tone fields buy delta E (8.3 -> 7.7) but no SSIM (0.49) until the 1-3 dot detail is right (0.80 unblurred); the normal angle lives in that same fine detail"
+ ],
+ "lessons_that_transfer": [
+  "Prove how the maps were made first (10 min): height and normal follow the colour, so the colour picture is the whole problem; then measure two ceilings (palette-snapped copy, and a blur ladder of the ground) to learn which layers can ever buy dot accuracy",
+  "Find the 'things' by a one-number colour axis test (Lab b below a threshold calibrated so about a third of the picture is 'not earth'), never by palette entries; then split by shape (size after opening, solidity, share of clearly blue dots) and watershed touching round things",
+  "Few big things first (8 puddles), many small things second (830 stones); follow line networks as ridges at the scale where they are valleys (3 dots fragments, 10 dots the rut paths)",
+  "Describe the rest as chance tables relative to the structure found (ground colour by distance to the nearest rut and side) plus size/shape/direction numbers; the sampler draws from them with a seed",
+  "Build the generator as a painter of flat shapes back to front photographed from above, with wrap copies for seamlessness; make height and normal from the finished colour; keep a numpy preview painter and compare it once with the real bake (0.75 levels)",
+  "Invented texture and traced patches must not be mixed in one tile: statistics for new tiles (kind score), tracing for this tile (pixel score); spend the last bytes on a correction layer traced only where the picture is still wrong",
+  "Calibrate sampler counts on cheap facts before baking (share non-earth 31%, share dark, density of fine edges) and look at the pictures: the kind tool cannot see clusters",
+  "Re-bake every row after a generator fix and compare only bakes from the same code; score a crop of a big picture by its parts, not the overall number; keep outputs in separate folders per surface",
+  "Transfer by changing numbers only (palette, which entries play which role, counts, analysis threshold, height stretch); mud to snow took ten minutes, mud to golden mud one threshold number"
+ ],
+ "known_gaps": [
+  "Tier 'close' not reached for the mud: normal angle 18.6 degrees against the 12 limit (best palette-snapped label map reaches 9.8 but cannot be described in 512 KB); best class is 'layout' at 503 KB",
+  "The L class is tracing the picture (about 61,000 traced corners + 830 stones, 163,631 numbers), not procedural description; invented ground and traced patches are never mixed",
+  "Stones are cut into pieces by the watershed (big stones look chopped, each piece with its own base colour); tan/orange stones are only traced",
+  "Sampled tiles are flatter and sparser than the reference: ruts read as scratches not flowing S-bands with lit crests; pebble-cluster rule is a guess not a fit; kind score 0.38 on average, fine-edge density (colour_gradient) still the weakest measure",
+  "Reference-fitted S and M rows use the first 14,000 clods; the sampler's later default (36,000 smaller clods) was not applied to them",
+  "Geometry Nodes stones did not match the painted look (stronger sun / sharper shapes / dark rim not tried); hybrid height from real geometry, Dynamic Paint/particles for ruts, EEVEE, compositor stylising and a 4x4 area were not tested",
+  "Roughness (0.97 - 0.55 x brightness), metallic (0) and AO maps have no reference and were not checked; water is not made glossy",
+  "Snow transfer judged by eye only (rut ends like claws, clods too small); golden L description is 513.7 KB (inside 512 KiB, over 512,000 bytes); golden has no height/normal reference so its tier uses colour measures only; kind score noise is +-0.03-0.05"
+ ],
+ "guide_files": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/04 Recipe - mud - how it is made.md",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/04 Lessons - mud - what carries over to other surfaces.md",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/mud/final_report.json"
+ ]
+}

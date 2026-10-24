@@ -1,0 +1,237 @@
+{
+ "what_this_is": "Repeat tests of the wood-from-maps recipe, round 2, written by tools/measure_repeats_round2.py (see the note at the top of that file). Seed 1, default settings.",
+ "shift_test": {
+  "control_plain_source_repeated_4x4_height_(exact_whole_dots)": {
+   "picture": "the uploaded height map repeated 4 x 4 (313 dots per tile, exact)",
+   "special_shifts_correlation": {
+    "one_tile_across": 1.0,
+    "one_tile_down": 1.0,
+    "one_tile_diagonal": 1.0,
+    "half_tile_across": 0.107
+   },
+   "background_random_shifts_highest": 0.079,
+   "background_random_shifts_mean": -0.001,
+   "background_sideways_only_highest": 0.201
+  },
+  "new_area_4x4_height": {
+   "picture": "new 4 x 4 area, height",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.066,
+    "one_tile_down": 0.017,
+    "one_tile_diagonal": 0.043,
+    "half_tile_across": 0.078
+   },
+   "background_random_shifts_highest": 0.047,
+   "background_random_shifts_mean": -0.001,
+   "background_sideways_only_highest": 0.117
+  },
+  "new_area_4x4_colour_brightness": {
+   "picture": "new 4 x 4 area, colour brightness",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.054,
+    "one_tile_down": 0.004,
+    "one_tile_diagonal": 0.034,
+    "half_tile_across": 0.069
+   },
+   "background_random_shifts_highest": 0.039,
+   "background_random_shifts_mean": -0.002,
+   "background_sideways_only_highest": 0.114
+  },
+  "new_area_2x2_height_(one_tile_is_626_dots)": {
+   "picture": "new 2 x 2 area, height",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.071,
+    "one_tile_down": -0.0,
+    "one_tile_diagonal": 0.01,
+    "half_tile_across": 0.077
+   },
+   "background_random_shifts_highest": 0.055,
+   "background_random_shifts_mean": -0.0,
+   "background_sideways_only_highest": 0.081
+  },
+  "default_tile_repeated_2x2_on_purpose_height_(must_be_1.0)": {
+   "picture": "the default tile repeated on purpose",
+   "special_shifts_correlation": {
+    "one_tile_across": 0.997,
+    "one_tile_down": 0.997,
+    "one_tile_diagonal": 0.997,
+    "half_tile_across": 0.062
+   },
+   "background_random_shifts_highest": 0.077,
+   "background_random_shifts_mean": -0.003,
+   "background_sideways_only_highest": 0.19
+  }
+ },
+ "source_reuse_and_neighbours_4x4": {
+  "source_dots_used_at_least_once": 0.521,
+  "times_a_used_source_dot_appears_mean_median_90th": [
+   30.7,
+   32.0,
+   48.0
+  ],
+  "boards_counted": 175,
+  "board_length_in_tiles_median_and_90th_percent": [
+   0.48,
+   0.75
+  ],
+  "touching_pairs": {
+   "all_touching_pairs": 467,
+   "side_by_side_pairs": 391,
+   "share_of_all_touching_pairs_with_the_same_source_row": 0.011,
+   "share_of_side_by_side_pairs_with_the_same_source_row": 0.01,
+   "touching_pairs_with_the_same_source_row_AND_half_or_more_of_the_same_source_stretch": 4,
+   "share_of_all_touching_pairs": 0.009
+  },
+  "share_of_boards_sharing_half_or_more_of_the_same_source_stretch_with_another_board_(says_little_by_itself)": 1.0
+ },
+ "landmarks_shown_in_the_4x4_area": {
+  "knot K2": {
+   "times_shown_in_16_tiles": 5,
+   "blobs_before_joining_parts": 5,
+   "pairs_closer_than_one_tile": 1
+  },
+  "knot K3": {
+   "times_shown_in_16_tiles": 2,
+   "blobs_before_joining_parts": 2,
+   "pairs_closer_than_one_tile": 0
+  },
+  "knot K4": {
+   "times_shown_in_16_tiles": 6,
+   "blobs_before_joining_parts": 6,
+   "pairs_closer_than_one_tile": 3
+  },
+  "zigzag crack R2": {
+   "times_shown_in_16_tiles": 7,
+   "blobs_before_joining_parts": 7,
+   "pairs_closer_than_one_tile": 0
+  },
+  "hook splinter R2": {
+   "times_shown_in_16_tiles": 8,
+   "blobs_before_joining_parts": 8,
+   "pairs_closer_than_one_tile": 7
+  },
+  "rust cloud R3": {
+   "times_shown_in_16_tiles": 10,
+   "blobs_before_joining_parts": 10,
+   "pairs_closer_than_one_tile": 6
+  },
+  "hole R3": {
+   "times_shown_in_16_tiles": 1,
+   "blobs_before_joining_parts": 1,
+   "pairs_closer_than_one_tile": 0
+  },
+  "notch R3": {
+   "times_shown_in_16_tiles": 2,
+   "blobs_before_joining_parts": 2,
+   "pairs_closer_than_one_tile": 0
+  },
+  "splinter R4": {
+   "times_shown_in_16_tiles": 5,
+   "blobs_before_joining_parts": 5,
+   "pairs_closer_than_one_tile": 2
+  },
+  "splinter R5": {
+   "times_shown_in_16_tiles": 5,
+   "blobs_before_joining_parts": 5,
+   "pairs_closer_than_one_tile": 1
+  },
+  "stain cluster R5": {
+   "times_shown_in_16_tiles": 7,
+   "blobs_before_joining_parts": 7,
+   "pairs_closer_than_one_tile": 1
+  },
+  "rubble R5": {
+   "times_shown_in_16_tiles": 6,
+   "blobs_before_joining_parts": 6,
+   "pairs_closer_than_one_tile": 2
+  },
+  "_total_shown_in_16_tiles": 64
+ },
+ "near_copies": {
+  "research_test_36x80_plain_source_repeated_height": {
+   "median_best_match": 1.0,
+   "share_with_a_near_copy_over_0.8": 1.0,
+   "templates": 40
+  },
+  "research_test_36x80_new_area_height": {
+   "median_best_match": 0.48,
+   "share_with_a_near_copy_over_0.8": 0.0,
+   "templates": 40
+  },
+  "research_test_36x80_new_area_colour_brightness": {
+   "median_best_match": 0.51,
+   "share_with_a_near_copy_over_0.8": 0.0,
+   "templates": 40
+  },
+  "research_test_24x40_new_area_height": {
+   "median_best_match": 0.65,
+   "share_with_a_near_copy_over_0.8": 0.15,
+   "templates": 40
+  },
+  "research_test_36x80_ROUND_1_area_height": {
+   "median_best_match": 0.68,
+   "share_with_a_near_copy_over_0.8": 0.2,
+   "templates": 40
+  },
+  "look_checker_test_200x380_dots_new_area_height_50_pieces": {
+   "pieces": 50,
+   "median": 0.403,
+   "share_over_0.6": 0.02,
+   "share_over_0.7": 0.02,
+   "share_over_0.8": 0.0
+  },
+  "look_checker_test_200x380_dots_new_area_height_other_draw": {
+   "pieces": 50,
+   "median": 0.451,
+   "share_over_0.6": 0.0,
+   "share_over_0.7": 0.0,
+   "share_over_0.8": 0.0
+  },
+  "look_checker_test_200x380_dots_new_area_colour_brightness": {
+   "pieces": 50,
+   "median": 0.392,
+   "share_over_0.6": 0.02,
+   "share_over_0.7": 0.0,
+   "share_over_0.8": 0.0
+  },
+  "look_checker_test_200x380_dots_ROUND_1_area_height": {
+   "pieces": 50,
+   "median": 0.501,
+   "share_over_0.6": 0.28,
+   "share_over_0.7": 0.14,
+   "share_over_0.8": 0.02
+  },
+  "look_checker_test_200x380_dots_ROUND_1_area_height_other_draw": {
+   "pieces": 50,
+   "median": 0.563,
+   "share_over_0.6": 0.36,
+   "share_over_0.7": 0.18,
+   "share_over_0.8": 0.08
+  },
+  "look_checker_test_200x380_dots_plain_source_repeated_height": {
+   "pieces": 30,
+   "median": 1.0,
+   "share_over_0.6": 1.0,
+   "share_over_0.7": 1.0,
+   "share_over_0.8": 1.0
+  }
+ },
+ "seam_test_default_tile_2x2": {
+  "colour": {
+   "jump_across_the_vertical_tile_line_over_a_typical_jump": 1.13,
+   "jump_across_the_horizontal_tile_line_over_a_typical_jump": 1.46,
+   "largest_ordinary_row_boundary_jump_over_a_typical_jump_(for_comparison)": 2.1,
+   "mean_difference_between_the_four_tiles_0_to_1": 0.0081
+  },
+  "height": {
+   "jump_across_the_vertical_tile_line_over_a_typical_jump": 1.13,
+   "jump_across_the_horizontal_tile_line_over_a_typical_jump": 1.38,
+   "largest_ordinary_row_boundary_jump_over_a_typical_jump_(for_comparison)": 2.4,
+   "mean_difference_between_the_four_tiles_0_to_1": 0.0138
+  }
+ },
+ "first_tile_of_the_area_versus_the_default_tile": {
+  "top_left_tile_of_the_area_versus_the_default_tile_of_the_same_seed_correlation": 0.049,
+  "other_tiles_of_the_area_versus_the_default_tile_correlation_highest": 0.053
+ }
+}

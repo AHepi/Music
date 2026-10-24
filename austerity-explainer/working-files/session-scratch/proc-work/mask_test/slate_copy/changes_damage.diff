@@ -1,0 +1,84 @@
+# (plain note) Two small files made by the mask test: these are the differences between the ORIGINAL slate layer and the copy in this folder (lines starting with + are added, - removed).
+--- recipes/slate_layers/layers/damage.py	2026-10-19 23:39:27.162989529 +0000
++++ mask_test/slate_copy/layers/damage.py	2026-10-20 13:29:23.908016702 +0000
+@@ -1,3 +1,8 @@
++# MASK TEST COPY (20 October 2026): this is a copy of the slate DAMAGE layer with one addition, a STAMP MODE for the flaked edges (FLAKES, kind 1 below).
++# Setting 'damage.mask_mode' chooses where flakes are: 'nodes' (the old node-made flakes, exactly the old picture), 'stamps' (chips cut from generated
++# pictures and sat on the lower edge and lower corners of each slate) or 'both' (node flakes times stamp chips). Pits, scratches, cracks, notches and
++# corner breaks stay node-made in every mode. Notes: ../../notes - generated mask stamps test.md and stamps.py.
++#
+ # What this file does (plain words)
+ # ------------------------------------------------------------------------------------------------------------------------------
+ # DAMAGE is where the slates are hurt. It paints (in this order, later ones on top):
+@@ -36,6 +41,7 @@
+     sys.path.insert(0, HERE)
+ import layer_interface as li  # noqa: E402
+ from layer_interface import Control  # noqa: E402
++import stamps  # noqa: E402
+ 
+ LAYER_KEY = 'damage'
+ GROUP_NAME = 'DAMAGE'
+@@ -53,6 +59,12 @@
+     Control('side_share', 'Side Share', 0.12, 0.0, 1.0, 'how far flakes reach in along the sides, as a share of the lower edge (the top edge gets less still)'),
+     Control('corner_gain', 'Corner Gain', 1.0, 0.0, 4.0, 'extra flaking at the two lower corners (1 = twice as deep right at the corner)'),
+     Control('slate_variation', 'Slate Variation', 0.6, 0.0, 1.0, 'how different the slates are from each other (0 = every slate equally damaged; 1 = some nearly clean, some badly hurt)'),
++    # ---- STAMP MODE (mask test): only used when the setting 'damage.mask_mode' is 'stamps' or 'both'; 'damage.stamp_atlas' = the atlas JSON file
++    Control('stamp_amount', 'Stamp Amount', 0.8, 0.0, 3.0, 'stamp mode: how likely each chip slot is used on a slate (multiplied by Chip Amount and by how damaged the slate is)'),
++    Control('stamp_width', 'Stamp Width', 0.045, 0.01, 0.2, 'stamp mode: width of an average chip, in tile units (0.045 = 56 dots); each chip is 0.7 to 1.5 times this'),
++    Control('stamp_turn', 'Stamp Turn', 8.0, 0.0, 90.0, 'stamp mode: the largest turn of a chip either way, in degrees (small: the teeth should keep pointing up)'),
++    Control('stamp_overhang', 'Stamp Overhang', 0.35, 0.0, 0.8, 'stamp mode: how much of a chip lies below the slate edge (cut off there), as a share of the chip height'),
++    Control('stamp_softness', 'Stamp Edge Softness', 0.12, 0.01, 0.5, 'stamp mode: softness of the chip edge (0.01 = hard)'),
+     # ---- notches and corner breaks
+     Control('notch_amount', 'Notch Amount', 0.30, 0.0, 1.0, 'how many small dark bites there are in the slate edges (0 = none)'),
+     Control('notch_depth', 'Notch Depth', 0.010, 0.0, 0.04, 'deepest bite into an edge, in tile units (0.010 = 13 dots)'),
+@@ -178,6 +190,50 @@
+     flake = hard(b.add(b.sub(flake_reach, edge_distance), breakup))
+ 
+     depth_ratio = b.div(edge_distance, b.mx(flake_reach, 1e-5))                                # 0 at the edge, 1 at the far tip of the flake
++
++    # ---- STAMP MODE (mask test). A build-time setting; 'nodes' builds exactly the old graph. The chips are stamps sat on the LOWER edge: four along the
++    # lower edge and one at each lower corner. A dot's height above the edge is its edge_distance (so the stamps follow the slate's real, chipped edge).
++    mask_mode = str(parameters.get('damage.mask_mode', 'nodes'))
++    if mask_mode in ('stamps', 'both'):
++        atlas = stamps.load_atlas(str(parameters['damage.stamp_atlas']))
++        turn_radians = b.mul(S('Stamp Turn'), 3.14159265 / 180.0)
++        stamp_masks = []
++        chip_height_scale = b.mul(S('Stamp Width'), atlas.aspect)
++        # Height above the lower edge: edge_distance follows the slate's real chipped, sloping edge, but it also measures the distance to a SIDE edge, and
++        # along a side edge that would smear the stamp up the side (first try: L-shaped chips). So edge_distance is used only where the side is not the
++        # nearest edge; near the sides the straight distance from the nominal lower edge is used instead.
++        bottom_is_nearest = b.lt(edge_distance, b.sub(side_near, 0.003))
++        height_above_edge = b.mixf(y_from_bottom, edge_distance, bottom_is_nearest)
++        y_in_stamp = b.sub(0.0, height_above_edge)                                       # up from the lower edge = minus 'down'
++        near_lower_edge = b.mul(b.gt(g['local_y'], 0.5), b.lt(y_from_bottom, 0.05))      # only the lower part of the slate: not along the sides or the top
++        for slot, kind in enumerate(['bottom', 'bottom', 'bottom', 'bottom', 'corner_left', 'corner_right']):
++            r = stamps.slot_randoms(b, g['piece_id'], seed, 300 + slot)
++            size = b.mul(S('Stamp Width'), b.math('MULTIPLY_ADD', r['size'], 0.8, 0.7))
++            if kind == 'bottom':
++                centre_x = b.mul(b.math('MULTIPLY_ADD', r['along'], 0.94, 0.03), width)
++                gain = 1.0
++            elif kind == 'corner_left':
++                centre_x = b.mul(b.math('MULTIPLY_ADD', r['along'], 0.04, 0.0), 1.0)
++                gain = b.math('MULTIPLY_ADD', S('Corner Gain'), 0.5, 0.5)
++            else:
++                centre_x = b.sub(width, b.mul(b.math('MULTIPLY_ADD', r['along'], 0.04, 0.0), 1.0))
++                gain = b.math('MULTIPLY_ADD', S('Corner Gain'), 0.5, 0.5)
++            centre_y = b.mul(b.sub(S('Stamp Overhang'), 0.5), b.mul(size, atlas.aspect))     # the chip sits on the lower edge, its lowest part below it
++            chance = b.mn(b.mul(b.mul(b.mul(S('Stamp Amount'), b.mul(S('Chip Amount'), amt)), damage_factor), gain), 1.0)
++            active = b.lt(r['chance'], chance)
++            turn = b.mul(b.sub(r['turn'], 0.5), b.mul(turn_radians, 2.0))
++            mirror = b.sub(1.0, b.mul(b.gt(r['mirror'], 0.5), 2.0))
++            mask, _depth_here = stamps.place(b, atlas, x_from_left, y_in_stamp, centre_x, centre_y, size, turn, mirror, r['pick'], active)
++            stamp_masks.append(mask)
++        union = stamp_masks[0]
++        for extra_mask in stamp_masks[1:]:
++            union = b.mx(union, extra_mask)
++        chip_mask = b.mul(stamps.harden(b, union, S('Stamp Edge Softness')), near_lower_edge)
++        if mask_mode == 'stamps':
++            flake = b.mul(chip_mask, piece_mask)
++            depth_ratio = b.div(height_above_edge, b.mul(chip_height_scale, 0.8))             # 0 at the edge, 1 about the top of a chip
++        else:
++            flake = b.mul(flake, chip_mask)
+     patch_noise = round_noise                                                                   # the same round noise also decides which tone a part of a flake gets
+     tone = b.math('MULTIPLY_ADD', b.sub(patch_noise, 0.5), 0.7, depth_ratio)
+     flake_colour = b.mix(b.mix(S('Break Colour Light'), S('Break Colour'), b.gt(tone, 0.28)), S('Break Colour Dark'), b.gt(tone, 0.70))

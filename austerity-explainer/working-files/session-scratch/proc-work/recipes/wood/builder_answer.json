@@ -1,0 +1,167 @@
+{
+ "surface": "wood",
+ "folder": "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood",
+ "classes": [
+  {
+   "class_name": "S0_layout_only",
+   "description_bytes": 5376,
+   "tier": "none",
+   "colour_ssim": 0.377,
+   "colour_mean_delta_e": 10.84,
+   "edge_skill": 0.007,
+   "height_mae_best_fit": 40.16,
+   "normal_mean_angle": 24.65,
+   "texture_compare_overall": 0.209
+  },
+  {
+   "class_name": "S1_layout_paint_grain",
+   "description_bytes": 6330,
+   "tier": "none",
+   "colour_ssim": 0.22,
+   "colour_mean_delta_e": 13.44,
+   "edge_skill": 0.014,
+   "height_mae_best_fit": 41.42,
+   "normal_mean_angle": 33.05,
+   "texture_compare_overall": 0.635
+  },
+  {
+   "class_name": "M1_trace_20k",
+   "description_bytes": 24345,
+   "tier": "none",
+   "colour_ssim": 0.423,
+   "colour_mean_delta_e": 9.56,
+   "edge_skill": 0.111,
+   "height_mae_best_fit": 34.2,
+   "normal_mean_angle": 23.7,
+   "texture_compare_overall": 0.201
+  },
+  {
+   "class_name": "M2_trace_40k",
+   "description_bytes": 38119,
+   "tier": "none",
+   "colour_ssim": 0.455,
+   "colour_mean_delta_e": 8.32,
+   "edge_skill": 0.158,
+   "height_mae_best_fit": 29.78,
+   "normal_mean_angle": 23.1,
+   "texture_compare_overall": 0.25
+  },
+  {
+   "class_name": "M3_trace_62k",
+   "description_bytes": 61526,
+   "tier": "none",
+   "colour_ssim": 0.488,
+   "colour_mean_delta_e": 7.48,
+   "edge_skill": 0.229,
+   "height_mae_best_fit": 27.04,
+   "normal_mean_angle": 22.41,
+   "texture_compare_overall": 0.326
+  },
+  {
+   "class_name": "L1_trace_150k",
+   "description_bytes": 154799,
+   "tier": "layout",
+   "colour_ssim": 0.591,
+   "colour_mean_delta_e": 6.06,
+   "edge_skill": 0.361,
+   "height_mae_best_fit": 21.16,
+   "normal_mean_angle": 19.38,
+   "texture_compare_overall": 0.426
+  },
+  {
+   "class_name": "L2_trace_300k",
+   "description_bytes": 308261,
+   "tier": "layout",
+   "colour_ssim": 0.674,
+   "colour_mean_delta_e": 5.21,
+   "edge_skill": 0.431,
+   "height_mae_best_fit": 17.59,
+   "normal_mean_angle": 16.84,
+   "texture_compare_overall": 0.459
+  },
+  {
+   "class_name": "L3_trace_480k",
+   "description_bytes": 473489,
+   "tier": "layout",
+   "colour_ssim": 0.725,
+   "colour_mean_delta_e": 4.61,
+   "edge_skill": 0.523,
+   "height_mae_best_fit": 15.2,
+   "normal_mean_angle": 15.46,
+   "texture_compare_overall": 0.506
+  }
+ ],
+ "variation_result": "8 new tiles from sampler.sample_description(seed 101..108), each a description of 4.1 to 4.6 KB, baked in one Blender run (248 s for all 8). Same-kind (texture_compare) score: mean 0.626, range 0.607 to 0.665 (the S1 description fitted to the reference scores 0.635). Dot for dot against the reference they are poor, as they must be: SSIM 0.197 to 0.205, edge skill 0 to 0.03, tier none. Between two new tiles: mean SSIM 0.214 and mean brightness difference 23.1 steps over all 28 pairs, so they are different pictures. Half-tile seamless test on a sampled tile: mean difference 0.74 steps, 0.00 % of dots over 40 (wrong-roll control 14.7 to 15.7 %). Two bugs found and fixed on the way: every tile shared the same fine-grain pattern (grain seed fixed; pair SSIM was 0.57), and the palette jitter tinted tiles pink. Honest limit: the tiles look like one family (similar tone, few dramatic long cracks, 'pixelated camouflage' paint), so variety is mostly in layout and detail.",
+ "area_result": "One sampled description with design tile 2508 (10 planks, about 4 times the knots, cracks, splatter and paint) baked at 2508 dots in 232.6 s: 4 tiles of new content. The four 1254-dot quarters are different pictures (pairwise SSIM 0.214 to 0.222, mean difference about 23 steps; a 2 x 2 repeat of one tile would give 1.0). Half-tile shift test: mean difference 0.745 steps, 0.00 % of dots over 40 (wrong roll 14.9 %). Jump across the middle lines over a normal one-dot jump (same direction): 1.06 vertical line, 0.91 horizontal line; across the wrap-around edges 0.84 and 0.89 (about 1 = no seam). Pictures: area/area_2508_preview.png and area_tiled_2x2_preview.png.",
+ "resolution_result": "Same description (seed 7, 14,278 shapes) at 512 / 1254 / 2508 dots: total bake 13.5 s / 32.6 s / 105.8 s (colour render 3.7 / 16.3 / 64.2 s; the shader grain is evaluated per dot so time grows with dots), PNG set 2.2 / 12.0 / 42.5 MB. Shapes and layout identical; at 512 the 1-3 dot strokes and hair lines blur away (mean gradient 3.2 against 5.9 at 1254; same-kind 0.38 against 0.60); 2508 is the same picture drawn with 4 times the dots (measured after shrinking to 1254 it is the same, gradient 5.7; looked at full size the edges are crisper). Traced classes bake in 14 to 28 s at 1254 (no grain).",
+ "transfer_result": "New surface: sun-bleached silver deck boards (6 equal boards, straight narrow gaps, butt joints, rows of nail heads, few straight cracks, no knots). Made by transfer/make_deck_boards.py (about 70 lines, about 10 minutes of work, one bake, first picture used as it came out) by changing ONLY the description: new 16-colour palette, board tone, paint-model colour spreads and strip aspect (x1.4), sampler options (6 planks, 0 knots, 8 % splatter, 35 % cracks, finer weaker grain), straight equal gap lines (4.2 dots), two short hand-written lists (6 butt joints as ribbons, 176 nail blobs), pebbles layer removed. No generator code changed. Description 6.1 KB; bake 50.3 s at 1254; half-tile seamless test 0.71 mean difference, 0.00 % over 40. No reference exists for deck boards, so it was judged by eye (it reads clearly as silver deck boards). What did not transfer by numbers alone: joints and nails had to be hand-written lists.",
+ "lessons_that_transfer": [
+  "First prove how the maps were made: fit brightness recipe + straight stretch (two cut-off numbers) + blur + normal strength from reference colour to reference height/normal (wood: 0.299R+0.587G+0.114B, (b-12)/116, blur 0.5, normal strength 8: height 4.15 steps, normal 4.3 degrees). Then height and normal come from the finished colour inside the generator and only the colour must be described.",
+  "Count the same-colour areas by size class before designing anything (wood: 92,000 areas, equal area share in every doubling class from 4 to 2000 dots). It tells you the traced description will be hundreds of KB and the fine detail can only be invented.",
+  "Trace by joining the two neighbouring patches that differ least (Ward clustering) and colouring each patch with its average colour: SSIM 0.76 against 0.53 at 600 KB for 'drop small areas'. Make outline looseness follow patch thickness, or 400 patches still cost 139 KB. Let patches join across the tile edge so a patch keeps one colour there.",
+  "One generator for every flat painted surface: every element becomes a flat coloured polygon, drawn back to front as one Blender mesh (each shape a hair above the last, camera above all), photographed from above with Cycles; polygons touching the tile edge are redrawn shifted +-1 tile; the fine structure comes from a shader node group (seamless stretched noise cut at two levels).",
+  "Invented paint must be colour-relative: cover the board with slowly varying zones (colour from three slow fields with fitted mean/spread), then strips whose colour = colour beneath + small fitted change. A plain colour probability table gives camouflage confetti.",
+  "What each layer buys: layout buys structure, invented paint plus grain buys the 'same kind' look (0.21 -> 0.63 for 6 KB) but costs dot-for-dot accuracy; tracing buys the match (SSIM 0.42 at 24 KB, 0.59 at 150 KB, 0.72 at 462 KB). Grain on top of tracing raises same-kind (0.46 -> 0.76) but lowers SSIM (0.67 -> 0.51).",
+  "Keep sampler seeds for EVERY random part (including grain noise seeds) or all tiles share fine detail; keep palette jitter to lightness/warmth shifts so tiles are not tinted.",
+  "Test seamlessness by baking the pattern shifted by half a tile (including any position-fixed shader grain) and comparing with the first picture rolled by half; compare a wrong roll as control; measure edge jumps in the same direction as the jump (along rows for vertical edges, down columns for horizontal edges).",
+  "Normal angle is the measure that costs most bytes for fine-grained surfaces (flat normal 24 degrees off; 300 KB trace 16.8; 470 KB trace 15.5; earlier 1.5 MB test 12.6): do not expect the 'close' tier at 512 KB and do not chase it with random grain.",
+  "Transfer by changing numbers and a few hand-written lists only; write down what changed. Waiting scripts must wait on a file or line count, never search for their own name (pkill/pgrep -f killed my own shell twice)."
+ ],
+ "known_gaps": [
+  "The dot-for-dot tier 'close' was NOT reached. Best class L3 (462 KB traced, 3,723 patches): tier layout, SSIM 0.725, Delta E 4.61, edge skill 0.523 (needs 0.55), height error 15.2 (needs under 20: ok), normal angle 15.5 degrees (needs under 12). The normal map is the blocker; a 1.5 MB trace reached 12.6. Tier exact is far away.",
+  "Invented paint (S1 and all sampled tiles) matches statistics (same-kind 0.61 to 0.67) but looks like pixelated camouflage next to the reference's soft big irregular patches with dry-brush fringes; strips are too rectangular. Long branching cracks with tan chip rims and sharp ringed knots are missing; sampled cracks are short dashed runs. Sampled tiles look like one family (limited variety in tone).",
+  "The requested file analysis/analysis_findings.md could not be written: the file-writing tool refused that file name in this session. All its content (derivation, palette and patch counts, layout, cracks, knots, splatter, pebbles, paint model, tracing results) is in section 4 of '04 Recipe - wood - how it is made.md', and the numbers are in analysis/*.json.",
+  "Traced M1-M3 classes are small but have tier none and low same-kind (0.20 to 0.33); the coarse classes inherit the reference's own mild edge mismatch (edge jump 2.4 to 4.3 times a normal jump; the reference itself is 1.7 to 2.5) although they pass the half-tile test (0.47 mean difference, 0.00 % over 40).",
+  "Traced polygons store each border twice; sharing borders (TopoJSON-style) would save about a third of the bytes (not done). The traced end is tracing, not procedural generation (stated plainly in the guide).",
+  "Not tested: height from real geometry (cracks as grooves, raised splinters); more than 8 sampler tiles; roughness is a guess from colour brightness (no reference roughness); the real-geometry route was tested only for cracks (Curve objects) and splatter (Geometry Nodes) on colour.",
+  "Tuning scores carry about +-0.03 noise; the two tuning rounds (analysis/tune_s1_results.json, tune_s1_round2_results.json) were measured partly on an earlier version of the strip shapes; the final S1 same-kind 0.635 was measured on the final code. Merge-order pickles were deleted to save disk (rebuilt in about 80 s)."
+ ],
+ "guide_files": [
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/04 Recipe - wood - how it is made.md",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/04 Lessons - wood - what carries over to other surfaces.md",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/final_report.json",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/guide_pictures",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/generator/wood_generator.py",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/generator/sampler.py",
+  "/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/wood/description/index.json"
+ ],
+ "derivation_ceiling": "Reference height = brightness (0.299R+0.587G+0.114B of the picture's own numbers), straight stretch (b-12)/116 cut at 0..1, blur 0.5 dots: mean error 4.15 steps of 255 (free 64-point tone curve 4.06), correlation 0.9946. Reference normal = slope of the 8-bit height (left/right dot difference /2) x strength 8: 0.34 degrees from the uploaded height; 4.3 degrees through the colour-derived height; a flat normal is 24.1 degrees off. So with a perfect colour the maps would be wrong by about 4 steps and 4 degrees.",
+ "geometry_route_verdict": "Tried: cracks as Blender Curve objects (poly curve, bevel, point radius = half width so the taper is automatic) and splatter blobs by Geometry Nodes (points with radius and colour -> Instance on Points with a circle -> Realize Instances -> Set Material), planks stay polygons. Same sampled description (seed 5, 200 cracks, 458 blobs) vs the numpy-polygon route: mean difference 0.134 brightness steps, 0.10 % of dots differ by more than 40 (nodes give perfect circles, polygons ragged ones); time 11.6 s against 15.3 s. Verdict: identical picture; taper is one setting and scatter is one node tree (real advantages), but one object per crack does not scale to thousands of traced patches and paint edges need extra noise nodes. For flat painted surfaces the polygon painter is simpler and as good; geometry would pay for real relief (grooves, raised splinters), which was not tested.",
+ "blender_tools_used": [
+  "Cycles renderer with an orthographic overhead camera (samples, Box/Gaussian pixel filter width, Standard vs Raw view transform, 16-bit PNG)",
+  "Mesh built from Python (from_pydata) with per-face attributes, one flat polygon per shape stacked a hair apart",
+  "Emission shader + Attribute node (every map shown as exact data)",
+  "Noise Texture 4D FBM read from a donut (seamless, stretched with different feature counts across/up) for dry-brush streaks and hair lines",
+  "Map Range with a near-zero window (hard cut = painted look), Math (Subtract, Absolute, Multiply) and Vector Math (Scale, Add) nodes combined in a node group built from Python ('Wood Grain Gain')",
+  "Node groups and node trees written from Python (NodeWriter)",
+  "Curve objects with bevel and per-point radius (tapering cracks)",
+  "Geometry Nodes (Mesh Circle, Instance on Points, Named Attribute, Realize Instances, Set Material) built from Python",
+  "numpy inside Blender for height-from-colour, normal-from-height, cavity AO"
+ ],
+ "what_each_layer_bought": [
+  "Layout only (S0, 5.4 KB: plank rows with wave-form gaps, 25 cracks, 4 knots, splatter clouds, pebbles): plank structure, but SSIM 0.377, same-kind 0.209, tier none.",
+  "+ invented paint (zones and strips) + dry-brush grain (S1, 6.3 KB): same-kind 0.209 -> 0.635 (grain alone on S0 0.303, paint without grain 0.425); dot-for-dot SSIM falls to 0.22 because invented paint is not where the real paint is.",
+  "Traced patches 24 KB (M1): SSIM 0.423, edge skill 0.111; 38 KB 0.455; 62 KB 0.488 / edge 0.229 (tier none).",
+  "Traced 150 KB (L1): tier layout, SSIM 0.591, edge 0.361, height error 21.2; 300 KB (L2): 0.674 / 0.431 / 17.6; 462 KB (L3): 0.725 / 0.523 / 15.2, Delta E 4.61, normal 15.5 degrees.",
+  "Grain on top of tracing: same-kind L2 0.459 -> 0.763 and M3 0.326 -> 0.644, but SSIM falls (L2 0.674 -> 0.509, normal 16.8 -> 23.8)."
+ ],
+ "dead_ends": [
+  "Tracing by 'keep same-colour areas bigger than N dots': SSIM 0.53 at 600 KB against 0.76 for joining least-different neighbours.",
+  "Hybrid of traced patches with layout layers (ribbon cracks, knots, splatter) on top: 320 KB SSIM 0.616 against 0.647 for plain tracing at 300 KB.",
+  "Few patches did not mean a small file (400 patches = 139 KB) until outline looseness followed patch thickness.",
+  "Random colour table for invented paint (camouflage, same-kind 0.39 to 0.45); fixed by zones + colour-beneath strips (0.51 to 0.63).",
+  "Voronoi 'distance to edge' hair lines on a stretched donut made diagonal criss-cross lines; contour lines of stretched noise work.",
+  "Merging patches across the tile edge made whole-width bounding boxes in the statistics (statistics now use a no-wrap merge); tracing without any wrap merge cut patches at the tile edge and left a colour seam in the coarse classes (edge jump 12 times normal) until a wrap-aware merge was used.",
+  "First half-tile test falsely showed 10 steps of difference because the shader grain did not slide with the shifted pattern; fixed by sliding the grain position.",
+  "pkill -f / pgrep -f with the script name killed my own shell and made a wait loop wait forever.",
+  "A written 'analysis_findings.md' was refused by the file tool; content folded into the recipe guide."
+ ],
+ "changes_wanted_in_lib": [
+  "pixel_compare.py: the 'close' tier needs a normal angle under 12 degrees, unreachable for fine-grained surfaces at 512 KB (flat normal 24 degrees; my 462 KB trace 15.5). Suggest expressing the normal limit as a share of the flat-normal error or reporting the tier without the normal measure too.",
+  "bake_harness.new_bake_scene: camera fixed at height 5 / clip end 100; generators with many stacked shapes must move it. Add a helper that puts the camera above the highest shape.",
+  "recipe_tools.tileable_noise_group: one feature count for both directions; add Scale U and Scale V inputs (contrib/builder.py already has the stretched version).",
+  "description_audit.py: also report the share of numbers that are traced corner steps so tracing is named in the report.",
+  "sweep_tools.py: only sweeps shader node groups; add a helper that bakes a DESCRIPTION with one setting changed (generator/sweeps_for_guide.py is a model).",
+  "texture_compare.py: score noise of +-0.03 between seeds; a built-in repeat over a few seeds would help tuning. Its seam number false-alarms on row layouts and inherits the reference's own mild seam."
+ ]
+}

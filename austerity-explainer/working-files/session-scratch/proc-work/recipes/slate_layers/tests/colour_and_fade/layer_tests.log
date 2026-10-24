@@ -1,0 +1,66 @@
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/tests/colour_and_fade/layer_tests.py:79: RuntimeWarning: Mean of empty slice
+  'changed in joints (% of joint dots)': round(float((delta[outside] > 2 / 255.0).mean() * 100), 4)}
+/usr/local/lib/python3.13/dist-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/proc-work/recipes/slate_layers/tests/colour_and_fade/layer_tests.py:83: RuntimeWarning: Mean of empty slice
+  'this layer seed 11 -> 12 (height, exact 16 bit): changed in joints (% of joint dots, > 0.0005)': round(float((np.abs(height_base - height_seed12)[outside] > 0.0005).mean() * 100), 4),
+{
+ "tiling, tiles_across 1": {
+  "colour: shifted vs rolled": {
+   "mean difference (of 255)": 1.461,
+   "share of dots over 40 (%)": 0.0198
+  },
+  "colour: WRONG roll (control)": {
+   "mean difference (of 255)": 19.433,
+   "share of dots over 40 (%)": 8.9851
+  },
+  "fade strength: shifted vs rolled": {
+   "mean difference (of 255)": 4.594,
+   "share of dots over 40 (%)": 1.7433
+  }
+ },
+ "tiling, tiles_across 2": {
+  "colour: shifted vs rolled": {
+   "mean difference (of 255)": 1.437,
+   "share of dots over 40 (%)": 0.0172
+  },
+  "colour: WRONG roll (control)": {
+   "mean difference (of 255)": 19.648,
+   "share of dots over 40 (%)": 9.1346
+  },
+  "fade strength: shifted vs rolled": {
+   "mean difference (of 255)": 4.643,
+   "share of dots over 40 (%)": 1.7372
+  }
+ },
+ "new content in the 2 x 2 area": {
+  "picture vs itself rolled by one base tile (a repeat would be near 0.9)": {
+   "mean difference (of 255)": 19.819,
+   "share of dots over 40 (%)": 9.4799
+  }
+ },
+ "independence": {
+  "this layer seed 11 -> 12 (colour)": {
+   "changed inside slates (% of slate dots)": 89.81,
+   "changed in joints (% of joint dots)": NaN
+  },
+  "this layer seed 11 -> 12 (height, exact 16 bit): changed in joints (% of joint dots, > 0.0005)": NaN,
+  "layout seed 1 -> 2 (the slates move): colour changed in joints (% of the old joint dots)": NaN,
+  "the layer's own tone relief inside slates (height): lowest / highest / spread": [
+   -0.415,
+   0.466,
+   0.141
+  ],
+  "amount 0: height minus layout height, largest absolute value (must be 0)": 0.0,
+  "amount 0: roughness, lowest / highest (must both be the base 0.8)": [
+   0.7961,
+   0.8039
+  ],
+  "amount 1: roughness inside slates, lowest / highest": [
+   0.631,
+   0.988
+  ],
+  "amount 0: fade strength picture, largest value (must be 0)": 0.0039,
+  "amount 0 (colour): % of slate dots that are not the single flat middle tone": 9.33
+ }
+}

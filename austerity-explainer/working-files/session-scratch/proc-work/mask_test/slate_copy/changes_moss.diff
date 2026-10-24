@@ -1,0 +1,101 @@
+# (plain note) Two small files made by the mask test: these are the differences between the ORIGINAL slate layer and the copy in this folder (lines starting with + are added, - removed).
+--- recipes/slate_layers/layers/moss.py	2026-10-20 11:00:31.406133465 +0000
++++ mask_test/slate_copy/layers/moss.py	2026-10-20 13:21:59.689919309 +0000
+@@ -1,3 +1,8 @@
++# MASK TEST COPY (20 October 2026): this is a copy of the slate MOSS layer with one addition, a STAMP MODE (see the block of notes just below).
++# Everything else is the unchanged layer. Setting 'moss.mask_mode' chooses where moss is: 'nodes' (the old node-made mask, exactly the old
++# picture), 'stamps' (separate moss clumps cut from generated pictures, placed per slate) or 'both' (node mask times stamp mask).
++# Stamp mode notes: ../../notes - generated mask stamps test.md and stamps.py.
++#
+ # What this file does (plain words)
+ # ------------------------------------------------------------------------------------------------------------------------------
+ # MOSS is the living growth on the slates: moss and lichen. It decides WHERE growth gathers, paints it as flat clumps with hard,
+@@ -58,6 +63,7 @@
+     sys.path.insert(0, HERE)
+ import layer_interface as li  # noqa: E402
+ from layer_interface import Control  # noqa: E402
++import stamps  # noqa: E402
+ 
+ LAYER_KEY = 'moss'
+ GROUP_NAME = 'MOSS'
+@@ -93,6 +99,12 @@
+     Control('core_opacity', 'Core Opacity', 1.0, 0.0, 1.0, 'how solid the paint is deep inside a clump: 1 = solid; lower = the slate paint and its streaks show through the moss (a tinted wash instead of an opaque stain). The opacity runs from Rim Opacity at the rim to Core Opacity once the dot is about 0.45 growth-strength units inside the clump'),
+     Control('side_clearance', 'Side Clearance', 0.0, 0.0, 0.05, 'moss growth fades out over this distance from the side joints of a slate, in tile units (0.012 = 15 dots; 0 = off, as before). Without it a clump that reaches a side joint is cut off in a straight line along the joint'),
+     Control('fleck_amount', 'Fleck Amount', 1.0, 0.0, 1.5, 'how strong the small light and dark flecks inside the moss are (1 = as before, 0 = none: a calmer moss)'),
++    # ---- STAMP MODE (mask test): only used when the setting 'moss.mask_mode' is 'stamps' or 'both'; 'moss.stamp_atlas' = the atlas JSON file
++    Control('stamp_amount', 'Stamp Amount', 0.35, 0.0, 3.0, 'stamp mode: how likely each stamp slot is used on a slate (1 = as likely as the slate rules allow; the chance is also multiplied by the big mossy areas, the slate\'s own mossiness and the slot\'s preference)'),
++    Control('stamp_width', 'Stamp Width', 0.09, 0.02, 0.3, 'stamp mode: width of an average moss clump, in tile units (0.09 = 113 dots); each clump is 0.7 to 1.5 times this'),
++    Control('stamp_turn', 'Stamp Turn', 25.0, 0.0, 180.0, 'stamp mode: the largest turn of a clump either way, in degrees'),
++    Control('stamp_overhang', 'Stamp Overhang', 0.12, 0.0, 0.5, 'stamp mode: how much of an upper-edge clump lies above the slate edge (it is cut off there), as a share of the clump height'),
++    Control('stamp_softness', 'Stamp Edge Softness', 0.25, 0.01, 0.5, 'stamp mode: softness of the clump edge (0.01 = hard, 0.5 = very soft, see-through rim)'),
+     # ---- the olive colours (darkest to lightest) and how they are used
+     Control('tone_1', 'Moss Tone 1 (darkest)', '#2b2c23', kind='colour', text='the darkest olive: deep shadow under the upper edge and the heart of thick moss'),
+     Control('tone_2', 'Moss Tone 2', '#35372a', kind='colour', text='dark olive'),
+@@ -228,7 +240,55 @@
+     excess = b.sub(strength, threshold)
+     moss_raw = hard(excess)
+     keep = b.sub(1.0, b.mul(damage_here, S('Damage Avoid')))
+-    moss = b.mul(b.mul(b.mul(moss_raw, keep), piece_mask), b.gt(coverage, 0.0))
++    # ---- STAMP MODE (mask test). The mask mode is a build-time setting: 'nodes' builds exactly the old graph, nothing of the stamps is added.
++    mask_mode = str(parameters.get('moss.mask_mode', 'nodes'))
++    stamp_depth = None
++    if mask_mode in ('stamps', 'both'):
++        atlas = stamps.load_atlas(str(parameters['moss.stamp_atlas']))
++        turn_radians = b.mul(S('Stamp Turn'), 3.14159265 / 180.0)
++        # each slot kind follows one of the layer's own rules and its own preference: drips (upper edge), joints (side), lower part
++        stamp_masks, stamp_depths = [], []
++
++        def moss_slot(slot, kind):
++            r = stamps.slot_randoms(b, g['piece_id'], seed, 200 + slot)
++            if kind == 'top':                       # hangs from the slate's own upper edge, anywhere along it
++                centre_x = b.mul(b.math('MULTIPLY_ADD', r['along'], 0.9, 0.05), width)
++                size = b.mul(S('Stamp Width'), b.math('MULTIPLY_ADD', r['size'], 0.8, 0.7))
++                centre_y = b.mul(b.sub(0.5, b.mul(S('Stamp Overhang'), b.math('MULTIPLY_ADD', r['extra'], 1.0, 0.5))), b.mul(size, atlas.aspect))
++                preference = S('Drip Preference')
++            elif kind == 'side':                    # along a side joint: centre on the joint (cut by the slate edge), somewhere in the upper two thirds
++                on_left = b.lt(r['extra'], 0.5)
++                centre_x = b.mul(b.mixf(width, 0.0, on_left), 1.0)
++                size = b.mul(b.mul(S('Stamp Width'), 0.8), b.math('MULTIPLY_ADD', r['size'], 0.8, 0.7))
++                centre_y = b.mul(b.math('MULTIPLY_ADD', r['extra2'], 0.6, 0.1), height)
++                preference = S('Joint Preference')
++            else:                                   # in the lower part of the slate
++                centre_x = b.mul(b.math('MULTIPLY_ADD', r['along'], 0.8, 0.1), width)
++                size = b.mul(b.mul(S('Stamp Width'), 0.8), b.math('MULTIPLY_ADD', r['size'], 0.8, 0.7))
++                centre_y = b.mul(b.math('MULTIPLY_ADD', r['extra2'], 0.3, 0.6), height)
++                preference = S('Lower Part Preference')
++            chance = b.mn(b.mul(b.mul(S('Stamp Amount'), gate), preference), 1.0)
++            active = b.lt(r['chance'], chance)
++            turn = b.mul(b.sub(r['turn'], 0.5), b.mul(turn_radians, 2.0))
++            mirror = b.sub(1.0, b.mul(b.gt(r['mirror'], 0.5), 2.0))
++            mask, depth_here = stamps.place(b, atlas, x_across, y_down, centre_x, centre_y, size, turn, mirror, r['pick'], active)
++            stamp_masks.append(mask)
++            stamp_depths.append(depth_here)
++
++        for slot, kind in enumerate(['top', 'top', 'side', 'lower']):
++            moss_slot(slot, kind)
++        union = stamp_masks[0]
++        union_depth = stamp_depths[0]
++        for extra_mask, extra_depth in zip(stamp_masks[1:], stamp_depths[1:]):
++            union, union_depth = b.mx(union, extra_mask), b.mx(union_depth, extra_depth)
++        stamp_mask = stamps.harden(b, union, S('Stamp Edge Softness'))
++        stamp_depth = union_depth
++        where = stamp_mask if mask_mode == 'stamps' else b.mul(moss_raw, stamp_mask)
++        moss = b.mul(b.mul(where, keep), piece_mask)
++        if mask_mode == 'both':
++            moss = b.mul(moss, b.gt(coverage, 0.0))
++    else:
++        moss = b.mul(b.mul(b.mul(moss_raw, keep), piece_mask), b.gt(coverage, 0.0))
+ 
+     # ------------------------------------------------------------------------------------------------ the colour: five flat olive tones
+     # The tone of a dot comes from three flat things added together: (1) tall patches (stretched cells, one random tone each), (2) vertical brush stripes (a noise
+@@ -248,6 +308,10 @@
+     fleck_random = cell_random(0.007, 1.3, 0.8, 0.8, 9.0)
+     stripes = slate_noise(x_flow, None, b.div(1.0, b.mul(S('Tone Patch Size'), 0.5)), 0.0, 1.0, 0.5, 83.0)
+     depth = b.maprange(excess, 0.0, 0.45, 0.0, 1.0, True)                                              # 0 at the rim of a clump, 1 deep inside
++    if mask_mode == 'stamps':
++        depth = stamp_depth                                                                           # stamp mode: depth comes from the stamp picture (green)
++    elif mask_mode == 'both':
++        depth = b.mn(depth, stamp_depth)
+     shade_zone = b.sub(1.0, b.smoothstep(y_down, 0.0, 0.05))                                           # 1 right under the upper edge
+     tone = b.math('MULTIPLY_ADD', b.sub(b.add(b.mul(patch_random, 0.6), b.mul(stripes, 0.4)), 0.5), S('Moss Tone Spread'), S('Moss Tone Centre'))
+     tone = b.add(tone, b.mul(b.sub(1.0, depth), b.mul(S('Rim Lightening'), 0.30)))
