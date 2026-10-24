@@ -89,9 +89,18 @@ for scene_object in bpy.data.objects:
 depsgraph = bpy.context.evaluated_depsgraph_get()
 triangle_total = 0
 instance_total = 0
+triangles_per_mesh = {}
+triangles_with_instances = 0
 for object_instance in depsgraph.object_instances:
     if object_instance.is_instance:
         instance_total += 1
+    instanced_object = object_instance.object
+    if instanced_object.type != "MESH" or instanced_object.data is None:
+        continue
+    mesh_key = instanced_object.data.name_full + "|" + instanced_object.name_full
+    if mesh_key not in triangles_per_mesh:
+        triangles_per_mesh[mesh_key] = sum(len(polygon.vertices) - 2 for polygon in instanced_object.data.polygons)
+    triangles_with_instances += triangles_per_mesh[mesh_key]
 for evaluated_object in [scene_object.evaluated_get(depsgraph) for scene_object in bpy.data.objects if scene_object.type == "MESH"]:
     mesh = evaluated_object.data
     if mesh is not None:
@@ -123,6 +132,8 @@ summary = {
     "particle_systems": sum(len(o.particle_systems) for o in bpy.data.objects if hasattr(o, "particle_systems")),
     "instances_after_scatter": instance_total,
     "triangles_before_instances": triangle_total,
+    "triangles_including_every_copy": triangles_with_instances,
+    "geometry_node_groups": sum(1 for group in bpy.data.node_groups if group.bl_idname == "GeometryNodeTree"),
     "names_matching_treatments": word_group_hits,
     "materials": material_rows,
 }
