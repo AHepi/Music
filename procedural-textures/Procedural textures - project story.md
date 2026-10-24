@@ -75,7 +75,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Second control test, Opus on its own (log 34):** Opus at maximum effort, same setup, 3 h 20 min. Three blind judges scored the three villages
   out of 10: plugin village 2.7, Sonnet alone 6.3, Opus alone 6.4. Opus looks more like a photograph; Sonnet fits your request a little better;
   they are level overall. The plugin's own building blocks (its trees, painted hill band, coarse ground and flat light) are what pull its village down.
-- **Nothing running** (checked 24 October about 03:45): no rented machines; RunPod balance US$11.00; the local Blender connection was stopped.
+- **Everything saved to GitHub (log 35):** about 17,400 working files (8.7 GB) and 200 constructed scene files, including the store-only scenes,
+  your textures and the Astra add-on, as you chose. Out: videos, audio, other people's work and 27 files with login keys. Map:
+  `austerity-explainer/working-files/35 Working files, second save - what is here.md`.
+- **Running:** Opus's second pass on its village (drawing its last final pictures). No rented machines are working; a few cents of worker time
+  were used to fetch the store's scenes.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
 
@@ -128,6 +132,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Control test:** the same job done without the thing being tested (here, without the plugin), to see what difference it really makes. **Blender MCP connection:** a link that lets a helper drive a running Blender directly, one command at a time. **Triangle:** the smallest flat piece a 3D shape is made of; more triangles means finer real shape.
 - **Blind judging:** judges score pictures shown under shuffled letters, so they cannot favour a maker they know. **Copies (instances):** one
   model shown in many places without storing it again; how Opus filled its meadow with 368,000 grass clumps.
+- **Partial copy (of the repository):** a copy that holds the list of files but downloads a file's contents only when it is needed; used here so
+  the 8.7 GB save never had to sit on this computer's small disk. **Split file:** a scene over GitHub's 100 MB limit saved as numbered parts that
+  join back into one file.
 
 ## Log (added to, never rewritten)
 
@@ -555,9 +562,24 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     forbade opening other files. Pictures: `34 Village by Opus without the plugin - pictures/` (start with the three-way sheet); counts, report,
     scripts and the judging in `village-without-plugin-opus/`.
 
+35. **Everything to GitHub (24 October).** You said: "Push everything to repo. Including all the images", then "And sets already constructed".
+    I listed every file made in these sessions that was not yet saved (the working folder, chapter 2's and the film kit's folders, the helpers'
+    instructions), left out videos, audio and other people's work, checked text files for keys, and pushed in batches of about 300 MB through a
+    partial copy of the repository, because the disk had about 1 GB free. The scenes that were only on the rented machines' store (the plugin
+    village's parts and rounds, the garden fixes, street and door tests, plugin test scenes) were fetched, checked against the store's own checksums
+    and pushed; four scenes over GitHub's 100 MB limit went up as numbered parts. **My mistakes:** my first checks were too loose, so batch 2 put
+    up 15 of your files that your earlier rules kept off GitHub (your mine pictures, crops of the mine reference screenshot, four maps made from
+    your textures, your texture pack's read-me); I took them out of the current version and asked whether to rewrite history; you said "No, leave
+    history". My first scene check also read only the first compressed piece of each scene file; the full check then found your Astra add-on's
+    material setups inside 20 garden scenes, which I held back. A command of mine started downloading the whole save back onto this computer; I
+    stopped it and deleted the unfinished download (nothing changed on GitHub). The computer restarted once; Opus's second pass was picked up from
+    its saved scene. **Then you said:** "Oh no the audit isn't necessary. There's nothing I want to keep secret." I stopped the three checkers and
+    asked about the held-back things; you chose "Push them all", so your textures, the pictures made from them, your mine pictures, the Astra
+    add-on, its 20 garden scenes and the plugin village's final scene with your mud inside went up too (decision 49). Still out: videos, audio,
+    other people's work, and 27 files with login keys. **Cost:** a few cents of rented-machine time to read and fetch the store's scenes. Map of
+    what is where and how to join split scenes: `austerity-explainer/working-files/35 Working files, second save - what is here.md`.
+
 ## Next step
 
-Your rule says a set that used different tools updates the plugin. The one next step: your three runs (Opus updates the plugin, Sonnet
-rebuilds the village with it, Opus checks), this time replacing the plugin's own trees, backdrop, ground and light with what both controls did
-better: a 2.5-3 cm road mesh with modelled ruts, hoof prints and puddle hollows; grown or modelled trees and meadow grass as copies; sun, haze and
-clouds; and the judges' list (dirtier surfaces, random scatter, mud and dung where hooves go). Waiting for your go-ahead.
+Waiting for Opus's second pass on its village to finish; then the same three blind judges score its first and second passes beside the
+Sonnet and plugin villages, and its scenes go to GitHub (the first-pass scene split into parts).

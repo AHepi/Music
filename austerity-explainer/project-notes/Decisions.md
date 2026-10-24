@@ -708,6 +708,25 @@ overturn any of them in one line. Changes to the project must follow this file.
   technique, material source or lesson the plugin does not carry, adding it to the plugin is part of that set's job, done before the set is called
   finished, and checked like the rest of the plugin. The repository's CLAUDE.md says this so every future session sees it.
 
+49. **Push everything to the repository, including every picture and every constructed set; nothing is secret** (your words, 24 October 2026):
+    "Push everything to repo. Including all the images", then "And sets already constructed", and later "Oh no the audit isn't necessary. There's
+    nothing I want to keep secret." Asked whether the things held back under the earlier rules (your uploaded textures and pictures made from them,
+    your mine pictures, the Astra add-on and the garden scenes holding it) should go up too, you chose "Push them all". Asked whether to rewrite
+    history to take out 15 files that went up by mistake, you chose "No, leave history". This overrides the earlier rules that your uploaded
+    textures and the Astra add-on are never committed.
+
+### Claude's calls for item 49
+
+- Login keys, tokens and the rented machines' ids still stay out of the repository (27 files held back for that; four of the flagged files turned
+  out to be maths in Blender code, not addresses, and went up).
+- Other people's work still stays out (item 30's call): downloaded models and scans, fetched web pages and papers, copied software and skills.
+  Free Poly Haven scans packed inside our own scenes went up, because their licence allows sharing.
+- Videos and audio stay out (item 30).
+- Files over GitHub's 100 MB limit go up split into numbered parts, with a note on how to join them.
+- This computer's copy of the repository leaves the saved working files out of its checkout (they are on GitHub), because the disk is small.
+- The plugin itself still tells any model not to copy a person's own textures into a repository: the plugin is written for anyone, and this choice
+  is yours for this repository only.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
