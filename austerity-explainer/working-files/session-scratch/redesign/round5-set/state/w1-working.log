@@ -1,0 +1,17 @@
+make_state_picture: 1536 x 2730; threshold 6 levels, faint 3 levels (smooth changes); noise between the plates (their fine grain, far from the change) 0.5 levels (99th percentile)
+  the mask at other settings (share of the frame, after widening):
+    threshold   4, faint none:  67.8%
+    threshold   6, faint none:  66.1%
+    threshold   8, faint none:  64.3%
+    threshold  10, faint none:  62.7%
+    threshold  14, faint none:  60.6%
+    threshold   6, faint    2:  71.2%
+    threshold   6, faint    3:  70.3%   <- used
+    threshold   6, faint    4:  69.6%
+    threshold   6, faint    5:  68.8%
+  used: plates differ over 66.7% of the frame; outlines 5.3%; second painting fully over 67.2%, partly over 6.5%
+  left with the main painting although the plates differ by more than 2 levels: 0.3% of the frame, by 3.4 levels on average, 10.5 at most
+  the two paintings across the soft join differ by 0.6 levels on average (a large number here shows as a seam)
+  largest difference from the main painting where the mask is zero (26.3% of the frame), read back from the written picture: 0 levels (must be 0)
+  wrote /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/works-w1-working-state.png (lossless) and /home/user/Music/austerity-explainer/film-kit/assets/models/inflation-chapter-2-newcomers/works/works-w1-working-mask.png
+  wrote /tmp/claude-0/-home-user-Music/02fc5154-76f5-5aac-a505-860164e7e921/scratchpad/redesign/round5-set/state/w1-working-look.jpg

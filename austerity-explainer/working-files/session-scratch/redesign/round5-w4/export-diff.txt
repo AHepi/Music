@@ -1,0 +1,68 @@
+== object and material names in the .glb files
+far-town.glb nodes: 110 -> 110; gone none; added none
+far-town.glb materials: 10 -> 10; gone none; added none
+no-1-quiet-factory.glb nodes: 99 -> 99; gone none; added none
+no-1-quiet-factory.glb materials: 22 -> 22; gone none; added none
+no-2-flat-out-factory.glb nodes: 115 -> 115; gone none; added none
+no-2-flat-out-factory.glb materials: 28 -> 28; gone none; added none
+works-doorway-workers.glb nodes: 16 -> 16; gone none; added none
+works-doorway-workers.glb materials: 2 -> 2; gone none; added none
+works-gates.glb nodes: 14 -> 14; gone none; added none
+works-gates.glb materials: 5 -> 5; gone none; added none
+works-no-2-men.glb nodes: 32 -> 32; gone none; added none
+works-no-2-men.glb materials: 12 -> 12; gone none; added none
+works-pop-up.glb nodes: 15 -> 15; gone none; added none
+works-pop-up.glb materials: 4 -> 4; gone none; added none
+works-set-factories.glb nodes: 214 -> 214; gone none; added none
+works-set-factories.glb materials: 50 -> 50; gone none; added none
+works-set-lane.glb nodes: 183 -> 183; gone none; added none
+works-set-lane.glb materials: 50 -> 50; gone none; added none
+works-set-props.glb nodes: 119 -> 123; gone ['cap', 'cap-nail', 'jacket', 'jacket-and-cap', 'jacket-and-cap-on-nail', 'jacket-nail', 'tin-mug-and-wages', 'tin-mug-and-wages-envelope', 'tin-mug-and-wages-envelope-mug', 'wages-envelope-paper-standing']; added ['crate-this-way-up.010', 'crate.010', 'tin-mug', 'tin-mug-body', 'w4-cap', 'w4-cap-cloth', 'w4-crate-table', 'w4-jacket', 'w4-jacket-on-peg', 'w4-mug', 'w4-peg', 'w4-wages', 'wages-envelope', 'wages-envelope-paper']
+works-set-props.glb materials: 43 -> 44; gone ['button-horn', 'cap-tweed', 'jacket-lining', 'jacket-wool']; added ['w4-button-horn', 'w4-cap-tweed', 'w4-jacket-lining', 'w4-jacket-wool', 'w4-peg-wood']
+works-set-town.glb nodes: 110 -> 110; gone none; added none
+works-set-town.glb materials: 10 -> 10; gone none; added none
+works-signs.glb nodes: 29 -> 32; gone none; added ['gate-board-no-2-back', 'gate-board-no-2-body.001', 'gate-board-no-2.002']
+works-signs.glb materials: 11 -> 11; gone none; added none
+== works-shot.json
+  changed decisions.round_5: "W1 and W2 stand 3 m nearer the gates (plate spot 10.0 m and composed spot 8.8 m from the works wall, the slide still 1.2 m). The waiting men stand gathered in front of each shut gate, a loose crowd two deep, backs to the lane, with a thin rim of light from the yard and the gate lamp; at No. 1 the b ...
+  changed decisions.w4_camera: "in line with No. 2's inner hinge post: from the outer one the eight men stood one behind another and read as one" -> "round 5: 0.2 m beside No. 2's inner hinge post's line, toward the gateway's middle (in line with the post, the back of the No. 2 board's \"No.\" was cut by the frame's edge), slidin ...
+  changed files.works-set-props.glb.megabytes: 38.9 -> 39.3
+  changed files.works-set-props.glb.objects: 119 -> 123
+  changed files.works-signs.glb.holds: "own surfaces: the lettered things (gate boards, drums, the bank's sign and plate)" -> "own surfaces: the lettered things (gate boards, No. 2's with its lettered back for W4, drums, the bank's sign and plate)"
+  changed files.works-signs.glb.megabytes: 7.2 -> 7.3
+  changed files.works-signs.glb.objects: 29 -> 32
+  changed letter_pixels.about: "letter heights on the film's 1080 x 1920 frame at each view's composed spot (letters: gate boards 0.266 and 0.25 m, the bank's sign 0.305 m, PETROL 0.097 m, DIESEL 0.106 m)" -> "letter heights on the film's 1080 x 1920 frame at each view's composed spot (letters: gate boards 0.266 and 0.25 m, the b ...
+  added letter_pixels.w4 No. 2 board back
+  added letter_pixels.w4 WAGES
+  added lights.w4-corner-lamp
+  changed men_seen.w4 composed (silhouettes): [{"name": "no-2-man-2", "distance_metres": 6.77, "film_frame_box": [0.146, 0.475, 0.334, 0.715]}, {"name": "no-2-man-1", "distance_metres": 6.81, "film_frame_box": [0.34, 0.492, 0.51, 0.725]}, {"name": "no-2-man-3", "distance_metres": 7.09, "film_frame_box": [-0.034, 0.483, 0.165, 0.709]}, {"name":  ...
+  changed plates.works-w4-plate.what: "W4: inside No. 2's yard, no men (they are own-surface silhouettes), no gate leaves" -> "W4: inside No. 2's yard, no men (they are own-surface silhouettes), no gate leaves, no gateway crates; one warm pool of lamplight on the jacket's corner, the rest in the dusk"
+  added state_pictures.works-w2-slowed-windows-state.png
+  changed states.w4.about: "page 14: No. 2 slowed seen from inside its yard, the 8 men outside its half-shut gate" -> "page 14: No. 2 slowed seen from inside its yard, the 8 men outside its half-shut gate; one warm pool of lamplight on the jacket's corner, the rest of the yard in the dusk, the gateway crates taken in"
+  added states.w4.board_back
+  added states.w4.corner_lamp
+  added states.w4.left_out
+  added states.w4.spill_shares
+  changed views.w4.about: "No. 2's gate from inside its yard, looking out down the lane" -> "No. 2's gate from inside its yard, looking out down the lane: the jacket, cap, mug and WAGES of someone with a job, and the men waiting outside the half-shut gate"
+  changed views.w4.composed: [2.03, 28.3, 1.72] -> [2.2, 27.8, 1.72]
+  changed views.w4.plate: [2.03, 29.5, 1.72] -> [2.2, 29.0, 1.72]
+  changed views.w4.subject: [2.0, 22.3, 1.5] -> [1.375, 22.970000000000002, 1.1]
+  added w4.about
+  added w4.board_back
+  added w4.cap
+  added w4.crate_table
+  gone w4.jacket_and_cap
+  added w4.jacket_box
+  added w4.jacket_on_peg
+  added w4.lamp
+  added w4.left_out
+  added w4.mug
+  gone w4.mug_and_wages
+  added w4.table_top
+  added w4.wages
+  added w4.wages_box
+== camera files
+works-camera-w1.json: the same, byte for byte
+works-camera-w2.json: the same, byte for byte
+works-camera-w3.json: the same, byte for byte
+works-camera-w4.json: changed

@@ -1,0 +1,77 @@
+# No. 1's gate furniture and its waiting men (x, y in metres; turn in degrees, 0 = back to a camera looking up the lane)
+_N1 = -GATE_CENTRE_X                     # No. 1's gateway middle
+_N1_OUTER = _N1 - GATE_WIDTH / 2         # its outer pier's inner face
+# Round 5 (round 4's check: the men in single file down the kerb were seen end-on from W1 and W3 and read as one dark
+# column; the drums stood among them). The waiting men now stand GATHERED IN FRONT OF THE SHUT GATE, a loose crowd two
+# deep across the gateway, backs to the lane, 0.3 to 0.5 m between shoulders, heads at different heights. The brazier
+# stands against the gate's right leaf with the stooped man warming his hands at it from its front-left, so its fire
+# warms the gate's lower bars and edges the men's right sides. The PETROL and DIESEL drums stand IN FRONT of the crowd's
+# left end, on the pavement, the lantern on DIESEL's lid and the lunch tin on PETROL's: nobody stands between them and
+# W1 or W3, they are the nearest story things in W1 (the bottom of DIESEL about 0.71 down), and the men stand behind
+# them. (Round 4's check asked for the drums against the dividing wall right of No. 1's right pier: from W1's new
+# composed spot, 3 m nearer, everything right of the right pier lies past 0.93 across, out of the frame or past the
+# phone buttons, so they stand here instead, where the same aim, no man in front of them from W1 or W3, holds.) No. 2's
+# side is the mirror: its drums in front of the right end of its eight men (page 12), its crates in the yard moved left
+# so the drums do not hide them from W2.
+DRUM_SPOTS = {    # x, y, turn (degrees; the stencil faces -y at 0, + turns it toward +x): words turned to the gate view
+    'no-1': {'petrol': (-5.3, 20.45, 12.0), 'diesel': (-4.3, 20.0, 8.0)},
+    'no-2': {'petrol': (5.3, 20.45, -12.0), 'diesel': (4.3, 20.0, -8.0)},
+}
+BRAZIER = (-2.35, 21.82)                                            # against No. 1's right gate leaf, in the road
+LANTERN = (DRUM_SPOTS['no-1']['diesel'][0] - 0.08, DRUM_SPOTS['no-1']['diesel'][1] - 0.2)   # on DIESEL's lid, at its front
+LUNCH_TIN = (DRUM_SPOTS['no-1']['petrol'][0] + 0.06, DRUM_SPOTS['no-1']['petrol'][1] - 0.18)   # on PETROL's lid, at its front
+STOOP_GAP = 0.1          # the stooped man stands this far further from the brazier than his pose's own reach (round 3's
+                         # check: his coat met the drum)
+STOOP_TURN = -40.0       # he faces the brazier from its front-left, turned up and to the right
+# men: (figure, name, (x, y), turn, scale). Scale: a little taller or shorter than the figure as built (heads at
+# different heights); the ground under each (pavement or road) changes it again
+MEN_1 = [
+    # the front man's right hand round a bar of the left leaf, so the chain where the leaves meet shows to his right
+    ('worker-hand-on-bar', 'man-1', (-4.15 - GRIP[0], GATE_PLANE_Y - 0.03 - GRIP[1]), 0, 1.0),
+    # stooped over the brazier from its front-left, turned toward it, his back to W1 and W3
+    ('worker-stooped-to-brazier', 'man-2', (BRAZIER[0] + (STOOP_AHEAD + STOOP_GAP) * math.sin(math.radians(STOOP_TURN)),
+                                            BRAZIER[1] - (STOOP_AHEAD + STOOP_GAP) * math.cos(math.radians(STOOP_TURN))), STOOP_TURN, 1.0),
+    # the front row, at the gate (between man 1 and the stooped man, and by the outer pier)
+    ('worker-arms-folded', 'man-3', (-3.45, 21.55), 6, 1.03),
+    ('worker-hands-in-pockets', 'man-4', (-4.95, 21.45), -10, 0.97),
+    # the back row, behind the drums, each between two of the front row
+    ('worker-arms-folded', 'man-5', (-4.55, 20.72), 12, 0.98),
+    ('worker-hands-in-pockets', 'man-6', (-3.75, 20.62), -4, 1.04),
+    ('worker-hands-in-pockets', 'man-7', (-2.95, 20.8), -14, 0.96),
+]
+# No. 2's eight (its slowed state, page 12): the same arrangement, mirrored and without a fire: a loose crowd two deep
+# across its gateway, backs to the lane, behind the drums at its right end; from W4, inside the yard, they stand
+# outside the half-shut gate
+_N2 = GATE_CENTRE_X
+MEN_2 = [
+    ('worker-hands-in-pockets', 'no-2-man-1', (2.35, 21.5), 6, 1.0),
+    ('worker-arms-folded', 'no-2-man-2', (3.15, 21.62), -8, 1.03),
+    ('worker-hands-in-pockets', 'no-2-man-3', (3.95, 21.48), 10, 0.97),
+    ('worker-arms-folded', 'no-2-man-4', (4.75, 21.58), -4, 1.0),
+    ('worker-hands-in-pockets', 'no-2-man-5', (2.0, 20.78), 12, 0.98),
+    ('worker-arms-folded', 'no-2-man-6', (2.75, 20.68), -12, 1.04),
+    ('worker-hands-in-pockets', 'no-2-man-7', (3.55, 20.8), 4, 0.96),
+    ('worker-arms-folded', 'no-2-man-8', (5.05, 20.95), -16, 1.01),
+]
+# The people at work inside each lit doorway (round 5; round 4's check: both lit doorways showed an empty room, so
+# "flat out" and "the workers go in" had no picture): existing figure shapes in dark work clothes, from behind or
+# side-on, so they show as dark shapes against the lit far wall. (figure, name, (x, y), turn). No. 2's are in every
+# No. 2 plate (in the slowed state only the first); No. 1's only in the working and "men gone" helper plates, so on
+# "go" the men leave the gate and appear inside. They are painted into the plates and are not in the film's set: they
+# stand 17 m and more from every camera, in front of the far wall.
+_ROOM_1, _ROOM_2 = WALL_Y + 8.0, WALL_Y + 8.0                       # each mill front's face (the doorway rooms start here)
+WORKERS = {
+    'no-1': [
+        # bent over the front of the nearer loom, from behind, his hands over its cloth
+        ('worker-stooped-to-brazier', 'no-1-worker-1', (-3.0, _ROOM_1 + 1.9 - STOOP_AHEAD - 0.12), 10),
+        # side-on, facing the second loom's way, his raised hand on the nearer loom's back post
+        ('worker-hand-on-bar', 'no-1-worker-2', (-4.05 - GRIP[1], _ROOM_1 + 3.05 + GRIP[0]), -90),
+    ],
+    'no-2': [
+        # at the lathe's headstock, from behind, bent over its bed
+        ('worker-stooped-to-brazier', 'no-2-worker-1', (1.9, _ROOM_2 + 2.2 - STOOP_AHEAD - 0.12), 18),
+        # side-on at the press, his raised hand on its column, the flywheel to his right
+        ('worker-hand-on-bar', 'no-2-worker-2', (2.77 - GRIP[1], _ROOM_2 + 4.9 + GRIP[0]), -90),
+    ],
+}
+WORKER_CLOTH = (0.025, 0.024, 0.026)     # their dark work clothes (every surface of the figure)
