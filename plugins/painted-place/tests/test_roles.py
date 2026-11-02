@@ -23,6 +23,13 @@ CASES = {
     'tea house floor': 'pavement', 'tea house counter': 'wood', 'tea house': 'wall', 'palm tree': 'wood', 'palm frond': 'weed',
     'boat mast timber': 'wood', 'paopao hull patch rust': 'rust', 'reef stone': 'rock', 'koi pond': 'water', 'river bank earth': 'earth',
     'sea': 'sea', 'beach': 'sand', 'oak tree trunk': 'wood', 'jetty deck': 'wood',
+    # the tea house set's metals and china (log 44): material words first, then the small things
+    'tea urn': 'brass', 'brass door handle': 'brass', 'samovar': 'brass', 'gilt sign letters': 'brass', 'bronze bell': 'brass',
+    'copper kettle': 'copper', 'kettle': 'copper', 'copper pipe': 'copper', 'teapot': 'china', 'tea pot': 'china',
+    'teacups 2': 'china', 'saucers': 'china', 'water jug': 'china', 'milk jug': 'china', 'porcelain vase': 'china',
+    'tea house urn': 'brass', 'tea house chimney pot': 'trim', 'cupboard': 'wood', 'cabinet wood': 'wood',
+    'tea house teapot lamp glass body': 'lamp glass', 'tea house teapot sign bracket iron': 'iron',
+    'glazed window': 'window dark', 'stoneware crock': 'china', 'earthenware pot': 'china',
 }
 
 

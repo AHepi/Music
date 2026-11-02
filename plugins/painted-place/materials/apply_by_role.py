@@ -36,6 +36,7 @@ import lay_facade  # noqa: E402
 import lay_timber  # noqa: E402
 import lay_details  # noqa: E402
 import scans  # noqa: E402
+import brass_copper_china  # noqa: E402
 
 MATERIALS_BLEND = os.path.join(HERE, 'Materials.blend')
 
@@ -69,6 +70,9 @@ ROLE_MATERIALS = {
     'rock': 'STONE • unique sandstone / damp soot',
     'sand': 'ROLE • damp sand',
     'sea': 'ROLE • dark sea with small waves',
+    'brass': 'ROLE • old brass',
+    'copper': 'ROLE • old copper',
+    'china': 'ROLE • glazed china',
 }
 
 CODE_MATERIALS = {}  # made here, because Materials.blend has no such surface
@@ -78,6 +82,10 @@ def _code_material(name):
     material = bpy.data.materials.get(name)
     if material is not None:
         return material
+    if 'brass' in name or 'copper' in name:
+        return brass_copper_china.old_metal(name, copper='copper' in name)
+    if 'china' in name:
+        return brass_copper_china.glazed_china(name)
     material = bpy.data.materials.new(name)
     material.use_nodes = True
     nodes, links = material.node_tree.nodes, material.node_tree.links
@@ -129,10 +137,16 @@ PAIR_WORDS = [
     # natural stone: "reef stone" is rock, though "stone" alone means a built wall
     (('reef', 'stone'), 'rock'), (('cliff', 'stone'), 'rock'), (('crag', 'stone'), 'rock'), (('outcrop', 'stone'), 'rock'),
     (('headland', 'stone'), 'rock'), (('shore', 'stone'), 'rock'), (('field', 'stone'), 'rock'),
+    (('tea', 'pot'), 'china'), (('coffee', 'pot'), 'china'),
 ]
 # a container of water is not water: "water tank", "water butt", "water trough" take the role of what they are made of
 WATER_CONTAINERS = {'tank', 'butt', 'trough', 'pump', 'tower', 'jug', 'bottle', 'bucket', 'barrel', 'can', 'pipe', 'tap', 'heater'}
 SINGLE_WORDS = [
+    # metal and china words first: "brass door handle" is brass, "copper pipe" copper, "china jug" china
+    ('brass', 'brass'), ('bronze', 'brass'), ('gilt', 'brass'), ('gilded', 'brass'), ('gold', 'brass'),
+    ('copper', 'copper'), ('verdigris', 'copper'),
+    ('china', 'china'), ('porcelain', 'china'), ('ceramic', 'china'), ('crockery', 'china'), ('earthenware', 'china'),
+    ('stoneware', 'china'), ('pottery', 'china'),
     ('boulder', 'rock'), ('rock', 'rock'),
     ('sand', 'sand'),
     ('lantern', 'lamp glass'), ('mantle', 'flame'), ('flame', 'flame'), ('fire', 'flame'), ('glow', 'flame'),
@@ -164,6 +178,10 @@ SINGLE_WORDS = [
     ('earth', 'earth'), ('ground', 'earth'), ('yard', 'earth'), ('mud', 'earth'), ('soil', 'earth'), ('grit', 'earth'), ('track', 'earth'),
     # names of things rather than what they are made of come last, so the material word wins: "boat hull rust" stays rust,
     # "harbour wall stone" is a wall, "beach hut timber" is timber, "jetty deck" is timber
+    # small things first among the things: "tea house urn" is brass, "counter teapot" china
+    ('urn', 'brass'), ('samovar', 'brass'), ('kettle', 'copper'),
+    ('teapot', 'china'), ('teacup', 'china'), ('cup', 'china'), ('saucer', 'china'), ('mug', 'china'), ('jug', 'china'),
+    ('vase', 'china'), ('bowl', 'china'),
     ('trunk', 'wood'), ('bark', 'wood'), ('log', 'wood'), ('driftwood', 'wood'), ('deck', 'wood'), ('decking', 'wood'), ('jetty', 'wood'),
     ('pier', 'wood'), ('wharf', 'wood'), ('boardwalk', 'wood'), ('stilt', 'wood'), ('weatherboard', 'wood'), ('cladding', 'wood'),
     ('hull', 'wood'), ('canoe', 'wood'), ('boat', 'wood'), ('floorboard', 'wood'), ('table', 'wood'), ('chair', 'wood'), ('bench', 'wood'),

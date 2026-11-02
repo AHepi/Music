@@ -4,7 +4,7 @@
 # Use:  sh tests/run_tests.sh            or   BLENDER=/path/to/blender sh tests/run_tests.sh
 cd "$(dirname "$0")/.." || exit 1
 status=0
-for test in tests/test_roles.py tests/test_measure.py tests/test_look_stage.py tests/test_dressing.py tests/test_shore_and_timber.py tests/test_scans.py; do
+for test in tests/test_roles.py tests/test_measure.py tests/test_look_stage.py tests/test_dressing.py tests/test_shore_and_timber.py tests/test_scans.py tests/test_tea_house_lessons.py; do
   if [ -n "$BLENDER" ]; then
     output=$("$BLENDER" -b --python-exit-code 1 --python "$test" 2>&1); code=$?
   else

@@ -608,6 +608,20 @@ Only failures in doing the work belong here. Newest at the bottom.
 169. **One mesh shared by a deck and a beam took whichever material came last** (checker, log 44). Fix: a mesh dressed two ways is split.
 170. **A scene changed by a script but not refreshed measured its objects at their old size** (log 44): a deck read 1 x 1 x 1 m and was
     taken for a beam. Fix: the dressing refreshes every placement before measuring.
+171. **The tea house test's window check looked at corners, not faces** (log 44): a glazing bar has corners only at its ends, so the bars
+    across the glass were missed and the test failed with the sash in place. Fix: the check reads each face's centre.
+172. **A brushstroke script failed at its first lines** (log 45): `import bmesh` came before `import bpy`, the trap the plugin builder had
+    reported an hour earlier. Fix: bpy first.
+173. **Brushstrokes without flow lines pointed every way** (log 45): the add-on takes each stroke's direction from flow lines, not from the
+    surface's flat map; three maps in three directions gave the very same random angles. Fix: flow lines are made along each face.
+174. **Turning the add-on's strokes into a mesh failed on a curves object** (log 45): "Object does not have geometry data". Fix: the strokes
+    are grown on an empty mesh object.
+175. **Strokes rode in front of the tea house's timbers and painted them over** (log 45): the probes that set how far out the strokes lie
+    hit windows and timbers more often than the plaster. Fix: only hits on the object itself (or its own ashlar, setts, flags and puddles)
+    count.
+176. **Strokes took the colour of whatever stood in front of them** (log 45): a timber 11 cm in front of the plaster passed a 25 cm "is it
+    hidden" margin, so timber brown was smeared over the plaster. Fix: colour from each stroke's middle, and a 4 cm margin.
+177. **Strokes that took a lit window's colour smeared glow over the walls** (log 45). Fix: no stroke is painted in a light's colour.
 
 ## Traps
 
@@ -647,3 +661,6 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Seed anything random from a checksum of a name, never from Python's hash() (lesson 158).
 - On a wet or glossy surface, judge a new texture by its relief in the reflections, not its colour (lesson 164).
 - Test a test runner by making one test fail on purpose (lesson 168).
+- A long drawing left running in the background is lost if the machine restarts (the tea house's full-size redraw, log 44): run the quickest
+  first, and after any pause check it is still running before saying it will arrive.
+- Brushstrokes need flow lines, and must lie on each object's own skin, behind what stands in front of it (lessons 173, 175).

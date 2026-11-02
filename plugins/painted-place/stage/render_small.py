@@ -25,6 +25,10 @@ Dials (all optional):
     --no-haze                     no haze
     --save-as LOOKED.blend        also save the scene with the look applied (the look can be removed again)
 
+Before drawing it measures how much of the frame glowing glass, lamps and flames take up and warns when that is over
+2 percent (light is rare in this look; big lit panes draw too bright whatever the dials say). The share goes into
+the dials file as glowing_share_of_frame.
+
 Nothing in the scene's shapes or materials is changed. The scene file on disk is not changed unless --save-as names it.
 """
 
@@ -39,6 +43,8 @@ import bpy
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import look_stage  # noqa: E402
+
+GLOWING_SHARE_WARNING = 0.02     # over this share of the frame, glowing glass draws too bright
 
 
 def parse(argv):
@@ -73,6 +79,15 @@ def main():
     scene = bpy.context.scene
     if scene.camera is None:
         raise SystemExit('the scene has no camera; place one first (the look stage lights the camera side)')
+    look_stage.remove_look(scene)                       # a look saved in the file would hide what the camera sees
+    scene.render.resolution_x, scene.render.resolution_y = args.width, args.height
+    share = look_stage.glowing_share_of_frame(scene)
+    warning = None
+    if share is not None and share > GLOWING_SHARE_WARNING:
+        warning = (f'glowing glass, lamps and flames cover {share:.1%} of the frame; the references keep warm light under about 3 percent, '
+                   'so this draws too bright and too warm whatever the dials say. Make most big panes "window dim" or "window dark" '
+                   '(rename them and dress again) or move the camera, before turning --window-light down.')
+        print('WARNING:', warning)
     report = look_stage.apply_look(
         scene,
         keep_scene_lights=args.keep_lights,
@@ -100,12 +115,18 @@ def main():
     seconds = round(time.time() - started, 1)
     dials = {k: v for k, v in vars(args).items() if k not in ('scene', 'out', 'save_as')}
     record = {'scene': os.path.abspath(args.scene), 'picture': out, 'seconds': seconds, 'dials': dials,
-              'look_stage': {k: v for k, v in report.items() if k != 'added_objects'}}
+              'look_stage': {k: v for k, v in report.items() if k != 'added_objects'},
+              'glowing_share_of_frame': None if share is None else round(share, 4)}
+    if warning:
+        record['warning'] = warning
     with open(os.path.splitext(out)[0] + ' - dials.json', 'w') as handle:
         json.dump(record, handle, indent=2, default=str)
     if args.save_as:
         bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.save_as))
-    print(f'drew {out} in {seconds} s; glowing patches found {report.get("glow_patches_found", 0)}, lights added {report.get("glow_lights_added", 0)}')
+    print(f'drew {out} in {seconds} s; glowing patches found {report.get("glow_patches_found", 0)}, lights added {report.get("glow_lights_added", 0)}, '
+          f'glowing share of the frame {share:.1%}' if share is not None else f'drew {out} in {seconds} s')
+    if warning:
+        print('WARNING:', warning)
 
 
 if __name__ == '__main__':

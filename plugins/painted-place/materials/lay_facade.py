@@ -11,12 +11,16 @@ Turns a flat stone wall into a built one, the way the street bundle "Rain on the
     a timber frame, a centre bar and a meeting rail (two more bars on tall windows);
   - each face gets a plinth band, a first-floor band, a cornice under the eaves and heavy quoins at both ends,
     each band broken where it would cross an opening;
-  - roof slabs get slate course lines.
+  - roof slabs get slate course lines;
+  - a window in a plaster (rendered, limewashed) wall gets the joinery it has there: a painted timber casing round
+    the opening, a sill with a dark drip line under it, and a sash with glazing bars, so a big pane reads as many
+    small ones. Whatever the builder made already (its own sash bars, surround or sill) is kept and not doubled.
 
     import lay_facade
     report = lay_facade.lay_facades(scene, materials, role_from_name)
 
-Only objects with the role `wall` (stone, brick) are built up. Their own material becomes mortar, so what shows
+Only objects with the role `wall` (stone, brick) are built up; a `plaster` wall keeps its face and only its windows
+are dressed. A stone wall's own material becomes mortar, so what shows
 between the blocks reads as joints. Everything added is named "FACADE • ..." and can be removed with
 remove_facades(). Nothing the builder made is moved or deleted. Each wall gets the property `facade_front`
 (how far its new face stands in front of the old one), which the details step reads.
@@ -32,7 +36,7 @@ from mathutils import Vector
 PREFIX = 'FACADE • '
 BLOCK_FRONT = 0.20          # metres from the builder's wall face to the front of the ashlar
 OPENING_ROLES = {'window lit', 'window dim', 'window dark', 'wood', 'trim', 'recess', 'pavement', 'earth', 'water'}
-MOVE_ROLES = {'iron', 'rust', 'lamp glass', 'flame', 'paper', 'grime'}
+MOVE_ROLES = {'iron', 'rust', 'lamp glass', 'flame', 'paper', 'grime', 'brass', 'copper'}
 WINDOW_ROLES = {'window lit', 'window dim', 'window dark'}
 MAX_DISTANCE = 90.0          # faces whose centre is farther from the camera are left flat
 
@@ -177,7 +181,7 @@ class FacadeMesh:
         faces = [tuple(range(8)), tuple(range(15, 7, -1))] + [(i, i + 8, (i + 1) % 8 + 8, (i + 1) % 8) for i in range(8)]
         self.poly(coords, faces, material, tone=rng.random())
 
-    def make(self, name, material_list, collection):
+    def make(self, name, material_list, collection, role='wall'):
         if not self.verts:
             return None
         mesh = bpy.data.meshes.new(name)
@@ -195,7 +199,7 @@ class FacadeMesh:
         tool.free()
         mesh.update()
         obj = bpy.data.objects.new(name, mesh)
-        obj['place_role'] = 'wall'
+        obj['place_role'] = role
         collection.objects.link(obj)
         return obj
 
@@ -289,6 +293,127 @@ def build_face(face, holes, windows, rng, index, shades, TRIM, DARK, WOOD, doors
                 if rng.random() > 0.07:
                     mesh.box(u_edge, D - 0.02, zz, (0.32 if q % 2 else 0.45) * rng.uniform(0.88, 1.08), 0.20, 0.426 * rng.uniform(0.94, 1.01), TRIM)
     return mesh, blocks
+
+
+# ----------------------------------------------------------------------------------------------- windows in plaster and timber walls
+
+def front_of(obj, face):
+    """How far the front of a builder's object stands out from the wall face (metres; 0 when it is not there)."""
+    if obj is None:
+        return 0.0
+    return max(0.0, max((obj.matrix_world @ Vector(c) - face['origin']).dot(face['normal']) for c in obj.bound_box))
+
+
+def builder_joinery(found, window, window_name):
+    """
+    Which parts of a window's joinery the builder made already, judged from the builder's timber and stone things in
+    front of the face: bars over the glass (a sash), a frame bigger than the glass all round (a surround), a thin
+    piece just under the glass (a sill, or the beam a timber frame sits a window on).
+    """
+    wu0, wu1, wz0, wz1 = window
+    width, area = wu1 - wu0, (wu1 - wu0) * (wz1 - wz0)
+    kept = {'sash': False, 'surround': False, 'sill': False}
+    for a, b, c, e, role, name in found:
+        if name == window_name or role not in ('wood', 'trim'):
+            continue
+        own = (b - a) * (e - c)
+        across = max(0.0, min(b, wu1) - max(a, wu0))
+        overlap = across * max(0.0, min(e, wz1) - max(c, wz0))
+        if overlap >= 0.6 * area and own <= 1.15 * area:
+            kept['sash'] = True
+        if a <= wu0 - 0.02 and b >= wu1 + 0.02 and c <= wz0 + 0.02 and e >= wz1 + 0.02 and 1.15 * area < own < 4.0 * area:
+            kept['surround'] = True
+        if wz0 - 0.30 <= e <= wz0 + 0.05 and e - c < 0.4 and across >= 0.6 * width:
+            kept['sill'] = True
+    return kept
+
+
+def window_joinery(box, window, front, rng, *, casing=True, sill=True, sash=True, CASING=0, DARK=1):
+    """
+    Joinery for one window in the wall face's own frame (u along, d out from the face, z up). `box(u, d, z, w, depth,
+    h, material)` adds one block; `front` is how far the builder's glass stands out from the face. A painted casing
+    round the opening, a sill with the dark line of its drip under it, and a sash: its frame, glazing bars that cut the
+    glass into panes about 0.45 m wide and 0.5 m tall, and a meeting rail when the window is a sash window's shape
+    (taller than about 0.9 m and no wider than 1.6 m). Returns the number of blocks added.
+    """
+    wu0, wu1, wz0, wz1 = window
+    ow, oh = wu1 - wu0, wz1 - wz0
+    ou, oz = (wu0 + wu1) / 2, (wz0 + wz1) / 2
+    proud = max(0.045, front + 0.06)            # the casing stands in front of the sash, the sash in front of the glass
+    blocks = 0
+    casing_width = rng.uniform(0.085, 0.115) if casing else 0.0
+    if casing:
+        for side in (-1, 1):
+            box(ou + side * (ow / 2 + casing_width / 2), proud / 2, oz, casing_width, proud, oh, CASING)
+        head = casing_width * 1.3
+        box(ou, (proud + 0.012) / 2, wz1 + head / 2, ow + 2 * casing_width + 0.04, proud + 0.012, head, CASING)
+        blocks += 3
+    if sill:
+        sill_width = ow + 2 * casing_width + 0.10
+        box(ou, (proud + 0.06) / 2, wz0 - 0.03, sill_width, proud + 0.06, 0.06, CASING)
+        box(ou, 0.015, wz0 - 0.072, sill_width - 0.06, 0.03, 0.018, DARK)
+        blocks += 2
+    if sash:
+        bar, glazing, depth = 0.05, 0.026, 0.04
+        d = front + 0.002 + depth / 2
+        for side in (-1, 1):
+            box(ou + side * (ow / 2 - bar / 2), d, oz, bar, depth, oh, CASING)
+            box(ou, d, oz + side * (oh / 2 - bar / 2), ow, depth, bar, CASING)
+        inner_w, inner_h = ow - 2 * bar, oh - 2 * bar
+        columns = max(1, round(inner_w / 0.45))
+        rows = max(1, round(inner_h / 0.5))
+        sash_shape = oh > 0.9 and ow <= 1.6
+        if sash_shape and rows % 2:
+            rows += 1                            # an even number of panes up, so the meeting rail falls between them
+        for k in range(1, columns):
+            box(wu0 + bar + k * inner_w / columns, d + 0.002, oz, glazing, depth - 0.01, inner_h, CASING)
+        for k in range(1, rows):
+            z = wz0 + bar + k * inner_h / rows
+            if sash_shape and 2 * k == rows:
+                box(ou, d + 0.004, z + rng.uniform(-0.02, 0.02), inner_w, depth + 0.008, 0.05, CASING)   # the meeting rail
+            else:
+                box(ou, d + 0.002, z, inner_w, depth - 0.01, glazing, CASING)
+        blocks += 4 + (columns - 1) + (rows - 1)
+    return blocks
+
+
+def dress_plaster_windows(scene, depsgraph, roles, role_from_name, camera_spot, rng, materials, collection):
+    """Every window in a plaster wall the camera faces gets a casing, a sill and a sash, unless the builder made them."""
+    report = {'plaster_walls_with_windows_dressed': 0, 'plaster_windows_dressed': 0,
+              'builder_sashes_kept': 0, 'builder_surrounds_kept': 0, 'builder_sills_kept': 0}
+    material_list = [materials['wood'], materials['dark']]
+    for obj in list(scene.objects):
+        if obj.type != 'MESH' or roles.get(obj.name) != 'plaster' or _is_added(obj):
+            continue
+        combined = None
+        for face in oriented_faces(obj, minimum_area=1.5):
+            if not _facing_camera(face, camera_spot) or _buried(scene, depsgraph, face, roles):
+                continue
+            found = openings_on(face, scene, roles, role_from_name)
+            windows = [f for f in found if f[4] in WINDOW_ROLES and 0.3 <= f[1] - f[0] <= 4 and 0.3 <= f[3] - f[2] <= 4]
+            if not windows:
+                continue
+            mesh = FacadeMesh(face)
+            for wu0, wu1, wz0, wz1, role, name in windows:
+                kept = builder_joinery(found, (wu0, wu1, wz0, wz1), name)
+                window_joinery(mesh.box, (wu0, wu1, wz0, wz1), front_of(scene.objects.get(name), face), rng,
+                               casing=not kept['surround'], sill=not kept['sill'], sash=not kept['sash'], CASING=0, DARK=1)
+                report['plaster_windows_dressed'] += 1
+                report['builder_sashes_kept'] += kept['sash']
+                report['builder_surrounds_kept'] += kept['surround']
+                report['builder_sills_kept'] += kept['sill']
+            if combined is None:
+                combined = mesh
+            else:
+                offset = len(combined.verts)
+                combined.verts.extend(mesh.verts)
+                combined.faces.extend(tuple(i + offset for i in f) for f in mesh.faces)
+                combined.materials.extend(mesh.materials)
+                combined.tones.extend(mesh.tones)
+        if combined is not None and combined.verts:
+            combined.make(PREFIX + obj.name + ' • window joinery', material_list, collection, role='wood')
+            report['plaster_walls_with_windows_dressed'] += 1
+    return report
 
 
 def move_out_fixtures(face, scene, roles):
@@ -443,4 +568,5 @@ def lay_facades(scene, materials, role_from_name, seed=241105):
     for obj in list(scene.objects):
         if obj.type == 'MESH' and roles.get(obj.name) == 'roof' and not _is_added(obj) and len(obj.data.polygons) <= 12:
             report['roof_courses'] += roof_courses(obj, collection, materials['slate'])
+    report.update(dress_plaster_windows(scene, depsgraph, roles, role_from_name, camera_spot, rng, materials, collection))
     return report

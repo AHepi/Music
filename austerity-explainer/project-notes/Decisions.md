@@ -794,6 +794,33 @@ overturn any of them in one line. Changes to the project must follow this file.
 55. **Check the scanned surfaces, then run the tea-house blind test** (2 November 2026, 23:55), your words: "Do it". They answered: "if you
     say go: a fresh checker reads the texture part, then the tea house blind test restarts with both builders on the same clock."
 
+56. **A rock texture for the stone plates, withdrawn** (3 November 2026, 00:25 and 00:26), your words: "Each stone plate needs a surface
+    texture like this: https://polyhaven.com/a/rock_face_03", then a minute later: "Ignore that. Keep going." Nothing was changed for it.
+
+57. **No blind judges: you judge** (3 November 2026, 00:58), your words: "No blind judges. I'll judge"
+
+### Claude's calls for item 57
+
+- The plugin builder's own blind judge was stopped before it answered (the builder fixed its round 2 from its own measures and eyes), and the
+  four final blind judges were not started.
+- The two finished pictures were shown to you as A and B, the letters picked at random, the key kept in a file and opened only after you had
+  judged.
+- The plugin's own loop (step 4 of the skill) still has its blind-judge step; whether builders should show you instead is your call.
+
+58. **The verdict, and the Brushstroke Tools add-on** (3 November 2026, 02:25), your words: "Absolutely incredible. The plugin works. Now only
+    minor adjustments are needed. Also, look at this add-on. It helps with the painted effect:
+    https://extensions.blender.org/add-ons/brushstroke-tools/". Then (02:29): "I was hoping you could test variations and I can judge."
+
+### Claude's calls for item 58
+
+- The key: B (the street with the teapot lantern) was the plugin's picture; A (the room inside) was Blender alone.
+- What the tea house set showed the plugin lacked went in as `painted-place` 0.5.0: brass, copper and china; windows in plaster walls get a
+  casing, a sill and a sash with glazing bars (and windows in timber walls a sash); a warning before drawing when glowing glass takes more than
+  2 percent of the frame; traps for smoke, light shafts and the import order.
+- Brushstroke Tools (Blender Studio, free, GPL) was tried as a paint-over: the add-on's fill strokes are laid on the surfaces the camera sees,
+  each stroke takes the finished picture's colour at its middle, and the strokes are drawn over the picture. The tea house picture was painted
+  six ways (stroke size, brush, foreground) for you to judge against the picture without strokes. Nothing goes into the plugin until you pick.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

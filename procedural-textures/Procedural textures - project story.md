@@ -112,8 +112,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   all fixed and tested.
 - **Scanned surfaces are in the plugin (log 43, 2 November, night):** `painted-place` 0.4.0. Your hint: "See if you can improve the look using
   PBR textures from poly haven." Six free Poly Haven scans for timber, planks, bark, sand and real stone grain; close up the flags read as worn
-  stone and the timber as weathered wood; from the standing camera the change is small. The blind test on "A tea house." is stopped (nothing
-  drawn) and waits for your word.
+  stone and the timber as weathered wood; from the standing camera the change is small.
+- **The tea house blind test is done and you judged it (log 44, 3 November, night):** two pictures shown as A and B; your verdict: "Absolutely
+  incredible. The plugin works." B was the plugin's. What the tea house showed the plugin lacked is in `painted-place` 0.5.0: brass, copper
+  and china; casings, sills and sashes for windows in plaster walls; a warning when lit glass takes too much of the frame.
+- **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
+  (B to G: stroke size, brush, near street left as drawn) beside the plain one (A), sent for you to judge. Not in the plugin until you pick.
 - **Nothing running:** no rented machines; the local Blender connection is stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
@@ -135,11 +139,15 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 | The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
-| The painted-place plugin (`plugins/painted-place`, version 0.4.0) | The look as five reference pictures and one page; a blind judge (measures and a rubric: the look and the request); the look stage (lights at every glowing window and lamp, sky, haze, finish); the dressing: materials by role words, real stone grain and photographed timber, bark and sand from Poly Haven scans (`scans.py`, `materials/textures/`), laid setts and flags, ashlar walls, lapped boards, and the details from the place's shape and from a camera survey (`survey.py`, `lay_details.py`, `lay_timber.py`, `lay_shore.py`, `lay_trees.py`); the loop as one short skill; five tests | A dressed, lit picture of any place in the look, and the judge's plain-word fixes |
+| The painted-place plugin (`plugins/painted-place`, version 0.5.0) | The look as five reference pictures and one page; a blind judge (measures and a rubric: the look and the request); the look stage (lights at every glowing window and lamp, sky, haze, finish); the dressing: materials by role words, real stone grain and photographed timber, bark and sand from Poly Haven scans (`scans.py`, `materials/textures/`), laid setts and flags, ashlar walls, lapped boards, and the details from the place's shape and from a camera survey (`survey.py`, `lay_details.py`, `lay_timber.py`, `lay_shore.py`, `lay_trees.py`); the loop as one short skill; five tests | A dressed, lit picture of any place in the look, and the judge's plain-word fixes |
 
 ## Word list
 
 - **Tile:** one square picture that repeats without a seam. **Dot:** one pixel.
+- **Brushstroke (log 45):** one stroke of paint grown in 3D on a surface by the Blender Studio's add-on, with a brush picture scanned from
+  real oil paint. **Flow lines:** lines laid on a surface that tell the strokes which way to run. **Paint-over:** strokes that take their
+  colour from the finished picture and are drawn on top of it. **Hidden but still in front:** everything except the strokes is left out of
+  the strokes' drawing, yet still hides the strokes behind it.
 - **Camera survey:** a grid of straight lines sent from the camera through the frame; where each first meets a surface tells the dressing what the camera sees, and where something standing meets the ground. **Scan:** a set of pictures photographed from a real surface (colour, roughness, height). **Box projection:** laying a picture on from three sides and blending them, for shapes with no texture layout. **Wrack line:** the band of seaweed, sticks and rubbish the tide leaves on a beach. **Swash:** the thin last run of a wave up the sand.
 - **Description:** the short file of numbers a recipe reads. **Size classes:** S up to 8 KB, M up to 64 KB, L up to 512 KB.
 - **Same-kind score:** how much two pictures look like the same kind of surface (0 to 1). **Dot-for-dot levels:** none, layout, close, exact.
@@ -806,7 +814,49 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     behind a downpipe. **Not done:** no blind judging of the scans; no full-size picture; the blind test is stopped and waits for your word;
     plaster, earth, grass and rusted tin have no scans yet.
 
+44. **The scans checked, the tea house blind test run, and you judged it (2 November 23:55 to 3 November 02:25).** You said: "Do it". A fresh
+    checker read the scans and found twelve faults, among them the plugin's boards running their grain up narrow walls, stone grain stretched
+    on shapes with unapplied scale, the scan pictures not stored in the dressed file, a test runner that passed failing tests (lessons 165 to
+    170); all were fixed as 0.4.1. At 00:25 you sent a rock texture for the stone plates, and a minute later: "Ignore that. Keep going." The
+    test ran from 00:30 on an equal 80-minute clock: one Sonnet builder with the plugin, one with Blender alone plus the five reference
+    pictures and the look page. At 00:58 you said: "No blind judges. I'll judge". The plugin builder's judge was stopped before it answered,
+    and it fixed its second round from its own measures and eyes. Both finished on time (01:25 and 01:38). **What they made:** with the
+    plugin, a jettied, half-timbered tea house with a teapot lantern at the end of a wet cobbled street at blue hour; without it, a 1915 tea
+    room inside, with a copper-brown urn, marble tables and a sunbeam through steamed glass. You saw them as A and B (letters at random, the
+    key in a file) and wrote: "Absolutely incredible. The plugin works." B was the plugin's. **What the tea house showed the plugin lacked:**
+    no brass, copper or china (the builder named its teacups "plaster"); windows in plaster walls got no frames, sills or sashes (it built
+    sash bars by hand); big lit panes drew far too bright (it had to raise the sky light to 6); smoke was faint against the dark sky; a script
+    must import bpy before bmesh. The other builder found that light makes shafts only through small gaps, and that a volume of its own came
+    out empty until its density was measured from its own centre. **Built (0.5.0):** three new roles with materials made in code (old brass;
+    old copper with blue-green in its hollows; glazed china in cream, pale blue-white or a teapot's brown); a painted casing, a sill and a
+    sash with glazing bars for every window in a plaster wall, and a sash for every window in a timber wall, keeping whatever the builder
+    made; a warning before drawing when glowing glass covers more than 2 percent of the frame; traps for smoke, shafts, the import order and
+    metal words. A new test checks all of it; a fresh checker is reading it. **Failures on the way:** the first full-size redraw was lost when
+    the machine restarted; the new test first looked at corners instead of faces. **Not done:** the full-size pictures were finished only for
+    the other builder (the plugin's is still drawing); the plugin's own loop still has its blind-judge step.
+
+45. **Brushstrokes from the Blender Studio's add-on, tried on the tea house (3 November, 02:25 to 03:10).** You said: "Also, look at this
+    add-on. It helps with the painted effect: https://extensions.blender.org/add-ons/brushstroke-tools/", then: "I was hoping you could test
+    variations and I can judge." **What the add-on is:** Brushstroke Tools 1.2.3 by the Blender Studio (free, GPL): node groups that grow
+    3D brushstrokes over a surface, six oil-paint brushes from scanned paint, and a brush material. Its own buttons need Blender's window, so
+    its node groups and brushes were loaded as data and set up by a script (`/home/claude/brushstroke-trial/paint_over.py`, not in the
+    plugin). **How the strokes are made:** the surfaces the camera sees most (walls, the tea house front, the street, the flags) are copied,
+    each face lifted to where that object's own visible skin is (in front of the ashlar, on top of the setts, behind the timbers); the
+    add-on's strokes grow on the copies along flow lines (along the walls, across the street); each stroke takes the finished picture's
+    colour at its middle; strokes that start behind something else, or would carry a lamp's or lit window's colour, are dropped; only the
+    strokes are drawn, glowing in their own colours, with everything else hidden but still in front; then they are laid over the picture
+    with the lit windows and lamps kept clear. **Shown** (`45 Brushstrokes - pictures to judge/`, sent): A no strokes; B fine; C medium; D
+    large; E medium with the dry brush; F medium with the feathery brush; G medium with the near street left as drawn; and close-ups of the
+    tea house front. Each took about 2 minutes on top of the picture. **Failures on the way:** the script stopped at its imports (bmesh before
+    bpy); the strokes pointed every way until flow lines were made (the add-on ignores the surface's flat map for direction); turning the
+    strokes into a mesh failed on a curves object; strokes rode in front of the timbers and painted them over, then took the timbers' colour
+    onto the plaster, until only hits on each object's own skin counted and each stroke's colour came from its middle with a 4 cm margin;
+    strokes in a lit window's colour smeared glow over the walls (lessons 172 to 177). **Not tried:** strokes lit by the lamps in the scene
+    (the add-on's usual way, slower); the full size; another place; the sky.
+    Meanwhile the tea house's two full-size pictures (1080 x 1920, 64 samples) were finished, one after the other (A 1415 s, B 1765 s), and
+    sent.
+
 ## Next step
 
-Run the blind test again on "A tea house." with the plugin at 0.4.0 (the scans in), both builders on the same clock, and judge the request, the
-look and how old and used it is, as well as whether it could be a photograph.
+You pick a brushstroke version (A to G, or a mix); that one goes into the plugin as a step after the drawing, with its own test, and is
+checked on a second place.

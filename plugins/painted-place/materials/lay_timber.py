@@ -9,7 +9,8 @@ Makes timber look old and used wherever a builder used it, the way the street bu
   - Doors, shutters, frames, sashes and casings keep the street's peeling dark paint.
   - Timber the builder made out of many separate boards gets a shade per board.
   - A plain timber wall (one flat slab) is laid as overlapping boards: cut round its windows and doors, with casings,
-    corner boards and nail lines that bleed rust.
+    a sash with glazing bars in each window (unless the builder made its own), corner boards and nail lines that
+    bleed rust.
   - Where timber meets the ground (seen by the camera survey), damp and rot creep up it, mould sits in the corner,
     and paint flakes and splinters lie at its foot.
 
@@ -484,7 +485,7 @@ def lay_boards(scene, roles, role_from_name, materials, seed=60411):
         collection = bpy.data.collections.new(PREFIX + 'laid boards')
         scene.collection.children.link(collection)
     report = {'timber_walls_boarded': 0, 'faces_boarded': 0, 'boards': 0, 'nails': 0, 'rust_streaks_under_nails': 0,
-              'timber_objects_shaded_per_board': 0}
+              'timber_objects_shaded_per_board': 0, 'window_sashes': 0}
     for index, obj in enumerate(list(scene.objects)):
         if obj.type != 'MESH' or _is_added(obj):
             continue
@@ -506,6 +507,18 @@ def lay_boards(scene, roles, role_from_name, materials, seed=60411):
             centre = face['origin'] + face['along'] * ((face['u0'] + face['u1']) / 2)
             near = (centre - Vector((camera_spot.x, camera_spot.y, 0))).length < 14.0
             mesh, boards, nails, streaks = lap_face(face, holes, windows, doors, rng, near)
+            # a sash with glazing bars in every window, unless the builder made its own (its own random numbers, so the
+            # boards of every other face stay as they were)
+            sash_rng = random.Random(seed + 7919 + face_index)
+            for a, b, c, e, r, window_name in found:
+                if r not in lay_facade.WINDOW_ROLES or not (0.25 < b - a < 4 and 0.25 < e - c < 4):
+                    continue
+                if lay_facade.builder_joinery(found, (a, b, c, e), window_name)['sash']:
+                    continue
+                lay_facade.window_joinery(lambda u, d, z, w, depth, h, slot: mesh.box(u, d, z, w, depth, h, 3, 0.5), (a, b, c, e),
+                                          lay_facade.front_of(scene.objects.get(window_name), face), sash_rng,
+                                          casing=False, sill=False, sash=True)
+                report['window_sashes'] += 1
             report['faces_boarded'] += 1
             report['boards'] += boards
             report['nails'] += nails

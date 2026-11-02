@@ -4,7 +4,7 @@ What this file is: which role word gives which proven material, and how to name 
 
 ## Name your objects with role words
 
-Build plain shapes and put the role in the name: `left terrace 03 wall`, `window lit`, `window dark`, `door wood`, `kerb stone`, `lamp post iron`, `lamp glass`, `puddle water`, `roof slate`, `chimney smoke`. Or set the property `obj['place_role'] = 'wall'` in your build script, or give a roles file `{"object name": "role"}`. Pairs of words beat single words (`window surround` is trim, not a window; `lamp post` is iron, not a lamp).
+Build plain shapes and put the role in the name: `left terrace 03 wall`, `window lit`, `window dark`, `door wood`, `kerb stone`, `lamp post iron`, `lamp glass`, `puddle water`, `roof slate`, `chimney smoke`, `tea urn brass`, `teapot china`. Or set the property `obj['place_role'] = 'wall'` in your build script, or give a roles file `{"object name": "role"}`. Pairs of words beat single words (`window surround` is trim, not a window; `lamp post` is iron, not a lamp).
 
 | Role | Material | Words that mean it |
 |---|---|---|
@@ -35,10 +35,15 @@ Build plain shapes and put the role in the name: `left terrace 03 wall`, `window
 | weed | `Weed • rain olive` | weed, grass, ivy; and, after every other word: frond, foliage, canopy, bush, shrub, hedge, fern, reed |
 | leaf | `Fallen leaf • ochre` | leaf, leaves, litter |
 | paper | `PAPER • aged torn fragments` | paper, poster, notice |
+| brass | `ROLE • old brass` (made in code): polished where handled, tarnished in patches and in every hollow, each object its own patches | brass, bronze, gilt, gilded, gold; and, after every other word: urn, samovar |
+| copper | `ROLE • old copper` (made in code): as brass, warmer, with blue-green verdigris deep in the hollows | copper, verdigris; and, after every other word: kettle |
+| china | `ROLE • glazed china` (made in code): a glossy glaze over cream, pale blue-white or a teapot's dark brown, chosen per object | china, porcelain, ceramic, crockery, earthenware, stoneware, pottery; `tea pot`, `coffee pot`; and, after every other word: teapot, teacup, cup, saucer, mug, jug, vase, bowl |
 
 About one in five windows lit and one in five dim reads like the references; the rest dark.
 
-Words that name a thing rather than what it is made of are read after every other word, so the material word wins: `boat hull rust` is rust, `paopao hull timber` is wood, `river bank earth` is earth, `jetty deck` is wood, `harbour wall stone` is a wall, `beach hut timber` is wood. In that order, last of all: trunk, bark, log, driftwood, deck, jetty, pier, wharf, boardwalk, stilt, weatherboard, cladding, hull, canoe, boat, floorboard, table, chair, bench, stool, counter, shelf, cupboard, cabinet, dresser (wood); frond, foliage, canopy, bush, shrub, hedge, fern, reed (weed); palm, tree, coconut (wood, with bark); floor, quay (pavement); ceiling (plaster); trough (trim); post, tank (iron); pond, pool, river, canal, lake, stream, creek (water); sea, ocean, lagoon, harbour, harbor (sea); beach, dune (sand); reef, cliff, headland, crag, outcrop (rock); terrace, house, tenement, building, shop, tower (wall).
+Words that name a thing rather than what it is made of are read after every other word, so the material word wins: `boat hull rust` is rust, `paopao hull timber` is wood, `river bank earth` is earth, `jetty deck` is wood, `harbour wall stone` is a wall, `beach hut timber` is wood. In that order, last of all: urn, samovar (brass); kettle (copper); teapot, teacup, cup, saucer, mug, jug, vase, bowl (china); trunk, bark, log, driftwood, deck, jetty, pier, wharf, boardwalk, stilt, weatherboard, cladding, hull, canoe, boat, floorboard, table, chair, bench, stool, counter, shelf, cupboard, cabinet, dresser (wood); frond, foliage, canopy, bush, shrub, hedge, fern, reed (weed); palm, tree, coconut (wood, with bark); floor, quay (pavement); ceiling (plaster); trough (trim); post, tank (iron); pond, pool, river, canal, lake, stream, creek (water); sea, ocean, lagoon, harbour, harbor (sea); beach, dune (sand); reef, cliff, headland, crag, outcrop (rock); terrace, house, tenement, building, shop, tower (wall).
+
+The metal and china words come before every other word, so they beat even `door` and `pipe`: `brass door handle` is brass, `copper pipe` copper, `china jug` china (and a `china cabinet` is china: call it `cabinet wood`).
 
 Three more rules: a plural counts as its singular (`floor flags` is a pavement, `sea rocks` is rock); natural stone named with `stone` stays rock (`reef stone`, `cliff stone`, `shore stone`, `field stone`); and a container of water is not water (`water tank` is iron, `water butt` wood, `water trough` trim). `sea water`, `harbour water`, `salt water` are the sea.
 
@@ -52,7 +57,11 @@ A wood-role object gets one of three looks, by the words in its name (`lay_timbe
 | bark | names with trunk, bark, palm, tree, coconut, branch, bough (a mast, a flagpole or a column is not a tree) | `SCAN • wet palm bark` (palm, coconut) or `SCAN • wet furrowed bark`, from photographs; without the scans, `TIMBER • wet ringed bark` (made in code) |
 | boards | every other wood thing: walls, decks, piles, posts, planks, fences, boats | `SCAN • weathered boards, peeling paint`: a photographed weathered wood, each board its own patch and shade, rain streaks, one faded paint per building left in cracked, peeling patches; a deck or floor that is one flat slab gets `SCAN • weathered deck planks`. Without the scans, `TIMBER • weathered boards, peeling paint` (made in code) |
 
-A plain timber wall (one flat slab, thin, taller than 1 m) is laid as overlapping boards with casings round its windows and doors, corner boards, and nail lines that bleed rust. Timber built from many separate boards gets a shade per board instead.
+A plain timber wall (one flat slab, thin, taller than 1 m) is laid as overlapping boards with casings round its windows and doors, a sash with glazing bars in each window, corner boards, and nail lines that bleed rust. Timber built from many separate boards gets a shade per board instead.
+
+## Windows in plaster walls
+
+A window standing in front of a `plaster` wall the camera faces gets the joinery it has there: a painted timber casing round the opening, a sill with the dark line of its drip under it, and a sash whose glazing bars cut the glass into panes about 0.45 m wide and 0.5 m tall, with a meeting rail when the window has a sash window's shape (taller than about 0.9 m, no wider than 1.6 m). A shop or tea-room front of big panes reads as many small ones, and draws less glare. Whatever you built yourself is kept and not doubled: bars over the glass (your own sash), a frame bigger than the glass all round (your own surround), a thin piece just under the glass (your own sill, or the beam a timber frame sets the window on). The plaster itself is left as it is.
 
 ## Water's edges
 
@@ -73,6 +82,7 @@ The stone, cobble, pavement and slate materials are built in world space: weathe
 - An object with its own material and no role word keeps its material; the report's `unassigned` list says which.
 - A merged mesh with several material slots gets one material in every slot. Build one object per role.
 - `window` alone is a dark window. Say `window lit` for the ones that should glow.
+- A name with `window` in it is a window, so your own sash bars named `window sash` would glow or darken like glass: call them `sash bars wood` (and a surround `window surround stone`, which is trim).
 - `stone` means a built stone wall, and a built wall is laid up in ashlar courses. A boulder, a rock or a reef is `rock`: name it so.
 - The glass materials glow but do not light the street by themselves; that is the look stage's job (it finds every glowing pane and puts a real light outside it).
 - A tree's living leaves are `frond`, `foliage` or `canopy` (the weed material); `leaves` is the fallen-leaf material. `palm` or `tree` alone gives bark: build the trunk and the leaves as two objects.

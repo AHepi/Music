@@ -145,6 +145,67 @@ def warm_glowing_patches(scene, minimum_area=0.02):
     return patches
 
 
+def glowing_materials():
+    """Names of the materials that glow warm (the same test the lights are placed by)."""
+    names = set()
+    for material in bpy.data.materials:
+        if not material.use_nodes:
+            continue
+        for node in material.node_tree.nodes:
+            strength, colour = 0.0, None
+            if node.type == 'BSDF_PRINCIPLED':
+                strength = node.inputs['Emission Strength'].default_value
+                colour = node.inputs['Emission Color'].default_value
+            elif node.type == 'EMISSION':
+                strength = node.inputs['Strength'].default_value
+                colour = node.inputs['Color'].default_value
+            if strength > 0 and colour is not None and _is_warm(colour):
+                names.add(material.name)
+    return names
+
+
+def glowing_share_of_frame(scene, columns=90):
+    """
+    How much of the picture (0 to 1) warm glowing surfaces take up - lit windows, lamp glass, flames - found by casting
+    a grid of rays from the camera before anything is drawn. Light is rare in this look: the references keep warm
+    light under about 3 percent of the frame, and the light a pane throws on the walls and ground round it adds to the
+    pane itself, so glowing surfaces over about 2 percent nearly always draw too bright and too warm.
+    Returns None when the scene has no camera.
+    """
+    camera = scene.camera
+    if camera is None or camera.type != 'CAMERA':
+        return None
+    glowing = glowing_materials()
+    if not glowing:
+        return 0.0
+    bpy.context.view_layer.update()
+    depsgraph = bpy.context.evaluated_depsgraph_get()
+    top_right, bottom_right, bottom_left, top_left = [camera.matrix_world @ corner for corner in camera.data.view_frame(scene=scene)]
+    origin = camera.matrix_world.translation
+    width = max(1, scene.render.resolution_x)
+    height = max(1, scene.render.resolution_y)
+    rows = max(1, round(columns * height / width))
+    hits = 0
+    for i in range(columns):
+        across = (i + 0.5) / columns
+        top, bottom = top_left.lerp(top_right, across), bottom_left.lerp(bottom_right, across)
+        for j in range(rows):
+            point = top.lerp(bottom, (j + 0.5) / rows)
+            hit, _, _, index, obj, _ = scene.ray_cast(depsgraph, origin, (point - origin).normalized(), distance=2000.0)
+            if not hit or obj is None or obj.type != 'MESH':
+                continue
+            evaluated = obj.evaluated_get(depsgraph)
+            polygons = evaluated.data.polygons
+            if not (0 <= index < len(polygons)):
+                continue
+            slot = polygons[index].material_index
+            if slot < len(evaluated.material_slots):
+                material = evaluated.material_slots[slot].material
+                if material is not None and material.name in glowing:
+                    hits += 1
+    return hits / (columns * rows)
+
+
 def _link(obj, collection):
     for existing in list(obj.users_collection):
         existing.objects.unlink(obj)

@@ -325,16 +325,19 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   Not fixed: the faint contour steps in the dark sky (invisible at normal contrast; filming again takes over an hour for nothing a viewer sees) and
   the plugin's and chapter 2's copies of the stage (outside this job).
 
-## The painted-place plugin (logs 38 to 43, 2 November 2026)
+## The painted-place plugin (logs 38 to 45, 2 and 3 November 2026)
 
-- `plugins/painted-place` 0.4.0: build a place in Blender, dress it in one call, light it in the series' blue-hour look, judge it blind
-  (now on the look and on the request), fix once. Decisions 50 to 54.
+- `plugins/painted-place` 0.5.0: build a place in Blender, dress it in one call, light it in the series' blue-hour look, judge it blind
+  (now on the look and on the request), fix once. Decisions 50 to 58.
 - In the dressing now: the street bundle's materials with real sandstone grain; laid setts and flags; ashlar walls with dressed windows;
   photographed weathered timber, deck planks, bark, sand and driftwood (free Poly Haven scans); lapped boards on plain timber walls; and the
   old-and-used details: puddles, gutter water, damp, stains, rust, rot, weeds, moss, rubbish, water's edges (wet sand, foam, a tide line,
-  driftwood, mossy banks), what trees drop. Nothing grows indoors. Five tests pass.
+  driftwood, mossy banks), what trees drop; old brass, copper and glazed china; casings, sills and sashes for windows in plaster walls.
+  Nothing grows indoors. Seven tests pass (0.5.0's are being read by a fresh checker).
 - First blind test (a bach in Samoa): all six judges chose the plugin's picture for the film; it lost on photograph and request.
-- Second blind test ("A tea house."): stopped twice, nothing drawn; waits for your word.
+- Second blind test ("A tea house."): run on equal clocks; you judged it yourself ("Absolutely incredible. The plugin works."); B was the
+  plugin's.
+- Brushstrokes (Blender Studio's Brushstroke Tools): the tea house painted six ways, sent for you to pick; not in the plugin yet.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -347,6 +350,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
+- Which brushstroke version you like (A to G, `procedural-textures/45 Brushstrokes - pictures to judge/`), and which "minor adjustments"
+  you have in mind for the plugin.
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),
