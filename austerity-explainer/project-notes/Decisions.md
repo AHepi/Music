@@ -727,6 +727,22 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The plugin itself still tells any model not to copy a person's own textures into a repository: the plugin is written for anyone, and this choice
   is yours for this repository only.
 
+50. **A new small plugin beside the old one** (2 November 2026). Shown that the street bundle's look transfers to the coal mine as one piece of
+    code (procedural textures log 38) and that the record says lessons stored as procedure made the plugin's builds worse than the models alone,
+    you were asked which way the plugin should go and chose "New small plugin beside the old (Recommended)": five things (the look as reference
+    pictures and one page, a blind judge, the look stage, proven materials by role, the loop build → look stage → small render → judge → one fix
+    pass), tested blind on a place that is not a village; the old plugin keeps making the paper-film chapters.
+
+### Claude's calls for item 50
+
+- The new plugin is `plugins/painted-place`, listed in the marketplace beside `explainer-film`. Decisions 44 to 48 apply to it as they did to the
+  old one: Cycles when lights are on, batches of far-apart variations, Opus writes and checks it and Sonnet is the blind builder, every new set
+  updates it, and a test build gets only the plugin and your plain words.
+- "Beside" means nothing is removed from `explainer-film` by this decision. Overturn in one line.
+
+51. **Claude commits to the repository itself** (2 November 2026). Asked whether folder 38 and the updated project story should be committed by
+    Claude or added by you, you chose "Yes, commit them". Commits go to the branch you pointed to (`ccr-e7298c9b-n19qkt`).
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

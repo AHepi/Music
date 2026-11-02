@@ -84,6 +84,13 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **The three solo villages in 4K (log 37):** all three drawn at 3840 x 2560 from 11 views each (the five judged views plus six new ones), on
   the rented cards in about 23 minutes of card time (about 41 US cents), and put side by side two at a time: 33 pictures, sent to you as a zip
   and saved in `37 Three solo villages in 4K/`. Opus's second-pass scene is also on GitHub whole, in one file, for you to open.
+- **The look transfers as code (log 38, 2 November):** the scene-independent half of the street bundle's look (lights at every glowing
+  patch, sky rig, painted blue-hour sky, haze, AgX, the restrained paint filter) is one function, `look_stage.py`. Dropped onto the coal
+  mine with no numbers written for the mine, then one fix pass from the measures: brightness 0.18, warm-to-cool 32:49, warm light 1.1 percent,
+  against the street render's 0.20, 31:47, 0.5 percent. Shapes untouched. One place, one camera, no blind judge yet.
+- **Why the lessons did not transfer, from the record (38):** they were stored as procedure and as the plugin's own building blocks; what
+  carried was a visible target, a judge in plain words, and code for the part a model will not do from a guide. Proposal in
+  `38 Look stage - the street's look on the coal mine/38 Proposal - a plugin whose lessons transfer.md`.
 - **Nothing running:** no rented machines; the local Blender connection is stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
@@ -627,8 +634,30 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     add from this step; it used the rented-card route and Blender settings the plugin already carries. Pictures, single 4K pictures, the scenes
     with the new cameras (Opus's in three parts each) and every script: `37 Three solo villages in 4K/` (start with its "what is here" page).
 
+38. **The look stage: the street's look dropped onto the coal mine (2 November).** You brought the street bundle "Rain on the Old Curve"
+    (built by another session; "This, for example, is close enough") and said the problem is that lessons learned are not transferable.
+    Read: the bundle's guide and six scripts, this story, the plugin's place skill, Decisions 40 to 49, the solo-village notes. **Finding
+    from the record:** the plugin stored its lessons as procedure (one skill of 400 lines; 622 files) and as its own building blocks; the
+    blind scores were 2.7 against 6.3 and 6.4 unaided; the step that helped most was blind judges' plain words plus one fix pass. The
+    bundle's own scripts weld the look to one street, but about half of the look (lights, sky, haze, colour, finish) does not depend on
+    the street. **Test:** Blender 5.1.2 installed here as a Python module (the bundle's version); the coal mine rebuilt from
+    `mine-scene/assemble_mine.py` in 18 s with your prepared textures from the working files; `look_stage.py` written from the bundle's
+    `build_scene.py` with every street number made scene-independent (lights scaled by the place's size; a light at every warm glowing
+    patch found by connected faces; haze box from the bounds; the scene's own lights muted, not deleted). Drawn three times at 540 x 960,
+    32 samples, on this 2-processor machine: as it was (59 s), with the look's defaults (135 s, too dark at 0.12), and after one fix pass
+    from the measures (exposure 1.0, window lights doubled, 139 s): brightness 0.18, warm-to-cool 32:49, warm light 1.1 percent, against
+    the street render's 0.20, 31:47, 0.5 percent and the reference paintings' 0.16 to 0.34, 16 to 30 warm, 0.9 to 1.0 percent. By eye:
+    the mine is in the street's family; the balloon smoke and flat hills remain, because shapes are not the look stage's business.
+    **Failures on the way:** the first choice of which glowing patches get a light (the 40 biggest) skipped the engine-house windows
+    nearest the camera; changed to every lamp, then the nearest windows. **Not done:** a second place, a moving camera, a blind judge, the
+    plugin update (your rule 48: this set used a new tool, so the look stage must go into the plugin; which plugin is the open question).
+    Pictures and code: `38 Look stage - the street's look on the coal mine/`. Earlier the same day, before the bundle arrived, a separate
+    kit was started on the wrong diagnosis (that the look could only come from an image generator): a three.js mover for paintings on a
+    desk, a style bible with measured colours, and a video layer for the Pinker toolkit; the style bible's measures are what `measure.py`
+    uses here; the rest is kept aside.
+
 ## Next step
 
-Your rule says a set that used different tools updates the plugin. The one next step: your three runs (Opus rewrites the plugin, Sonnet
-rebuilds the village with it, Opus checks), replacing the plugin's own trees, backdrop, ground and light with what Sonnet and Opus did better on
-their own, and building in the step that helped most: blind judges' plain words, then one fix pass. Waiting for your go-ahead.
+Decide the plugin's shape: a new small plugin beside the old one (the look, the judge, the look stage, proven materials by role, the
+loop), or the old plugin rebuilt around those five things. Then the first blind test on a place that is not a village. The proposal with
+the two options is in `38 Look stage - the street's look on the coal mine/38 Proposal - a plugin whose lessons transfer.md`.
