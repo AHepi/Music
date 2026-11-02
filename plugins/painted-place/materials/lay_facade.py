@@ -143,17 +143,21 @@ class FacadeMesh:
 
     def __init__(self, face):
         self.face = face
-        self.verts, self.faces, self.materials = [], [], []
+        self.verts, self.faces, self.materials, self.tones = [], [], [], []
 
     def point(self, u, d, z):
         p = self.face['origin'] + self.face['along'] * u + self.face['normal'] * d
         return (p.x, p.y, z)
 
-    def poly(self, coords, faces, material):
+    def poly(self, coords, faces, material, tone=None):
         start = len(self.verts)
         self.verts.extend(self.point(*c) for c in coords)
         self.faces.extend(tuple(start + i for i in f) for f in faces)
         self.materials.extend([material] * len(faces))
+        if tone is None:      # a number per stone, so a scanned grain samples a different patch on every block
+            u, d, z = coords[0]
+            tone = (abs(u * 7.31 + z * 3.17 + d * 1.3) * 0.618) % 1.0
+        self.tones.extend([tone] * len(faces))
 
     def box(self, u, d, z, w, dep, h, material):
         x, y, z0, z1 = w / 2, dep / 2, z - h / 2, z + h / 2
@@ -171,7 +175,7 @@ class FacadeMesh:
         for side, dd in enumerate((d - dep / 2, d + dep / 2)):
             coords.extend((u + x, dd + (0.009 * math.sin(31 * u + 17 * z + 7 * i) if side else 0), z + zz) for i, (x, zz) in enumerate(outline))
         faces = [tuple(range(8)), tuple(range(15, 7, -1))] + [(i, i + 8, (i + 1) % 8 + 8, (i + 1) % 8) for i in range(8)]
-        self.poly(coords, faces, material)
+        self.poly(coords, faces, material, tone=rng.random())
 
     def make(self, name, material_list, collection):
         if not self.verts:
@@ -182,6 +186,8 @@ class FacadeMesh:
             mesh.materials.append(material)
         for polygon, index in zip(mesh.polygons, self.materials):
             polygon.material_index = index
+        attribute = mesh.attributes.new('board_tone', 'FLOAT', 'FACE')
+        attribute.data.foreach_set('value', self.tones)
         tool = bmesh.new()
         tool.from_mesh(mesh)
         bmesh.ops.recalc_face_normals(tool, faces=tool.faces)
@@ -422,6 +428,7 @@ def lay_facades(scene, materials, role_from_name, seed=241105):
                 combined.verts.extend(mesh.verts)
                 combined.faces.extend(tuple(i + offset for i in f) for f in mesh.faces)
                 combined.materials.extend(mesh.materials)
+                combined.tones.extend(mesh.tones)
             report['faces_built'] += 1
             report['blocks'] += blocks
             report['windows_dressed'] += len(windows)

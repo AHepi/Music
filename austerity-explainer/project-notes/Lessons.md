@@ -596,6 +596,19 @@ Only failures in doing the work belong here. Newest at the bottom.
 164. **Stone grain laid over the colour vanished on wet flags** (log 43). The flags' wet coat and reflections hid a colour-only overlay;
     deeper relief (14 mm) is what made them read as worn stone. On a glossy surface, change the relief, not only the colour.
 
+165. **The plugin's own boards had their grain running up them on a wall taller than it is wide** (checker, log 44). The grain followed
+    the longest side of the whole boards object, which on a narrow shed wall is its height. Fix: the boards are built in each wall's own frame
+    and their grain is set along the wall.
+166. **Stone grain was stretched on shapes whose scale was never applied** (checker, log 44): only timber carried its real scale. Fix: every
+    dressed object carries it.
+167. **The scan pictures were not stored in the dressed file** (checker, log 44): drawn on another machine they would have come out pink.
+    Fix: packed.
+168. **The test runner passed when a test failed** (checker, log 44): it judged by the printed words, and an error line counted as success.
+    Fix: each test's own exit code decides. A test runner must be tested by making a test fail.
+169. **One mesh shared by a deck and a beam took whichever material came last** (checker, log 44). Fix: a mesh dressed two ways is split.
+170. **A scene changed by a script but not refreshed measured its objects at their old size** (log 44): a deck read 1 x 1 x 1 m and was
+    taken for a beam. Fix: the dressing refreshes every placement before measuring.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -633,3 +646,4 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Wait for the fresh checker before starting a test that uses what it checks (lesson 157).
 - Seed anything random from a checksum of a name, never from Python's hash() (lesson 158).
 - On a wet or glossy surface, judge a new texture by its relief in the reflections, not its colour (lesson 164).
+- Test a test runner by making one test fail on purpose (lesson 168).

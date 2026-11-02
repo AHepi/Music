@@ -336,6 +336,7 @@ def timber_materials():
 def apply(scene, roles_file=None, seed=7, setts=True, facade=True, boards=True, details=True, wet=1.0, grime=1.0, growth=1.0, litter=1.0,
           today=False):
     rng = random.Random(seed)
+    bpy.context.view_layer.update()      # every object's placement, turn and scale up to date before anything is measured
     plan = {}
     for obj in scene.objects:
         if obj.type != 'MESH' or _is_laid_or_source(obj) or len(obj.data.polygons) == 0:
@@ -355,6 +356,8 @@ def apply(scene, roles_file=None, seed=7, setts=True, facade=True, boards=True, 
     grained = _grain_the_stone()
     counts = {}
     timber_looks = {}
+    dressed_mesh = {}
+    split_meshes = 0
     for obj in scene.objects:
         if obj.name not in plan:
             continue
@@ -367,9 +370,13 @@ def apply(scene, roles_file=None, seed=7, setts=True, facade=True, boards=True, 
             kind = lay_timber.timber_kind(obj, role)
             material = lay_timber.timber_material(kind, obj) or material
             timber_looks[kind] = timber_looks.get(kind, 0) + 1
-            scans.mark_object(obj)          # its scale and grain, read by the photographed timber
+        if obj.data.users > 1 and dressed_mesh.get(obj.data.name, material.name) != material.name:
+            obj.data = obj.data.copy()      # one mesh shared by things dressed two ways (a deck and a beam): each its own
+            split_meshes += 1
         obj.data.materials.clear()
         obj.data.materials.append(material)
+        dressed_mesh[obj.data.name] = material.name
+        scans.mark_object(obj)              # its full scale and its grain, read by every scanned picture
         counts[role] = counts.get(role, 0) + 1
     laid = {}
     if setts:
@@ -393,7 +400,11 @@ def apply(scene, roles_file=None, seed=7, setts=True, facade=True, boards=True, 
             obj['place_role_from'] = 'dressing'     # written here, not by the builder: worked out again next time
     report = {'objects_dressed': len(plan), 'by_role': counts, 'timber_looks': timber_looks, 'unassigned': unassigned, 'laid_stones': laid,
               'projection_fitted_to': {'low': tuple(round(v, 1) for v in low), 'high': tuple(round(v, 1) for v in high), 'nodes': fitted},
-              'stone_given_scanned_grain': grained, 'scans_on_the_shelf': scans.available()}
+              'stone_given_scanned_grain': grained, 'scans_on_the_shelf': scans.available(), 'shared_meshes_split': split_meshes}
+    if not scans.ENABLED and any(m.get('pp_stone_grain') for m in bpy.data.materials):
+        report['warning'] = ('this file was dressed with the scans before: --no-scans cannot take them out again. '
+                             'Dress the undressed PLACE.blend for a clean before-and-after.')
+        print('WARNING:', report['warning'])
     if facade:
         report['facade'] = lay_facade.lay_facades(scene, facade_materials(), role_from_name)
         report['stone_given_scanned_grain'] += _grain_the_stone()     # the dressings and shades the facades brought in
@@ -425,7 +436,8 @@ def main():
     parser.add_argument('--litter', type=float, default=1.0,
                         help='leaves, rubbish, fallen flakes, paint flakes, sand drifts, the wrack line, driftwood, what trees drop')
     parser.add_argument('--no-scans', action='store_true',
-                        help='use the code-made timber, bark, sand and driftwood and no scanned stone grain (for a before-and-after)')
+                        help='use the code-made timber, bark, sand and driftwood and no scanned stone grain (for a before-and-after; '
+                             'run it on the undressed PLACE.blend)')
     parser.add_argument('--today', action='store_true',
                         help="the place is in the present day: today's scraps (plastic, rope ends, a sandal) join the tide line")
     args = parser.parse_args(argv)

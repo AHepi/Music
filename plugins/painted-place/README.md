@@ -1,6 +1,6 @@
 # Painted place
 
-What this is: a small Claude plugin for building a place in Blender and bringing it into the series' painted blue-hour look, built so that what was learned once transfers to the next place and the next session. Version 0.4.0, 2 November 2026.
+What this is: a small Claude plugin for building a place in Blender and bringing it into the series' painted blue-hour look, built so that what was learned once transfers to the next place and the next session. Version 0.4.1, 3 November 2026.
 
 Why it is shaped this way: the record of the earlier plugin (`procedural-textures/Procedural textures - project story.md`, logs 32 to 38) shows that lessons stored as procedure and as the plugin's own building blocks made a model's places worse than its unaided ones (blind scores 2.7 against 6.3 and 6.4), while a visible target, a judge in plain words and one fix pass helped most (6.0 to 7.2). So this plugin carries five things and a loop, and no gate.
 
@@ -27,7 +27,7 @@ Needs Blender 5.1 or later (the look stage uses the 5.1 compositor), or the `bpy
 
 ```
 cd plugins/painted-place
-sh tests/run_tests.sh                                                     # five tests, a few minutes
+sh tests/run_tests.sh                                                     # six tests, a few minutes
 blender -b --python examples/lane-blockout/build_lane.py -- --out /tmp/lane/lane.blend
 blender -b --python materials/apply_by_role.py -- --scene /tmp/lane/lane.blend --save-as /tmp/lane/dressed.blend
 blender -b --python stage/render_small.py -- --scene /tmp/lane/dressed.blend --out /tmp/lane/round-1.png --rain

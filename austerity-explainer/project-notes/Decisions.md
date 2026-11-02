@@ -788,6 +788,11 @@ overturn any of them in one line. Changes to the project must follow this file.
 - They replace only what the plugin made in code (timber, bark, sand, driftwood) and add grain and relief to the street's stone; the setts are
   left as they were, since you called the street's pavement great. `--no-scans` dresses without them.
 - The blind test stays stopped until you say to start it again (with the scans in). Overturn any of these in one line.
+- A checker pointed out that "pavement" may have meant the flagstone footway, not the setts. The setts are untouched; the flags are what the
+  scans change most (their grain and 14 mm of relief). If the flags are what you liked, say so and they go back as they were.
+
+55. **Check the scanned surfaces, then run the tea-house blind test** (2 November 2026, 23:55), your words: "Do it". They answered: "if you
+    say go: a fresh checker reads the texture part, then the tea house blind test restarts with both builders on the same clock."
 
 ## Traps
 

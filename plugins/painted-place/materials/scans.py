@@ -59,26 +59,34 @@ def available(name=None):
 
 
 def _image(set_name, role):
+    """A scan picture, packed into the .blend so a dressed file carries it (drawn on another machine, or after the
+    plugin moves, it is still there; a missing picture draws pink)."""
     entry = manifest()[set_name]
     path = os.path.join(TEXTURES, set_name, entry['maps'][role])
     image = bpy.data.images.load(path, check_existing=True)
     image.colorspace_settings.name = 'sRGB' if role == 'diff' else 'Non-Color'
+    if image.packed_file is None:
+        image.pack()
     return image
 
 
 def tile_size(set_name):
-    return manifest()[set_name]['size_m'][0]
+    """(across, up) in metres: how much of a real surface one picture covers, across it and up it."""
+    size = manifest()[set_name]['size_m']
+    return size[0], size[1] if len(size) > 1 else size[0]
 
 
 def mark_object(obj, grain_axis=None):
-    """The numbers the scanned materials read from each object: its scale (so a scaled object gets the scan at its
-    real size) and the axis its grain runs along (0 x, 1 y, 2 z of its own: by default its longest side)."""
+    """The numbers the scanned materials read from each object: its full scale, parents included (so a scaled object
+    gets the scan at its real size), and the axis its grain runs along (0 x, 1 y, 2 z of its own: by default its
+    longest side as it really stands, a flattened axis never chosen)."""
     if obj.type != 'MESH':
         return
-    obj['pp_scale'] = tuple(abs(v) if abs(v) > 1e-6 else 1.0 for v in obj.scale)
+    scale = [abs(v) for v in obj.matrix_world.to_scale()]
+    obj['pp_scale'] = tuple(v if v > 1e-6 else 1.0 for v in scale)
     if grain_axis is None:
         corners = obj.bound_box
-        extent = [(max(c[k] for c in corners) - min(c[k] for c in corners)) * obj['pp_scale'][k] for k in range(3)]
+        extent = [(max(c[k] for c in corners) - min(c[k] for c in corners)) * scale[k] for k in range(3)]
         grain_axis = max(range(3), key=lambda k: extent[k])
     obj['pp_grain'] = float(grain_axis)
 
@@ -162,8 +170,11 @@ class BoxLayout:
         tone.attribute_type = 'GEOMETRY'
         tone.attribute_name = 'board_tone'
         offset = _vmath(nodes, links, 'MULTIPLY', _combine(nodes, links, tone.outputs['Fac'], tone.outputs['Fac']), (7.31, 3.17, 0.0))
-        if by_location:     # laid stones are copies of a few pieces: each copy samples the scan where it lies
-            where = nodes.new('ShaderNodeObjectInfo')
+        # every object and every copy of one (a collection or Geometry Nodes copy) samples its own patch
+        where = nodes.new('ShaderNodeObjectInfo')
+        offset = _vmath(nodes, links, 'ADD', offset, _vmath(nodes, links, 'MULTIPLY',
+                                                            _combine(nodes, links, where.outputs['Random'], where.outputs['Random']), (5.27, 2.91, 0.0)))
+        if by_location:     # laid stones are copies of a few pieces: each copy also samples the scan where it lies
             offset = _vmath(nodes, links, 'ADD', offset, _vmath(nodes, links, 'MULTIPLY', where.outputs['Location'], (0.61, 0.43, 0.0)))
         size = (1.0 / across, 1.0 / along, 1.0)
         # the picture's grain runs up it (its second coordinate), so that coordinate follows the object's grain axis
@@ -180,6 +191,22 @@ class BoxLayout:
         powered = [_math(nodes, links, 'POWER', separate_n.outputs[k], sharpness) for k in ('X', 'Y', 'Z')]
         total = _math(nodes, links, 'ADD', _math(nodes, links, 'ADD', powered[0], powered[1]), powered[2])
         self.weights = [_math(nodes, links, 'DIVIDE', p, _math(nodes, links, 'MAXIMUM', total, 1e-5)) for p in powered]
+
+    def shift_each_plank(self, planks_per_picture):
+        """For a planks picture: move each plank's stretch of wood along its own length by a different amount, so a long
+        deck shows no repeat. Planks run up the picture, so the shift is along the grain and the seams stay put."""
+        nodes, links = self.nodes, self.links
+        shifted = []
+        for plane in self.planes:
+            separate = nodes.new('ShaderNodeSeparateXYZ')
+            links.new(plane, separate.inputs['Vector'])
+            plank = _math(nodes, links, 'FLOOR', _math(nodes, links, 'MULTIPLY', separate.outputs['X'], float(planks_per_picture)))
+            noise = nodes.new('ShaderNodeTexWhiteNoise')
+            noise.noise_dimensions = '1D'
+            links.new(plank, noise.inputs['W'])
+            along = _math(nodes, links, 'MULTIPLY_ADD', noise.outputs['Value'], 3.7, separate.outputs['Y'])
+            shifted.append(_combine(nodes, links, separate.outputs['X'], along))
+        self.planes = shifted
 
     def sample(self, image, colour=True):
         """The picture laid on from three sides and blended: a colour (vector) socket, or a value socket."""
@@ -240,7 +267,8 @@ def boards():
     import lay_timber
     nodes, links = material.node_tree.nodes, material.node_tree.links
     principled = nodes.get('Principled BSDF')
-    layout = BoxLayout(nodes, links, along=tile_size('rough_wood') * 2.2, across=tile_size('rough_wood') * 1.1)
+    across, up = tile_size('rough_wood')
+    layout = BoxLayout(nodes, links, along=up * 2.2, across=across * 1.1)
     wood = _look(nodes, links, layout.sample(_image('rough_wood', 'diff')), 0.62, 0.7)
     tone = nodes.new('ShaderNodeAttribute')
     tone.attribute_type = 'GEOMETRY'
@@ -321,8 +349,9 @@ def planks():
         return material
     nodes, links = material.node_tree.nodes, material.node_tree.links
     principled = nodes.get('Principled BSDF')
-    size = tile_size('wood_planks_grey')
-    layout = BoxLayout(nodes, links, along=size, across=size)
+    across, up = tile_size('wood_planks_grey')
+    layout = BoxLayout(nodes, links, along=up, across=across)
+    layout.shift_each_plank(planks_per_picture=5)
     links.new(_look(nodes, links, layout.sample(_image('wood_planks_grey', 'diff')), 0.9, 0.75), principled.inputs['Base Color'])
     links.new(_math(nodes, links, 'MULTIPLY', layout.sample(_image('wood_planks_grey', 'rough'), colour=False), 0.85), principled.inputs['Roughness'])
     links.new(_bump(nodes, links, layout.sample(_image('wood_planks_grey', 'disp'), colour=False), 0.006), principled.inputs['Normal'])
@@ -341,8 +370,8 @@ def bark(palm=False):
         return material
     nodes, links = material.node_tree.nodes, material.node_tree.links
     principled = nodes.get('Principled BSDF')
-    size = tile_size(set_name)
-    layout = BoxLayout(nodes, links, along=size, across=size * (0.6 if palm else 1.0), sharpness=3.0)
+    across, up = tile_size(set_name)
+    layout = BoxLayout(nodes, links, along=up, across=across, sharpness=3.0)
     links.new(_look(nodes, links, layout.sample(_image(set_name, 'diff')), 0.42 if palm else 0.6, 0.65), principled.inputs['Base Color'])
     links.new(_math(nodes, links, 'MULTIPLY', layout.sample(_image(set_name, 'rough'), colour=False), 0.8), principled.inputs['Roughness'])
     links.new(_bump(nodes, links, layout.sample(_image(set_name, 'disp'), colour=False), 0.015), principled.inputs['Normal'])
@@ -359,8 +388,8 @@ def driftwood():
         return material
     nodes, links = material.node_tree.nodes, material.node_tree.links
     principled = nodes.get('Principled BSDF')
-    size = tile_size('rough_wood')
-    layout = BoxLayout(nodes, links, along=size * 2.0, across=size)
+    across, up = tile_size('rough_wood')
+    layout = BoxLayout(nodes, links, along=up * 2.0, across=across)
     links.new(_look(nodes, links, layout.sample(_image('rough_wood', 'diff')), 1.15, 0.25), principled.inputs['Base Color'])
     links.new(layout.sample(_image('rough_wood', 'rough'), colour=False), principled.inputs['Roughness'])
     links.new(_bump(nodes, links, layout.sample(_image('rough_wood', 'disp'), colour=False), 0.006), principled.inputs['Normal'])
@@ -378,7 +407,7 @@ def sand(name=PREFIX + 'damp sand'):
         return material
     nodes, links = material.node_tree.nodes, material.node_tree.links
     principled = nodes.get('Principled BSDF')
-    size = tile_size('damp_beach_sand')
+    size = tile_size('damp_beach_sand')[0]
     position = nodes.new('ShaderNodeNewGeometry').outputs['Position']
     separate = nodes.new('ShaderNodeSeparateXYZ')
     links.new(position, separate.inputs['Vector'])
@@ -434,8 +463,8 @@ def add_stone_grain(material, strength=0.65, relief=0.005):
     principled_nodes = [n for n in nodes if n.type == 'BSDF_PRINCIPLED']
     if not principled_nodes:
         return False
-    size = tile_size('sandstone_cracks')
-    layout = BoxLayout(nodes, links, along=size, across=size, sharpness=4.0, by_location=True)
+    across, up = tile_size('sandstone_cracks')
+    layout = BoxLayout(nodes, links, along=up, across=across, sharpness=4.0, by_location=True)
     gray = nodes.new('ShaderNodeRGBToBW')
     links.new(layout.sample(_image('sandstone_cracks', 'diff')), gray.inputs['Color'])
     mean = manifest()['sandstone_cracks'].get('mean_luminance', 0.4)

@@ -296,15 +296,27 @@ def vary_boards(obj, seed):
 # ----------------------------------------------------------------------------------------------- lapped boards
 
 class BoardMesh:
-    """Vertices, faces, material slots and a shade per face, in a wall face's own frame (u along, d out, z up)."""
+    """Vertices, faces, material slots and a shade per face, in a wall face's own frame (u along, d out, z up). The
+    vertices are kept in that frame (x along the wall, -y out of it, z up) and the object is turned and placed to the
+    wall, so a scanned picture's grain runs along the boards whichever way the wall faces."""
 
     def __init__(self, face):
         self.face = face
         self.verts, self.faces, self.slots, self.tones = [], [], [], []
 
     def point(self, u, d, z):
-        p = self.face['origin'] + self.face['along'] * u + self.face['normal'] * d
-        return (p.x, p.y, z)
+        return (u, -d, z)
+
+    def frame(self):
+        from mathutils import Matrix
+        along, normal = self.face['along'], self.face['normal']
+        matrix = Matrix.Identity(4)
+        for row in range(3):
+            matrix[row][0] = along[row]
+            matrix[row][1] = -normal[row]
+            matrix[row][2] = (0.0, 0.0, 1.0)[row]
+            matrix[row][3] = self.face['origin'][row]
+        return matrix
 
     def solid(self, coords, slot, tone):
         """Eight corners: back-bottom-left, back-bottom-right, front-bottom-right, front-bottom-left, then the tops."""
@@ -427,12 +439,33 @@ def _is_added(obj):
             or '• laid' in obj.name)
 
 
+def _thinnest_side(obj):
+    """(thickness, length) of a simple shape measured across and along its own walls, so a wall turned by its vertices
+    (not by its object) still counts as thin."""
+    matrix = obj.matrix_world
+    verts = [matrix @ v.co for v in obj.data.vertices]
+    normal_matrix = matrix.to_3x3().inverted_safe().transposed()
+    best = None
+    for polygon in obj.data.polygons:
+        n = normal_matrix @ polygon.normal
+        n.z = 0.0
+        if n.length < 1e-6:
+            continue
+        n.normalize()
+        across = [v.dot(n) for v in verts]
+        along_axis = Vector((-n.y, n.x, 0.0))
+        along = [v.dot(along_axis) for v in verts]
+        width, length = max(across) - min(across), max(along) - min(along)
+        if best is None or width < best[0]:
+            best = (width, length)
+    return best or (min(obj.dimensions.x, obj.dimensions.y), max(obj.dimensions.x, obj.dimensions.y))
+
+
 def is_plain_timber_wall(obj, role):
     if obj.type != 'MESH' or role != 'wood' or timber_kind(obj, role) != 'boards' or len(obj.data.polygons) > 12:
         return False
-    size = obj.dimensions
-    thickness = min(size.x, size.y)
-    return thickness < 0.45 and size.z > 1.0 and max(size.x, size.y) > 1.2
+    thickness, length = _thinnest_side(obj)
+    return thickness < 0.45 and obj.dimensions.z > 1.0 and length > 1.2
 
 
 def lay_boards(scene, roles, role_from_name, materials, seed=60411):
@@ -462,8 +495,8 @@ def lay_boards(scene, roles, role_from_name, materials, seed=60411):
             if vary_boards(obj, 300 + index):
                 report['timber_objects_shaded_per_board'] += 1
             continue
-        combined = None
-        for face in lay_facade.oriented_faces(obj, minimum_area=1.0):
+        made_any = False
+        for face_index, face in enumerate(lay_facade.oriented_faces(obj, minimum_area=1.0)):
             if not lay_facade._facing_camera(face, camera_spot) or lay_facade._buried(scene, depsgraph, face, roles):
                 continue
             found = lay_facade.openings_on(face, scene, roles, role_from_name)
@@ -477,31 +510,33 @@ def lay_boards(scene, roles, role_from_name, materials, seed=60411):
             report['boards'] += boards
             report['nails'] += nails
             report['rust_streaks_under_nails'] += streaks
-            if combined is None:
-                combined = mesh
-            else:
-                offset = len(combined.verts)
-                combined.verts.extend(mesh.verts)
-                combined.faces.extend(tuple(i + offset for i in f) for f in mesh.faces)
-                combined.slots.extend(mesh.slots)
-                combined.tones.extend(mesh.tones)
-        if combined is None or not combined.faces:
+            if not mesh.faces:
+                continue
+            name = PREFIX + obj.name + ' • lapped boards %d' % face_index
+            data = bpy.data.meshes.new(name)
+            data.from_pydata(mesh.verts, [], mesh.faces)
+            for material in (materials['boards'], materials['iron'], materials['rust'], materials['painted']):
+                data.materials.append(material)
+            for polygon, slot in zip(data.polygons, mesh.slots):
+                polygon.material_index = slot
+            attribute = data.attributes.new('board_tone', 'FLOAT', 'FACE')
+            attribute.data.foreach_set('value', mesh.tones)
+            import bmesh
+            tool = bmesh.new()
+            tool.from_mesh(data)
+            bmesh.ops.recalc_face_normals(tool, faces=tool.faces)
+            tool.to_mesh(data)
+            tool.free()
+            data.update()
+            boards_obj = bpy.data.objects.new(name, data)
+            boards_obj.matrix_world = mesh.frame()
+            boards_obj['place_role'] = 'wood'
+            collection.objects.link(boards_obj)
+            import scans
+            scans.mark_object(boards_obj, grain_axis=0)      # along the wall: the boards' own length
+            made_any = True
+        if not made_any:
             continue
-        name = PREFIX + obj.name + ' • lapped boards'
-        data = bpy.data.meshes.new(name)
-        data.from_pydata(combined.verts, [], combined.faces)
-        for material in (materials['boards'], materials['iron'], materials['rust'], materials['painted']):
-            data.materials.append(material)
-        for polygon, slot in zip(data.polygons, combined.slots):
-            polygon.material_index = slot
-        attribute = data.attributes.new('board_tone', 'FLOAT', 'FACE')
-        attribute.data.foreach_set('value', combined.tones)
-        data.update()
-        boards_obj = bpy.data.objects.new(name, data)
-        boards_obj['place_role'] = 'wood'
-        collection.objects.link(boards_obj)
-        import scans
-        scans.mark_object(boards_obj)
         obj.data.materials.clear()
         obj.data.materials.append(materials['dark'])
         obj['timber_front'] = 0.026
