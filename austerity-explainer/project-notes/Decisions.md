@@ -821,6 +821,9 @@ overturn any of them in one line. Changes to the project must follow this file.
   each stroke takes the finished picture's colour at its middle, and the strokes are drawn over the picture. The tea house picture was painted
   six ways (stroke size, brush, foreground) for you to judge against the picture without strokes. Nothing goes into the plugin until you pick.
 
+59. **Set the brushstroke add-on aside** (3 November 2026, 09:31), your words: "I was to try something else and ignore add on for now."
+    Nothing from Brushstroke Tools goes into the plugin; the trial stays on record in `procedural-textures/45 Brushstrokes - pictures to judge/`.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
