@@ -97,6 +97,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   loop as one short skill. Three tests pass. Second test: a grey-box lane of 674 named boxes went through the plugin alone and came out
   as a wet-sett lane in the family after four dial rounds; two plugin faults found and fixed on the way. Not yet: a blind judge run, a blind
   Sonnet build, a second kind of place, a moving camera.
+- **First blind test passed its own question (log 40, 2 November, evening):** a fresh Sonnet builder with `painted-place` and the words "A
+  bach on the beach in Samoa. Modern day." against the same model with Blender alone. Six blind judges all chose the plugin's picture for the
+  film (look lens 5.0 against 1.7); it lost on photograph (2.3 against 4.2) and request (5.0 against 7.2); level overall (4.1 against 4.3).
+  The old plugin's picture was chosen by nobody and sat four points below unaided. Plugin 0.1.1 carries the four faults the test found.
 - **Nothing running:** no rented machines; the local Blender connection is stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
@@ -683,8 +687,33 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     **Not done:** no blind judge run (the measures and my eyes only), no blind Sonnet build, no second kind of place (interior, yard,
     daylight), no moving camera, no full-size picture. Pictures and records: `plugins/painted-place/examples/`.
 
+40. **The first blind test of the new plugin: a bach on the beach in Samoa (2 November, 16:11 to 18:50).** You said: "I batch on the
+    beach in Samoa. Modern day." Read as "A bach on the beach in Samoa. Modern day." **Set-up:** two Sonnet builders at high effort, at the
+    same time, isolated (no other files, no internet, no rented cards, no image generation), the same words; Blender as the bpy module on this
+    2-processor machine. The plugin builder got the plugin folder and the words; it built 78 plain objects named with role words (a bach on piles
+    with louvres and a rust iron roof, a verandah, palms, a fale, a canoe, a fire, a rain tank, a solar panel), dressed them (77 of 77 got a role),
+    drew round 1 at the defaults in 15 minutes, made the packet and stopped. A fresh blind judge said **no** with seven plain fixes (the sand a
+    polished floor glowing warm, nothing old, no air, a toy fire, an unnamed dark shape). The builder did the one fix pass in 45 minutes: rippled
+    sand, grime at the wall feet, rust streaks, a plank walk and beach things, a rebuilt fire, dials (off-frame amber light 0, window light 0.5,
+    lamp light 0.7, sky light 1.6). A second fresh judge: **nearly**, "the colours, the framing and the finish already match". Round 2 was drawn
+    once at full size (17 minutes). The control builder, Blender alone, worked 1 h 35 min and drew a golden-hour beach with palms, sea, canoe,
+    surfboards and string lights, full size in 31 minutes. **Judging:** three fresh judges, shuffled letters, the five reference pictures beside,
+    three lenses (photograph, request, film backdrop in the look). Then a third picture: the control's own scene with the look stage dropped on
+    it and a dial pass from the measures; the first judges could not be reopened, so three more judges scored all three. **Result (six judges on
+    A and B):** control 4.2 / 7.2 / 1.7, mean 4.3, chosen by none; plugin 2.3 / 5.0 / 5.0, mean 4.1, chosen by all six. The control scene with
+    the look stage (three judges): 3.3 / 6.3 / 3.0. Every judge's fix for the control was "make it an evening lit from the house"; every judge's
+    fix for the plugin's picture was the toy fire and the foreground objects. **What it says:** the look transfers through the plugin without
+    sinking the builder (the old plugin: chosen by nobody, four points below); shapes remain the builder's weak half; the judge-then-fix loop
+    moved a "no" to a "nearly" in one pass; the look stage alone on someone else's scene gets a third of the way. **Faults found and fixed
+    (plugin 0.1.1):** the rubric named candidate.jpg while the packet held a png; the coal-mine reference's balloon smoke now marked as a shape
+    fault; a haze dial; fires lit apart from lamps with their own dial. **Failures on the way:** my first dial pass on the control scene
+    overshot to all-cool (warm 6 percent) because the off-frame amber light was doing most of the warm work there; a second pass sat between.
+    The three first judges' transcripts could not be reopened for picture C, so three new judges were used. Builders could not write report
+    files (the harness refused) and returned them as text, saved by me unchanged. **Not done:** a second request, equal clocks for both builders
+    (the plugin builder had about one hour, the control 1 h 35 min), a request lens in the judge's rubric, a per-third brightness measure.
+    Record: `40 Blind test - a bach on the beach in Samoa/`.
+
 ## Next step
 
-The first blind test of `painted-place`: one Sonnet helper gets the plugin and your plain words for a place that is not a village (a yard, a
-harbour, a tea house seen from its doorway), builds it, runs the loop, and a fresh judge scores the result beside a plugin-free build of the
-same words. That is the test the old plugin failed at 2.7 against 6.3; it says whether this shape transfers.
+Decide whether the plugin's own test should also ask the judge about the request (not only the look), then run the second blind test with
+equal clocks: a different kind of place (an interior, or a daylight place once the look stage has a daylight variant) and the same two builders.

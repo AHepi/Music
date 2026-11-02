@@ -44,6 +44,7 @@ def main():
     box('window lit', (-4.45, 8, 4), (0.1, 1, 1.5), glowing('GLASS test warm', (1, 0.4, 0.08), 2.8))
     box('window cold', (-4.45, 12, 4), (0.1, 1, 1.5), glowing('GLASS test cold', (0.2, 0.4, 1.0), 2.0))
     box('lamp glass', (3, 6, 3.8), (0.3, 0.3, 0.4), glowing('Lamp glass test', (1, 0.5, 0.1), 5))
+    box('fire flame', (1, 4, 0.3), (0.4, 0.4, 0.5), glowing('Fire flame test', (1, 0.45, 0.1), 8))
     own = bpy.data.lights.new('own sun', 'SUN')
     own_obj = bpy.data.objects.new('own sun', own)
     scene.collection.objects.link(own_obj)
@@ -55,9 +56,9 @@ def main():
 
     report = look_stage.apply_look(scene, samples=4, resolution=(96, 170))
     names = [o.name for o in scene.objects if o.name.startswith(look_stage.LOOK_PREFIX)]
-    assert report['glow_patches_found'] == 2, report  # the warm window and the lamp; the cold window is not warm
-    assert report['glow_lights_added'] == 3, report   # lamp: mantle + wash; window: one
-    assert any('glow lamp' in n for n in names) and any('glow window' in n for n in names), names
+    assert report['glow_patches_found'] == 3, report  # the warm window, the lamp and the fire; the cold window is not warm
+    assert report['glow_lights_added'] == 4, report   # lamp: mantle + wash; window: one; fire: one
+    assert any('glow lamp' in n for n in names) and any('glow window' in n for n in names) and any('glow fire' in n for n in names), names
     assert own_obj.hide_render and own_obj.get('look_muted'), 'the scene light should be muted, not deleted'
     assert scene.world.name.startswith(look_stage.LOOK_PREFIX), scene.world.name
     assert scene.compositing_node_group.name.startswith(look_stage.LOOK_PREFIX)
@@ -80,7 +81,7 @@ def main():
     # applying twice is safe
     look_stage.apply_look(scene, samples=4, resolution=(96, 170))
     look_stage.apply_look(scene, samples=4, resolution=(96, 170))
-    assert len([o for o in scene.objects if o.type == 'LIGHT' and o.name.startswith(look_stage.LOOK_PREFIX)]) == 3 + 4
+    assert len([o for o in scene.objects if o.type == 'LIGHT' and o.name.startswith(look_stage.LOOK_PREFIX)]) == 4 + 4
     print('PASS test_look_stage')
 
 

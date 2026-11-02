@@ -52,13 +52,13 @@ say what the viewer should see instead. If the measures and your eyes disagree, 
 def build_packet(candidate, out_folder, also=()):
     out = Path(out_folder)
     (out / 'reference').mkdir(parents=True, exist_ok=True)
-    shutil.copy(candidate, out / ('candidate' + Path(candidate).suffix.lower()))
+    from PIL import Image
+    Image.open(candidate).convert('RGB').save(out / 'candidate.jpg', quality=95)
     for index, extra in enumerate(also, start=2):
-        shutil.copy(extra, out / f'candidate-{index}{Path(extra).suffix.lower()}')
+        Image.open(extra).convert('RGB').save(out / f'candidate-{index}.jpg', quality=95)
     for picture in sorted((HERE / 'reference').glob('*.jpg')):
         shutil.copy(picture, out / 'reference' / picture.name)
     shutil.copy(HERE / 'The look.md', out / 'The look.md')
-    from PIL import Image
     numbers = measure.measure(Image.open(candidate))
     judged = measure.verdicts(numbers)
     (out / 'measures.json').write_text(json.dumps({

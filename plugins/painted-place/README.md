@@ -1,6 +1,6 @@
 # Painted place
 
-What this is: a small Claude plugin for building a place in Blender and bringing it into the series' painted blue-hour look, built so that what was learned once transfers to the next place and the next session. Version 0.1.0, 2 November 2026.
+What this is: a small Claude plugin for building a place in Blender and bringing it into the series' painted blue-hour look, built so that what was learned once transfers to the next place and the next session. Version 0.1.1, 2 November 2026.
 
 Why it is shaped this way: the record of the earlier plugin (`procedural-textures/Procedural textures - project story.md`, logs 32 to 38) shows that lessons stored as procedure and as the plugin's own building blocks made a model's places worse than its unaided ones (blind scores 2.7 against 6.3 and 6.4), while a visible target, a judge in plain words and one fix pass helped most (6.0 to 7.2). So this plugin carries five things and a loop, and no gate.
 
@@ -46,7 +46,8 @@ python3 look/judge.py /tmp/lane/round-1.png --out /tmp/lane/judge-1       # then
 
 - `examples/coal-mine/`: the transfer test (a place built by others, with its own materials: as it was, the look's defaults, one fix pass).
 - `examples/lane-blockout/`: a grey-box lane of 674 named boxes, dressed and lit by the plugin alone.
-- Decisions 50 and 51 in `austerity-explainer/project-notes/Decisions.md`; story logs 38 and 39.
+- `procedural-textures/40 Blind test - a bach on the beach in Samoa/`: the first blind test. A fresh Sonnet builder with the plugin and six words against the same model with Blender alone; six blind judges all chose the plugin's picture for the film (look lens 5.0 against 1.7), while it lost on photograph and request; level overall.
+- Decisions 50 and 51 in `austerity-explainer/project-notes/Decisions.md`; story logs 38 to 40.
 
 ## Traps
 

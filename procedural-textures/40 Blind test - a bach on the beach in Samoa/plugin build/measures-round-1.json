@@ -1,0 +1,40 @@
+{
+  "bands": {
+    "brightness": [
+      0.14,
+      0.35
+    ],
+    "warm_share": [
+      0.15,
+      0.35
+    ],
+    "cool_share": [
+      0.3,
+      0.6
+    ],
+    "warm_light_coverage": [
+      0.004,
+      0.03
+    ]
+  },
+  "pictures": {
+    "round-1.png": {
+      "numbers": {
+        "brightness": 0.30850055430711576,
+        "warm_share": 0.609564606741573,
+        "cool_share": 0.32803370786516856,
+        "warm_light_coverage": 0.14964887640449437
+      },
+      "verdicts": {
+        "brightness": "inside",
+        "warm_share": "high",
+        "cool_share": "inside",
+        "warm_light_coverage": "high"
+      },
+      "dials": {
+        "warm_share": "less warm light: window_light_scale down, or fewer lit windows",
+        "warm_light_coverage": "blown-out light pools: window_light_scale down, exposure down"
+      }
+    }
+  }
+}

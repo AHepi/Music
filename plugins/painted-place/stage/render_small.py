@@ -14,6 +14,8 @@ Dials (all optional):
     --lamp-light 1.0              strength of the gas-lamp lights; a narrow lane with four lamps wanted 0.6
     --sky-light 1.0               strength of the blue sky lights; raise it when a place goes amber all over
     --amber-reflection 1.0        the warm off-frame light beside the camera; 0 turns it off
+    --fire-light 1.0              strength of a fire's or flame's light, separate from the lamps
+    --haze 1.0                    thickness of the haze; raise it when far things should turn paler and bluer
     --max-glow-lights 48          how many glowing patches get a real light (every lamp always does)
     --painterly 0.28              how much of the paint filter is mixed in (0 none, 1 all)
     --rain                        fine slanted rain
@@ -51,6 +53,8 @@ def parse(argv):
     parser.add_argument('--lamp-light', type=float, default=1.0, help='strength of the gas-lamp lights (1.0 = the street)')
     parser.add_argument('--sky-light', type=float, default=1.0, help='strength of the blue sky lights (1.0 = the street)')
     parser.add_argument('--amber-reflection', type=float, default=1.0, help='the warm off-frame light beside the camera (0 = none)')
+    parser.add_argument('--fire-light', type=float, default=1.0, help='strength of the light a fire, flame or brazier gives (separate from lamps)')
+    parser.add_argument('--haze', type=float, default=1.0, help='thickness of the haze (1.0 = the street; 2.0 twice as thick; 0.5 half)')
     parser.add_argument('--max-glow-lights', type=int, default=48)
     parser.add_argument('--painterly', type=float, default=0.28)
     parser.add_argument('--rain', action='store_true')
@@ -85,6 +89,8 @@ def main():
         lamp_light_scale=args.lamp_light,
         sky_light_scale=args.sky_light,
         amber_reflection=args.amber_reflection,
+        fire_light_scale=args.fire_light,
+        haze_scale=args.haze,
     )
     out = os.path.abspath(args.out)
     os.makedirs(os.path.dirname(out), exist_ok=True)

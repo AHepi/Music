@@ -11,6 +11,8 @@ scene's shapes or materials. The look is the half of that bundle that does not d
   - Cycles with the AgX view, "Medium High Contrast", exposure 0.5,
   - a restrained painterly finish: fog glow, then an anisotropic Kuwahara filter mixed in at 28 percent,
   - optionally fine slanted rain, and optionally the camera set like a standing person (32 mm, eye 1.65 m).
+Dials: exposure, window_light_scale, lamp_light_scale, fire_light_scale (flames, fires, embers, braziers get their own
+low wide light), sky_light_scale, amber_reflection, haze_scale, painterly_mix, max_glow_lights.
 
 Everything it adds is named "LOOK • ..." so it can be found and removed. The scene's own lights are
 muted (not deleted) unless keep_scene_lights=True.
@@ -185,7 +187,7 @@ def remove_look(scene):
 def apply_look(scene, *, keep_scene_lights=False, replace_world=True, haze=True, rain=False,
                camera_like_a_person=False, samples=64, resolution=(1080, 1920), glow_lights=True,
                max_glow_lights=40, painterly_mix=0.28, exposure=0.5, seed=714035, window_light_scale=1.0,
-               lamp_light_scale=1.0, sky_light_scale=1.0, amber_reflection=1.0):
+               lamp_light_scale=1.0, sky_light_scale=1.0, amber_reflection=1.0, haze_scale=1.0, fire_light_scale=1.0):
     """Apply the look. Returns a short report dictionary of what was added."""
     report = {}
     remove_look(scene)
@@ -212,15 +214,23 @@ def apply_look(scene, *, keep_scene_lights=False, replace_world=True, haze=True,
         patches = warm_glowing_patches(scene)
         # every lamp gets a light; windows nearest the camera first, up to the cap
         camera_spot = scene.camera.matrix_world.translation if scene.camera else centre
-        lamp_words = ('lamp', 'lantern', 'bulb', 'flame', 'mantle')
-        lamps = [p for p in patches if any(word in p[4].lower() for word in lamp_words)]
-        windows = [p for p in patches if p not in lamps]
+        lamp_words = ('lamp', 'lantern', 'bulb', 'mantle')
+        fire_words = ('flame', 'fire', 'ember', 'brazier', 'hearth')
+        fires = [p for p in patches if any(word in p[4].lower() for word in fire_words)]
+        lamps = [p for p in patches if p not in fires and any(word in p[4].lower() for word in lamp_words)]
+        windows = [p for p in patches if p not in lamps and p not in fires]
         windows.sort(key=lambda p: (p[0] - camera_spot).length)
-        chosen = lamps + windows[:max(0, max_glow_lights - len(lamps))]
+        chosen = fires + lamps + windows[:max(0, max_glow_lights - len(lamps) - len(fires))]
         added = 0
         for patch_centre, normal, area, strength, material_name in chosen:
-            is_lamp = any(word in material_name.lower() for word in ('lamp', 'lantern', 'bulb', 'flame', 'mantle'))
-            if is_lamp:
+            is_fire = any(word in material_name.lower() for word in fire_words)
+            is_lamp = (not is_fire) and any(word in material_name.lower() for word in lamp_words)
+            if is_fire:
+                # a fire: a low, wide, red-amber light that pools on the ground close by and falls off fast
+                _light('glow fire ' + material_name, 'POINT', patch_centre + Vector((0, 0, 0.25)), (1.0, 0.42, 0.10),
+                       260 * fire_light_scale, collection, size=0.45)
+                added += 1
+            elif is_lamp:
                 # like the street's gas mantle plus its pavement wash
                 _light('glow lamp ' + material_name, 'POINT', patch_centre + normal * 0.05, AMBER_LIGHT, 460 * lamp_light_scale, collection, size=0.19)
                 _light('glow lamp wash ' + material_name, 'AREA', patch_centre + Vector((0, 0, -0.15)), AMBER_WASH, 350 * lamp_light_scale, collection,
@@ -290,7 +300,7 @@ def apply_look(scene, *, keep_scene_lights=False, replace_world=True, haze=True,
         tree = fog.node_tree
         tree.nodes.clear()
         volume = tree.nodes.new('ShaderNodeVolumePrincipled')
-        volume.inputs['Density'].default_value = HAZE_DENSITY
+        volume.inputs['Density'].default_value = HAZE_DENSITY * haze_scale
         volume.inputs['Color'].default_value = HAZE_COLOUR
         volume.inputs['Anisotropy'].default_value = 0.12
         out = tree.nodes.new('ShaderNodeOutputMaterial')

@@ -10,7 +10,7 @@ What this file is: the target. One page a builder reads before building and a ju
 | `painting - rainy tenement street at dusk.jpg` | A series painting: gas lamps and lit windows in rain, wet cobbles mirroring them |
 | `painting - pithead at sunset.jpg` | A series painting: the headframe dark against the last light, lit windows answering it |
 | `render - Rain on the Old Curve street.jpg` | A Blender render (Cycles) the owner called close enough: the look stage's numbers come from its scene |
-| `render - coal mine with the look stage.jpg` | The coal mine after the look stage and one fix pass (the transfer test, 2 November 2026) |
+| `render - coal mine with the look stage.jpg` | The coal mine after the look stage and one fix pass (the transfer test, 2 November 2026). A reference for light, colour and air only: its smoke is balloon-shaped, which is a shape fault, not the look |
 
 The two paintings with words in them carry their captions baked in; a built place never has words in it.
 
