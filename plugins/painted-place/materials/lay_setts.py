@@ -83,6 +83,7 @@ def _sett_prototypes(material, collection, count=18):
         bevel.width = 0.014
         bevel.segments = 3
         obj.location = (0, 0, -60 - i * 2)
+        obj['prototype'] = True
         made.append(obj)
     return made
 
@@ -106,6 +107,7 @@ def _flag_prototypes(material, collection, count=8):
         for existing in list(obj.users_collection):
             existing.objects.unlink(obj)
         collection.objects.link(obj)
+        obj['prototype'] = True
         made.append(obj)
     return made
 
@@ -153,8 +155,11 @@ def _scatter(name, points, scales, rotations, source_collection, target_collecti
 
 
 def lay_setts_on(road, cobble_material, bed_material, seed=714035):
-    """Lay setts over a flat road object. The road itself becomes the dark bed 7 cm lower."""
+    """Lay setts over a flat road object. The road itself becomes the dark bed 7 cm lower. Laying twice does nothing new."""
     scene = bpy.context.scene
+    already = bpy.data.objects.get(road.name + ' • laid setts')
+    if already is not None:
+        return already, len(already.data.vertices)
     x0, x1, y0, y1, top = _footprint(road)
     rng = random.Random(seed)
     prototypes = _collection(PROTOTYPE_COLLECTION, scene)
@@ -196,6 +201,9 @@ def lay_setts_on(road, cobble_material, bed_material, seed=714035):
 def lay_flags_on(pavement, pavement_material, seed=714036):
     """Lay worn flagstones over a flat pavement object, in strips along its length. The object stays as the bed."""
     scene = bpy.context.scene
+    already = bpy.data.objects.get(pavement.name + ' • laid flags')
+    if already is not None:
+        return already, len(already.data.vertices)
     x0, x1, y0, y1, top = _footprint(pavement)
     rng = random.Random(seed)
     prototypes = _collection(PROTOTYPE_COLLECTION, scene)

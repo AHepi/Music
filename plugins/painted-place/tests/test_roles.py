@@ -15,6 +15,7 @@ CASES = {
     'lamp cap iron 2': 'iron', 'puddle water 35': 'water', 'roof slate': 'roof', 'chimney smoke': 'smoke',
     'chimney stack wall': 'wall', 'cart wheel iron': 'iron', 'cart bed wood': 'wood', 'downpipe iron': 'iron',
     'road setts': 'road', 'pavement flags right': 'pavement', 'Cube': None, 'far hills earth': 'earth',
+    'beach rippled sand plaster': 'sand', 'sea water': 'sea', 'surfboard leaning wood': 'wood', 'shore boulder stone': 'rock',
 }
 
 
@@ -26,6 +27,8 @@ def main():
         names = choice if isinstance(choice, list) else [choice]
         inventory = open(os.path.join(os.path.dirname(roles.MATERIALS_BLEND), 'Material inventory.txt'), encoding='utf-8').read()
         for n in names:
+            if n.startswith('ROLE •'):
+                continue  # made in code by apply_by_role, not taken from Materials.blend
             assert n in inventory, f'{role}: {n} is not in Materials.blend'
     print('PASS test_roles')
 

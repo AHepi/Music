@@ -743,6 +743,19 @@ overturn any of them in one line. Changes to the project must follow this file.
 51. **Claude commits to the repository itself** (2 November 2026). Asked whether folder 38 and the updated project story should be committed by
     Claude or added by you, you chose "Yes, commit them". Commits go to the branch you pointed to (`ccr-e7298c9b-n19qkt`).
 
+52. **The details are part of the plugin** (2 November 2026, after the first blind test), your words: "Ok. But notice the complete lack of details.
+    I should have told you before that the pavement in the city scene was great. But the rest of geometry and the textures were terrible. The repos
+    example had water, grime, weeds, moss, weathering. All missing. This is the failure I mentioned at the start."
+
+### Claude's calls for item 52
+
+- The dressing step of `painted-place` (0.2.0) now builds flat stone walls up into ashlar with dressed windows (the street bundle's facades, read from
+  the builder's own walls and windows) and lays the details from the place's own shape (the street bundle's wear and street-life systems, and the
+  weathering kit's ideas: puddles, gutter water, damp feet, stains, rust, weeds, moss, rubbish, whitened steps). A builder cannot skip them: they run
+  inside the same call that gives the materials. Each has a dial and an off switch.
+- The weathering kit itself (`procedural-textures/kits/weathering/`) is not copied in: it needs a settings file per place and mask packs drawn on the
+  rented cards. Its ideas are carried as code that reads any place. Overturn in one line.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

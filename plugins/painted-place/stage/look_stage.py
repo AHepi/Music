@@ -66,6 +66,10 @@ def scene_bounds(scene):
     for obj in scene.objects:
         if obj.type != 'MESH' or obj.hide_render or _looks_like_sky_or_ground_backdrop(obj):
             continue
+        if obj.get('prototype') or obj.name.startswith(LOOK_PREFIX):
+            continue
+        if max((obj.matrix_world @ Vector(c)).z for c in obj.bound_box) < -20:
+            continue  # parked out of sight below the place (an instancing source)
         for corner in obj.bound_box:
             world = obj.matrix_world @ Vector(corner)
             low = Vector((min(low.x, world.x), min(low.y, world.y), min(low.z, world.z)))

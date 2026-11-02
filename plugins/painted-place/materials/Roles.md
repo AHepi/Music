@@ -25,6 +25,9 @@ Build plain shapes and put the role in the name: `left terrace 03 wall`, `window
 | lamp glass | `Lantern • glowing imperfect amber glass` (glows; the look stage adds the gas mantle and its pavement wash) | `lamp glass`, `lamp head`, `lamp pane`, lantern |
 | flame | `LAMP • honey flame glow` | mantle, flame, fire, glow |
 | water | `PUDDLE • shallow transparent reflective film` | puddle, water, gutter |
+| rock | `STONE • unique sandstone / damp soot` (natural stone: never built up into ashlar) | boulder, rock, reef, cliff, headland, crag, outcrop |
+| sand | `ROLE • dry sand with wind grain` (made in code: the street bundle has no sand) | sand, dune, beach |
+| sea | `ROLE • dark sea with small waves` (made in code) | sea, ocean, lagoon, harbour |
 | moss | `MOSS • subdued olive crevices` | moss, algae, lichen |
 | grime | `GRIME • dark damp organic residue` | grime, soot, stain, dirt; `wall foot` |
 | recess | `RECESSES • near-black blue` | recess, void, inside, interior, dark, shadow |
@@ -46,4 +49,5 @@ The stone, cobble, pavement and slate materials are built in world space: weathe
 - An object with its own material and no role word keeps its material; the report's `unassigned` list says which.
 - A merged mesh with several material slots gets one material in every slot. Build one object per role.
 - `window` alone is a dark window. Say `window lit` for the ones that should glow.
+- `stone` means a built stone wall, and a built wall is laid up in ashlar courses. A boulder, a rock or a reef is `rock`: name it so.
 - The glass materials glow but do not light the street by themselves; that is the look stage's job (it finds every glowing pane and puts a real light outside it).

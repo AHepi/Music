@@ -101,6 +101,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   bach on the beach in Samoa. Modern day." against the same model with Blender alone. Six blind judges all chose the plugin's picture for the
   film (look lens 5.0 against 1.7); it lost on photograph (2.3 against 4.2) and request (5.0 against 7.2); level overall (4.1 against 4.3).
   The old plugin's picture was chosen by nobody and sat four points below unaided. Plugin 0.1.1 carries the four faults the test found.
+- **The details are in the plugin (log 41, 2 November, evening):** `painted-place` 0.2.0. Your words after the blind test: "notice the
+  complete lack of details ... The repos example had water, grime, weeds, moss, weathering. All missing." The dressing now builds flat stone walls
+  up into ashlar with dressed windows and lays puddles, gutter water, damp, stains, rust, weeds, moss and rubbish from the place's own shape, in
+  the same call. Shown on the lane (before and after); the beach bach changes little, because its details are a shore's, not a street's.
 - **Nothing running:** no rented machines; the local Blender connection is stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
@@ -713,7 +717,33 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     (the plugin builder had about one hour, the control 1 h 35 min), a request lens in the judge's rubric, a per-third brightness measure.
     Record: `40 Blind test - a bach on the beach in Samoa/`.
 
+41. **The details go into the plugin (2 November, 19:00 to 21:30).** You said: "Ok. But notice the complete lack of details. I should have told you
+    before that the pavement in the city scene was great. But the rest of geometry and the textures were terrible. The repos example had water,
+    grime, weeds, moss, weathering. All missing. This is the failure I mentioned at the start." **What I had done wrong:** I left the details out of
+    `painted-place` as "the old plugin's building blocks", when the record says the kits worked and it was the old plugin's trees and light that
+    failed; so when a judge asked for "everything old and used", the builder had no means. **Built (plugin 0.2.0):** `lay_facade.py`: every flat
+    stone wall face the camera can see is laid up in courses of chipped ashlar (the street bundle's facades.py, reading the builder's own walls and
+    windows instead of one street's coordinates), cut back around every window and door so they sit in deep reveals; windows get jambs, lintel,
+    sill, drip line and sash; faces get plinth, first-floor band, cornice and quoins; roof slabs get slate courses; pipes and wall lamps move out
+    with the thicker face. `lay_details.py`: puddles placed where a lamp or lit window will mirror in them (the light's reflection point), gutter
+    water at the real gutter height, damp wall feet starting where the ground really meets the wall, soot and run-off stains, rust streaks and
+    rusted pipes, weeds and moss at wall feet, along kerbs and in the joints between laid setts, leaves, fallen flakes, and rubbish (coal, cinders,
+    ash, straw, paper in a street; shells, coral, seaweed on a shore), whitened doorsteps. Every height comes from a ray cast down onto the real
+    ground (rays hit the laid stones). Both run inside the dressing call; dials `--wet`, `--grime`, `--growth`, `--litter`, switches `--no-facade`,
+    `--no-details`. New roles: `rock` (boulders, reefs: never laid up in ashlar), `sand` and `sea` (made in code). A fourth test (`test_dressing.py`)
+    builds a tiny street and checks all of it, and that a second dressing changes nothing. **Shown:** the lane, same boxes, camera and dials as
+    round 5, before and after (`plugins/painted-place/examples/lane-blockout/before and after the details.jpg`): built stone facades with recessed
+    dressed windows, haze, puddles with lamp reflections, gutter water, weeds in the joints, rubbish and leaves along the gutters. The beach bach's
+    round-2 scene re-dressed changes little: its walls are timber and its details should be a shore's (wet sand line, driftwood, husks, salt-grey
+    boards), which the street bundle never had. **Failures on the way:** a probe for "buried" faces counted windows as walls and skipped most street
+    faces (fixed: only another wall buries a face); blocks touching an opening were dropped whole, leaving bare mortar around windows (fixed: cut
+    back to the opening); details at wall feet landed on the new plinth band or under the flags (fixed: ground found by rays, plinth stepped over);
+    rubbish came out metres wide because instancing resets an object's own scale (fixed: size written into the shape); the stones' parked pattern
+    pieces sat 100 to 240 m below the street and were counted in the look stage's measure, so the haze box was underground in the lane's rounds 2 to
+    5 (fixed); a second dressing laid the setts again and sank the road (fixed and tested). **Not done:** no blind judging of the new lane; no
+    full-size picture; shore details beyond shells, coral and seaweed; weathered timber; the bach's own shapes (its toy fire and props).
+
 ## Next step
 
-Decide whether the plugin's own test should also ask the judge about the request (not only the look), then run the second blind test with
-equal clocks: a different kind of place (an interior, or a daylight place once the look stage has a daylight variant) and the same two builders.
+Make the shore and timber details (a wet band at the waterline, driftwood and husks, salt-grey split boards with peeling paint), then run the blind
+test again on a new place with equal clocks, judging the request as well as the look.

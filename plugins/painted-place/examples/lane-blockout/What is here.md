@@ -28,6 +28,14 @@ Round 5 sits inside every band but the warm share. By eye it is in the family: w
 1. **A flat road with the cobble material reads as a polished floor** (round 1). The bundle's road was real stones; the material alone is only a sheen. Fix: `materials/lay_setts.py`, called by `apply_by_role.py` for every flat `road` and `pavement`: the bundle's eighteen unique chipped setts and eight worn flags, scattered live over the object's footprint; the flat object stays as the dark bed. 12,279 setts here, laid in a second.
 2. **Every glowing window got the same light** (round 1 to 3): a floor of 40 W made a dim room shine like a lit one, and a lane with 93 glowing panes blazed. Fix: the floor is 8 W, so a dim pane gives a dim light; and three new dials in the look stage (`--lamp-light`, `--sky-light`, `--amber-reflection`) because a narrow lane with four lamps and the warm off-frame light beside the camera went amber all over.
 
+## Round 6: the details (plugin 0.2.0, 2 November, evening)
+
+The owner, after the blind test: "Ok. But notice the complete lack of details. I should have told you before that the pavement in the city scene was great. But the rest of geometry and the textures were terrible. The repos example had water, grime, weeds, moss, weathering. All missing." Same boxes, same camera, same dials as round 5; the dressing now also builds the walls up and lays the details (`round-6 - with facades and details.jpg`, `close look - left wall foot with facades and details.jpg`, `before and after the details.jpg`; counts in `dressing-report.json`):
+
+- 39 walls, 60 faces laid up in about 7,000 chipped ashlar blocks; 251 windows dressed with jambs, lintels, sills, drip lines and sashes; bands, cornices and quoins; 380 slate course lines; 19 downpipes moved out with the thicker face.
+- 11 puddles (placed where lamps and lit windows mirror in them), 28 runs of gutter water, about 240 damp wall feet, about 130 stains, 19 rust streaks and rusted pipes, about 530 weed tufts at wall feet and kerbs, about 80 more in sett joints, about 200 moss patches, about 900 leaves and fragments, about 5,500 pieces of coal, cinders, ash, straw and paper, 19 whitened doorsteps.
+- A bug found on the way: the stones' parked pattern pieces (100 to 240 m below the street) were counted in the look stage's measure of the place, so its haze box sat underground in rounds 2 to 5. Fixed; the haze now shows.
+
 ## Not done
 
 - No blind judge was run on these pictures (the measures and my eyes only).

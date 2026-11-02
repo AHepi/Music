@@ -32,6 +32,8 @@ from mathutils import Vector
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import lay_setts  # noqa: E402
+import lay_facade  # noqa: E402
+import lay_details  # noqa: E402
 
 MATERIALS_BLEND = os.path.join(HERE, 'Materials.blend')
 
@@ -62,7 +64,50 @@ ROLE_MATERIALS = {
     'weed': 'Weed • rain olive',
     'leaf': 'Fallen leaf • ochre',
     'paper': 'PAPER • aged torn fragments',
+    'rock': 'STONE • unique sandstone / damp soot',
+    'sand': 'ROLE • dry sand with wind grain',
+    'sea': 'ROLE • dark sea with small waves',
 }
+
+CODE_MATERIALS = {}  # made here, because Materials.blend has no such surface
+
+
+def _code_material(name):
+    material = bpy.data.materials.get(name)
+    if material is not None:
+        return material
+    material = bpy.data.materials.new(name)
+    material.use_nodes = True
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    geometry = nodes.new('ShaderNodeNewGeometry')
+    noise = nodes.new('ShaderNodeTexNoise')
+    links.new(geometry.outputs['Position'], noise.inputs['Vector'])
+    bump = nodes.new('ShaderNodeBump')
+    links.new(bump.outputs['Normal'], principled.inputs['Normal'])
+    if 'sand' in name:
+        noise.inputs['Scale'].default_value = 3.0
+        noise.inputs['Detail'].default_value = 6
+        ramp = nodes.new('ShaderNodeValToRGB')
+        ramp.color_ramp.elements[0].color = (0.15, 0.14, 0.11, 1)   # sand in this look is a dark, damp grey-brown, never a pale floor
+        ramp.color_ramp.elements[1].color = (0.28, 0.25, 0.20, 1)
+        links.new(noise.outputs['Fac'], ramp.inputs[0])
+        links.new(ramp.outputs['Color'], principled.inputs['Base Color'])
+        grain = nodes.new('ShaderNodeTexNoise')
+        grain.inputs['Scale'].default_value = 900.0
+        links.new(geometry.outputs['Position'], grain.inputs['Vector'])
+        links.new(grain.outputs['Fac'], bump.inputs['Height'])
+        bump.inputs['Strength'].default_value = 0.25
+        principled.inputs['Roughness'].default_value = 0.95
+    else:
+        noise.inputs['Scale'].default_value = 1.6
+        noise.inputs['Detail'].default_value = 4
+        links.new(noise.outputs['Fac'], bump.inputs['Height'])
+        bump.inputs['Strength'].default_value = 0.35
+        principled.inputs['Base Color'].default_value = (0.006, 0.020, 0.028, 1)
+        principled.inputs['Roughness'].default_value = 0.06
+        principled.inputs['IOR'].default_value = 1.333
+    return material
 
 # word pairs first (they beat single words), then single words in priority order
 PAIR_WORDS = [
@@ -75,6 +120,9 @@ PAIR_WORDS = [
     (('cart', 'wheel'), 'iron'), (('chimney', 'pot'), 'trim'),
 ]
 SINGLE_WORDS = [
+    ('boulder', 'rock'), ('rock', 'rock'), ('reef', 'rock'), ('cliff', 'rock'), ('headland', 'rock'), ('crag', 'rock'), ('outcrop', 'rock'),
+    ('sand', 'sand'), ('dune', 'sand'), ('beach', 'sand'),
+    ('sea', 'sea'), ('ocean', 'sea'), ('lagoon', 'sea'), ('harbour', 'sea'), ('harbor', 'sea'),
     ('lantern', 'lamp glass'), ('mantle', 'flame'), ('flame', 'flame'), ('fire', 'flame'), ('glow', 'flame'),
     ('kerb', 'trim'), ('curb', 'trim'), ('sill', 'trim'), ('lintel', 'trim'), ('quoin', 'trim'), ('cornice', 'trim'),
     ('surround', 'trim'), ('dressing', 'trim'), ('trim', 'trim'), ('plinth', 'trim'),
@@ -125,7 +173,11 @@ def role_for(obj, roles_file):
 
 
 def append_materials(names):
-    """Bring the named materials in from Materials.blend (once); return them by name."""
+    """Bring the named materials in from Materials.blend (once), or make the few the file lacks; return them by name."""
+    for name in names:
+        if name.startswith('ROLE •'):
+            _code_material(name)
+    names = list(names)
     wanted = [n for n in names if n not in bpy.data.materials]
     if wanted:
         with bpy.data.libraries.load(MATERIALS_BLEND, link=False) as (data_from, data_to):
@@ -183,10 +235,36 @@ def fit_projection(material, low, high):
 
 
 def _is_laid_or_source(obj):
-    return 'LAID •' in obj.name or '• laid' in obj.name or any('LAID •' in c.name for c in obj.users_collection)
+    return (obj.name.startswith(('LAID •', 'DETAIL •', 'FACADE •', 'LOOK •')) or '• laid' in obj.name or bool(obj.get('prototype'))
+            or any(c.name.startswith(('LAID •', 'DETAIL •', 'FACADE •')) for c in obj.users_collection))
 
 
-def apply(scene, roles_file=None, seed=7, setts=True):
+FACADE_MATERIALS = {'trim': 'STONE • worn honey-grey architectural dressings', 'dark': 'RECESSES • near-black blue',
+                    'wood': 'WOOD • peeling dark painted doors', 'mortar': 'MORTAR • dark eroded joints',
+                    'slate': 'SLATE • soot-dark irregular roofs'}
+DETAIL_MATERIALS = {'water': 'PUDDLE • shallow transparent reflective film', 'grime': 'GRIME • dark damp organic residue',
+                    'soot': 'Damp • fine dark soot', 'rust': 'RUST • rain-aged iron', 'moss': 'MOSS • subdued olive crevices',
+                    'stone': 'STONE • worn honey-grey architectural dressings', 'paper': 'PAPER • aged torn fragments'}
+DETAIL_GREENS = ['Weed • rain olive', 'Weed • dark ivy', 'Weed • yellowed seed blades']
+DETAIL_LEAVES = ['Fallen leaf • peat brown', 'Fallen leaf • ochre']
+
+
+def facade_materials():
+    by_name = append_materials(sorted(set(FACADE_MATERIALS.values()) | set(WALL_SHADES)))
+    found = {key: by_name[name] for key, name in FACADE_MATERIALS.items()}
+    found['shades'] = [by_name[name] for name in WALL_SHADES]
+    return found
+
+
+def detail_materials():
+    by_name = append_materials(sorted(set(DETAIL_MATERIALS.values()) | set(DETAIL_GREENS) | set(DETAIL_LEAVES)))
+    found = {key: by_name[name] for key, name in DETAIL_MATERIALS.items()}
+    found['greens'] = [by_name[name] for name in DETAIL_GREENS]
+    found['leaves'] = [by_name[name] for name in DETAIL_LEAVES]
+    return found
+
+
+def apply(scene, roles_file=None, seed=7, setts=True, facade=True, details=True, wet=1.0, grime=1.0, growth=1.0, litter=1.0):
     rng = random.Random(seed)
     plan = {}
     for obj in scene.objects:
@@ -229,8 +307,18 @@ def apply(scene, roles_file=None, seed=7, setts=True):
                 laid[name] = {'flags': count}
     unassigned = [o.name for o in scene.objects if o.type == 'MESH' and o.name not in plan and max(o.dimensions) <= 400
                   and not _is_laid_or_source(o) and len(o.data.polygons) > 0]
-    return {'objects_dressed': len(plan), 'by_role': counts, 'unassigned': unassigned, 'laid_stones': laid,
-            'projection_fitted_to': {'low': tuple(round(v, 1) for v in low), 'high': tuple(round(v, 1) for v in high), 'nodes': fitted}}
+    for name, role in plan.items():
+        obj = scene.objects.get(name)
+        if obj is not None and not obj.get('place_role'):
+            obj['place_role'] = role
+    report = {'objects_dressed': len(plan), 'by_role': counts, 'unassigned': unassigned, 'laid_stones': laid,
+              'projection_fitted_to': {'low': tuple(round(v, 1) for v in low), 'high': tuple(round(v, 1) for v in high), 'nodes': fitted}}
+    if facade:
+        report['facade'] = lay_facade.lay_facades(scene, facade_materials(), role_from_name)
+    if details:
+        report['details'] = lay_details.lay_details(scene, detail_materials(), role_from_name,
+                                                    wet=wet, grime=grime, growth_amount=growth, litter_amount=litter)
+    return report
 
 
 def main():
@@ -241,10 +329,17 @@ def main():
     parser.add_argument('--roles', help='a JSON file: {"object name": "role"}')
     parser.add_argument('--report', help='write the report here as JSON')
     parser.add_argument('--no-setts', action='store_true', help='leave flat roads and pavements flat')
+    parser.add_argument('--no-facade', action='store_true', help='leave flat stone walls flat (no ashlar, dressings, sashes)')
+    parser.add_argument('--no-details', action='store_true', help='no puddles, damp, stains, rust, moss, weeds or litter')
+    parser.add_argument('--wet', type=float, default=1.0, help='puddles and gutter water (0 none, 1 the street, 2 twice)')
+    parser.add_argument('--grime', type=float, default=1.0, help='damp wall feet, soot and run-off stains, rust under iron')
+    parser.add_argument('--growth', type=float, default=1.0, help='moss and weeds')
+    parser.add_argument('--litter', type=float, default=1.0, help='leaves, fragments and fallen flakes')
     args = parser.parse_args(argv)
     bpy.ops.wm.open_mainfile(filepath=os.path.abspath(args.scene))
     roles_file = json.load(open(args.roles)) if args.roles else None
-    report = apply(bpy.context.scene, roles_file, setts=not args.no_setts)
+    report = apply(bpy.context.scene, roles_file, setts=not args.no_setts, facade=not args.no_facade, details=not args.no_details,
+                   wet=args.wet, grime=args.grime, growth=args.growth, litter=args.litter)
     bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.save_as))
     print(json.dumps(report, indent=2))
     if args.report:
