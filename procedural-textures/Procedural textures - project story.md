@@ -91,6 +91,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **Why the lessons did not transfer, from the record (38):** they were stored as procedure and as the plugin's own building blocks; what
   carried was a visible target, a judge in plain words, and code for the part a model will not do from a guide. Proposal in
   `38 Look stage - the street's look on the coal mine/38 Proposal - a plugin whose lessons transfer.md`.
+- **The new small plugin exists (log 39, 2 November):** `plugins/painted-place` 0.1.0, listed in the marketplace beside `explainer-film`:
+  the look (five reference pictures and one page with measured bands), the judge (measures and a blind rubric for a fresh model), the look
+  stage with dials, the street bundle's 45 materials applied by role words with laid setts and flags on flat roads and pavements, and the
+  loop as one short skill. Three tests pass. Second test: a grey-box lane of 674 named boxes went through the plugin alone and came out
+  as a wet-sett lane in the family after four dial rounds; two plugin faults found and fixed on the way. Not yet: a blind judge run, a blind
+  Sonnet build, a second kind of place, a moving camera.
 - **Nothing running:** no rented machines; the local Blender connection is stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
@@ -656,8 +662,29 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     desk, a style bible with measured colours, and a video layer for the Pinker toolkit; the style bible's measures are what `measure.py`
     uses here; the rest is kept aside.
 
+39. **The new small plugin, built and tried on a lane from nothing (2 November, evening).** You chose "New small plugin beside the old
+    (Recommended)" and "Yes, commit them" (decisions 50 and 51). **Built:** `plugins/painted-place` 0.1.0: `look/` (The look.md, five
+    reference pictures, `measure.py` with the bands, `judge.py` that packs a blind judging folder, the `blind-judge` agent), `stage/`
+    (`look_stage.py` from log 38 plus `render_small.py` with dials: exposure, window light, lamp light, sky light, off-frame amber light,
+    paint mix, rain, standing-person camera, keep lights, keep world, no haze), `materials/` (the street bundle's `Materials.blend`, 45
+    materials; `apply_by_role.py` reads role words from object names, a `place_role` property or a roles file, appends the materials once,
+    stretches the stone picture's projection over the place, and lays the bundle's eighteen unique setts and eight flags on any flat road or
+    pavement; `Roles.md`), one skill (the loop), `tests/` (three, all pass under the bpy module), `examples/` (the coal mine from log 38 and
+    the lane). The marketplace lists it; CLAUDE.md names both plugins. **The lane test:** `build_lane.py` made 674 named boxes and
+    cylinders with no materials and no lights; the dressing gave all 673 meshes a material from their names (none unassigned) and laid
+    12,279 setts and 690 flags; the look stage lit it. Round 1 (defaults) was a polished floor between blazing facades: brightness 0.30,
+    warm 69 percent, warm light 7.0 percent. Two plugin faults found: a flat road with the cobble material is only a sheen (the bundle's road
+    was real stones) - fixed with `lay_setts.py`; and every glowing pane got at least 40 W, so a lane with 93 panes blazed - fixed with an 8 W
+    floor and the three new light dials. Round 5 (window light 0.3, lamp light 0.6, sky light 1.6, no off-frame amber, exposure 0.3):
+    brightness 0.19, warm 51 percent, cool 33, warm light 2.7 percent; wet setts mirroring the cobalt sky with amber pools under the lamps,
+    haze down the lane. Inside every band but the warm share, which this camera's wall-filled frame explains. About 110 s a picture here.
+    **Failures on the way:** my first node-link check used `is` on Blender's wrappers and reported the materials as unlinked (they were
+    fine; `==` is right); the first role priorities turned window surrounds into windows and a lamp cap into trim (fixed with word pairs).
+    **Not done:** no blind judge run (the measures and my eyes only), no blind Sonnet build, no second kind of place (interior, yard,
+    daylight), no moving camera, no full-size picture. Pictures and records: `plugins/painted-place/examples/`.
+
 ## Next step
 
-Decide the plugin's shape: a new small plugin beside the old one (the look, the judge, the look stage, proven materials by role, the
-loop), or the old plugin rebuilt around those five things. Then the first blind test on a place that is not a village. The proposal with
-the two options is in `38 Look stage - the street's look on the coal mine/38 Proposal - a plugin whose lessons transfer.md`.
+The first blind test of `painted-place`: one Sonnet helper gets the plugin and your plain words for a place that is not a village (a yard, a
+harbour, a tea house seen from its doorway), builds it, runs the loop, and a fresh judge scores the result beside a plugin-free build of the
+same words. That is the test the old plugin failed at 2.7 against 6.3; it says whether this shape transfers.
