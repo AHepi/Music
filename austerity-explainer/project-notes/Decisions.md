@@ -756,6 +756,39 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The weathering kit itself (`procedural-textures/kits/weathering/`) is not copied in: it needs a settings file per place and mask packs drawn on the
   rented cards. Its ideas are carried as code that reads any place. Overturn in one line.
 
+53. **Beach and timber details, then a fair blind test** (2 November 2026, evening), your words: "Yeah good idea. Do it." They answered the
+    proposal: "I build the beach and timber details, then rerun the blind test on a new place with equal time for both builders, judging the
+    request as well as the look."
+
+### Claude's calls for item 53
+
+- `painted-place` 0.3.0 carries the new details as code that reads any place: timber gets three looks (weathered boards with one faded paint
+  per building, wet bark on trunks, the street's painted wood on doors and frames) and plain timber walls are laid as boards; a survey of what
+  the camera sees dresses the foot of anything standing (rot and mould up timber, weeds, moss and leaves, sand drifted against it); water's edges
+  are found by looking down over the place (by the sea: wet sand, foam and a swash line, surf, a wrack line with a few of today's scraps,
+  driftwood; by a pond or river: a mossy bank and leaves); what trees drop lies under them. Each has a dial and an off switch.
+- The plugin's own judge now gives two verdicts, the look and the request; the person's words go into its packet.
+- The new place is "A tea house.": the first example in your first message ("ask for a different scene, like a tea house or modern street").
+- Equal clocks: both builders start together and stop at the same minute (80 minutes). Both final scenes are redrawn the same way (1080 x 1920,
+  64 samples) for the judges.
+- The builder without the plugin gets the five reference pictures and the look page, as you described doing ("When I give an LLM a reference
+  image like these, and ask for a different scene"). The first blind test's control had the words only, so this test is the harder one for the
+  plugin: what it can win on now is its tools, not the target.
+- The judges score four things: could it be a photograph, does it deliver the request, could it be a backdrop in the look, and how old and used
+  its surfaces are (wet, grime, moss, weeds, weathering). Overturn any of these in one line.
+
+54. **Try Poly Haven's scanned surfaces for the look** (2 November 2026, 22:38), your words: "Just a hint. See if you can improve the look
+    using PBR textures from poly haven." (Your interruption also stopped the blind test's two builders and the checker; they had drawn nothing.)
+
+### Claude's calls for item 54
+
+- Six free Poly Haven sets (CC0, public domain) are shipped inside `painted-place` (about 17 MB, in `materials/textures/`): weathered wood,
+  deck planks, palm bark, furrowed bark, damp sand, and a sandstone used as grain over the street's own stone. Shipped, not downloaded on the
+  spot, because a blind test's builder has no internet.
+- They replace only what the plugin made in code (timber, bark, sand, driftwood) and add grain and relief to the street's stone; the setts are
+  left as they were, since you called the street's pavement great. `--no-scans` dresses without them.
+- The blind test stays stopped until you say to start it again (with the scans in). Overturn any of these in one line.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

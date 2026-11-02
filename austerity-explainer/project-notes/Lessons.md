@@ -540,6 +540,62 @@ Only failures in doing the work belong here. Newest at the bottom.
     `US$0.048` was meant (the shell read `$0` as its own name); a checker found it. Fix: `US$0.` put back and the file loaded again to check it is
     still valid. Write any text with prices through the file-writing tool or a quoted here-document, then search the file for `bin/bash` (log 38).
 
+## 2026-11-02 (the painted-place plugin: the first blind test, the details, timber and the shore; logs 40 to 42)
+
+143. **The judging rubric named a file the packet did not hold.** It asked for `candidate.jpg` while the packet held a `.png` (log 40). Fix: the
+    packet always writes `candidate.jpg`. Check a rubric's file names against the packet it ships with.
+144. **A probe for "buried" walls counted windows as walls.** Most street faces were skipped as hidden behind something (log 41). Fix: only
+    another wall buries a face, and three probes must all hit. A "something is in front" test must say which things count.
+145. **Stone blocks touching an opening were dropped whole.** Bare mortar showed round every window (log 41). Fix: a block that meets an
+    opening is cut back to its edge.
+146. **Instancing resets each piece's own scale.** Rubbish meant to be 4 cm came out metres wide (log 41). Fix: every piece's size is written
+    into its shape, never into its object's scale.
+147. **Parked pattern pieces were counted as part of the place.** Pieces parked 100 to 240 m below the street put the look stage's haze box
+    underground in four lane rounds (log 41). Fix: the look stage's measure skips anything marked as a pattern piece or far below. Anything parked
+    out of sight must be marked, and every measure of "the place" must skip what is marked.
+148. **A second dressing laid the stones again and sank the road** (log 41). Fix: the laying checks for its own earlier work, and a test dresses
+    twice.
+149. **Ground probes stepped past details and went under the ground.** Each probe restarted 2 mm below every detail it looked through; a paint
+    flake lying half a millimetre above the sand put the next ray under the sand, which then found nothing (log 42). Fix: 0.4 mm steps. A step
+    past a thing must be smaller than the gap between that thing and what lies under it.
+150. **Sand drifts built along nets and rods came out as pale shards** (log 42). Fix: drifts only against things taller than 25 cm and thicker
+    than 5 cm, broken where the face turns a corner.
+151. **A colour that is right in daylight turned to snow by a fire** (log 42). The sand at a quarter of white blew out beside a 260 W fire
+    light. Fix: half as bright. In a dark look, judge a ground colour next to the brightest light it will have.
+152. **Red paint peeling off grey wood read as rust under amber light** (log 42). Fix: reds and oranges taken out of the paints.
+153. **Leaves fell inside a trunk** (log 42): scatter distances started at the trunk's centre. Fix: they start at its edge.
+154. **Adding names of things as role words overrode the material words** (log 42): "boat hull rust" became wood once "hull" was a word. Fix:
+    names of things are read after every material word.
+155. **A line traced at a fixed distance from a straight edge is itself straight** (log 42). The first swash line ran white and straight along a
+    beach the builder had cut straight, like a road marking. Fix: faint, scalloped and broken.
+156. **Text replacements written with the old indentation missed after a file was re-indented** (log 42). Each replacement asserted that it
+    matched, so the misses stopped the script instead of passing silently; they were redone with the file's own indentation. Keep every
+    scripted replacement asserted.
+
+157. **The blind test was started before the fresh checker had reported** (log 43). Its findings (names like "tea house floor" becoming a
+    stone wall, weeds growing indoors, a second dressing stretching the stone picture) could have sunk the plugin's builder for faults
+    already known. Both builders were stopped after seven minutes and restarted on the fixed plugin with a new, equal clock. Wait for the
+    checker before any test that uses what it checks.
+158. **Seeds taken from Python's hash() of names made the dressing differ from run to run** (found by the checker, log 43). The new test
+    passed under some hash seeds and failed under others. Fix: seeds from a checksum of the name (the same in every run); a check that two
+    runs under different hash seeds give the same result.
+159. **Place words read before material words gave fishing-village names the wrong role** (checker, log 43): "harbour wall stone" became the
+    sea, "beach hut timber" sand, "water tank" water. Fix: names of things are read after every material word, plurals count, a container
+    of water is not water; the names are in the roles test.
+160. **"Ground" meant any surface facing up, so shore litter landed on palm tops, quay tops and a moored boat** (checker, log 43). Fix: only
+    shore materials (sand, earth, rock, grass...) within 1.5 m of the water count, and the tide line stops lower still.
+161. **Nothing asked whether a place had a roof, so weeds grew round a tea room's tables** (checker, log 43). Fix: an indoors test
+    (something built overhead and walls on five sides of eight). Its first version counted a rising beach as walls and called a shed's foot
+    indoors; only steep surfaces count as walls now.
+162. **Dressing a dressed file measured the parked pattern pieces 350 m down and kept roles from the first dressing** (checker, log 43). The
+    stone picture was stretched over 350 m and a renamed object kept its old role. Fix: parked and added things are left out of the measure;
+    a role the dressing wrote is worked out again.
+
+163. **Python's own downloader was refused by Poly Haven (403) where curl was let through** (log 43). The same address answered curl at
+    once. Fix: downloads by curl. When a site refuses a script, try curl before deciding the site is blocked.
+164. **Stone grain laid over the colour vanished on wet flags** (log 43). The flags' wet coat and reflections hid a colour-only overlay;
+    deeper relief (14 mm) is what made them read as worn stone. On a glossy surface, change the relief, not only the colour.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -572,3 +628,8 @@ Only failures in doing the work belong here. Newest at the bottom.
 - Before blaming a change for a failed planning check (the preflight's "filming" cases), check the free disk (lesson 140).
 - A "dot for dot" proof needs several draws of each picture with each stage and a count of the pictures compared: some scenes (the house
   sample at 20 s) come out two slightly different ways from run to run with no change at all (lesson 141). After writing text with prices through the shell, search it for `bin/bash` (lesson 142).
+- Any details a dressing lays must sit further above the ground than the step its probes take through them (lesson 149).
+- Judge a dark look's ground colour beside the brightest light it will have (lesson 151).
+- Wait for the fresh checker before starting a test that uses what it checks (lesson 157).
+- Seed anything random from a checksum of a name, never from Python's hash() (lesson 158).
+- On a wet or glossy surface, judge a new texture by its relief in the reflections, not its colour (lesson 164).

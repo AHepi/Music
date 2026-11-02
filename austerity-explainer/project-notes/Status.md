@@ -325,6 +325,17 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   Not fixed: the faint contour steps in the dark sky (invisible at normal contrast; filming again takes over an hour for nothing a viewer sees) and
   the plugin's and chapter 2's copies of the stage (outside this job).
 
+## The painted-place plugin (logs 38 to 43, 2 November 2026)
+
+- `plugins/painted-place` 0.4.0: build a place in Blender, dress it in one call, light it in the series' blue-hour look, judge it blind
+  (now on the look and on the request), fix once. Decisions 50 to 54.
+- In the dressing now: the street bundle's materials with real sandstone grain; laid setts and flags; ashlar walls with dressed windows;
+  photographed weathered timber, deck planks, bark, sand and driftwood (free Poly Haven scans); lapped boards on plain timber walls; and the
+  old-and-used details: puddles, gutter water, damp, stains, rust, rot, weeds, moss, rubbish, water's edges (wet sand, foam, a tide line,
+  driftwood, mossy banks), what trees drop. Nothing grows indoors. Five tests pass.
+- First blind test (a bach in Samoa): all six judges chose the plugin's picture for the film; it lost on photograph and request.
+- Second blind test ("A tea house."): stopped twice, nothing drawn; waits for your word.
+
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
 - Your words: "I want to use the full set when we get around to it. Because I want to now do something more immersive with the camera moving through

@@ -105,6 +105,15 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   complete lack of details ... The repos example had water, grime, weeds, moss, weathering. All missing." The dressing now builds flat stone walls
   up into ashlar with dressed windows and lays puddles, gutter water, damp, stains, rust, weeds, moss and rubbish from the place's own shape, in
   the same call. Shown on the lane (before and after); the beach bach changes little, because its details are a shore's, not a street's.
+- **Timber, the shore and trees are in the plugin (log 42, 2 November, night):** `painted-place` 0.3.0. Big timber weathers to grey boards
+  with peeling paint, plain timber walls are laid as boards, and a survey of what the camera sees dresses the foot of anything standing (rot,
+  mould, weeds, sand drifts); by water a wet band, foam, a tide line and driftwood, by a pond a mossy bank; what trees drop. A fresh checker found
+  fifteen faults (shore litter on palm tops, results that changed between runs, wrong roles for names like "tea house floor", weeds indoors);
+  all fixed and tested.
+- **Scanned surfaces are in the plugin (log 43, 2 November, night):** `painted-place` 0.4.0. Your hint: "See if you can improve the look using
+  PBR textures from poly haven." Six free Poly Haven scans for timber, planks, bark, sand and real stone grain; close up the flags read as worn
+  stone and the timber as weathered wood; from the standing camera the change is small. The blind test on "A tea house." is stopped (nothing
+  drawn) and waits for your word.
 - **Nothing running:** no rented machines; the local Blender connection is stopped.
 - **Waiting (not started, as you asked):** realistic moss and damage over the painted colour and weathering.
 - **Not tested:** the recipes have not yet been put back into the coal-mine scene.
@@ -126,10 +135,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 | The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
+| The painted-place plugin (`plugins/painted-place`, version 0.4.0) | The look as five reference pictures and one page; a blind judge (measures and a rubric: the look and the request); the look stage (lights at every glowing window and lamp, sky, haze, finish); the dressing: materials by role words, real stone grain and photographed timber, bark and sand from Poly Haven scans (`scans.py`, `materials/textures/`), laid setts and flags, ashlar walls, lapped boards, and the details from the place's shape and from a camera survey (`survey.py`, `lay_details.py`, `lay_timber.py`, `lay_shore.py`, `lay_trees.py`); the loop as one short skill; five tests | A dressed, lit picture of any place in the look, and the judge's plain-word fixes |
 
 ## Word list
 
 - **Tile:** one square picture that repeats without a seam. **Dot:** one pixel.
+- **Camera survey:** a grid of straight lines sent from the camera through the frame; where each first meets a surface tells the dressing what the camera sees, and where something standing meets the ground. **Scan:** a set of pictures photographed from a real surface (colour, roughness, height). **Box projection:** laying a picture on from three sides and blending them, for shapes with no texture layout. **Wrack line:** the band of seaweed, sticks and rubbish the tide leaves on a beach. **Swash:** the thin last run of a wave up the sand.
 - **Description:** the short file of numbers a recipe reads. **Size classes:** S up to 8 KB, M up to 64 KB, L up to 512 KB.
 - **Same-kind score:** how much two pictures look like the same kind of surface (0 to 1). **Dot-for-dot levels:** none, layout, close, exact.
 - **Height map:** brighter is higher. **Normal map:** a picture telling Blender which way each dot of the surface faces. **Derivation ceiling:** how well the height and normal
@@ -743,7 +754,59 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     5 (fixed); a second dressing laid the setts again and sank the road (fixed and tested). **Not done:** no blind judging of the new lane; no
     full-size picture; shore details beyond shells, coral and seaweed; weathered timber; the bach's own shapes (its toy fire and props).
 
+42. **Timber, the shore and trees go into the plugin (2 November, 20:10 to 22:10).** You said: "Yeah good idea. Do it." to building the beach
+    and timber details and then a fair blind test. **Built (plugin 0.3.0):** `survey.py` looks at the place the way the camera does: a grid of
+    rays through the frame (about 58,000, under 2 seconds) finds every place where something standing meets the ground as seen, whatever its
+    shape or name. `lay_timber.py`: big timber gets weathered boards (grey wood, a shade per board, rain streaks, one faded paint per building
+    peeling and cracked), trunks get wet ringed bark, doors and frames keep the street's paint; a plain timber wall is laid as lapped boards with
+    casings, corner boards and nails that bleed rust; where timber meets the ground, rot and mould creep up it and flakes and splinters lie in front.
+    `lay_shore.py` finds where water meets ground by looking straight down over what the camera sees: by the sea a dark glossy wet band (a thin
+    sheet of water that fades inland, so the sky and lamps show in it), foam lace, a broken swash line on the sand, broken surf further out, a
+    wrack line of seaweed, sticks, husk fibre, shells, coral, pumice and a few of today's scraps, bleached driftwood; by a pond or river a wet
+    mossy bank and leaves against it and floating near it; rocks, posts and hulls in either wet to the high-water line; sand drifted against
+    anything standing in sand. `lay_trees.py`: dead fronds, coconuts and split husks under palms, leaves under other trees. The feet of any
+    standing thing on soft ground get weeds, moss and leaves. New role words (trunk, deck, jetty, hull, boat, frond, pond, river...) are read
+    after every material word. The plugin's own judge now gives two verdicts, the look and the request, with the person's words in its packet.
+    A fifth test builds a beach and a garden pond and checks all of it. **Shown:** the blind test's bach re-dressed
+    (`plugins/painted-place/examples/bach-on-the-beach/`): grey boards with pale paint peeling, darker sand; and, with the camera moved up the
+    shore, the wet band with the sky in it, foam, swash, surf, wrack and driftwood. **Failures on the way:** the ground probes stepped 2 mm past
+    each detail they looked through and went under ground where a flake lay closer than that (now 0.4 mm); sand drifts built along nets and rods
+    came out as pale shards (now only against things taller than 25 cm and thicker than 5 cm, broken at corners); the sand was so pale that the
+    fire turned it to snow (darkened by half); a faded red paint peeling off grey wood read as rust under amber light (reds and oranges removed);
+    leaves fell inside trunks (now outside the trunk's own radius); "boat hull rust" became wood once nouns were added (nouns now come last);
+    a palm trunk named without "wood" got no role (trunk is now a word); the first swash line ran straight and white like a road marking (now
+    faint, scalloped and broken). **The fresh check:** a fresh checker read the plugin cold and built its own small scenes (a fishing village,
+    a moored boat, a tea-room interior, nine odd cases): nothing crashed, but fifteen findings. The worst: shore litter on palm tops, a quay top
+    and round a moored boat; results that changed from run to run (and a test that passed or failed by chance); names like "harbour wall stone"
+    or "tea house floor" given the wrong role; weeds and rot indoors; masts taken for trees; today's plastic in a 1915 world; a second dressing
+    stretching the stone picture. All fixed (log 43 tells the restart this caused): only shore materials near the water count as shore; steady
+    seeds; names of things read after material words, plurals, natural stone, water containers; an indoors test; bark by name only; today's
+    scraps only with `--today`, and the judge told that the request decides period and the look decides light and wear; the dials wired and
+    listed; wet copies named by the water level and hung on one object; the python3 form of every command in the skill; "judge again if either
+    verdict is no". The checker's own village and boat scenes rerun clean; five tests pass, and the dressing comes out the same under different
+    seeds. **Not done:** drip lines under eaves; rust run-off under tin roof edges; a beach grass edge where sand meets lawn; old-and-used details
+    for interiors (dust, scuffs, worn floors).
+
+43. **A fair blind test started twice, then stopped; Poly Haven's scans go into the plugin (2 November, 22:10 to 23:35).** The blind test on
+    a new place ("A tea house.", the first example in your first message) started at 22:11 with two Sonnet builders on an equal 80-minute clock:
+    one with the plugin, one with Blender alone and, this time, the five reference pictures and the look page (as you described giving an LLM
+    reference images). The fresh checker's report came in seven minutes later with faults that could have sunk the plugin's builder (log 42),
+    so both builders were stopped, the faults fixed, and the test restarted at 22:30 on a new clock. At 22:38 you wrote: "Just a hint. See if
+    you can improve the look using PBR textures from poly haven." Your interruption also stopped both builders and a second checker; nothing had
+    been drawn. **Built (plugin 0.4.0):** six free Poly Haven sets (CC0) shipped inside the plugin (17 MB after re-saving smaller): rough
+    weathered wood, grey deck planks, palm bark, willow bark, damp beach sand, cracked sandstone. `scans.py` lays each on from three sides in the
+    object's own space (builders' shapes have no texture layout), with wood grain along the object's longest side, each board its own patch and
+    shade, ground sampled at two sizes, every colour darkened into the look's range, and the plugin's own peeling paint and rain streaks on top.
+    The street's stone (wall shades, dressings, flags, rocks) keeps its colours and gains the sandstone's grain and relief; the setts are left as
+    they were. `--no-scans` dresses without them. **Shown** (`plugins/painted-place/examples/scanned-surfaces/`): close up on the lane, the flags
+    turn from smooth plastic slabs into worn, pitted stone that breaks up the lamps' reflections, the wall stones gain a real stone's mottling and
+    the cart's boards become weathered wood; on the beach house the walk planks and boards show grain board by board. From the standing camera at
+    540 x 960 the change is small. The lane's drawing took 194 s with the scans against 175 s. **Failures on the way:** Python's downloader was
+    refused (403) where curl worked; the sandstone grain vanished on the wet flags until their relief was deepened; the first close look stood
+    behind a downpipe. **Not done:** no blind judging of the scans; no full-size picture; the blind test is stopped and waits for your word;
+    plaster, earth, grass and rusted tin have no scans yet.
+
 ## Next step
 
-Make the shore and timber details (a wet band at the waterline, driftwood and husks, salt-grey split boards with peeling paint), then run the blind
-test again on a new place with equal clocks, judging the request as well as the look.
+Run the blind test again on "A tea house." with the plugin at 0.4.0 (the scans in), both builders on the same clock, and judge the request, the
+look and how old and used it is, as well as whether it could be a photograph.

@@ -16,6 +16,13 @@ CASES = {
     'chimney stack wall': 'wall', 'cart wheel iron': 'iron', 'cart bed wood': 'wood', 'downpipe iron': 'iron',
     'road setts': 'road', 'pavement flags right': 'pavement', 'Cube': None, 'far hills earth': 'earth',
     'beach rippled sand plaster': 'sand', 'sea water': 'sea', 'surfboard leaning wood': 'wood', 'shore boulder stone': 'rock',
+    # names of things come after material words (the fresh checker's fishing-village and tea-house names)
+    'harbour wall stone': 'wall', 'sea wall stone': 'wall', 'harbour steps': 'pavement', 'harbour quay': 'pavement', 'harbour pier': 'wood',
+    'sea rocks': 'rock', 'beach hut timber': 'wood', 'beach house wall': 'wall', 'water tank': 'iron', 'rain tank rust': 'rust',
+    'water butt': 'wood', 'jetty post': 'wood', 'wooden post': 'wood', 'mooring post': 'iron', 'tea house floor flags': 'pavement',
+    'tea house floor': 'pavement', 'tea house counter': 'wood', 'tea house': 'wall', 'palm tree': 'wood', 'palm frond': 'weed',
+    'boat mast timber': 'wood', 'paopao hull patch rust': 'rust', 'reef stone': 'rock', 'koi pond': 'water', 'river bank earth': 'earth',
+    'sea': 'sea', 'beach': 'sand', 'oak tree trunk': 'wood', 'jetty deck': 'wood',
 }
 
 

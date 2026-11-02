@@ -35,24 +35,20 @@ def role_of(obj, role_from_name):
 
 def is_added(obj):
     """Things this plugin added (laid stones, details, facades, the look) and parked prototypes are not part of the place."""
-    return (obj.name.startswith(('FACADE •', 'DETAIL •', 'LAID •', 'LOOK •')) or '• laid' in obj.name
+    return (obj.name.startswith(('FACADE •', 'DETAIL •', 'LAID •', 'LOOK •', 'TIMBER •')) or '• laid' in obj.name
             or bool(obj.get('prototype')))
 
 
 def wall_faces(scene, roles, camera_spot):
-    """Big vertical faces the camera can see, of stone walls and of timber walls (a thin, tall, long wood object).
-    Each face carries `front`: how far its visible surface stands in front of the face (laid ashlar is thick)."""
+    """Big vertical faces of stone walls the camera can see. Each face carries `front`: how far its visible surface
+    stands in front of the face (laid ashlar is thick). Timber is dressed from the camera survey instead (lay_timber)."""
     import lay_facade
     faces = []
     for obj in scene.objects:
         if obj.type != 'MESH' or is_added(obj):
             continue
         role = roles.get(obj.name)
-        if role == 'wood':
-            size = sorted(obj.dimensions)
-            if not (obj.dimensions.z > 1.2 and size[-1] > 1.5 and min(obj.dimensions.x, obj.dimensions.y) < 0.8):
-                continue
-        elif role not in ('wall', 'plaster'):
+        if role not in ('wall', 'plaster'):
             continue
         for face in lay_facade.oriented_faces(obj, minimum_area=1.5):
             centre = face['origin'] + face['along'] * ((face['u0'] + face['u1']) / 2) + Vector((0, 0, (face['z0'] + face['z1']) / 2))
@@ -81,7 +77,7 @@ def ground_probe(scene):
             name = obj.name if obj is not None else ''
             role = obj.get('place_role', '') if obj is not None else ''
             if name.startswith(skip_words) or role in ('smoke', 'window lit', 'window dim', 'window dark', 'lamp glass', 'flame') or normal.z < 0.6:
-                origin = location - Vector((0, 0, 0.002))
+                origin = location - Vector((0, 0, 0.0001))
                 continue
             return location.z
         return None
@@ -369,8 +365,8 @@ def _shore_prototypes(scene, rng):
         return existing
     collection = bpy.data.collections.new(name)
     scene.collection.children.link(collection)
-    shell = _simple_material(PREFIX + 'bleached shell', (0.55, 0.50, 0.43), 0.6, (0.75, 0.70, 0.62), scale=60.0)
-    coral = _simple_material(PREFIX + 'coral rubble', (0.48, 0.45, 0.40), 0.9, (0.66, 0.62, 0.55), scale=80.0)
+    shell = _simple_material(PREFIX + 'bleached shell', (0.20, 0.185, 0.16), 0.6, (0.34, 0.32, 0.28), scale=60.0)   # pale things stay
+    coral = _simple_material(PREFIX + 'coral rubble', (0.17, 0.16, 0.145), 0.9, (0.28, 0.265, 0.24), scale=80.0)  # mid-grey at night
     weed = _simple_material(PREFIX + 'dried seaweed', (0.03, 0.035, 0.015), 0.6, (0.09, 0.08, 0.03))
     for i in range(6):
         r = random.Random(4400 + i)
@@ -424,7 +420,7 @@ def _shore_prototypes(scene, rng):
 
 def _in_view(point, camera, limit):
     """In front of the camera, inside its frame (with a margin) and nearer than limit."""
-    if camera is None:
+    if camera is None or camera.type != 'CAMERA':
         return True
     local = camera.matrix_world.inverted() @ Vector(point)
     depth = -local.z
@@ -550,13 +546,21 @@ def puddles(scene, roads, kerbs, water, collection, rng, amount, camera_spot, ro
     return {'puddles': count, 'gutter_runs': runs}
 
 
-def wall_damp_and_soot(scene, faces_list, grime, soot, collection, rng, amount, camera_spot, ground_z):
-    """Damp at every wall's foot, starting where the ground really meets it, and soot or run-off stains higher up."""
+def _face_indoors(face, indoors):
+    if indoors is None:
+        return False
+    point = _ground_point(face, (face['u0'] + face['u1']) / 2, 0.3)
+    return indoors((point.x, point.y, face['z0']))
+
+
+def wall_damp_and_soot(scene, faces_list, grime, soot, collection, rng, amount, camera_spot, ground_z, indoors=None):
+    """Damp at every wall's foot, starting where the ground really meets it, and soot or run-off stains higher up.
+    Walls inside a room are left alone: rain does not reach them."""
     foot_verts, foot_faces = [], []
     stain_verts, stain_faces = [], []
     feet = stains = 0
     for face in faces_list:
-        if not _near_camera(face['centre'], camera_spot):
+        if not _near_camera(face['centre'], camera_spot) or _face_indoors(face, indoors):
             continue
         n, along = face['normal'], face['along']
         out = 0.012
@@ -661,14 +665,15 @@ def rust_under_iron(scene, feet, faces_list, rust, soot, collection, rng, amount
     return {'rust_streaks': streaks, 'iron_rings': rings}
 
 
-def growth(scene, faces_list, kerbs, greens, moss, collection, rng, amount, camera_spot, ground_z):
-    """Moss patches and weed tufts where a wall meets the ground and in the gutter along the kerb, in patchy colonies."""
+def growth(scene, faces_list, kerbs, greens, moss, collection, rng, amount, camera_spot, ground_z, indoors=None):
+    """Moss patches and weed tufts where a wall meets the ground and in the gutter along the kerb, in patchy colonies
+    (never indoors)."""
     prototypes = _weed_prototypes(scene, greens, rng)
     points = []
     moss_verts, moss_faces = [], []
     patches = 0
     for face in faces_list:
-        if not _near_camera(face['centre'], camera_spot):
+        if not _near_camera(face['centre'], camera_spot) or _face_indoors(face, indoors):
             continue
         u = face['u0']
         while u < face['u1']:
@@ -711,7 +716,7 @@ def growth(scene, faces_list, kerbs, greens, moss, collection, rng, amount, came
     return {'weed_tufts': len(points), 'moss_patches': patches}
 
 
-def rubbish(scene, faces_list, kerbs, steps, paper, collection, rng, amount, camera, ground_z, shore=False, sand_objects=()):
+def rubbish(scene, faces_list, kerbs, steps, paper, collection, rng, amount, camera, ground_z, shore=False, sand_objects=(), indoors=None):
     """Where a place's small rubbish collects: thick along gutters, along wall feet and round doorsteps, thinning away from
     each edge; never in the middle of a road or a pavement. A street gets coal, cinders, ash, straw and paper; a shore gets
     shells, coral bits and seaweed, also strewn thinly over the sand near the camera."""
@@ -722,7 +727,7 @@ def rubbish(scene, faces_list, kerbs, steps, paper, collection, rng, amount, cam
         x0, x1 = min(c.x for c in corners), max(c.x for c in corners)
         y0, y1 = min(c.y for c in corners), max(c.y for c in corners)
         top = max(c.z for c in corners)
-        for _ in range(int(amount * 900)):
+        for _ in range(int(amount * 320)):
             x, y = rng.uniform(x0, x1), rng.uniform(y0, y1)
             if _in_view((x, y, top), camera, 16.0):
                 z = ground_z(x, y, top + 1.0)
@@ -739,6 +744,8 @@ def rubbish(scene, faces_list, kerbs, steps, paper, collection, rng, amount, cam
                 z = gutter if out < 0.12 else (ground_z(point.x, point.y, top + 0.3) or gutter)
                 points.append((point.x, point.y, z + 0.002))
     for face in faces_list:
+        if _face_indoors(face, indoors):
+            continue
         span = face['u1'] - face['u0']
         for _ in range(int(amount * span * 35)):
             point = _ground_point(face, rng.uniform(face['u0'], face['u1']), rng.expovariate(1 / 0.06))
@@ -829,7 +836,7 @@ def road_life(scene, kerbs, greens, moss, collection, rng, amount, camera_spot):
     return {'sett_joints_rooted': rooted, 'joint_weeds': len(points), 'kerb_moss_patches': edge_patches}
 
 
-def litter(scene, faces_list, kerbs, leaves, stone, collection, rng, amount, camera_spot, ground_z):
+def litter(scene, faces_list, kerbs, leaves, stone, collection, rng, amount, camera_spot, ground_z, indoors=None):
     """Wet leaves and small fragments in the gutters and at wall feet, and fallen stone flakes."""
     verts, faces, indices = [], [], []
     flake_points = []
@@ -864,7 +871,7 @@ def litter(scene, faces_list, kerbs, leaves, stone, collection, rng, amount, cam
             if rng.random() < 0.25:
                 flake_points.append((point.x, point.y, z + 0.006))
     for face in faces_list:
-        if not _near_camera(face['centre'], camera_spot):
+        if not _near_camera(face['centre'], camera_spot) or _face_indoors(face, indoors):
             continue
         for _ in range(int(amount * (face['u1'] - face['u0']) * 1.2)):
             point = _ground_point(face, rng.uniform(face['u0'], face['u1']), abs(rng.gauss(0, 0.15)) + 0.02)
@@ -894,6 +901,72 @@ def litter(scene, faces_list, kerbs, leaves, stone, collection, rng, amount, cam
     return {'litter_pieces': pieces, 'stone_flakes': flakes}
 
 
+def feet_life(seen, greens, moss, leaves, collection, rng, growth_amount, litter_amount, indoors=None):
+    import survey as survey_module
+    """Weeds, moss and wet leaves at the feet of standing things that are not stone walls (posts, timber, rocks, iron,
+    kerbs, steps), wherever the camera survey sees one meet earth, grass, moss, a road or a pavement. Stone walls get
+    theirs from growth() and litter()."""
+    report = {'standing_feet_seen': 0, 'weed_tufts_at_feet': 0, 'moss_at_feet': 0, 'leaves_at_feet': 0}
+    if seen is None or not seen.grid:
+        return report
+    soft = {'earth', 'weed', 'moss', 'pavement', 'road', 'grime', 'leaf'}
+    points, moss_verts, moss_faces = [], [], []
+    leaf_verts, leaf_faces, leaf_slots = [], [], []
+    for run in seen.foot_runs({'wood', 'rock', 'iron', 'rust', 'trim', 'pavement', 'grime'}, limit=40.0):
+        if run[0].ground_role not in soft:
+            continue
+        report['standing_feet_seen'] += len(run)
+        object_seed = survey_module.steady_seed(run[0].obj, 997) / 7.0
+        for k, foot in enumerate(run):
+            if indoors is not None and indoors(foot.point):
+                continue
+            colony = math.sin(k * 0.35 + object_seed) + 0.7 * math.sin(k * 0.9 + object_seed * 2)
+            if growth_amount > 0 and colony > -0.3 and rng.random() < 0.28 * growth_amount:
+                for _ in range(rng.randint(1, 4)):
+                    p = foot.point + foot.normal * rng.uniform(0.0, 0.12)
+                    ground = seen.ground_under(p, above=0.3)
+                    if ground is not None and abs(ground[0] - foot.point.z) < 0.1:
+                        points.append((p.x + rng.uniform(-0.04, 0.04), p.y + rng.uniform(-0.04, 0.04), ground[0] + 0.003))
+            if growth_amount > 0 and rng.random() < 0.12 * growth_amount:
+                p = foot.point + foot.normal * rng.uniform(0.0, 0.06)
+                rx, ry = rng.uniform(0.03, 0.12), rng.uniform(0.03, 0.12)
+                _patch(moss_verts, moss_faces, (p.x, p.y), rx, ry, foot.point.z + 0.003, rng, lift=0.001)
+                report['moss_at_feet'] += 1
+            if litter_amount > 0 and rng.random() < 0.3 * litter_amount:
+                p = foot.point + foot.normal * abs(rng.gauss(0, 0.1))
+                ground = seen.ground_under(p, above=0.3)
+                if ground is not None and abs(ground[0] - foot.point.z) < 0.1:
+                    rad = rng.uniform(0.015, 0.05)
+                    length = rad * rng.uniform(1.2, 2.2)
+                    a = rng.random() * math.tau
+                    dx, dy = math.cos(a), math.sin(a)
+                    px, py = -dy, dx
+                    z = ground[0] + 0.004
+                    k0 = len(leaf_verts)
+                    leaf_verts.extend([(p.x - dx * length, p.y - dy * length, z), (p.x + px * rad, p.y + py * rad, z + 0.002),
+                                       (p.x + dx * length, p.y + dy * length, z + 0.001), (p.x - px * rad, p.y - py * rad, z + 0.003),
+                                       (p.x, p.y, z + 0.007)])
+                    slot = 0 if rng.random() < 0.7 else 1
+                    for b in range(4):
+                        leaf_faces.append((k0 + b, k0 + (b + 1) % 4, k0 + 4))
+                        leaf_slots.append(slot)
+                    report['leaves_at_feet'] += 1
+    if points:
+        prototypes = _weed_prototypes(seen.scene, greens, rng)
+        _instance_randomly(PREFIX + 'weeds at the feet of things', points, prototypes, collection, 'weed', 977,
+                           scale_range=((0.8, 0.8, 0.7), (1.8, 1.8, 1.6)))
+        report['weed_tufts_at_feet'] = len(points)
+    if moss_faces:
+        _mesh_object(PREFIX + 'moss at the feet of things', moss_verts, moss_faces, moss, collection, 'moss')
+    if leaf_faces:
+        obj = _mesh_object(PREFIX + 'leaves at the feet of things', leaf_verts, leaf_faces, None, collection, 'leaf')
+        for leaf in leaves:
+            obj.data.materials.append(leaf)
+        for polygon, slot in zip(obj.data.polygons, leaf_slots):
+            polygon.material_index = slot
+    return report
+
+
 # ----------------------------------------------------------------------------------------------- the one call
 
 def remove_details(scene):
@@ -905,7 +978,7 @@ def remove_details(scene):
             bpy.data.collections.remove(collection)
 
 
-def lay_details(scene, materials, role_from_name, *, wet=1.0, grime=1.0, growth_amount=1.0, litter_amount=1.0, seed=93711):
+def lay_details(scene, materials, role_from_name, *, wet=1.0, grime=1.0, growth_amount=1.0, litter_amount=1.0, seed=93711, today=False):
     """
     materials: a dictionary with keys water, grime, soot, rust, moss, greens (a list), leaves (a list), stone.
     Returns a report of counts.
@@ -921,22 +994,27 @@ def lay_details(scene, materials, role_from_name, *, wet=1.0, grime=1.0, growth_
     faces_list = wall_faces(scene, roles, camera_spot)
     kerbs = kerb_lines(scene, roles, road_centre, ground_z)
     feet = iron_feet(scene, roles)
+    import survey as survey_module
+    indoors = survey_module.indoors_probe(scene, roles, role_from_name)
     report = {'wall_faces': len(faces_list), 'kerb_lines': len(kerbs), 'roads': len(roads), 'iron_things': len(feet)}
     if wet > 0:
         report.update(puddles(scene, roads, kerbs, materials['water'], collection, rng, wet, camera_spot, roles))
     if grime > 0:
-        report.update(wall_damp_and_soot(scene, faces_list, materials['grime'], materials['soot'], collection, rng, grime, camera_spot, ground_z))
+        report.update(wall_damp_and_soot(scene, faces_list, materials['grime'], materials['soot'], collection, rng, grime, camera_spot, ground_z,
+                                         indoors=indoors))
         report.update(rust_under_iron(scene, feet, faces_list, materials['rust'], materials['soot'], collection, rng, grime, camera_spot, ground_z))
     if growth_amount > 0:
-        report.update(growth(scene, faces_list, kerbs, materials['greens'], materials['moss'], collection, rng, growth_amount, camera_spot, ground_z))
+        report.update(growth(scene, faces_list, kerbs, materials['greens'], materials['moss'], collection, rng, growth_amount, camera_spot, ground_z,
+                             indoors=indoors))
         report.update(road_life(scene, kerbs, materials['greens'], materials['moss'], collection, rng, growth_amount, camera_spot))
     if litter_amount > 0:
-        report.update(litter(scene, faces_list, kerbs, materials['leaves'], materials['stone'], collection, rng, litter_amount, camera_spot, ground_z))
+        report.update(litter(scene, faces_list, kerbs, materials['leaves'], materials['stone'], collection, rng, litter_amount, camera_spot, ground_z,
+                             indoors=indoors))
         steps = door_steps(scene, roles, faces_list)
         sand_objects = [o for o in scene.objects if o.type == 'MESH' and not is_added(o) and roles.get(o.name) == 'sand']
         shore = bool(sand_objects or any(r == 'sea' for r in roles.values())) and not roads
         report.update(rubbish(scene, faces_list, kerbs, [(c, s) for c, s, o in steps], materials['paper'], collection, rng,
-                              litter_amount, scene.camera, ground_z, shore=shore, sand_objects=sand_objects if shore else ()))
+                              litter_amount, scene.camera, ground_z, shore=shore, sand_objects=sand_objects if shore else (), indoors=indoors))
         report['rubbish_kind'] = 'shore: shells, coral, seaweed' if shore else 'street: coal, cinders, ash, straw, paper'
     if grime > 0:
         whitened = _simple_material(PREFIX + 'whitened worn doorstep', (0.42, 0.40, 0.34), 0.75, (0.62, 0.58, 0.48), scale=9.0)
@@ -957,4 +1035,15 @@ def lay_details(scene, materials, role_from_name, *, wet=1.0, grime=1.0, growth_
                         rusted += 1
             break
         report['pipes_rusted'] = rusted
+    # what the camera survey finds: timber feet, the feet of other standing things, water edges, what trees drop
+    import lay_timber
+    import lay_shore
+    import lay_trees
+    seen = survey_module.Survey(scene, roles, role_from_name)
+    report['timber'] = lay_timber.lay_timber_feet(seen, roles, materials, collection, grime=grime, growth=growth_amount, litter=litter_amount,
+                                                  indoors=indoors)
+    report['feet'] = feet_life(seen, materials['greens'], materials['moss'], materials['leaves'], collection, rng, growth_amount, litter_amount,
+                               indoors=indoors)
+    report['shore'] = lay_shore.lay_shore(scene, roles, seen, collection, wet=wet, litter=litter_amount, growth=growth_amount, today=today)
+    report['trees'] = lay_trees.lay_tree_fall(seen, roles, collection, litter=litter_amount)
     return report
