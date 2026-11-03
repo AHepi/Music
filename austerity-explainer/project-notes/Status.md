@@ -337,7 +337,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - First blind test (a bach in Samoa): all six judges chose the plugin's picture for the film; it lost on photograph and request.
 - Second blind test ("A tea house."): run on equal clocks; you judged it yourself ("Absolutely incredible. The plugin works."); B was the
   plugin's.
-- Brushstrokes (Blender Studio's Brushstroke Tools): the tea house painted six ways, sent for you to pick; not in the plugin yet.
+- Brushstrokes (Blender Studio's Brushstroke Tools): the tea house painted six ways; set aside at your word (decision 59).
+- Three places by pictures-only builders (townhouse, desert mine, military base; log 46): done and sent.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -350,8 +351,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Which brushstroke version you like (A to G, `procedural-textures/45 Brushstrokes - pictures to judge/`), and which "minor adjustments"
-  you have in mind for the plugin.
+- Which "minor adjustments" you have in mind for the plugin, and what you make of the three pictures-only places.
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),

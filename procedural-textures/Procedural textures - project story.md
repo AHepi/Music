@@ -116,6 +116,8 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **The tea house blind test is done and you judged it (log 44, 3 November, night):** two pictures shown as A and B; your verdict: "Absolutely
   incredible. The plugin works." B was the plugin's. What the tea house showed the plugin lacked is in `painted-place` 0.5.0: brass, copper
   and china; casings, sills and sashes for windows in plaster walls; a warning when lit glass takes too much of the frame.
+- **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
+  only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
   (B to G: stroke size, brush, near street left as drawn) beside the plain one (A), sent for you to judge. Not in the plugin until you pick.
 - **Nothing running:** no rented machines; the local Blender connection is stopped.
@@ -856,7 +858,20 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     Meanwhile the tea house's two full-size pictures (1080 x 1920, 64 samples) were finished, one after the other (A 1415 s, B 1765 s), and
     sent.
 
+46. **Three places by pictures-only builders (3 November, 09:31 to 12:50).** You said: "I was to try something else and ignore add on for
+    now", and asked what the tea room's builder had been given (its brief, the five pictures, the look page and Blender; it also saw the
+    repository's rules file and your saved preferences). Then: "Can you do the same thing for a suburban townhouse, a mine in the desert, a
+    military base." Asked which test, you chose "Pictures-only builder". **Run:** three fresh Sonnet builders, one after another, each with
+    the tea room builder's brief word for word (only the request, folder and clock changed) and 80 minutes on the whole machine. **What they
+    made:** a Victorian brick terrace after rain ending at a three-storey townhouse with a red door and glowing fanlight, gas lamps, a coal
+    cart and about 3,000 cobbles laid one by one (finished 10:43); a timber winding tower and brick engine house at dusk in the desert, ore
+    cars on rails, a saguaro, back-lit dry grass and mesas in the haze (11:47); a muddy army-camp lane about 1915, timber barracks and bell
+    tents, a field gun reflected in a long puddle, a watch tower against the last sun (12:45). Each picture sent as it finished. **What they
+    shared:** all set the place in Britain around 1915 because the look page asks for it; all wrote their own stand-in for the measuring tool;
+    all first had lamps blocked by their own glass, haze too thick and puddles like holes or paper. The desert mine builder listed eight
+    techniques the plugin lacks (grading the picture in code so orange never turns white, haze inside each material, smoke as a soft
+    camera-facing ribbon and more; saved in its report). **Not done:** no full-size redraws; no judging asked for.
+
 ## Next step
 
-You pick a brushstroke version (A to G, or a mix); that one goes into the plugin as a step after the drawing, with its own test, and is
-checked on a second place.
+You look at the three pictures-only places; then say what you want next. The brushstroke add-on is set aside (decision 59).

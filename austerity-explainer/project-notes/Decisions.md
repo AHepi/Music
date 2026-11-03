@@ -824,6 +824,15 @@ overturn any of them in one line. Changes to the project must follow this file.
 59. **Set the brushstroke add-on aside** (3 November 2026, 09:31), your words: "I was to try something else and ignore add on for now."
     Nothing from Brushstroke Tools goes into the plugin; the trial stays on record in `procedural-textures/45 Brushstrokes - pictures to judge/`.
 
+60. **Three more places, pictures-only builders** (3 November 2026, 09:50), your words: "Can you do the same thing for a suburban
+    townhouse, a mine in the desert, a military base." Asked which test, you chose "Pictures-only builder".
+
+### Claude's calls for item 60
+
+- Each place gets a fresh Sonnet builder with the tea room builder's brief word for word, only the request, folder and clock changed: the
+  five reference pictures, the look page and Blender; no plugin, no internet.
+- One after another, 80 minutes each, so each has the whole machine. Your three phrases are the requests, exactly as written.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
