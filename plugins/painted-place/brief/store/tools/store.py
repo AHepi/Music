@@ -11,14 +11,17 @@ decides where anything goes: you say where.
     mat = store.material('SURFACE • brown_mud')               # brought in from materials/Materials.blend, its pictures found on the shelf
     store.use_material(obj, 'SURFACE • brown_mud')            # put a material on an object (every slot)
     tent = store.add_part('bell_tent', location=(2, 8, 0), turn=30, seed=4)   # build a part where you say; returns its root
-    store.prepare_for_render(bpy.context.scene)               # just before drawing: every object's real scale and ground height recorded
-    store.fit_stone_pictures(bpy.context.scene)                # the street's stone materials: their one big picture stretched over your place
+    store.prepare_for_render(bpy.context.scene)               # once, just before drawing (see below)
 
 Conventions every part follows: metres; Z up; the part's foot at its origin (it stands on the ground at z = 0); its
 front (a door, a muzzle, a lamp's face) towards -Y, which is Blender's front view; turn it with `turn` (degrees about Z).
 The surface materials read two numbers per object: its real scale (so a picture is never stretched by an unapplied
-scale) and the height of the ground under it (for the mud dial). `add_part` records both; for your own objects call
-`use_material` or, once, `prepare_for_render` before drawing.
+scale) and the height of the ground under it (for the mud dial). `prepare_for_render(scene)`, called once just before
+drawing, records both for everything in the scene: the scale as it is then, and the ground as the foot of the part an
+object belongs to (or, for your own objects, the height you gave `use_material(obj, name, ground=z)`, or else the
+object's lowest point). It also stretches the street's stone pictures over your place (`fit_stone_pictures`).
+
+Material names may be typed as the cards spell them ('SURFACE - brown_mud' finds 'SURFACE • brown_mud').
 
     python3 store.py --list            (prints what the store holds)
 """
@@ -88,16 +91,61 @@ def find_shelf_pictures():
     return fixed
 
 
+def _plain(text):
+    """A name with its punctuation and case taken out, so 'SURFACE - brown mud' and 'SURFACE • brown_mud' agree."""
+    for mark_character in '•-/_.,':
+        text = text.replace(mark_character, ' ')
+    return ' '.join(text.lower().split())
+
+
+def _merge_copies():
+    """Appending materials one at a time brings a fresh copy of every picture and dial group they share ('x.001');
+    point every user at the first copy and drop the rest, so a scene holds each picture once."""
+    import re
+    firsts = {}
+    for image in list(bpy.data.images):
+        base = re.sub(r'\.\d{3}$', '', image.name)
+        key = (base, image.filepath, image.packed_file.size if image.packed_file else 0, tuple(image.size))
+        if key in firsts and firsts[key] is not image:
+            image.user_remap(firsts[key])
+            bpy.data.images.remove(image)
+        else:
+            firsts.setdefault(key, image)
+    groups = {}
+    for group in list(bpy.data.node_groups):
+        base = re.sub(r'\.\d{3}$', '', group.name)
+        if not base.startswith('STORE •'):
+            continue
+        if base in groups and groups[base] is not group:
+            group.user_remap(groups[base])
+            bpy.data.node_groups.remove(group)
+        else:
+            groups.setdefault(base, group)
+
+
 def material(name):
-    """The named material: already in the scene, or brought in from the store's Materials.blend (once)."""
+    """The named material: already in the scene, or brought in from the store's Materials.blend (once). The name may
+    be spelt as on its card ('SURFACE - brown_mud'); a name that matches nothing gets the nearest names suggested."""
     existing = bpy.data.materials.get(name)
     if existing is not None:
         return existing
     with bpy.data.libraries.load(MATERIALS_BLEND, link=False) as (source, target):
-        if name not in source.materials:
-            close = [n for n in source.materials if name.lower() in n.lower()][:8]
-            raise KeyError('no material %r in the store%s' % (name, ('; did you mean: ' + ', '.join(close)) if close else ''))
+        available = list(source.materials)
+        if name not in available:
+            plain = {_plain(n): n for n in available}
+            if _plain(name) in plain:
+                name = plain[_plain(name)]
+            else:
+                import difflib
+                close = [plain[n] for n in difflib.get_close_matches(_plain(name), list(plain), n=6, cutoff=0.5)]
+                close += [n for n in available if _plain(name) in _plain(n) and n not in close]
+                raise KeyError('no material %r in the store%s' % (name, ('; did you mean: ' + ', '.join(close[:8])) if close else
+                                                                     ' (python3 store.py --list prints them all)'))
+        existing = bpy.data.materials.get(name)
+        if existing is not None:
+            return existing
         target.materials = [name]
+    _merge_copies()
     find_shelf_pictures()
     return bpy.data.materials[name]
 
@@ -122,12 +170,30 @@ def use_material(obj, name_or_material, ground=None):
     return mat
 
 
+def _part_root(obj):
+    while obj is not None:
+        if obj.get('store_part'):
+            return obj
+        obj = obj.parent
+    return None
+
+
 def prepare_for_render(scene):
-    """Just before drawing: every mesh's real scale recorded (objects scaled after their material was set included)."""
+    """Once, just before drawing. For every mesh and curve: its real scale as it is now; the ground under it (the foot
+    of the part it belongs to, wherever that part now stands; for your own objects the ground you gave use_material,
+    or else the object's lowest point); and the street's stone pictures stretched over the place (fit_stone_pictures).
+    It moves nothing."""
     bpy.context.view_layer.update()
     for obj in scene.objects:
-        if obj.type in ('MESH', 'CURVE'):
-            obj['pp_scale'] = tuple(obj.matrix_world.to_scale())
+        if obj.type not in ('MESH', 'CURVE'):
+            continue
+        obj['pp_scale'] = tuple(obj.matrix_world.to_scale())
+        root = _part_root(obj)
+        if root is not None:
+            obj['pp_ground'] = float(root.matrix_world.translation.z)
+        elif 'pp_ground' not in obj:
+            obj['pp_ground'] = float(min((obj.matrix_world @ Vector(corner)).z for corner in obj.bound_box))
+    return fit_stone_pictures(scene)
 
 
 def fit_projection(mat, low, high):
@@ -189,6 +255,19 @@ def _part_module(name):
     return module
 
 
+def _check_options(name, module, options):
+    """A misspelt option must not pass unnoticed: every option given must be one the part's build() takes by name or
+    one its card lists."""
+    import inspect
+    parameters = inspect.signature(module.build).parameters
+    named = {key for key, p in parameters.items() if p.kind in (p.POSITIONAL_OR_KEYWORD, p.KEYWORD_ONLY)} - {'collection', 'seed'}
+    listed = set(getattr(module, 'CARD', {}).get('options', {}) or {})
+    known = named | listed
+    unknown = [key for key in options if key not in known]
+    if unknown:
+        raise TypeError('%s has no option %s; its options are: %s' % (name, ', '.join(repr(k) for k in unknown), ', '.join(sorted(known)) or 'none'))
+
+
 def add_part(name, location=(0.0, 0.0, 0.0), turn=0.0, scale=1.0, seed=0, collection=None, **options):
     """
     Build the named part and stand it where you say: its foot at `location`, turned `turn` degrees about Z (its front
@@ -197,6 +276,7 @@ def add_part(name, location=(0.0, 0.0, 0.0), turn=0.0, scale=1.0, seed=0, collec
     of the part is its child, in a collection of its own.
     """
     module = _part_module(name)
+    _check_options(name, module, options)
     scene = bpy.context.scene
     target = collection or scene.collection
     holder = bpy.data.collections.new('%s %d' % (name, len([c for c in bpy.data.collections if c.name.startswith(name + ' ')]) + 1))

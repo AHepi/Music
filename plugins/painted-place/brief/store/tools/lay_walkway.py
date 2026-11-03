@@ -43,6 +43,10 @@ Options, with their defaults:
     seed             0          the same seed lays the same walkway
     collection       none       where to put the objects (default: a new collection 'walkway')
 
+Sharp corners in the line (a turn of more than 25 degrees at one of its points) are kept: a section ends at each, and
+the next begins across the corner. A smooth curve is laid in straight sections of about section_length, so a tight bend
+wants a shorter section_length.
+
 It returns the objects it made: 'walkway boards', 'walkway runners', 'walkway nails', 'walkway rust' and, with mud,
 'walkway mud'. Boards and runners carry the UV map 'metres' and the numbers 'MADE • walkway boards' reads.
 """
@@ -88,7 +92,7 @@ TOOL = {
     },
     'materials': ['MADE • walkway boards', 'MADE • rusty nail heads', 'MADE • rust stain', 'MADE • wet mud'],
     'source': 'the duckboards of the military base builders (log 50, first and second pass scripts), made into a tool (log 51)',
-    'trap': 'it lays straight sections between points of your line: a tight bend wants a shorter section_length',
+    'trap': 'sharp corners in your line are kept (a section ends at each); a smooth curve is laid in straight sections, so a tight bend wants a shorter section_length',
 }
 
 UP = Vector((0.0, 0.0, 1.0))
@@ -156,6 +160,33 @@ class Path:
         span = self.lengths[index + 1] - self.lengths[index]
         t = (distance - self.lengths[index]) / span if span > 0 else 0.0
         return self.points[index].lerp(self.points[index + 1], t)
+
+
+def section_bounds(path, section_length, width, corner_angle=25.0):
+    """Where each straight section starts and ends, measured along the line. The line is cut at its corners (where it
+    turns by more than corner_angle degrees between two of its points), and each run between corners is cut into equal
+    sections of about section_length; a run that ends at a corner stops half a walkway's width short of it, so the next
+    run's first boards cross the corner without lying on the last ones."""
+    stops = [0.0]
+    for index in range(1, len(path.points) - 1):
+        before = path.points[index] - path.points[index - 1]
+        after = path.points[index + 1] - path.points[index]
+        before.z = after.z = 0.0
+        if before.length > 1e-6 and after.length > 1e-6 and math.degrees(before.angle(after)) > corner_angle:
+            stops.append(path.lengths[index])
+    stops.append(path.total)
+    bounds = []
+    for number, (start, end) in enumerate(zip(stops, stops[1:])):
+        at_corner = number < len(stops) - 2
+        if at_corner and end - start - width / 2 >= 0.4:
+            end -= width / 2
+        run = end - start
+        if run < 0.25:
+            continue
+        count = max(1, int(round(run / section_length)))
+        each = run / count
+        bounds.extend((start + k * each, start + (k + 1) * each) for k in range(count))
+    return bounds
 
 
 def _ground_height(ground, x, y, fallback):
@@ -295,8 +326,7 @@ def lay(line, width=0.6, board_width=0.2, gap=0.035, board_thickness=0.035, runn
     nail_mesh = bmesh.new()
     rust_mesh = bmesh.new()
     rust_fade = []
-    sections = max(1, int(round(path.total / section_length)))
-    length_each = path.total / sections
+    bounds = section_bounds(path, section_length, width)
     runner_offset = width / 2 - runner_inset
     board_count = 0
     nail_count = 0
@@ -307,8 +337,7 @@ def lay(line, width=0.6, board_width=0.2, gap=0.035, board_thickness=0.035, runn
         nearest_end = min(distance_along, path.total - distance_along)
         return mud_at_ends * max(0.0, 1.0 - nearest_end / 2.2) ** 1.2
 
-    for section in range(sections):
-        s0, s1 = section * length_each, (section + 1) * length_each
+    for s0, s1 in bounds:
         start, end = path.at(s0), path.at(s1)
         flat = Vector((end.x - start.x, end.y - start.y, 0.0))
         if flat.length < 1e-6:
@@ -351,9 +380,12 @@ def lay(line, width=0.6, board_width=0.2, gap=0.035, board_thickness=0.035, runn
             return runner_bottom(side_sign, t) + UP * runner_height
 
         # where the boards go (centred in the section), then the runners under them, then the boards
-        pitch = board_width + gap
-        count = max(1, int((span_length - 0.04 + gap) / pitch))
-        first = (span_length - (count * pitch - gap)) / 2 + board_width / 2
+        # the boards spread evenly over the whole section (each gap within a few millimetres of the one asked for), so the
+        # sections read as one walkway with only a slightly wider joint between them
+        count = max(1, int(round(span_length / (board_width + gap))))
+        spacing = span_length / count - board_width
+        pitch = board_width + spacing
+        first = spacing / 2 + board_width / 2
         # runners: one beam each side, bent by the sag
         run_start = max(0.0, first - board_width / 2 - 0.025) / span_length   # the runners stop just past the end boards
         run_end = min(span_length, first + (count - 1) * pitch + board_width / 2 + 0.025) / span_length
@@ -368,7 +400,7 @@ def lay(line, width=0.6, board_width=0.2, gap=0.035, board_thickness=0.035, runn
                 rings.append(((bottom - half, bottom + half, bottom + half + UP * runner_height, bottom - half + UP * runner_height),
                               t * span_length))
             runners.beam(rings, {'board_tone': tone_runner, 'across': 1.0, 'wear': 0.0, 'wet': min(1.0, wet * 1.3),
-                                 'mud': mud_here(s0 + 0.5 * length_each)}, (rng.uniform(0, 4), rng.uniform(0, 4)))
+                                 'mud': mud_here((s0 + s1) / 2)}, (rng.uniform(0, 4), rng.uniform(0, 4)))
         for index in range(count):
             if 0 < index < count - 1 and rng.random() < missing:
                 continue
@@ -507,19 +539,29 @@ def main():
     parser.add_argument('--line', help='the name of a curve or line-mesh object in the --blend file')
     parser.add_argument('--ground', help='the name of a ground mesh object in the --blend file to rest the walkway on')
     parser.add_argument('--out', required=False, help='save the result here')
+    helps = {
+        'width': 'across the walkway, the boards\' length, metres', 'board-width': 'each board along the walkway, metres',
+        'gap': 'between boards, metres', 'board-thickness': 'metres', 'runner-width': 'the two timbers under the boards, metres',
+        'runner-height': 'metres', 'runner-inset': 'how far in from the boards\' ends the runners sit, metres',
+        'section-length': 'one section of duckboard, metres; shorter follows a tight bend better',
+        'sag': 'how far the middle of a section sags, metres', 'wear': 'the middle of the boards polished pale, 0 to 1',
+        'wet': 'standing water films on the wood, 0 to 1', 'mud-at-ends': 'churned mud where the walkway meets the ground, 0 (none) to 1',
+        'missing': 'the chance a board is gone', 'rust': 'the chance a nail has a rust run'}
     for name, default in (('width', 0.6), ('board-width', 0.2), ('gap', 0.035), ('board-thickness', 0.035),
                           ('runner-width', 0.07), ('runner-height', 0.05), ('runner-inset', 0.1),
                           ('section-length', 2.4), ('sag', 0.01), ('wear', 0.7), ('wet', 0.4), ('mud-at-ends', 0.0),
                           ('missing', 0.02), ('rust', 0.35)):
-        parser.add_argument('--' + name, type=float, default=default)
-    parser.add_argument('--no-nails', action='store_true')
-    parser.add_argument('--seed', type=int, default=0)
+        parser.add_argument('--' + name, type=float, default=default, help='%s; default %s' % (helps[name], default))
+    parser.add_argument('--no-nails', action='store_true', help='leave out the nail heads and rust runs')
+    parser.add_argument('--seed', type=int, default=0, help='the same seed lays the same walkway; default 0')
     args = parser.parse_args(argv)
     if args.blend:
         bpy.ops.wm.open_mainfile(filepath=args.blend)
     else:
         bpy.ops.wm.read_factory_settings(use_empty=True)
     if args.line:
+        if args.line not in bpy.data.objects:
+            parser.error('no object %r in the file; its objects are: %s' % (args.line, ', '.join(o.name for o in bpy.data.objects)))
         line = bpy.data.objects[args.line]
     elif args.points_json:
         line = args.points_json
@@ -527,7 +569,11 @@ def main():
         line = [tuple(float(v) for v in point.split(',')) for point in args.points.split()]
     else:
         parser.error('give the line: --points, --points-json or --line')
+    if args.ground and args.ground not in bpy.data.objects:
+        parser.error('no object %r in the file to rest the walkway on' % args.ground)
     ground = bpy.data.objects[args.ground] if args.ground else None
+    if not args.out:
+        print('note: nothing will be saved; give --out FILE.blend to keep the walkway')
     made = lay(line, width=args.width, board_width=args.board_width, gap=args.gap, board_thickness=args.board_thickness,
                runner_width=args.runner_width, runner_height=args.runner_height, runner_inset=args.runner_inset,
                section_length=args.section_length, sag=args.sag, wear=args.wear, wet=args.wet,

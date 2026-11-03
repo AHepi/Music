@@ -36,7 +36,7 @@ CARD = {
         'door_open': 'the door flaps rolled back and tied, the inside showing (default True)',
         'seed': "the canvas's slack and wrinkles, guy and peg placing, a slight lean (default 0)",
     },
-    'materials': ['SURFACE • rough_linen (bell_tent)', 'PART • bell_tent: hemp rope', 'SURFACE • rough_wood',
+    'materials': ['MADE • army canvas (bell_tent)', 'PART • bell_tent: hemp rope', 'SURFACE • rough_wood',
                   'SURFACE • hessian_380', 'IRON • soot-black lamp posts', 'RECESSES • near-black blue'],
     'source': "rebuilt from `tent` in '50 first pass - render_final.py' (line 377), '50 second pass' (line 495) and "
               "'46 military-base - render_final.py' (line 463), with the board's photograph 02 for its make",
@@ -58,7 +58,7 @@ Z_DOOR = 1.72        # top of the door slit
 
 def build(collection, seed=0, door_open=True, **_ignored):
     rnd = sh.rand(seed, PART)
-    canvas = sh.copy_surface('SURFACE • rough_linen', PART, mud_height=0.4, grime=0.65, darken=0.25)
+    canvas = sh.copy_surface('MADE • army canvas', PART, mud_height=0.4, grime=0.65, darken=0.25)
     rope = sh.rope_material(PART)
     made = []
 

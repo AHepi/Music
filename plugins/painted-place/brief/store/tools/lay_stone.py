@@ -17,7 +17,7 @@ From your own Blender script:
         ('front', 'window', 1.8, 1.0, 0.8, 1.0),
     ], seed=2)
     import store
-    store.fit_stone_pictures(bpy.context.scene)       # once, when the place is built, before drawing
+    store.prepare_for_render(bpy.context.scene)       # once, when the place is built, before drawing
 
     Sides are named by the way they face in the wall's own axes: '-y' (or 'front'), '+y' ('back'), '+x' ('right'),
     '-x' ('left'). "From the left end" is measured along the side as you see it standing outside, facing it.
@@ -94,7 +94,7 @@ TOOL = {
     },
     'materials': SHADES + [TRIM_MATERIAL, DARK_MATERIAL, WOOD_MATERIAL, GLASS_MATERIAL, MORTAR_MATERIAL],
     'source': 'plugins/painted-place/materials/lay_facade.py: FacadeMesh, build_face, _free_segments (and oriented_faces)',
-    'trap': 'the sandstone materials project one big picture over the place: call store.fit_stone_pictures(scene) once before drawing',
+    'trap': 'the sandstone materials project one big picture over the place: call store.prepare_for_render(scene) once before drawing',
 }
 
 

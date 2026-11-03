@@ -2,8 +2,9 @@
 What this file does: lays hand-cut stone setts (cobbles) on a flat road object you name, and worn flagstones on a flat
 pavement object you name. The stones are the street bundle's ("Rain on the Old Curve"): eighteen chipped eight-sided
 sett shapes (eight worn flag shapes), each stone its own small turn, size and height, so nothing repeats. Setts are
-laid in courses across the road, a slight crown in the middle, a few true missing setts; the road itself becomes the
-dark damp bed 7 cm below them, seen in the joints. Flags are laid in strips along the pavement. Nothing here decides
+laid in courses across the road, a slight crown in the middle, a few true missing setts; the stones' tops sit at the
+road's own height along its middle (a little lower towards its edges), so a thing you stand on the road at its height
+stands on the stones; the road itself becomes the dark damp bed 12.5 cm below the tops, seen in the joints. Flags are laid in strips along the pavement. Nothing here decides
 where the road or pavement is: the stones go only on the object you pass, inside its outline.
 
 From your own Blender script:
@@ -16,7 +17,7 @@ From your own Blender script:
     flags = lay_cobbles.lay_flags(my_pavement, seed=3)          # returns the object 'flags'
     print(len(setts.data.vertices), 'setts')
     import store
-    store.fit_stone_pictures(bpy.context.scene)                 # once, when the place is built, before drawing
+    store.prepare_for_render(bpy.context.scene)                 # once, before drawing (it fits the stone pictures)
 
 From the command line:
 
@@ -29,7 +30,7 @@ Options (lay_setts):
     collection      the collection the stones go in; default a new collection 'lay_cobbles'
     sett_material   the stones' material; default 'COBBLES • wet basalt / broken amber-blue reflections'
     bed_material    the road becomes this, the bed seen in the joints; default 'ROAD BED • damp grit' (None: leave it)
-    lower_road      how far the road (the bed) is lowered under the stones, metres; default 0.07 (0: leave it)
+    lower_road      how far the road (the bed) is lowered below the stones' tops, metres; default 0.125 (0: leave it)
     crown           how much lower the edges of the road are than its middle, metres; default 0.025
     missing         the share of setts left out (true missing setts); default 0.007
     along           which way the road runs in its own axes: 'x', 'y' or 'auto' (its longer side); default 'auto'
@@ -73,7 +74,7 @@ TOOL = {
         'collection': "the collection the stones go in; default a new collection 'lay_cobbles'",
         'sett_material': "setts' material; default '%s'" % SETT_MATERIAL,
         'bed_material': "the road becomes this bed, seen in the joints; default '%s' (None leaves the road's own)" % BED_MATERIAL,
-        'lower_road': 'metres the road (the bed) is lowered under the setts; default 0.07',
+        'lower_road': 'metres the road (the bed) is lowered below the stones\' tops; default 0.125',
         'crown': 'metres the road edges sit lower than its middle; default 0.025',
         'missing': 'share of setts left out; default 0.007',
         'flag_material': "flags' material; default '%s'" % FLAG_MATERIAL,
@@ -83,7 +84,7 @@ TOOL = {
     },
     'materials': [SETT_MATERIAL, BED_MATERIAL, FLAG_MATERIAL],
     'source': 'plugins/painted-place/materials/lay_setts.py: lay_setts_on, lay_flags_on, _sett_prototypes, _flag_prototypes, _scatter',
-    'trap': 'the stone materials project one big picture over the place: call store.fit_stone_pictures(scene) once before drawing',
+    'trap': 'the stone materials project one big picture over the place: call store.prepare_for_render(scene) once before drawing (it fits them); a puddle on setts: puddle.make(..., level=road_height + 0.002)',
 }
 
 SHAPES_COLLECTION = 'lay_cobbles shapes'
@@ -262,7 +263,7 @@ def _clip(low, high, edge_low, edge_high, keep_inside, smallest):
 
 # ----------------------------------------------------------------------------------------------- setts
 
-def lay_setts(road, seed=0, collection=None, sett_material=SETT_MATERIAL, bed_material=BED_MATERIAL, lower_road=0.07,
+def lay_setts(road, seed=0, collection=None, sett_material=SETT_MATERIAL, bed_material=BED_MATERIAL, lower_road=0.125,
               crown=0.025, missing=0.007, along='auto', keep_inside=True):
     """Lay setts over a flat road object. Returns the object 'setts' (one point per stone, live copies on them)."""
     if road is None or road.type != 'MESH':
@@ -313,7 +314,9 @@ def lay_setts(road, seed=0, collection=None, sett_material=SETT_MATERIAL, bed_ma
             if surface is None:
                 continue                                    # this stone's middle is off the road
             # a slight crown: the middle of the road a little higher than its edges
-            pz = surface + 0.055 + height_wobble - crown * (abs(pa - centre) / max(half_width, 0.5)) ** 1.8
+            # the stones' tops at the road's own height in the middle (so anything stood on the road at its height stands on
+            # them), the bed lowered under them: the same joints and depths as the street bundle, only the whole laid 5.5 cm lower
+            pz = surface + height_wobble - crown * (abs(pa - centre) / max(half_width, 0.5)) ** 1.8
             points.append(tuple(frame @ Vector((px, py, pz))))
             scales.append((stone_width - 0.008, stone_depth - 0.008, 1.0))
             rotations.append(tuple((frame_turn @ turn @ Euler(tilt).to_matrix()).to_euler()))
@@ -398,7 +401,7 @@ def main(argv=None):
     parser.add_argument('--seed', type=int, default=0, help='which stones go where; default 0')
     parser.add_argument('--sett-material', default=SETT_MATERIAL, help='setts\' material')
     parser.add_argument('--bed-material', default=BED_MATERIAL, help="the road's new material, the bed; 'none' leaves it")
-    parser.add_argument('--lower-road', type=float, default=0.07, help='metres the road is lowered under the setts; default 0.07')
+    parser.add_argument('--lower-road', type=float, default=0.125, help='metres the road (the bed) is lowered below the setts\' tops; default 0.125')
     parser.add_argument('--crown', type=float, default=0.025, help='metres the road edges sit lower than its middle; default 0.025')
     parser.add_argument('--missing', type=float, default=0.007, help='share of setts left out; default 0.007')
     parser.add_argument('--flag-material', default=FLAG_MATERIAL, help='flags\' material')

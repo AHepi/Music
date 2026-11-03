@@ -88,7 +88,65 @@ def test_grain():
     print('PASS stone_grain: added once to a stone material, refused the second time')
 
 
+def test_walkway_corner():
+    fresh_scene()
+    import lay_walkway
+    from mathutils import Vector
+    line = [(0.0, 0.0, 0.0), (0.0, 4.0, 0.0), (4.0, 4.0, 0.0)]
+    boards = lay_walkway.lay(line, seed=1)[0]
+    vertices = [v.co for v in boards.data.vertices]
+    worst = 0.0
+    for b in range(len(vertices) // 8):
+        centre = sum(vertices[8 * b: 8 * b + 8], Vector()) / 8
+        best = 1e9
+        for a, c in zip(line, line[1:]):
+            a, c = Vector(a), Vector(c)
+            t = max(0.0, min(1.0, (centre - a).dot(c - a) / (c - a).length_squared))
+            point = a + (c - a) * t
+            best = min(best, Vector((centre.x - point.x, centre.y - point.y)).length)
+        worst = max(worst, best)
+    check(worst < 0.15, 'at a corner a board lies %.2f m off the line' % worst)
+    print('PASS lay_walkway keeps a sharp corner: no board more than %.2f m off the line' % worst)
+
+
+def test_puddle_on_setts():
+    fresh_scene()
+    import lay_cobbles
+    import puddle
+    bpy.ops.mesh.primitive_plane_add(size=1.0)
+    road = bpy.context.object
+    road.scale = (3.0, 6.0, 1.0)
+    bpy.ops.object.transform_apply(scale=True)
+    lay_cobbles.lay_setts(road, seed=1)
+    bed = max((road.matrix_world @ v.co).z for v in road.data.vertices)
+    check(bed < -0.1, 'the bed was not lowered under the setts (it is at %.3f)' % bed)
+    water, _film = puddle.make((0.2, 0.5, 0.0), size=(1.4, 0.8), level=0.002, seed=1)
+    heights = [(water.matrix_world @ v.co).z for v in water.data.vertices]
+    check(abs(sum(heights) / len(heights) - 0.002) < 0.002, 'the water is not at the level asked for (%.4f)' % (sum(heights) / len(heights)))
+    try:
+        puddle.make((0.2, 0.5, 0.0), size=(1.0, 0.6), ground=bpy.data.objects['setts'], seed=1)
+        check(False, 'a puddle given the setts as ground did not say why it cannot drape on them')
+    except ValueError as problem:
+        check('level' in str(problem), 'the puddle error does not point to level: %s' % problem)
+    print('PASS setts lie with their tops at the road height, the bed %.3f m below; a puddle among them stands at the level asked for' % -bed)
+
+
+def test_catalogue_help():
+    import hashlib
+    import subprocess
+    from _common import STORE, TOOLS
+    page = os.path.join(STORE, 'Store.md')
+    before = hashlib.sha256(open(page, 'rb').read()).hexdigest()
+    result = subprocess.run([sys.executable, os.path.join(TOOLS, 'catalogue.py'), '--help'], capture_output=True, text=True, timeout=300)
+    check(result.returncode == 0 and 'usage' in result.stdout, 'catalogue.py --help failed')
+    check(hashlib.sha256(open(page, 'rb').read()).hexdigest() == before, 'catalogue.py --help changed Store.md')
+    print('PASS catalogue.py --help prints its help and changes nothing')
+
+
 def main():
+    test_walkway_corner()
+    test_puddle_on_setts()
+    test_catalogue_help()
     names = store.names('tools')
     for name, test in (('lay_boards', test_boards), ('lay_stone', test_stone), ('puddle', test_puddle), ('stone_grain', test_grain)):
         if name in names:

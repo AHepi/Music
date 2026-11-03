@@ -24,7 +24,7 @@ Using one is the builder's choice; nothing here says where a surface goes. The p
 | `palm_tree_bark/` | palm bark | 1.30 x 2.60 m | palm_tree_bark_diff_2k.jpg, palm_tree_bark_rough_2k.jpg, palm_tree_bark_disp_2k.jpg |
 | `damaged_plaster/` | plaster broken away to the brick beneath | 1.85 x 1.85 m | damaged_plaster_diff_2k.jpg, damaged_plaster_rough_2k.jpg, damaged_plaster_disp_2k.jpg |
 | `worn_plaster_wall/` | plaster, worn, patched, stained | 1.80 x 1.80 m | worn_plaster_wall_diff_2k.jpg, worn_plaster_wall_rough_2k.jpg, worn_plaster_wall_disp_2k.jpg |
-| `rough_linen/` | rough canvas, for tents and tarpaulins | 0.27 x 0.27 m | rough_linen_diff_2k.jpg, rough_linen_rough_2k.jpg, rough_linen_disp_2k.jpg |
+| `rough_linen/` | rough linen weave, photographed dyed blue (for undyed tent canvas use the store's MADE • army canvas) | 0.27 x 0.27 m | rough_linen_diff_2k.jpg, rough_linen_rough_2k.jpg, rough_linen_disp_2k.jpg |
 | `rough_wood/` | rough weathered wood, grey-brown | 0.50 x 0.50 m | rough_wood_diff_2k.jpg, rough_wood_rough_2k.jpg, rough_wood_disp_2k.jpg |
 | `rusty_metal_02/` | rusted iron sheet, for tanks, drums, bins, gun shields | 1.00 x 1.00 m | rusty_metal_02_diff_2k.jpg, rusty_metal_02_rough_2k.jpg, rusty_metal_02_disp_2k.jpg |
 | `hessian_380/` | sacking (hessian), for sandbags and sacks | 0.27 x 0.27 m | hessian_380_diff_2k.jpg, hessian_380_rough_2k.jpg, hessian_380_disp_2k.jpg |

@@ -8,7 +8,8 @@ What this file does: draws the store's card pictures, so a builder (and the owne
     python3 card.py sheet materials                        one sheet of every material card with its name
     python3 card.py sheet parts
 
-Cards go to store/cards/materials/ and store/cards/parts/. Every card uses the same light: an amber key from the
+Cards go to store/cards/materials/ and store/cards/parts/, or with --out FOLDER to a folder of your own (use that to
+look at a part without changing the store's own cards). Every card uses the same light: an amber key from the
 front left, a blue fill from the right, a rim from behind, on a dark ground, so cards can be compared.
 Parts face -Y (Blender's front view); "three" looks from 35 degrees to the right of front, "close" from nearer and
 lower at the front, "side" from +X, "back" from +Y.
@@ -207,7 +208,13 @@ def main():
     parser.add_argument('--samples', type=int, default=32)
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--option', action='append', default=[], help='a part option as key=value (true/false/numbers understood)')
+    parser.add_argument('--out', help='write the pictures into this folder instead of the store\'s own cards folder')
     args = parser.parse_args(argv)
+    if args.out:
+        global CARDS
+        CARDS = os.path.abspath(args.out)
+        for kind in ('parts', 'materials'):
+            os.makedirs(os.path.join(CARDS, kind), exist_ok=True)
     if args.kind == 'part':
         options = {}
         for item in args.option:

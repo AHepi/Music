@@ -29,10 +29,12 @@ Needs Blender 5.1 or later, or the `bpy` Python module (`pip install bpy==5.1.2`
 cd plugins/painted-place
 sh tests/run_tests.sh                                        # every test; fails if one fails
 python3 brief/store/tools/store.py --list                    # what the store holds
-python3 brief/store/tools/lay_walkway.py --points "0,0,0 0.5,6,0 2,12,0.3" --out walkway.blend
-python3 brief/store/tools/card.py part bell_tent             # a part's card pictures
+python3 brief/store/tools/lay_walkway.py --points "0,0,0 0.5,6,0 2,12,0.3" --out /tmp/walkway.blend
+python3 brief/store/tools/card.py part bell_tent --out /tmp/cards      # a part's pictures, kept out of the store
 python3 brief/measure.py brief/reference/"painting - rainy tenement street at dusk.jpg"
 ```
+
+Keep your own files out of `brief/`: a builder gets a copy of it, and what is written there goes to every builder.
 
 ## What was retired, and why
 

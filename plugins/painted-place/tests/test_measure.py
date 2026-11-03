@@ -24,6 +24,9 @@ def main():
         check(all(v == 'inside' for v in judged.values()), 'reference picture %s is outside a band: %s' % (name, judged))
     dark = Image.open(os.path.join(reference, pictures[0])).convert('RGB').point(lambda v: v // 4)
     check(measure.verdicts(measure.measure(dark))['brightness'] == 'low', 'a picture at a quarter brightness was not called too dark')
+    for key in [('brightness', 'low'), ('warm_share', 'low'), ('cool_share', 'low'), ('warm_light_coverage', 'low')]:
+        advice = measure.dial_for(*key)
+        check(advice and 'look stage' not in advice and 'window_light' not in advice, 'the measure advises a retired dial: %s' % advice)
     print('PASS test_measure: %d reference pictures inside every band; a dark picture is called too dark' % len(pictures))
 
 

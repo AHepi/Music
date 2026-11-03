@@ -114,6 +114,11 @@ def catalogue_text():
 
 
 def main():
+    import argparse
+    argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
+    parser = argparse.ArgumentParser(description="Write the store's catalogue into Store.md from the parts', tools' and materials' own descriptions.")
+    parser.add_argument('--check', action='store_true', help='print the catalogue and say whether Store.md is up to date; change nothing')
+    args = parser.parse_args(argv)
     bpy.ops.wm.read_factory_settings(use_empty=True)
     text = catalogue_text()
     page = open(STORE_MD, encoding='utf-8').read()
@@ -121,7 +126,7 @@ def main():
     start_end = page.index('\n', start) + 1
     end = page.index(END)
     updated = page[:start_end] + text + '\n' + page[end:]
-    if '--check' in sys.argv:
+    if args.check:
         print(text)
         print('\nStore.md is %s' % ('up to date' if updated == page else 'out of date: run catalogue.py'))
         return 0 if updated == page else 1

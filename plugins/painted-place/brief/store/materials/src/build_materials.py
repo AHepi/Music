@@ -6,7 +6,8 @@ materials as they are (their sandstone pictures packed inside), and rebuilds eve
     object's own space at the picture's real size, darkened into the look's range, with dials (see below);
   - MADE • ...: the materials made in code (made.py: old brass, copper, china, weathered boards, wet bark, puddle water,
     a wet-ground film, rusty nail heads, a rust stain), and two made here from shelf photographs: wet mud (the forest
-    mud soaked) and the walkway's boards (rough sawn wood laid along each board by its 'metres' UV map).
+    mud soaked), army canvas (the linen weave without its blue dye) and the walkway's boards (rough sawn wood laid along each
+    board by its 'metres' UV map).
 
     python3 build_materials.py            (run from anywhere; needs the bpy module and Pillow)
 
@@ -297,6 +298,28 @@ def walkway_boards(entry, box_group, weather):
     return material
 
 
+def army_canvas():
+    """MADE • army canvas: the shelf's rough linen weave (it was photographed dyed blue) as undyed buff canvas: its weave,
+    relief and dials kept, its colour taken out and a buff laid in, the brightness unchanged."""
+    material = bpy.data.materials['SURFACE • rough_linen'].copy()
+    material.name = 'MADE • army canvas'
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    weather = nodes['Weather']
+    picture = weather.inputs['Color'].links[0].from_socket
+    grey = nodes.new('ShaderNodeRGBToBW')
+    links.new(picture, grey.inputs['Color'])
+    buff = nodes.new('ShaderNodeMix')
+    buff.data_type = 'RGBA'
+    buff.blend_type = 'MULTIPLY'
+    buff.inputs[0].default_value = 1.0
+    links.new(grey.outputs['Val'], buff.inputs[6])
+    buff.inputs[7].default_value = (1.17, 0.99, 0.61, 1.0)      # a buff whose own brightness is 1: the weave's brightness kept
+    links.new(buff.outputs[2], weather.inputs['Color'])
+    material['store_what'] = 'undyed army canvas, buff (bell tents, tarpaulins, covers): the shelf\'s linen weave without its blue dye'
+    material.diffuse_color = (0.30, 0.26, 0.17, 1.0)
+    return material
+
+
 def wet_mud(box_group, weather):
     """MADE • wet mud: the shelf's dark forest mud, soaked: darker and glossy in its hollows, stronger relief."""
     source = bpy.data.materials['SURFACE • mud_forest']
@@ -388,6 +411,7 @@ def main():
         material.use_fake_user = True
     walkway_boards(manifest['rough_wood'], box_group, weather).use_fake_user = True
     wet_mud(box_group, weather).use_fake_user = True
+    army_canvas().use_fake_user = True
     bpy.ops.file.make_paths_relative()
     bpy.ops.wm.save_mainfile(filepath=TARGET)
     counts = {'street': sum(1 for m in bpy.data.materials if not m.name.startswith(('SURFACE •', 'MADE •'))),

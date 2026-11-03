@@ -148,9 +148,14 @@ def main():
     parser = argparse.ArgumentParser(description='Turn a raw render into the finished picture (see the note at the top of finish.py).')
     parser.add_argument('source', help='the raw render: a 32-bit EXR (best) or a PNG')
     parser.add_argument('target', help='where to write the finished picture (PNG or JPEG)')
+    helps = {'exposure': 'brightness before the curve (EXR only)', 'bloom': 'glow round bright lamps and windows',
+             'veil': 'a warm band of lit air along the horizon (0: none)', 'veil-height': 'where the veil lies, 0 top to 1 bottom',
+             'shadows-blue': 'darks pulled towards blue-black', 'floor': 'blacks lifted to a blue-black floor',
+             'warm-lights': 'extra warmth in the lightest parts', 'soften': "a painter's softening of small detail, edges kept",
+             'vignette': 'corners darkened', 'grain': 'fine film grain'}
     for name, default in (('exposure', 1.0), ('bloom', 1.0), ('veil', 0.0), ('veil-height', 0.575), ('shadows-blue', 1.0),
                           ('floor', 1.0), ('warm-lights', 1.0), ('soften', 0.5), ('vignette', 1.0), ('grain', 1.0)):
-        parser.add_argument('--' + name, type=float, default=default)
+        parser.add_argument('--' + name, type=float, default=default, help='%s; default %s (0 leaves it out)' % (helps[name], default))
     args = parser.parse_args(argv)
     print(finish(args.source, args.target, exposure=args.exposure, bloom=args.bloom, veil=args.veil, veil_height=args.veil_height,
                  shadows_blue=args.shadows_blue, floor=args.floor, warm_lights=args.warm_lights, soften=args.soften,

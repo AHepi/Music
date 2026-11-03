@@ -31,6 +31,8 @@ Options:
     water_material  default 'MADE • puddle water' (reads 'shallow')
     film_material   default 'MADE • wet ground film' (reads 'dry')
     lift            how far the water sits above the ground, metres; default 0.004 (the film sits at half that)
+    level           a height in metres: the water lies flat at it instead of on the ground (a puddle among setts:
+                    about 2 mm above the road's height, so the highest stones stand out of it); default none
     film_reach      how far the wet ground reaches past the water, metres; default 0.3 x half the width + 0.08
     raggedness      how broken the outline is (0 a smooth blob, 1 normal, 2 very broken); default 1
     shallow_band    how wide the shallow, clear rim of the water is, metres; default about 0.4 x half the width (at most 0.22)
@@ -73,6 +75,7 @@ TOOL = {
         'water_material': "default '%s'" % WATER_MATERIAL,
         'film_material': "default '%s'" % FILM_MATERIAL,
         'lift': 'metres the water sits above the ground; default 0.004',
+        'level': 'a height: the water lies flat at it instead of on the ground (a puddle among setts: 2 mm above the road\'s height); default none',
         'film_reach': 'metres the wet ground reaches past the water; default 0.3 x half the width + 0.08',
         'raggedness': 'how broken the outline is: 0 smooth, 1 normal, 2 very broken; default 1',
         'shallow_band': 'metres of shallow, clear rim; default about 0.4 x half the width, at most 0.22',
@@ -167,7 +170,11 @@ class _Ground:
             if hit:
                 result[index] = (matrix @ location).z
         if numpy.isnan(result).all():
-            raise ValueError('the puddle is not over the ground object %r' % self.ground.name)
+            hint = ''
+            if not self.ground.data.polygons:
+                hint = (' (it has no faces of its own: setts and flags are drawn as copies that rays cannot hit; give the road '
+                        'or nothing as ground, and level= the height of the water)')
+            raise ValueError('rays cast straight down at the puddle found no face of the ground object %r%s' % (self.ground.name, hint))
         result[numpy.isnan(result)] = numpy.nanmean(result)
         return result
 
@@ -231,9 +238,11 @@ def _rings_mesh(name, rings_xyz, values, attribute, centre_point=None, centre_va
 
 
 def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=None, water_material=WATER_MATERIAL,
-         film_material=FILM_MATERIAL, lift=0.004, film_reach=None, raggedness=1.0, shallow_band=None):
+         film_material=FILM_MATERIAL, lift=0.004, film_reach=None, raggedness=1.0, shallow_band=None, level=None):
     """Make one puddle with its middle at `location`. Returns (water, film): the objects 'puddle water' and
-    'puddle wet film'."""
+    'puddle wet film'. With `level` (a height in metres), the water lies flat at that height instead of on the ground:
+    for a puddle among setts, give level about 2 mm above the road's height (the stones' tops): the water covers
+    most stones and the highest stand out of it; a centimetre lower, water shows only in the joints."""
     length, width = float(size[0]), float(size[1])
     if length < width:
         length, width, turn = width, length, turn + 90.0
@@ -283,16 +292,27 @@ def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=No
 
     # heights: draped on the ground; the water level over small hollows, bumps above it show through
     extent = numpy.abs(film_world_xy - numpy.array([location.x, location.y])).max(axis=0) + 0.1
-    level = _level(floor, (location.x, location.y), extent, radius=min(0.15, max(0.06, 0.45 * half_width)))
-    under_water = floor.heights(world_xy)
-    water_level = level(world_xy)
-    above_level = numpy.clip((under_water - water_level - 0.002) / 0.006, 0.0, 1.0)
-    shallow = numpy.maximum(shallow, above_level)
     swell = numpy.array([noise.noise(Vector((x * 4.0 - seed * 1.7, y * 4.0, 5.3))) for x, y in world_xy])
-    water_z = numpy.maximum(under_water, water_level) + lift + 0.0005 * swell     # a sub-millimetre swell: reflections waver
-    film_z = floor.heights(film_world_xy) + lift * 0.5
-    centre_ground = float(floor.heights(numpy.array([[location.x, location.y]]))[0])
-    centre_level = float(level(numpy.array([[location.x, location.y]]))[0])
+    if level is None:
+        level_at = _level(floor, (location.x, location.y), extent, radius=min(0.15, max(0.06, 0.45 * half_width)))
+        under_water = floor.heights(world_xy)
+        water_level = level_at(world_xy)
+        above_level = numpy.clip((under_water - water_level - 0.002) / 0.006, 0.0, 1.0)
+        shallow = numpy.maximum(shallow, above_level)
+        water_z = numpy.maximum(under_water, water_level) + lift + 0.0005 * swell     # a sub-millimetre swell: reflections waver
+        film_z = floor.heights(film_world_xy) + lift * 0.5
+        centre_ground = float(floor.heights(numpy.array([[location.x, location.y]]))[0])
+        centre_level = float(level_at(numpy.array([[location.x, location.y]]))[0])
+    else:                    # flat water at the height given; whatever stands higher (stones, bumps) stands out of it
+        level = float(level)
+        if ground is not None:
+            under_water = floor.heights(world_xy)
+            shallow = numpy.maximum(shallow, numpy.clip((under_water - level + 0.002) / 0.006, 0.0, 1.0))
+            film_z = numpy.maximum(floor.heights(film_world_xy) + lift * 0.5, level - 0.0015)
+        else:
+            film_z = numpy.full(len(film_world_xy), level - 0.0015)
+        water_z = level + 0.0005 * swell
+        centre_ground = centre_level = level - lift
     origin = Vector((location.x, location.y, centre_ground))
 
     def rings(xy, z):
@@ -332,6 +352,8 @@ def main(argv=None):
     parser.add_argument('--ground', help='the ground object to drape the puddle onto (default: flat at Z)')
     parser.add_argument('--seed', type=int, default=0, help="the outline's bays and spits; default 0")
     parser.add_argument('--lift', type=float, default=0.004, help='metres the water sits above the ground; default 0.004')
+    parser.add_argument('--level', type=float, default=None, help='a height: the water lies flat at it (a puddle among setts: 2 mm above the road height)')
+    parser.add_argument('--shallow-band', type=float, default=None, help='metres of clear, shallow water at the rim; default from the size')
     parser.add_argument('--film-reach', type=float, default=None, help='metres the wet ground reaches past the water')
     parser.add_argument('--raggedness', type=float, default=1.0, help='0 smooth, 1 normal, 2 very broken; default 1')
     parser.add_argument('--water-material', default=WATER_MATERIAL)
@@ -346,7 +368,8 @@ def main(argv=None):
         ground = bpy.data.objects.get(args.ground)
         if ground is None:
             parser.error('no object %r in %s' % (args.ground, args.blend))
-    water, film = make(args.at, size=args.size, turn=args.turn, ground=ground, seed=args.seed, lift=args.lift,
+    water, film = make(args.at, size=args.size, turn=args.turn, ground=ground, seed=args.seed, lift=args.lift, level=args.level,
+                       shallow_band=args.shallow_band,
                        film_reach=args.film_reach, raggedness=args.raggedness, water_material=args.water_material,
                        film_material=args.film_material)
     bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.out))

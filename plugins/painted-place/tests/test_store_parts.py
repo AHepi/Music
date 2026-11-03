@@ -62,6 +62,7 @@ def main():
         root, objects = build(name, 0)
         check(objects, '%s built nothing' % name)
         low, high = bounds(objects)
+        count = len(objects)
         size = high - low
         foot = float(card.get('foot_z', 0.0))      # a wall sign hangs above its origin (the foot of its wall); its card says how far
         check(abs(low.z - foot) <= 0.06, '%s: its foot is at z = %.3f, its card says %.2f' % (name, low.z, foot))
@@ -86,7 +87,16 @@ def main():
         with bpy.data.libraries.load(path, link=False) as (source, _):
             in_file = list(source.objects)
         check(any(o.startswith(name) for o in in_file), '%s: its part file holds none of its objects (%s)' % (name, in_file[:5]))
-        print('PASS %s: %.2f x %.2f x %.2f m, %d objects, foot at z = %.3f' % (name, size.x, size.y, size.z, len(objects), low.z))
+        for view in ('three', 'close', 'side', 'back'):
+            check(os.path.exists(os.path.join(STORE, 'cards', 'parts', '%s - %s.png' % (name, view))), '%s: no %s card' % (name, view))
+        fresh_scene()
+        try:
+            store.add_part(name, no_such_option=1)
+            check(False, '%s took an option it does not have without a word' % name)
+        except TypeError as problem:
+            check('no_such_option' in str(problem), '%s: the error for a wrong option does not name it: %s' % (name, problem))
+        check(not bpy.data.collections, '%s: a refused option left a collection behind' % name)
+        print('PASS %s: %.2f x %.2f x %.2f m, %d objects, foot at z = %.3f, four cards, a wrong option refused' % (name, size.x, size.y, size.z, count, low.z))
     print('PASS test_store_parts: %d parts' % len(names))
 
 

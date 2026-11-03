@@ -71,18 +71,19 @@ def verdicts(numbers):
 
 
 def dial_for(name, verdict):
-    """The dial that usually moves a measure back into its band (the look stage's own settings)."""
+    """What usually moves a measure back into its band, in your own scene's terms (the camera's exposure, your lights,
+    your sky)."""
     if verdict == 'inside':
         return ''
     advice = {
-        ('brightness', 'low'): 'raise exposure (look stage: exposure, try +0.4), or window_light_scale up',
-        ('brightness', 'high'): 'lower exposure (look stage: exposure, try -0.4)',
-        ('warm_share', 'low'): 'more warm light: window_light_scale up, or more glowing windows and lamps in the place',
-        ('warm_share', 'high'): 'less warm light: window_light_scale down, or fewer lit windows',
-        ('cool_share', 'low'): 'the sky rig is drowned: fewer or weaker warm lights, or sky strength up',
-        ('cool_share', 'high'): 'the picture is all sky: more warm lights, or exposure up',
-        ('warm_light_coverage', 'low'): 'the lamps light nothing: window_light_scale up (try 2.0), exposure up, or add lamps near the camera',
-        ('warm_light_coverage', 'high'): 'blown-out light pools: window_light_scale down, exposure down',
+        ('brightness', 'low'): 'raise the exposure (scene.view_settings.exposure, try +0.4) or strengthen your lamps',
+        ('brightness', 'high'): 'lower the exposure (scene.view_settings.exposure, try -0.4)',
+        ('warm_share', 'low'): 'more warm light: stronger lamps and lit windows, or more of them in the frame',
+        ('warm_share', 'high'): 'less warm light: weaker lamps or fewer lit windows',
+        ('cool_share', 'low'): 'the blue is drowned: weaker or fewer warm lights, or more blue from the sky and its fill light',
+        ('cool_share', 'high'): 'the picture is all blue: more warm lights in the frame, or a higher exposure',
+        ('warm_light_coverage', 'low'): 'the lamps light nothing: lamps nearer the camera or brighter, or a higher exposure',
+        ('warm_light_coverage', 'high'): 'blown-out pools of light: weaker lamps, or a lower exposure',
     }
     return advice.get((name, verdict), '')
 

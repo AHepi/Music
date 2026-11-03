@@ -42,7 +42,7 @@ import _shapes_camp as sh  # noqa: E402
 
 CARD = {
     'name': 'timber_hut',
-    'what': 'a 1914-18 army barrack hut: lapped weatherboards, corrugated iron roof with deep eaves, on stumps',
+    'what': 'a 1914-18 army hut, walls 10 x 5 m by default: lapped weatherboards, corrugated iron roof with deep eaves, on stumps (a full barrack hut of the period was about 18 x 6 m: length=18.3, width=6.1)',
     'size_m': (10.74, 6.18, 5.32),
     'options': {
         'length': 'outside length along X in metres (default 10.0)',
