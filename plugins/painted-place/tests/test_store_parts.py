@@ -37,11 +37,19 @@ def build(name, seed):
 
 
 def fingerprint(objects):
+    """One number from every point of every mesh, in the world: the same part gives the same number."""
+    import numpy
     total = 0.0
     for obj in objects:
-        if obj.type == 'MESH':
-            total += sum(abs(c) for v in obj.data.vertices[::7] for c in (obj.matrix_world @ v.co))
-    return round(total, 4)
+        if obj.type != 'MESH' or not obj.data.vertices:
+            continue
+        points = numpy.empty(len(obj.data.vertices) * 3, dtype=numpy.float64)
+        obj.data.vertices.foreach_get('co', points)
+        points = points.reshape(-1, 3)
+        matrix = numpy.array(obj.matrix_world)
+        world = points @ matrix[:3, :3].T + matrix[:3, 3]
+        total += float(numpy.abs(world).sum())
+    return round(total, 3)
 
 
 def main():
@@ -55,19 +63,21 @@ def main():
         check(objects, '%s built nothing' % name)
         low, high = bounds(objects)
         size = high - low
-        check(abs(low.z) <= 0.06, '%s: its foot is at z = %.3f, not on the ground' % (name, low.z))
+        foot = float(card.get('foot_z', 0.0))      # a wall sign hangs above its origin (the foot of its wall); its card says how far
+        check(abs(low.z - foot) <= 0.06, '%s: its foot is at z = %.3f, its card says %.2f' % (name, low.z, foot))
         centre = (low + high) / 2
-        check(abs(centre.x) <= max(0.3, size.x * 0.35) and abs(centre.y) <= max(0.3, size.y * 0.35),
-              '%s: not centred on the origin (centre %.2f, %.2f)' % (name, centre.x, centre.y))
+        if 'foot_z' not in card:
+            check(abs(centre.x) <= max(0.3, size.x * 0.35) and abs(centre.y) <= max(0.3, size.y * 0.35),
+                  '%s: not centred on the origin (centre %.2f, %.2f)' % (name, centre.x, centre.y))
         for given, measured, axis in zip(card['size_m'], size, 'xyz'):
             check(abs(measured - float(given)) <= max(0.06, 0.25 * float(given)),
                   '%s: %s size %.2f m, its card says %.2f m' % (name, axis, measured, float(given)))
         for obj in objects:
             check(all(abs(s - 1.0) < 1e-4 for s in obj.scale), '%s: %s is scaled %s (apply its scale)' % (name, obj.name, tuple(obj.scale)))
             check(len(obj.data.materials) > 0 and all(m is not None for m in obj.data.materials), '%s: %s has an empty material slot' % (name, obj.name))
+        first = fingerprint(objects)
         same = fingerprint(build(name, 0)[1])
-        again = fingerprint(objects)
-        check(abs(same - again) < 1e-3, '%s: the same seed built a different part' % name)
+        check(abs(same - first) < 1e-3, '%s: the same seed built a different part' % name)
         other = fingerprint(build(name, 7)[1])
         if abs(other - same) < 1e-6:
             print('note: %s looks the same with another seed' % name)
