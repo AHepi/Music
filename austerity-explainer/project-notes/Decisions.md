@@ -841,6 +841,22 @@ overturn any of them in one line. Changes to the project must follow this file.
   builder's brief otherwise, 80 minutes on the whole machine.
 - No blind judge (decision 57): it skips the skill's judge step and makes its one fix pass from the measures and its own eyes.
 
+62. **Stop building the plugin's code; the brief carries the look** (3 November 2026, 17:52 to 18:00). Your words: "What do you think? The
+    textures need significantly more work. The logic behind why objects are placed where they are is faulty. The objects themselves don't
+    make a lot of sense. There is no volumetric lighting or atmosphere. What do you think should be done? Maybe just abandon the plugin?
+    The self job was really good." Then: "Don't do anything. Just plan." Then, to the plan: "You do step one and two. Tell me when step one
+    is done and just move on to two without waiting for my reply. The new street view, keep it out. Keep the attached one in as reference.
+    Yes, redo the military base." (The attached picture was the rainy tenement street painting, already one of the five references.)
+
+### Claude's calls for item 62
+
+- `place-brief/` is the kit: the look page, seven references (the five, the tea room interior, the desert mine), `Traps.md`, `measure.py`
+  and the brief text. The plugin's tea house street stays out, as you said.
+- The desert mine sat outside two bands; the bands were widened (warm share to 36 percent, warm light to 4.5 percent), as the look page
+  says a new reference should widen a band, not be forced in.
+- The brief's rule: keep fixing until the clock runs out, no fixed number of rounds.
+- Step 3 of the plan (retiring the plugin, changing the rules file) waits for the military base result and your word.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
