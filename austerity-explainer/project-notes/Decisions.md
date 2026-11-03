@@ -873,6 +873,15 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The shelf is Poly Haven CC0 only (23 sets, 27 MB, colour at 2K, roughness and height at 1K).
 - Two passes: the first builder on a 100-minute clock (the material list adds work), the second on 80 with the first's scene.
 
+65. **Keep the plugin as a store of parts, tools and materials; Opus works from a plan** (3 November 2026, 23:00 and 23:04), your words:
+    "It looks so much better. But it isn't there just yet. The water looks like a cutout mirror, the walk way is littered with items I
+    can't identify. House to the left of the tower looks like cardboard. There are also a ton of things I would add if we are to keep
+    the plugin: - The footpath could be turned into a tool or modified that automatically generates on a spline: it has really great
+    details. - There a ton of detailed assets, already created, that can be turned into some kind of tool as well. - There are a tone
+    of textures that can be added as "pick and choose" shaders. Regardless, what do you recommend we do next?" Then: "Actually can you
+    create the plan for Opus to follow. Your the brains, Opus is the worker." The plan is
+    `procedural-textures/51 Plan for Opus - the brief fixes and the store.md`.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

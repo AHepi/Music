@@ -936,5 +936,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 
 ## Next step
 
-Your judgment of the two-pass military base against the pictures-only one. If the gain is real but small, the next lever is time and
-shape, not more kit: a longer clock with the bands named as a floor, and the tents and tower built with their sag, seams and patches.
+Opus follows `51 Plan for Opus - the brief fixes and the store.md`: fix the brief (puddle edges, nameable props, buildings with eaves,
+the bands as a floor), build the store (the walkway tool, the old plugin's good parts as tools, parts from the builders' scripts, the
+shelf as ready materials, a finish), test on the military base, then checks and records. Your verdict on the two-pass base: "It looks so
+much better. But it isn't there just yet.

@@ -357,7 +357,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your judgment of the two-pass military base (folder 50) against the pictures-only one, and whether to retire the plugin's code (step 3).
+- Opus to work the plan in `procedural-textures/51 Plan for Opus - the brief fixes and the store.md` (decision 65): the plugin is kept as a
+  store of parts, tools and ready materials beside the brief kit.
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),
