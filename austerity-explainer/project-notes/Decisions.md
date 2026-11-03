@@ -857,6 +857,12 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The brief's rule: keep fixing until the clock runs out, no fixed number of rounds.
 - Step 3 of the plan (retiring the plugin, changing the rules file) waits for the military base result and your word.
 
+63. **Research first: how CGI artists do it** (3 November 2026, 19:46), your words, after "Pictures only is better. But it's still missing the
+    detail.": "Before that step, how about doing some research on how CGI artists do it. I know part of their design process is to do
+    research on materials, how the behaviour and weather, how they fit together, so on and so forth." The research is
+    `procedural-textures/49 Research - how environment artists make a place old, used and full.md`. The full-size redraw and the second
+    pass (my plan at 18:59) wait.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

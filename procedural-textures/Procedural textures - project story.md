@@ -901,7 +901,18 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     military bases side by side (plugin, pictures only, kit). **Not done:** step 3 (retiring the plugin) waits for your word; no full-size
     redraw.
 
+49. **Research: how environment artists make a place old, used and full (3 November, 19:46 to 20:20).** You judged the three military
+    bases: "Pictures only is better. But it's still missing the detail." Then: "Before that step, how about doing some research on how CGI
+    artists do it." **Found** (`49 Research - ...md`, with sources): professionals begin with a wall of real photographs and a material list
+    (what every surface is made of, how it has aged, where the wear sits), decide who uses the place, and only then build; detail comes from
+    things prepared in advance (photographed surfaces, trim strips, stick-on marks, a store of parts, photo projection), not from modelling
+    everything; wear follows a few physical rules (edges bright, hollows dirty, water runs down, rust where water sits) broken up by hand;
+    props are placed to tell who was here; big, medium and small shapes must all be present; and the painted games (Dishonored, Arcane)
+    paint over real detail rather than filtering at the end. **What it means:** our builders do the blockout and the light and skip the
+    reference, the material list, the parts and most of the set dressing. The remedies differ by kind of detail: a shelf of photographed
+    surfaces and a wear sheet for surfaces; a story brief and a second, set-dressing pass for objects; time for light in the air.
+
 ## Next step
 
-You judge the three military bases. If the kit's holds up, step 3: retire the plugin's code, change the rule in the repository's notes,
-and the kit becomes the way a place is built.
+Your call on the research: whether the kit gets a reference board and a material list as the builder's first deliverable, a shelf of
+photographed surfaces, and a second set-dressing pass with a story brief; then the military base again to test it.
