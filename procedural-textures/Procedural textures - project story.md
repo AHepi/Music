@@ -872,6 +872,17 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     techniques the plugin lacks (grading the picture in code so orange never turns white, haze inside each material, smoke as a soft
     camera-facing ribbon and more; saved in its report). **Not done:** no full-size redraws; no judging asked for.
 
+47. **The military base again, with the plugin (3 November, 15:48 to 16:40).** You said: "Ok. Can you retry the military base with the
+    plugin?" A fresh Sonnet builder had `painted-place` 0.5.0, your words "a military base", 80 minutes on the whole machine, and no blind
+    judge. **What it made:** a First World War camp at blue hour: timber barrack huts, a brick headquarters, a gate with barbed wire, a field
+    gun, a truck, a brazier, gas lamps, 430 named shapes dressed into 2,007 lapped boards, ashlar, weeds, rubbish and rot. **How it went:** it
+    stopped at 16:27 after two rounds, with 68 minutes unused, because the skill allows one fix pass. Its last picture is out of the colour
+    bands (warm 56 percent) and, by its own list, has a big pale hut wall filling the left third, ground like wet shiny concrete with an empty
+    bottom half, and wire coils and the brazier as black cylinders. Beside the pictures-only builder's camp (log 46) it is clearly worse.
+    **What it shows about the plugin:** "one fix pass, then stop" outranks the clock; the `earth` material (the street's road bed) reads as a
+    mirror on open ground; simple iron cylinders read as black blobs; the skill does not warn how narrow the tall frame is near the camera.
+
 ## Next step
 
-You look at the three pictures-only places; then say what you want next. The brushstroke add-on is set aside (decision 59).
+Fix the four gaps the military base showed (let a builder keep fixing while its clock allows; open-ground earth that reads as mud; a
+warning about the narrow tall frame; small props that are not plain cylinders), then build the military base with the plugin again.

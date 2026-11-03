@@ -622,6 +622,10 @@ Only failures in doing the work belong here. Newest at the bottom.
 176. **Strokes took the colour of whatever stood in front of them** (log 45): a timber 11 cm in front of the plaster passed a 25 cm "is it
     hidden" margin, so timber brown was smeared over the plaster. Fix: colour from each stroke's middle, and a 4 cm margin.
 177. **Strokes that took a lit window's colour smeared glow over the walls** (log 45). Fix: no stroke is painted in a light's colour.
+178. **A plugin builder stopped with 68 of its 80 minutes left and a picture it knew was broken** (log 47): the skill's "one fix pass, then
+    stop" outranked the clock, and it had its next fixes written down. Not fixed yet.
+179. **The `earth` role's material read as a mirror sheet on a big open ground** (log 47): it is the street's road bed, made to lie under
+    setts, not to be seen as mud. Not fixed yet.
 
 ## Traps
 

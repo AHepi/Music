@@ -833,6 +833,14 @@ overturn any of them in one line. Changes to the project must follow this file.
   five reference pictures, the look page and Blender; no plugin, no internet.
 - One after another, 80 minutes each, so each has the whole machine. Your three phrases are the requests, exactly as written.
 
+61. **The military base again, with the plugin** (3 November 2026, 15:48), your words: "Ok. Can you retry the military base with the plugin?"
+
+### Claude's calls for item 61
+
+- A fresh Sonnet builder with `painted-place` 0.5.0 (copied as it is now) and the request "a military base", the tea house plugin
+  builder's brief otherwise, 80 minutes on the whole machine.
+- No blind judge (decision 57): it skips the skill's judge step and makes its one fix pass from the measures and its own eyes.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
