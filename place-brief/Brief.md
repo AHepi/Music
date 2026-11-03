@@ -10,23 +10,27 @@ What this file is: the words a builder gets, with the request, the folder and th
 >
 > The film has a look. The pictures in FOLDER/reference/ show it, FOLDER/The look.md describes it, and FOLDER/Traps.md lists what has gone wrong for builders before you. Your picture should belong with the reference pictures. `python3 FOLDER/measure.py PICTURE` measures a picture against the look's bands.
 >
+> Before you build, read FOLDER/Before you build.md and the photographs in FOLDER/boards/REQUEST/: real pictures of the kind of place asked for. Your first deliverable is WORK/materials.md: who uses this place and what they left, and every surface and thing in the picture with what it is made of, how it has aged and where its wear sits. FOLDER/surfaces/ is a shelf of photographed surfaces you may lay on (see its Surfaces.md).
+>
 > What you have:
 > - A work folder: WORK. Write everything there.
 > - Blender 5.1.2 as the Python module `bpy`: run scripts with `python3`. The computer has 2 processors and nobody else is drawing on it.
 >
 > Rules:
 > - Read nothing outside FOLDER and WORK. No internet, no image generation, no rented machines, no other folders on this computer.
-> - Your clock: your last picture must be finished by DEADLINE by this computer's clock (check with `date`). Use the time: measure every picture, look at every picture at full size, fix what you see, and draw again, until the clock says stop. There is no fixed number of rounds.
+> - Your clock: your last picture must be finished by DEADLINE by this computer's clock (check with `date`). Use all of it: measure every picture, look at every picture at full size, fix what you see, and draw again. Do not stop before the clock unless you can say what you would still change and why you will not; a builder who stopped early with time left handed in less than it could have.
 > - Your final picture is a tall frame for a vertical film. Draw it at 540 x 960, saved as WORK/final.png. It may be redrawn at 1080 x 1920 with 64 samples later, so also leave a script, render_final.py, that draws your final scene with all its finishing, run as: python3 render_final.py WIDTH HEIGHT SAMPLES OUT.png
 > - When you finish (or at DEADLINE), end with a report in plain words: what you built, how you lit and framed it, every picture you drew with how long it took, its measures, what you checked and fixed, and what you did not do. Your report is your last message.
 
 ## How a place is built with this
 
-1. Copy `place-brief/` to a fresh folder the builder may read; make an empty work folder beside it.
+1. Copy `place-brief/` to a fresh folder the builder may read; make an empty work folder beside it. If `boards/` has no board for the
+   request, make one first (real photographs of the kind of place, public domain, with a `Board.md` saying what to look at in each).
 2. Fill in REQUEST (the owner's words, exactly), FOLDER, WORK and DEADLINE (80 minutes from the start has been enough).
 3. Start one fresh builder with the text and nothing else. Do not give it the project's notes, the plugin, or your own reasoning.
 4. When it ends, save its report beside its picture; the owner judges the picture against the reference pictures.
-5. A picture the owner approves can join `reference/` (and `The look.md`'s table); if it sits outside a band, widen the band in `measure.py` and on the page. A fault the builder reports that the next builder would also hit goes into `Traps.md` as one line.
+5. For more detail, a second builder dresses the place (`Second pass.md`).
+6. A picture the owner approves can join `reference/` (and `The look.md`'s table); if it sits outside a band, widen the band in `measure.py` and on the page. A fault the builder reports that the next builder would also hit goes into `Traps.md` as one line.
 
 ## Traps
 

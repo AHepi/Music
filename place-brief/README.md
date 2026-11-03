@@ -9,8 +9,12 @@ What this is: everything a builder gets to make one place for the film, and noth
 | `reference/` | Seven pictures: three series paintings, two renders, and two places built from this brief that the owner approved |
 | `Traps.md` | What has gone wrong for builders before, one line each |
 | `measure.py` | Measures a picture against the look's bands (`python3 measure.py PICTURE`) |
+| `Before you build.md` | What to look at and write down before building: the board, the material list, who uses the place, where wear sits, three sizes of shape |
+| `boards/<request>/` | Real photographs of the kind of place asked for (public domain), one folder per request, with a `Board.md` |
+| `surfaces/` | A shelf of 23 photographed surfaces (Poly Haven, CC0) with their real sizes, for the builder to lay on as it chooses |
+| `Second pass.md` | The brief for a second builder that dresses a finished place: surfaces, wear, the things people left |
 
-How lessons travel: a good new picture joins `reference/`; a fault joins `Traps.md`. No code is added.
+How lessons travel: a good new picture joins `reference/`; a fault joins `Traps.md`; a new kind of place gets a board; a new surface joins the shelf. No code is added.
 
 ## Traps
 
