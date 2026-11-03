@@ -626,6 +626,8 @@ Only failures in doing the work belong here. Newest at the bottom.
     stop" outranked the clock, and it had its next fixes written down. Not fixed yet.
 179. **The `earth` role's material read as a mirror sheet on a big open ground** (log 47): it is the street's road bed, made to lie under
     setts, not to be seen as mud. Not fixed yet.
+180. **A builder told to keep fixing until the clock still stopped with 49 minutes left** (log 48): "until the clock says stop" read as
+    permission, not an instruction. Not fixed yet; if it matters, the brief needs a plainer line ("do not stop before the clock").
 
 ## Traps
 

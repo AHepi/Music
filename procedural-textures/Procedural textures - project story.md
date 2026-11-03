@@ -116,6 +116,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **The tea house blind test is done and you judged it (log 44, 3 November, night):** two pictures shown as A and B; your verdict: "Absolutely
   incredible. The plugin works." B was the plugin's. What the tea house showed the plugin lacked is in `painted-place` 0.5.0: brass, copper
   and china; casings, sills and sashes for windows in plaster walls; a warning when lit glass takes too much of the frame.
+- **The brief kit exists (log 48, 3 November, evening):** `place-brief/`, the folder a builder gets instead of the plugin: the look page,
+  seven reference pictures, a traps page, the measure tool and the brief text. Your words on the plugin: "Maybe just abandon the plugin? The
+  self job was really good." The military base built from the kit is in `48 Military base from the brief kit/`, beside the other two.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -882,7 +885,23 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     **What it shows about the plugin:** "one fix pass, then stop" outranks the clock; the `earth` material (the street's road bed) reads as a
     mirror on open ground; simple iron cylinders read as black blobs; the skill does not warn how narrow the tall frame is near the camera.
 
+48. **The brief kit, and the military base a third time (3 November, 17:52 to 18:45).** You asked what should be done and whether to abandon
+    the plugin: "The textures need significantly more work. The logic behind why objects are placed where they are is faulty. The objects
+    themselves don't make a lot of sense. There is no volumetric lighting or atmosphere... Maybe just abandon the plugin? The self job was
+    really good." My view, given in full: mostly yes; the tests show the target (pictures and a page) carries the look and the code does not,
+    and I had built the plugin into the building blocks its own front page warned against. You said: "Don't do anything. Just plan.", then
+    to the plan: "You do step one and two... The new street view, keep it out. Keep the attached one in as reference. Yes, redo the military
+    base." **Step 1, the kit** (`place-brief/`): the look page (the request may name another period), seven references (the five, the tea
+    room interior, the desert mine; the plugin's tea house street left out), `Traps.md` (fifteen lines from the builders' own faults),
+    `measure.py` (two bands widened so the desert mine sits inside, as the page says to do) and `Brief.md` with the new rule: keep fixing until
+    the clock. **Step 2:** a fresh builder with the kit and "a military base", 80 minutes. It built a muddy camp road between six timber huts
+    to a watchtower against the last light, a searchlight beam in the haze, a field gun turned across the road, crates with brass shells, a
+    lantern, barbed wire along the bottom edge, broken puddles mirroring the lights. It drew 24 pictures, measured every one with the real
+    tool, checked itself against the traps page, and finished inside every band at 18:36, with 49 minutes unused. **Shown:** the three
+    military bases side by side (plugin, pictures only, kit). **Not done:** step 3 (retiring the plugin) waits for your word; no full-size
+    redraw.
+
 ## Next step
 
-Fix the four gaps the military base showed (let a builder keep fixing while its clock allows; open-ground earth that reads as mud; a
-warning about the narrow tall frame; small props that are not plain cylinders), then build the military base with the plugin again.
+You judge the three military bases. If the kit's holds up, step 3: retire the plugin's code, change the rule in the repository's notes,
+and the kit becomes the way a place is built.

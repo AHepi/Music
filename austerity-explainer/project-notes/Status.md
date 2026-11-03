@@ -339,6 +339,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   plugin's.
 - Brushstrokes (Blender Studio's Brushstroke Tools): the tea house painted six ways; set aside at your word (decision 59).
 - Three places by pictures-only builders (townhouse, desert mine, military base; log 46): done and sent.
+- The military base with the plugin (log 47): clearly worse, stopped after 12 minutes by the one-fix rule. Your verdict on the plugin: the
+  textures, placement, objects and light in the air all fall short; maybe abandon it.
+- `place-brief/` (log 48): the kit that replaces the plugin's code (look page, seven references, traps, measure, brief). The military
+  base built from it is sent, beside the other two. Step 3 (retiring the plugin) waits for your word.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -351,7 +355,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Which "minor adjustments" you have in mind for the plugin, and what you make of the three pictures-only places.
+- Your judgment of the three military bases (plugin, pictures only, kit), and whether to retire the plugin's code (step 3).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),
