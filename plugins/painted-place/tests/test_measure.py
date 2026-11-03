@@ -1,32 +1,30 @@
 """
-What this file does: checks the measures against the look's bands: every reference picture sits inside every
-band; the coal mine as it was fails the warm-light band; the first dark pass fails brightness.
+What this file does: checks the kit's measure tool (brief/measure.py): every reference picture sits inside every band,
+and a picture that is too dark is called too dark.
     python3 tests/test_measure.py
 """
 import os
 import sys
-from pathlib import Path
 
 from PIL import Image
 
-HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE / '..' / 'look'))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _common import BRIEF, check  # noqa: E402
+
+sys.path.insert(0, BRIEF)
 import measure  # noqa: E402
 
 
 def main():
-    plugin = HERE.parent
-    for picture in sorted((plugin / 'look' / 'reference').glob('*.jpg')):
-        judged = measure.verdicts(measure.measure(Image.open(picture)))
-        assert all(v == 'inside' for v in judged.values()), (picture.name, judged)
-    as_is = measure.verdicts(measure.measure(Image.open(plugin / 'examples' / 'coal-mine' / 'mine-A-as-is.jpg')))
-    assert as_is['warm_light_coverage'] == 'low', as_is
-    dark = measure.verdicts(measure.measure(Image.open(plugin / 'examples' / 'coal-mine' / 'mine-B-look.jpg')))
-    assert dark['brightness'] == 'low', dark
-    fixed = measure.verdicts(measure.measure(Image.open(plugin / 'examples' / 'coal-mine' / 'mine-C-look-fixed.jpg')))
-    assert all(v == 'inside' for v in fixed.values()), fixed
-    assert measure.dial_for('brightness', 'low').startswith('raise exposure')
-    print('PASS test_measure')
+    reference = os.path.join(BRIEF, 'reference')
+    pictures = sorted(f for f in os.listdir(reference) if f.lower().endswith(('.jpg', '.png')))
+    check(len(pictures) >= 5, 'fewer than five reference pictures in %s' % reference)
+    for name in pictures:
+        judged = measure.verdicts(measure.measure(Image.open(os.path.join(reference, name))))
+        check(all(v == 'inside' for v in judged.values()), 'reference picture %s is outside a band: %s' % (name, judged))
+    dark = Image.open(os.path.join(reference, pictures[0])).convert('RGB').point(lambda v: v // 4)
+    check(measure.verdicts(measure.measure(dark))['brightness'] == 'low', 'a picture at a quarter brightness was not called too dark')
+    print('PASS test_measure: %d reference pictures inside every band; a dark picture is called too dark' % len(pictures))
 
 
 if __name__ == '__main__':

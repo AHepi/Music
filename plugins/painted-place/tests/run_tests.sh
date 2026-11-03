@@ -1,21 +1,18 @@
 #!/bin/sh
-# What this does: runs every test with the Python that has bpy (the bpy module, or Blender's own Python), shows each
+# What this does: runs every test of the brief kit and its store with the Python that has the bpy module, shows each
 # test's PASS lines or its error, and fails if any test fails (by the test's own exit code, not by what it prints).
-# Use:  sh tests/run_tests.sh            or   BLENDER=/path/to/blender sh tests/run_tests.sh
+# Use:  sh tests/run_tests.sh          (from the plugin folder or anywhere)
 cd "$(dirname "$0")/.." || exit 1
 status=0
-for test in tests/test_roles.py tests/test_measure.py tests/test_look_stage.py tests/test_dressing.py tests/test_shore_and_timber.py tests/test_scans.py tests/test_tea_house_lessons.py; do
-  if [ -n "$BLENDER" ]; then
-    output=$("$BLENDER" -b --python-exit-code 1 --python "$test" 2>&1); code=$?
-  else
-    output=$(python3 "$test" 2>&1); code=$?
-  fi
-  if [ "$code" -eq 0 ] && echo "$output" | grep -q "PASS"; then
-    echo "$output" | grep "PASS"
+for test in tests/test_measure.py tests/test_store_materials.py tests/test_store_parts.py tests/test_store_tools.py tests/test_store_rules.py; do
+  output=$(python3 "$test" 2>&1); code=$?
+  if [ "$code" -eq 0 ] && echo "$output" | grep -q "^PASS"; then
+    echo "$output" | grep -E "^(PASS|note)"
   else
     echo "FAIL $test (exit $code)"
-    echo "$output" | grep -E "Error|assert|Traceback" | tail -5
+    echo "$output" | grep -E "Error|assert|Traceback|^note" | tail -6
     status=1
   fi
 done
+if [ "$status" -eq 0 ]; then echo "ALL PASSED"; else echo "SOME FAILED"; fi
 exit $status

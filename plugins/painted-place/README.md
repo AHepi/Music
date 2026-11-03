@@ -1,18 +1,18 @@
 # Painted place
 
-What this is: a small Claude plugin for building a place in Blender and bringing it into the series' painted blue-hour look, built so that what was learned once transfers to the next place and the next session. Version 0.5.0, 3 November 2026.
+What this is: a small Claude plugin for building a place in Blender for the series' painted look, the way the owner approved on 3 November 2026. Version 0.6.0, 4 November 2026.
 
-Why it is shaped this way: the record of the earlier plugin (`procedural-textures/Procedural textures - project story.md`, logs 32 to 38) shows that lessons stored as procedure and as the plugin's own building blocks made a model's places worse than its unaided ones (blind scores 2.7 against 6.3 and 6.4), while a visible target, a judge in plain words and one fix pass helped most (6.0 to 7.2). So this plugin carries five things and a loop, and no gate.
+How a place is built now: one fresh builder gets the **brief kit** (`brief/`) and the owner's plain request, decides everything about the place itself (what is in it, where every thing goes, how it is lit), and the owner judges the picture. The kit carries the look; the builder's judgment does the rest. The skill `skills/make-a-painted-place/SKILL.md` says how to run it.
 
-## The five things
+## What is in it
 
 | Thing | Where | What it is |
 |---|---|---|
-| The look | `look/The look.md`, `look/reference/` | The target: five reference pictures and one page with the measured bands |
-| The judge | `look/measure.py`, `look/judge.py`, `agents/blind-judge.md` | Numbers against the bands, and a blind rubric a fresh model answers in plain words |
-| The look stage | `stage/look_stage.py`, `stage/render_small.py` | One function: lights at every glowing window and lamp, the sky rig, the painted sky, haze, Cycles with AgX, the restrained paint filter; before drawing, a warning when glowing glass takes up more than 2 percent of the frame |
-| The dressing | `materials/apply_by_role.py` (with `lay_setts.py`, `lay_facade.py`, `lay_timber.py`, `lay_details.py`, `survey.py`, `lay_shore.py`, `lay_trees.py`, `scans.py`, `brass_copper_china.py`), `materials/Roles.md`, `materials/Materials.blend`, `materials/textures/` | One call: the street bundle's 45 proven materials by role words, with a real sandstone's grain laid over its stone, and weathered timber, deck planks, bark, damp sand and driftwood from free photographed scans (Poly Haven, CC0); laid setts and flags on flat roads and pavements; flat stone walls built up into ashlar with dressed windows, bands and quoins; windows in plaster walls given casings, sills and sashes with glazing bars; plain timber walls laid as boards, their windows given sashes; old brass, old copper and glazed china made for the roles that need them; the details from the place's own shape (puddles where lights will mirror, gutter water, damp feet, stains, rust, weeds, moss, rubbish, whitened steps); and, from a survey of what the camera sees, rot and mould up timber, weeds and leaves at the feet of anything standing, sand drifted against things, water's edges (wet ground, foam, a wrack line, driftwood, mossy banks, things wet to the tide line) and what trees drop |
-| The loop | `skills/make-a-painted-place/SKILL.md` | Build, dress, light and draw small, measure, judge blind (the look and the request), one fix pass, full size once |
+| The brief kit | `brief/` | The words a builder gets (`Brief.md`), the look in words and numbers (`The look.md`) and in pictures (`reference/`), what went wrong for builders before (`Traps.md`), a measure tool (`measure.py`), what to do before building (`Before you build.md`), boards of real photographs per kind of place (`boards/`), a shelf of 23 photographed surfaces (`surfaces/`), the brief for a second builder that dresses a finished place (`Second pass.md`); see `brief/README.md` |
+| The store | `brief/store/` | Ready parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with a card picture of each; nothing in it places itself. Catalogue: `brief/store/Store.md` |
+| The skill | `skills/make-a-painted-place/SKILL.md` | How to run a build: the board, the copy, the words, one fresh builder, its report, the owner's judgment |
+| The tests | `tests/run_tests.sh` | The measure tool on the reference pictures; every material, part and tool in the store; the store's rule that nothing places itself; the catalogue up to date. Fails if any test fails |
+| Records | `examples/` | Pictures and notes from the plugin's earlier versions (0.2 to 0.5), kept as a record; the code they used is retired (below) |
 
 ## Install
 
@@ -21,41 +21,30 @@ Why it is shaped this way: the record of the earlier plugin (`procedural-texture
 /plugin install painted-place@ahepi-music
 ```
 
-Needs Blender 5.1 or later (the look stage uses the 5.1 compositor), or the `bpy` Python module (`pip install bpy==5.1.2`), plus Python with Pillow for the measures. Every command answers `--help`. With only the `bpy` module, run each script as `python3 SCRIPT ARGS` instead of `blender -b --python SCRIPT -- ARGS`.
+Needs Blender 5.1 or later, or the `bpy` Python module (`pip install bpy==5.1.2`), plus Python with Pillow, numpy, scipy and OpenCV for the measure and the optional finish. With only the `bpy` module, run each script as `python3 SCRIPT ARGS`.
 
-## Try it in five minutes
+## Try it
 
 ```
 cd plugins/painted-place
-sh tests/run_tests.sh                                                     # seven tests, a few minutes
-blender -b --python examples/lane-blockout/build_lane.py -- --out /tmp/lane/lane.blend
-blender -b --python materials/apply_by_role.py -- --scene /tmp/lane/lane.blend --save-as /tmp/lane/dressed.blend
-blender -b --python stage/render_small.py -- --scene /tmp/lane/dressed.blend --out /tmp/lane/round-1.png --rain
-python3 look/measure.py /tmp/lane/round-1.png
-python3 look/judge.py /tmp/lane/round-1.png --out /tmp/lane/judge-1 --request "a narrow old lane in the rain"   # then: "Judge the packet at /tmp/lane/judge-1."
+sh tests/run_tests.sh                                        # every test; fails if one fails
+python3 brief/store/tools/store.py --list                    # what the store holds
+python3 brief/store/tools/lay_walkway.py --points "0,0,0 0.5,6,0 2,12,0.3" --out walkway.blend
+python3 brief/store/tools/card.py part bell_tent             # a part's card pictures
+python3 brief/measure.py brief/reference/"painting - rainy tenement street at dusk.jpg"
 ```
 
-## What it does not do
+## What was retired, and why
 
-- It does not model the place. Shapes are the builder's (a model's or a person's); the plugin dresses them (stones, ashlar, dressings, details) and lights them.
-- It does not paint over the render with an image model. For the flatter painted look, the explainer-film plugin's `paint-and-cut` skill does that from the full-size picture.
-- It does not make daylight. The look stage is a blue hour; a daylight variant does not exist yet.
-- It does not film. A moving camera through a place lit this way is untested (the paint filter and Cycles' noise clean-up could flicker between frames).
+Until version 0.5 the plugin built the look itself: a **dressing** (`materials/apply_by_role.py` and the `lay_*.py` files) gave every object a material by the words in its name and laid details where its own survey of the camera's view said they belonged; a **look stage** (`stage/`) lit and drew the place; a **blind judge** (`look/judge.py`, `agents/blind-judge.md`) said what to fix. The owner judged a builder given only pictures and a page against builders using the dressing, and the pictures-only builders' places were better ("Pictures only is better"): the dressing's placement logic was faulty and its objects did not make sense (decision 62). The owner then asked to keep the good parts as things to pick from: the footpath as a tool on a line, the detailed things builders had made as parts, the textures as "pick and choose" shaders (decision 65). So in 0.6:
 
-## Record
-
-- `examples/coal-mine/`: the transfer test (a place built by others, with its own materials: as it was, the look's defaults, one fix pass).
-- `examples/lane-blockout/`: a grey-box lane of 674 named boxes, dressed and lit by the plugin alone; `before and after the details.jpg` shows the same boxes before and after the facade and details step.
-- `procedural-textures/40 Blind test - a bach on the beach in Samoa/`: the first blind test. A fresh Sonnet builder with the plugin and six words against the same model with Blender alone; six blind judges all chose the plugin's picture for the film (look lens 5.0 against 1.7), while it lost on photograph and request; level overall.
-- `examples/bach-on-the-beach/`: the blind test's bach re-dressed by 0.3.0 (timber, the shore, what the palms drop), from the camera and from a view up the shore.
-- `examples/scanned-surfaces/`: the lane and the bach dressed with and without the Poly Haven scans (0.4.0), from the camera and close up.
-- `examples/tea-house-lessons/`: a tea-room corner showing 0.5.0's brass, copper, china and window joinery, and the glowing-glass warning firing.
-- `procedural-textures/44 Blind test - a tea house/`: the second blind test (0.4.1 against Blender alone, same clock, the person judging). What the tea house set lacked went into 0.5.0: brass, copper and china, windows in plaster walls, the glowing-glass warning, and traps for smoke, shafts and the import order.
-- Decisions 50 to 56 in `austerity-explainer/project-notes/Decisions.md`; story logs 38 to 44.
+- the brief kit moved into the plugin as `brief/`, so an install carries it;
+- the good code of the dressing became the store's tools (setts and flags, lapped boards with new eaves, stonework, puddles, stone grain), working only where the builder says; the street's 45 materials, the old brass, copper and china, and the photographed timber, bark and sand joined the store's materials;
+- the things builders made in their own scripts (logs 44, 46 and 50) became the store's parts, rebuilt to read from every side;
+- the dressing, the look stage, the blind judge, the role list and their tests were deleted from the plugin; they stay in the repository's history (the last commit with them is the one before 0.6.0's), and decision 57 retired blind judges.
 
 ## Traps
 
-- A place laid along X instead of Y gets the stone picture smeared on its long walls (`materials/Roles.md`).
-- The look stage replaces the sky; a sunset painted on a dome is gone unless `--keep-world`.
-- Measures inside every band do not make a picture right; judge every round.
-- One fix pass. The third pass is where the last plugin's costs and procedure grew.
+- The store's parts and tools find the shelf and the materials by their place inside `brief/`; copy the whole folder, never the store alone.
+- Every helper also reads the repository's rules file and the owner's saved preferences; keep technique out of both, or a test of the kit is spoiled.
+- `examples/` shows the retired dressing at work; its commands no longer run in 0.6.
