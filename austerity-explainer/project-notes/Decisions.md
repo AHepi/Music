@@ -863,6 +863,16 @@ overturn any of them in one line. Changes to the project must follow this file.
     `procedural-textures/49 Research - how environment artists make a place old, used and full.md`. The full-size redraw and the second
     pass (my plan at 18:59) wait.
 
+64. **The three kit changes, and the military base again** (3 November 2026, 20:00), your words: "Go!" to: a reference board and a
+    material list as the builder's first deliverable, a shelf of photographed surfaces, and a second set-dressing pass with a story brief.
+
+### Claude's calls for item 64
+
+- The board is twelve public-domain photographs from the Library of Congress (Bain, stereographs, Red Cross), 1914 to 1918, mixed British,
+  French and American camps; Wikimedia Commons refused the machine's requests, so no Imperial War Museum pictures.
+- The shelf is Poly Haven CC0 only (23 sets, 27 MB, colour at 2K, roughness and height at 1K).
+- Two passes: the first builder on a 100-minute clock (the material list adds work), the second on 80 with the first's scene.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

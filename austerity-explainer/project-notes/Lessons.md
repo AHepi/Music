@@ -628,6 +628,11 @@ Only failures in doing the work belong here. Newest at the bottom.
     setts, not to be seen as mud. Not fixed yet.
 180. **A builder told to keep fixing until the clock still stopped with 49 minutes left** (log 48): "until the clock says stop" read as
     permission, not an instruction. Not fixed yet; if it matters, the brief needs a plainer line ("do not stop before the clock").
+181. **Two more builders stopped early (30 and 39 minutes) with the plainer line in the brief** (log 50): both said the picture was
+    inside every band and the remaining changes were not worth the risk. The measure tool has become a reason to stop. Not fixed yet;
+    the brief should say the bands are a floor, not the goal, and name what "finished" means.
+182. **Wikimedia Commons refused the machine's requests (429, too many requests) for the reference board** (log 50); the Library of
+    Congress answered. Two of its pictures came down broken over HTTP/2 and were fetched again over HTTP/1.1.
 
 ## Traps
 

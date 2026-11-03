@@ -341,8 +341,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - Three places by pictures-only builders (townhouse, desert mine, military base; log 46): done and sent.
 - The military base with the plugin (log 47): clearly worse, stopped after 12 minutes by the one-fix rule. Your verdict on the plugin: the
   textures, placement, objects and light in the air all fall short; maybe abandon it.
-- `place-brief/` (log 48): the kit that replaces the plugin's code (look page, seven references, traps, measure, brief). The military
-  base built from it is sent, beside the other two. Step 3 (retiring the plugin) waits for your word.
+- `place-brief/` (logs 48 and 50): the kit that replaces the plugin's code: look page, seven references, traps, measure, brief, and now a
+  reference board for a military base, a shelf of 23 photographed surfaces, "Before you build" and a second-pass brief. The military
+  base built with it in two passes is sent (folder 50). Research on how environment artists work: file 49. Step 3 (retiring the
+  plugin) waits for your word.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -355,7 +357,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your judgment of the three military bases (plugin, pictures only, kit), and whether to retire the plugin's code (step 3).
+- Your judgment of the two-pass military base (folder 50) against the pictures-only one, and whether to retire the plugin's code (step 3).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),

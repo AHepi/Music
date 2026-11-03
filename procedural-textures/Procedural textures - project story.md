@@ -119,6 +119,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **The brief kit exists (log 48, 3 November, evening):** `place-brief/`, the folder a builder gets instead of the plugin: the look page,
   seven reference pictures, a traps page, the measure tool and the brief text. Your words on the plugin: "Maybe just abandon the plugin? The
   self job was really good." The military base built from the kit is in `48 Military base from the brief kit/`, beside the other two.
+- **The kit has a board, a shelf and a material list (log 50, 3 November, night):** `place-brief/` now holds a reference board of real
+  1914 to 1918 photographs for a military base, a shelf of 23 photographed surfaces, a page "Before you build" (the material list first,
+  who uses the place, where wear sits, three sizes of shape) and a second-pass brief for set dressing. The military base built with it, in
+  two passes, is in `50 Military base from the kit with board, shelf and material list/`.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -912,7 +916,25 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     reference, the material list, the parts and most of the set dressing. The remedies differ by kind of detail: a shelf of photographed
     surfaces and a wear sheet for surfaces; a story brief and a second, set-dressing pass for objects; time for light in the air.
 
+50. **The kit gets a board, a shelf and a material list; the military base in two passes (3 November, 20:00 to 22:45).** You said: "Go!"
+    **Built into the kit:** a reference board of twelve public-domain photographs from the Library of Congress (Aldershot camp and bell
+    tents 1914, field guns, barbed wire, a camp street, a hut inside), each with a note on what to look at (Wikimedia Commons refused the
+    machine, so no Imperial War Museum pictures); a shelf of 23 photographed surfaces from Poly Haven (brick, corrugated iron, rust, three
+    muds, gravel, plaster, sacking, canvas, planks, stone, cobbles and the plugin's six), 27 MB; the page "Before you build" (look at the
+    board, write the material list, decide who uses the place, where wear sits, three sizes of shape); the brief changed to ask for the
+    material list as the first deliverable and to use the whole clock; and "Second pass.md", the brief for a set-dressing builder.
+    **First pass (20:12 to 21:25):** the builder wrote the material list first (a gun battery's men and the camp guard; what they left),
+    built from it, laid seven surfaces from the shelf, measured every picture with the real tool and finished inside every band; tents and
+    tower still clean simple shapes; stopped 30 minutes early. **Second pass (21:31 to 22:16):** a fresh builder kept the layout, camera
+    and lights and added wear by rule (edges bright, mud climbing by height, wet films, nail rust, tent patches) and the things people left
+    (a mug, a cap, boots, a mallet, a pick, a tarpaulin, a canvas cover on the muzzle, an open shell crate, a rain barrel), each with an
+    owner; stopped 39 minutes early. **What it shows:** the board and the list gave placement a reason; the shelf gave the ground and
+    boards real surfaces but not the tents their sag and patches; the dressing pass added small sensible things whose gain at 540 wide is
+    modest; and three builders in a row stopped early because the picture "measured well": the bands have become a reason to stop.
+    **Shown:** the three military bases side by side, and before and after the dressing, whole and close up. The dressed scene was redrawn
+    at 1080 x 1920 at the end.
+
 ## Next step
 
-Your call on the research: whether the kit gets a reference board and a material list as the builder's first deliverable, a shelf of
-photographed surfaces, and a second set-dressing pass with a story brief; then the military base again to test it.
+Your judgment of the two-pass military base against the pictures-only one. If the gain is real but small, the next lever is time and
+shape, not more kit: a longer clock with the bands named as a floor, and the tents and tower built with their sag, seams and patches.
