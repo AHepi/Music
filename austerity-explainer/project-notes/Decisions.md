@@ -902,6 +902,11 @@ overturn any of them in one line. Changes to the project must follow this file.
 - The goods yard and chapel boards are Library of Congress photographs, mostly American (no British public-domain ones were found); one
   chapel photograph whose rights were unclear was taken off the board.
 
+
+67. **The store works; the old copy may go** (4 November 2026, 11:56), your words: "It worked. These look incredible. Next step is: How
+    do we keep adding to it for more details? Also deleting is fine." The old 22 GB copy of the repository was deleted (25 GB free now).
+    The question of how the store keeps growing is answered in the story's next step.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
