@@ -30,6 +30,7 @@ PART = 'wheelbarrow'
 BOARDS = 'MADE • weathered boards, peeling paint'
 IRON = 'IRON • soot-black lamp posts'
 RUST = 'RUST • rain-aged iron'
+ASH = 'MADE • ash'                 # the store's one ash (heaps and spills); the clinker lumps are the part's own
 LOADS = ('ash', 'coal', 'none')
 
 CARD = {
@@ -42,7 +43,7 @@ CARD = {
         'seed': "the boards' shades, the wheel's turn, the heap (default 0)",
     },
     'materials': [BOARDS + " (reads 'board_tone')", 'SURFACE • rough_wood (wheelbarrow)', IRON, RUST,
-                  'PART • wheelbarrow: stove ash', 'PART • wheelbarrow: clinker', 'PART • wheelbarrow: coal'],
+                  ASH, 'PART • wheelbarrow: clinker', 'PART • wheelbarrow: coal'],
     'source': "'/home/claude/build-51-chapel/dress/dress_block.py', wheelbarrow() (line 110) and the ash in it (blob 'ash in barrow')",
     'views': 'reads from every side',
     'trap': 'the handles reach 0.85 m behind the origin (+Y) and the wheel 0.77 m in front: leave it room',
@@ -51,24 +52,6 @@ CARD = {
 WHEEL_R = 0.225
 WHEEL_Y = -0.55
 GRIP_Y = 0.85
-
-
-def ash_material():
-    return shapes.part_material(PART, 'stove ash', _ash)
-
-
-def _ash(m, nodes, links, principled):
-    """Fine grey stove ash, pale for the look but still dull: darker where it is damp, a soft lumpy bump."""
-    vec = shapes.own_coordinates(nodes)
-    fine = shapes.noise_fac(nodes, links, vec, 18.0, detail=5.0, roughness=0.65)
-    damp = shapes.noise_fac(nodes, links, vec, 3.0, detail=3.0)
-    colour = shapes.mix_colour(nodes, links, shapes.map_range(nodes, links, fine, 0.35, 0.65), (0.11, 0.11, 0.115), (0.19, 0.19, 0.195))
-    colour = shapes.mix_colour(nodes, links, shapes.map_range(nodes, links, damp, 0.5, 0.65, 0.0, 0.7), colour, (0.06, 0.06, 0.065))
-    links.new(colour, principled.inputs['Base Color'])
-    principled.inputs['Roughness'].default_value = 0.95
-    principled.inputs['Specular IOR Level'].default_value = 0.2
-    links.new(shapes.bump(nodes, links, fine, 0.3, 0.004), principled.inputs['Normal'])
-    m.diffuse_color = (0.15, 0.15, 0.155, 1.0)
 
 
 def clinker_material():
@@ -105,6 +88,7 @@ def build(collection, seed=0, loaded='ash'):
 
     # ------------------------------------------------------------------ stringers (the handles), legs, brace
     axle = Vector((0.0, WHEEL_Y, WHEEL_R))
+    legs = {}
     for side in (-1, 1):
         front = Vector((side * 0.075, WHEEL_Y - 0.06, WHEEL_R + 0.09))
         back = Vector((side * 0.30, GRIP_Y - 0.14, 0.56))
@@ -117,6 +101,7 @@ def build(collection, seed=0, loaded='ash'):
         # leg: from under the stringer to the ground, a little splayed, an iron shoe at its foot
         top = front.lerp(back, 0.64) + Vector((0.0, 0.0, -0.03))
         foot = Vector((side * 0.30, top.y + 0.05, 0.0))
+        legs[side] = (top, foot)
         timber('leg %s' % ('left' if side < 0 else 'right'), top, foot, 0.04, 0.045)
         shoe = shapes.Shape()
         shoe.box((foot.x, foot.y, 0.012), (0.05, 0.055, 0.024))
@@ -126,9 +111,14 @@ def build(collection, seed=0, loaded='ash'):
         fork.box((side * 0.075, WHEEL_Y, WHEEL_R + 0.045), (0.012, 0.05, 0.095))
         fork.box((side * 0.082, WHEEL_Y, WHEEL_R), (0.012, 0.07, 0.03))
         objects.append(fork.finish('wheelbarrow fork %s' % ('left' if side < 0 else 'right'), collection, IRON, chamfer=0.002))
-    # cross brace between the legs, and a stay from each leg to the stringer
-    brace_y = 0.38 + 0.05
-    timber('leg brace', (-0.29, brace_y + 0.02, 0.17), (0.29, brace_y + 0.02, 0.17), 0.03, 0.045)
+    # cross brace between the legs: on the legs' own line, 17 cm up, running a little into each leg
+    brace_z = 0.17
+    ends = []
+    for side in (-1, 1):
+        top, foot = legs[side]
+        on_leg = foot.lerp(top, brace_z / top.z)        # where the leg is at the brace's height
+        ends.append(Vector((on_leg.x - side * 0.01, on_leg.y, on_leg.z)))
+    timber('leg brace', ends[0], ends[1], 0.03, 0.045)
     # cross bearers under the floor, between the stringers
     for y in (-0.30, 0.0, 0.30):
         t = (y - (WHEEL_Y - 0.06)) / ((GRIP_Y - 0.14) - (WHEEL_Y - 0.06))
@@ -208,7 +198,7 @@ def build(collection, seed=0, loaded='ash'):
                 n = _noise.noise(v.co * 7.0 + Vector((seed * 3.1, 0, 0)))
                 n2 = _noise.noise(v.co * 20.0 + Vector((0, seed * 2.3, 0)))
                 v.co.z += (0.035 * n + 0.008 * n2) * lift ** 0.5
-            objects.append(heap.finish('wheelbarrow ash', collection, ash_material(), smooth=True, sharp=None))
+            objects.append(heap.finish('wheelbarrow ash', collection, ASH, smooth=True, sharp=None))
             # clinker lumps lying on the ash
             clinker = shapes.Shape()
             for _ in range(18):
@@ -223,7 +213,11 @@ def build(collection, seed=0, loaded='ash'):
             shapes.lumps(heap, (cx, cy, top + 0.02), 110, 0.085, (rx * 0.9, ry * 0.92), rng, height=0.14)
             shapes.lumps(heap, (cx, cy, top + 0.12), 45, 0.075, (rx * 0.55, ry * 0.6), rng, height=0.1)
             objects.append(heap.finish('wheelbarrow coal', collection, shapes.coal_material(PART), smooth=False))
+            # the bed under the lumps: a squashed dome clipped at the floor, as the ash heap is (nothing hangs below the boards)
             bed = shapes.Shape()
             bed.sphere((cx, cy, top), 1.0, segments=20, rings=8, squash=(rx * 0.95, ry * 0.95, 0.16))
+            for v in bed.bm.verts:
+                if v.co.z < top:
+                    v.co.z = top - 0.02
             objects.append(bed.finish('wheelbarrow coal bed', collection, shapes.coal_material(PART), smooth=True, sharp=None))
     return objects

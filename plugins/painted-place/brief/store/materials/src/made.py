@@ -374,15 +374,44 @@ def stain(name, kind):
     return material
 
 
+def _real_sized_coordinates(nodes, links):
+    """The object's own coordinates with its unapplied scale undone: multiplied by the object number 'pp_scale'
+    (store.prepare_for_render records it; where none was recorded the scale is taken as 1). The same logic as
+    build_materials.py's box_coordinates_group, copied here so a made material carries it itself."""
+    coordinates = nodes.new('ShaderNodeTexCoord')
+    scale_attribute = nodes.new('ShaderNodeAttribute')
+    scale_attribute.attribute_type = 'OBJECT'
+    scale_attribute.attribute_name = 'pp_scale'
+
+    def vmath(operation, a, b=None):
+        node = nodes.new('ShaderNodeVectorMath')
+        node.operation = operation
+        for socket, value in zip(node.inputs, (a, b)):
+            if value is None:
+                continue
+            if isinstance(value, bpy.types.NodeSocket):
+                links.new(value, socket)
+            else:
+                socket.default_value = value
+        return node.outputs[0]
+
+    absolute = vmath('ABSOLUTE', scale_attribute.outputs['Vector'])
+    missing = vmath('SUBTRACT', (1.0, 1.0, 1.0), vmath('SIGN', absolute))       # 1 where no scale was recorded
+    real_scale = vmath('ADD', absolute, missing)
+    return vmath('MULTIPLY', coordinates.outputs['Object'], real_scale)
+
+
 def slate_roof(name):
     """A slate roof in courses: dark blue-grey slates, each a little different, the lap lines and the slates' lower
     edges in relief, a wet sheen. Laid in the object's own coordinates: slates sit side by side along X, courses climb
     along Y (a plane whose eave runs along X and that rises along its own Y, pitched by turning the object). Slates are
-    0.28 m wide, courses 0.22 m. From `slate_courses` in the chapel builder's script (log 51)."""
+    0.28 m wide, courses 0.22 m. The object's unapplied scale is undone first (the object number 'pp_scale' that
+    store.prepare_for_render records; absent means 1), the way the SURFACE materials' box coordinates do, so a plane
+    scaled 4 x 2.5 still shows 0.28 m slates. From `slate_courses` in the chapel builder's script (log 51)."""
     material = fresh_material(name)
     nodes, links = material.node_tree.nodes, material.node_tree.links
     principled = nodes.get('Principled BSDF')
-    own = nodes.new('ShaderNodeTexCoord').outputs['Object']
+    own = _real_sized_coordinates(nodes, links)
     brick = nodes.new('ShaderNodeTexBrick')
     brick.offset = 0.5
     brick.inputs['Color1'].default_value = (0.030, 0.038, 0.050, 1)

@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-11-04 for the painted-place plugin (log 51); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-04, 16:00, for the painted-place plugin (log 52); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -348,7 +348,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   tools (a duckboard walkway along a line, setts, boards with eaves, stonework, puddles, stone grain, a sky with haze, smoke, a finish)
   and 82 ready materials, each with a card; nothing in it places itself. The dressing, look stage and blind judge are retired. All tests
   pass; a fresh checker's 16 findings were fixed. Built with it by fresh builders: the military base (sent beside the earlier two) and a
-  railway goods yard (folder 51). Boards also exist for a chapel (not built).
+  railway goods yard (folder 51); you judged them: "It worked. These look incredible." (decision 67).
+- **Log 52 (decision 68):** every place is now built in two passes (layout, then a fresh dresser on the near ground) and feeds the
+  store afterwards. The chapel was the first: its two pictures are in folder 51 for your verdict; its railing, stains, headstone,
+  barrow, scuttle, churn, umbrella and besom are in the store (26 parts, 11 tools, 90 materials; 51 tests pass).
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -361,11 +364,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your verdict on the military base and the railway goods yard built with the store (`procedural-textures/51 The store, and places built
-  with it/`), and what next: make builders use their whole clock by how the build is run, build the chapel, or turn the goods yard's wagon,
-  gantry and ballast into store items.
-- An old 22 GB copy of the repository (from 2 November) fills most of this machine's disk; deleting it was refused as a step that cannot be
-  undone. Yours to decide.
+- Your verdict on the chapel, first pass beside second pass (`procedural-textures/51 The store, and places built with it/`).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),

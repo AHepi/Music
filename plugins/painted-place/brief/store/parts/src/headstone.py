@@ -47,7 +47,7 @@ CARD = {
     'source': "'/home/claude/build-51-chapel/work/render_final.py', headstone() (line 511); the soot and damp stains in "
               "'/home/claude/build-51-chapel/dress/dress_block.py' (near line 395)",
     'views': 'reads from every side; the panel is on the front (-Y) only',
-    'trap': 'the plinth is sunk 3 cm into the ground: on a hard floor lift the part that much',
+    'trap': 'the plinth is sunk into the ground: its lowest point is 1.5 to 3 cm below z = 0 (the lean decides); on a hard floor lift the part 3 cm',
 }
 
 
@@ -96,8 +96,26 @@ def weathered_stone():
     return shapes.part_material(PART, 'weathered stone', maker)
 
 
+def pointed_outline(hw, spring, r, cx):
+    """A Gothic arch outline in (x, z) from its foot at 0: straight sides at +-hw up to the spring line, then two arcs
+    of radius r whose centres are at (-cx, spring) for the right arc and (cx, spring) for the left, meeting in a point
+    at x = 0. An equilateral arch (the slab) has r = 2 hw and cx = hw; an outline inset from it by m keeps the same
+    centres with r - m and hw - m, so the margin is even all round."""
+    a_max = math.acos(cx / r)
+    pts = [(-hw, 0.0), (hw, 0.0), (hw, spring)]
+    for k in range(1, 12):
+        a = a_max * k / 12
+        pts.append((-cx + r * math.cos(a), spring + r * math.sin(a)))
+    pts.append((0.0, spring + r * math.sin(a_max)))
+    for k in range(11, 0, -1):
+        a = a_max * k / 12
+        pts.append((cx - r * math.cos(a), spring + r * math.sin(a)))
+    pts.append((-hw, spring))
+    return pts
+
+
 def outline(shape, width, height, thickness):
-    """The slab's face outline in (x, z), anticlockwise seen from the front, from its foot."""
+    """The slab's face outline in (x, z), anticlockwise seen from the front, from its foot; its top at `height`."""
     hw = width / 2
     pts = [(-hw, 0.0), (hw, 0.0)]
     if shape == 'round':
@@ -117,19 +135,9 @@ def outline(shape, width, height, thickness):
             a = math.pi * k / 14
             pts.append((r * math.cos(a), rise + r * math.sin(a)))
         pts += [(-hw + shoulder, rise), (-hw + shoulder, rise - shoulder * 0.5), (-hw, rise - shoulder * 0.5)]
-    else:   # pointed: a Gothic arch, two arcs meeting at a point
-        spring = height - width * 0.95
-        pts.append((hw, spring))
-        r = width
-        # right arc: centre at (-hw, spring)
-        for k in range(1, 12):
-            a = math.pi / 3 * k / 12
-            pts.append((-hw + r * math.cos(a), spring + r * math.sin(a)))
-        pts.append((0.0, spring + r * math.sin(math.pi / 3)))
-        for k in range(11, 0, -1):
-            a = math.pi / 3 * k / 12
-            pts.append((hw - r * math.cos(a), spring + r * math.sin(a)))
-        pts.append((-hw, spring))
+    else:   # pointed: an equilateral Gothic arch, two arcs of radius `width` meeting in a point at `height`
+        spring = height - width * math.sin(math.pi / 3)
+        pts = pointed_outline(hw, spring, width, hw)
     return pts
 
 
@@ -142,7 +150,7 @@ def build(collection, seed=0, shape='round', lean=4.0, height=1.0):
     height = float(height)
     width = min(0.62, max(0.42, height * 0.56 + rng.uniform(-0.02, 0.02)))
     thickness = 0.09 + rng.uniform(-0.005, 0.01)
-    sink = 0.03                                   # the plinth sunk into the grass
+    sink = 0.015                                  # the plinth sunk into the grass (its lowest point stays within 3 cm of z = 0, see the end)
     plinth_h = 0.14
     plinth_top = plinth_h - sink
     slab_h = height - plinth_top
@@ -161,18 +169,29 @@ def build(collection, seed=0, shape='round', lean=4.0, height=1.0):
     objects.append(finish(slab, 'headstone slab'))
     # the raised blank panel on the face: a frame of four strips and the tablet inside, proud of the slab
     panel_w = width * 0.74
-    panel_top = (slab_h - width / 2) * 0.92 if shape != 'pointed' else (slab_h - width * 0.95) * 0.92
     panel_bottom = slab_h * 0.12
     y_face = -thickness / 2
     panel = shapes.Shape()
     strip = 0.03
     proud = 0.006
-    panel.box((0.0, y_face - proud / 2, plinth_top + (panel_top + panel_bottom) / 2), (panel_w, proud, panel_top - panel_bottom))
-    frame_pts = [((-panel_w / 2 + strip / 2), (panel_top + panel_bottom) / 2, strip, panel_top - panel_bottom),
-                 ((panel_w / 2 - strip / 2), (panel_top + panel_bottom) / 2, strip, panel_top - panel_bottom),
-                 (0.0, panel_top - strip / 2, panel_w - 2 * strip, strip), (0.0, panel_bottom + strip / 2, panel_w - 2 * strip, strip)]
-    for (x, z, w, h) in frame_pts:
-        panel.box((x, y_face - proud - 0.003, plinth_top + z), (w, 0.006, h))
+    if shape == 'pointed':
+        # the panel follows the point: a pointed border (proud) with a pointed tablet standing on it (prouder), both
+        # inset evenly from the slab's own arch (the same arc centres, smaller radii)
+        margin = (width - panel_w) / 2
+        spring = slab_h - width * math.sin(math.pi / 3) - panel_bottom
+        border = pointed_outline(panel_w / 2, spring, width - margin, width / 2)
+        tablet = pointed_outline(panel_w / 2 - strip, spring, width - margin - strip, width / 2)
+        lift = Matrix.Translation((0, 0, plinth_top + panel_bottom)) @ to_xz
+        panel.prism(border, y_face - proud, y_face + 0.002, lift)
+        panel.prism(tablet, y_face - proud - 0.006, y_face, lift)
+    else:
+        panel_top = (slab_h - width / 2) * 0.92
+        panel.box((0.0, y_face - proud / 2, plinth_top + (panel_top + panel_bottom) / 2), (panel_w, proud, panel_top - panel_bottom))
+        frame_pts = [((-panel_w / 2 + strip / 2), (panel_top + panel_bottom) / 2, strip, panel_top - panel_bottom),
+                     ((panel_w / 2 - strip / 2), (panel_top + panel_bottom) / 2, strip, panel_top - panel_bottom),
+                     (0.0, panel_top - strip / 2, panel_w - 2 * strip, strip), (0.0, panel_bottom + strip / 2, panel_w - 2 * strip, strip)]
+        for (x, z, w, h) in frame_pts:
+            panel.box((x, y_face - proud - 0.003, plinth_top + z), (w, 0.006, h))
     objects.append(finish(panel, 'headstone panel'))
     # the plinth: a block wider than the slab, its top edge chamfered, sunk a little
     plinth = shapes.Shape()
@@ -183,4 +202,10 @@ def build(collection, seed=0, shape='round', lean=4.0, height=1.0):
     # lean: back (+) about X at the foot, with a smaller sideways part
     side = math.radians(rng.uniform(-2.5, 2.5))
     shapes.tilt_all(objects, rx=-math.radians(float(lean)), ry=side, pivot=(0.0, 0.0, 0.0))
+    # the lean drops one corner of the sunk plinth further: keep the lowest point within 3 cm of the ground
+    bpy.context.view_layer.update()
+    lowest = min((obj.matrix_world @ v.co).z for obj in objects for v in obj.data.vertices)
+    if lowest < -0.03:
+        for obj in objects:
+            obj.matrix_world = Matrix.Translation((0.0, 0.0, -0.03 - lowest)) @ obj.matrix_world
     return objects

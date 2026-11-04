@@ -53,7 +53,8 @@ Options of gate(), with their defaults:
 
 Both return the objects made, in a dict by plain names: lay(): 'railing bars', 'railing rails', 'railing posts',
 'railing plinth' (if any), 'railing rust' (if any); gate(): 'gate left leaf', 'gate right leaf' (the leaf objects turn
-about their hinge: rotation_euler.z is turn + the swing), 'gate left pier', 'gate right pier' (if piers).
+about their hinge: rotation_euler.z is turn + the swing), 'gate left pier', 'gate right pier', 'gate left pier cap',
+'gate right pier cap' (if piers).
 """
 
 import argparse

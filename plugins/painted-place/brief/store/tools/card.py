@@ -11,6 +11,8 @@ What this file does: draws the store's card pictures, so a builder (and the owne
 Cards go to store/cards/materials/ and store/cards/parts/, or with --out FOLDER to a folder of your own (use that to
 look at a part without changing the store's own cards). Every card uses the same light: an amber key from the
 front left, a blue fill from the right, a rim from behind, on a dark ground, so cards can be compared.
+One exception: a roof material ('MADE • slate roof', the set PITCHED) gets a 1.2 x 0.9 m plane pitched 35 degrees
+about X in the cube's place, so its courses show; the sphere stays.
 Parts face -Y (Blender's front view); "three" looks from 35 degrees to the right of front, "close" from nearer and
 lower at the front, "side" from +X, "back" from +Y.
 """
@@ -34,6 +36,9 @@ VIEWS = {  # azimuth from the front (-Y) towards +X, elevation, distance factor,
     'side': (90.0, 8.0, 1.0, 0.0, 0.0),
     'back': (180.0, 15.0, 1.0, 0.0, 0.0),
 }
+
+
+PITCHED = {'MADE • slate roof'}     # materials whose card shows a pitched plane instead of the cube (see material_card)
 
 
 def file_name(name):
@@ -154,8 +159,15 @@ def material_card(name, width=360, height=220, samples=24):
     bpy.ops.mesh.primitive_uv_sphere_add(radius=0.5, location=(-0.62, 0.0, 0.5), segments=48, ring_count=24)
     sphere = bpy.context.object
     bpy.ops.object.shade_smooth()
-    bpy.ops.mesh.primitive_cube_add(size=1.0, location=(0.62, 0.15, 0.5), rotation=(0, 0, math.radians(28)))
-    cube = bpy.context.object
+    if name in PITCHED:
+        # a roof material shows its courses only on a pitched plane: a 1.2 x 0.9 m plane in the cube's place, its
+        # eave along X, pitched 35 degrees about X (the sphere stays)
+        bpy.ops.mesh.primitive_plane_add(size=1.0, location=(0.62, 0.15, 0.5), rotation=(math.radians(35), 0, 0))
+        cube = bpy.context.object
+        cube.scale = (1.2, 0.9, 1.0)
+    else:
+        bpy.ops.mesh.primitive_cube_add(size=1.0, location=(0.62, 0.15, 0.5), rotation=(0, 0, math.radians(28)))
+        cube = bpy.context.object
     for obj in (sphere, cube):
         store.use_material(obj, material, ground=0.0)
     centre = Vector((0.0, 0.05, 0.5))

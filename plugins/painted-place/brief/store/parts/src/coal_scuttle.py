@@ -40,7 +40,7 @@ CARD = {
     'materials': [IRON, RUST, 'PART • coal_scuttle: coal', 'PART • coal_scuttle: dark worn ash'],
     'source': "'/home/claude/build-51-chapel/dress/dress_block.py', scuttle() (line 351)",
     'views': 'reads from every side; the mouth and lip face -Y',
-    'trap': 'tipped, the spilled coal reaches about 0.5 m in front (-Y) of the origin',
+    'trap': 'tipped, the spilled coal reaches 0.70 m in front (-Y) of the origin',
 }
 
 H_FRONT, H_BACK = 0.24, 0.40          # the mouth's height at the front and the back
@@ -135,34 +135,39 @@ def build(collection, seed=0, tipped=False):
                matrix=shapes.to4(shapes.frame_along(along), mid))
     objects.append(grip.finish('coal_scuttle grip', collection, grip_wood, smooth=True, sharp=50))
 
-    # ------------------------------------------------------------------ coal in it
-    lumps = shapes.Shape()
-    fill = lift + H_FRONT - 0.05
-    shapes.lumps(lumps, (0.0, 0.02, fill - 0.02), 40, 0.06, (R_TOP - 0.06, R_TOP - 0.05), rng, height=0.06)
-    shapes.lumps(lumps, (0.0, 0.0, fill - 0.08), 30, 0.055, (R_TOP - 0.08, R_TOP - 0.08), rng, height=0.03)
-    coal_in = lumps.finish('coal_scuttle coal', collection, coal, smooth=False)
-    objects.append(coal_in)
+    # ------------------------------------------------------------------ coal in it (standing: a heap filling the body)
+    if not tipped:
+        lumps = shapes.Shape()
+        fill = lift + H_FRONT - 0.05
+        shapes.lumps(lumps, (0.0, 0.02, fill - 0.02), 40, 0.06, (R_TOP - 0.06, R_TOP - 0.05), rng, height=0.06)
+        shapes.lumps(lumps, (0.0, 0.0, fill - 0.08), 30, 0.055, (R_TOP - 0.08, R_TOP - 0.08), rng, height=0.03)
+        objects.append(lumps.finish('coal_scuttle coal', collection, coal, smooth=False))
+        return objects
 
-    if tipped:
-        # over onto its front: the mouth towards -Y, rolled a little onto one side, then set on the ground
-        side = rng.choice((-1, 1))
-        roll = Matrix.Rotation(math.radians(side * rng.uniform(18, 30)), 4, 'Y') @ Matrix.Rotation(math.radians(88), 4, 'X')
-        turn = Matrix.Rotation(math.radians(rng.uniform(-15, 15)), 4, 'Z')
-        for obj in objects:
-            obj.matrix_world = turn @ roll @ obj.matrix_world
-        bpy.context.view_layer.update()
-        low = min((obj.matrix_world @ v.co).z for obj in objects if obj.name != 'coal_scuttle coal' for v in obj.data.vertices)
-        for obj in objects:
-            obj.matrix_world = Matrix.Translation((0.0, 0.0, -low)) @ obj.matrix_world
-        shapes.bake_placement(objects)
-        # the coal that has run out: a tongue of lumps from the mouth forward along the ground
-        spill = shapes.Shape()
-        mouth_y = -(lift + H_FRONT) - 0.02
-        shapes.lumps(spill, (0.0, mouth_y - 0.12, 0.0), 45, 0.06, (0.17, 0.16), rng, height=0.05)
-        shapes.lumps(spill, (0.02, mouth_y - 0.30, 0.0), 20, 0.05, (0.2, 0.12), rng, height=0.0)
-        objects.append(spill.finish('coal_scuttle spilled coal', collection, coal, smooth=False))
-        # the coal left in the mouth
-        rest = shapes.Shape()
-        shapes.lumps(rest, (0.0, mouth_y + 0.08, 0.02), 18, 0.055, (0.1, 0.06), rng, height=0.04)
-        objects.append(rest.finish('coal_scuttle coal in the mouth', collection, coal, smooth=False))
+    # ------------------------------------------------------------------ tipped: over onto its front, the coal run out
+    # the mouth towards -Y, rolled a little onto one side, then set on the ground (the heap is not built: tipped, the
+    # coal has run out, and what is left lies low in the mouth, not where the heap was)
+    side = rng.choice((-1, 1))
+    roll = Matrix.Rotation(math.radians(side * rng.uniform(18, 30)), 4, 'Y') @ Matrix.Rotation(math.radians(88), 4, 'X')
+    turn = Matrix.Rotation(math.radians(rng.uniform(-15, 15)), 4, 'Z')
+    for obj in objects:
+        obj.matrix_world = turn @ roll @ obj.matrix_world
+    bpy.context.view_layer.update()
+    low = min((obj.matrix_world @ v.co).z for obj in objects for v in obj.data.vertices)
+    for obj in objects:
+        obj.matrix_world = Matrix.Translation((0.0, 0.0, -low)) @ obj.matrix_world
+    shapes.bake_placement(objects)
+    # the coal that has run out: a tongue of lumps from the mouth forward along the ground
+    spill = shapes.Shape()
+    mouth_y = -(lift + H_FRONT) - 0.02
+    shapes.lumps(spill, (0.0, mouth_y - 0.12, 0.0), 45, 0.06, (0.17, 0.16), rng, height=0.05)
+    shapes.lumps(spill, (0.02, mouth_y - 0.30, 0.0), 20, 0.05, (0.2, 0.12), rng, height=0.0)
+    objects.append(spill.finish('coal_scuttle spilled coal', collection, coal, smooth=False))
+    # a little coal left low in the mouth, resting on the lower inside wall (the body lies with its lowest inside
+    # wall about a centimetre above the ground; the lumps sit in a flat spread just inside the rim, following the roll)
+    rest = shapes.Shape()
+    body_obj = objects[0]
+    lowest = min((v.co for v in body_obj.data.vertices if -0.26 < v.co.y < -0.08), key=lambda c: c.z)
+    shapes.lumps(rest, (lowest.x, mouth_y + 0.10, lowest.z + WALL + 0.004), 14, 0.05, (0.05, 0.07), rng, height=0.0, squash=(1.0, 1.0, 0.55))
+    objects.append(rest.finish('coal_scuttle coal in the mouth', collection, coal, smooth=False))
     return objects

@@ -126,7 +126,8 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **The plugin is a store now (log 51, 3 and 4 November):** `plugins/painted-place` 0.6.0 carries the brief kit (`brief/`) and, inside it,
   a store a builder may pick from: 20 parts, 9 tools and 82 ready materials, each with a picture card, and a catalogue written from their
   own descriptions. Nothing in it places itself. The dressing, the look stage and the blind judge are retired. A fresh builder built the
-  military base and a railway goods yard with it (folder `51 The store, and places built with it/`); your verdict is awaited.
+  military base and a railway goods yard with it (folder `51 The store, and places built with it/`); you judged them: "It
+  worked. These look incredible." Since log 52 every place is built in two passes and feeds the store (26 parts, 11 tools, 90 materials).
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -976,12 +977,31 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     parts and tools; lit glass that draws near white on the cards; an old 22 GB copy of the repository on this machine was not deleted
     (the deletion was refused as a step that cannot be undone).
 
+
+52. **The chapel in two passes; the store feeds itself (4 November, 11:56 to 16:00).** You judged the store's two places: "It worked.
+    These look incredible. Next step is: How do we keep adding to it for more details? Also deleting is fine." The old 22 GB copy of
+    the repository was deleted (decision 67). The answer to your question is now the standing way of building (decision 68): a first
+    builder lays the place out; a second fresh builder spends its clock on the near ground, the wear and the things people left; then
+    whatever either made that the store lacks is pulled into the store, checked from four sides and tested, so each place leaves the
+    store bigger. **The chapel, first pass (12:18 to 13:23):** a gable-fronted stone chapel on a wet lane, the store's stone tool for its
+    front, its sky and haze, puddles, gas lamps and a lantern; railings, headstones, a slate roof and stain planes made by the builder;
+    inside every band; stopped 35 minutes early. **Second pass (13:28 to 14:15):** a barrow of ash, a lit lantern, a coal scuttle,
+    a churn, an umbrella, gutter boards, smears and headstone stains; stopped 33 minutes early. **What it showed:** the second pass added
+    things but put them in the middle of the lane, where they read as rubbish dumped in the road; the first pass was the better picture.
+    The rule "where its owner would put it down, never in the open road or on the path" and "nothing between a puddle and its lamp"
+    are now in the second-pass brief. **Into the store from the chapel:** six parts (a headstone, a builder's wheelbarrow, a coal
+    scuttle, a milk churn, an umbrella furled or lying open, a besom with a bucket), two tools (a railing along a line with a gate
+    between piers; stain planes for soot, damp, rust, mud, coal dust and ash on a wall face or the ground) and eight materials (a slate
+    roof, stove ash, six stains). The store now holds 26 parts, 11 tools and 90 materials; 51 tests pass. **Not done:** builders
+    still stop early (seven in a row); the second pass has run once, so the placement rule is untested; a fresh checker found nine faults in the
+    additions (a floating brace, coal through a floor, a stretched slate roof, wrong card texts), all fixed, and the parts test now builds
+    every option and lets no piece float.
+
 ## Next step
 
-Your verdict on the two pictures in `51 The store, and places built with it/`: the military base beside the earlier two, and the railway
-goods yard. Then, as you choose: make builders work to the clock by the way the build is run (for example a second pass that starts from
-the first builder's scene, as in log 50) rather than by more words; or build the chapel; or turn the goods yard's wagon, gantry and
-ballast into parts and a tool.
+Your verdict on the chapel (first pass beside second pass, in folder 51). Then the next place in two passes with the new placement rule
+in the second-pass brief, to see whether the second pass helps when things go where their owners would put them; every place fed back
+into the store.
 
 ## Traps
 

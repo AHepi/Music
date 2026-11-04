@@ -106,7 +106,8 @@ def build(collection, seed=0, lid=True):
 
     # ------------------------------------------------------------------ the lid: a mushroom with a loop
     cap = shapes.Shape()
-    cap.lathe([(0.0, 0.0), (0.112, 0.0), (0.112, 0.04), (0.14, 0.045), (0.142, 0.055), (0.13, 0.075), (0.09, 0.095), (0.03, 0.105), (0.0, 0.106)], segments=48)
+    cap_profile = [(0.0, 0.0), (0.112, 0.0), (0.112, 0.04), (0.14, 0.045), (0.142, 0.055), (0.13, 0.075), (0.09, 0.095), (0.03, 0.105), (0.0, 0.106)]
+    cap.lathe(cap_profile, segments=48)
     loop = shapes.Shape()
     loop.torus((0.0, 0.0, 0.112), 0.03, 0.006, axis=(0.0, 1.0, 0.0), segments=20, sides=8, arc=(0.0, math.pi))
     loop.cylinder((-0.03, 0.0, 0.1), (-0.03, 0.0, 0.112), 0.006, segments=8)
@@ -114,10 +115,13 @@ def build(collection, seed=0, lid=True):
     if lid:
         place = Matrix.Translation((0.0, 0.0, 0.63))
     else:
-        # the lid off, leant against the foot at the front, its loop outwards
-        place = Matrix.Translation((0.0, -0.24, 0.0)) @ Matrix.Rotation(math.radians(-68), 4, 'X') @ Matrix.Translation((0.0, 0.0, 0.0))
-        lowest = min((place @ Vector((0.142 * math.cos(a), 0.142 * math.sin(a), 0.05))).z for a in [2 * math.pi * k / 48 for k in range(48)])
-        place = Matrix.Translation((0.0, 0.0, -lowest + 0.0)) @ place
+        # the lid off, leant against the foot at the front: its underside towards the churn (+Y), its dome and loop
+        # facing outwards (-Y); a turn of +68 degrees about X tips the lid's top towards -Y (-68 would face it the
+        # churn's way); then set down so its lowest point (the rim's edge) is on the ground
+        place = Matrix.Translation((0.0, -0.25, 0.0)) @ Matrix.Rotation(math.radians(68), 4, 'X')
+        lowest = min((place @ Vector((r * math.cos(a), r * math.sin(a), z))).z
+                     for (r, z) in cap_profile for a in [2 * math.pi * k / 48 for k in range(48)])
+        place = Matrix.Translation((0.0, 0.0, -lowest)) @ place
     objects.append(cap.finish('milk_churn lid', collection, steel, smooth=True, sharp=42, matrix=place))
     objects.append(loop.finish('milk_churn lid loop', collection, steel, smooth=True, sharp=50, matrix=place))
 

@@ -6,7 +6,8 @@ wet. Foot at z = 0.
 
 Options:
     pose     'furled standing' (default): furled, leaning back 12 degrees (the wall is at +Y); 'lying open': open,
-             lying on its side on the ground, the canopy's top towards -Y
+             dropped on the ground, the canopy standing tilted on its rim (0.99 x 0.66 m on the ground, 0.86 m
+             tall), its top towards -Y
     seed     the furled folds' twist, the lying umbrella's turn
 
 Where it came from: '/home/claude/build-51-chapel/work/render_final.py', umbrella() (line 491): a cone, a shaft and
@@ -37,15 +38,16 @@ CARD = {
             'black cloth over eight ribs, a wooden crook handle, a brass ferrule',
     'size_m': (0.09, 0.25, 0.96),
     'options': {
-        'pose': "'furled standing' (default): furled, leaning back 12 degrees on a wall at +Y; 'lying open': open, lying on the ground, "
-                "its top towards -Y",
+        'pose': "'furled standing' (default): furled, leaning back 12 degrees on a wall at +Y; 'lying open': open, dropped on the ground, "
+                "the canopy standing tilted on its rim, its top towards -Y (0.99 x 0.66 m, 0.86 m tall)",
         'seed': "the folds' twist, the lying umbrella's turn (default 0)",
     },
     'materials': ['PART • umbrella: wet black cloth', 'PART • umbrella: dark worn ash', IRON, BRASS],
     'source': "'/home/claude/build-51-chapel/work/render_final.py', umbrella() (line 491); '/home/claude/build-51-chapel/dress/dress_block.py', "
               "umbrella_lying() (line 258)",
     'views': "reads from every side; furled, it needs the wall it leans on at +Y (drawn alone it leans on air)",
-    'trap': "furled, it leans 12 degrees back: its crook is 0.19 m behind (+Y) its foot, where the wall must be; lying open it is 1.3 m across",
+    'trap': "furled, it leans 12 degrees back: its crook is 0.19 m behind (+Y) its foot, where the wall must be; lying open it is 0.99 x 0.66 m "
+            "on the ground and 0.86 m tall (the canopy stands tilted on its rim, its top towards -Y)",
 }
 
 LENGTH = 0.90          # ferrule tip to the top of the crook's bend

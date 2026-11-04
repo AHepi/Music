@@ -31,7 +31,7 @@ From the command line:
     python3 stain.py --blend IN.blend --ground-at 1.0 -0.4 0.0 --size 0.9 0.5 --kind mud --turn 15 --out OUT.blend
 
 Options, with their defaults:
-    kind          'soot'     on a wall: 'soot', 'damp', 'rust', 'mud'; on the ground: 'mud', 'coal dust', 'ash', 'damp'
+    kind          'soot' on a wall, 'mud' on the ground;  on a wall: 'soot', 'damp', 'rust', 'mud'; on the ground: 'mud', 'coal dust', 'ash', 'damp'
     strong_at     'top'      which end of the wall plane the stain is strongest at: 'top' or 'bottom'
     strength      1.0        how strong at its strongest (a wall); 0.7 for a ground smear; it scales 'fade'
     seed          0          the plane's edge softening and the smear's ragged outline (the material's noise is fixed)
@@ -72,7 +72,7 @@ TOOL = {
     'call': "stain.on_wall(wall, 'front', 1.2, 2.3, 1.0, 2.3, kind='soot', strong_at='top', seed=1);  stain.on_ground((1.0, -0.4, 0.0), size=(0.9, 0.5), kind='mud', turn=15, ground=my_ground)",
     'options': {
         'wall, side, x0, x1, z0, z1': "the box-like object and its face ('front' -Y, 'back' +Y, 'left' -X, 'right' +X); metres along the side from its left end seen from outside, and up from its foot",
-        'kind': "'soot', 'damp', 'rust', 'mud' on a wall; 'mud', 'coal dust', 'ash', 'damp' on the ground ('soot')",
+        'kind': "'soot', 'damp', 'rust', 'mud' on a wall (default 'soot'); 'mud', 'coal dust', 'ash', 'damp' on the ground (default 'mud')",
         'strong_at': "'top' or 'bottom': where the wall stain is strongest ('top')",
         'strength': 'how strong at its strongest, scaling the fade (1.0 on a wall, 0.7 on the ground)',
         'location, size, turn': "the ground smear's middle (x, y, z), half-lengths (rx, ry) and turn in degrees",

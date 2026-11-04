@@ -14,10 +14,16 @@ What this folder is: the record of plan 51 (`51 Plan for Opus - the brief fixes 
 | `51 Railway goods yard - kit with the store - final.png` | The goods yard as its builder handed it in (540 x 960): a place the store was not made from |
 | `51 Railway goods yard - kit with the store - full size.jpg` | The same scene at 1080 x 1920, 64 samples |
 | `51 goods yard - builder text.md`, `- builder's report.md`, `- materials.md`, `- render_final.py` | As for the military base |
+| `51 Chapel - first pass beside second pass.jpg` | The chapel (log 52): the first builder's picture beside the second (dressing) builder's |
+| `51 Chapel - first pass - final.png`, `- full size.jpg`; `51 Chapel - second pass - final.png`, `- full size.jpg` | Both passes, as handed in and redrawn at 1080 x 1920 |
+| `51 chapel first pass - builder text.md`, `- materials.md`, `- render_final.py`; `51 chapel second pass - ...` | What each chapel builder got and left |
+| `51 chapel - builders' reports.md` | Both chapel builders' reports, word for word |
 
 How the two builds were run: the plugin's `brief/` folder (with the store) was copied for each builder, keeping only the board for its request; a fresh Sonnet builder got the brief's words with the request, the folders and a 100-minute clock, and nothing else; one builder at a time on the 2-processor machine. Its report was saved here by the session. You judge the pictures (no blind judges, decision 57).
 
 What the store gave each builder: the military base builder placed 24 parts of 11 kinds (the hut, two tents, the gun, the tower, lanterns, sandbags, wire, crates, shell boxes, barrels) and used the walkway, puddle and finish tools; the goods yard builder used the boards tool for its goods shed, the puddle tool, gas lamps, lanterns, crates, barrels and the finish, and built its rails, wagons, gantry, water tower and coaling stage itself.
+
+The chapel (log 52) was the first place built the standing way since decision 68: two passes, then its new things pulled into the store.
 
 ## Traps
 

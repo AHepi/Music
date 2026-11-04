@@ -681,6 +681,27 @@ Only failures in doing the work belong here. Newest at the bottom.
     have failed at level 0), and the smoke test's pass mark would have failed the tool's own example. Fix: both read after an update and
     check what the tools' notes claim.
 
+## 2026-11-04 (the chapel in two passes; log 52)
+
+200. **The second-pass text's filled-in measure line pointed at the first builder's picture** (log 52): the page used the word PICTURE
+    both for the first pass's picture and for "any picture" in the measure command, and the filling put the same path in both. Fix: a
+    different placeholder for the measure line. Check a filled-in brief by reading it whole before sending it.
+201. **The chapel's second pass put its things in the middle of the lane** (log 52): a barrow, a scuttle and an umbrella in the open road
+    read as dumped rubbish, and the first pass without them was the better picture. The brief said "where its owner would have put it
+    down" but not "never in the open road". Fix: the rule, with the case, in Second pass.md.
+202. **The street's stone materials squeezed into stripes on a headstone** (log 52): they project one picture over the whole place, so on
+    a single small slab the courses become 5 cm stripes. Fix: the headstone has its own stone; Store.md says those materials are for
+    walls and pavements.
+203. **Two tools' tests read world positions before Blender had placed the objects** (log 52, the railing and stain tools), the same
+    fault as lesson 199 in new code. Fix: the tools update the view layer before returning. A tool that returns objects should return
+    them placed.
+204. **Stains that looked right in the nodes drew too faint** (log 52): a noise's output sits between 0.4 and 0.6, and the AgX view
+    flattens the darks, so every stain had to be pushed about twice as hard as it looked. Judge a stain in a drawn picture.
+205. **A third fresh checker found floating and sunk pieces the parts test let through** (log 52): a barrow's brace hanging in the air,
+    a coal bed through the floor, tipped coal stuck to the lying scuttle's ceiling, a material stretched by an unapplied scale. The test
+    built every part only at its defaults and measured loose boxes. Fix: every option value is built, every piece must touch the ground
+    or another piece, and sizes come from the points themselves.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
