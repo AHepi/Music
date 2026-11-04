@@ -13,7 +13,7 @@ From your own script:
 Options, with their defaults:
     start         where the smoke leaves the chimney (x, y, z), metres (required)
     facing        where the viewer stands (x, y, z): the ribbon turns to face it (required; give your camera's place)
-    drift         the wind's way along the ground (x, y); its length does not matter (1, 0)
+    drift         the wind's way along the ground (x, y); its length does not matter; (0, 0) means along +X (1, 0)
     rise          how high the ribbon climbs, metres (12)
     lean          how far it leans with the wind for each metre it rises (0.5)
     width_start   its width at the chimney, metres (0.8)

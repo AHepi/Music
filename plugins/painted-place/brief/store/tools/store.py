@@ -223,13 +223,26 @@ def fit_projection(mat, low, high):
     return changed
 
 
+def _is_solid(obj):
+    """False for air and smoke (a haze box, a smoke ribbon): objects whose materials have no surface, or that the
+    store's smoke tool made, so they do not stretch the stone pictures over the sky."""
+    if obj.name.startswith(('smoke ribbon', 'haze box')):
+        return False
+    materials = [m for m in getattr(obj.data, 'materials', []) if m is not None and m.node_tree is not None]
+    for material in materials:
+        output = next((n for n in material.node_tree.nodes if n.type == 'OUTPUT_MATERIAL'), None)
+        if output is not None and not output.inputs['Surface'].is_linked:
+            return False
+    return True
+
+
 def fit_stone_pictures(scene, backdrop_limit=400.0):
     """Stretch every street stone material's picture over the place's own extent (backdrops over 400 m left out)."""
     low = Vector((1e9, 1e9, 1e9))
     high = Vector((-1e9, -1e9, -1e9))
     bpy.context.view_layer.update()
     for obj in scene.objects:
-        if obj.type != 'MESH' or max(obj.dimensions) > backdrop_limit:
+        if obj.type != 'MESH' or max(obj.dimensions) > backdrop_limit or not _is_solid(obj):
             continue
         for corner in obj.bound_box:
             world = obj.matrix_world @ Vector(corner)

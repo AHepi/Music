@@ -14,6 +14,7 @@ From your own Blender script:
     import bpy
     import lay_cobbles
     setts = lay_cobbles.lay_setts(my_road, seed=3)              # returns the object 'setts' (one point per stone)
+    print(setts['top_height'])                                  # the stones' tops: the road's height before it was lowered
     flags = lay_cobbles.lay_flags(my_pavement, seed=3)          # returns the object 'flags'
     print(len(setts.data.vertices), 'setts')
     import store
@@ -30,7 +31,8 @@ Options (lay_setts):
     collection      the collection the stones go in; default a new collection 'lay_cobbles'
     sett_material   the stones' material; default 'COBBLES • wet basalt / broken amber-blue reflections'
     bed_material    the road becomes this, the bed seen in the joints; default 'ROAD BED • damp grit' (None: leave it)
-    lower_road      how far the road (the bed) is lowered below the stones' tops, metres; default 0.125 (0: leave it)
+    lower_road      how far the road (the bed) is lowered below the stones' tops, metres; default 0.125, at least 0.08
+                    (any less and the road's surface would cover the stones)
     crown           how much lower the edges of the road are than its middle, metres; default 0.025
     missing         the share of setts left out (true missing setts); default 0.007
     along           which way the road runs in its own axes: 'x', 'y' or 'auto' (its longer side); default 'auto'
@@ -74,7 +76,7 @@ TOOL = {
         'collection': "the collection the stones go in; default a new collection 'lay_cobbles'",
         'sett_material': "setts' material; default '%s'" % SETT_MATERIAL,
         'bed_material': "the road becomes this bed, seen in the joints; default '%s' (None leaves the road's own)" % BED_MATERIAL,
-        'lower_road': 'metres the road (the bed) is lowered below the stones\' tops; default 0.125',
+        'lower_road': 'metres the road (the bed) is lowered below the stones\' tops; default 0.125, at least 0.08',
         'crown': 'metres the road edges sit lower than its middle; default 0.025',
         'missing': 'share of setts left out; default 0.007',
         'flag_material': "flags' material; default '%s'" % FLAG_MATERIAL,
@@ -84,7 +86,7 @@ TOOL = {
     },
     'materials': [SETT_MATERIAL, BED_MATERIAL, FLAG_MATERIAL],
     'source': 'plugins/painted-place/materials/lay_setts.py: lay_setts_on, lay_flags_on, _sett_prototypes, _flag_prototypes, _scatter',
-    'trap': 'the stone materials project one big picture over the place: call store.prepare_for_render(scene) once before drawing (it fits them); a puddle on setts: puddle.make(..., level=road_height + 0.002)',
+    'trap': 'the stone materials project one big picture over the place: call store.prepare_for_render(scene) once before drawing (it fits them); a puddle on setts: puddle.make(..., level=setts[\'top_height\'] + 0.002); keep other ground at least 13 cm below the road',
 }
 
 SHAPES_COLLECTION = 'lay_cobbles shapes'
@@ -327,6 +329,10 @@ def lay_setts(road, seed=0, collection=None, sett_material=SETT_MATERIAL, bed_ma
     setts['stones'] = len(points)
     if bed_material is not None:
         store.use_material(road, _material(bed_material), ground=frame.translation.z + top)
+    setts['top_height'] = float(frame.translation.z + top)        # the road's height before it was lowered: the stones' tops
+    if lower_road < 0.08:
+        print('lay_setts: lower_road %.3f is too shallow (the road would cover the stones); using 0.08' % lower_road)
+        lower_road = 0.08
     if lower_road and not road.get('lay_cobbles_lowered'):
         road.matrix_world = Matrix.Translation((0.0, 0.0, -lower_road)) @ road.matrix_world
         road['lay_cobbles_lowered'] = float(lower_road)
@@ -401,7 +407,7 @@ def main(argv=None):
     parser.add_argument('--seed', type=int, default=0, help='which stones go where; default 0')
     parser.add_argument('--sett-material', default=SETT_MATERIAL, help='setts\' material')
     parser.add_argument('--bed-material', default=BED_MATERIAL, help="the road's new material, the bed; 'none' leaves it")
-    parser.add_argument('--lower-road', type=float, default=0.125, help='metres the road (the bed) is lowered below the setts\' tops; default 0.125')
+    parser.add_argument('--lower-road', type=float, default=0.125, help='metres the road (the bed) is lowered below the setts\' tops; default 0.125, at least 0.08')
     parser.add_argument('--crown', type=float, default=0.025, help='metres the road edges sit lower than its middle; default 0.025')
     parser.add_argument('--missing', type=float, default=0.007, help='share of setts left out; default 0.007')
     parser.add_argument('--flag-material', default=FLAG_MATERIAL, help='flags\' material')

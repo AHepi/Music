@@ -664,6 +664,22 @@ Only failures in doing the work belong here. Newest at the bottom.
     default, the rails as an option; a wall sign's card says how high it hangs above its origin.
 193. **The parts test failed on its own code twice before it tested anything** (log 51): a stepped slice of a Blender list, and a measure
     taken from objects already cleared away. Run a new test once on purpose before reading its verdict on the work.
+194. **The walkway's corner fix left a hole at every corner** (log 51, found by a second fresh checker): the run before a corner stopped
+    0.3 m short and the next began at the corner, so the middle of the way was bare for 0.37 m. Fix: the run before goes a little past the
+    corner and the next begins where its first board lies clear of it; at turns of 26 to 150 degrees no boards lie through each other.
+195. **A trap I wrote did not work with the store's own glass** (log 51, second checker): it said to put a small light just inside a lit
+    window, but the store's lit glass is an opaque glow and blocks it (the ground in front measured the same with the light on and off).
+    Fix: the light goes just outside the glass, or behind an open gap. Test a trap's advice once before writing it.
+196. **Lowering the road under the setts had side effects nothing warned about** (log 51, second checker): a puddle draped on the road lay
+    hidden under the stones with no error, and `lower_road=0` sank most stones under the road's surface. Fix: the puddle tool refuses a
+    cobbled road and points to `level=`, the setts record their top height, and the road is lowered at least 8 cm.
+197. **Rail steel polished the rail's foot** (log 51, second checker): it polished every face pointing up. Fix: only faces near the rail's
+    top.
+198. **The smoke ribbon showed as a narrow streak that began above the chimney** (log 51, second checker): its see-through amount left
+    most of the ribbon's width clear. Fix: solid most of the way across, fading slowly, from the chimney.
+199. **Two tests passed by luck** (log 51, second checker): the puddle-level test read the water before Blender had placed it (it would
+    have failed at level 0), and the smoke test's pass mark would have failed the tool's own example. Fix: both read after an update and
+    check what the tools' notes claim.
 
 ## Traps
 

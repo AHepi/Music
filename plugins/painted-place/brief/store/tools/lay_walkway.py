@@ -43,8 +43,8 @@ Options, with their defaults:
     seed             0          the same seed lays the same walkway
     collection       none       where to put the objects (default: a new collection 'walkway')
 
-Sharp corners in the line (a turn of more than 25 degrees at one of its points) are kept: a section ends at each, and
-the next begins across the corner. A smooth curve is laid in straight sections of about section_length, so a tight bend
+Sharp corners in the line (a turn of more than 25 degrees at one of its points) are kept: the section before a corner
+runs a little past it, and the next begins where its first board lies clear of that one. A smooth curve is laid in straight sections of about section_length, so a tight bend
 wants a shorter section_length.
 
 It returns the objects it made: 'walkway boards', 'walkway runners', 'walkway nails', 'walkway rust' and, with mud,
@@ -162,30 +162,64 @@ class Path:
         return self.points[index].lerp(self.points[index + 1], t)
 
 
-def section_bounds(path, section_length, width, corner_angle=25.0):
-    """Where each straight section starts and ends, measured along the line. The line is cut at its corners (where it
-    turns by more than corner_angle degrees between two of its points), and each run between corners is cut into equal
-    sections of about section_length; a run that ends at a corner stops half a walkway's width short of it, so the next
-    run's first boards cross the corner without lying on the last ones."""
-    stops = [0.0]
+def _clear_start(extension, turn, width, board_width):
+    """How far past a corner the next run must start (along its own way) so that its first board lies clear of the last
+    run, which runs `extension` metres past the corner; `turn` is the signed angle between the two ways (radians)."""
+    half = width / 2
+    cos_turn, sin_turn = math.cos(turn), math.sin(turn)
+    start = 0.0
+    while start < 2.5 * width:
+        clear = True
+        for i in range(8):
+            along = start + board_width * i / 7
+            for j in range(9):
+                across = -half + width * j / 8
+                x = along * cos_turn - across * sin_turn          # in the last run's frame: x along it, y across it
+                y = along * sin_turn + across * cos_turn
+                if -2.0 * width <= x <= extension - 0.002 and abs(y) <= half - 0.002:
+                    clear = False
+                    break
+            if not clear:
+                break
+        if clear:
+            return start
+        start += 0.01
+    return start
+
+
+def section_bounds(path, section_length, width, corner_angle=25.0, board_width=0.2):
+    """Each straight section's start and end: (distance along the line at the start, at the end, start point, end point).
+    The line is cut at its corners (where it turns by more than corner_angle degrees at one of its points), and each run
+    between corners into equal sections of about section_length. At a corner the run before it goes on a little past
+    the corner, as a through section of duckboard would, and the run after it begins where its first board lies clear of
+    that one, so the corner is crossed with neither a hole in the middle of the way nor boards through each other."""
+    corners = []
     for index in range(1, len(path.points) - 1):
         before = path.points[index] - path.points[index - 1]
         after = path.points[index + 1] - path.points[index]
         before.z = after.z = 0.0
         if before.length > 1e-6 and after.length > 1e-6 and math.degrees(before.angle(after)) > corner_angle:
-            stops.append(path.lengths[index])
-    stops.append(path.total)
+            into, out = before.normalized(), after.normalized()
+            turn = math.atan2(into.x * out.y - into.y * out.x, into.dot(out))
+            # how far the run before the corner goes past it: enough that its last board lies over the way that turns
+            extension = 0.6 * board_width if abs(turn) >= math.radians(89.0) else max(0.6 * board_width, min(0.25 * width, (width / 2) / math.tan(abs(turn))))
+            corners.append({'distance': path.lengths[index], 'point': path.points[index].copy(), 'into': into,
+                            'extension': extension, 'clear': _clear_start(extension, turn, width, board_width)})
     bounds = []
-    for number, (start, end) in enumerate(zip(stops, stops[1:])):
-        at_corner = number < len(stops) - 2
-        if at_corner and end - start - width / 2 >= 0.4:
-            end -= width / 2
-        run = end - start
-        if run < 0.25:
+    edges = [None] + corners + [None]
+    for before, after in zip(edges, edges[1:]):
+        start = before['distance'] + before['clear'] if before else 0.0
+        end = after['distance'] if after else path.total
+        if end - start < 0.25:
             continue
-        count = max(1, int(round(run / section_length)))
-        each = run / count
-        bounds.extend((start + k * each, start + (k + 1) * each) for k in range(count))
+        count = max(1, int(round(end - start) / section_length + 0.5)) if end - start > section_length else 1
+        each = (end - start) / count
+        cuts = [start + k * each for k in range(count + 1)]
+        points = [path.at(d) for d in cuts]
+        if after:
+            corner = after['point']
+            points[-1] = corner + after['into'] * after['extension']
+        bounds.extend((cuts[k], cuts[k + 1], points[k], points[k + 1]) for k in range(count))
     return bounds
 
 
@@ -326,7 +360,7 @@ def lay(line, width=0.6, board_width=0.2, gap=0.035, board_thickness=0.035, runn
     nail_mesh = bmesh.new()
     rust_mesh = bmesh.new()
     rust_fade = []
-    bounds = section_bounds(path, section_length, width)
+    bounds = section_bounds(path, section_length, width, board_width=board_width)
     runner_offset = width / 2 - runner_inset
     board_count = 0
     nail_count = 0
@@ -337,8 +371,7 @@ def lay(line, width=0.6, board_width=0.2, gap=0.035, board_thickness=0.035, runn
         nearest_end = min(distance_along, path.total - distance_along)
         return mud_at_ends * max(0.0, 1.0 - nearest_end / 2.2) ** 1.2
 
-    for s0, s1 in bounds:
-        start, end = path.at(s0), path.at(s1)
+    for s0, s1, start, end in bounds:
         flat = Vector((end.x - start.x, end.y - start.y, 0.0))
         if flat.length < 1e-6:
             continue

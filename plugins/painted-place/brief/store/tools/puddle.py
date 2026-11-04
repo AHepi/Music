@@ -32,7 +32,7 @@ Options:
     film_material   default 'MADE • wet ground film' (reads 'dry')
     lift            how far the water sits above the ground, metres; default 0.004 (the film sits at half that)
     level           a height in metres: the water lies flat at it instead of on the ground (a puddle among setts:
-                    about 2 mm above the road's height, so the highest stones stand out of it); default none
+                    the setts object's 'top_height' + 0.002, so the highest stones stand out of it); default none
     film_reach      how far the wet ground reaches past the water, metres; default 0.3 x half the width + 0.08
     raggedness      how broken the outline is (0 a smooth blob, 1 normal, 2 very broken); default 1
     shallow_band    how wide the shallow, clear rim of the water is, metres; default about 0.4 x half the width (at most 0.22)
@@ -241,7 +241,7 @@ def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=No
          film_material=FILM_MATERIAL, lift=0.004, film_reach=None, raggedness=1.0, shallow_band=None, level=None):
     """Make one puddle with its middle at `location`. Returns (water, film): the objects 'puddle water' and
     'puddle wet film'. With `level` (a height in metres), the water lies flat at that height instead of on the ground:
-    for a puddle among setts, give level about 2 mm above the road's height (the stones' tops): the water covers
+    for a puddle among setts, give level about 2 mm above the stones' tops (the setts object's 'top_height'): the water covers
     most stones and the highest stand out of it; a centimetre lower, water shows only in the joints."""
     length, width = float(size[0]), float(size[1])
     if length < width:
@@ -254,6 +254,9 @@ def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=No
     rim = _outline(length, width, rng, raggedness)                     # the puddle's own frame: x along its length
     turning = Matrix.Rotation(math.radians(turn), 2)
     to_world = numpy.array([[turning[0][0], turning[0][1]], [turning[1][0], turning[1][1]]])
+    if ground is not None and level is None and ground.get('lay_cobbles_lowered'):
+        raise ValueError("setts are laid on %r: its surface is now the bed under the stones, so water draped on it would lie "
+                         "hidden under them; give level= instead (the setts object's 'top_height' plus about 0.002)" % ground.name)
     floor = _Ground(ground, location.z)
 
     # water: rings from the middle out to the rim, denser towards the rim where it turns clear

@@ -970,7 +970,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     enough to keep a builder working to the clock. **Carried into the plugin from the two builds** (the rule in the repository's rules
     file): a dusk sky and haze tool (both builders lost their first quarter hour to a black sky or a haze that hid the sky), a smoke ribbon
     tool, rail steel, and four traps (haze that ends in the sky, a mud surface that reads orange, a glowing pane that lights nothing, and
-    stopping early because changes feel risky). **Not done:** the chapel; the goods yard's coal wagon, signal gantry and loose ballast as
+    stopping early because changes feel risky); a second fresh checker read these and found eight more faults (a hole at every walkway
+    corner, a trap about lit glass that did not work with the store's glass, the setts' side effects, polished rail feet, narrow smoke,
+    tests that passed by luck), all fixed; every test passes. **Not done:** the chapel; the goods yard's coal wagon, signal gantry and loose ballast as
     parts and tools; lit glass that draws near white on the cards; an old 22 GB copy of the repository on this machine was not deleted
     (the deletion was refused as a step that cannot be undone).
 

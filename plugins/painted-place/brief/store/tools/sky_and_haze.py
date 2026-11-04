@@ -41,7 +41,7 @@ if TOOLS not in sys.path:
 
 TOOL = {
     'name': 'sky_and_haze',
-    'what': 'a dusk sky for the world (amber horizon, teal-blue above, streaky cloud) and a box of thin haze that fades out before its top',
+    'what': 'a dusk sky for the world (amber horizon, teal-blue above, streaky cloud low down) and a box of thin haze that fades smoothly to nothing at its top',
     'call': 'sky_and_haze.sky(scene); sky_and_haze.haze(low=(-60, -5, 0), high=(60, 220, 30), density=0.0016)',
     'options': {
         'sky: horizon, low_band, high_band, top': 'the sky\'s four colours from the horizon up (linear RGB)',
@@ -50,6 +50,7 @@ TOOL = {
         'haze: low, high': 'the haze box\'s two corners, metres (required)',
         'haze: density': 'how thick the air is (0.0016; 0.004 a misty evening)',
         'haze: anisotropy': 'how much the haze glows towards a light behind it (0.35)',
+        'sky: seed': 'moves the clouds (0)', 'haze: colour, collection': 'the air\'s colour (a cool grey-blue); where the box goes (a new collection)',
     },
     'materials': [],
     'source': 'the goods yard and military base builders of log 51 (their skies and haze boxes), made into a tool',
@@ -106,13 +107,23 @@ def sky(scene, horizon=HORIZON, low_band=LOW_BAND, high_band=HIGH_BAND, top=TOP,
         amount.inputs['From Max'].default_value = 0.68
         amount.inputs['To Max'].default_value = clouds
         _link(links, cloud.outputs['Fac'], amount.inputs['Value'])
+        thin_high = nodes.new('ShaderNodeMapRange')                          # clouds thin out high up, where the streaks
+        thin_high.inputs['From Min'].default_value = 0.35                    # would close into rings round the top
+        thin_high.inputs['From Max'].default_value = 0.8
+        thin_high.inputs['To Min'].default_value = 1.0
+        thin_high.inputs['To Max'].default_value = 0.0
+        _link(links, separate.outputs['Z'], thin_high.inputs['Value'])
+        thinned = nodes.new('ShaderNodeMath')
+        thinned.operation = 'MULTIPLY'
+        _link(links, amount.outputs['Result'], thinned.inputs[0])
+        _link(links, thin_high.outputs['Result'], thinned.inputs[1])
         darker = nodes.new('ShaderNodeVectorMath')
         darker.operation = 'MULTIPLY'
         darker.inputs[1].default_value = (0.35, 0.40, 0.62)                 # cloud undersides: darker and bluer
         _link(links, colour, darker.inputs[0])
         mix = nodes.new('ShaderNodeMix')
         mix.data_type = 'RGBA'
-        _link(links, amount.outputs['Result'], mix.inputs[0])
+        _link(links, thinned.outputs['Value'], mix.inputs[0])
         _link(links, colour, mix.inputs[6])
         _link(links, darker.outputs[0], mix.inputs[7])
         colour = mix.outputs[2]
@@ -182,6 +193,8 @@ def main():
     else:
         bpy.ops.wm.read_factory_settings(use_empty=True)
     sky(bpy.context.scene, clouds=args.clouds, seed=args.seed)
+    if bool(args.low) != bool(args.high):
+        parser.error('give both --low and --high for the haze box (or neither, for no haze)')
     if args.low and args.high:
         haze(args.low, args.high, density=args.density)
     if args.out:

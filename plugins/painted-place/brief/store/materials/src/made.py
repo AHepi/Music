@@ -286,6 +286,11 @@ def rail_steel(name):
     vector, _ = _own_coordinates(nodes, links)
     speckle = noise(nodes, links, vector, 5.0, detail=8.0)
     facing_up = math(nodes, links, 'ADD', separate.outputs['Z'], math(nodes, links, 'MULTIPLY', speckle, 0.35))
+    # only the running top: faces that point up AND lie near the top of the rail (its own box, 0 at the foot, 1 at the
+    # top), so the upper faces of the foot stay rusty
+    height = nodes.new('ShaderNodeSeparateXYZ')
+    links.new(nodes.new('ShaderNodeTexCoord').outputs['Generated'], height.inputs[0])
+    facing_up = math(nodes, links, 'MULTIPLY', facing_up, map_range(nodes, links, height.outputs['Z'], 0.7, 0.88))
     links.new(map_range(nodes, links, facing_up, 0.55, 0.9), principled.inputs['Metallic'])
     colour = ramp(nodes, [(0.55, (0.09, 0.04, 0.025)), (0.9, (0.30, 0.27, 0.25))])
     links.new(facing_up, colour.inputs[0])
@@ -306,11 +311,13 @@ def smoke_ribbon(name):
     separate = nodes.new('ShaderNodeSeparateXYZ')
     links.new(uv, separate.inputs[0])
     billows = noise(nodes, links, stretched(nodes, links, uv, (1.0, 2.2, 1.0)), 3.5, detail=10.0, roughness=0.65)
-    across = math(nodes, links, 'SUBTRACT', 1.0, math(nodes, links, 'ABSOLUTE', math(nodes, links, 'MULTIPLY_ADD', separate.outputs['X'], 2.0, -1.0)))
-    left = math(nodes, links, 'SUBTRACT', 1.0, separate.outputs['Y'])
-    starts = math(nodes, links, 'MINIMUM', math(nodes, links, 'MULTIPLY', separate.outputs['Y'], 14.0), 1.0)
-    body = math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY', across, billows), left), starts)
-    links.new(map_range(nodes, links, body, 0.10, 0.42, 0.0, 0.7), principled.inputs['Alpha'])
+    puffs = map_range(nodes, links, billows, 0.25, 0.75, 0.35, 1.0)
+    edge = math(nodes, links, 'ABSOLUTE', math(nodes, links, 'MULTIPLY_ADD', separate.outputs['X'], 2.0, -1.0))
+    across = math(nodes, links, 'SUBTRACT', 1.0, math(nodes, links, 'POWER', edge, 2.2))         # broad: solid most of the way across
+    left = math(nodes, links, 'POWER', math(nodes, links, 'SUBTRACT', 1.0, separate.outputs['Y']), 0.7)
+    starts = math(nodes, links, 'MINIMUM', math(nodes, links, 'MULTIPLY', separate.outputs['Y'], 40.0), 1.0)
+    body = math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY', across, puffs), left), starts)
+    links.new(map_range(nodes, links, body, 0.06, 0.45, 0.0, 0.75), principled.inputs['Alpha'])
     links.new(mix(nodes, links, map_range(nodes, links, billows, 0.3, 0.7), (0.045, 0.055, 0.08), (0.11, 0.12, 0.14)), principled.inputs['Base Color'])
     principled.inputs['Roughness'].default_value = 1.0
     principled.inputs['Emission Color'].default_value = (1.0, 0.5, 0.2, 1.0)
