@@ -882,6 +882,26 @@ overturn any of them in one line. Changes to the project must follow this file.
     create the plan for Opus to follow. Your the brains, Opus is the worker." The plan is
     `procedural-textures/51 Plan for Opus - the brief fixes and the store.md`.
 
+
+66. **Opus works plan 51; the kit moves inside the plugin; a second place is tested** (3 November 2026, 23:08), your words: "Ok Opus.
+    Execute plan. And yes to both questions". The two questions were: move the kit inside the plugin's folder (it changes paths
+    everywhere), and which second place to test if there is time (a railway goods yard or a chapel).
+
+### Claude's calls for item 66
+
+- "Yes to both" read as: the kit moves to `plugins/painted-place/brief/` (done in step 1), and a second place is tested; you did not
+  pick one, so the railway goods yard first and the chapel too if there is time.
+- A part's front faces −Y (Blender's front view), not +Y as the plan said, so a part seen in Blender's front view shows its front.
+- Parts are code first (one module per part, with a card that says what it is, its size and where it came from); the Blender file of each
+  part is made from its code, so a part can be rebuilt with another seed or options.
+- Beyond the plan's list: a timber hut (the fix for the hut you called "cardboard"), rails, a barrel and a marble table.
+- The ore car stands on plain ground unless asked to stand on the rails part; the teapot sign's origin is the foot of the wall it hangs on.
+- Retired from the plugin once their good parts were in the store and tested: the dressing, the look stage, the blind judge, the role list
+  and their tests (they stay in the repository's history). The features that decided placement by themselves (rot at timber feet, gutter
+  water, slate course lines on roofs, the shore's details) were not carried over.
+- The goods yard and chapel boards are Library of Congress photographs, mostly American (no British public-domain ones were found); one
+  chapel photograph whose rights were unclear was taken off the board.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

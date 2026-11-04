@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-04 for the painted-place plugin (log 51); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -325,7 +325,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   Not fixed: the faint contour steps in the dark sky (invisible at normal contrast; filming again takes over an hour for nothing a viewer sees) and
   the plugin's and chapter 2's copies of the stage (outside this job).
 
-## The painted-place plugin (logs 38 to 45, 2 and 3 November 2026)
+## The painted-place plugin (logs 38 to 51, 2 to 4 November 2026)
 
 - `plugins/painted-place` 0.5.0: build a place in Blender, dress it in one call, light it in the series' blue-hour look, judge it blind
   (now on the look and on the request), fix once. Decisions 50 to 58.
@@ -343,8 +343,12 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   textures, placement, objects and light in the air all fall short; maybe abandon it.
 - `place-brief/` (logs 48 and 50): the kit that replaces the plugin's code: look page, seven references, traps, measure, brief, and now a
   reference board for a military base, a shelf of 23 photographed surfaces, "Before you build" and a second-pass brief. The military
-  base built with it in two passes is sent (folder 50). Research on how environment artists work: file 49. Step 3 (retiring the
-  plugin) waits for your word.
+  base built with it in two passes is sent (folder 50). Research on how environment artists work: file 49.
+- **Now (log 51, decisions 65 and 66): `plugins/painted-place` 0.6.0** carries the kit as `brief/` and a store inside it: 20 parts, 9
+  tools (a duckboard walkway along a line, setts, boards with eaves, stonework, puddles, stone grain, a sky with haze, smoke, a finish)
+  and 82 ready materials, each with a card; nothing in it places itself. The dressing, look stage and blind judge are retired. All tests
+  pass; a fresh checker's 16 findings were fixed. Built with it by fresh builders: the military base (sent beside the earlier two) and a
+  railway goods yard (folder 51). Boards also exist for a chapel (not built).
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -357,8 +361,11 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Opus to work the plan in `procedural-textures/51 Plan for Opus - the brief fixes and the store.md` (decision 65): the plugin is kept as a
-  store of parts, tools and ready materials beside the brief kit.
+- Your verdict on the military base and the railway goods yard built with the store (`procedural-textures/51 The store, and places built
+  with it/`), and what next: make builders use their whole clock by how the build is run, build the chapel, or turn the goods yard's wagon,
+  gantry and ballast into store items.
+- An old 22 GB copy of the repository (from 2 November) fills most of this machine's disk; deleting it was refused as a step that cannot be
+  undone. Yours to decide.
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),

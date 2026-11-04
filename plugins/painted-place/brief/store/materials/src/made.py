@@ -1,6 +1,7 @@
 """
 What this file does: the store's made materials, built in code (no photograph): old brass, old copper, glazed china,
-weathered boards with peeling paint, wet bark, puddle water, a wet-ground film, rusty nail heads, a rust stain.
+weathered boards with peeling paint, wet bark, puddle water, a wet-ground film, rusty nail heads, a rust stain, rail steel and
+smoke for a ribbon.
 build_materials.py calls build_all().
 
 Two of them read a number the puddle tool writes on its meshes:
@@ -273,6 +274,52 @@ def rust_stain(name):
     return material
 
 
+def rail_steel(name):
+    """Rail steel: the running top polished bright by wheels, the sides and foot rusted dark brown; chosen by which way
+    each face points (up: polished), so it needs no numbers on the mesh. From the goods yard builder of log 51."""
+    material = fresh_material(name)
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    normal = nodes.new('ShaderNodeNewGeometry').outputs['Normal']
+    separate = nodes.new('ShaderNodeSeparateXYZ')
+    links.new(normal, separate.inputs[0])
+    vector, _ = _own_coordinates(nodes, links)
+    speckle = noise(nodes, links, vector, 5.0, detail=8.0)
+    facing_up = math(nodes, links, 'ADD', separate.outputs['Z'], math(nodes, links, 'MULTIPLY', speckle, 0.35))
+    links.new(map_range(nodes, links, facing_up, 0.55, 0.9), principled.inputs['Metallic'])
+    colour = ramp(nodes, [(0.55, (0.09, 0.04, 0.025)), (0.9, (0.30, 0.27, 0.25))])
+    links.new(facing_up, colour.inputs[0])
+    links.new(colour.outputs['Color'], principled.inputs['Base Color'])
+    links.new(map_range(nodes, links, facing_up, 0.3, 0.9, 0.7, 0.22), principled.inputs['Roughness'])
+    material.diffuse_color = (0.12, 0.07, 0.05, 1)
+    return material
+
+
+def smoke_ribbon(name):
+    """Smoke for a ribbon that faces the viewer (the smoke ribbon tool makes one): soft grey-blue, see-through, broken up,
+    fading at its edges and out along its length, faintly warm low down where a fire lights it. It reads the ribbon's UV
+    map: across 0 to 1, along 0 (the chimney) to 1 (where it has gone)."""
+    material = fresh_material(name)
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    uv = nodes.new('ShaderNodeTexCoord').outputs['UV']
+    separate = nodes.new('ShaderNodeSeparateXYZ')
+    links.new(uv, separate.inputs[0])
+    billows = noise(nodes, links, stretched(nodes, links, uv, (1.0, 2.2, 1.0)), 3.5, detail=10.0, roughness=0.65)
+    across = math(nodes, links, 'SUBTRACT', 1.0, math(nodes, links, 'ABSOLUTE', math(nodes, links, 'MULTIPLY_ADD', separate.outputs['X'], 2.0, -1.0)))
+    left = math(nodes, links, 'SUBTRACT', 1.0, separate.outputs['Y'])
+    starts = math(nodes, links, 'MINIMUM', math(nodes, links, 'MULTIPLY', separate.outputs['Y'], 14.0), 1.0)
+    body = math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY', across, billows), left), starts)
+    links.new(map_range(nodes, links, body, 0.10, 0.42, 0.0, 0.7), principled.inputs['Alpha'])
+    links.new(mix(nodes, links, map_range(nodes, links, billows, 0.3, 0.7), (0.045, 0.055, 0.08), (0.11, 0.12, 0.14)), principled.inputs['Base Color'])
+    principled.inputs['Roughness'].default_value = 1.0
+    principled.inputs['Emission Color'].default_value = (1.0, 0.5, 0.2, 1.0)
+    links.new(math(nodes, links, 'MULTIPLY', math(nodes, links, 'POWER', left, 3.0), 0.08), principled.inputs['Emission Strength'])
+    material.surface_render_method = 'DITHERED'
+    material.diffuse_color = (0.08, 0.09, 0.11, 1)
+    return material
+
+
 MADE = {
     'MADE • old brass': (lambda n: old_metal(n, copper=False), 'old brass: polished where handled, tarnished in patches and every hollow (urns, lamps, shell cases, fittings)'),
     'MADE • old copper': (lambda n: old_metal(n, copper=True), 'old copper: as brass, warmer, blue-green verdigris in the hollows (kettles, pipes, boilers)'),
@@ -282,6 +329,8 @@ MADE = {
     'MADE • puddle water': (puddle_water, "puddle water: near-black, glossy, a faint ripple, clear at the shallow rim (needs the mesh number 'shallow'; the puddle tool writes it)"),
     'MADE • wet ground film': (wet_ground_film, "a wet film to lay over ground: darker and glossy, breaking up towards its edge (mesh number 'dry'; the puddle tool writes it)"),
     'MADE • rusty nail heads': (rusty_nail_heads, 'rusty iron nail and bolt heads: near-black iron, rust in patches'),
+    'MADE • rail steel': (rail_steel, 'rail steel: the running top polished by wheels, the sides and foot rusted dark (by which way each face points)'),
+    'MADE • smoke ribbon': (smoke_ribbon, "smoke for a ribbon facing the viewer: soft, see-through, broken up, fading out (the smoke ribbon tool's UV map)"),
     'MADE • rust stain': (rust_stain, "a rust stain run out from a nail or bolt, fading along its length (mesh number 'fade': 0 at the start, 1 gone; the walkway tool writes it)"),
 }
 

@@ -123,6 +123,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   1914 to 1918 photographs for a military base, a shelf of 23 photographed surfaces, a page "Before you build" (the material list first,
   who uses the place, where wear sits, three sizes of shape) and a second-pass brief for set dressing. The military base built with it, in
   two passes, is in `50 Military base from the kit with board, shelf and material list/`.
+- **The plugin is a store now (log 51, 3 and 4 November):** `plugins/painted-place` 0.6.0 carries the brief kit (`brief/`) and, inside it,
+  a store a builder may pick from: 20 parts, 9 tools and 82 ready materials, each with a picture card, and a catalogue written from their
+  own descriptions. Nothing in it places itself. The dressing, the look stage and the blind judge are retired. A fresh builder built the
+  military base and a railway goods yard with it (folder `51 The store, and places built with it/`); your verdict is awaited.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -148,11 +152,15 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 | The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
-| The painted-place plugin (`plugins/painted-place`, version 0.5.0) | The look as five reference pictures and one page; a blind judge (measures and a rubric: the look and the request); the look stage (lights at every glowing window and lamp, sky, haze, finish); the dressing: materials by role words, real stone grain and photographed timber, bark and sand from Poly Haven scans (`scans.py`, `materials/textures/`), laid setts and flags, ashlar walls, lapped boards, and the details from the place's shape and from a camera survey (`survey.py`, `lay_details.py`, `lay_timber.py`, `lay_shore.py`, `lay_trees.py`); the loop as one short skill; five tests | A dressed, lit picture of any place in the look, and the judge's plain-word fixes |
+| The painted-place plugin (`plugins/painted-place`, version 0.6.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
 
 ## Word list
 
 - **Tile:** one square picture that repeats without a seam. **Dot:** one pixel.
+- **Store (log 51):** the folder of ready things a builder may pick from: **parts** (things to place, such as a tent or a gas lamp),
+  **tools** (code that makes a thing from a line, a point or an object the builder gives, such as a walkway along a line) and **ready
+  materials** (Blender materials to put on an object). Nothing in it places itself. **Card:** a small picture of a part or material, drawn
+  under one light so they can be compared. **Catalogue:** the store's list (`Store.md`), written from each item's own description.
 - **Brushstroke (log 45):** one stroke of paint grown in 3D on a surface by the Blender Studio's add-on, with a brush picture scanned from
   real oil paint. **Flow lines:** lines laid on a surface that tell the strokes which way to run. **Paint-over:** strokes that take their
   colour from the finished picture and are drawn on top of it. **Hidden but still in front:** everything except the strokes is left out of
@@ -934,9 +942,49 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     **Shown:** the three military bases side by side, and before and after the dressing, whole and close up. The dressed scene was redrawn
     at 1080 x 1920 at the end.
 
+
+51. **The store, and two places built with it (3 November 23:08 to 4 November 11:00).** You said: "Ok Opus. Execute plan. And yes to both
+    questions". **Step 1, the brief:** four new traps (puddles drawn as cutout mirrors, things nobody can name, buildings that read as
+    cardboard, the bands as a floor not the finish), "finished" spelled out in the builder's words, the store offered as a folder; the kit
+    moved into the plugin as `brief/`. **Step 2, the store (`brief/store/`):** a loader; tools that make a thing only where they are told:
+    a duckboard walkway along any line (sections of boards nailed to runners, every board resting on both, worn pale in the middle, rusty
+    nails, churned mud only if asked), setts and flags, lapped boards with eaves on a box, stonework on a wall, a puddle with a ragged edge
+    and a wet rim, stone grain, an optional finish; 20 parts from the builders' scripts, each looked at from four sides (a timber hut with
+    eaves, real boards, door, glazed windows and stove pipe; a bell tent; a field gun; a watch tower; a lantern; sandbags; barbed wire; a
+    crate; a shell box; a gas lamp; a coal cart; a winding tower; an ore car; rails; a barrel; a tea urn; a cafe chair; a marble table; a
+    teapot sign); the street's, the shelf's and some made materials with a card each; boards of photographs for a goods yard and a chapel.
+    The plugin became 0.6.0: the dressing, the look stage, the blind judge and their tests were retired (they stay in history). **Checks:**
+    new tests (the measure tool, every material, part and tool, a copy of the kit used on its own, the rule that nothing places itself);
+    the test runner fails when a test fails. A fresh checker found 16 faults, fixed before the tests: setts buried whatever was put on the
+    road, the bell tent was blue (the shelf's "canvas" was blue linen), each stone material loaded the same pictures again (a 191 MB
+    scene), the walkway left its line at corners, the rule test missed most ways of surveying a scene, a misspelt option passed silently,
+    and some documents disagreed with the code. **A pause:** the machine stopped from about 00:41 to 08:11; the two part makers' reports
+    were lost, but their parts were finished and saved, and were reviewed from their cards and the tests. **Test 1, the military base
+    (08:42 to 09:17):** a fresh builder used 11 kinds of part (24 placed), the walkway and puddle tools and the finish; every thing can be
+    named, the puddles have ragged edges and catch the lanterns, the hut has eaves and boards; the picture is sparser and less hazy than
+    the two-pass one of log 50; the builder stopped 63 minutes early by its own choice. **Test 2, a railway goods yard (09:32 to 10:33),
+    a place the store was not made from:** a fresh builder used the boards tool for its goods shed, the puddle tool, gas lamps, lanterns,
+    crates, barrels and the finish, and built the rest itself (rails, coal wagons, a signal gantry, a water tower, a coaling stage, smoke);
+    it stopped 38 minutes early. **What it shows:** the store fixed the faults you named and gave builders things that read as real, but the
+    places still come out sparse in the near ground, and five builders in a row have stopped early, so the words in the brief are not
+    enough to keep a builder working to the clock. **Carried into the plugin from the two builds** (the rule in the repository's rules
+    file): a dusk sky and haze tool (both builders lost their first quarter hour to a black sky or a haze that hid the sky), a smoke ribbon
+    tool, rail steel, and four traps (haze that ends in the sky, a mud surface that reads orange, a glowing pane that lights nothing, and
+    stopping early because changes feel risky). **Not done:** the chapel; the goods yard's coal wagon, signal gantry and loose ballast as
+    parts and tools; lit glass that draws near white on the cards; an old 22 GB copy of the repository on this machine was not deleted
+    (the deletion was refused as a step that cannot be undone).
+
 ## Next step
 
-Opus follows `51 Plan for Opus - the brief fixes and the store.md`: fix the brief (puddle edges, nameable props, buildings with eaves,
-the bands as a floor), build the store (the walkway tool, the old plugin's good parts as tools, parts from the builders' scripts, the
-shelf as ready materials, a finish), test on the military base, then checks and records. Your verdict on the two-pass base: "It looks so
-much better. But it isn't there just yet.
+Your verdict on the two pictures in `51 The store, and places built with it/`: the military base beside the earlier two, and the railway
+goods yard. Then, as you choose: make builders work to the clock by the way the build is run (for example a second pass that starts from
+the first builder's scene, as in log 50) rather than by more words; or build the chapel; or turn the goods yard's wagon, gantry and
+ballast into parts and a tool.
+
+## Traps
+
+- Log entries are added to, never rewritten; a later entry corrects an earlier one by saying so.
+- This machine can stop in the middle of a long run (log 51: about seven hours); keep what helpers make on disk, and check it there before
+  saying it will arrive.
+- The machine's disk is nearly full (an old 22 GB copy of the repository from 2 November sits beside the working one): a long run of big
+  renders can fail for want of space.

@@ -143,7 +143,42 @@ def test_catalogue_help():
     print('PASS catalogue.py --help prints its help and changes nothing')
 
 
+def test_sky_and_haze():
+    scene = fresh_scene()
+    import sky_and_haze
+    world = sky_and_haze.sky(scene)
+    check(scene.world is world and world.node_tree.nodes.get('Background') is not None, 'the sky did not become the world')
+    box = sky_and_haze.haze(low=(-20.0, -5.0, 0.0), high=(20.0, 60.0, 15.0))
+    check(box.data.materials[0].node_tree.nodes.get('Volume Scatter') is not None, 'the haze box has no scattering air')
+    check(abs(box.location.z - 7.5) < 1e-6 and abs(box.dimensions.z - 15.0) < 1e-6, 'the haze box is not where it was asked to be')
+    try:
+        sky_and_haze.haze(low=(0, 0, 10), high=(5, 5, 0))
+        check(False, 'a haze box with its corners the wrong way round was accepted')
+    except ValueError:
+        pass
+    print('PASS sky_and_haze: the dusk sky becomes the world; the haze fills the box asked for, and only that')
+
+
+def test_smoke_ribbon():
+    fresh_scene()
+    import smoke_ribbon
+    from mathutils import Vector
+    viewer = Vector((0.0, -10.0, 1.6))
+    smoke = smoke_ribbon.make(start=(0.0, 20.0, 6.0), facing=viewer, drift=(1.0, 0.0), rise=10.0, seed=1)
+    check(smoke.data.uv_layers.get('UVMap') is not None, 'the smoke ribbon has no UV map for its material')
+    facing = 0
+    for polygon in smoke.data.polygons:
+        to_viewer = (viewer - smoke.matrix_world @ polygon.center).normalized()
+        if abs(polygon.normal.dot(to_viewer)) > 0.7:
+            facing += 1
+    check(facing >= 0.8 * len(smoke.data.polygons), 'only %d of %d smoke faces turn to the viewer' % (facing, len(smoke.data.polygons)))
+    check(smoke.data.materials[0].name == 'MADE • smoke ribbon', 'the smoke has the wrong material')
+    print('PASS smoke_ribbon: %d of %d faces turned to the viewer, its material reads the ribbon\'s UV map' % (facing, len(smoke.data.polygons)))
+
+
 def main():
+    test_sky_and_haze()
+    test_smoke_ribbon()
     test_walkway_corner()
     test_puddle_on_setts()
     test_catalogue_help()

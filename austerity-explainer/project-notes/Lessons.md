@@ -634,6 +634,37 @@ Only failures in doing the work belong here. Newest at the bottom.
 182. **Wikimedia Commons refused the machine's requests (429, too many requests) for the reference board** (log 50); the Library of
     Congress answered. Two of its pictures came down broken over HTTP/2 and were fetched again over HTTP/1.1.
 
+## 2026-11-04 (plan 51: the store; log 51)
+
+183. **The walkway's mud at its ends drew as glossy black boulders** (log 51): tall lumps in a wet mud material. Fix: a low patch of
+    churned mud that sinks into the ground at its rim, with a few small clods on it.
+184. **The finish taken from the desert mine turned a whole night picture teal** (log 51): its blue-black grade was made for a sunlit
+    picture and pulled every dark pixel blue, the lamp-lit ground included. Fix: the grade spares anything lit warm and touches only the
+    darkest parts.
+185. **The walkway left its line at a corner** (log 51, found by the fresh checker): it cut the whole line into equal sections and ignored
+    the line's corners, so on an L-shaped line a board's middle lay 0.67 m off it. Fix: a section ends at each sharp corner, and the boards
+    are spread evenly over each section, so sections no longer leave wide gaps between them.
+186. **Setts buried whatever was put on the road** (log 51, fresh checker): the old code set the stones' tops 4.5 cm above the road and
+    lowered the road 7 cm, so a puddle on the road lay under the stones and a part stood at the road's height sank into them. Fix: the
+    stones' tops at the road's height, the bed lowered under them (same joints), and a water level for a puddle among setts.
+187. **The bell tent was blue** (log 51, fresh checker): the shelf's "rough canvas" is a photograph of blue-dyed linen, and its line in the
+    shelf's list said canvas. Fix: a buff army canvas made from the same weave; the shelf's line corrected.
+188. **Each stone material brought its own copies of the same pictures** (log 51, fresh checker): materials appended one at a time each
+    bring every picture they share, so sixteen stone materials made 96 pictures and a 191 MB scene. Fix: the loader keeps one copy of each
+    picture and dial group.
+189. **The test that nothing places itself caught two ways out of eight** (log 51, fresh checker): it looked only for `.camera` and
+    `scene.objects` written out in full. Fix: it now looks for every way of walking or searching a scene, and is first run on snippets it
+    must catch (as lesson 168: test the test).
+190. **A board helper's search loop hung on a download with no time limit** (log 51) and was still running after the helper finished;
+    stopped by hand. Give every download a time limit.
+191. **A photograph filed in a government survey's record was not the government's** (log 51): a chapel photograph sat in a Historic
+    American Buildings Survey record but came from another collection whose rights were not stated; taken off the board. Check whose
+    photograph it is, not only whose record holds it.
+192. **The ore car stood 16 cm above the ground** (log 51): its maker built it to stand on the rails part by default. Fix: plain ground by
+    default, the rails as an option; a wall sign's card says how high it hangs above its origin.
+193. **The parts test failed on its own code twice before it tested anything** (log 51): a stepped slice of a Blender list, and a measure
+    taken from objects already cleared away. Run a new test once on purpose before reading its verdict on the work.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -675,3 +706,8 @@ Only failures in doing the work belong here. Newest at the bottom.
 - A long drawing left running in the background is lost if the machine restarts (the tea house's full-size redraw, log 44): run the quickest
   first, and after any pause check it is still running before saying it will arrive.
 - Brushstrokes need flow lines, and must lie on each object's own skin, behind what stands in front of it (lessons 173, 175).
+- A check that something never happens must first be shown catching it: feed it the cases it must catch (lessons 168, 189).
+- Put what one builder makes to the test of being placed by another: stood on a road, a puddle on setts, a walkway round a corner, a
+  part on plain ground (lessons 185, 186, 192).
+- Give every download a time limit, and check a picture's rights where the picture came from, not where it is filed (lessons 190, 191).
+- A long run can lose its helpers' reports if the machine stops: keep what they make on disk and check it there (log 51).
