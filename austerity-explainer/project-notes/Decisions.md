@@ -912,6 +912,13 @@ overturn any of them in one line. Changes to the project must follow this file.
     one builder lays the place out, a fresh second builder spends its whole clock on the near ground (the things people left, mud, wear,
     small nameable things), then the new things both made are pulled into the store; tested on the chapel.
 
+
+69. **Ground tools next: research first, then a plan for Opus** (4 November 2026, 16:54), your words: "Wow. Incredible. They look
+    fantastic. Can we work on ground tools now. Maybe start with dry dirt ground, wet dirt ground, then adding making separate
+    rocks/pebbles layers. Then add a tracks layer that automatically changes according to conditions of wet or dry. So human tracks, car
+    tyre tracks, cart when tracks. The last two will need to add things like sink holes and depressions according to age and so on. Hmm
+    maybe researching real world examples first. Look at how game studios do it. Then make a plan for Opus."
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

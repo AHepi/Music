@@ -364,7 +364,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your verdict on the chapel, first pass beside second pass (`procedural-textures/51 The store, and places built with it/`).
+- Opus to work `procedural-textures/53 Plan for Opus - ground tools.md` (decision 69): ground, stones and tracks tools; research in file 53.
+- Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
 - The newcomer script: read it to one or two of the people who got lost (the listener questions are in the file),

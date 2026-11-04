@@ -999,9 +999,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 
 ## Next step
 
-Your verdict on the chapel (first pass beside second pass, in folder 51). Then the next place in two passes with the new placement rule
-in the second-pass brief, to see whether the second pass helps when things go where their owners would put them; every place fed back
-into the store.
+Opus follows `53 Plan for Opus - ground tools.md` (decision 69): a ground tool (shape, soil, wetness by height and dial), stones in
+size layers, and tracks carved along the builder's lines (cart and motor ruts, a footpath, footprints, potholes), with one age dial;
+research first in `53 Research - ground, wet and dry, pebbles and tracks.md`. You judged the chapel's first pass as the stronger picture
+is still my reading, not your verdict; the next place in two passes tests the placement rule.
 
 ## Traps
 
