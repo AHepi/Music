@@ -12,6 +12,8 @@ SKIES = {
     # id: what it is, in plain words
     'mud_road_puresky': 'a flat grey overcast sky, soft even daylight (midday, low contrast)',
     'overcast_soil_puresky': 'a heavy grey sky of rolling rain clouds, a paler band low down (morning or afternoon)',
+    'kloofendal_48d_partly_cloudy_puresky': ('a blue sky with fair-weather clouds and the sun about 48 degrees up: a bright day '
+                                             'with hard shadows (midday, high contrast)'),
 }
 
 

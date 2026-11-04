@@ -943,6 +943,17 @@ overturn any of them in one line. Changes to the project must follow this file.
     line for a place with this kind of ground, and a fresh builder who has never seen the ground tools makes it with only the
     plugin (in two passes, decision 68).
 
+
+75. **Send every picture as soon as it is drawn** (5 November 2026, 06:17), your words: "Can you report back any time an image
+    is complete. If you can." Since then each picture a builder draws is sent when it is finished; a builder's zoomed crops of
+    its own pictures, its side-by-side comparisons and copies of a picture already sent are not new pictures and are not sent.
+
+
+76. **The barn by day too** (5 November 2026, 08:16), your words: "Can you do a render during the day?" Drawn after the second
+    builder's clock: the dressed farmyard under a photographed sunny sky (now in the store), its lanterns unlit, daylight let in
+    through the open barn door. Asked just before (08:14): "It looks like new textures have been added. Will they go in to tools
+    or a library?" Answered: into the store, as parts, tools and materials (decision 68).
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

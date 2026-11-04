@@ -27,3 +27,13 @@ What this file is: the faults builders working from this brief have run into so 
 - **With the `bpy` module, `import bpy` must come before `import bmesh`.**
 - **Tracks drawn as a picture on flat ground look painted under a low lamp:** nothing casts a shadow, nothing holds water, and a stone sits across the groove. Ruts, footprints and potholes need real depth in the ground; the store's tracks tool carves them.
 - **Water that reaches past the ground's edge draws a dark rectangle in the distance.** Make the ground bigger than the frame shows, or leave out the water at its edge.
+- **A light inside a closed building lights nothing you can see.** A barn builder's cow-house lamp sat inside solid walls; a lantern by the door, or a building left hollow with its door open, lights the yard.
+- **Lamps seen through an open door draw as glowing balls.** Hide those lights from the eye and let them light the hay, the walls and the cart instead.
+- **Haze inside a lit barn or room turns everything in it into flat glowing fog.** Keep the haze outside the building; light the inside from one side so its things cast shadows.
+- **Straw or hay strands spread out from one middle point read as stars.** Laid side by side in clumps, pressed flat and darker where trodden, they read as straw.
+- **Asking the ground for its height once per small thing is slow:** once per straw strand took 90 seconds for one yard. Ask once per clump.
+- **Anything behind a wall taller than about 1.2 m is hidden from eye height.** A gate swung into the field behind a dry-stone wall disappeared; swung into the yard, it shows.
+- **Root crops drawn round, pale and pink read as peaches.** Mangolds are long and tapering, dull orange to red, with soil caked on their tails.
+- **A sack seen small reads as a boulder.** Give it a tied neck and folds, or leave it out.
+- **Stains, damp runs and rust streaks on a building 19 m away do not show** at 540 x 960. Make them big and strong, or put them on things near the eye.
+- **By day an open doorway reads as a black hole.** The sky's light through a door is too little to show the inside; a soft cool light just inside the door, facing in and hidden from the eye, shows it dimmer than the sunlit outside. Lanterns are unlit by day.

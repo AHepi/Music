@@ -28,7 +28,8 @@ Options of haze(): low, high (the box's corners, metres; required), density (def
 colour (default a cool grey-blue), anisotropy (how much the haze glows towards a light behind it; default 0.35),
 collection (default a new collection 'haze').
 photo_sky(scene, name, strength, turn): a sky photographed all round (Poly Haven, CC0; the store's skies folder lists
-them in skies/manifest.json, e.g. 'mud_road_puresky', a flat grey overcast day) as the world's background and light;
+them in skies/manifest.json: 'mud_road_puresky', a flat grey overcast day; 'overcast_soil_puresky', rain clouds;
+'kloofendal_48d_partly_cloudy_puresky', a sunny day with its sun in it) as the world's background and light;
 strength (default 1.0), turn (degrees the sky is turned about the vertical; default 0).
 """
 
@@ -55,7 +56,9 @@ TOOL = {
         'haze: density': 'how thick the air is (0.0016; 0.004 a misty evening)',
         'haze: anisotropy': 'how much the haze glows towards a light behind it (0.35)',
         'sky: seed': 'moves the clouds (0)', 'haze: colour, collection': 'the air\'s colour (a cool grey-blue); where the box goes (a new collection)',
-        'photo_sky: name, strength, turn': "a photographed sky from the store's skies ('mud_road_puresky', a grey overcast day); its light (1.0); degrees turned (0)",
+        'photo_sky: name, strength, turn': "a photographed sky from the store's skies ('mud_road_puresky', a grey overcast day; 'overcast_soil_puresky', rain clouds; "
+                                           "'kloofendal_48d_partly_cloudy_puresky', a sunny day whose sun casts the shadows); its light (1.0); "
+                                           "degrees turned (0; the sunny sky's sun stands at bearing -34 - turn, see skies/README.md)",
     },
     'materials': [],
     'source': 'the goods yard and military base builders of log 51 (their skies and haze boxes), made into a tool',
