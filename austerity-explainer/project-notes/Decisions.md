@@ -934,6 +934,10 @@ overturn any of them in one line. Changes to the project must follow this file.
     be possible." So the tracks tool keeps the horse and cart (narrow iron tyres cutting deep slots, now with the horse's hoof prints
     between the ruts) next to the car, the lorry and the tractor; the cart track example stays a cart track.
 
+
+73. **The ground tools work: the three pictures hold** (5 November 2026, 04:23), your words, on the three pictures in folder 53
+    (deep ruts in a wet field by grey day and at dusk, the cart track at dusk): "Those look like a Hollywood film. Holy crap 😅"
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

@@ -132,7 +132,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   water, ruts for a horse and cart (with hoof prints), a car, a lorry and a tractor, paths, footprints and potholes, stones,
   grass, and leaves and twigs, using Poly Haven's scanned grass, photographed mud with real lumps near the eye, and a
   photographed rain sky. Two worked examples, a cart track after rain and deep ruts in a wet field like your picture, are in
-  `53 Ground tools - wet ground, ruts, grass/` for your verdict.
+  `53 Ground tools - wet ground, ruts, grass/`; you judged them: "Those look like a Hollywood film. Holy crap 😅" (decision 73).
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -1034,8 +1034,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     used yet); no fresh builder has used the ground tools yet.
 ## Next step
 
-Your verdict on the three pictures in `53 Ground tools - wet ground, ruts, grass/`. Then, if they hold: your generated leaf sheet
-into the litter tool, and a fresh builder making a place with the ground tools from a plain request, in two passes.
+The three pictures hold (decision 73). Next: a fresh builder makes a place with this kind of ground from your plain one-line
+request, using only the plugin, in two passes: the test of whether the ground tools work in hands that did not make them. When
+your generated leaf sheet comes, its leaves go into the litter tool. Still owed: the independent check of 0.7.0 (it was stopped;
+it restarts only at your word).
 
 ## Traps
 

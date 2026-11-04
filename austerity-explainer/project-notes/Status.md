@@ -356,7 +356,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   soil's photographs, standing parts on uneven ground), tracks (a horse and cart with hoof prints, a car, a lorry, a tractor;
   paths, footprints, potholes; an age dial), stones, grass and litter, using Poly Haven's scanned grass, mud photographs with
   normal pictures, and photographed skies. Two worked examples drew three pictures (`procedural-textures/53 Ground tools - wet
-  ground, ruts, grass/`), sent for your verdict. 64 test lines pass. Not yet: an independent check (the checker was stopped),
+  ground, ruts, grass/`); you judged them: "Those look like a Hollywood film. Holy crap 😅" (decision 73). 64 test lines pass. Not yet: an independent check (the checker was stopped),
   leaves from photographs, scanned rocks, a fresh builder using the tools.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
@@ -370,7 +370,8 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Opus to work `procedural-textures/53 Plan for Opus - ground tools.md` (decision 69): ground, stones and tracks tools; research in file 53.
+- A plain one-line request for the next place, built by a fresh builder with the ground tools (only the plugin, two passes).
+- Your generated leaf sheet, when you have one (about 12 separate fallen leaves from straight above on white), for the litter tool.
 - Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").
