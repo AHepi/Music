@@ -1,6 +1,6 @@
 """
-What this file does: the store tools' tests for the boards, stone, puddle and stone grain tools (test_store_tools.py
-runs it): each, run on a small scene, makes what it says.
+What this file does: the store tools' tests for the boards, stone, puddle, stone grain, sky and haze, smoke ribbon,
+railing and stain tools (test_store_tools.py runs it): each, run on a small scene, makes what it says.
 """
 import os
 import sys
@@ -214,9 +214,95 @@ def test_smoke_ribbon():
     print('PASS smoke_ribbon: starts at the chimney, widens from %.1f to %.1f m, %d of %d faces turned to the viewer' % (bottom, top, facing, len(smoke.data.polygons)))
 
 
+def test_railing():
+    fresh_scene()
+    import lay_railing
+    from mathutils import Vector
+    made = lay_railing.lay([(-3.0, 0.0, 0.0), (3.0, 0.0, 0.0), (3.0, 4.0, 0.0)], height=1.1, spacing=0.14, plinth=0.15, seed=1)
+    bars = made['railing bars']
+    count = bars['railing_bars']
+    # 6 m + 4 m of line at 0.14 m, less a bar at each of the posts: about 65 bars
+    check(55 <= count <= 75, 'a 10 m railing at 0.14 m spacing has %d bars' % count)
+    check(len(bars.data.polygons) == count * 13, '%d bars but %d faces (13 each)' % (count, len(bars.data.polygons)))
+    points = [bars.matrix_world @ v.co for v in bars.data.vertices]
+    check(abs(min(p.z for p in points) - 0.15) < 0.01, 'the bars do not stand on the plinth top (lowest point z = %.3f)' % min(p.z for p in points))
+    check(abs(max(p.z for p in points) - 1.25) < 0.02, 'the spear points are not at plinth + height (highest z = %.3f)' % max(p.z for p in points))
+    check(bars['railing_posts'] >= 4, 'too few posts: %d' % bars['railing_posts'])
+    check('railing plinth' in made and 'railing rust' in made, 'no plinth or no rust made')
+    fade = numbers(made['railing rust'], 'fade')
+    check(min(fade) < 0.01 and max(fade) > 0.99, 'the rust fade runs %.2f to %.2f' % (min(fade), max(fade)))
+    check(made['railing rust'].data.materials[0].name == 'MADE • stain rust', 'the rust has the wrong material')
+    # the gate: two leaves hung at +-width/2, each swung open by the angle asked (the left leaf's far end goes to +Y)
+    gate = lay_railing.gate((0.0, 0.0, 0.0), width=1.2, open_angle=35.0, seed=2)
+    left, right = gate['gate left leaf'], gate['gate right leaf']
+    check((left.location - Vector((-0.6, 0.0, 0.0))).length < 1e-6 and (right.location - Vector((0.6, 0.0, 0.0))).length < 1e-6,
+          'the hinges are not at the opening\'s sides (%s, %s)' % (tuple(left.location), tuple(right.location)))
+    import math
+    far_left = max((left.matrix_world @ v.co for v in left.data.vertices), key=lambda p: p.x)
+    expected = Vector((-0.6, 0.0, 0.0)) + Vector((math.cos(math.radians(35.0)), math.sin(math.radians(35.0)), 0.0)) * left['gate_leaf_width']
+    check((far_left.xy - expected.xy).length < 0.03, 'the left leaf\'s far end is at %s, not swung 35 degrees to %s' % (tuple(far_left.xy), tuple(expected.xy)))
+    far_right = min((right.matrix_world @ v.co for v in right.data.vertices), key=lambda p: p.x)
+    check(far_right.y > 0.3, 'the right leaf did not swing inwards (its far end at y = %.2f)' % far_right.y)
+    closed = lay_railing.gate((5.0, 0.0, 0.0), width=1.2, open_angle=0.0, seed=2)
+    shut = max((closed['gate left leaf'].matrix_world @ v.co for v in closed['gate left leaf'].data.vertices), key=lambda p: p.x)
+    check(abs(shut.y) < 0.03 and abs(shut.x - (4.4 + closed['gate left leaf']['gate_leaf_width'])) < 0.03, 'a shut leaf does not lie along the opening')
+    check(all(k in gate for k in ('gate left pier', 'gate right pier', 'gate left pier cap')), 'the piers were not made')
+    pier = gate['gate left pier']
+    top = max((pier.matrix_world @ v.co).z for v in pier.data.vertices)
+    check(1.4 < top < 1.7, 'the pier body is %.2f m tall' % top)
+    print('PASS lay_railing: %d bars on a plinth with rust at their feet; the gate leaves hang at the piers and swing 35 degrees' % count)
+
+
+def test_stain():
+    fresh_scene()
+    import stain
+    from mathutils import Vector
+    wall = box('wall', (6.0, 0.5, 3.0), (1.0, 2.0, 1.5))        # front face at y = 1.75, left end (seen from -Y) at x = -2
+    soot = stain.on_wall(wall, 'front', 1.0, 2.0, 0.5, 1.5, kind='soot', strong_at='top', seed=1)
+    points = [soot.matrix_world @ v.co for v in soot.data.vertices]
+    ys = [p.y for p in points]
+    check(1.735 <= min(ys) and max(ys) <= 1.75, 'the soot plane is not just in front of the front face (y %.3f to %.3f; the face is at 1.75)' % (min(ys), max(ys)))
+    check(abs(min(p.x for p in points) - (-1.0)) < 1e-6 and abs(max(p.x for p in points) - 0.0) < 1e-6, 'the soot plane does not run 1 to 2 m from the left end (x %.2f to %.2f)' % (min(p.x for p in points), max(p.x for p in points)))
+    check(abs(min(p.z for p in points) - 0.5) < 1e-6 and abs(max(p.z for p in points) - 1.5) < 1e-6, 'the soot plane does not stand 0.5 to 1.5 m up')
+    fade = numbers(soot, 'fade')
+    check(min(fade) >= 0.0 and max(fade) <= 1.0 and min(fade) < 0.05 and max(fade) > 0.95, 'fade runs %.2f to %.2f, not 0 to 1' % (min(fade), max(fade)))
+    top_fade = [f for f, p in zip(fade, points) if p.z > 1.49]
+    foot_fade = [f for f, p in zip(fade, points) if p.z < 0.51]
+    check(min(top_fade) < 0.05 and min(foot_fade) > 0.95, 'strong_at top: the top should be strongest (fade %.2f) and the foot gone (%.2f)' % (min(top_fade), min(foot_fade)))
+    check(soot.data.materials[0].name == 'MADE • stain soot' and not soot.visible_shadow, 'the soot plane has the wrong material or casts a shadow')
+    # the other faces: right (+X, at x = 4; its left end seen from +X is at y = -0.25... the wall's low y)
+    right = stain.on_wall(wall, 'right', 0.0, 0.5, 0.0, 1.0, kind='damp', strong_at='bottom')
+    xs = [(right.matrix_world @ v.co).x for v in right.data.vertices]
+    check(4.0 <= min(xs) and max(xs) <= 4.015, 'the right-face plane is not just off the right face (x %.3f to %.3f)' % (min(xs), max(xs)))
+    back = stain.on_wall(wall, 'back', 0.0, 1.0, 0.0, 1.0, kind='rust', strong_at='top')
+    ys = [(back.matrix_world @ v.co).y for v in back.data.vertices]
+    check(2.25 <= min(ys) and max(ys) <= 2.265, 'the back-face plane is not just off the back face')
+    bxs = [(back.matrix_world @ v.co).x for v in back.data.vertices]
+    check(abs(max(bxs) - 4.0) < 1e-6, 'from the back, the left end is the +X end (plane x up to %.2f)' % max(bxs))
+    # a ground smear draped on a sloping ground
+    bpy.ops.mesh.primitive_plane_add(size=6.0, location=(0.0, -3.0, 0.0), rotation=(0.1, 0.0, 0.0))
+    ground = bpy.context.object
+    smear = stain.on_ground((0.0, -3.0, 0.0), size=(0.6, 0.4), kind='mud', turn=20, ground=ground, seed=3)
+    spots = [smear.matrix_world @ v.co for v in smear.data.vertices]
+    rising = max(spots, key=lambda p: p.y).z - min(spots, key=lambda p: p.y).z
+    check(0.04 < rising < 0.14, 'the smear does not follow the sloping ground (its +Y side is %.3f m higher; the slope gives about 0.08)' % rising)
+    sfade = numbers(smear, 'fade')
+    check(abs(min(sfade) - 0.3) < 0.01 and max(sfade) > 0.99, 'the smear fade runs %.2f to %.2f (strength 0.7: 0.3 to 1)' % (min(sfade), max(sfade)))
+    span = max((p - spots[0]).length for p in spots)
+    check(0.6 < span < 1.0, 'a 0.6 m half-length smear spans %.2f m' % span)
+    try:
+        stain.on_wall(wall, 'top', 0, 1, 0, 1)
+        check(False, "a side named 'top' was accepted")
+    except ValueError:
+        pass
+    print('PASS stain: planes 4 mm off the front, right and back faces where asked, fade 0 at the strong end to 1; the ground smear drapes onto the slope')
+
+
 def main():
     test_sky_and_haze()
     test_smoke_ribbon()
+    test_railing()
+    test_stain()
     test_walkway_corner()
     test_puddle_on_setts()
     test_catalogue_help()

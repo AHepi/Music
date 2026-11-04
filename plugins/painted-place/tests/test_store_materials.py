@@ -42,6 +42,8 @@ def main():
     check('shallow' in attribute_names(bpy.data.materials['MADE • puddle water']), 'puddle water no longer reads shallow')
     check('dry' in attribute_names(bpy.data.materials['MADE • wet ground film']), 'wet ground film no longer reads dry')
     check('fade' in attribute_names(bpy.data.materials['MADE • rust stain']), 'rust stain no longer reads fade')
+    for kind in ('soot', 'damp', 'rust', 'mud', 'coal dust', 'ash'):
+        check('fade' in attribute_names(bpy.data.materials['MADE • stain ' + kind]), 'stain %s does not read fade' % kind)
     walkway = attribute_names(bpy.data.materials['MADE • walkway boards'])
     check({'board_tone', 'across', 'wear', 'wet', 'mud'} <= walkway, 'walkway boards read %s' % sorted(walkway))
     check('board_tone' in attribute_names(bpy.data.materials['MADE • weathered boards, peeling paint']), 'weathered boards no longer read board_tone')

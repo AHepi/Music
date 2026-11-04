@@ -907,6 +907,11 @@ overturn any of them in one line. Changes to the project must follow this file.
     do we keep adding to it for more details? Also deleting is fine." The old 22 GB copy of the repository was deleted (25 GB free now).
     The question of how the store keeps growing is answered in the story's next step.
 
+
+68. **The second pass becomes a standing part of every build; the chapel first** (4 November 2026, 12:18), your words: "Do it", to:
+    one builder lays the place out, a fresh second builder spends its whole clock on the near ground (the things people left, mud, wear,
+    small nameable things), then the new things both made are pulled into the store; tested on the chapel.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

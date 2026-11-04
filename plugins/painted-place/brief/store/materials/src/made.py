@@ -1,14 +1,16 @@
 """
 What this file does: the store's made materials, built in code (no photograph): old brass, old copper, glazed china,
-weathered boards with peeling paint, wet bark, puddle water, a wet-ground film, rusty nail heads, a rust stain, rail steel and
-smoke for a ribbon.
+weathered boards with peeling paint, wet bark, puddle water, a wet-ground film, rusty nail heads, a rust stain, rail steel,
+smoke for a ribbon, six see-through stains (soot, damp, rust, mud, coal dust, ash), a slate roof and stove ash.
 build_materials.py calls build_all().
 
-Two of them read a number the puddle tool writes on its meshes:
+Some of them read a number a tool writes on its meshes:
   - MADE • puddle water: 'shallow' on each point, 0 in the deep middle, 1 at the rim; where it is 1 the water is clear
     and the ground shows through. A mesh without it is deep water all over.
   - MADE • wet ground film: 'dry' on each point, 0 against the water, 1 at the film's outer edge; where it is 1 the film
     is gone. A mesh without it is wet all over.
+  - MADE • rust stain and the six MADE • stain ...: 'fade' on each point, 0 where the stain is strongest, 1 where it is
+    gone (the walkway, stain and railing tools write it). A mesh without it is stained all over.
 """
 
 import bpy
@@ -327,6 +329,144 @@ def smoke_ribbon(name):
     return material
 
 
+STAINS = {
+    # kind: colour (linear), roughness, streaked downwards, strongest alpha
+    'soot': ((0.012, 0.012, 0.014), 0.9, True, 0.92),
+    'damp': ((0.014, 0.020, 0.014), 0.42, True, 0.88),
+    'rust': ((0.095, 0.036, 0.011), 0.85, True, 0.80),
+    'mud': ((0.020, 0.014, 0.008), 0.35, False, 0.85),
+    'coal dust': ((0.004, 0.004, 0.005), 0.32, False, 0.75),
+    'ash': ((0.17, 0.165, 0.15), 0.9, False, 0.70),
+}
+
+
+def stain(name, kind):
+    """A see-through stain to lay a few millimetres in front of a wall or on the ground (the stain tool makes the
+    planes): one flat colour, its alpha the mesh number 'fade' (0 where the stain is strongest, 1 where it is gone)
+    broken up by noise: soot, damp and rust are streaked downwards (the world's Z, so any wall's way), mud, coal dust
+    and ash are blotched. From the chapel builders' `stain` and `smear` (log 51)."""
+    colour, roughness, streaked, strongest = STAINS[kind]
+    material = fresh_material(name)
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    position = nodes.new('ShaderNodeNewGeometry').outputs['Position']
+    fade = nodes.new('ShaderNodeAttribute')
+    fade.attribute_type = 'GEOMETRY'
+    fade.attribute_name = 'fade'
+    if streaked:
+        # drawn out downwards: fine across, long along Z; a broad noise makes some runs heavier than others
+        runs = noise(nodes, links, stretched(nodes, links, position, (16.0, 16.0, 1.4)), 1.0, detail=6.0, roughness=0.55)
+        breakup = map_range(nodes, links, runs, 0.3, 0.75, 0.1, 1.6)
+        broad = map_range(nodes, links, noise(nodes, links, stretched(nodes, links, position, (3.0, 3.0, 0.5)), 1.0, detail=3.0), 0.35, 0.65, 0.45, 1.25)
+    else:
+        blotch = noise(nodes, links, position, 6.0, detail=8.0, roughness=0.6)
+        breakup = map_range(nodes, links, blotch, 0.32, 0.66, 0.15, 1.6)
+        broad = map_range(nodes, links, noise(nodes, links, position, 1.6, detail=3.0), 0.35, 0.65, 0.5, 1.2)
+    left = math(nodes, links, 'POWER', math(nodes, links, 'SUBTRACT', 1.0, fade.outputs['Fac'], clamp=True), 0.7)   # holds on, then goes
+    strength = math(nodes, links, 'MULTIPLY', left, math(nodes, links, 'MULTIPLY', breakup, broad))
+    links.new(math(nodes, links, 'MULTIPLY', strength, strongest, clamp=True), principled.inputs['Alpha'])
+    grain = noise(nodes, links, position, 40.0, detail=3.0)
+    links.new(mix(nodes, links, map_range(nodes, links, grain, 0.3, 0.7, 0.0, 0.5), colour, tuple(c * 0.55 for c in colour)), principled.inputs['Base Color'])
+    links.new(map_range(nodes, links, grain, 0.3, 0.7, roughness - 0.08, roughness + 0.08), principled.inputs['Roughness'])
+    principled.inputs['Specular IOR Level'].default_value = 0.3 if roughness > 0.6 else 0.5
+    material.surface_render_method = 'DITHERED'
+    material.diffuse_color = (*colour, 1)
+    return material
+
+
+def slate_roof(name):
+    """A slate roof in courses: dark blue-grey slates, each a little different, the lap lines and the slates' lower
+    edges in relief, a wet sheen. Laid in the object's own coordinates: slates sit side by side along X, courses climb
+    along Y (a plane whose eave runs along X and that rises along its own Y, pitched by turning the object). Slates are
+    0.28 m wide, courses 0.22 m. From `slate_courses` in the chapel builder's script (log 51)."""
+    material = fresh_material(name)
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    own = nodes.new('ShaderNodeTexCoord').outputs['Object']
+    brick = nodes.new('ShaderNodeTexBrick')
+    brick.offset = 0.5
+    brick.inputs['Color1'].default_value = (0.030, 0.038, 0.050, 1)
+    brick.inputs['Color2'].default_value = (0.070, 0.078, 0.092, 1)
+    brick.inputs['Mortar'].default_value = (0.006, 0.008, 0.011, 1)
+    brick.inputs['Scale'].default_value = 1.0
+    brick.inputs['Mortar Size'].default_value = 0.006
+    brick.inputs['Mortar Smooth'].default_value = 0.3
+    brick.inputs['Bias'].default_value = 0.0
+    brick.inputs['Brick Width'].default_value = 0.28
+    brick.inputs['Row Height'].default_value = 0.22
+    links.new(own, brick.inputs['Vector'])
+    # each course laps the one below: a sawtooth up Y, the slate's lower edge standing proud
+    separate = nodes.new('ShaderNodeSeparateXYZ')
+    links.new(own, separate.inputs[0])
+    course = math(nodes, links, 'FRACT', math(nodes, links, 'DIVIDE', separate.outputs['Y'], 0.22))
+    lap = map_range(nodes, links, course, 0.0, 0.08, 0.0, 1.0)
+    weathering = noise(nodes, links, own, 1.4, detail=8.0, roughness=0.6)
+    tone = ramp(nodes, [(0.3, (0.55, 0.58, 0.62)), (0.7, (1.0, 1.0, 1.0))])
+    links.new(weathering, tone.inputs[0])
+    colour = mix(nodes, links, 0.9, brick.outputs['Color'], tone.outputs['Color'], 'MULTIPLY')
+    wet = noise(nodes, links, stretched(nodes, links, own, (1.0, 3.0, 1.0)), 2.5, detail=3.0)
+    colour = mix(nodes, links, map_range(nodes, links, wet, 0.35, 0.65, 0.0, 0.5), colour, (0.012, 0.016, 0.022))
+    links.new(colour, principled.inputs['Base Color'])
+    links.new(map_range(nodes, links, wet, 0.3, 0.7, 0.22, 0.42), principled.inputs['Roughness'])
+    principled.inputs['Coat Weight'].default_value = 0.25
+    principled.inputs['Coat Roughness'].default_value = 0.15
+    grain = noise(nodes, links, own, 30.0, detail=4.0)
+    height = math(nodes, links, 'ADD', math(nodes, links, 'MULTIPLY', lap, 0.6),
+                  math(nodes, links, 'MULTIPLY_ADD', brick.outputs['Fac'], -0.5, math(nodes, links, 'MULTIPLY', grain, 0.15)))
+    bump = nodes.new('ShaderNodeBump')
+    bump.inputs['Strength'].default_value = 0.7
+    bump.inputs['Distance'].default_value = 0.012
+    links.new(height, bump.inputs['Height'])
+    links.new(bump.outputs['Normal'], principled.inputs['Normal'])
+    material.diffuse_color = (0.04, 0.05, 0.06, 1)
+    return material
+
+
+def ash(name):
+    """Grey stove ash with clinker, matte, for heaps and spills: pale grey ash in lumps and fine dust, darker burnt
+    clinker lumps through it. In the object's own coordinates. From `ash_mat` in the chapel dresser's script (log 51)."""
+    material = fresh_material(name)
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    own = nodes.new('ShaderNodeTexCoord').outputs['Object']
+    lumps = noise(nodes, links, own, 45.0, detail=10.0, roughness=0.75)
+    shade = ramp(nodes, [(0.38, (0.040, 0.040, 0.042)), (0.68, (0.30, 0.285, 0.26))])
+    links.new(lumps, shade.inputs[0])
+    clinker = nodes.new('ShaderNodeTexVoronoi')
+    clinker.inputs['Scale'].default_value = 28.0
+    clinker.inputs['Randomness'].default_value = 1.0
+    warp = nodes.new('ShaderNodeTexNoise')                      # the cells warped, so no two clinker lumps are alike
+    warp.inputs['Scale'].default_value = 9.0
+    warp.inputs['Detail'].default_value = 2.0
+    links.new(own, warp.inputs['Vector'])
+    warped = nodes.new('ShaderNodeVectorMath')
+    warped.operation = 'MULTIPLY_ADD'
+    warped.inputs[1].default_value = (0.12, 0.12, 0.12)
+    links.new(warp.outputs['Color'], warped.inputs[0])
+    links.new(own, warped.inputs[2])
+    links.new(warped.outputs['Vector'], clinker.inputs['Vector'])
+    size = map_range(nodes, links, noise(nodes, links, own, 12.0, detail=2.0), 0.4, 0.62, 0.12, 0.34)
+    burnt = nodes.new('ShaderNodeMapRange')
+    burnt.clamp = True
+    links.new(clinker.outputs['Distance'], burnt.inputs['Value'])
+    links.new(math(nodes, links, 'SUBTRACT', size, 0.1), burnt.inputs['From Min'])
+    links.new(size, burnt.inputs['From Max'])
+    burnt.inputs['To Min'].default_value = 1.0
+    burnt.inputs['To Max'].default_value = 0.0
+    burnt = burnt.outputs['Result']
+    colour = mix(nodes, links, burnt, shade.outputs['Color'], (0.020, 0.016, 0.014))
+    links.new(colour, principled.inputs['Base Color'])
+    links.new(map_range(nodes, links, burnt, 0.0, 1.0, 0.92, 0.7), principled.inputs['Roughness'])
+    principled.inputs['Specular IOR Level'].default_value = 0.2
+    bump = nodes.new('ShaderNodeBump')
+    bump.inputs['Strength'].default_value = 1.0
+    bump.inputs['Distance'].default_value = 0.01
+    links.new(math(nodes, links, 'ADD', lumps, math(nodes, links, 'MULTIPLY', burnt, 0.6)), bump.inputs['Height'])
+    links.new(bump.outputs['Normal'], principled.inputs['Normal'])
+    material.diffuse_color = (0.18, 0.17, 0.16, 1)
+    return material
+
+
 MADE = {
     'MADE • old brass': (lambda n: old_metal(n, copper=False), 'old brass: polished where handled, tarnished in patches and every hollow (urns, lamps, shell cases, fittings)'),
     'MADE • old copper': (lambda n: old_metal(n, copper=True), 'old copper: as brass, warmer, blue-green verdigris in the hollows (kettles, pipes, boilers)'),
@@ -339,6 +479,14 @@ MADE = {
     'MADE • rail steel': (rail_steel, 'rail steel: the running top polished by wheels, the sides and foot rusted dark (by which way each face points)'),
     'MADE • smoke ribbon': (smoke_ribbon, "smoke for a ribbon facing the viewer: soft, see-through, broken up, fading out (the smoke ribbon tool's UV map)"),
     'MADE • rust stain': (rust_stain, "a rust stain run out from a nail or bolt, fading along its length (mesh number 'fade': 0 at the start, 1 gone; the walkway tool writes it)"),
+    'MADE • stain soot': (lambda n: stain(n, 'soot'), "a see-through soot stain, near-black, matte, streaked downwards (mesh number 'fade': 0 strongest, 1 gone; the stain tool writes it)"),
+    'MADE • stain damp': (lambda n: stain(n, 'damp'), "a see-through damp stain, dark green-grey, a little glossy, streaked downwards (mesh number 'fade'; the stain tool writes it)"),
+    'MADE • stain rust': (lambda n: stain(n, 'rust'), "a see-through rust run, orange-brown, matte, streaked downwards from a bracket or pipe joint (mesh number 'fade'; the stain and railing tools write it)"),
+    'MADE • stain mud': (lambda n: stain(n, 'mud'), "a see-through smear of trodden mud, dark brown, a little glossy, blotched (mesh number 'fade'; the stain tool writes it)"),
+    'MADE • stain coal dust': (lambda n: stain(n, 'coal dust'), "a see-through smear of coal dust, black, a little glossy, blotched (mesh number 'fade'; the stain tool writes it)"),
+    'MADE • stain ash': (lambda n: stain(n, 'ash'), "a see-through smear of ash carried on boots, pale grey, matte, blotched (mesh number 'fade'; the stain tool writes it)"),
+    'MADE • slate roof': (slate_roof, "a slate roof in courses: dark blue-grey slates, lap lines in relief, wet sheen; in the object's own axes, slates along X, courses climbing Y"),
+    'MADE • ash': (ash, 'grey stove ash with dark clinker lumps, matte, for heaps and spills'),
 }
 
 

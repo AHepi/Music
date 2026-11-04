@@ -31,7 +31,9 @@ What this file is: the words a builder gets, with the request, the folder and th
    take time).
 3. Start one fresh builder with the text and nothing else. Do not give it the project's notes, the plugin, or your own reasoning.
 4. When it ends, save its report beside its picture; the owner judges the picture against the reference pictures.
-5. For more detail, a second builder dresses the place (`Second pass.md`).
+5. Then, always, a second fresh builder dresses the place (`Second pass.md`, 80 minutes, decision 68): the near ground, the wear,
+   the things people left. Every builder so far has stopped early and left the near ground sparse; the second pass is what adds the detail.
+   After it, whatever either builder made for itself that the store lacks is pulled into the store (the rule in the repository's rules file).
 6. A picture the owner approves can join `reference/` (and `The look.md`'s table); if it sits outside a band, widen the band in `measure.py` and on the page. A fault the builder reports that the next builder would also hit goes into `Traps.md` as one line.
 
 ## Traps

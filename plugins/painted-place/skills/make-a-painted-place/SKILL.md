@@ -15,7 +15,8 @@ What this is: how a place is built for the series since decision 62 (3 November 
 4. **The builder.** Start one fresh builder (a new agent) with that text and nothing else: not the project's notes, not this skill, not your own reasoning, not the names of any techniques. One builder at a time on a 2-processor machine.
 5. **Its report.** When it ends, save its report beside its picture yourself (a builder cannot write files whose names begin with REPORT). If a full-size picture is wanted, run its `render_final.py 1080 1920 64 OUT.png`.
 6. **The owner judges**, against the reference pictures. No blind judges (decision 57). Send the picture beside the earlier pictures of the same place, if there are any.
-7. **More detail**, if the owner asks for it: a second builder dresses the finished place (`brief/Second pass.md`).
+7. **The second pass, always** (decision 68): a second fresh builder gets the first builder's script, picture and material list, the same kit, and 80 minutes to dress the place, above all the near ground (`brief/Second pass.md` says how). Its picture is the one the owner judges.
+8. **Feed the store:** whatever either builder made for itself that the store lacks (a thing, a tool, a material) is pulled into the store, checked from four sides, tested, and catalogued. Each place leaves the store bigger.
 
 ## The store
 
