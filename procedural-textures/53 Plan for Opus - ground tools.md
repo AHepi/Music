@@ -62,6 +62,28 @@ The repository's rules file; decisions 45 (no technique in a builder's request),
 
 About fourteen hours. If it does not all fit: steps 1, 2 and the ruts and path of step 3 first, the example and the checks, then footprints, potholes and age's debris can follow.
 
+
+## What happened (4 November, 17:16 to 21:30)
+
+- **Steps 1 to 3 done as planned:** `ground.py` (relief, camber, wetness by height and dial, four states on one ground, water,
+  cracked beds), `stones.py` (by a helper: rocks, pebbles and grit, `settle`), `tracks.py` (ruts, path, footprints, potholes, one age
+  dial, the mesh divided under each mark, every random choice seeded); soil materials `MADE • dirt` and `MADE • dirt, dark`.
+- **The owner changed the plan twice** (decisions 71 and 72): the tools must also make deep motor ruts in a wet field like the
+  owner's picture, and carts must stay. Added: heavy ruts (a tractor's tread ridges holding water; lumpy, torn, smeared walls),
+  hoof prints for a cart's horse, a grass tool, a litter tool (leaves, twigs), rain rings on the water, and a second worked example.
+- **The water changed:** one flat sheet per pool, cut from the ground's own faces (no boxes past the ground's edge or into another
+  dip); water stands only in a groove's lower part; ground long dry holds none.
+- **Photographs used whole** (the owner's question about PBR): `ground.detail` really moves the near ground by the soil's own
+  height photographs; churned mud is Poly Haven's `brown_mud_03` where tracks left bare earth; the soils use Poly Haven's normal
+  pictures; scanned grass, nettles, dandelions and branches and two photographed skies came from Poly Haven into the store.
+- **Step 4:** the worked examples are in `store/examples/`, with their pictures; cards for the ground, tracks, grass, litter and
+  stones tools and for the new materials; the "Ground" paragraph in `Store.md`; the catalogue rebuilt.
+- **Step 5:** tests in `tests/test_store_ground.py` (not in `test_store_tools_more.py`, which the stones helper was editing at the
+  time); `run_tests.sh` passes (64 lines). The trap about painted tracks and one about water past the ground's edge are in
+  `brief/Traps.md`. The fresh checker was stopped before it reported: **no independent check yet.**
+- **Not done:** leaves from photographs (the owner offered a generated sheet); Poly Haven's scanned rocks for the stones tool; a
+  fresh builder using the ground tools.
+
 ## Traps
 
 - A ground carved after the stones were laid leaves stones floating over the groove: lay tracks before stones, or re-drop the stones (the stones tool should offer `settle(ground)`).

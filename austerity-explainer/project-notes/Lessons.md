@@ -702,6 +702,46 @@ Only failures in doing the work belong here. Newest at the bottom.
     built every part only at its defaults and measured loose boxes. Fix: every option value is built, every piece must touch the ground
     or another piece, and sizes come from the points themselves.
 
+
+## 2026-11-04 (plan 53: the ground tools; log 53)
+
+206. **A test script read its own switch as a number** (log 53, the ground test): '--nodraw' after '--' went into the list of
+     wetness levels and stopped the run. Arguments that start with '--' are now left out of the numbers.
+207. **The materials build stopped on a plain number given as a colour** (log 53): the shared mix helper wanted colours, and a
+     per-channel tint was given to a helper that scales by one number. Numbers now go through their own blend helper, and colour
+     tints through a colour multiply.
+208. **The ground held far too much water** (log 53): 12% of it stood under water at wetness 0.6, with a 6 m² pond. The water now
+     stands lower below each dip's brim as the place dries (about 2% at 0.6, 9% at 0.9), and none at all on ground long dry.
+209. **Puddle edges drew as hard cutouts** (log 53): water lying flat at a level met the ground in a sharp line. Water under 2.5 cm
+     deep is now clear, so the mud shows through at the edge.
+210. **Water reached past the ground's edge and drew a dark rectangle in the distance** (log 53), and the first water sheets were
+     boxes that could overlap one another or reach another dip. Water is now cut from the ground's own faces round each pool.
+211. **Wet ruts drew as two continuous bright rails** (log 53): water stood the whole length of a smooth groove and mirrored the sky.
+     Water now stands only in a groove's lower part, the floor rises and falls, firm stretches run out shallow, and the walls
+     carry clods; a low sun straight ahead still makes wet mud glare (judge under the light the place will have).
+212. **Fresh rut walls were drawn as cracked, dried mud** (log 53): the rule for the beds of dried puddles took the walls of a deep
+     groove for a dried bed. Cracks now come only in the low beds, and not where a fresh track has wet the ground.
+213. **Wet ground drew as pale as sand or snow** (log 53, the first two examples): the soil's whole surface was a smooth shine, its
+     photographs flattened when wet. The soil now stays rough under a patchy film, steep faces drain, soaked soil darkens more,
+     and the day light comes from a photographed sky alone.
+214. **A test for floating leaves failed on leaves lying on the shore** (log 53), and floating leaves sat at a level averaged
+     from the dry bank. The tool now floats them at the pool's own level, and the test looks only at leaves out on the water.
+215. **Two tests read objects from a scene already replaced** (log 53): each new test ground clears the scene, so a ground made
+     earlier was gone when it was measured. Each ground is now measured before the next is made.
+216. **The second edit to the litter tool counted shapes before choosing them** (log 53): the count would have come from the
+     previous kind of litter. The shapes are now chosen first.
+217. **A home-made pattern of crumbs tiled like fish scales** (log 53): one regular cell pattern over the churned mud. Its edges
+     now wander and it comes and goes in patches; the photographed churned mud does most of the work.
+218. **Poly Haven answered empty once** (log 53, fetching the grey sky). The fetch scripts now ask again, up to three times.
+219. **The soil's photographs were half used** (log 53, your question "Are you using PBR?"): their height pictures only shaded
+     the surface, they were flattened when wet, and none had normal pictures. The ground near the camera is now really pushed up
+     and down by the same height photographs (ground.detail), churned mud is a photograph of churned mud, and the soils use
+     Poly Haven's normal pictures.
+220. **The stones helper's five fixes** (log 53, from its report): a floating check that split four-sided faces differently from
+     Blender; points cleared before their numbers were written (caught before it ran); two sizes of stone mirroring each other's
+     places from one random stream; a test asking four rocks for a wide spread of wetness; counts that fell as the amount rose
+     because each amount was a separate draw (a bigger amount now keeps the stones of a smaller one).
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.
@@ -748,3 +788,6 @@ Only failures in doing the work belong here. Newest at the bottom.
   part on plain ground (lessons 185, 186, 192).
 - Give every download a time limit, and check a picture's rights where the picture came from, not where it is filed (lessons 190, 191).
 - A long run can lose its helpers' reports if the machine stops: keep what they make on disk and check it there (log 51).
+- Judge wet ground under the light the place will have: a low sun straight ahead makes any wet surface glare (lesson 211).
+- Use photographed surface sets whole: the height picture to move the surface near the camera, the normal picture for the light,
+  and no flattening of either (lesson 219).

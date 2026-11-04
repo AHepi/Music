@@ -11,7 +11,7 @@ What this is: everything a builder gets to make one place for the film, and noth
 | `measure.py` | Measures a picture against the look's bands (`python3 measure.py PICTURE`) |
 | `Before you build.md` | What to look at and write down before building: the board, the material list, who uses the place, where wear sits, three sizes of shape |
 | `boards/<request>/` | Real photographs of the kind of place asked for (public domain), one folder per request, with a `Board.md` |
-| `surfaces/` | A shelf of 23 photographed surfaces (Poly Haven, CC0) with their real sizes, for the builder to lay on as it chooses |
+| `surfaces/` | A shelf of 26 photographed surfaces (Poly Haven, CC0) with their real sizes, for the builder to lay on as it chooses |
 | `Second pass.md` | The brief for a second builder that dresses a finished place: surfaces, wear, the things people left |
 | `store/` | Ready parts (a tent, a gun, a lantern, a hut...), tools that make a thing from a line or a shape you give (a duckboard walkway, cobbles, lapped boards, stonework, a puddle), ready materials (the street's 45, the shelf's 23, a few made ones) and a finishing step; see `store/Store.md` |
 

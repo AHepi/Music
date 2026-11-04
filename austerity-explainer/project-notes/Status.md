@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-11-04, 16:00, for the painted-place plugin (log 52); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-04, 21:30, for the painted-place plugin (log 53); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -352,6 +352,12 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 - **Log 52 (decision 68):** every place is now built in two passes (layout, then a fresh dresser on the near ground) and feeds the
   store afterwards. The chapel was the first: its two pictures are in folder 51 for your verdict; its railing, stains, headstone,
   barrow, scuttle, churn, umbrella and besom are in the store (26 parts, 11 tools, 90 materials; 51 tests pass).
+- **Log 53 (decisions 69 to 72): `plugins/painted-place` 0.7.0** has ground tools: ground (wetness, water, real lumps from the
+  soil's photographs, standing parts on uneven ground), tracks (a horse and cart with hoof prints, a car, a lorry, a tractor;
+  paths, footprints, potholes; an age dial), stones, grass and litter, using Poly Haven's scanned grass, mud photographs with
+  normal pictures, and photographed skies. Two worked examples drew three pictures (`procedural-textures/53 Ground tools - wet
+  ground, ruts, grass/`), sent for your verdict. 64 test lines pass. Not yet: an independent check (the checker was stopped),
+  leaves from photographs, scanned rocks, a fresh builder using the tools.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 

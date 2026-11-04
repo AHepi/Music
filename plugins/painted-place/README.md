@@ -1,6 +1,6 @@
 # Painted place
 
-What this is: a small Claude plugin for building a place in Blender for the series' painted look, the way the owner approved on 3 November 2026. Version 0.6.0, 4 November 2026.
+What this is: a small Claude plugin for building a place in Blender for the series' painted look, the way the owner approved on 3 November 2026. Version 0.7.0, 4 November 2026.
 
 How a place is built now: one fresh builder gets the **brief kit** (`brief/`) and the owner's plain request, decides everything about the place itself (what is in it, where every thing goes, how it is lit), and the owner judges the picture. The kit carries the look; the builder's judgment does the rest. The skill `skills/make-a-painted-place/SKILL.md` says how to run it.
 
@@ -8,8 +8,8 @@ How a place is built now: one fresh builder gets the **brief kit** (`brief/`) an
 
 | Thing | Where | What it is |
 |---|---|---|
-| The brief kit | `brief/` | The words a builder gets (`Brief.md`), the look in words and numbers (`The look.md`) and in pictures (`reference/`), what went wrong for builders before (`Traps.md`), a measure tool (`measure.py`), what to do before building (`Before you build.md`), boards of real photographs per kind of place (`boards/`), a shelf of 23 photographed surfaces (`surfaces/`), the brief for a second builder that dresses a finished place (`Second pass.md`); see `brief/README.md` |
-| The store | `brief/store/` | Ready parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with a card picture of each; nothing in it places itself. Catalogue: `brief/store/Store.md` |
+| The brief kit | `brief/` | The words a builder gets (`Brief.md`), the look in words and numbers (`The look.md`) and in pictures (`reference/`), what went wrong for builders before (`Traps.md`), a measure tool (`measure.py`), what to do before building (`Before you build.md`), boards of real photographs per kind of place (`boards/`), a shelf of 26 photographed surfaces (`surfaces/`), the brief for a second builder that dresses a finished place (`Second pass.md`); see `brief/README.md` |
+| The store | `brief/store/` | Ready parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with a card picture of each; nothing in it places itself. Since 0.7 it has ground tools: a ground with its wetness and water, ruts (a horse and cart, a car, a lorry, a tractor), paths, footprints and potholes, stones, grass, leaves and twigs, with two worked examples in `brief/store/examples/`. Catalogue: `brief/store/Store.md` |
 | The skill | `skills/make-a-painted-place/SKILL.md` | How to run a build: the board, the copy, the words, one fresh builder, its report, the owner's judgment |
 | The tests | `tests/run_tests.sh` | The measure tool on the reference pictures; every material, part and tool in the store; the store's rule that nothing places itself; the catalogue up to date. Fails if any test fails |
 | Records | `examples/` | Pictures and notes from the plugin's earlier versions (0.2 to 0.5), kept as a record; the code they used is retired (below) |
@@ -35,6 +35,10 @@ python3 brief/measure.py brief/reference/"painting - rainy tenement street at du
 ```
 
 Keep your own files out of `brief/`: a builder gets a copy of it, and what is written there goes to every builder.
+
+## What 0.7 added
+
+The ground tools (plan 53 and the owner's decisions 71 and 72): `ground` (the sheet a place stands on, a road's camber, its wetness by height, water as sheets cut from the ground itself, rain rings), `tracks` (ruts carved along a line for a horse and cart with its hoof prints, a car, a lorry or a tractor whose tread ridges hold water; a trodden path; footprints; potholes; one age dial), `stones` (rocks, pebbles and grit), `grass` (turf, tussocks, tall weeds, kept out of ruts and water) and `litter` (fallen leaves and twigs); soil, pebble, grass and leaf materials; two worked examples, a cart track after rain and deep motor ruts in a wet field; their tests in `tests/test_store_ground.py`.
 
 ## What was retired, and why
 

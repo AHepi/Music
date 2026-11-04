@@ -1,6 +1,6 @@
 """
 What this file does: the store tools' tests for the boards, stone, puddle, stone grain, sky and haze, smoke ribbon,
-railing and stain tools (test_store_tools.py runs it): each, run on a small scene, makes what it says.
+railing, stain and stones tools (test_store_tools.py runs it): each, run on a small scene, makes what it says.
 """
 import os
 import sys
@@ -298,7 +298,129 @@ def test_stain():
     print('PASS stain: planes 4 mm off the front, right and back faces where asked, fade 0 at the strong end to 1; the ground smear drapes onto the slope')
 
 
+def test_stones():
+    """The stones tool on a small wet ground, measured on the copies it draws: counts grow with the amount; no stone
+    floats; more grit in the dips than on the crowns; only within the area given; the same seed, the same stones; each
+    stone carries the ground's wetness; settle puts a stone back on ground lowered 5 cm under it."""
+    import numpy
+    import ground
+    import stones
+    from mathutils import Vector
+    from mathutils.bvhtree import BVHTree
+
+    def points(obj):
+        co = numpy.zeros(len(obj.data.vertices) * 3)
+        obj.data.vertices.foreach_get('co', co)
+        return co.reshape(-1, 3)
+
+    def surface_of(yard):
+        yard.data.calc_loop_triangles()                     # the triangles Blender draws
+        return BVHTree.FromPolygons(ground.world_points(yard).tolist(), [tuple(t.vertices) for t in yard.data.loop_triangles], all_triangles=True)
+
+    def height(tree, x, y):
+        return tree.ray_cast(Vector((x, y, 5.0)), Vector((0.0, 0.0, -1.0)))[0].z
+
+    def under(yard, tree, xy, values):
+        """The ground's number straight under each place: on the triangle hit, weighted by nearness to its corners."""
+        corners = ground.world_points(yard)
+        found = []
+        for x, y in xy:
+            triangle = yard.data.loop_triangles[tree.ray_cast(Vector((x, y, 5.0)), Vector((0.0, 0.0, -1.0)))[2]].vertices
+            (ax, ay), (bx, by), (cx, cy) = (corners[i, :2] for i in triangle)
+            area = (bx - ax) * (cy - ay) - (cx - ax) * (by - ay)
+            wb = ((x - ax) * (cy - ay) - (cx - ax) * (y - ay)) / area
+            wc = ((bx - ax) * (y - ay) - (x - ax) * (by - ay)) / area
+            found.append(values[triangle[0]] * (1 - wb - wc) + values[triangle[1]] * wb + values[triangle[2]] * wc)
+        return numpy.array(found)
+
+    def copies(obj):
+        depsgraph = bpy.context.evaluated_depsgraph_get()
+        return [(numpy.array(i.matrix_world), i.instance_object.original) for i in depsgraph.object_instances
+                if i.is_instance and i.parent is not None and i.parent.original == obj]
+
+    fresh_scene()
+    yard = ground.make(size=(4.0, 4.0), relief=0.08, seed=3)
+    ground.wet(yard, 0.6)
+    laid = stones.scatter(yard, seed=2)
+    check(sorted(laid) == ['grit', 'pebbles', 'rocks'], 'scatter made %s, not rocks, pebbles and grit' % sorted(laid))
+    check(all(obj.name == 'stones ' + layer for layer, obj in laid.items()), 'the stone objects are named %s' % [o.name for o in laid.values()])
+    check(laid['grit']['stones'] > laid['pebbles']['stones'] > laid['rocks']['stones'] > 0,
+          'more grit than pebbles than rocks: %s' % {k: o['stones'] for k, o in laid.items()})
+    tree = surface_of(yard)
+    ground_wet = ground.numbers(yard.data, 'wetness')
+    for layer, obj in laid.items():
+        drawn = copies(obj)
+        check(len(drawn) == obj['stones'] == len(obj.data.vertices), '%s: %d copies drawn, %d points, count %d' % (layer, len(drawn), len(obj.data.vertices), obj['stones']))
+        check(all(shape.data.materials[0].name == stones.MATERIAL for _, shape in drawn[:50]), '%s are not in %s' % (layer, stones.MATERIAL))
+        floating = 0
+        for matrix, shape in drawn:
+            corners = numpy.array([v.co[:] for v in shape.data.vertices])
+            lowest = (corners @ matrix[2, :3] + matrix[2, 3]).min()
+            if lowest >= height(tree, matrix[0, 3], matrix[1, 3]):
+                floating += 1
+        check(floating == 0, '%d of the %s float: their lowest point is not under the ground at their middle' % (floating, layer))
+        wet = numpy.zeros(len(obj.data.vertices))
+        obj.data.attributes['wetness'].data.foreach_get('value', wet)
+        check(numpy.abs(wet - under(yard, tree, points(obj)[:, :2], ground_wet)).max() < 0.01, '%s do not carry the wetness of the ground under them' % layer)
+    # more grit per square metre in the dips than on the crowns
+    hollow, areas = ground.numbers(yard.data, 'hollow'), ground.point_areas(yard.data)
+    ground_xy = ground.world_points(yard)[:, :2]
+    from scipy.spatial import cKDTree
+    nearest = cKDTree(ground_xy).query(points(laid['grit'])[:, :2])[1]
+    dips, crowns = hollow >= 0.5, hollow <= 0.02
+    in_dips, on_crowns = dips[nearest].sum() / areas[dips].sum(), crowns[nearest].sum() / areas[crowns].sum()
+    check(in_dips > on_crowns, 'where=hollows: %.0f grit per square metre in the dips, not more than %.0f on the crowns' % (in_dips, on_crowns))
+    # counts grow with the amount
+    counts = []
+    for amount in (0.5, 1.0, 2.0):
+        holder = bpy.data.collections.new('amount %s' % amount)
+        bpy.context.scene.collection.children.link(holder)
+        counts.append({k: o['stones'] for k, o in stones.scatter(yard, amount=amount, seed=2, collection=holder).items()})
+    for layer in ('rocks', 'pebbles', 'grit'):
+        check(counts[0][layer] < counts[1][layer] < counts[2][layer], '%s at amount 0.5, 1, 2: %s' % (layer, [c[layer] for c in counts]))
+    # the same seed, the same stones
+    again = stones.scatter(yard, seed=2, collection=bpy.data.collections.new('again'))
+    check(all(numpy.allclose(points(laid[k]), points(again[k])) for k in laid), 'the same seed laid different stones')
+    # only within the area given: a rectangle, a polygon, a function
+    box = stones.scatter(yard, area=(-1.5, -1.0, 0.5, 0.8), seed=3, layers=('pebbles', 'grit'))
+    for obj in box.values():
+        p = points(obj)
+        check(len(p) and p[:, 0].min() >= -1.5 and p[:, 0].max() <= 0.5 and p[:, 1].min() >= -1.0 and p[:, 1].max() <= 0.8,
+              'stones laid outside the rectangle asked for (x %.2f to %.2f, y %.2f to %.2f)' % (p[:, 0].min(), p[:, 0].max(), p[:, 1].min(), p[:, 1].max()))
+    triangle = stones.scatter(yard, area=[(0.0, 0.0), (1.5, 0.0), (0.0, 1.5)], seed=3, layers=('grit',))['grit']
+    p = points(triangle)
+    check(len(p) and (p[:, 0] >= 0).all() and (p[:, 1] >= 0).all() and (p[:, 0] + p[:, 1] <= 1.5 + 1e-9).all(), 'grit laid outside the triangle asked for')
+    band = stones.scatter(yard, area=lambda xy: (numpy.abs(xy[:, 0] - 1.0) < 0.1).astype(float), seed=3, layers=('grit',), amount=2.0)['grit']
+    p = points(band)
+    check(len(p) > 20 and (numpy.abs(p[:, 0] - 1.0) < 0.1).all(), 'grit laid outside the band an area function asked for (%d stones)' % len(p))
+    # settle: the ground lowered 5 cm under a rock; the rock goes down with it, as deep in the soil as it was
+    rocks = laid['rocks']
+    before = points(rocks)
+    pick = int(numpy.argmin(numpy.abs(before[:, 0]) + numpy.abs(before[:, 1])))
+    centre = before[pick, :2]
+    world = ground.world_points(yard)
+    distance = numpy.linalg.norm(world[:, :2] - centre, axis=1)
+    ground.set_world_heights(yard, world[:, 2] - 0.05 * numpy.clip((0.6 - distance) / 0.25, 0.0, 1.0))
+    moved = stones.settle(yard, laid)
+    after = points(rocks)
+    drop = after[pick, 2] - before[pick, 2]
+    check(moved == sum(o['stones'] for o in laid.values()), 'settle moved %d stones' % moved)
+    check(abs(drop + 0.05) < 0.002, 'settle: a rock on ground lowered 5 cm went down %.4f m' % -drop)
+    far = numpy.linalg.norm(before[:, :2] - centre, axis=1) > 0.7
+    check(numpy.allclose(before[far], after[far], atol=1e-5), 'settle moved rocks whose ground did not move')
+    for wrong in ({'layers': ('boulders',)}, {'where': 'everywhere'}):
+        try:
+            stones.scatter(yard, **wrong)
+            check(False, 'scatter accepted %s' % wrong)
+        except ValueError:
+            pass
+    print('PASS stones: %d rocks, %d pebbles, %d grit on 16 square metres, none floating; grit %.0f per square metre in the dips, '
+          '%.0f on the crowns; only within the area given; same seed, same stones; settle drops a rock %.3f m with its ground'
+          % (laid['rocks']['stones'], laid['pebbles']['stones'], laid['grit']['stones'], in_dips, on_crowns, -drop))
+
+
 def main():
+    test_stones()
     test_sky_and_haze()
     test_smoke_ribbon()
     test_railing()

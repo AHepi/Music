@@ -1,7 +1,8 @@
 """
 What this does: downloads a shelf of free photographed surfaces (Poly Haven, CC0) for builders to use: for each set the
-colour picture, the roughness picture and the height picture at 2K, plus a manifest with the real size in metres and the
-authors. Run: python3 fetch_surfaces.py   (needs curl and the internet; the builders get the result, not this script).
+colour picture, the roughness picture and the height picture at 2K (and, for the grounds' soils, the normal picture:
+which way each tiny bit of surface faces), plus a manifest with the real size in metres and the authors.
+Run: python3 fetch_surfaces.py   (needs curl and the internet; the builders get the result, not this script).
 """
 import json
 import os
@@ -28,7 +29,12 @@ SETS = {
     'old_planks_02': 'old grey planks',
     'old_stone_wall_02': 'old rubble stone wall',
     'cobblestone_floor_01': 'cobbles, worn',
+    'aerial_mud_1': 'wet churned mud with tyre tracks, seen from above',
+    'brown_mud_03': 'brown mud, damp, with footprints',
+    'brown_mud_leaves_01': 'brown mud with fallen leaves, moss and a little grass',
 }
+# the sets the ground tools' soils use also get their normal picture
+WITH_NORMALS = ('brown_mud', 'mud_forest', 'gravel_road', 'aerial_mud_1', 'brown_mud_03', 'brown_mud_leaves_01')
 
 
 def fetch(url, path):
@@ -46,7 +52,8 @@ def main():
         info = json.loads(subprocess.run(['curl', '-sS', '-m', '60', 'https://api.polyhaven.com/info/' + set_id], capture_output=True, text=True, check=True).stdout)
         files = json.loads(subprocess.run(['curl', '-sS', '-m', '60', 'https://api.polyhaven.com/files/' + set_id], capture_output=True, text=True, check=True).stdout)
         maps = {}
-        for key, short in (('Diffuse', 'diff'), ('Rough', 'rough'), ('Displacement', 'disp')):
+        wanted = [('Diffuse', 'diff'), ('Rough', 'rough'), ('Displacement', 'disp')] + ([('nor_gl', 'normal')] if set_id in WITH_NORMALS else [])
+        for key, short in wanted:
             if key not in files or '2k' not in files[key] or 'jpg' not in files[key]['2k']:
                 continue
             url = files[key]['2k']['jpg']['url']
@@ -54,7 +61,9 @@ def main():
             fetch(url, os.path.join(folder, name))
             maps[short] = name
         size = info.get('dimensions') or [1000, 1000]
-        manifest[set_id] = {
+        kept = manifest.get(set_id, {})
+        manifest[set_id] = dict(kept)
+        manifest[set_id].update({
             'name': info.get('name', set_id),
             'what': what,
             'size_m': [round(size[0] / 1000.0, 2), round(size[1] / 1000.0, 2)],
@@ -62,7 +71,8 @@ def main():
             'maps': maps,
             'source': 'https://polyhaven.com/a/' + set_id,
             'licence': 'CC0 1.0 (public domain)',
-        }
+        })
+        manifest[set_id].setdefault('pixels', [2048, 2048])
         print(set_id, maps, manifest[set_id]['size_m'], file=sys.stderr)
     json.dump(manifest, open(manifest_path, 'w'), indent=1)
 

@@ -180,7 +180,8 @@ def wet_bark(name):
 
 def puddle_water(name):
     """Puddle water: near-black, glossy, with a faint ripple that breaks the reflection; clear where it is shallow
-    (the mesh number 'shallow', 1 at the rim), so the mud shows through at the edge instead of a hard cut."""
+    (the mesh number 'shallow', 1 at the rim), so the mud shows through at the edge instead of a hard cut. The dial node
+    'Rain' (0 by default; 1 steady rain) adds rings spreading from raindrops."""
     material = fresh_material(name)
     nodes, links = material.node_tree.nodes, material.node_tree.links
     principled = nodes.get('Principled BSDF')
@@ -200,6 +201,23 @@ def puddle_water(name):
     ripple = noise(nodes, links, stretched(nodes, links, position, (1.0, 1.0, 0.0)), 22.0, detail=3.0, roughness=0.5)
     swell = noise(nodes, links, stretched(nodes, links, position, (1.0, 1.0, 0.0)), 2.5, detail=1.0)
     height = math(nodes, links, 'MULTIPLY_ADD', swell, 2.0, ripple)
+    # rain: rings spreading from drops on the water, each drop its own size; the dial 'Rain' (0 none, 1 steady rain)
+    rain = nodes.new('ShaderNodeValue')
+    rain.name = rain.label = 'Rain'
+    rain.outputs[0].default_value = 0.0
+    drops = nodes.new('ShaderNodeTexVoronoi')
+    drops.inputs['Scale'].default_value = 6.0
+    links.new(stretched(nodes, links, position, (1.0, 1.0, 0.0)), drops.inputs['Vector'])
+    which = nodes.new('ShaderNodeSeparateColor')
+    links.new(drops.outputs['Color'], which.inputs['Color'])
+    reach = math(nodes, links, 'MULTIPLY_ADD', which.outputs['Red'], 0.35, 0.1)
+    spread = drops.outputs['Distance']
+    wave = math(nodes, links, 'SINE', math(nodes, links, 'MULTIPLY', spread, 2.0 * 3.14159 / 0.07))
+    fading = math(nodes, links, 'SUBTRACT', 1.0, map_range(nodes, links, math(nodes, links, 'SUBTRACT', spread, reach), -0.15, 0.0))
+    fading = math(nodes, links, 'MULTIPLY', fading, map_range(nodes, links, spread, 0.0, 0.02))
+    fading = math(nodes, links, 'MULTIPLY', fading, math(nodes, links, 'GREATER_THAN', which.outputs['Green'], 0.35))
+    rings = math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY', wave, fading), rain.outputs[0])
+    height = math(nodes, links, 'MULTIPLY_ADD', rings, 1.5, height)
     bump = nodes.new('ShaderNodeBump')
     bump.inputs['Strength'].default_value = 0.1
     bump.inputs['Distance'].default_value = 0.004

@@ -919,6 +919,21 @@ overturn any of them in one line. Changes to the project must follow this file.
     tyre tracks, cart when tracks. The last two will need to add things like sink holes and depressions according to age and so on. Hmm
     maybe researching real world examples first. Look at how game studios do it. Then make a plan for Opus."
 
+
+70. **Opus works plan 53, the ground tools** (4 November 2026, 17:16), your words: "Execute plan 53."
+
+
+71. **The ground tools must also make the deep muddy field track of your picture** (4 November 2026, 18:45), your words, with a
+    picture of deep tyre ruts in a wet field, water in them, a grassy strip between them and grassy, weedy verges, leaves and twigs
+    in the mud: "It should be able to look like this as well." So plan 53 grew: heavy ruts (lumpy torn walls, mud smeared along them,
+    tread ridges across the floor holding water), a grass tool, fallen leaves and twigs, rain rings on the water, and a second worked
+    example drawn like your picture.
+
+
+72. **Cart tracks stay beside the motor ruts** (4 November 2026, 18:55), your words: "Those are car tracks. Cart tracks still need to
+    be possible." So the tracks tool keeps the horse and cart (narrow iron tyres cutting deep slots, now with the horse's hoof prints
+    between the ruts) next to the car, the lorry and the tractor; the cart track example stays a cart track.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

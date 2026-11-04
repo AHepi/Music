@@ -4,6 +4,7 @@ materials as they are (their sandstone pictures packed inside), and rebuilds eve
 
   - SURFACE • <set>: one per photographed surface on the shelf (brief/surfaces/), laid from three sides in the
     object's own space at the picture's real size, darkened into the look's range, with dials (see below);
+  - MADE • dirt, MADE • dirt, dark, MADE • pebbles, wet: the ground tools' soil and stones (ground_materials.py);
   - MADE • ...: the materials made in code (made.py: old brass, copper, china, weathered boards, wet bark, puddle water,
     a wet-ground film, rusty nail heads, a rust stain), and two made here from shelf photographs: wet mud (the forest
     mud soaked), army canvas (the linen weave without its blue dye) and the walkway's boards (rough sawn wood laid along each
@@ -34,6 +35,7 @@ sys.path.insert(0, HERE)
 
 import bpy  # noqa: E402
 
+import ground_materials  # noqa: E402
 import made  # noqa: E402
 from node_helpers import fresh_material, map_range, math, mix, noise  # noqa: E402
 
@@ -412,6 +414,7 @@ def main():
     walkway_boards(manifest['rough_wood'], box_group, weather).use_fake_user = True
     wet_mud(box_group, weather).use_fake_user = True
     army_canvas().use_fake_user = True
+    ground_materials.build_all(SHELF, manifest, box_group)
     bpy.ops.file.make_paths_relative()
     bpy.ops.wm.save_mainfile(filepath=TARGET)
     counts = {'street': sum(1 for m in bpy.data.materials if not m.name.startswith(('SURFACE •', 'MADE •'))),

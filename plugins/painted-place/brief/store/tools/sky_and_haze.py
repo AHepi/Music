@@ -9,6 +9,7 @@ From your own script:
     import sky_and_haze
     sky_and_haze.sky(bpy.context.scene)                                   # the dusk sky as the world's background
     sky_and_haze.haze(low=(-60, -5, 0), high=(60, 220, 30))               # thin air over the place, gone by the box's top
+    sky_and_haze.photo_sky(bpy.context.scene, 'mud_road_puresky')        # or a photographed sky from the store's skies
 
 The sky is coloured by how high you look: an amber band on the horizon, a dull warm band just above it, teal-blue
 higher up and deep blue overhead, with streaky clouds drawn darker and bluer across it. It lights the scene a little
@@ -26,6 +27,9 @@ Options of sky(): horizon, low_band, high_band, top (the four colours, linear RG
 Options of haze(): low, high (the box's corners, metres; required), density (default 0.0016; 0.004 is a misty evening),
 colour (default a cool grey-blue), anisotropy (how much the haze glows towards a light behind it; default 0.35),
 collection (default a new collection 'haze').
+photo_sky(scene, name, strength, turn): a sky photographed all round (Poly Haven, CC0; the store's skies folder lists
+them in skies/manifest.json, e.g. 'mud_road_puresky', a flat grey overcast day) as the world's background and light;
+strength (default 1.0), turn (degrees the sky is turned about the vertical; default 0).
 """
 
 import argparse
@@ -51,16 +55,46 @@ TOOL = {
         'haze: density': 'how thick the air is (0.0016; 0.004 a misty evening)',
         'haze: anisotropy': 'how much the haze glows towards a light behind it (0.35)',
         'sky: seed': 'moves the clouds (0)', 'haze: colour, collection': 'the air\'s colour (a cool grey-blue); where the box goes (a new collection)',
+        'photo_sky: name, strength, turn': "a photographed sky from the store's skies ('mud_road_puresky', a grey overcast day); its light (1.0); degrees turned (0)",
     },
     'materials': [],
     'source': 'the goods yard and military base builders of log 51 (their skies and haze boxes), made into a tool',
     'trap': 'a haze filling the whole world (a world volume) swallows the sky; keep the haze in a box over the place',
 }
+SKIES = os.path.join(os.path.dirname(TOOLS), 'skies')
 
 HORIZON = (0.85, 0.36, 0.12)
 LOW_BAND = (0.30, 0.15, 0.10)
 HIGH_BAND = (0.028, 0.085, 0.15)
 TOP = (0.003, 0.025, 0.06)
+
+
+def photo_sky(scene, name='mud_road_puresky', strength=1.0, turn=0.0):
+    """A photographed sky from the store's skies folder as the world's background and light (see the note at the top)."""
+    import json
+    import math
+    manifest = json.load(open(os.path.join(SKIES, 'manifest.json')))
+    if name not in manifest:
+        raise ValueError('no sky %r; the store has %s' % (name, ', '.join(sorted(manifest))))
+    world = scene.world or bpy.data.worlds.new('photographed sky')
+    scene.world = world
+    world.use_nodes = True
+    nodes, links = world.node_tree.nodes, world.node_tree.links
+    for node in list(nodes):
+        nodes.remove(node)
+    output = nodes.new('ShaderNodeOutputWorld')
+    background = nodes.new('ShaderNodeBackground')
+    background.inputs['Strength'].default_value = float(strength)
+    picture = nodes.new('ShaderNodeTexEnvironment')
+    picture.image = bpy.data.images.load(os.path.join(SKIES, manifest[name]['file']), check_existing=True)
+    coordinates = nodes.new('ShaderNodeTexCoord')
+    mapping = nodes.new('ShaderNodeMapping')
+    mapping.inputs['Rotation'].default_value = (0.0, 0.0, math.radians(turn))
+    links.new(coordinates.outputs['Generated'], mapping.inputs['Vector'])
+    links.new(mapping.outputs['Vector'], picture.inputs['Vector'])
+    links.new(picture.outputs['Color'], background.inputs['Color'])
+    links.new(background.outputs['Background'], output.inputs['Surface'])
+    return world
 
 
 def _link(links, a, b):

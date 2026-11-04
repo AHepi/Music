@@ -36,6 +36,8 @@ Options:
     film_reach      how far the wet ground reaches past the water, metres; default 0.3 x half the width + 0.08
     raggedness      how broken the outline is (0 a smooth blob, 1 normal, 2 very broken); default 1
     shallow_band    how wide the shallow, clear rim of the water is, metres; default about 0.4 x half the width (at most 0.22)
+    film            False leaves out the wet film round the water (the ground tool's soil already wets the ground round its
+                    water); default True
 
 The water writes the number 'shallow' on each point (0 in the deep middle, rising to 1 at the rim, also 1 where a bump
 rises to the surface); the film writes 'dry' (0 against the water and under it, rising to 1 at its outer edge). The two
@@ -238,9 +240,9 @@ def _rings_mesh(name, rings_xyz, values, attribute, centre_point=None, centre_va
 
 
 def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=None, water_material=WATER_MATERIAL,
-         film_material=FILM_MATERIAL, lift=0.004, film_reach=None, raggedness=1.0, shallow_band=None, level=None):
+         film_material=FILM_MATERIAL, lift=0.004, film_reach=None, raggedness=1.0, shallow_band=None, level=None, film=True):
     """Make one puddle with its middle at `location`. Returns (water, film): the objects 'puddle water' and
-    'puddle wet film'. With `level` (a height in metres), the water lies flat at that height instead of on the ground:
+    'puddle wet film' (film is None with film=False: the ground tool's soil wets its own ground round the water). With `level` (a height in metres), the water lies flat at that height instead of on the ground:
     for a puddle among setts, give level about 2 mm above the stones' tops (the setts object's 'top_height'): the water covers
     most stones and the highest stand out of it; a centimetre lower, water shows only in the joints."""
     length, width = float(size[0]), float(size[1])
@@ -310,7 +312,8 @@ def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=No
         level = float(level)
         if ground is not None:
             under_water = floor.heights(world_xy)
-            shallow = numpy.maximum(shallow, numpy.clip((under_water - level + 0.002) / 0.006, 0.0, 1.0))
+            # water shallower than 2 cm is clear: the bed shows through it, so the shore is soft wherever it falls
+            shallow = numpy.maximum(shallow, 1.0 - numpy.clip((level - under_water) / 0.02, 0.0, 1.0))
             film_z = numpy.maximum(floor.heights(film_world_xy) + lift * 0.5, level - 0.0015)
         else:
             film_z = numpy.full(len(film_world_xy), level - 0.0015)
@@ -332,17 +335,21 @@ def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=No
         collection = bpy.data.collections.new('puddle')
         bpy.context.scene.collection.children.link(collection)
     made = []
-    for mesh, material in ((water_mesh, water_material), (film_mesh, film_material)):
+    sheets = ((water_mesh, water_material), (film_mesh, film_material)) if film else ((water_mesh, water_material),)
+    if not film:
+        bpy.data.meshes.remove(film_mesh)
+    for mesh, material in sheets:
         obj = bpy.data.objects.new(mesh.name, mesh)
         collection.objects.link(obj)
         obj.location = origin
         obj.visible_shadow = False
         store.use_material(obj, store.material(material) if isinstance(material, str) else material, ground=centre_ground)
         made.append(obj)
-    water, film = made
+    water = made[0]
+    film_object = made[1] if film else None
     water['puddle_size'] = (length, width)
     water['puddle_seed'] = seed
-    return water, film
+    return water, film_object
 
 
 def main(argv=None):

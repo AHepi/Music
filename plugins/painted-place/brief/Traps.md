@@ -25,3 +25,5 @@ What this file is: the faults builders working from this brief have run into so 
 - **The shelf's `muddy_tracks` reads orange and crinkled like foil under amber light** on a wide ground; `mud_forest` with its Wet dial up, or the store's `MADE • wet mud`, reads as mud.
 - **A glowing pane lights nothing round it by itself.** Give each lit window or door left ajar a small warm light of its own just outside the glass, or behind an open gap (a goods yard builder used about 40 W each); the store's lit glass is an opaque glow and blocks a light set behind it. Without one the glass glows while the ground in front of it stays dark.
 - **With the `bpy` module, `import bpy` must come before `import bmesh`.**
+- **Tracks drawn as a picture on flat ground look painted under a low lamp:** nothing casts a shadow, nothing holds water, and a stone sits across the groove. Ruts, footprints and potholes need real depth in the ground; the store's tracks tool carves them.
+- **Water that reaches past the ground's edge draws a dark rectangle in the distance.** Make the ground bigger than the frame shows, or leave out the water at its edge.

@@ -128,6 +128,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   own descriptions. Nothing in it places itself. The dressing, the look stage and the blind judge are retired. A fresh builder built the
   military base and a railway goods yard with it (folder `51 The store, and places built with it/`); you judged them: "It
   worked. These look incredible." Since log 52 every place is built in two passes and feeds the store (26 parts, 11 tools, 90 materials).
+- **Ground tools (log 53, 4 November, plugin 0.7.0):** the store makes the ground itself now: a ground with its wetness and
+  water, ruts for a horse and cart (with hoof prints), a car, a lorry and a tractor, paths, footprints and potholes, stones,
+  grass, and leaves and twigs, using Poly Haven's scanned grass, photographed mud with real lumps near the eye, and a
+  photographed rain sky. Two worked examples, a cart track after rain and deep ruts in a wet field like your picture, are in
+  `53 Ground tools - wet ground, ruts, grass/` for your verdict.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -153,11 +158,17 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 | The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
-| The painted-place plugin (`plugins/painted-place`, version 0.6.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
+| The painted-place plugin (`plugins/painted-place`, version 0.7.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
 
 ## Word list
 
 - **Tile:** one square picture that repeats without a seam. **Dot:** one pixel.
+- **PBR set (log 53):** photographs of a real surface that together describe it: its colour, how shiny each bit is
+  (roughness), how high each bit stands (height) and which way each tiny bit faces (normal). **Displacement:** using the
+  height photograph to really move the surface up and down, so its lumps cast shadows. **Scan (log 53):** a real plant or
+  branch photographed and measured into a 3D model (Poly Haven's are free).
+- **Rut, lip, pothole (log 53):** a rut is the groove a wheel cuts; the lip is the soil pushed up beside it in soft ground;
+  a pothole is a hole pounded out where water stood in a rut.
 - **Store (log 51):** the folder of ready things a builder may pick from: **parts** (things to place, such as a tent or a gas lamp),
   **tools** (code that makes a thing from a line, a point or an object the builder gives, such as a walkway along a line) and **ready
   materials** (Blender materials to put on an object). Nothing in it places itself. **Card:** a small picture of a part or material, drawn
@@ -997,12 +1008,34 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     additions (a floating brace, coal through a floor, a stretched slate roof, wrong card texts), all fixed, and the parts test now builds
     every option and lets no piece float.
 
+
+53. **The ground tools (4 November, 17:16 to 21:30, plan 53).** You asked for dry and wet dirt, separate layers of rocks and
+    pebbles, and tracks (people, car tyres, cart wheels) that change with wet or dry and with age, with sink-holes. Research came
+    first (`53 Research - ground, wet and dry, pebbles and tracks.md`), then a plan (`53 Plan for Opus - ground tools.md`), then
+    "Execute plan 53." **Built, in the plugin's store (version 0.7.0):** `ground` (the sheet a
+    place stands on, a road's camber, wetness by height so water finds the low places first, water cut from the ground's own
+    faces, rain rings, real lumps from the soil's photographs where the eye is near, and a way to stand parts on uneven
+    ground); `tracks` (ruts for a horse and cart with its hoof prints, a car, a lorry and a tractor whose tread ridges hold
+    water; a trodden path; footprints that alternate with the heel deepest; potholes where you say; one age dial for sharp
+    edges, dark glossy floors, crumbs, grit, water and cracked floors); `stones` (rocks, pebbles and grit, by a helper);
+    `grass` (turf, tussocks, tall weeds and low herbs, kept out of ruts and water, leaning over torn edges); `litter`
+    (leaves that float on water and twigs); soil, pebble, grass and leaf materials. **Your picture changed the plan** (decision
+    71, "It should be able to look like this as well."): heavy ruts with lumpy, torn, smeared walls, grass, leaves and rain
+    were added; then "Those are car tracks. Cart tracks still need to be possible." (decision 72): carts stay, now with hoof
+    prints. **Your question "Are you using PBR?"** found the soil's photographs half used (only shading, flattened when wet,
+    no normal pictures): the ground near the camera is now really pushed up and down by them, churned mud is a photograph of
+    churned mud, and, at your reminder, Poly Haven also gives the store scanned grass, nettles, dandelions and branches and two
+    photographed skies. **Pictures** (folder `53 Ground tools - wet ground, ruts, grass/`): deep ruts in a wet field by grey day
+    and at dusk, and the cart track at dusk. **Tested:** 64 test lines pass, among them depths by wetness, lips only when wet,
+    old ruts rounder, tread ridges every 20 cm, hoof prints only for carts, nothing carved outside a mark, grass never in a rut
+    or under water, leaves afloat at the water's level, real lumps only where asked, the same seed giving the same ground.
+    **Not done:** the fresh checker was stopped before it reported, so no independent check of this work yet; leaves are still
+    made in code (your generated leaf sheet would replace them); the stones are made in code (Poly Haven's scanned rocks are not
+    used yet); no fresh builder has used the ground tools yet.
 ## Next step
 
-Opus follows `53 Plan for Opus - ground tools.md` (decision 69): a ground tool (shape, soil, wetness by height and dial), stones in
-size layers, and tracks carved along the builder's lines (cart and motor ruts, a footpath, footprints, potholes), with one age dial;
-research first in `53 Research - ground, wet and dry, pebbles and tracks.md`. You judged the chapel's first pass as the stronger picture
-is still my reading, not your verdict; the next place in two passes tests the placement rule.
+Your verdict on the three pictures in `53 Ground tools - wet ground, ruts, grass/`. Then, if they hold: your generated leaf sheet
+into the litter tool, and a fresh builder making a place with the ground tools from a plain request, in two passes.
 
 ## Traps
 
