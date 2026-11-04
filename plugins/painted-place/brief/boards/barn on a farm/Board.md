@@ -1,0 +1,29 @@
+# Reference board: a barn on a farm
+
+What this folder is: real photographs of barns, cart sheds and farmyards, gathered for the request "A barn on a farm" (Library of Congress: stereograph cards, the Bain News Service, the Photochrom prints of the British Isles, the National Photo Company, the Farm Security Administration / Office of War Information, the Carnegie Survey of the Architecture of the South; all public domain or with no known restrictions; `sources.json` has each picture's source). Seven are from Britain and Ireland, five from America. They show what the place is made of and how it is used. They do not show the look (the look is in `reference/`); the period's photographs are daylight and grey. The years in the file names are the year of the photograph.
+
+| Photograph | Look at |
+|---|---|
+| 01 Inside a tithe barn, Great Coxwell, 1896 | the inside of a big old stone barn: tall timber posts with braces up to the roof beams, the roof's underside of rafters and laths, a small bright gap in the roof; hay piled to the beams on both sides; two farm wagons standing on the floor between, one with high boarded sides; loose hay and straw over the floor |
+| 02 Stone cart shed, an English farm yard, 1892 | a pier of rough laid stone holding up an open-fronted shed roofed with stone slates, a cart standing inside in the dark; a wooden five-bar gate hung between stone gateposts; walls of flat stones piled without mortar; a big tree; the yard bare, dry and worn smooth |
+| 03 Woman leading a loaded farm cart, Britain, 1915 | a heavy horse with hairy feet, collar, blinkers and harness, pulling a two-wheeled cart heaped far above its sides; big wooden wheels with iron tyres; a thick hedge; a dry track with the grass worn off in two lines and left standing at the sides |
+| 04 Thatched farmyard, Killarney, 1901 | low limewashed stone buildings under thick thatch, a stone chimney; a heap of dung in the middle of the yard; a donkey cart with a churn, a pig; the whole yard trodden into mud, every hoof and boot print showing, with shallow puddles and straw pressed into it |
+| 05 Thatched buildings round a red earth lane, Cockington, 1890-1900 | thick rounded thatch with deep eaves over walls of earth and stone; a tall stone chimney grown with ivy, smoke rising; a lane of red earth between the buildings; a wooden field gate; hedges and trees close round |
+| 06 Farmyard with a wagon, hens and sheds, 1920 | a yard of bare earth with tufts of grass where nobody walks; a four-wheeled wagon with spoked wheels; sheds of rough boards with lean-to roofs, one with a cart backed inside; stacked logs and poles; a worn path going up between the sheds; hens, a dog and a cow |
+| 07 Boarded barns and a muddy cattle yard, Hancock County, 1941 | barns of upright boards gone grey; a straw stack slumped against a barn; cattle lying in trodden straw behind a fence of rails nailed to posts; in front, mud with deep wheel ruts holding water and straw |
+| 08 Weathered boards and a hay door, central Ohio, 1938 | wide upright boards, split and broken at their feet, with gaps between them and rows of nail heads; a square hay door, its boards held by cross pieces nailed on, hung on iron strap hinges; weeds growing against the bottom of the wall |
+| 09 Limewashed stone barn, Baltimore County, 1936 | a gable end of rough stone under limewash, the wash flaking off in patches to show the stones; long cracks running up from the doors; a stable door of planks in two halves, a loading door above it; small square openings closed with board shutters; narrow slits for air high in the gable; long grass up to the walls |
+| 10 Stone and board barn over a cattle yard, Dodge County, 1941 | a barn whose lower walls are rough stone with small doors and windows, and whose upper part is upright boards with a big door; a yard of trodden straw and earth below with cattle, a hay rack, a wire fence and a gate |
+| 11 Spreading muck from a horse cart, England, 1943 | a two-wheeled tipping cart of heavy planks with big spoked wheels and iron tyres; the horse in its shafts, collar and saddle; the dung forked off in heaps on the field |
+| 12 Pig pens inside a farm building, England, 1943 | pens of thick planks nailed to posts; a whitewashed brick wall; a row of small windows high up; straw over the floor; a broom |
+
+Not found as public-domain photographs, so from memory or the builder's own knowledge: a British threshing barn seen from its yard, with its pair of tall cart doors and a porch roofed over them; a black tarred weatherboarded barn of the south and east of England on a brick plinth; a farmyard in rain at dusk with a lantern hung at the barn door; a stone water trough; a muck heap steaming in the cold.
+
+## Traps
+
+- Five photographs are American (06 to 10; 06's place is not recorded, but the company that took it worked in and around Washington). Take materials, building and wear from them (boards, stone, limewash, mud, straw, rails), not style: no curved double-slope roofs like the left barn in 07, no red paint, no little turrets on the ridge. A British barn of about 1915 is stone, brick or tarred boards, with a roof of slate, stone slates, clay tiles or thatch, and big double doors a loaded cart can go through.
+- 01 is a church's tithe barn, far bigger than an ordinary farm's barn; take its timber, hay and wagons, not its size.
+- 11 and 12 are from 1943; the carts, harness and pens in them were the same in 1915.
+- The words on some photographs (the caption across 03, the printed title on 05, the handwritten title on 09, the numbers on 11 and 12) belong to the photographs, not the place.
+- 05 is a Photochrom, a photograph coloured by printing; the red earth of Devon is true, the exact greens are the printer's.
+- The pictures are photographs of daylight; everything in them is lighter and greyer than the look wants.
