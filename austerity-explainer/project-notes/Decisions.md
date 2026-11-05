@@ -967,6 +967,13 @@ overturn any of them in one line. Changes to the project must follow this file.
     better with textures" (log 53) as the rule to use photographed sets whole: all 26 sets now have their normal pictures and
     the store's surfaces use them.
 
+
+79. **The barn holds; the town street once more, with all the detail it can take** (5 November 2026, 11:27), your words: "It
+    looks incredible. Now do the town street one more time with as much careful detail." Read as: the rainy town street of the
+    reference picture "Rain on the Old Curve" (stone tenements, setts, gas lamps, rain at dusk), built again by fresh builders
+    from the plugin alone, your words given to them exactly; for "as much careful detail", a third pass after the usual two,
+    given only to the building fronts and the middle distance, since in a street they fill most of the frame.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").
