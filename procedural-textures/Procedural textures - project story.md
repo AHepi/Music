@@ -153,6 +153,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   bricks (four bonds) or stone blocks; house fronts in photographed sandstone with painted timber door and window frames
   (decision 81) and lit windows. A worked example shows it all: a wet curved corner at dusk (folder
   `56 Photographed stone, curved road, brick walls/`).
+- **A Japanese garden after rain, from your picture (log 57, 6 November, plugin 0.11.0):** two fresh builders with the
+  plugin, your words and your two pictures: an inn's veranda with hanging lanterns, a wet slab path with maple leaves, a
+  blue-and-white jar, a stone basin and spout, a stone lantern in a lily pond, a red arched bridge, a timber inn with lit
+  paper screens under a curved tiled roof, maples, bamboo, misty mountains; a close view of the path; the full-size picture
+  (folder `57 Japanese garden - two builders/`). What they made is now in the store: twelve parts and seven tools.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -178,7 +183,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 | The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
-| The painted-place plugin (`plugins/painted-place`, version 0.10.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
+| The painted-place plugin (`plugins/painted-place`, version 0.11.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
 
 ## Word list
 
@@ -206,6 +211,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   stone cut into squared blocks laid in courses. **Atlas (log 56):** the list of every whole brick or block found in a wall
   photograph, so each brick of a built wall can show one real photographed brick. **Casing:** the timber frame round a door
   or window, up both sides and across the head.
+- **Tōrō (log 57):** a Japanese stone lantern. **Tsukubai:** a low stone water basin, often fed by a bamboo spout (kakei).
+  **Shōji:** sliding screens of paper on a fine timber lattice. **Engawa:** the raised timber veranda along a Japanese
+  house. **Geta:** wooden clogs on two teeth. **Niwaki:** a garden tree pruned into cloud-like pads. **Hip-and-gable roof
+  (irimoya):** a roof hipped below and gabled above, the temple and inn roof.
 - **Store (log 51):** the folder of ready things a builder may pick from: **parts** (things to place, such as a tent or a gas lamp),
   **tools** (code that makes a thing from a line, a point or an object the builder gives, such as a walkway along a line) and **ready
   materials** (Blender materials to put on an object). Nothing in it places itself. **Card:** a small picture of a part or material, drawn
@@ -1150,11 +1159,35 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     sandstone reads orange-tan beside the street's old honey-grey (left as photographed); bricks do not wrap round a corner
     where two planes meet; the corner only at 540 x 960.
 
+57. **A Japanese garden after rain, from your picture, by two fresh builders; the store fed (5 November, 19:43 to 6 November,
+    00:10).** Your words with your picture (decision 82): "Now try to do some of this. The animals are unnecessary. I'm not
+    sure how you'll get this done though." A board of 12 real photographs was made first (Library of Congress stereographs,
+    1896 to 1904: stepping stones, arched bridges, lotus, the Golden Pavilion, stone lanterns, a stone basin, bamboo fences,
+    verandas, an inn's lanterns, paper screens). **First builder (20:07 to 21:29, 18 minutes early):** the veranda with its
+    hanging lanterns, a wet slab path with fallen maple leaves, the blue-and-white jar, wooden clogs, a stone basin with a
+    bamboo spout, a stone lantern on rocks in a pond with water lilies, a red arched bridge, a two-storey inn with lit paper
+    screens and a curved tiled roof, maples, bamboo, a pine, misty mountains; mid-build it got your second picture ("Give
+    this picture.", decision 83) and drew a close view of the path from it, and your word "Please remind the builders to
+    use PBR wherever possible. It save in space and compute." (decision 84), now written into the brief for every builder.
+    **Second builder (21:32 to 22:40):** split slabs with knocked-off corners and ragged puddles, leaves turned from pink to
+    deep red and brown, a bamboo broom with the leaves it swept, a wooden bucket, the clogs rebuilt, rain streaks on the jar.
+    The full-size picture took 30 minutes; it sat a hair over the warm band and was finished with bluer shadows. **Your
+    Poliigon link** (decision 85): its free sets need a signed-in account, this machine cannot reach the site, and its
+    licence forbids sharing the files, so any you attach stay on this machine, off GitHub. **Into the plugin (0.11.0):**
+    twelve parts and seven tools by four helpers (the garden's lanterns, basin, jar, clogs, bucket, broom, bridge, maple,
+    pine, fern, bamboo; a tiled roof, a veranda and paper screens for a timber inn; a slab path with water in its hollows, a
+    bamboo fence, water lilies, far hills), maple leaves and a swept heap in the litter tool, a stronger puddle mirror; the
+    builders' traps. The machine restarted at about 23:37 with the four helpers nearly done; none could be resumed, so their
+    notes stand in for their reports; the session's test run found one fault (a basin sunk 14 cm into the ground) and fixed
+    it. **Tested:** all 210 test lines pass, among them all 60 parts built with every option and nothing floating, and
+    the four new garden tests. **Not done:** no independent check of 0.7.0 to 0.11.0 (it waits for your word); no light
+    rays, steps up to the inn, flowering shrubs or lotus; the four helpers' own reports.
+
 ## Next step
 
-Your verdict on the curved corner and the new tools (folder `56 Photographed stone, curved road, brick walls/`). Then, at
-your word, an independent check of the plugin (0.7.0 to 0.10.0) by a fresh checker; and your generated leaf sheet into the
-litter tool when it comes.
+Your verdict on the Japanese garden (folder `57 Japanese garden - two builders/`: both passes, the close views, the full
+size). Then, at your word, an independent check of the plugin (0.7.0 to 0.11.0) by a fresh checker; Poliigon sets if you
+attach any; and your generated leaf sheet into the litter tool when it comes.
 
 ## Traps
 

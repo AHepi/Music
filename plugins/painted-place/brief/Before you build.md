@@ -28,6 +28,10 @@ Write three lines at the top of `materials.md`: who is here (they are not in the
 
 Before the last picture, squint at it. The big shapes should be the place (huts, road, tower). Close one eye and look again: medium shapes should give each thing its character (a gun's wheels and shield, a hut's windows and stove pipe, a tent's ropes). Then the small ones: nails, stains, sacks, a cup on a crate, the things people left. If any size is missing, add it; if the small ones are everywhere, take some away.
 
+## 5. Photographed surfaces wherever they can carry the detail
+
+The owner's words to every builder (decision 84): "Please remind the builders to use PBR wherever possible. It save in space and compute." PBR here means the photographed surface sets: their colour, roughness, normal and height pictures used together, as on the shelf (`surfaces/`) and in the store's `SURFACE`, `BRICK` and `ASHLAR` materials. Let the pictures carry fine relief, grain, cracks and wear; build a shape only where its outline or its shadow must show (a step, a lip, a sett's edge, a beam's end).
+
 ## Traps
 
 - The photographs on the board are daylight and grey; take the materials and the use from them, never the light or the colour.

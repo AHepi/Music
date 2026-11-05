@@ -834,6 +834,28 @@ Only failures in doing the work belong here. Newest at the bottom.
      smoothly along each piece); its first turned copy of the wood put the grain across the sills' tops; an apostrophe broke
      its scratch copy; one line would have broken the old stone surrounds (its before-and-after comparison caught it); a
      1.5 mm sag in the head touched the sash; its test counted stones from round the corner.
+243. **Four store helpers were stopped by a restart and could not be resumed** (log 57, about 23:37): the machine restarted
+     55 minutes into their 113; none could be resumed (their records were too large to load), so none wrote a report. Their
+     parts, tools, tests and cards were on disk and nearly finished; the session ran the whole test suite on them, and their
+     notes stand in for their reports in the record folder.
+244. **The square water basin sank 14 cm into the ground** (log 57): its low stand stone reached 0.137 m under z = 0, which
+     the parts test caught after the restart (it stopped there, so the three parts after it went unchecked until the fix).
+     The session squashed the stand's buried part as the basin's foot stones already were (now 0.041 m, like the round
+     basin) and the parts test passed all 60 parts.
+245. **The garden builders' fixes** (log 57, from their reports): path slabs that looked like crinkled foil; puddles that
+     read as black holes because they mirrored the dark eave or a steep dusk sky; a jar whose pattern read as polka dots;
+     clogs that read as boxes; mountains hidden by the camera's 100 m far limit; a fence just outside the frame; leaves that
+     read as stars, then shiny leaves that turned pink under the blue sky; a broom standing in front of the bucket;
+     rectangular water poking past knocked-off slab corners; and in both builders a stop command that stopped its own
+     shell (lesson 222; now a builders' trap). The second builder's first folder listing also printed the names in the
+     first builder's folder, outside the folders it was allowed; it read none of the files.
+246. **The full-size garden sat a hair over the warm band** (log 57): 36% at 1080 x 1920 where the working picture had
+     35.7%. Finishing the same drawing again with the shadows a little bluer (2.3 for 2.0) brought it inside every band
+     without drawing it again.
+247. **The board helper's fixes** (log 57, from its report): its script for finding the picture's edges on stereograph
+     cards was fooled by the cards' printing (every card was then measured by eye); first crops kept bits of the cards'
+     corners; four records failed to download; one card's rights covered the United States only (swapped for a plainer
+     one); one card's date disagreed with the card itself (the card's 1896 was used).
 
 ## Traps
 
@@ -891,3 +913,5 @@ Only failures in doing the work belong here. Newest at the bottom.
 - When several helpers add to the store at once, run the whole test suite after the last one finishes (lesson 235).
 - Send a helper's follow-up to a fresh helper: a finished one may not resume (lesson 237).
 - A photographed material on copied pieces must be told each copy's real size, or it squeezes a whole picture onto each (lesson 239).
+- After helpers are lost to a restart, run the whole test suite on what they left before trusting it (lessons 243, 244).
+- Measure a full-size picture again: it can sit a hair outside a band the working size was inside (lesson 246).

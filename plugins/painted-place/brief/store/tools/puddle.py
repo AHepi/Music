@@ -38,6 +38,12 @@ Options:
     shallow_band    how wide the shallow, clear rim of the water is, metres; default about 0.4 x half the width (at most 0.22)
     film            False leaves out the wet film round the water (the ground tool's soil already wets the ground round its
                     water); default True
+    mirror          how strongly the water mirrors the sky: 0 as the puddle water always was, up to 1 a strong mirror
+                    (water seen from above at dusk mirrors only a little of the sky and reads as black: 0.5 to 0.8 shows
+                    the sky in it); the water then wears a copy of its material, '<material> • mirror 0.50'; default 0
+    no_ring         True: the wet film darkens the ground round the water without the broad glossy shine that draws a
+                    pale ring round the water under a lamp (it wears a copy of its material, '<material> • no ring'),
+                    and the water's clear rim is kept narrow (shallow_band 0.04 unless you give one); default False
 
 The water writes the number 'shallow' on each point (0 in the deep middle, rising to 1 at the rim, also 1 where a bump
 rises to the surface); the film writes 'dry' (0 against the water and under it, rising to 1 at its outer edge). The two
@@ -81,11 +87,73 @@ TOOL = {
         'film_reach': 'metres the wet ground reaches past the water; default 0.3 x half the width + 0.08',
         'raggedness': 'how broken the outline is: 0 smooth, 1 normal, 2 very broken; default 1',
         'shallow_band': 'metres of shallow, clear rim; default about 0.4 x half the width, at most 0.22',
+        'mirror': 'how strongly the water mirrors the sky: 0 as it always was, 1 a strong mirror (seen from above at dusk '
+                  'plain water reads black: 0.5 to 0.8 shows the sky); default 0',
+        'no_ring': 'True: the wet film darkens the ground round the water without the glossy shine that draws a pale ring '
+                   'round it under a lamp, and the clear rim is kept narrow; default False',
     },
     'materials': [WATER_MATERIAL, FILM_MATERIAL],
     'source': 'plugins/painted-place/materials/lay_details.py: puddles; lay_shore.py: wet_ground (rebuilt: ragged outline, shallow rim, wet film)',
     'trap': "the materials need the numbers this tool writes ('shallow', 'dry'): on your own mesh the water is deep all over",
 }
+
+def strong_mirror(material, mirror=0.6):
+    """A copy of a water material that mirrors the sky more strongly: its IOR and its specular level raised and its
+    ripples' roughness lowered by `mirror` (0 to 1). Named '<material> • mirror 0.60'; made once, then shared; mirror 0
+    returns the material itself. Water seen from above mirrors only about 2 per cent of the sky, so at dusk it reads as
+    black; a painter's puddle shows the sky."""
+    material = store.material(material) if isinstance(material, str) else material
+    mirror = min(max(float(mirror), 0.0), 1.0)
+    if mirror <= 0:
+        return material
+    name = '%s • mirror %.2f' % (material.name, mirror)
+    existing = bpy.data.materials.get(name)
+    if existing is not None and existing.get('pp_mirror_of') == material.name:
+        return existing
+    copy = material.copy()
+    copy.name = name
+    copy['pp_mirror_of'] = material.name
+    if copy.use_nodes and copy.node_tree is not None:
+        for node in copy.node_tree.nodes:
+            if node.type == 'BSDF_PRINCIPLED':
+                ior = node.inputs['IOR']
+                ior.default_value = ior.default_value + (2.2 - ior.default_value) * mirror
+                level = node.inputs['Specular IOR Level']
+                level.default_value = level.default_value + (1.0 - level.default_value) * mirror
+                rough = node.inputs['Roughness']
+                if rough.links and rough.links[0].from_node.type == 'MAP_RANGE':
+                    ranged = rough.links[0].from_node
+                    for key in ('To Min', 'To Max'):
+                        ranged.inputs[key].default_value *= 1.0 - 0.6 * mirror
+                elif not rough.links:
+                    rough.default_value *= 1.0 - 0.6 * mirror
+    return copy
+
+
+def no_ring_film(material):
+    """A copy of a wet-film material that darkens the ground without the broad glossy shine (rough 0.1 to 0.6) that
+    draws a pale ring round the water under a lamp: rough and matte like damp soil, its darkening kept. Named
+    '<material> • no ring'; made once, then shared."""
+    material = store.material(material) if isinstance(material, str) else material
+    name = '%s • no ring' % material.name
+    existing = bpy.data.materials.get(name)
+    if existing is not None and existing.get('pp_no_ring_of') == material.name:
+        return existing
+    copy = material.copy()
+    copy.name = name
+    copy['pp_no_ring_of'] = material.name
+    if copy.use_nodes and copy.node_tree is not None:
+        nodes, links = copy.node_tree.nodes, copy.node_tree.links
+        for node in [n for n in nodes if n.type == 'BSDF_PRINCIPLED']:
+            rough = node.inputs['Roughness']
+            for link in list(rough.links):
+                links.remove(link)
+            rough.default_value = 0.85
+            node.inputs['Specular IOR Level'].default_value = 0.2
+            if node.inputs['Normal'].links:
+                links.remove(node.inputs['Normal'].links[0])
+    return copy
+
 
 ANGLES = 160          # points round the outline
 WATER_RINGS = 14
@@ -240,11 +308,14 @@ def _rings_mesh(name, rings_xyz, values, attribute, centre_point=None, centre_va
 
 
 def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=None, water_material=WATER_MATERIAL,
-         film_material=FILM_MATERIAL, lift=0.004, film_reach=None, raggedness=1.0, shallow_band=None, level=None, film=True):
+         film_material=FILM_MATERIAL, lift=0.004, film_reach=None, raggedness=1.0, shallow_band=None, level=None, film=True,
+         mirror=0.0, no_ring=False):
     """Make one puddle with its middle at `location`. Returns (water, film): the objects 'puddle water' and
     'puddle wet film' (film is None with film=False: the ground tool's soil wets its own ground round the water). With `level` (a height in metres), the water lies flat at that height instead of on the ground:
     for a puddle among setts, give level about 2 mm above the stones' tops (the setts object's 'top_height'): the water covers
-    most stones and the highest stand out of it; a centimetre lower, water shows only in the joints."""
+    most stones and the highest stand out of it; a centimetre lower, water shows only in the joints. `mirror` (0 to 1) gives the
+    water a copy of its material that mirrors the sky more strongly; `no_ring` gives the film a matte copy that draws no pale
+    ring round the water under a lamp and keeps the clear rim narrow. Both are off by default: the puddle is as it always was."""
     length, width = float(size[0]), float(size[1])
     if length < width:
         length, width, turn = width, length, turn + 90.0
@@ -252,6 +323,8 @@ def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=No
     location = Vector(location)
     half_width = width / 2
     band = shallow_band if shallow_band is not None else min(0.22, max(0.05, 0.4 * half_width))
+    if no_ring and shallow_band is None:                               # a narrow clear rim: no pale outline under a lamp
+        band = 0.04
     reach = film_reach if film_reach is not None else min(0.4, max(0.12, 0.3 * half_width + 0.08))
     rim = _outline(length, width, rng, raggedness)                     # the puddle's own frame: x along its length
     turning = Matrix.Rotation(math.radians(turn), 2)
@@ -335,6 +408,10 @@ def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=No
         collection = bpy.data.collections.new('puddle')
         bpy.context.scene.collection.children.link(collection)
     made = []
+    if mirror and float(mirror) > 0:
+        water_material = strong_mirror(water_material, mirror)
+    if no_ring:
+        film_material = no_ring_film(film_material)
     sheets = ((water_mesh, water_material), (film_mesh, film_material)) if film else ((water_mesh, water_material),)
     if not film:
         bpy.data.meshes.remove(film_mesh)
@@ -366,6 +443,8 @@ def main(argv=None):
     parser.add_argument('--shallow-band', type=float, default=None, help='metres of clear, shallow water at the rim; default from the size')
     parser.add_argument('--film-reach', type=float, default=None, help='metres the wet ground reaches past the water')
     parser.add_argument('--raggedness', type=float, default=1.0, help='0 smooth, 1 normal, 2 very broken; default 1')
+    parser.add_argument('--mirror', type=float, default=0.0, help='how strongly the water mirrors the sky, 0 (as always) to 1; default 0')
+    parser.add_argument('--no-ring', action='store_true', help='a matte wet film and a narrow clear rim: no pale ring round the water under a lamp')
     parser.add_argument('--water-material', default=WATER_MATERIAL)
     parser.add_argument('--film-material', default=FILM_MATERIAL)
     parser.add_argument('--out', help='where to save the result (.blend)')
@@ -381,7 +460,7 @@ def main(argv=None):
     water, film = make(args.at, size=args.size, turn=args.turn, ground=ground, seed=args.seed, lift=args.lift, level=args.level,
                        shallow_band=args.shallow_band,
                        film_reach=args.film_reach, raggedness=args.raggedness, water_material=args.water_material,
-                       film_material=args.film_material)
+                       film_material=args.film_material, mirror=args.mirror, no_ring=args.no_ring)
     bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.out))
     print('made %s and %s, saved %s' % (water.name, film.name, args.out))
 

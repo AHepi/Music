@@ -83,6 +83,18 @@ windows glow. A worked example, `examples/street - a curved corner after rain.py
 it. Tests in `tests/test_store_photographed.py`, `tests/test_store_curved_road.py`, `tests/test_store_wall.py` and
 `tests/test_store_frames.py`.
 
+## What 0.11 added
+
+What the Japanese garden's two builders made for themselves (log 57, decisions 82 to 84), pulled into the store: twelve parts
+(`stone_lantern` in two kinds, lit if asked; `water_basin` with a bamboo spout and ladle; a blue-and-white `jar`; `clogs`; a
+`hanging_lantern`; a `wooden_bucket` with copper hoops; a `bamboo_broom`; an `arched_bridge`; a `maple_tree`; a pruned
+`garden_pine`; a `fern`; a `bamboo_clump`) and seven tools (`lay_tile_roof`, `lay_veranda` and `lay_shoji` for a timber
+inn on a box; `lay_slab_path` with water in the slabs' hollows, `bamboo_fence` along a line, `water_lilies`, `far_hills`);
+`maple` leaves and a swept heap in `litter`; a stronger mirror for puddles; a board of real Japanese garden photographs; the
+owner's word that builders use photographed surfaces wherever possible, in `Before you build.md`; the builders' traps.
+Tests in `tests/test_store_garden_things.py`, `tests/test_store_garden_plants.py`, `tests/test_store_garden_buildings.py`
+and `tests/test_store_garden_ground.py`.
+
 ## What was retired, and why
 
 Until version 0.5 the plugin built the look itself: a **dressing** (`materials/apply_by_role.py` and the `lay_*.py` files) gave every object a material by the words in its name and laid details where its own survey of the camera's view said they belonged; a **look stage** (`stage/`) lit and drew the place; a **blind judge** (`look/judge.py`, `agents/blind-judge.md`) said what to fix. The owner judged a builder given only pictures and a page against builders using the dressing, and the pictures-only builders' places were better ("Pictures only is better"): the dressing's placement logic was faulty and its objects did not make sense (decision 62). The owner then asked to keep the good parts as things to pick from: the footpath as a tool on a line, the detailed things builders had made as parts, the textures as "pick and choose" shaders (decision 65). So in 0.6:

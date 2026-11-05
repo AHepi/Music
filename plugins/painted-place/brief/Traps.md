@@ -44,6 +44,12 @@ What this file is: the faults builders working from this brief have run into so 
 - **On the side fronts of a street, flat things are seen edge-on.** What stands out from a wall (signs on brackets, pots on sills, downpipes) reads there; flat things (stains, blinds) read on the fronts that face the eye, and must be broad on the side ones.
 - **Measure the ground's height before anything is set down on it:** a ray from above finds the top of whatever already stands there (a street builder's dirt floated 40 cm up on a stack of setts until it did).
 - **The water of a puddle nearer the eye than a lamp's reflection mirrors the dark sky above the lamp** and reads as a black streak: put the reflection at the puddle's near end. A puddle's clear rim draws a pale outline round the water under a lamp; a narrower rim (`shallow_band=0.04`) keeps it clean.
+- **A puddle under an eave mirrors the eave and reads as black;** water seen from above mirrors only a little of a dusk sky, so its mirror has to be made stronger to read.
+- **Fallen leaves with narrow lobes read as stars,** and shiny leaves under a blue dusk sky turn pink: broad toothed lobes, little shine.
+- **Small things built from boxes read as boxes** (clogs, buckets); things smaller than about 3 cm cannot be seen at 540 x 960. A dark thing in a big shadow reads with pale materials or bright metal on it, without a light of its own.
+- **One thing standing in front of another cancels both** (a broom before a bucket): set them apart.
+- **A stop command that names a process also stops the shell running it** (`pkill -f render_final` matches its own command line): match with a bracket, `pkill -f "[r]ender_final"`. Both garden builders lost a step this way.
+- **Blender's camera stops seeing at 100 m by default:** far mountains vanish until its far limit is raised.
 - **A pale thing on pale wet flags vanishes** (a newspaper on buff sandstone): put it where the ground is dark, in the gutter or on the setts.
 - **Two faces lying in exactly the same plane draw as black squares** (where two timbers cross, where a frame meets its panel, where a flat thing's top lies exactly on the road). Make one of them a few millimetres shallower, or lift it 1 mm.
 - **Worn iron made shiny like a mirror reads dark, not bright:** at night it mirrors the dark sky. Make the worn tops lighter and only half metal, the rust in the hollows darker.

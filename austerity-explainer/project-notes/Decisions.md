@@ -991,6 +991,34 @@ overturn any of them in one line. Changes to the project must follow this file.
     as: the house-front stone tool gives its doors and windows painted timber frames (casings up the sides and across the
     head, a timber sill) by default instead of stone jambs, lintels and sills; the stone surrounds stay as a choice.
 
+82. **A Japanese garden after rain, from your picture** (5 November 2026, 19:43), your words, with a picture of a Japanese
+    inn's garden at dusk after rain (a wet stone path with fallen maple leaves, a blue-and-white jar, a veranda with hanging
+    lanterns, a pond with lily pads and lotus, a red arched bridge, stone lanterns, a bamboo spout into a stone basin, a bamboo
+    fence, maples, pines and bamboo, a large timber inn with lit paper windows, misty mountains): "Now try to do some of this.
+    The animals are unnecessary. I'm not sure how you'll get this done though." Read as: a place built the usual way (a board
+    of real photographs, a fresh builder with only the plugin and your words and picture, a second builder for the near
+    ground, then the store fed), without the koi; your picture goes to the builders in their copy of the kit only, never into
+    the plugin or GitHub. It measures warmer and less blue than the look's bands (0.25, 40% warm, 12% cool), so the builders
+    keep the series' look unless you say otherwise.
+
+83. **A second picture for the builders: the wet stone path** (5 November 2026, 20:40), your words, with a close picture of a
+    wet path of rough dark stone slabs, water standing in their hollows mirroring a cloudy sky, red maple leaves, moss and
+    pebbles in the joints: "Give this picture." Read as: give it to the builders beside the first (in their copy of the kit
+    only): passed to the first builder at 20:43, in the middle of its build, and given to the second, whose work is the near
+    ground.
+
+84. **Builders use photographed surfaces wherever possible** (5 November 2026, 20:51), your words: "Please remind the builders
+    to use PBR wherever possible. It save in space and compute." Read as: a standing word to every builder: passed to the first
+    builder in the middle of its build, and written, with your words, into the brief's `Before you build.md` (section 5), so
+    every builder from now on reads it: the photographed sets carry fine relief, grain and wear; shapes are built only where
+    an outline or a shadow must show.
+
+85. **Poliigon as another free source of photographed surfaces** (5 November 2026, 20:53), your words: "Just one more thing.
+    Another PBR source that's free: https://www.poliigon.com/textures/free". Found: its free textures download only when
+    signed in to an account, this machine cannot reach the site, and its licence allows use in your own work but no sharing
+    of the files, even changed. Read as: Poliigon sets you download and attach go on a shelf on this machine for the builders,
+    as your own texture library does, never into the plugin or GitHub; Poly Haven (free to share) stays the plugin's source.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

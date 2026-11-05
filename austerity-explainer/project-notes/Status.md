@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-11-05, 19:45, for the painted-place plugin (log 56); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-06, 00:10, for the painted-place plugin (log 57); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -325,7 +325,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   Not fixed: the faint contour steps in the dark sky (invisible at normal contrast; filming again takes over an hour for nothing a viewer sees) and
   the plugin's and chapter 2's copies of the stage (outside this job).
 
-## The painted-place plugin (logs 38 to 56, 2 to 5 November 2026)
+## The painted-place plugin (logs 38 to 57, 2 to 6 November 2026)
 
 - `plugins/painted-place` 0.5.0: build a place in Blender, dress it in one call, light it in the series' blue-hour look, judge it blind
   (now on the look and on the request), fix once. Decisions 50 to 58.
@@ -383,6 +383,14 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   wood.") the house fronts got painted timber frames and lit windows, and the corner was redrawn
   (`procedural-textures/56 Photographed stone, curved road, brick walls/`). **Plugin 0.10.0.** All test lines pass. Not yet:
   an independent check; the new sandstone reads orange-tan beside the old honey-grey.
+- **Log 57 (decisions 82 to 85): a Japanese garden after rain, from your picture.** A board of 12 real photographs, then two
+  fresh builders with the plugin, your words and your two pictures (the garden, and the wet slab path): the veranda and its
+  lanterns, the wet path and maple leaves, the jar, the basin and spout, a stone lantern in a lily pond, the red bridge, the
+  timber inn, maples, bamboo, misty mountains, and a close view of the path; the full-size picture
+  (`procedural-textures/57 Japanese garden - two builders/`). Your PBR word is now in the brief for every builder. Poliigon:
+  sign-in only, unreachable from here, and not shareable, so only sets you attach, kept on this machine. **Plugin 0.11.0:**
+  twelve garden parts and seven tools; all test lines pass. Not yet: an independent check; the four store helpers' own
+  reports (lost to a restart; their notes stand in).
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -395,10 +403,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your verdict on the curved corner and the new tools: photographed stone and brick, the road on a curve, the wall on a
-  plane, timber frames (folder 56).
+- Your verdict on the Japanese garden: both passes, the close views of the path and the full size (folder 57).
+- Any Poliigon sets you want the builders to have: download them and attach them here (they stay on this machine).
 - Your generated leaf sheet, when you have one (about 12 separate fallen leaves from straight above on white), for the litter tool.
-- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.10.0: the plugin's rule asks for one; you stopped the
+- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.11.0: the plugin's rule asks for one; you stopped the
   last one, so it waits for your word.
 - Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
