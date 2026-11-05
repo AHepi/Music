@@ -857,6 +857,45 @@ Only failures in doing the work belong here. Newest at the bottom.
      corners; four records failed to download; one card's rights covered the United States only (swapped for a plainer
      one); one card's date disagreed with the card itself (the card's 1896 was used).
 
+## 2026-11-06 (the garden closer to the owner's picture; log 58)
+
+248. **The closer builder's fixes** (log 58, from its report): the sunlit mist veiled the far hills into one pale slope
+     (the sun and the fill light now leave the mist alone and a weak blue light of its own lights it); gold over a wide part
+     of the clouds turned the whole wet path warm (the gold now stays near the sun); the store's hanging lantern near the
+     eye pushed the warm-light measure past its band (its paper turned down to an eighth, its light to a quarter); the
+     store's maple hung its crown low (the tree lifted 2 m, its foot out of frame); the hills came out lower than asked;
+     the camera's 1000 m limit cut off the cloud deck; thick air over the courtyard drew a milky veil, not sun shafts
+     (taken out); a puddle ripple drew crumpled foil at full size; the full-size close view sat over the warm band (finished
+     again, darker).
+249. **The bands, not the tools, stop the garden at the owner's gold** (log 58): the owner's picture measures warm 40% and
+     blue 12% (the second picture 49% and 3%); the closer pass stopped at warm 34% and blue 31%, one point above the blue
+     floor, with brightness 0.22 to 0.23 against the owner's 0.25. Its full size measured inside every band as drawn
+     (24 minutes), unlike log 57's (lesson 246).
+250. **Two store helpers found why the far hills stand low** (log 58, from the sky helper's notes): each ridge's highest
+     point averaged 0.7 of the height asked (0.31 to 0.90 over 12 seeds), because a ridge spans only part of one hump of
+     its noise, so it is one gentle slope standing wherever the noise is there; a narrow view sees lower still.
+251. **The plants and lanterns helper's fixes** (log 58, from its report): the maple's new option shared its name with a
+     list inside the maple's code (a crash; the inside name was changed); its default written "(default 0: ...)" could not
+     be read by the parts test (now "(default 0; ...)"); the first azalea's leaves were far too sparse, its dark inside read
+     as a grey stone dome and the leaves' shine as white specks; too few flowers for "covered"; out of flower it was sparse,
+     with glittery yellow shoots; the hedge first got twice too many flowers, some in the soil; a warning on the azalea's
+     card, written before it was checked (pink flowers the brightest thing at dusk), said the opposite of what its dusk
+     picture then showed (rewritten); three slips in its own test.
+252. **The sky and hills helper's fixes** (log 58, from its report): its first mist light (4 W to the square metre) laid a
+     blue veil over the hills (now 1); its first sky read as noon, with white clouds; its wind option did nothing, because
+     Blender stretched the clouds before turning them (now two steps), and its first check camera looked straight down;
+     the exact heights came out at 0.97 of those asked (it had left room for tree tops); the card's own lights showed as a
+     white blob in its puddle; five slips in its own test.
+253. **The bake helper was stopped by the server under a minute after it started** (log 58, 07:00): it had left nothing on
+     disk. Its record was still short, so it could be resumed with the same job, and it started again at 07:01.
+254. **The bake helper's fixes** (log 58, from its report): Blender's usual way of laying out the pictures failed inside
+     the tool's own working scene (the dome now gets its own seamless layout); its first bake had no leaves, because each
+     temporary copy was removed too early; the pictures had black holes at the dome's foot (now filled from around them);
+     a dark swirl near the baked bush's top, seen by the session at full size, came from the 173,274 single-face leaves
+     and petals facing into the bush, which baked as dents (the tool now turns them outwards first; the first three pairs
+     sent to the owner had it); the dome stood 4.6 cm under the ground; a shape the caller gives was added to its
+     collection twice (an error); its first garden picture was too dark, the lantern facing away.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.

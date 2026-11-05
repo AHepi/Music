@@ -13,6 +13,8 @@ Options:
            with a broad cap, 0.95 m tall and 1.1 m across
     lit    (default False) a warm light inside the fire box: the paper windows glow, the round windows let it out, and
            it lights what is round the lantern; False: cold paper, no light
+    light  (default 18) the strength of that light in watts, when lit: 18 lights the stones and moss round its own foot;
+           30 to 40 reaches the ground and things a few metres off in a wide scene (the third garden builder set 30)
     seed   how each stone sits on the one below (a little off true), the cap's turn, the moss and streaks
 
 Where it came from: the builders' stone lantern in '/home/claude/build-57-garden/first pass/render_final.py' (the
@@ -46,16 +48,20 @@ CARD = {
     'size_m': (0.93, 0.80, 1.80),
     'options': {
         'kind': "'kasuga' (default): the tall lantern on a post, 1.8 m; 'yukimi': the low snow-viewing lantern on three legs, 0.95 m tall, 1.1 m across",
-        'lit': 'False (default): cold paper, no light; True: a warm 18 W light in the fire box, the paper windows glowing and the round ones letting it out',
+        'lit': 'False (default): cold paper, no light; True: a warm light in the fire box (its strength is light), the paper windows glowing and the round ones letting it out',
+        'light': 'the strength of the light in the fire box in watts, when lit (default 18; 18 lights the stones and moss round its own foot, '
+                 '30 to 40 reaches the ground a few metres round it in a wide scene; 2 to 150)',
         'seed': "how each stone sits on the one below, the cap's turn, the moss and streaks (default 0)",
     },
     'materials': ['SURFACE • dark_rock_02 (garden stone, wet 0.45, moss 1.00)', 'PART • garden: lantern paper',
                   'PART • garden: lantern paper, lit'],
     'source': "the stone lantern in '/home/claude/build-57-garden/first pass/render_final.py' (lines 940-1046), kept in "
-              "'/home/claude/build-57-garden/second pass/render_final.py' (lines 1096-1171); rebuilt from the board's photographs 06 and 07",
+              "'/home/claude/build-57-garden/second pass/render_final.py' (lines 1096-1171); rebuilt from the board's photographs 06 and 07; "
+              "the light option from '/home/claude/build-57-garden/closer/render_final.py' (lines 1221-1231), where the builder set its light to 30 W by hand",
     'views': 'reads from every side; the paper window faces -Y (and +Y), the round sun and moon windows the two front corners',
-    'trap': "lit, its light is only 18 W, inside the fire box (the object 'stone_lantern light'): it lights the stones and moss round "
-            "its foot; in a wide scene turn it up rather than brightening the paper; the yukimi's legs reach 0.42 m out from its middle",
+    'trap': "lit, its light is 18 W unless you give light=, inside the fire box (the object 'stone_lantern light'): at 18 W it lights only the "
+            "stones and moss round its foot; in a wide scene give light=30 or more rather than brightening the paper; the yukimi's legs reach "
+            "0.42 m out from its middle",
 }
 
 
@@ -286,9 +292,15 @@ def _yukimi(shape, rng):
     return papers, (0.0, 0.0, 0.525), turn
 
 
-def build(collection, seed=0, kind='kasuga', lit=False):
+def build(collection, seed=0, kind='kasuga', lit=False, light=18.0):
     if kind not in KINDS:
         raise ValueError("kind is one of %s, not %r" % (', '.join(repr(k) for k in KINDS), kind))
+    try:
+        light = float(light)
+    except (TypeError, ValueError):
+        raise ValueError('stone_lantern light is a number of watts, not %r' % (light,))
+    if not 2.0 <= light <= 150.0:
+        raise ValueError('stone_lantern light is 2 to 150 W (18 its own, 30 to 40 for a wide scene), not %r' % (light,))
     rng = shapes.rng_for(PART, seed)
     shape = garden.Shape()
     papers, light_at, turn = (_kasuga if kind == 'kasuga' else _yukimi)(shape, rng)
@@ -304,5 +316,5 @@ def build(collection, seed=0, kind='kasuga', lit=False):
     paper.visible_shadow = False
     made.append(paper)
     if lit:
-        made.append(garden.hidden_light(collection, '%s light' % PART, lean @ Vector(light_at), 18.0, (1.0, 0.52, 0.2), 0.03))
+        made.append(garden.hidden_light(collection, '%s light' % PART, lean @ Vector(light_at), light, (1.0, 0.52, 0.2), 0.03))
     return made

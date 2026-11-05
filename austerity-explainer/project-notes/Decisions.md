@@ -1019,6 +1019,22 @@ overturn any of them in one line. Changes to the project must follow this file.
     of the files, even changed. Read as: Poliigon sets you download and attach go on a shelf on this machine for the builders,
     as your own texture library does, never into the plugin or GitHub; Poly Haven (free to share) stays the plugin's source.
 
+86. **The garden pushed closer to your picture** (6 November 2026, 04:41), your words, on the finished garden: "Can you push it
+    a little closer to the image now?" Read as: a further pass by a fresh builder whose one job is to bring the place closer
+    to your first picture, the differences closed biggest first (the golden light and rays through the mist, the steps up
+    to the inn, flowering shrubs, more lanterns, the inn's size, the moss), the earlier builders' work kept where your
+    picture has it too; still inside the look's bands, which leave room to go brighter and less blue towards your picture
+    (not warmer: the garden already sits at the top of the warm band). A new brief for such a pass, `Closer to the
+    picture.md`, joins the plugin.
+87. **The azalea projected onto a PBR set, to see how it looks** (6 November 2026, 06:53), your words, on the new azalea's
+    cards: "The bush looks incredible. But it try projecting it onto a PBR and see how it looks". Read as: bake the built
+    bush (thousands of single leaves and flowers) onto a simple low shape as a set of pictures (colour, relief, shine,
+    height), draw the baked bush beside the built one near and at garden distance, and measure what it saves in file size
+    and drawing time (decision 84); whichever way it comes out, the technique and its lesson go into the plugin. A minute
+    later (06:54): "Oh and use Eevee if its faster." Read as: time Eevee against Cycles on the same pictures and draw with
+    the faster (it was Cycles: this machine has no graphics card). On the pictures, at 07:48: "If the right one in these
+    new pictures is PCR, it looks great" (the right one was the PBR bush).
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

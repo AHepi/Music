@@ -4,7 +4,7 @@
 # Use:  sh tests/run_tests.sh          (from the plugin folder or anywhere)
 cd "$(dirname "$0")/.." || exit 1
 status=0
-for test in tests/test_measure.py tests/test_store_materials.py tests/test_store_photographed.py tests/test_store_parts.py tests/test_store_tools.py tests/test_store_ground.py tests/test_store_farm_tools.py tests/test_store_street_ground.py tests/test_store_street_fronts.py tests/test_store_curved_road.py tests/test_store_wall.py tests/test_store_frames.py tests/test_store_garden_things.py tests/test_store_garden_plants.py tests/test_store_garden_buildings.py tests/test_store_garden_ground.py tests/test_copy_case.py tests/test_store_rules.py; do
+for test in tests/test_measure.py tests/test_store_materials.py tests/test_store_photographed.py tests/test_store_parts.py tests/test_store_tools.py tests/test_store_ground.py tests/test_store_farm_tools.py tests/test_store_street_ground.py tests/test_store_street_fronts.py tests/test_store_curved_road.py tests/test_store_wall.py tests/test_store_frames.py tests/test_store_garden_things.py tests/test_store_garden_plants.py tests/test_store_garden_buildings.py tests/test_store_garden_ground.py tests/test_store_garden_closer.py tests/test_store_sky_hills.py tests/test_store_bake.py tests/test_copy_case.py tests/test_store_rules.py; do
   output=$(python3 "$test" 2>&1); code=$?
   if [ "$code" -eq 0 ] && echo "$output" | grep -q "^PASS"; then
     echo "$output" | grep -E "^(PASS|note)"

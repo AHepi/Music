@@ -158,6 +158,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   blue-and-white jar, a stone basin and spout, a stone lantern in a lily pond, a red arched bridge, a timber inn with lit
   paper screens under a curved tiled roof, maples, bamboo, misty mountains; a close view of the path; the full-size picture
   (folder `57 Japanese garden - two builders/`). What they made is now in the store: twelve parts and seven tools.
+- **The garden closer to your picture, and a baked bush (log 58, 6 November, plugin 0.12.0):** a third builder gave the
+  garden a golden low sun behind the ridge, dark wooded hills, the pond opened up, a big lantern near the eye, pines, a
+  pink azalea; as far towards your picture's gold as the look's bands allow (folder `58 Garden closer to the picture/`).
+  The store gained the azalea, flowering hedges, the low sun, the mist's own light, true-height hills and lantern
+  options; and a tool that bakes any detailed part into four PBR pictures on a simple dome, which reads as the built
+  azalea from about 3 m on.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -198,6 +204,11 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   edge along its top. **Mangold:** a big orange-red root grown to feed cattle. **Skep:** a round woven willow basket.
   **Normal picture (log 53, used on every surface from log 54):** the photograph in a PBR set that says which way each tiny
   bit of the surface faces, so light catches its relief.
+- **Bake, baked stand-in (log 58):** to bake is to photograph a detailed thing onto a simple shape: every leaf and flower of
+  the bush is turned into four PBR pictures (colour, relief, shine, height) laid on a plain dome, which is then drawn instead
+  of the thousands of leaves. The dome with its pictures is the baked stand-in. **Eevee, Cycles:** Blender's two ways of
+  drawing a picture; Eevee is built for a graphics card and is slower than Cycles on a machine without one, like this one.
+  **True height (log 58):** the far hills option that makes each ridge's highest point stand exactly at the height asked.
 - **Sett, kerb, channel (log 55):** a sett is one squared stone block of a paved road; the kerb is the row of long stones along
   the pavement's edge; the channel is the row of flat stones along the kerb's foot that the rain runs down. **Close:** a narrow
   passage between tenements, to a stair or a back court. **Hopper head:** the open iron box at the top of a downpipe that the
@@ -1182,12 +1193,48 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     it. **Tested:** all 210 test lines pass, among them all 60 parts built with every option and nothing floating, and
     the four new garden tests. **Not done:** no independent check of 0.7.0 to 0.11.0 (it waits for your word); no light
     rays, steps up to the inn, flowering shrubs or lotus; the four helpers' own reports.
+58. **The garden closer to your picture; the store fed; the azalea baked into PBR pictures (6 November, 04:41 to
+    08:10).** Your words on the finished garden (decision 86): "Can you push it a little closer to the image now?" A new
+    brief, `Closer to the picture.md`, gave a third fresh builder (04:47 to 06:04) the earlier script and pictures, a
+    fresh kit and your two pictures. It listed 28 differences, biggest first, and closed the biggest: a golden low sun
+    just behind the far ridge, cloud undersides gold near it and grey away (the puddles now mirror gold and white cloud);
+    dark wooded ridges in layers rising either side of the sun; the mist kept low and lit by a weak light of its own, so
+    it no longer veils the hills; the pond's near shore opened, so the water, lilies, bridge and lit windows show; the
+    store's maple hanging across the top, two pruned pines by the inn, a stout lit stone lantern and a big lantern
+    hanging near the eye; a pink azalea, brighter moss, softly lit windows, wetter boards, greyer stone, fewer and
+    redder leaves; the eye 15 cm higher, the close view looking further along the path. It stopped 23 minutes early
+    (one more change needed two full pictures and their measures), saying what it would change next. Your picture
+    measures warm 40% and blue 12%, outside the look's bands; the garden went as far as they allow: warm 34%, blue 31%
+    (the floor is 30%), brightness 0.22 (yours 0.25). The full size took 24 minutes and sat inside every band as drawn.
+    Not done: sun shafts (thick air drew a milky veil), bamboo leaves at the top right, steps beyond the bridge and a
+    second lantern (the warm-light measure was at 4.1% of its 4.5% limit), ferns at the bottom right. **Into the
+    plugin (0.12.0), by two helpers (06:13 to 06:58):** a new `azalea` part (a clipped mound in flower in five colours,
+    or out of flower), flowers on the hedge tool, a taller clear trunk for the maple, a dimmer glow for the hanging
+    lantern and a stronger light for the stone lantern; a low golden sun with its clouds drawn in the sky itself and the
+    mist's own light; far hills that now reach the height asked (they stood at about 0.7 of it, because each ridge
+    spanned only part of one hump of its random wobble) and dip where the sun sets; the builder's traps. **Your
+    azalea word** (decision 87): "The bush looks incredible. But it try projecting it onto a PBR and see how it looks",
+    then "Oh and use Eevee if its faster." A third helper (07:01 to 07:43, after the server stopped its first start)
+    baked the built bush (265,367 faces) onto a 320-face dome as four pictures: colour, relief, shine and height. With
+    the height turned into real bumps it reads as the same bush from about 3 m on, and from 8 m at dusk the two cannot
+    be told apart; very close (1.8 m) its flowers look flat and soft; on a smooth dome it reads as a shiny painted ball.
+    A dark swirl near its top, seen by the session at full size, was leaves facing into the bush that baked as dents
+    (fixed). It draws faster (8 against 13 seconds at 3 m, 10 against 21 at 1.8 m, 20 against 21 in a whole garden
+    view) but is smaller only with small pictures: the built bush is already stored as points its leaves and flowers
+    are copied onto (0.92 MB); baked it is 0.36 MB with 256 pictures, about 1 MB with 512, 3.1 MB with 1024. Eevee was
+    slower than Cycles here (27.0 against 13.2 seconds), because this machine has no graphics card and Eevee draws
+    through software. You looked at the pairs: "If the right one in these new pictures is PCR, it looks great" (it is).
+    The bake is now a store tool, `bake_to_pbr`, for any detailed part. **Tested:** the full test run passes, all 230
+    test lines (210 before), among them all 61 parts built with every option and nothing floating, and the three new
+    tests. **Not done:** no independent check of
+    0.7.0 to 0.12.0 (it waits for your word); the azalea part has no baked option of its own (a builder bakes it with
+    the tool, in about 9 seconds at 256 pictures).
 
 ## Next step
 
-Your verdict on the Japanese garden (folder `57 Japanese garden - two builders/`: both passes, the close views, the full
-size). Then, at your word, an independent check of the plugin (0.7.0 to 0.11.0) by a fresh checker; Poliigon sets if you
-attach any; and your generated leaf sheet into the litter tool when it comes.
+Your verdict on the garden brought closer to your picture (folder `58 Garden closer to the picture/`: the full size and
+the close view of the path). Then, at your word, an independent check of the plugin (0.7.0 to 0.12.0) by a fresh checker;
+Poliigon sets if you attach any; and your generated leaf sheet into the litter tool when it comes.
 
 ## Traps
 

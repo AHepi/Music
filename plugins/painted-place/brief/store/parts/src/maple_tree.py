@@ -9,6 +9,11 @@ Options:
     height     metres from the ground to the top of the crown (default 4.5)
     colour     'red' (default), 'orange' or 'green': the leaves
     fullness   how full the crown is (default 1.0)
+    trunk      metres of clear trunk: from the ground to where the trunk divides into its stems and the crown starts
+               (default 0: where it divides of itself, 0.7 to 1 m up at the default height). Given higher, the trunk runs
+               up clear to that height and the crown sits on it unchanged, so the top rises by as much: a maple that has
+               had its lower limbs taken off over a path, or grown on a single stem, its crown clear of what stands
+               behind it (the third garden builder had to lift the whole tree 2 m into the air, its foot out of frame)
     seed       the whole tree: its stems, branches, sprays and every leaf's shade
 
 Where it came from: '/home/claude/build-57-garden/first pass/render_final.py': maple_outline_fine() (line 1365, the
@@ -56,17 +61,23 @@ CARD = {
                   "red; 'green': summer green, a few turning red",
         'fullness': 'how full the crown is: 1 a full crown, 0.5 thin with the branches showing, 0.2 nearly bare (default '
                     '1.0; 0.1 to 1.5)',
+        'trunk': 'metres of clear trunk, from the ground to where it divides into its stems and the crown starts (default 0; 0 is '
+                 'where it divides of itself, about 0.7 to 1.1 m up at the default height; given higher, the trunk runs up clear to there and the '
+                 'crown sits on it unchanged, so the top rises by as much: height=4.5 with trunk=2.4 starts the crown at 2.4 m, its lowest '
+                 'leaves just above, the top at about 5.9 m; a value under where it divides of itself changes nothing; 0 to 8)',
         'seed': 'the whole tree: its stems, branches, sprays and every leaf (default 0)',
     },
     'materials': ['SURFACE • bark_willow_02', 'PART • maple_tree: leaves, red', 'PART • maple_tree: leaves, orange',
                   'PART • maple_tree: leaves, green'],
     'source': "'/home/claude/build-57-garden/first pass/render_final.py', maple_outline_fine() (line 1365) and "
-              "leaf_the_tree() (line 1530)",
+              "leaf_the_tree() (line 1530); the trunk option from '/home/claude/build-57-garden/closer/render_final.py' "
+              "(line 1710), where the builder lifted the whole tree 2 m into the air by hand to get its crown clear",
     'views': 'reads from every side; its leaves read as maple leaves from about 6 m, nearer than that each one shows its '
              'lobes and veins; from far off the crown is a soft red layered mass',
     'trap': 'the leaves are single faces, about 10 cm long: from straight below or edge-on at eye height the layers thin '
             'out, and a crown against a dark ground loses its red; set it against the sky or a lit wall, and give it light '
-            'from the side; a full maple is about 6,000 leaves (340,000 points): for trees far off, fullness=0.5 halves them',
+            'from the side; a full maple is about 6,000 leaves (340,000 points): for trees far off, fullness=0.5 halves them; '
+            'its crown hangs low (from about 1 m) over whatever stands behind it: give trunk= to lift it rather than lifting the tree',
 }
 
 LEAF = 0.1           # metres from a leaf's base to its middle lobe's tip (Acer palmatum: 5 to 12 cm)
@@ -81,9 +92,33 @@ def _bezier(a, c, b, count):
     return [a * (1 - t) ** 2 + c * 2 * t * (1 - t) + b * t * t for t in (k / count for k in range(count + 1))]
 
 
-def build(collection, seed=0, height=4.5, colour='red', fullness=1.0):
+def _lift(wood, foliage, divides, trunk, foot, lean):
+    """Stretch the trunk between `foot` (its flare kept as it is) and where it divides up to `trunk`, and lift
+    everything above it (stems, branches, leaves) by the difference, unchanged: the crown on a taller clear trunk. The
+    taller trunk is a little thicker (a quarter more for 2 m of lift), as a tree carrying its crown higher grows it."""
+    lift = trunk - divides
+    stretch = (trunk - foot) / max(divides - foot, 1e-6)
+    thicker = 1.0 + 0.25 * min(lift / 2.0, 1.0)
+    for v in wood.bm.verts:
+        z = v.co.z
+        if z < divides:
+            grow = 1.0 + (thicker - 1.0) * min(1.0, max(0.0, (divides - z) / 0.12))
+            centre_x, centre_y = lean.x * max(z, 0.0), lean.y * max(z, 0.0)          # the trunk was built along lean * z
+            v.co.x = centre_x + (v.co.x - centre_x) * grow
+            v.co.y = centre_y + (v.co.y - centre_y) * grow
+    for shape in (wood, foliage):
+        for v in shape.bm.verts:
+            z = v.co.z
+            if z >= divides:
+                v.co.z = z + lift
+            elif z > foot:
+                v.co.z = foot + (z - foot) * stretch
+
+
+def build(collection, seed=0, height=4.5, colour='red', fullness=1.0, trunk=0.0):
     height = _number('maple_tree height', height, 1.5, 12.0)
     fullness = _number('maple_tree fullness', fullness, 0.05, 2.0)
+    clear_trunk = _number('maple_tree trunk', trunk, 0.0, 8.0)      # (the name trunk is taken below by the trunk's points)
     if colour not in COLOURS:
         raise ValueError("maple_tree colour is 'red', 'orange' or 'green', not %r" % (colour,))
     rng = shapes.rng_for(PART, seed)
@@ -200,11 +235,16 @@ def build(collection, seed=0, height=4.5, colour='red', fullness=1.0):
 
     # ------------------------------------------------------------------ the crown's top exactly at the height asked for
     reach = max(max(v.co.z for v in wood.bm.verts), max((v.co.z for v in foliage.bm.verts), default=0.0))
+    k = 1.0
     if reach > 0.0:
         k = height / reach
         scale = Matrix.Diagonal((k, k, k, 1.0))
         wood.transform(scale)
         foliage.transform(scale)
+    # ------------------------------------------------------------------ a taller clear trunk, if asked: the crown lifted whole
+    divides = split * k                                  # where the trunk divides, after the fit
+    if clear_trunk > divides + 1e-6:
+        _lift(wood, foliage, divides, clear_trunk, min(0.3 * s * k, 0.5 * divides), lean)
     bark = plants.bark(PART, 'smooth bark', Scale=0.45, Normal=0.5, Darken=0.42, Wet=0.5)
     leaves = plants.leaf_material(PART, 'leaves, ' + colour, COLOURS[colour], veins='palmate', spacing=50.0,
                                   translucent=0.15, rough=0.6, coat=0.04, specular=0.05)

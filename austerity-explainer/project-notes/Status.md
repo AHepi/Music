@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-11-06, 00:10, for the painted-place plugin (log 57); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-06, 08:10, for the painted-place plugin (log 58); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -391,6 +391,14 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   sign-in only, unreachable from here, and not shareable, so only sets you attach, kept on this machine. **Plugin 0.11.0:**
   twelve garden parts and seven tools; all test lines pass. Not yet: an independent check; the four store helpers' own
   reports (lost to a restart; their notes stand in).
+- **Log 58 (decisions 86 and 87): the garden closer to your picture, and a baked bush.** A third fresh builder gave the
+  garden a golden low sun behind the far ridge, gold-lit clouds the puddles mirror, dark wooded hills, the pond opened up,
+  a big lantern near the eye, pines and a pink azalea, as far towards your picture's gold as the look's bands allow (warm
+  34%, blue 31%; yours 40% and 12%); the full size sits inside every band (`procedural-textures/58 Garden closer to the
+  picture/`). **Plugin 0.12.0:** the azalea, flowering hedges, a taller maple trunk, lantern glow and light options, the
+  low sun, the mist's own light, hills that reach the height asked, and `bake_to_pbr`, which bakes a detailed part into
+  four PBR pictures on a simple dome: the baked azalea reads as the built one from about 3 m on and draws faster, but is
+  smaller only with small pictures; Eevee was slower than Cycles here. All 230 test lines pass. Not yet: an independent check.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -403,10 +411,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your verdict on the Japanese garden: both passes, the close views of the path and the full size (folder 57).
+- Your verdict on the garden brought closer to your picture: the full size and the close view of the path (folder 58).
 - Any Poliigon sets you want the builders to have: download them and attach them here (they stay on this machine).
 - Your generated leaf sheet, when you have one (about 12 separate fallen leaves from straight above on white), for the litter tool.
-- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.11.0: the plugin's rule asks for one; you stopped the
+- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.12.0: the plugin's rule asks for one; you stopped the
   last one, so it waits for your word.
 - Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line

@@ -11,7 +11,7 @@ What this file is: the faults builders working from this brief have run into so 
 - **Colour gradients with stops outside 0 to 1 silently go flat** in Blender's colour ramps; rescale the input first.
 - **A volume's density measured from the world's centre comes out empty** when the box stands elsewhere; measure from the object's own coordinates.
 - **The tall 9:16 frame is narrow near the camera:** about 3 m wide at 9 m with a 32 mm lens. A building placed near the camera fills a third of the picture; things 10 m to the side are out of frame. Check the frame before dressing.
-- **Light makes visible shafts only where it comes through a small gap** (a few clear panes, a door ajar). A whole wall of lit glass makes a glow, not shafts.
+- **Light makes visible shafts only where it comes through a small gap** (a few clear panes, a door ajar). A whole wall of lit glass makes a glow, not shafts. Thick air over a courtyard with a building between it and a low sun drew only a milky veil (a garden builder's sun shafts).
 - **Lit glass is counted by its area, not by how many windows glow.** Big panes lit all over draw far too bright whatever the exposure; light one or two and leave the rest dim or dark.
 - **A dark hero against a dark background disappears** (a black urn, a gun barrel). Give it a light of its own or a lighter ground behind it.
 - **A thing nobody can name at the final size is noise.** The owner could not tell what the small objects on a walkway were. Make each thing big enough and lit enough to be named, or take it out; litter on a path is the usual case.
@@ -49,8 +49,15 @@ What this file is: the faults builders working from this brief have run into so 
 - **Small things built from boxes read as boxes** (clogs, buckets); things smaller than about 3 cm cannot be seen at 540 x 960. A dark thing in a big shadow reads with pale materials or bright metal on it, without a light of its own.
 - **One thing standing in front of another cancels both** (a broom before a bucket): set them apart.
 - **A stop command that names a process also stops the shell running it** (`pkill -f render_final` matches its own command line): match with a bracket, `pkill -f "[r]ender_final"`. Both garden builders lost a step this way.
-- **Blender's camera stops seeing at 100 m by default:** far mountains vanish until its far limit is raised.
+- **Blender's camera stops seeing at 100 m by default:** far mountains vanish until its far limit is raised. A cloud deck seen low in the sky lies further still: a garden builder's deck, 420 m up, was cut off at a 1000 m limit.
 - **A pale thing on pale wet flags vanishes** (a newspaper on buff sandstone): put it where the ground is dark, in the gutter or on the setts.
 - **Two faces lying in exactly the same plane draw as black squares** (where two timbers cross, where a frame meets its panel, where a flat thing's top lies exactly on the road). Make one of them a few millimetres shallower, or lift it 1 mm.
 - **Worn iron made shiny like a mirror reads dark, not bright:** at night it mirrors the dark sky. Make the worn tops lighter and only half metal, the rust in the hollows darker.
 - **By day an open doorway reads as a black hole.** The sky's light through a door is too little to show the inside; a soft cool light just inside the door, facing in and hidden from the eye, shows it dimmer than the sunlit outside. Lanterns are unlit by day.
+- **Mist lit by the sun or a big fill light veils far hills into one pale slope.** A garden builder kept those lights out of the mist and gave the mist a weak blue light of its own; the hills came back dark, their ridges rimmed with gold.
+- **Clouds lit gold across a wide part of the sky turn the whole wet ground warm,** because wet ground mirrors them. Keep the gold near the sun and the other clouds pale grey: the owner's puddles mirrored gold and white cloud.
+- **A lit lantern near the eye can fill the warm-light measure by itself:** a garden builder's near lantern pushed it past the band until its paper glowed an eighth as bright and its light a quarter.
+- **Warm lamps all round turn every surface they light orange,** and the warm share past its band. Moving each lamp's colour part of the way to white (a garden builder moved them 45% of the way) kept the lit surfaces from all turning orange.
+- **A picture measures warmer at full size than small** (1 to 3 points of the warm share), and a brighter finish raises the warm share and lowers the blue. Measure the final at full size before calling it done.
+- **A ripple that looks right on a small picture draws crumpled foil at full size:** look at water at full size before keeping its ripple.
+- **Eevee is slower than Cycles on a machine with no graphics card:** there it draws through software. On this machine a small test scene took Eevee 33 to 41 seconds and Cycles 3.7; the azalea at 3 m took Eevee 27.0 seconds and Cycles 13.2.

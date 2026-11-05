@@ -36,16 +36,28 @@ Options, with their defaults:
     amount          1.0      how thick the leaves are: 0.5 thin (winter), 1.5 dense
     twigs           1.0      how many bare twigs stick out (0 none)
     dry             0.25     how much of it has turned brown, 0 green to 1 all russet
+    flowers         0        how much of it is in flower: 0 none; 0.3 a scatter; 1 covered, as an azalea hedge in late
+                             spring (five-lobed flowers, each its own size, turn and shade, over the sprays at its skin)
+    flower_colour   'pink'   'pink', 'magenta', 'red', 'white' or 'salmon' (the colours garden azaleas come in)
     seed            0        the same seed grows the same hedge
     leaves_material 'MADE • hedge leaves'          the leaves (reads the numbers this tool writes)
     twig_material   'MADE • wet bark'              stems and twigs
     core_material   'MADE • hedge leaves'          the dark core (the leaves' darkest green, as deep inside a hedge)
+    flowers_material none    a material of your own for the flowers (it may read the numbers 'petal', 'blotch' and
+                             'flower_tone' described below); none: the tool's own in flower_colour
     collection      none     where the objects go (a new collection 'hedge')
 
 What it makes: 'hedge sprays' (a cloud of points, one per spray, carrying 'hedge_scale', 'hedge_rotation',
 'hedge_shape', 'hedge_tone', 'hedge_dry' and 'hedge_inner'; a Geometry Nodes modifier puts a live copy of a leafy spray
 on each; obj['sprays'] is the count), 'hedge twigs' (the stems at its foot and the bare twigs; obj['twigs']) and 'hedge
-core'. The spray shapes are kept in a hidden collection 'hedge shapes • <material>'.
+core'. The spray shapes are kept in a hidden collection 'hedge shapes • <material>'. With flowers, also 'hedge flowers'
+(a cloud of points, one per flower, carrying 'flower_scale', 'flower_rotation', 'flower_shape' and 'flower_tone'; a
+Geometry Nodes modifier puts a live copy of a flower on each; obj['flowers'] is the count; the flower shapes, kept in a
+hidden collection 'flower shapes • <material>', carry 'petal' (0 at the throat to 1 at the lobes' edge) and 'blotch'
+(the spots on the upper lobe)), and the result has a fourth key, 'flowers'.
+
+The flowers are shared with the store's azalea part: flower_shapes(material, collection), flower_material(colour, name)
+and flower_points(name, collection, positions, normals, sizes, seed, ...) make them for any shrub of your own.
 """
 
 import argparse
@@ -89,15 +101,21 @@ TOOL = {
         'amount': 'how thick the leaves are: 0.5 thin, 1.5 dense (1.0)',
         'twigs': 'how many bare twigs stick out, 0 none (1.0)',
         'dry': 'how much has turned brown, 0 to 1 (0.25)',
+        'flowers': 'how much of it is in flower: 0 none, 0.3 a scatter, 1 covered like an azalea hedge in late spring (0)',
+        'flower_colour': "'pink', 'magenta', 'red', 'white' or 'salmon' ('pink')",
         'seed': 'the same seed grows the same hedge (0)',
         'leaves_material, twig_material, core_material': "('%s', '%s', '%s')" % (LEAVES, BARK, CORE),
+        'flowers_material': "a material of your own for the flowers (none: the tool's own, in flower_colour)",
         'collection': "where the objects go (a new collection 'hedge')",
     },
     'materials': [LEAVES, BARK],
     'source': "the hedge in the barn builder's '54 barn first pass - render_final.py' (section 5, line 746) rebuilt: the "
-              "builder's strip of noise read as 'a row of balloons', then as a flat dark band",
+              "builder's strip of noise read as 'a row of balloons', then as a flat dark band; the flowers from the third garden "
+              "builder's azalea in '/home/claude/build-57-garden/closer/render_final.py' (lines 1726-1739), which turned most of "
+              "the hedge's leaves pink, rebuilt as real five-lobed azalea flowers over the sprays at the hedge's skin",
     'trap': 'a hedge is thousands of leaves: far away it is a dark ragged band, so give a long distant hedge amount=0.6 '
-            'and keep amount 1 or more for the near one',
+            'and keep amount 1 or more for the near one; flowers sit over its sprays, so a ragged hedge (raggedness 1) in '
+            'flower reads as a field hedge with pink in it: for a clipped flowering hedge give raggedness=0.3, twigs=0',
 }
 
 
@@ -218,6 +236,314 @@ def _live_copies(obj, shapes):
     return modifier
 
 
+# ------------------------------------------------------------------------------------------------ flowers
+#
+# A garden azalea's flower (Rhododendron indicum, satsuki; the kurume azaleas are smaller): a funnel 4 to 7 cm across
+# opening into five round lobes joined at the throat, the upper lobe spotted darker; flowers open singly or two or three
+# together at the shoot tips, all over the clipped skin of the bush in late spring.
+
+FLOWER_COLOURS = {          # (the lobes, the throat, the spots on the upper lobe), before the look darkens them
+    'pink': ((0.74, 0.17, 0.32), (0.56, 0.075, 0.2), (0.32, 0.012, 0.075)),
+    'magenta': ((0.56, 0.045, 0.30), (0.40, 0.02, 0.22), (0.22, 0.0, 0.11)),
+    'red': ((0.64, 0.035, 0.035), (0.46, 0.018, 0.024), (0.24, 0.0, 0.01)),
+    'white': ((0.80, 0.78, 0.74), (0.66, 0.70, 0.52), (0.40, 0.46, 0.20)),
+    'salmon': ((0.84, 0.31, 0.19), (0.66, 0.18, 0.11), (0.40, 0.05, 0.04)),
+}
+FLOWER_SHAPES = 6           # four open flowers, each its own, one half open, one bud
+_SEGMENTS = 20              # round the flower: four to a lobe (its middle, a half, the notch, a half)
+_RINGS = (0.3, 0.68, 1.0)
+
+
+def _flower_mesh(name, index):
+    """One flower, real size, facing +Z with its throat at the origin and its upper lobe towards +Y: a funnel opening
+    into five lobes, notched between them, their edges a little ruffled; 'petal' runs from 0 at the throat to 1 at the
+    lobes' edge, 'blotch' marks the spots on the upper lobe. Shapes 0-3 open (each its own size, depth and ruffle), 4
+    half open, 5 a bud."""
+    pick = random.Random(7100 + index)
+    across = pick.uniform(0.048, 0.058)                      # metres across the open flower
+    depth = across * pick.uniform(0.28, 0.36)                 # the funnel's depth
+    ruffle = pick.uniform(0.02, 0.05) * across
+    opening = (1.0, 1.0, 1.0, 1.0, 0.45, 0.12)[index % FLOWER_SHAPES]
+    points, petal, blotch = [(0.0, 0.0, 0.0)], [0.0], [0.0]
+    lobe_size = [pick.uniform(0.9, 1.06) for _ in range(5)]
+    for f in _RINGS:
+        for j in range(_SEGMENTS):
+            theta = math.pi / 2 + 2.0 * math.pi * j / _SEGMENTS
+            lobe = abs(math.cos(2.5 * (theta - math.pi / 2)))
+            rim = (0.68 + 0.32 * lobe ** 0.5) * lobe_size[(j + 2) // 4 % 5]
+            r = 0.5 * across * f * rim
+            z = depth * (1.0 - (1.0 - f) ** 1.6) + ruffle * f ** 3 * math.cos(10.0 * theta + index)
+            # half open and the bud: the lobes stand up round the throat instead of spreading
+            if opening < 1.0:
+                closed = 1.0 - opening
+                r *= opening + closed * 0.35 * (1.0 - 0.4 * f)
+                z = depth * f * (1.0 + 1.8 * closed) if index % FLOWER_SHAPES == 5 else z + depth * 0.9 * closed * f
+            points.append((r * math.cos(theta), r * math.sin(theta), z))
+            petal.append(f)
+            up = math.exp(-((theta - math.pi / 2) / math.radians(24.0)) ** 2)
+            blotch.append(up * max(0.0, 1.0 - abs(f - 0.4) / 0.35))          # from the throat to half way up the lobe
+    faces = []
+    for j in range(_SEGMENTS):
+        faces.append((0, 1 + j, 1 + (j + 1) % _SEGMENTS))
+    for k in range(len(_RINGS) - 1):
+        a, b = 1 + k * _SEGMENTS, 1 + (k + 1) * _SEGMENTS
+        for j in range(_SEGMENTS):
+            j1 = (j + 1) % _SEGMENTS
+            faces.append((a + j, b + j, b + j1, a + j1))
+    if index % FLOWER_SHAPES != 5:
+        # five stamens and the longer style out of the throat, bent towards the lower lobes and curving up at their
+        # tips, each a thin strip ending in a dark anther ('petal' 0 there, as dark as the throat)
+        reach = 0.5 * across * opening
+        for k in range(6):
+            style = k == 5
+            spread = math.radians(-24.0 + 12.0 * k) if not style else 0.0
+            length = reach * (1.08 if style else pick.uniform(0.8, 0.98))
+            width = 0.0007 if not style else 0.0009
+            ribbon = []
+            for step in range(7):
+                t = step / 6.0
+                r = length * t
+                z = depth * (0.15 + 0.95 * t) + across * 0.16 * t ** 2.2
+                centre = (r * math.sin(spread), -r * math.cos(spread), z)
+                side = (math.cos(spread), math.sin(spread), 0.0)
+                half = width * (2.4 if (step == 6 and not style) else 1.0)
+                first = len(points)
+                points.append((centre[0] - side[0] * half, centre[1] - side[1] * half, centre[2]))
+                points.append((centre[0] + side[0] * half, centre[1] + side[1] * half, centre[2]))
+                tip = step == 6 and not style
+                petal += [0.0 if tip else 0.55, 0.0 if tip else 0.55]
+                blotch += [0.0, 0.0]
+                ribbon.append(first)
+            for a, b in zip(ribbon, ribbon[1:]):
+                faces.append((a, a + 1, b + 1, b))
+    mesh = bpy.data.meshes.new(name)
+    mesh.from_pydata(points, [], faces)
+    mesh.update()
+    for attribute, values in (('petal', petal), ('blotch', blotch)):
+        layer = mesh.attributes.new(attribute, 'FLOAT', 'POINT')
+        layer.data.foreach_set('value', numpy.asarray(values, dtype=numpy.float32))
+    mesh.shade_smooth()
+    return mesh
+
+
+def flower_material(colour='pink', name=None):
+    """The flowers' material, made once per file ('hedge flowers • <colour>' unless named): the lobes' colour, deeper in
+    the throat, the upper lobe spotted ('petal' and 'blotch' on the flower shapes), each flower a little lighter or
+    darker ('flower_tone' on the points that carry the copies); thin petals, so lit through a little from behind;
+    a faint wet sheen."""
+    if colour not in FLOWER_COLOURS:
+        raise ValueError('flower_colour is one of %s, not %r' % (', '.join(repr(c) for c in FLOWER_COLOURS), colour))
+    name = name or 'hedge flowers • %s' % colour
+    found = bpy.data.materials.get(name)
+    if found is not None:
+        return found
+    lobes, throat, spots = FLOWER_COLOURS[colour]
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    nodes, links = m.node_tree.nodes, m.node_tree.links
+    p = nodes.get('Principled BSDF')
+    out = nodes.get('Material Output')
+
+    def attribute(what, kind='GEOMETRY'):
+        n = nodes.new('ShaderNodeAttribute')
+        n.attribute_type = kind
+        n.attribute_name = what
+        return n.outputs['Fac']
+
+    def maths(op, a, b, clamp=False):
+        n = nodes.new('ShaderNodeMath')
+        n.operation = op
+        n.use_clamp = clamp
+        for socket, value in zip(n.inputs, (a, b)):
+            if isinstance(value, (int, float)):
+                socket.default_value = value
+            else:
+                links.new(value, socket)
+        return n.outputs[0]
+
+    def mix(fac, a, b, blend='MIX'):
+        n = nodes.new('ShaderNodeMix')
+        n.data_type = 'RGBA'
+        n.blend_type = blend
+        for socket, value in ((n.inputs[0], fac), (n.inputs[6], a), (n.inputs[7], b)):
+            if isinstance(value, (int, float)):
+                socket.default_value = value
+            elif isinstance(value, tuple):
+                socket.default_value = tuple(value) + (1.0,) if len(value) == 3 else value
+            else:
+                links.new(value, socket)
+        return n.outputs[2]
+
+    petal = attribute('petal')
+    blotch = attribute('blotch')
+    tone = attribute('flower_tone', 'INSTANCER')
+    opened = nodes.new('ShaderNodeMapRange')
+    opened.inputs['From Min'].default_value, opened.inputs['From Max'].default_value = 0.1, 0.75
+    links.new(petal, opened.inputs['Value'])
+    colour_out = mix(opened.outputs['Result'], throat, lobes)
+    # the spots: small dots on the upper lobe, from the flower's own place (each copy its own pattern)
+    coords = nodes.new('ShaderNodeTexCoord')
+    dots = nodes.new('ShaderNodeTexVoronoi')
+    dots.feature = 'F1'
+    dots.inputs['Scale'].default_value = 900.0
+    links.new(coords.outputs['Object'], dots.inputs['Vector'])
+    dot = maths('LESS_THAN', dots.outputs['Distance'], 0.33)
+    colour_out = mix(maths('MULTIPLY', maths('MULTIPLY', blotch, 1.6, True), dot, True), colour_out, spots)
+    # each flower lighter or darker, and the deep throat in its own shadow
+    shade = maths('ADD', maths('MULTIPLY', tone, 0.32), 0.84)
+    colour_out = mix(1.0, colour_out, shade, 'MULTIPLY')
+    deep = nodes.new('ShaderNodeMapRange')
+    deep.inputs['From Min'].default_value, deep.inputs['From Max'].default_value = 0.0, 0.25
+    deep.inputs['To Min'].default_value, deep.inputs['To Max'].default_value = 0.55, 0.0
+    links.new(petal, deep.inputs['Value'])
+    colour_out = mix(deep.outputs['Result'], colour_out, (0.0, 0.0, 0.0))
+    links.new(colour_out, p.inputs['Base Color'])
+    p.inputs['Roughness'].default_value = 0.45
+    p.inputs['Specular IOR Level'].default_value = 0.25
+    p.inputs['Coat Weight'].default_value = 0.15
+    p.inputs['Coat Roughness'].default_value = 0.2
+    through = nodes.new('ShaderNodeBsdfTranslucent')
+    links.new(colour_out, through.inputs['Color'])
+    both = nodes.new('ShaderNodeMixShader')
+    both.inputs['Fac'].default_value = 0.35
+    links.new(p.outputs['BSDF'], both.inputs[1])
+    links.new(through.outputs['BSDF'], both.inputs[2])
+    links.new(both.outputs['Shader'], out.inputs['Surface'])
+    m.diffuse_color = tuple(lobes) + (1.0,)
+    return m
+
+
+def flower_shapes(material, collection):
+    """The hidden collection of flower shapes in `material` ('flower shapes • <material>'), made once per file, linked
+    under `collection`."""
+    name = 'flower shapes • %s' % material.name
+    shapes = bpy.data.collections.get(name)
+    if shapes is None:
+        shapes = bpy.data.collections.new(name)
+    if shapes.name not in collection.children:
+        collection.children.link(shapes)
+    shapes.hide_render = True
+    shapes.hide_viewport = True
+    for index in range(len(shapes.objects), FLOWER_SHAPES):
+        shape_name = 'flower %02d • %s' % (index, material.name)
+        mesh = _flower_mesh(shape_name, index)
+        mesh.materials.append(material)
+        shapes.objects.link(bpy.data.objects.new(shape_name, mesh))
+    return shapes
+
+
+def copies(obj, shapes, prefix):
+    """A Geometry Nodes modifier putting a live copy of one of `shapes` on each of obj's points, as the points'
+    '<prefix>_scale', '<prefix>_rotation' (XYZ angles) and '<prefix>_shape' (which shape) say."""
+    group = bpy.data.node_groups.new(obj.name + ' • live copies', 'GeometryNodeTree')
+    group.interface.new_socket(name='Geometry', in_out='INPUT', socket_type='NodeSocketGeometry')
+    group.interface.new_socket(name='Geometry', in_out='OUTPUT', socket_type='NodeSocketGeometry')
+    nodes, links = group.nodes, group.links
+    group_in, group_out = nodes.new('NodeGroupInput'), nodes.new('NodeGroupOutput')
+    instance = nodes.new('GeometryNodeInstanceOnPoints')
+    info = nodes.new('GeometryNodeCollectionInfo')
+    info.inputs['Collection'].default_value = shapes
+    info.inputs['Separate Children'].default_value = True
+    info.inputs['Reset Children'].default_value = True
+    instance.inputs['Pick Instance'].default_value = True
+    links.new(group_in.outputs['Geometry'], instance.inputs['Points'])
+    links.new(info.outputs['Instances'], instance.inputs['Instance'])
+    for attribute, socket, kind in (('_scale', 'Scale', 'FLOAT_VECTOR'), ('_rotation', 'Rotation', 'FLOAT_VECTOR'),
+                                    ('_shape', 'Instance Index', 'INT')):
+        named = nodes.new('GeometryNodeInputNamedAttribute')
+        named.data_type = kind
+        named.inputs['Name'].default_value = prefix + attribute
+        links.new(named.outputs['Attribute'], instance.inputs[socket])
+    links.new(instance.outputs['Instances'], group_out.inputs['Geometry'])
+    modifier = obj.modifiers.new('live copies', 'NODES')
+    modifier.node_group = group
+    return modifier
+
+
+def facing(normals, up_hint, rng, tilt=0.35, roll=0.6):
+    """Turns (n, 3, 3: columns x, y, z) whose z is each normal tipped by up to `tilt` (radians, at random) and whose y
+    leans towards `up_hint` (the flowers' spotted upper lobe up), rolled by up to `roll` either way."""
+    n = len(normals)
+    z = numpy.asarray(normals, dtype=numpy.float64) + rng.normal(0.0, tilt, (n, 3))
+    z /= numpy.maximum(numpy.linalg.norm(z, axis=1, keepdims=True), 1e-9)
+    hint = numpy.tile(numpy.asarray(up_hint, dtype=numpy.float64), (n, 1))
+    y = hint - z * numpy.sum(hint * z, axis=1, keepdims=True)
+    flat = numpy.linalg.norm(y, axis=1) < 1e-4
+    y[flat] = numpy.array([0.0, 1.0, 0.0]) - z[flat] * z[flat][:, 1:2]
+    y /= numpy.maximum(numpy.linalg.norm(y, axis=1, keepdims=True), 1e-9)
+    x = numpy.cross(y, z)
+    angle = rng.uniform(-roll, roll, n)
+    x, y = x * numpy.cos(angle)[:, None] + y * numpy.sin(angle)[:, None], y * numpy.cos(angle)[:, None] - x * numpy.sin(angle)[:, None]
+    return numpy.stack([x, y, z], axis=-1)
+
+
+def flower_points(name, collection, positions, normals, sizes, seed=0, material=None, colour='pink', buds=0.08, origin=None):
+    """A cloud of points carrying a flower each (live copies): at `positions` (n, 3, world), facing out along `normals`
+    (tipped a little at random, the spotted lobe up), each `sizes` times a flower's own size; `buds` of them half open
+    or in bud. Returns the object (obj['flowers'] the count)."""
+    rng = numpy.random.default_rng([int(seed) % (2 ** 32), 113])
+    positions = numpy.asarray(positions, dtype=numpy.float64).reshape(-1, 3)
+    origin = numpy.asarray(origin if origin is not None else (positions.mean(axis=0) if len(positions) else (0.0, 0.0, 0.0)))
+    material = material or flower_material(colour)
+    count = len(positions)
+    turn = facing(normals, (0.0, 0.0, 1.0), rng, tilt=0.5) if count else numpy.zeros((0, 3, 3))
+    shape = numpy.where(rng.random(count) < buds, rng.integers(4, 6, count), rng.integers(0, 4, count))
+    mesh = bpy.data.meshes.new(name)
+    mesh.vertices.add(count)
+    if count:
+        mesh.vertices.foreach_set('co', (positions - origin).astype(numpy.float32).ravel())
+    mesh.update()
+    for attribute, kind, values in (('flower_scale', 'FLOAT_VECTOR', numpy.repeat(numpy.asarray(sizes, dtype=numpy.float64).reshape(-1, 1), 3, axis=1)),
+                                    ('flower_rotation', 'FLOAT_VECTOR', stones._euler(turn) if count else numpy.zeros((0, 3))),
+                                    ('flower_shape', 'INT', shape), ('flower_tone', 'FLOAT', rng.random(count))):
+        stones._write(mesh, attribute, kind, values)
+    mesh.materials.append(material)
+    obj = bpy.data.objects.new(name, mesh)
+    obj.location = tuple(origin)
+    collection.objects.link(obj)
+    copies(obj, flower_shapes(material, collection), 'flower')
+    obj['flowers'] = count
+    return obj
+
+
+def _hedge_flowers(spots, flowers, seed, rng, skin_area):
+    """Where the flowers go on a hedge: about 260 to the square metre of its skin (`skin_area`) at flowers=1, as an
+    azalea in full flower carries; over the sprays at its skin (inner under 0.2), more of them up its faces and on its
+    top than at its foot, in patches; within each spray's own leafy fan (from a third of the way out to its tip),
+    facing out from the hedge and a little up. Returns (positions, normals, sizes)."""
+    if not spots:
+        return numpy.zeros((0, 3)), numpy.zeros((0, 3)), numpy.zeros(0)
+    position = numpy.concatenate([spot[0] for spot in spots])
+    turn = numpy.concatenate([spot[1] for spot in spots])
+    size = numpy.concatenate([spot[2] for spot in spots])
+    inner = numpy.concatenate([spot[3] for spot in spots])
+    up_the_face = numpy.concatenate([spot[4] for spot in spots])
+    ground = numpy.concatenate([spot[5] for spot in spots])
+    patch = 0.5 + 0.5 * _noise.wander(position[:, 0] + 0.31 * position[:, 2], position[:, 1] - 0.27 * position[:, 2], scale=0.9, seed=int(seed) + 71)
+    skin = inner < 0.2
+    # the sprays overlap several deep, so the flowers are shared out among the skin's sprays by their size (a spray's
+    # leafy fan faces out about half its length squared), the patches and the height up the face
+    weight = size ** 2 * (0.25 + 1.5 * patch) * (0.35 + 0.65 * numpy.clip(up_the_face, 0.0, 1.0)) * skin
+    if weight.sum() <= 0:
+        return numpy.zeros((0, 3)), numpy.zeros((0, 3)), numpy.zeros(0)
+    wanted = flowers * 260.0 * skin_area * weight / weight.sum()
+    count = rng.poisson(numpy.clip(wanted, 0.0, None))
+    which = numpy.repeat(numpy.arange(len(position)), count)
+    if not len(which):
+        return numpy.zeros((0, 3)), numpy.zeros((0, 3)), numpy.zeros(0)
+    k = len(which)
+    out = rng.uniform(0.32, 1.0, k)
+    side = rng.uniform(-0.38, 0.38, k) * out
+    lift = rng.uniform(0.0, 0.14, k)
+    local = numpy.column_stack([out, side, lift])
+    world = position[which] + size[which, None] * numpy.einsum('nij,nj->ni', turn[which], local)
+    normal = turn[which][:, :, 0] + 0.5 * turn[which][:, :, 2] + numpy.array([0.0, 0.0, 0.45])
+    normal /= numpy.maximum(numpy.linalg.norm(normal, axis=1, keepdims=True), 1e-9)
+    sizes = rng.uniform(0.85, 1.15, k)
+    above = world[:, 2] > ground[which] + 0.04                  # a spray at the foot reaching down: no flowers in the soil
+    return world[above], normal[above], sizes[above]
+
+
 # ------------------------------------------------------------------------------------------------ the hedge's shape
 
 def _smoothstep(low, high, value):
@@ -268,7 +594,8 @@ def _frames(line, run, u):
 
 
 def lay(line, height=1.6, width=1.1, gaps=(), ground=None, smooth=True, raggedness=1.0, amount=1.0, twigs=1.0, dry=0.25, seed=0,
-        leaves_material=LEAVES, twig_material=BARK, core_material=CORE, collection=None):
+        leaves_material=LEAVES, twig_material=BARK, core_material=CORE, collection=None, flowers=0.0, flower_colour='pink',
+        flowers_material=None):
     """Grow the hedge along the line; returns {'sprays': object, 'twigs': object, 'core': object} (see the note at the
     top)."""
     height, width, raggedness, amount, twigs, dry = (float(v) for v in (height, width, raggedness, amount, twigs, dry))
@@ -284,6 +611,11 @@ def lay(line, height=1.6, width=1.1, gaps=(), ground=None, smooth=True, raggedne
         raise ValueError('twigs is 0 to 4, not %r' % (twigs,))
     if not 0.0 <= dry <= 1.0:
         raise ValueError('dry is 0 (green) to 1 (all brown), not %r' % (dry,))
+    flowers = float(flowers)
+    if not 0.0 <= flowers <= 1.5:
+        raise ValueError('flowers is 0 (none) to 1 (covered), at most 1.5, not %r' % (flowers,))
+    if flowers > 0 and flowers_material is None and flower_colour not in FLOWER_COLOURS:
+        raise ValueError('flower_colour is one of %s, not %r' % (', '.join(repr(c) for c in FLOWER_COLOURS), flower_colour))
     path = dry_wall.Line(line, smooth=smooth)
     gap_list = dry_wall.read_gaps(gaps, path.total)
     pieces = dry_wall.runs(path, gap_list, corner=180.0)            # a hedge rounds its corners: only gaps break it
@@ -293,12 +625,15 @@ def lay(line, height=1.6, width=1.1, gaps=(), ground=None, smooth=True, raggedne
     rng = numpy.random.default_rng([int(seed) % (2 ** 32), 61])
     pick = random.Random(seed)
     positions, scales, rotations, shapes_used, tones, dries, inners = [], [], [], [], [], [], []
+    flower_spots = []                    # (positions, turns, sizes, inner, height up the face) of the sprays, for flowers
+    skin_area = 0.0
     twig_mesh = bmesh.new()
     core_points, core_faces = [], []
     for number, run in enumerate(pieces):
         shape = _Shape(run, height, width, raggedness, int(seed) * 7 + number)
         length = run['end'] - run['start']
         skin = (2.0 * height + width) * length
+        skin_area += skin
         wanted = int(SPRAYS_PER_SQUARE_METRE * amount * skin)
         found = 0
         tries = 0
@@ -359,6 +694,8 @@ def lay(line, height=1.6, width=1.1, gaps=(), ground=None, smooth=True, raggedne
             patches = 0.5 + 0.5 * _noise.wander(u, z, scale=(2.0, 1.0), seed=int(seed) + 41)
             dries.append(numpy.clip(dry + 0.45 * (patches - 0.5) + rng.normal(0.0, 0.12, len(u)), 0.0, 1.0))
             inners.append(numpy.clip(numpy.maximum(depth, 0.0) / numpy.maximum(0.5 * half, 0.1), 0.0, 1.0))
+            if flowers > 0:                          # (kept aside only: the hedge's own numbers are drawn as before)
+                flower_spots.append((positions[-1], turn, size, inners[-1], z / numpy.maximum(h, 1e-6), ground_here))
         # the dark core: a lumpy body well inside the leaves, from a third of the way up (the foot shows its stems)
         sections = max(2, int(math.ceil(length / 0.3)) + 1)
         ring = 14
@@ -461,11 +798,16 @@ def lay(line, height=1.6, width=1.1, gaps=(), ground=None, smooth=True, raggedne
     collection.objects.link(core)
     core_data.materials.append(core_mat)
     lowest = min(foot(u) for u in numpy.linspace(0.0, path.total, 20))
-    for obj in (sprays, twig_object, core):
+    made = {'sprays': sprays, 'twigs': twig_object, 'core': core}
+    if flowers > 0:
+        where, normals, sizes = _hedge_flowers(flower_spots, flowers, seed, numpy.random.default_rng([int(seed) % (2 ** 32), 97]), skin_area)
+        petals = material(flowers_material) if flowers_material is not None else flower_material(flower_colour)
+        made['flowers'] = flower_points('hedge flowers', collection, where, normals, sizes, seed=seed, material=petals, origin=origin)
+    for obj in made.values():
         store.mark(obj, ground=lowest)
     sprays['length'] = sum(r['end'] - r['start'] for r in pieces)
     bpy.context.view_layer.update()
-    return {'sprays': sprays, 'twigs': twig_object, 'core': core}
+    return made
 
 
 def _branch(bm, start, heading, length, radius, pick, forks=1, depth=0, droop=0.0):
@@ -511,6 +853,8 @@ def main():
                                 ('raggedness', 1.0, '0 clipped to 2 overgrown'), ('amount', 1.0, 'how thick the leaves are'),
                                 ('twigs', 1.0, 'how many bare twigs stick out'), ('dry', 0.25, 'how much has turned brown, 0 to 1')):
         parser.add_argument('--' + name, type=float, default=default, help='%s; default %s' % (text, default))
+    parser.add_argument('--flowers', type=float, default=0.0, help='how much of it is in flower: 0 none, 1 covered; default 0')
+    parser.add_argument('--flower-colour', default='pink', choices=sorted(FLOWER_COLOURS), help="the flowers' colour; default pink")
     parser.add_argument('--no-smooth', action='store_true', help='straight between the points')
     parser.add_argument('--seed', type=int, default=0, help='the same seed grows the same hedge; default 0')
     parser.add_argument('--out', help='save the result here (.blend)')
@@ -536,8 +880,10 @@ def main():
             parser.error('no object %r in the file' % args.ground)
         ground = bpy.data.objects[args.ground]
     made = lay(line, height=args.height, width=args.width, gaps=[tuple(g) for g in args.gap], ground=ground, smooth=not args.no_smooth, raggedness=args.raggedness,
-               amount=args.amount, twigs=args.twigs, dry=args.dry, seed=args.seed)
+               amount=args.amount, twigs=args.twigs, dry=args.dry, seed=args.seed, flowers=args.flowers, flower_colour=args.flower_colour)
     print('grew %d sprays and %d twigs along %.2f m of hedge' % (made['sprays']['sprays'], made['twigs']['twigs'], made['sprays']['length']))
+    if 'flowers' in made:
+        print('and %d flowers' % made['flowers']['flowers'])
     if args.out:
         bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.out))
         print('saved', args.out)

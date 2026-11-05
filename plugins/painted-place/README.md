@@ -95,6 +95,21 @@ owner's word that builders use photographed surfaces wherever possible, in `Befo
 Tests in `tests/test_store_garden_things.py`, `tests/test_store_garden_plants.py`, `tests/test_store_garden_buildings.py`
 and `tests/test_store_garden_ground.py`.
 
+## What 0.12 added
+
+A brief for one more builder when the owner asks for a place to come closer to the picture they sent, `brief/Closer to
+the picture.md` (decision 86, the skill's step 7b), and what the first such builder made by hand for the Japanese garden
+(log 58), pulled into the store: a new part, `azalea` (a clipped mound in flower, in five colours, or out of flower);
+flowers on the `hedge` tool's bushes; options for a `maple_tree` with a taller clear trunk, a `hanging_lantern` that glows
+less near the eye and a `stone_lantern` with a stronger light; a low golden sun in `sky_and_haze` (its sun light and a
+cloud deck drawn in the sky itself, gold near the sun) and the mist's own light, so the sun and the fill leave the mist
+alone and far hills stay dark; and `far_hills` ridges that reach the height asked (they stood at about 0.7 of it), dip
+where the sun sets, and say how high they stand from a given eye. The builder's traps went into `Traps.md` and
+`Store.md`. At the owner's word (decision 87), a new tool, `bake_to_pbr`, bakes a detailed part onto a simple dome as
+four PBR pictures with its height as real bumps: the baked azalea reads as the built one from about 3 m on and draws
+faster, but saves file space only with small pictures. Tests in `tests/test_store_garden_closer.py`,
+`tests/test_store_sky_hills.py` and `tests/test_store_bake.py`.
+
 ## What was retired, and why
 
 Until version 0.5 the plugin built the look itself: a **dressing** (`materials/apply_by_role.py` and the `lay_*.py` files) gave every object a material by the words in its name and laid details where its own survey of the camera's view said they belonged; a **look stage** (`stage/`) lit and drew the place; a **blind judge** (`look/judge.py`, `agents/blind-judge.md`) said what to fix. The owner judged a builder given only pictures and a page against builders using the dressing, and the pictures-only builders' places were better ("Pictures only is better"): the dressing's placement logic was faulty and its objects did not make sense (decision 62). The owner then asked to keep the good parts as things to pick from: the footpath as a tool on a line, the detailed things builders had made as parts, the textures as "pick and choose" shaders (decision 65). So in 0.6:

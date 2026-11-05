@@ -1,0 +1,18 @@
+# 58 The two store helpers' own jobs (each got the common text, then its own part below)
+
+## 1. Sky and hills helper
+
+Your job, as the sky and hills helper (your scratch folder: `/home/claude/store-work/closer58/sky/`):
+1. A low-sun sky in `sky_and_haze.py`. The builder's `golden_sky` and its cloud deck (script lines about 1920 to 2030) give a golden glow round a low sun just behind the far ridge, a sun light shining from the same place, and a cloud deck whose undersides are lit gold near the sun and pale grey away from it (the owner's puddles mirror both). Make it one call that returns what it made, with the sun's bearing, height and strength and the deck's height as options, and tell the caller how far the camera must see to reach the deck (the builder's deck, 420 m up, lay past the camera's 1000 m far limit low in the view).
+2. The mist's own light. The builder found that the sunlit mist veiled the far hills pale grey from end to end. Its fix: the sun and the main fill light kept out of the mist (Blender's `visible_volume_scatter = False` on those lights) and a weak blue light that only the mist sees. Give `sky_and_haze` the call that does this for the lights the caller passes, and makes the mist's own light.
+3. `far_hills.py`: (a) the builder raised the ridges either side of the sun's bearing, so they rise towards the edges of the frame with a low saddle where the sun sets (lines about 1762 to 1785): make that an option. (b) The builder found the hills come out lower than asked across a narrow view (its `hills_check.py` measures how high they stand above the eye, bearing by bearing): find out why, and fix it, or give the caller a way to know the heights before drawing, from an eye point the caller passes (tools never read the camera).
+4. Check each against the look's bands (`python3 brief/measure.py PICTURE.png`) with a small picture of a test place of your own (not the garden: a few ground planes, a wet patch that mirrors the sky, the hills), and draw each tool's card.
+
+## 2. Garden plants and lanterns helper
+
+Your job, as the garden plants and lanterns helper (your scratch folder: `/home/claude/store-work/closer58/plants/`):
+1. A new part `azalea`. The builder made a pink azalea in flower by turning most of the hedge tool's leaves to blossom (script lines about 1726 to 1739). Garden azaleas (satsuki) are clipped into low rounded mounds, often several run together, covered in flowers in late spring: look at the board's photographs and build it the way the real shrub is built, with a choice of flower colour, how much of it is in flower, and a choice to have it out of flower (green and clipped). Also give `hedge.py` an option to put flowers on its bushes by the same means, so a builder can lay a flowering hedge along a line.
+2. `maple_tree`: the builder had to lift the whole tree 2 m into the air (its foot out of frame), because the store's maple hangs its crown low over what stands behind it. Give it an option for how high the crown starts (the clear trunk below it).
+3. `hanging_lantern`: near the eye its lit paper panes pushed the warm-light measure past the band; the builder turned its light down to about a quarter and its paper's glow to about an eighth (lines about 987 to 1019). Give it an option for how brightly it glows.
+4. `stone_lantern`: its 18 W light lit only its own foot in a wide scene, and the builder set 30 W. Give it an option for its light's strength.
+5. Check each from four sides, and check the lantern options against the look's warm-light band (`python3 brief/measure.py PICTURE.png`) with a small dusk picture of your own.

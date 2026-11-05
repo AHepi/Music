@@ -12,6 +12,10 @@ Options:
     kind   'box' (default): the square timber-framed lantern with paper panes behind a lattice and a copper roof;
            'glass': the same frame glazed, a candle inside; 'round': a round paper lantern on bamboo ribs
     lit    (default True) glowing warm with a hidden 22 W light inside; False: cold paper or dark glass, no light
+    glow   (default 1.0) how brightly it glows, lit: its light is 22 W times glow, and its paper (or the glazed kind's
+           candle) glows glow times the square root of glow as brightly, so turned down it dims faster than the light it
+           throws; 0.25 (a 5.5 W light, the paper at an eighth) for a lantern near the eye, as the third garden builder
+           found; 0.05 to 3
     seed   the chain's twist, a slight swing, the paper's stains
 
 Where it came from: hanging_lantern() in '/home/claude/build-57-garden/first pass/render_final.py' (line 886), kept in
@@ -49,15 +53,21 @@ CARD = {
         'kind': "'box' (default): timber frame, lattice, paper panes, copper roof; 'glass': the same frame glazed, a candle inside; "
                 "'round': a round paper lantern on bamboo ribs between black rims",
         'lit': 'True (default): glowing warm, a hidden 22 W light inside; False: cold paper or dark glass, no light',
+        'glow': 'how brightly it glows, lit: its light is 22 W times glow, and its paper dims faster than its light (default 1.0; '
+                '0.25 for a lantern near the eye, whose full glow draws its panes white and blows out the warm light: a quarter of the '
+                'light, the paper at an eighth; 0.05 to 3)',
         'seed': "the chain's twist, a slight swing, the paper's stains (default 0)",
     },
     'materials': [IRON, COPPER, 'SURFACE • rough_wood (hanging_lantern)', 'PART • garden: lantern paper, lit', 'PART • garden: lantern paper',
                   'PART • hanging_lantern: glass', 'PART • hanging_lantern: black lacquer', 'PART • hanging_lantern: candle flame'],
     'source': "hanging_lantern() in '/home/claude/build-57-garden/first pass/render_final.py' (line 886), kept in "
-              "'/home/claude/build-57-garden/second pass/render_final.py' (lines 929-966); the round paper lanterns of the board's photograph 11",
+              "'/home/claude/build-57-garden/second pass/render_final.py' (lines 929-966); the round paper lanterns of the board's photograph 11; "
+              "the glow option from '/home/claude/build-57-garden/closer/render_final.py' (lines 987-1019), where the builder turned a near "
+              "lantern's light to a quarter and its paper to an eighth by hand",
     'views': 'reads from every side; drawn alone it hangs in the air, as it needs an eave or a bracket above it',
     'trap': "the hook is 0.8 m above the origin (the lantern's foot): to hang it from an eave whose underside is at height H, put the origin at H - 0.8. "
-            "Lit, the light is the part's own (the object 'hanging_lantern light'): a row of them adds up, so turn each down rather than the paper",
+            "Lit, the light is the part's own (the object 'hanging_lantern light'): a row of them adds up, so give each glow=0.5 or less; "
+            "near the eye (a few metres) its full glow passes the look's warm-light band: give glow=0.25",
 }
 
 
@@ -84,13 +94,33 @@ def lacquer():
     return shapes.part_material(PART, 'black lacquer', maker)
 
 
-def flame():
+def flame(glow=1.0):
     def maker(m, nodes, links, p):
         p.inputs['Base Color'].default_value = (1.0, 0.7, 0.35, 1.0)
         p.inputs['Emission Color'].default_value = (1.0, 0.6, 0.25, 1.0)
         p.inputs['Emission Strength'].default_value = 25.0
         m.diffuse_color = (1.0, 0.7, 0.35, 1.0)
-    return shapes.part_material(PART, 'candle flame', maker)
+    return _dimmed(shapes.part_material(PART, 'candle flame', maker), glow)
+
+
+def _dimmed(material, glow):
+    """The material itself at glow 1; otherwise its own copy ('<name>, glow 0.25'), every glowing strength in it
+    times glow ** 1.5 (the third garden builder's near lantern: light at a quarter, paper at an eighth)."""
+    if abs(glow - 1.0) < 1e-6:
+        return material
+    name = '%s, glow %s' % (material.name, ('%.3f' % glow).rstrip('0').rstrip('.'))
+    existing = bpy.data.materials.get(name)
+    if existing is not None:
+        return existing
+    copy = material.copy()
+    copy.name = name
+    factor = glow ** 1.5
+    for n in copy.node_tree.nodes:
+        if n.type == 'BSDF_PRINCIPLED':
+            n.inputs['Emission Strength'].default_value *= factor
+        elif n.type == 'EMISSION':
+            n.inputs['Strength'].default_value *= factor
+    return copy
 
 
 def chain(shape, top, bottom, rng):
@@ -119,7 +149,7 @@ def hook(shape):
     shape.cylinder((0.0, 0.0, -0.008), (0.0, 0.0, -0.012), 0.004, segments=6)
 
 
-def box_lantern(collection, rng, kind, lit, made):
+def box_lantern(collection, rng, kind, lit, made, glow=1.0):
     w, h = 0.11, 0.32                          # half width, body height
     z0 = -DROP + 0.025                         # the body's foot, over the tray
     z1 = z0 + h
@@ -155,7 +185,7 @@ def box_lantern(collection, rng, kind, lit, made):
         y = s * (w - 0.012)
         panes.poly([(-w + 0.012, y, z0 + 0.02), (w - 0.012, y, z0 + 0.02), (w - 0.012, y, z1 - 0.02), (-w + 0.012, y, z1 - 0.02)])
         panes.poly([(y, -w + 0.012, z0 + 0.02), (y, w - 0.012, z0 + 0.02), (y, w - 0.012, z1 - 0.02), (y, -w + 0.012, z1 - 0.02)])
-    pane_mat = garden.paper(lit) if kind == 'box' else glass()
+    pane_mat = _dimmed(garden.paper(lit), glow) if kind == 'box' else glass()
     obj = panes.finish('%s panes' % PART, collection, pane_mat)
     obj.visible_shadow = False
     made.append(obj)
@@ -166,7 +196,7 @@ def box_lantern(collection, rng, kind, lit, made):
         if lit:
             fl = garden.Shape()
             fl.lathe([(0.0, z0 + 0.093), (0.006, z0 + 0.1), (0.0045, z0 + 0.115), (0.0, z0 + 0.128)], segments=10)
-            f = fl.finish('%s flame' % PART, collection, flame(), smooth=True)
+            f = fl.finish('%s flame' % PART, collection, flame(glow), smooth=True)
             f.visible_shadow = False
             made.append(f)
     # the roof: four flared slopes in copper, the eave turned up a little, a ring on top
@@ -189,7 +219,7 @@ def box_lantern(collection, rng, kind, lit, made):
     return irons, ring_top, (0.0, 0.0, (z0 + z1) / 2 + (0.03 if kind == 'glass' else 0.0))
 
 
-def round_lantern(collection, rng, lit, made):
+def round_lantern(collection, rng, lit, made, glow=1.0):
     """A chochin: paper on bamboo ribs (the ridges every 2 cm), black lacquered rims, a wire bail."""
     bottom = -DROP
     rim = 0.03
@@ -206,7 +236,7 @@ def round_lantern(collection, rng, lit, made):
         profile.append((r, centre + half * t))
     paper = garden.Shape()
     paper.lathe(profile, segments=40, open_ends=True)
-    obj = paper.finish('%s paper' % PART, collection, garden.paper(lit), smooth=True)
+    obj = paper.finish('%s paper' % PART, collection, _dimmed(garden.paper(lit), glow), smooth=True)
     obj.visible_shadow = False
     made.append(obj)
     caps = garden.Shape()
@@ -223,15 +253,22 @@ def round_lantern(collection, rng, lit, made):
     return irons, top + 0.077, (0.0, 0.0, centre)
 
 
-def build(collection, seed=0, kind='box', lit=True):
+def build(collection, seed=0, kind='box', lit=True, glow=1.0):
     if kind not in KINDS:
         raise ValueError("kind is one of %s, not %r" % (', '.join(repr(k) for k in KINDS), kind))
+    try:
+        glow = float(glow)
+    except (TypeError, ValueError):
+        raise ValueError('hanging_lantern glow is a number, not %r' % (glow,))
+    if not 0.05 <= glow <= 3.0:
+        raise ValueError('hanging_lantern glow is 0.05 to 3 (1 its own, 0.25 near the eye), not %r' % (glow,))
     rng = shapes.rng_for(PART, seed)
     made = []
+    shine = glow if lit else 1.0                # unlit, nothing glows to turn down
     if kind == 'round':
-        irons, ring_top, light_at = round_lantern(collection, rng, lit, made)
+        irons, ring_top, light_at = round_lantern(collection, rng, lit, made, shine)
     else:
-        irons, ring_top, light_at = box_lantern(collection, rng, kind, lit, made)
+        irons, ring_top, light_at = box_lantern(collection, rng, kind, lit, made, shine)
     hook(irons)
     chain(irons, -0.026, ring_top - 0.004, rng)
     made.append(irons.finish('%s chain' % PART, collection, IRON, smooth=True))
@@ -242,5 +279,5 @@ def build(collection, seed=0, kind='box', lit=True):
     for obj in made:
         obj.data.transform(place)
     if lit:
-        made.append(garden.hidden_light(collection, '%s light' % PART, place @ Vector(light_at), 22.0, (1.0, 0.55, 0.22), 0.04))
+        made.append(garden.hidden_light(collection, '%s light' % PART, place @ Vector(light_at), 22.0 * glow, (1.0, 0.55, 0.22), 0.04))
     return made

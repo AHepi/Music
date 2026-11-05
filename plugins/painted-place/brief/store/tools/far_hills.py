@@ -12,12 +12,37 @@ From your own script:
     import far_hills
     made = far_hills.lay(centre=(0, 0), facing=0, distance=(120, 450), layers=4, height=(60, 220), seed=2)
     made['hills']                    # one object per layer: 'far hills 1' (nearest) ...
-    camera.data.clip_end = 1000      # Blender's camera stops drawing at 100 m by default: the hills vanish
+    camera.data.clip_end = made['far_limit']   # Blender's camera stops drawing at 100 m by default: the hills vanish
+
+    # ridges that really stand as high as asked, with a low saddle where the sun sets, seen from your eye:
+    made = far_hills.lay(facing=0, height=(70, 230), true_height=True, saddle=-6, eye=(0, -1, 1.7), seed=5)
+    for row in far_hills.skyline(made, eye=(0, -1, 1.7)):    # how high they stand above the eye, bearing by bearing
+        print(row['bearing'], row['elevation'], row['layer'])
+    behind = far_hills.ridge_height(made, (0, -1, 1.7), -6) - 1.5          # a sun just behind the ridge in the saddle:
+    sky_and_haze.low_sun(scene, bearing=-6, height=behind)               # (sky_and_haze's low sun)
+
+Why the hills came out lower than asked (the third garden builder's find, measured 6 November 2026): a ridge's height
+is 0.6 plus a noise that runs from about -0.67 to 0.67, and that noise's hump is 9 times the peak's height long, while
+a ridge reaches only 1.8 times its distance across: each ridge spans a fifth to two fifths of one hump, so it is one
+gentle slope standing wherever the noise happens to be there. Over twelve seeds each ridge's highest point came out at
+0.31 to 0.90 of the height asked, 0.7 on average, and across a narrow view lower still. That is kept as it was, so the
+places already built draw the same; `true_height=True` gives each ridge three or four peaks and saddles along its
+reach and scales it so its highest point stands at the height asked. skyline() tells you how high the hills stand
+above an eye point you give, before anything is drawn (nothing here reads the camera): use it to check they rise over a
+near roof, or to put a low sun just behind the ridge (low_sun's height 1 to 2 degrees under the skyline at its
+bearing).
+
+The saddle: `saddle=B` dips the ridges at bearing B (degrees counter-clockwise from +Y, counted as `facing` and as the
+low sun's bearing in sky_and_haze), seen from `eye` (or from the centre): they climb smoothly to their full height
+`saddle_width` degrees either side, so the skyline rises towards the edges of the frame with a low saddle where the sun
+sets, as mountains round a valley do. The tree tops keep their size; only the ground dips. With true_height the
+highest peak, outside the saddle, still stands at the height asked.
 
 From the command line:
 
     python3 far_hills.py --help
     python3 far_hills.py --distance 120 450 --layers 4 --out hills.blend
+    python3 far_hills.py --true-height --saddle -6 --eye 0 -1 1.7 --skyline
 
 Options, with their defaults:
     centre        (0, 0)          the place's middle (x, y): the hills are measured from it
@@ -26,6 +51,7 @@ Options, with their defaults:
     distance      (120, 450)      metres from the place to the nearest ridge and to the farthest
     layers        4               how many ridges, one behind the other
     height        (60, 220)       the highest peaks of the nearest ridge and of the farthest, metres above `base`
+                                  (as they were made before: they come out at about 0.7 of it; true_height for exact)
     width         none            how far each ridge reaches across, metres (none: 1.8 times its distance)
     haze          400 m           how thick the air: the distance at which a hill has lost half its own colour
     haze_colour   (0.11, 0.14, 0.18)   the air's colour, linear RGB (a dusk grey-blue; warmer for a sunset behind)
@@ -35,10 +61,17 @@ Options, with their defaults:
     base          0.0             the height of the place's ground; the ridges' feet go 15 m below it
     seed          0               the same seed raises the same hills
     collection    none            where the objects go (a new collection 'far_hills')
+    true_height   False           True: each ridge's highest point stands at the height asked, three or four peaks
+                                  and saddles along it, its skyline broken at every size
+    saddle        none            a low saddle at this bearing (degrees, counted as facing), seen from `eye`
+    saddle_width  26              degrees from the saddle's middle to where the ridges stand at their full height
+    saddle_depth  0.4             how far the ridges dip at the saddle, as a share of their height (0.4: to 0.6 of it)
+    eye           none            the eye point (x, y) or (x, y, z) the saddle's bearing is seen from (none: the centre)
 
 What it makes: 'far hills 1' to 'far hills N' (nearest first), each with obj['distance'] and its points' 'hill_haze'
 (0 its own colour to 1 all air) and 'hill_height' (0 at its foot to 1 at its top), read by the material made here,
-'MADE • far hills' (one copy for all).
+'MADE • far hills' (one copy for all); lay() returns {'hills': [...], 'far_limit': metres}, the camera's far limit that
+reaches the farthest of them from the eye (or the centre).
 """
 
 import argparse
@@ -59,8 +92,11 @@ MATERIAL = 'MADE • far hills'
 TOOL = {
     'name': 'far_hills',
     'what': 'wooded mountain ridges far behind a place, for a backdrop: layers one behind the other, each skyline broken by '
-            'tree tops, fading paler and bluer into haze with distance, mist low in the valleys between them',
-    'call': "far_hills.lay(centre=(0, 0), facing=0, distance=(120, 450), layers=4, height=(60, 220), seed=2)",
+            'tree tops, fading paler and bluer into haze with distance, mist low in the valleys between them; when asked, each '
+            'ridge standing at the height asked and the ridges dipping to a low saddle where the sun sets; and a measure of how high '
+            'they stand above your eye, bearing by bearing, before anything is drawn',
+    'call': "made = far_hills.lay(centre=(0, 0), facing=0, distance=(120, 450), layers=4, height=(60, 220), seed=2, true_height=True, saddle=-6, eye=(0, -1, 1.7));  "
+            "camera.data.clip_end = made['far_limit'];  far_hills.skyline(made, eye=(0, -1, 1.7))",
     'options': {
         'centre': "the place's middle (x, y) ((0, 0))",
         'facing': 'the way from the place to the hills, degrees counter-clockwise from +Y; 0 behind a place facing -Y (0)',
@@ -75,15 +111,29 @@ TOOL = {
         'base': "the place's ground height; the ridges' feet go 15 m below it (0.0)",
         'seed': 'the same seed raises the same hills (0)',
         'collection': "where the objects go (a new collection 'far_hills')",
+        'true_height': 'False: as before, each ridge\'s highest point at 0.3 to 0.9 of the height asked (0.7 on average); True: at the height asked, '
+                       'with three or four peaks and saddles along it (False)',
+        'saddle, saddle_width, saddle_depth': 'a low saddle where the sun sets: its bearing, degrees counted as facing (none); degrees either side to '
+                                              'where the ridges stand at full height (26); how far they dip there, as a share of their height (0.4)',
+        'eye': 'the eye point (x, y) or (x, y, z) the saddle\'s bearing is seen from (none: the centre)',
+        'skyline(hills, eye, step, bearings)': 'how high the hills stand above an eye point you give, bearing by bearing, before drawing: '
+                                               "one row per slice of `step` degrees (2.0) with its 'bearing', 'elevation' (degrees), 'above_eye' and "
+                                               "'distance' (metres) and 'layer'",
+        'ridge_height(hills, eye, bearing)': "the skyline's height at one bearing, degrees above the eye: a low sun just behind the ridge stands "
+                                             '1 to 2 degrees under it',
     },
     'materials': [MATERIAL + ' (made in code)'],
     'source': "the mountains in the garden builders' '57 garden' scripts ('/home/claude/build-57-garden/second pass/"
               "render_final.py', lines 1672-1686, with add_air() at line 298), made into a tool: ridges in layers that "
               'stand apart by valley mist, skylines broken by tree tops, and the haze in the hills\' own material by '
-              'distance instead of read from the camera',
-    'trap': "a camera draws nothing beyond its far limit, 100 m by Blender's default: set camera.data.clip_end to at "
-            'least 1.5 times the farthest distance (1000 for the default hills) or the hills vanish; a haze box over the '
-            'place does not reach them (their haze is their own): judge them against your sky in a drawn picture',
+              "distance instead of read from the camera; the saddle from the third garden builder's lift either side of the sun "
+              "('/home/claude/build-57-garden/closer/render_final.py', lines 1762-1785), now a dip in the ridge itself that keeps the tree tops "
+              "their size, and skyline() from its hills_check.py, which found the hills standing lower than asked",
+    'trap': "a camera draws nothing beyond its far limit, 100 m by Blender's default: set camera.data.clip_end to "
+            "made['far_limit'] (1000 m for the default hills) or the hills vanish; a haze box over the "
+            'place does not reach them (their haze is their own): judge them against your sky in a drawn picture. Without true_height the '
+            'ridges stand at about 0.7 of the height asked, lower still across a narrow view: ask skyline() before you judge them against a '
+            'roof. A sunlit or fill-lit haze box between the eye and the hills veils them pale: sky_and_haze.mist_light',
 }
 
 
@@ -141,9 +191,21 @@ def material(haze_colour=(0.11, 0.14, 0.18), haze_strength=0.7):
     return mat
 
 
+def _bearing(dx, dy):
+    """Degrees counter-clockwise from +Y (as `facing`) of the way (dx, dy)."""
+    return math.degrees(math.atan2(-dx, dy))
+
+
+def _turned(angle):
+    """An angle brought into -180 to 180 degrees."""
+    return (angle + 180.0) % 360.0 - 180.0
+
+
 def lay(centre=(0.0, 0.0), facing=0.0, distance=(120.0, 450.0), layers=4, height=(60.0, 220.0), width=None, haze=400.0,
-        haze_colour=(0.11, 0.14, 0.18), haze_strength=0.7, mist=0.6, trees=1.0, base=0.0, seed=0, collection=None):
-    """Raise the ridges (see the note at the top). Returns {'hills': [obj, ...]} (nearest first)."""
+        haze_colour=(0.11, 0.14, 0.18), haze_strength=0.7, mist=0.6, trees=1.0, base=0.0, seed=0, collection=None,
+        true_height=False, saddle=None, saddle_width=26.0, saddle_depth=0.4, eye=None):
+    """Raise the ridges (see the note at the top). Returns {'hills': [obj, ...] (nearest first), 'far_limit': the
+    camera's far limit, metres, that reaches the farthest of them from the eye (or the centre)}."""
     near, far = (float(v) for v in distance)
     low, high = (float(v) for v in height)
     layers = int(layers)
@@ -155,6 +217,9 @@ def lay(centre=(0.0, 0.0), facing=0.0, distance=(120.0, 450.0), layers=4, height
         raise ValueError('mist is 0 to 1 and trees 0 to 2, not %r and %r' % (mist, trees))
     if haze <= 0:
         raise ValueError('haze is a distance in metres above 0, not %r' % (haze,))
+    if saddle is not None and not (0.0 < saddle_width <= 90.0 and 0.0 <= saddle_depth < 1.0):
+        raise ValueError('saddle_width is 0 to 90 degrees and saddle_depth 0 to below 1, not %r and %r' % (saddle_width, saddle_depth))
+    eye_xy = Vector((float(eye[0]), float(eye[1]))) if eye is not None else Vector((float(centre[0]), float(centre[1])))
     a = math.radians(facing)
     away = Vector((-math.sin(a), math.cos(a), 0.0))          # from the place towards the hills
     across = Vector((away.y, -away.x, 0.0))                  # to the right, looking at them
@@ -165,6 +230,7 @@ def lay(centre=(0.0, 0.0), facing=0.0, distance=(120.0, 450.0), layers=4, height
         bpy.context.scene.collection.children.link(target)
     mat = material(haze_colour, haze_strength)
     made = []
+    farthest = 0.0
     for layer in range(layers):
         share = layer / max(layers - 1, 1)
         d = near + (far - near) * share ** 1.15
@@ -175,15 +241,47 @@ def lay(centre=(0.0, 0.0), facing=0.0, distance=(120.0, 450.0), layers=4, height
         rows = 16
         own = 1.0 - math.exp(-d / haze * math.log(2.0))        # half its colour gone at `haze` metres
         offset = Vector((seed * 17.3 + layer * 41.7, seed * 3.1 - layer * 13.9, layer * 7.7))
+        # the crest's height along the ridge, column by column (0 to about 1 of `peak`)
+        crest = []
+        for i in range(columns + 1):
+            x = (i / columns - 0.5) * reach
+            if true_height:      # three or four peaks and saddles along the ridge's reach, scaled below so the highest is `peak`
+                q = Vector((x / (reach / 3.2), 0.0, 0.0)) + offset
+            else:                # as before (the hump is 9 x peak metres long: most ridges are one gentle slope, lower than asked)
+                q = Vector((x / max(peak * 9.0, 1.0), 0.0, 0.0)) + offset
+            ridge = 0.6 + 0.42 * noise.noise(q) + 0.22 * noise.noise(q * 2.7 + Vector((5.0, 0, 0))) + 0.08 * noise.noise(q * 7.0)
+            if true_height:      # a real skyline is broken at every size: spurs, knolls and crags on the bigger peaks
+                ridge += 0.05 * noise.noise(q * 17.0 + Vector((0.0, 9.0, 0.0))) + 0.025 * noise.noise(q * 41.0 + Vector((0.0, 3.0, 0.0)))
+            ridge = max(ridge, 0.12)
+            if saddle is not None:   # a low saddle at the bearing asked, seen from the eye: the ridges rise either side of it
+                crest_point = middle + away * (d + depth * 0.15) + across * x
+                off = abs(_turned(_bearing(crest_point.x - eye_xy.x, crest_point.y - eye_xy.y) - saddle)) / saddle_width
+                off = min(off, 1.0)
+                ridge *= 1.0 - saddle_depth * (1.0 - off * off * (3.0 - 2.0 * off))
+            crest.append(ridge)
+        if true_height:      # scale the ground (not the tree tops) so the highest point, trees and all, is `peak`
+            ground, tops = [], []
+            for j in range(rows + 1):
+                v = j / rows
+                profile = math.sin(math.pi * min(max(v, 0.0), 1.0)) ** 0.85
+                for i in range(columns + 1):
+                    u = i / columns
+                    x = (u - 0.5) * reach
+                    end = min(min(u, 1.0 - u) / 0.08, 1.0) ** 0.6
+                    ground.append(peak * crest[i] * profile * end)
+                    tops.append(trees * peak * 0.035 * (0.5 + noise.noise(Vector((x * 0.11, v * 3.0, layer + 3.0)) + offset)) * profile * end)
+            scale = 1.0
+            for _ in range(8):                               # the highest of s * ground + tops is `peak`
+                k = max(range(len(ground)), key=lambda n: scale * ground[n] + tops[n])
+                scale += (peak - (scale * ground[k] + tops[k])) / max(ground[k], 1e-6)
+            crest = [r * scale for r in crest]
         verts, haze_values, heights, faces = [], [], [], []
         for j in range(rows + 1):
             v = j / rows
             for i in range(columns + 1):
                 u = i / columns
                 x = (u - 0.5) * reach
-                q = Vector((x / max(peak * 9.0, 1.0), 0.0, 0.0)) + offset
-                ridge = 0.6 + 0.42 * noise.noise(q) + 0.22 * noise.noise(q * 2.7 + Vector((5.0, 0, 0))) + 0.08 * noise.noise(q * 7.0)
-                ridge = max(ridge, 0.12)
+                ridge = crest[i]
                 profile = math.sin(math.pi * min(max(v, 0.0), 1.0)) ** 0.85
                 treetop = trees * peak * 0.035 * (0.5 + noise.noise(Vector((x * 0.11, v * 3.0, layer + 3.0)) + offset)) * profile
                 z = peak * ridge * profile + treetop
@@ -220,7 +318,58 @@ def lay(centre=(0.0, 0.0), facing=0.0, distance=(120.0, 450.0), layers=4, height
         obj['distance'] = d
         store.mark(obj)
         made.append(obj)
-    return {'hills': made}
+        farthest = max(farthest, max((Vector(p).to_2d() - eye_xy).length for p in (verts[0], verts[columns], verts[-1], verts[-1 - columns])))
+    return {'hills': made, 'far_limit': math.ceil(farthest * 1.1 / 50.0) * 50.0}
+
+
+def skyline(hills, eye, step=2.0, bearings=None):
+    """How high the hills stand above an eye point you give, bearing by bearing, before anything is drawn (the eye is
+    yours: the camera's place, or any other; nothing here reads a camera). `hills` is lay()'s result or its list of
+    objects; `eye` is (x, y, z); `step` the width of each bearing's slice in degrees; `bearings` (from, to) in degrees
+    counted as `facing` (none: all the hills cover). Returns one row per slice, from the lowest bearing up:
+    {'bearing', 'elevation' (degrees above the eye's level), 'above_eye' (metres), 'distance' (metres), 'layer' (its name)}."""
+    import numpy
+    objects = hills['hills'] if isinstance(hills, dict) else list(hills)
+    if not objects:
+        raise ValueError('skyline needs the hills lay() made')
+    if step <= 0:
+        raise ValueError('step is degrees above 0, not %r' % (step,))
+    bpy.context.view_layer.update()
+    eye = numpy.array([float(eye[0]), float(eye[1]), float(eye[2]) if len(eye) > 2 else 0.0])
+    found = []
+    for obj in objects:
+        co = numpy.zeros(len(obj.data.vertices) * 3)
+        obj.data.vertices.foreach_get('co', co)
+        matrix = numpy.array(obj.matrix_world)
+        world = co.reshape(-1, 3) @ matrix[:3, :3].T + matrix[:3, 3] - eye
+        level = numpy.hypot(world[:, 0], world[:, 1])
+        found.append((obj.name, numpy.degrees(numpy.arctan2(-world[:, 0], world[:, 1])), numpy.degrees(numpy.arctan2(world[:, 2], level)), world[:, 2], level))
+    all_bearings = numpy.concatenate([f[1] for f in found])
+    first, last = (bearings if bearings is not None else (float(all_bearings.min()), float(all_bearings.max())))
+    rows = []
+    start = float(first)
+    while start < float(last) - 1e-9:
+        best = None
+        for name, bearing, elevation, rise, level in found:
+            inside = (bearing >= start) & (bearing < start + step)
+            if inside.any():
+                k = numpy.flatnonzero(inside)[numpy.argmax(elevation[inside])]
+                if best is None or elevation[k] > best['elevation']:
+                    best = {'bearing': round(start + step / 2.0, 3), 'elevation': round(float(elevation[k]), 2),
+                            'above_eye': round(float(rise[k]), 1), 'distance': round(float(level[k]), 1), 'layer': name}
+        if best is not None:
+            rows.append(best)
+        start += step
+    return rows
+
+
+def ridge_height(hills, eye, bearing):
+    """The skyline's height at one bearing (degrees counted as `facing`), in degrees above the eye's level, from the eye
+    point you give: for a low sun just behind the ridge, give sky_and_haze.low_sun a height 1 to 2 degrees under it."""
+    rows = skyline(hills, eye, step=1.0, bearings=(bearing - 0.5, bearing + 0.5))
+    if not rows:
+        raise ValueError('no hill stands at bearing %r seen from %r' % (bearing, tuple(eye)))
+    return rows[0]['elevation']
 
 
 def main():
@@ -237,6 +386,12 @@ def main():
     parser.add_argument('--trees', type=float, default=1.0, help='how wooded, 0 bare; default 1')
     parser.add_argument('--base', type=float, default=0.0, help="the place's ground height; default 0")
     parser.add_argument('--seed', type=int, default=0, help='the same seed raises the same hills; default 0')
+    parser.add_argument('--true-height', action='store_true', help="each ridge's highest point at the height asked (default: as before, about 0.7 of it)")
+    parser.add_argument('--saddle', type=float, default=None, help='a low saddle at this bearing, degrees counted as --facing; default none')
+    parser.add_argument('--saddle-width', type=float, default=26.0, help='degrees either side to where the ridges stand at full height; default 26')
+    parser.add_argument('--saddle-depth', type=float, default=0.4, help='how far the ridges dip at the saddle, as a share of their height; default 0.4')
+    parser.add_argument('--eye', type=float, nargs=3, default=None, metavar=('X', 'Y', 'Z'), help='the eye point the saddle is seen from and --skyline measures from; default the centre, 1.7 m up')
+    parser.add_argument('--skyline', action='store_true', help='print how high the hills stand above the eye, bearing by bearing')
     parser.add_argument('--out', help='save the result here (.blend)')
     args = parser.parse_args(argv)
     if args.blend:
@@ -244,9 +399,15 @@ def main():
     else:
         bpy.ops.wm.read_factory_settings(use_empty=True)
     made = lay(centre=args.centre, facing=args.facing, distance=args.distance, layers=args.layers, height=args.height,
-               haze=args.haze, mist=args.mist, trees=args.trees, base=args.base, seed=args.seed)
+               haze=args.haze, mist=args.mist, trees=args.trees, base=args.base, seed=args.seed, true_height=args.true_height,
+               saddle=args.saddle, saddle_width=args.saddle_width, saddle_depth=args.saddle_depth, eye=args.eye)
     print('raised %d ridges, %s' % (len(made['hills']), ', '.join('%.0f m' % o['distance'] for o in made['hills'])))
-    print("remember: camera.data.clip_end = 1000 (Blender's default 100 m hides them)")
+    print("remember: camera.data.clip_end = %.0f (Blender's default 100 m hides them)" % made['far_limit'])
+    if args.skyline:
+        eye = args.eye or (args.centre[0], args.centre[1], args.base + 1.7)
+        print('bearing  elevation  above the eye  distance  layer')
+        for row in skyline(made, eye):
+            print('%7.1f  %8.1f  %11.0f m  %6.0f m  %s' % (row['bearing'], row['elevation'], row['above_eye'], row['distance'], row['layer']))
     if args.out:
         bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.out))
         print('saved', args.out)

@@ -1,10 +1,10 @@
 # What is here (log 57)
 
-What this folder is: the record of the Japanese garden after rain built from the owner's picture (decisions 82 to 85), by two fresh builders from the painted-place plugin alone, and what the build added to the plugin (0.11.0). The owner's two pictures are not here: they stay off GitHub, on this machine only, in the builders' copy of the kit (`/home/claude/build-57-garden/kit/request/`).
+What this folder is: the record of the Japanese garden after rain built from the owner's picture (decisions 82 to 85), by two fresh builders from the painted-place plugin alone, and what the build added to the plugin (0.11.0). The third pass, which brought the garden closer to the owner's picture (decision 86), is in the folder `58 Garden closer to the picture`. The owner's two pictures are not here: they stay off GitHub, on this machine only, in the builders' copy of the kit (`/home/claude/build-57-garden/kit/request/`).
 
 | File | What it is |
 |---|---|
-| `57 Garden - second pass - full size.jpg` | The garden as it now stands, 1080 x 1920, 64 samples (30 minutes), finished with slightly bluer shadows to sit inside the warm band |
+| `57 Garden - second pass - full size.jpg` | The garden as the second pass left it, 1080 x 1920, 64 samples (30 minutes), finished with slightly bluer shadows to sit inside the warm band |
 | `57 Garden - second pass - final.png`, `57 Garden - second pass - close view of the path.png` | The second builder's two pictures (540 x 960) |
 | `57 Garden - first pass - final.png`, `57 Garden - first pass - close view of the path.png` | The first builder's two pictures |
 | `57 Garden - first and second pass, both views.jpg` | The four side by side |
