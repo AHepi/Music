@@ -32,6 +32,12 @@ SETS = {
     'aerial_mud_1': 'wet churned mud with tyre tracks, seen from above',
     'brown_mud_03': 'brown mud, damp, with footprints',
     'brown_mud_leaves_01': 'brown mud with fallen leaves, moss and a little grass',
+    # the town street made photographed (decision 80): setts, flags and dressings, mortar, a dressed block wall
+    'dark_rock_02': 'dark weathered rock with no block pattern (whinstone, basalt): for setts, each sett its own part',
+    'worn_rock_natural_01': 'honey-buff weathered sandstone face with no joints: for flags, kerbs, lintels, sills, quoins and ashlar blocks',
+    'rough_plasterbrick_05': 'grey gritty lime render with no joints: for mortar in the joints of bricks and blocks',
+    'sandstone_blocks_05': 'a wall of honey sandstone blocks in courses, their faces rough-tooled: the stone-block atlas (ASHLAR)',
+    'brick_wall_10': 'dark sooty brick in stretcher bond, pale mortar: the dark brick atlas (BRICK)',
 }
 # every set gets its normal picture too (log 54: use photographed sets whole; the soils had theirs from log 53)
 WITH_NORMALS = tuple(SETS)

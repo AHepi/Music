@@ -3,7 +3,10 @@ What this file does: (re)builds the store's materials file, materials/Materials.
 materials as they are (their sandstone pictures packed inside), and rebuilds every other material in it:
 
   - SURFACE • <set>: one per photographed surface on the shelf (brief/surfaces/), laid from three sides in the
-    object's own space at the picture's real size, darkened into the look's range, with dials (see below);
+    object's own space at the picture's real size, darkened into the look's range, with dials (see below); each
+    piece a tool marks with the number 'pp_piece' shows its own part of the picture (pieces_group);
+  - BRICK • <set> and ASHLAR • <set>: the wall photographs whose whole bricks and blocks find_atlas.py found
+    (materials/atlas/<set>.json), read through the wall tool's UV map 'pp_atlas' (atlas_material);
   - MADE • dirt, MADE • dirt, dark, MADE • pebbles, wet: the ground tools' soil and stones (ground_materials.py);
   - MADE • ...: the materials made in code (made.py: old brass, copper, china, weathered boards, wet bark, puddle water,
     a wet-ground film, rusty nail heads, a rust stain), and two made here from shelf photographs: wet mud (the forest
@@ -22,6 +25,7 @@ Every SURFACE material has two dial nodes a builder may change from a script:
         'Mud color'   the mud's colour
         'Edge wear'   corners and edges rubbed paler (0 none, 1 strong; costs render time when above 0)
         'Bump'        how strongly the photograph's relief shows
+    mat.node_tree.nodes['Pieces'].inputs['Turn' | 'Shade']   each piece's own turn (1 any angle, 0 none) and shade
 The pictures are kept as paths to the shelf (`//../../surfaces/...`), not packed, so the file stays small; the
 store's loader finds them again wherever the brief folder is.
 """
@@ -240,6 +244,8 @@ def box_normal_group():
     group = bpy.data.node_groups.new('STORE • box normal picture', 'ShaderNodeTree')
     _socket(group, 'Color', 'NodeSocketColor', 'INPUT', (0.5, 0.5, 1.0, 1.0))
     _socket(group, 'Strength', 'NodeSocketFloat', 'INPUT', 1.0, 0.0, 2.0)
+    _socket(group, 'Axis', 'NodeSocketVector', 'INPUT', (0.0, 0.0, 1.0))
+    _socket(group, 'Angle', 'NodeSocketFloat', 'INPUT', 0.0)
     _socket(group, 'Normal', 'NodeSocketVector', 'OUTPUT')
     nodes, links = group.nodes, group.links
     g_in, g_out = nodes.new('NodeGroupInput'), nodes.new('NodeGroupOutput')
@@ -290,6 +296,15 @@ def box_normal_group():
     total = math(nodes, links, 'ADD', math(nodes, links, 'ADD', wx, wy), wz)
     blended = vmath('ADD', vmath('ADD', vmath('SCALE', on_x, scale=wx), vmath('SCALE', on_y, scale=wy)), vmath('SCALE', on_z, scale=wz))
     blended = vmath('SCALE', blended, scale=math(nodes, links, 'DIVIDE', 1.0, math(nodes, links, 'MAXIMUM', total, 1e-6)))
+    # a piece whose picture was turned (the Pieces node's Angle about its Axis) has its relief turned back the same way,
+    # so it stays lit from the right side; with no turn (Angle 0) this changes nothing
+    turned_back = nodes.new('ShaderNodeVectorRotate')
+    turned_back.rotation_type = 'AXIS_ANGLE'
+    turned_back.invert = True
+    links.new(blended, turned_back.inputs['Vector'])
+    links.new(g_in.outputs['Axis'], turned_back.inputs['Axis'])
+    links.new(g_in.outputs['Angle'], turned_back.inputs['Angle'])
+    blended = turned_back.outputs['Vector']
     # strength: from the plain surface (0) to the picture's relief (1)
     mixed = vmath('ADD', facing, vmath('SCALE', vmath('SUBTRACT', blended, facing), scale=g_in.outputs['Strength']))
     to_world = nodes.new('ShaderNodeVectorTransform')
@@ -299,6 +314,74 @@ def box_normal_group():
     links.new(vmath('NORMALIZE', mixed), to_world.inputs['Vector'])
     links.new(vmath('NORMALIZE', to_world.outputs['Vector']), g_out.inputs['Normal'])
     return group
+
+
+def pieces_group():
+    """Each piece its own part of the photograph: reads the number 'pp_piece' (0..1, one random number per brick, block,
+    sett, flag or kerbstone) from the mesh's faces or from the points that instanced the copy, and gives back how far
+    to turn the picture (Angle, about the Axis the face looks along), how far to shift it (Offset, in copies of the
+    picture) and how much lighter or darker to make it (Brightness). Where 'pp_piece' is absent (0) they are 0, 0 and
+    1 exactly, so the material draws as it did before. Dials: Turn (1 any angle, 0 never turned), Shade (0.12: up to
+    12 per cent lighter or darker)."""
+    group = bpy.data.node_groups.new('STORE • pieces', 'ShaderNodeTree')
+    _socket(group, 'Turn', 'NodeSocketFloat', 'INPUT', 1.0, 0.0, 1.0)
+    _socket(group, 'Shade', 'NodeSocketFloat', 'INPUT', 0.12, 0.0, 1.0)
+    _socket(group, 'Angle', 'NodeSocketFloat', 'OUTPUT')
+    _socket(group, 'Axis', 'NodeSocketVector', 'OUTPUT')
+    _socket(group, 'Offset', 'NodeSocketVector', 'OUTPUT')
+    _socket(group, 'Brightness', 'NodeSocketFloat', 'OUTPUT')
+    _socket(group, 'Piece', 'NodeSocketFloat', 'OUTPUT')
+    nodes, links = group.nodes, group.links
+    g_in, g_out = nodes.new('NodeGroupInput'), nodes.new('NodeGroupOutput')
+
+    def number(kind):
+        node = nodes.new('ShaderNodeAttribute')
+        node.attribute_type = kind
+        node.attribute_name = 'pp_piece'
+        return node.outputs['Fac']
+
+    piece = math(nodes, links, 'MAXIMUM', number('GEOMETRY'), number('INSTANCER'))
+    present = math(nodes, links, 'GREATER_THAN', piece, 0.0)
+
+    def random(offset):
+        node = nodes.new('ShaderNodeTexWhiteNoise')
+        node.noise_dimensions = '1D'
+        links.new(math(nodes, links, 'ADD', piece, offset), node.inputs['W'])
+        return node
+
+    first, second = random(0.0), random(7.31)
+    angle = math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY', first.outputs['Value'], 6.283185307), g_in.outputs['Turn'])
+    links.new(math(nodes, links, 'MULTIPLY', angle, present), g_out.inputs['Angle'])
+    offset = nodes.new('ShaderNodeVectorMath')
+    offset.operation = 'SCALE'
+    links.new(first.outputs['Color'], offset.inputs[0])
+    links.new(present, offset.inputs['Scale'])
+    links.new(offset.outputs[0], g_out.inputs['Offset'])
+    swing = math(nodes, links, 'MULTIPLY', math(nodes, links, 'MULTIPLY_ADD', second.outputs['Value'], 2.0, -1.0), g_in.outputs['Shade'])
+    links.new(math(nodes, links, 'MULTIPLY_ADD', swing, present, 1.0), g_out.inputs['Brightness'])
+    links.new(piece, g_out.inputs['Piece'])
+    # the axis the face looks along most (object space): the picture turns about it, so it turns within the face
+    facing = nodes.new('ShaderNodeTexCoord')
+    absolute = nodes.new('ShaderNodeVectorMath')
+    absolute.operation = 'ABSOLUTE'
+    links.new(facing.outputs['Normal'], absolute.inputs[0])
+    parts = nodes.new('ShaderNodeSeparateXYZ')
+    links.new(absolute.outputs[0], parts.inputs['Vector'])
+    ax, ay, az = parts.outputs['X'], parts.outputs['Y'], parts.outputs['Z']
+    on_x = math(nodes, links, 'MULTIPLY', math(nodes, links, 'GREATER_THAN', ax, ay), math(nodes, links, 'GREATER_THAN', ax, az))
+    on_y = math(nodes, links, 'MULTIPLY', math(nodes, links, 'SUBTRACT', 1.0, on_x), math(nodes, links, 'GREATER_THAN', ay, az))
+    on_z = math(nodes, links, 'SUBTRACT', math(nodes, links, 'SUBTRACT', 1.0, on_x), on_y)
+    axis = nodes.new('ShaderNodeCombineXYZ')
+    for socket, value in zip(axis.inputs, (on_x, on_y, on_z)):
+        links.new(value, socket)
+    links.new(axis.outputs['Vector'], g_out.inputs['Axis'])
+    return group
+
+
+# sets whose picture has a direction (grain, courses, corrugations, a weave): their pieces are shifted, never turned
+DIRECTED = {'bark_willow_02', 'brick_wall_02', 'brick_wall_10', 'cobblestone_floor_01', 'damaged_plaster', 'dark_brick_wall',
+            'distressed_painted_planks', 'hessian_380', 'old_planks_02', 'old_stone_wall_02', 'palm_tree_bark', 'rough_linen',
+            'rough_wood', 'rusty_corrugated_iron', 'sandstone_blocks_05', 'wood_planks_grey', 'worn_corrugated_iron'}
 
 
 def walkway_boards(entry, box_group, weather):
@@ -423,7 +506,7 @@ def linear_mean(path):
     return float((linear @ numpy.array([0.2126, 0.7152, 0.0722])).mean()), [float(v) for v in linear.reshape(-1, 3).mean(0)]
 
 
-def surface_material(set_id, entry, box_group, weather, weather_normal=None, normal_group=None):
+def surface_material(set_id, entry, box_group, weather, weather_normal=None, normal_group=None, pieces=None):
     """SURFACE • <set>: the shelf set's colour, roughness and height pictures laid from three sides (BOX) at the
     photograph's real size, with the weather dials; a set with a normal picture also has it, read the same way and turned
     into world space (normal_group), with the height picture's relief laid lightly over it."""
@@ -436,6 +519,27 @@ def surface_material(set_id, entry, box_group, weather, weather_normal=None, nor
     coordinates.name = coordinates.label = 'Picture size'
     coordinates.inputs['Size'].default_value = (size_x, size_x, size_y)
     coordinates.location = (-900, 0)
+    projected = coordinates.outputs['Vector']
+    variety = None
+    if pieces is not None:
+        # each piece (pp_piece) its own part of the picture: turned within its face and shifted, a little lighter or darker
+        variety = nodes.new('ShaderNodeGroup')
+        variety.node_tree = pieces
+        variety.name = variety.label = 'Pieces'
+        variety.location = (-1150, -300)
+        variety.inputs['Turn'].default_value = 0.0 if set_id in DIRECTED else 1.0
+        turned = nodes.new('ShaderNodeVectorRotate')
+        turned.rotation_type = 'AXIS_ANGLE'
+        turned.location = (-760, -200)
+        links.new(projected, turned.inputs['Vector'])
+        links.new(variety.outputs['Axis'], turned.inputs['Axis'])
+        links.new(variety.outputs['Angle'], turned.inputs['Angle'])
+        shifted = nodes.new('ShaderNodeVectorMath')
+        shifted.operation = 'ADD'
+        shifted.location = (-700, -350)
+        links.new(turned.outputs['Vector'], shifted.inputs[0])
+        links.new(variety.outputs['Offset'], shifted.inputs[1])
+        projected = shifted.outputs['Vector']
     pictures = {}
     roles = [('diff', 'sRGB'), ('rough', 'Non-Color'), ('disp', 'Non-Color')]
     if normal_group is not None and 'normal' in entry['maps']:
@@ -451,19 +555,30 @@ def surface_material(set_id, entry, box_group, weather, weather_normal=None, nor
         node.projection = 'BOX'
         node.projection_blend = 0.2
         node.location = (-600, 300 - 280 * index)
-        links.new(coordinates.outputs['Vector'], node.inputs['Vector'])
+        links.new(projected, node.inputs['Vector'])
         pictures[role] = node
     dials = nodes.new('ShaderNodeGroup')
     dials.node_tree = weather_normal if 'normal' in pictures else weather
     dials.name = dials.label = 'Weather'
     dials.location = (-200, 0)
-    links.new(pictures['diff'].outputs['Color'], dials.inputs['Color'])
+    if variety is not None:
+        shade = nodes.new('ShaderNodeVectorMath')
+        shade.operation = 'SCALE'
+        shade.location = (-350, 250)
+        links.new(pictures['diff'].outputs['Color'], shade.inputs[0])
+        links.new(variety.outputs['Brightness'], shade.inputs['Scale'])
+        links.new(shade.outputs[0], dials.inputs['Color'])
+    else:
+        links.new(pictures['diff'].outputs['Color'], dials.inputs['Color'])
     if 'normal' in pictures:
         turned = nodes.new('ShaderNodeGroup')
         turned.node_tree = normal_group
         turned.name = turned.label = 'Normal picture'
         turned.location = (-400, -600)
         links.new(pictures['normal'].outputs['Color'], turned.inputs['Color'])
+        if variety is not None:
+            links.new(variety.outputs['Axis'], turned.inputs['Axis'])
+            links.new(variety.outputs['Angle'], turned.inputs['Angle'])
         links.new(turned.outputs['Normal'], dials.inputs['Normal'])
         dials.inputs['Bump'].default_value = 0.15      # the normal picture carries the fine relief; the height adds a little
     if 'rough' in pictures:
@@ -483,10 +598,78 @@ def surface_material(set_id, entry, box_group, weather, weather_normal=None, nor
     return material
 
 
+ATLAS = os.path.join(MATERIALS, 'atlas')
+
+
+def atlas_material(atlas_path, manifest, weather_normal, pieces):
+    """BRICK • <set> or ASHLAR • <set>: a wall photograph whose whole bricks or blocks were found (atlas/<set>.json,
+    made by find_atlas.py). The wall tool gives each unit's front face one of those rectangles through the UV map
+    'pp_atlas' (and its sides thin strips at the rectangle's edges); this material reads all four pictures through
+    that UV map (the normal picture through the UV map's own directions), makes each piece a little lighter or
+    darker by its 'pp_piece', and has the same Weather dials as a SURFACE."""
+    atlas = json.load(open(atlas_path))
+    set_id = atlas['set']
+    entry = manifest[set_id]
+    material = fresh_material(atlas['material'])
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    uv = nodes.new('ShaderNodeUVMap')
+    uv.uv_map = 'pp_atlas'
+    uv.location = (-900, 0)
+    pictures = {}
+    for index, (role, colour_space) in enumerate((('diff', 'sRGB'), ('rough', 'Non-Color'), ('disp', 'Non-Color'), ('normal', 'Non-Color'))):
+        image = bpy.data.images.load(os.path.join(SHELF, set_id, entry['maps'][role]), check_existing=True)
+        image.colorspace_settings.name = colour_space
+        node = nodes.new('ShaderNodeTexImage')
+        node.image = image
+        node.extension = 'EXTEND'
+        node.location = (-600, 300 - 280 * index)
+        links.new(uv.outputs['UV'], node.inputs['Vector'])
+        pictures[role] = node
+    variety = nodes.new('ShaderNodeGroup')
+    variety.node_tree = pieces
+    variety.name = variety.label = 'Pieces'
+    variety.location = (-900, 400)
+    variety.inputs['Turn'].default_value = 0.0
+    variety.inputs['Shade'].default_value = 0.15
+    shade = nodes.new('ShaderNodeVectorMath')
+    shade.operation = 'SCALE'
+    links.new(pictures['diff'].outputs['Color'], shade.inputs[0])
+    links.new(variety.outputs['Brightness'], shade.inputs['Scale'])
+    relief = nodes.new('ShaderNodeNormalMap')
+    relief.space = 'TANGENT'
+    relief.uv_map = 'pp_atlas'
+    relief.name = relief.label = 'Normal picture'
+    links.new(pictures['normal'].outputs['Color'], relief.inputs['Color'])
+    dials = nodes.new('ShaderNodeGroup')
+    dials.node_tree = weather_normal
+    dials.name = dials.label = 'Weather'
+    dials.location = (-200, 0)
+    links.new(shade.outputs[0], dials.inputs['Color'])
+    links.new(pictures['rough'].outputs['Color'], dials.inputs['Roughness'])
+    links.new(pictures['disp'].outputs['Color'], dials.inputs['Height'])
+    links.new(relief.outputs['Normal'], dials.inputs['Normal'])
+    dials.inputs['Bump'].default_value = 0.15
+    mean, colour = linear_mean(os.path.join(SHELF, set_id, entry['maps']['diff']))
+    darken = max(0.3, min(1.0, (0.08 / max(mean, 1e-4)) ** 0.7))
+    dials.inputs['Darken'].default_value = round(darken, 3)
+    links.new(dials.outputs['Base Color'], principled.inputs['Base Color'])
+    links.new(dials.outputs['Roughness'], principled.inputs['Roughness'])
+    links.new(dials.outputs['Normal'], principled.inputs['Normal'])
+    material.diffuse_color = (*[c * darken for c in colour], 1.0)
+    kind = 'bricks' if atlas['material'].startswith('BRICK') else 'stone blocks'
+    material['store_what'] = ('%s for the wall tool, each its own whole %s from the photograph %s (%d found, atlas/%s.json); '
+                              'needs the UV map pp_atlas the wall tool writes' % (kind, kind[:-1], set_id, len(atlas['units']), set_id))
+    material['store_size_m'] = entry['size_m']
+    material['store_source'] = entry.get('source', '')
+    material['store_atlas'] = 'atlas/%s.json' % set_id
+    return material
+
+
 def main():
     bpy.ops.wm.open_mainfile(filepath=TARGET)
     for material in list(bpy.data.materials):
-        if material.name.startswith(('SURFACE •', 'MADE •')):
+        if material.name.startswith(('SURFACE •', 'MADE •', 'BRICK •', 'ASHLAR •')):
             bpy.data.materials.remove(material)
     for group in list(bpy.data.node_groups):
         if group.name.startswith('STORE •'):
@@ -501,9 +684,14 @@ def main():
             material.use_fake_user = True
     box_group, weather = box_coordinates_group(), weather_group()
     weather_normal, normal_group = weather_group(with_normal=True), box_normal_group()
+    pieces = pieces_group()
     manifest = json.load(open(os.path.join(SHELF, 'manifest.json')))
     for set_id, entry in sorted(manifest.items()):
-        surface_material(set_id, entry, box_group, weather, weather_normal, normal_group).use_fake_user = True
+        surface_material(set_id, entry, box_group, weather, weather_normal, normal_group, pieces).use_fake_user = True
+    if os.path.isdir(ATLAS):
+        for name in sorted(os.listdir(ATLAS)):
+            if name.endswith('.json'):
+                atlas_material(os.path.join(ATLAS, name), manifest, weather_normal, pieces).use_fake_user = True
     for material in made.build_all().values():
         material.use_fake_user = True
     walkway_boards(manifest['rough_wood'], box_group, weather).use_fake_user = True
@@ -512,7 +700,8 @@ def main():
     ground_materials.build_all(SHELF, manifest, box_group)
     bpy.ops.file.make_paths_relative()
     bpy.ops.wm.save_mainfile(filepath=TARGET)
-    counts = {'street': sum(1 for m in bpy.data.materials if not m.name.startswith(('SURFACE •', 'MADE •'))),
+    counts = {'street': sum(1 for m in bpy.data.materials if not m.name.startswith(('SURFACE •', 'MADE •', 'BRICK •', 'ASHLAR •'))),
+              'atlas': sum(1 for m in bpy.data.materials if m.name.startswith(('BRICK •', 'ASHLAR •'))),
               'surface': sum(1 for m in bpy.data.materials if m.name.startswith('SURFACE •')),
               'made': sum(1 for m in bpy.data.materials if m.name.startswith('MADE •'))}
     print('saved', TARGET, counts)

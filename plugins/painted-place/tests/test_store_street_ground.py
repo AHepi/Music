@@ -198,7 +198,9 @@ def test_cobbles_unchanged():
     check(setts.data.attributes.get('stone_tint') is None and not any(k in setts for k in ('relaid setts', 'pitch', 'hole water', 'grit bed', 'joint stones', 'rocked', 'holes')),
           'the default setts made wear nobody asked for: %s' % list(setts.keys()))
     shape = next(iter(bpy.data.collections[[c.name for c in bpy.data.collections if c.name.startswith('lay_cobbles shapes • setts')][0]].objects))
-    check(shape.data.materials[0].name == lay_cobbles.SETT_MATERIAL, 'the default setts are not in the store\'s own material')
+    # the store's own material, or (a photographed one) its copy that undoes each copy's own size (decision 80)
+    check(shape.data.materials[0].name in (lay_cobbles.SETT_MATERIAL, lay_cobbles.SETT_MATERIAL + ' • stone sized'),
+          'the default setts are not in the store\'s own material: %s' % shape.data.materials[0].name)
     # asking for shades or quarries moves no stone
     road2, _ = plane('road two', 3.0, 8.0, location=(0.0, 20.0, 0.0)), None
     tinted = lay_cobbles.lay_setts(road2, seed=1, shades=0.3, quarries=True)

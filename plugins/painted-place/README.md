@@ -67,6 +67,22 @@ unevenness for the stains and four heavy stains that show far down a street; a t
 the owner asks for the most detail (`brief/Third pass.md`); a board of real town street photographs; the builders' traps.
 Tests in `tests/test_store_street_ground.py`, `tests/test_store_street_fronts.py` and the parts test.
 
+## What 0.10 added
+
+The owner's question about the town street (decision 80): "Can we make the brick was PBR? And the brick road as well? The
+road to a curve, the brick wall auto adjusts to size." Photographed stone and brick (five new Poly Haven sets on the shelf),
+where every sett, flag, kerbstone, brick and block shows its own part of the photographs through the number `pp_piece`; whole
+bricks and stone blocks found in wall photographs (`materials/atlas/`, `BRICK •` and `ASHLAR •` materials), so each brick of
+a wall is a real photographed brick; `materials/Photographed.md` saying which material is for what. `lay_setts_along`,
+`road_edges`, `lay_flags_along` and `top_at` in `lay_cobbles` (the sett road, its flags and kerbs along any line or curve,
+fanning on the bends and climbing); `lay_wall` (one flat plane of any size filled with bricks in stretcher, English, Flemish
+or header bond, or coursed stone blocks, fitted to the plane, a gable and holes cut round); the road, kerb and house-front
+tools now photographed by default (the old painted stone still answers by name). At the owner's next word (decision 81),
+`lay_stone`'s doors and windows get painted timber frames (`frames='stone'` keeps the stone surrounds) and `lit=` makes
+windows glow. A worked example, `examples/street - a curved corner after rain.py`, builds a wet curved corner with all of
+it. Tests in `tests/test_store_photographed.py`, `tests/test_store_curved_road.py`, `tests/test_store_wall.py` and
+`tests/test_store_frames.py`.
+
 ## What was retired, and why
 
 Until version 0.5 the plugin built the look itself: a **dressing** (`materials/apply_by_role.py` and the `lay_*.py` files) gave every object a material by the words in its name and laid details where its own survey of the camera's view said they belonged; a **look stage** (`stage/`) lit and drew the place; a **blind judge** (`look/judge.py`, `agents/blind-judge.md`) said what to fix. The owner judged a builder given only pictures and a page against builders using the dressing, and the pictures-only builders' places were better ("Pictures only is better"): the dressing's placement logic was faulty and its objects did not make sense (decision 62). The owner then asked to keep the good parts as things to pick from: the footpath as a tool on a line, the detailed things builders had made as parts, the textures as "pick and choose" shaders (decision 65). So in 0.6:

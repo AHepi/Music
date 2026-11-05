@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-11-05, 16:50, for the painted-place plugin (log 55); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-05, 19:45, for the painted-place plugin (log 56); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -325,7 +325,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   Not fixed: the faint contour steps in the dark sky (invisible at normal contrast; filming again takes over an hour for nothing a viewer sees) and
   the plugin's and chapter 2's copies of the stage (outside this job).
 
-## The painted-place plugin (logs 38 to 55, 2 to 5 November 2026)
+## The painted-place plugin (logs 38 to 56, 2 to 5 November 2026)
 
 - `plugins/painted-place` 0.5.0: build a place in Blender, dress it in one call, light it in the series' blue-hour look, judge it blind
   (now on the look and on the request), fix once. Decisions 50 to 58.
@@ -373,6 +373,16 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   was drawn at full size (`procedural-textures/55 Town street - three builders/`). **Into the plugin (0.9.0):** fourteen parts,
   five new tools (kerbs, joint weeds, slate roofs with gutters, downpipes, weathering), wear for the setts, four heavy stains,
   builders' notes kept on disk, the builders' and helpers' traps. 112 test lines pass. Not yet: an independent check.
+  You judged it: "It looks incredible." (decision 79).
+- **Log 56 (decisions 80 and 81): photographed stone and brick, the road on any curve, a wall on one plane, timber frames.**
+  Your question "Can we make the brick was PBR? And the brick road as well? The road to a curve, the brick wall auto adjusts
+  to size." went to three helpers at once: photographed materials where every piece shows its own part of the photographs
+  (each brick a real photographed brick), the sett road with flags and kerbs along any curve, and a wall tool that fills one
+  flat plane of any size with bricks or stone blocks; the house fronts went to photographed sandstone. A worked example, a
+  wet curved corner at dusk, used them all; at your word ("The framing around the doors and windows probably should be
+  wood.") the house fronts got painted timber frames and lit windows, and the corner was redrawn
+  (`procedural-textures/56 Photographed stone, curved road, brick walls/`). **Plugin 0.10.0.** All test lines pass. Not yet:
+  an independent check; the new sandstone reads orange-tan beside the old honey-grey.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -385,9 +395,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your verdict on the town street: the three passes side by side and the third at full size (folder 55).
+- Your verdict on the curved corner and the new tools: photographed stone and brick, the road on a curve, the wall on a
+  plane, timber frames (folder 56).
 - Your generated leaf sheet, when you have one (about 12 separate fallen leaves from straight above on white), for the litter tool.
-- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.9.0: the plugin's rule asks for one; you stopped the
+- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.10.0: the plugin's rule asks for one; you stopped the
   last one, so it waits for your word.
 - Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line

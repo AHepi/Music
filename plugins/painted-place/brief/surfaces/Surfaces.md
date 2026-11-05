@@ -2,6 +2,8 @@
 
 What this folder is: a shelf of photographed surfaces a builder may use, free (Poly Haven, CC0, public domain; the authors are in `manifest.json`). Each set has a colour picture (`diff`), a roughness picture (`rough`: white is rough, black is glossy) and a height picture (`disp`: white is high), all repeating without a seam; every set also has a normal picture (`nor_gl`: which way each tiny bit of the surface faces; the soils' since log 53, the rest since log 54), and the store's `SURFACE` materials use all four. `size_m` in the manifest is the real size one copy of the picture covers, so a 2 m brick picture laid on a 6 m wall repeats three times.
 
+The last five sets (decision 80) were chosen for the town street made photographed: which material is meant for setts, flags, kerbs, bricks, blocks and mortar is in `store/materials/Photographed.md`, and the whole bricks and blocks found in the wall photographs are in `store/materials/atlas/`.
+
 Using one is the builder's choice; nothing here says where a surface goes. The pictures carry their own wear, but the wear of the place (where water ran, what hands rubbed, what the setting did) is still the builder's to add on top.
 
 | Set | What it is | One copy covers | Pictures |
@@ -32,10 +34,16 @@ Using one is the builder's choice; nothing here says where a surface goes. The p
 | `brown_mud_03/` | brown mud, damp, with footprints | 1.30 x 1.30 m | brown_mud_03_diff_2k.jpg, brown_mud_03_rough_2k.jpg, brown_mud_03_disp_2k.jpg, brown_mud_03_nor_gl_2k.jpg |
 | `brown_mud_leaves_01/` | brown mud with fallen leaves, moss and a little grass | 1.30 x 1.30 m | brown_mud_leaves_01_diff_2k.jpg, brown_mud_leaves_01_rough_2k.jpg, brown_mud_leaves_01_disp_2k.jpg, brown_mud_leaves_01_nor_gl_2k.jpg |
 | `muddy_tracks/` | wet mud with wheel tracks | 2.25 x 2.25 m | muddy_tracks_diff_2k.jpg, muddy_tracks_rough_2k.jpg, muddy_tracks_disp_2k.jpg |
+| `dark_rock_02/` | dark weathered rock with no block pattern (whinstone, basalt): for setts, each sett its own part | 2.00 x 2.00 m | dark_rock_02_diff_2k.jpg, dark_rock_02_rough_2k.jpg, dark_rock_02_disp_2k.jpg, dark_rock_02_nor_gl_2k.jpg |
+| `worn_rock_natural_01/` | honey-buff weathered sandstone face with no joints: for flags, kerbs, lintels, sills, quoins and ashlar blocks | 2.00 x 2.00 m | worn_rock_natural_01_diff_2k.jpg, worn_rock_natural_01_rough_2k.jpg, worn_rock_natural_01_disp_2k.jpg, worn_rock_natural_01_nor_gl_2k.jpg |
+| `rough_plasterbrick_05/` | grey gritty lime render with no joints: for mortar in the joints of bricks and blocks | 1.50 x 1.50 m | rough_plasterbrick_05_diff_2k.jpg, rough_plasterbrick_05_rough_2k.jpg, rough_plasterbrick_05_disp_2k.jpg, rough_plasterbrick_05_nor_gl_2k.jpg |
+| `sandstone_blocks_05/` | a wall of honey sandstone blocks in courses, their faces rough-tooled: the stone-block atlas (ASHLAR) | 3.00 x 3.00 m | sandstone_blocks_05_diff_2k.jpg, sandstone_blocks_05_rough_2k.jpg, sandstone_blocks_05_disp_2k.jpg, sandstone_blocks_05_nor_gl_2k.jpg |
+| `brick_wall_10/` | dark sooty brick in stretcher bond, pale mortar: the dark brick atlas (BRICK) | 1.90 x 1.90 m | brick_wall_10_diff_2k.jpg, brick_wall_10_rough_2k.jpg, brick_wall_10_disp_2k.jpg, brick_wall_10_nor_gl_2k.jpg |
 
 ## Traps
 
 - The colour pictures were photographed in flat daylight and are brighter than this look wants; darken them in the material rather than lighting the scene down.
 - A picture laid on a surface with no texture layout needs a box projection (three sides) or the object's own coordinates; a stretched picture reads at once.
-- The height pictures are at half size (1K); use them for bump, not for cutting the shape.
+- The height pictures of the older sets are at half size (1K; the five sets of decision 80 have theirs at 2K); use them for bump, not for cutting the shape.
+- Some Poly Haven sets have a blank height picture (`medieval_blocks_03`'s 2K height picture is plain white), and some dark rocks have bright veins (`dark_rock`): look at all four pictures, full size, before adding a set.
 - `fetch_surfaces.py` downloads more sets from Poly Haven when the internet is available; a sealed builder cannot run it.

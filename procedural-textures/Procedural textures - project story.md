@@ -145,7 +145,14 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   then its near ground dressed by a second builder, then its fronts by a third (soot and rain runs, hopper heads, blinds,
   geraniums, a teapot sign, barrows), and the third pass at full size (folder `55 Town street - three builders/`). What they
   made for themselves is now in the store: fourteen parts, kerbs, joint weeds, worn setts, slate roofs with gutters,
-  downpipes, weathering and four heavy stains. The third builder's report was lost when the machine restarted.
+  downpipes, weathering and four heavy stains. The third builder's report was lost when the machine restarted. You judged
+  it: "It looks incredible." and asked the next question (decision 80).
+- **Photographed stone and brick, the road on any curve, a wall on one plane, timber frames (log 56, 5 November, plugin
+  0.10.0):** every sett, flag, kerbstone, brick and block now shows its own part of real photographs, each brick of a wall a
+  real photographed brick; the sett road with its flags and kerbs follows any curve; a wall tool fills any flat plane with
+  bricks (four bonds) or stone blocks; house fronts in photographed sandstone with painted timber door and window frames
+  (decision 81) and lit windows. A worked example shows it all: a wet curved corner at dusk (folder
+  `56 Photographed stone, curved road, brick walls/`).
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -171,7 +178,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 | The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
-| The painted-place plugin (`plugins/painted-place`, version 0.9.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
+| The painted-place plugin (`plugins/painted-place`, version 0.10.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
 
 ## Word list
 
@@ -192,6 +199,13 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   gutter's water falls into. **Eaves board:** the board along a roof's edge that the gutter hangs from. **Dormer:** a window
   standing up out of a sloping roof, with its own small roof. **Coster barrow:** a street seller's two-wheeled hand cart.
   **Sack barrow:** an upright hand truck on two small wheels, for moving sacks.
+- **Bond (log 56):** the pattern bricks are laid in so no joint runs straight up the wall. **Stretcher:** a brick laid
+  lengthwise along the wall; **header:** a brick laid end-on, showing its short end. Stretcher bond is all stretchers, each
+  course shifted half a brick; English bond is a course of stretchers, then a course of headers; Flemish bond has stretchers
+  and headers taking turns in every course. **Closer:** a cut brick that keeps the bond right at a wall's end. **Ashlar:**
+  stone cut into squared blocks laid in courses. **Atlas (log 56):** the list of every whole brick or block found in a wall
+  photograph, so each brick of a built wall can show one real photographed brick. **Casing:** the timber frame round a door
+  or window, up both sides and across the head.
 - **Store (log 51):** the folder of ready things a builder may pick from: **parts** (things to place, such as a tent or a gas lamp),
   **tools** (code that makes a thing from a line, a point or an object the builder gives, such as a walkway along a line) and **ready
   materials** (Blender materials to put on an object). Nothing in it places itself. **Card:** a small picture of a part or material, drawn
@@ -1107,11 +1121,40 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     builder's own report; some cards show only a part's default (the ash bin with its lid on, the blind but not the nets); three
     part files (shop front, stair door, chimney stack) are 14 MB each, because they carry the street's stone pictures inside them.
 
+56. **Photographed stone and brick, the road on any curve, a wall that fills one plane, timber frames (5 November, 16:43
+    to 19:40).** Your question on the town street (decision 80): "Can we make the brick was PBR? And the brick road as well?
+    The road to a curve, the brick wall auto adjusts to size." Asked what the wall should fit: "Allow the wall to expand to
+    however big the surface is. Based on the 2d area of a single plane. Not the whole building"; bricks or stone blocks:
+    "Both, as a choice". The answer to the first part was "only partly": the street's walls and setts all used one
+    hand-painted stone picture stretched over the whole street. **Three helpers at once (17:31 to 18:16):** one fetched five
+    photographed sets from Poly Haven (dark rock for setts, a sandstone, a lime mortar, sandstone blocks, a dark brick), let
+    every photographed surface show each piece its own part of the picture, and found every whole brick and block in three
+    wall photographs (74, 152 and 21 of them), so a wall's bricks are real photographed bricks; one made the sett road, its
+    flags and its kerbs follow any line or curve, fanning on the bends and climbing; one made the wall tool (one flat plane
+    of any size filled with bricks in stretcher, English, Flemish or header bond, or coursed stone blocks, whole courses
+    fitted, a gable and holes cut round) and switched the house fronts to photographed sandstone. **A worked example (18:17
+    to 19:08):** a wet curved corner at dusk built with all of it (`examples/street - a curved corner after rain.py`); its
+    helper found a height call that gave a pavement's first height everywhere (fixed by the session) and that unevenly
+    spaced points make a bend tighter than meant (now a trap). **Your word on its pictures (decision 81):** "Looks
+    incredible. Just one update. The framing around the doors and windows probably should be wood." A fifth helper gave the
+    house fronts painted timber frames (slim casings, a head, a timber sill; the stone surrounds kept as a choice) and windows
+    that glow when asked; the session redrew the corner with them (inside every band: 0.17, 24%, 41%, 0.6%). Every card and
+    working picture was sent as it was drawn, apart from near-copies. **Into the plugin (0.10.0):** five shelf sets, three
+    brick and block atlases, per-piece variety for every photographed surface, `lay_setts_along`, `road_edges`,
+    `lay_flags_along`, `top_at`, `lay_wall`, timber frames and lit windows in `lay_stone`, the photographed materials as the
+    tools' defaults, a worked example, traps. **Tested:** all 164 test lines pass, among them 5,004 setts on an
+    S-bend all inside the road with no joint over 14 mm and the courses square to the line within 0.4 degrees, a kerb at the
+    road's edge all the way, walls from 1 x 1 m to 12 x 6 m facing every way with whole courses and the bonds kept, every
+    brick showing a whole photographed brick, the old stone surrounds rebuilt point for point, and an old material drawn
+    pixel for pixel as before. **Not done:** no independent check of 0.7.0 to 0.10.0 (it waits for your word); the new
+    sandstone reads orange-tan beside the street's old honey-grey (left as photographed); bricks do not wrap round a corner
+    where two planes meet; the corner only at 540 x 960.
+
 ## Next step
 
-Your verdict on the town street (folder `55 Town street - three builders/`: first, second and third pass side by side, and
-the third at full size). Then, at your word, an independent check of the plugin (0.7.0 to 0.9.0) by a fresh checker; and
-your generated leaf sheet into the litter tool when it comes.
+Your verdict on the curved corner and the new tools (folder `56 Photographed stone, curved road, brick walls/`). Then, at
+your word, an independent check of the plugin (0.7.0 to 0.10.0) by a fresh checker; and your generated leaf sheet into the
+litter tool when it comes.
 
 ## Traps
 

@@ -974,6 +974,23 @@ overturn any of them in one line. Changes to the project must follow this file.
     from the plugin alone, your words given to them exactly; for "as much careful detail", a third pass after the usual two,
     given only to the building fronts and the middle distance, since in a street they fill most of the frame.
 
+80. **Photographed stone for the walls and the road; the road on any curve; a wall that fills one plane** (5 November 2026,
+    16:43), your words, after the town street's full-size picture: "Can we make the brick was PBR? And the brick road as well?
+    The road to a curve, the brick wall auto adjusts to size." Asked what the wall should fit, your answer: "Allow the wall to
+    expand to however big the surface is. Based on the 2d area of a single plane. Not the whole building". Asked bricks or
+    stone blocks: "Both, as a choice (Recommended)". Read as: "the brick wall" is the street's block walls and "the brick road"
+    its setts (as with "that hut made of brick", decision 78, which was stone); PBR is photographed sets used whole (colour,
+    shine, relief, height) at their real size, each brick, block, sett, flag and kerbstone showing its own part of the
+    photographs; the sett road (with its flags and kerbs) follows any line or curve the builder gives, whichever way it goes,
+    as the dry-stone wall does (decision 77); a new wall tool fills one flat plane of any size with real bricks or stone
+    blocks, the builder's choice, its courses fitted to the plane; the house-front stone tool keeps building whole buildings
+    and gets the photographed stone too.
+
+81. **Timber frames round doors and windows** (5 November 2026, 18:41), your words, on the curved street corner's working
+    pictures: "Looks incredible. Just one update. The framing around the doors and windows probably should be wood." Read
+    as: the house-front stone tool gives its doors and windows painted timber frames (casings up the sides and across the
+    head, a timber sill) by default instead of stone jambs, lintels and sills; the stone surrounds stay as a choice.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

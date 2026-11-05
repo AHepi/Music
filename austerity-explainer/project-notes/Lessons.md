@@ -803,6 +803,37 @@ Only failures in doing the work belong here. Newest at the bottom.
      the hopper's lip and the holdfasts' arms poked 5 mm into the wall (its test caught it); lean-to and flat roofs got a gutter
      on their high side too; two wrong test thresholds; the examples gave a world height where the downpipe wanted a height up
      the wall (it now takes both from a gutter outlet).
+237. **A finished helper could not take a second piece of work** (log 56): the photographed materials helper finished early,
+     and a follow-up (bring the new sandstone toward the street's honey-grey) could not be sent to it: its record was too large
+     to load, as with the third builder (lesson 231). The sandstone stays as photographed. A follow-up goes to a fresh helper,
+     or into the first brief.
+238. **The materials helper's fixes** (log 56, from its report): its first sett stone had gold marble veins; its first block
+     wall's height picture was plain white; the shelf's dark brick held only about 35 whole bricks, under the 40 its test
+     asked for (another dark brick set was added); its brick finder first found only specks, because the old red brick's
+     height picture barely shows the mortar (it now finds the thin mortar lines, courses first, then the upright joints), then
+     counted pale patches as bricks, merged narrow blocks and took two bricks for one; its first check of copied pieces failed
+     though the copies did differ (it now compares their patterns).
+239. **The road helper's fixes** (log 56, from its report): a missing sett was read as a 21 cm joint; a test called the
+     puddle tool with wrong options; its first test bend was too tight for a pavement on its inside (the tool now refuses
+     bends tighter than it can lay); square flags on bends made slivers and opened joints up to 33 cm (they are now cut as
+     wedges, none under 20 cm); setts near the old bend limit opened 4.8 cm joints, and edge setts grew to 47 cm (now split);
+     and the photographed materials laid a whole picture squeezed onto every copied sett and flag, because a copy reads its
+     own small shape (each stone now gets a copy of its material that shows the picture at its real size).
+240. **The wall helper's fixes** (log 56, from its report): stone blocks looked like pillows (corner chips too big for their
+     relief); a test gable faced the wrong way and its bricks stood behind it (the tool now has `flip`); header bond left an
+     11 mm gap at one end; two of 5,760 bricks got the same piece number, because Blender stores it less precisely (numbers
+     are now spread evenly and shuffled); a rounding error lost a whole course under a window; one of its own checks grouped
+     faces wrongly; the cut bricks first stacked into a straight seam down the middle (each course now places its own cuts).
+241. **A height call gave a wrong answer without a warning** (log 56, found by the worked example's helper): on a climbing
+     pavement, `lay_cobbles.top_at(flags, ...)` returned the height at the pavement's first point everywhere (0.0 where the
+     slabs stood 0.70 m up), because only the road recorded its line. The pavement now records its line too, and the road's
+     test checks three heights up a climbing pavement. The example's first road lines were also refused as too tight: its
+     points sat on a 9 m circle but unevenly spaced, so the smoothed curve bent tighter (now a store trap).
+242. **The frames helper's fixes** (log 56, from its report): stones next to a frame were dropped when shorter than 12 cm,
+     leaving gaps (they now run on to the frame or stop at it); wear set point by point striped the timber (it now changes
+     smoothly along each piece); its first turned copy of the wood put the grain across the sills' tops; an apostrophe broke
+     its scratch copy; one line would have broken the old stone surrounds (its before-and-after comparison caught it); a
+     1.5 mm sag in the head touched the sash; its test counted stones from round the corner.
 
 ## Traps
 
@@ -858,3 +889,5 @@ Only failures in doing the work belong here. Newest at the bottom.
 - A long-running builder may not resume after a restart: have it keep its notes on disk as it goes (lesson 231).
 - Judge whether a picture is new by its content or the repository, never by its file time (lesson 233).
 - When several helpers add to the store at once, run the whole test suite after the last one finishes (lesson 235).
+- Send a helper's follow-up to a fresh helper: a finished one may not resume (lesson 237).
+- A photographed material on copied pieces must be told each copy's real size, or it squeezes a whole picture onto each (lesson 239).

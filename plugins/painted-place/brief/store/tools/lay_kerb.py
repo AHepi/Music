@@ -46,13 +46,18 @@ Options, with their defaults:
     dish            0.012 m  how much lower the channel is at the kerb than at its road edge (water runs at the kerb)
     smooth          True     a smooth curve through your points; False: straight between them
     seed            0        the same seed lays the same kerb
-    material        'STONE • worn honey-grey architectural dressings'   the stones: a store name or a material you hold
+    material        'SURFACE • worn_rock_natural_01'   the stones: a store name or a material you hold (photographed;
+                    the street's own 'STONE • worn honey-grey architectural dressings' still works by name)
     channel_material  none   the channel stones (none: the kerb's material)
     collection      none     where the objects go (a new collection 'lay_kerb')
 
 What it makes: 'kerbstones' (obj['stones'], obj['chips']) and, when asked, 'kerb channel' (obj['stones']). Every face
-carries its stone's 'stone_tone' (0 to 1, its shade) and 'stone_number'; every point of the kerbstones carries
+carries its stone's 'stone_tone' (0 to 1, its shade), 'stone_number' and 'pp_piece' (0 to 1, its own random number: a
+photographed material shows each stone its own part of its pictures by it); every point of the kerbstones carries
 'kerb_chip', how far a chip cut it back (metres; 0 where the stone is whole).
+
+Along a road laid by lay_cobbles.lay_setts_along, lay_cobbles.road_edges(line, width) gives its two edges at the setts'
+tops: lay_kerb.lay(left, road='right') and lay_kerb.lay(right, road='left') stand the kerbs exactly at the road's edge.
 """
 
 import argparse
@@ -72,7 +77,8 @@ import store  # noqa: E402
 import _lines  # noqa: E402
 import _rough_stones  # noqa: E402
 
-STONE = 'STONE • worn honey-grey architectural dressings'
+STONE = 'SURFACE • worn_rock_natural_01'                 # photographed (decision 80; brief/store/materials/Photographed.md)
+OLD_STONE = 'STONE • worn honey-grey architectural dressings'     # the street's own: still there by name
 UP = Vector((0.0, 0.0, 1.0))
 BATTER = 0.012            # metres the road face stands further out at the road's level than at the top
 STEP = 0.015              # metres between the slices a stone is built from (fine enough for a chip to bite)
@@ -97,17 +103,18 @@ TOOL = {
         'dish': 'how much lower the channel is at the kerb than at its road edge (0.012 m)',
         'smooth': 'a smooth curve through your points, the stones bending with it; a curve object keeps its own shape (True); False: straight runs',
         'seed': 'the same seed lays the same kerb (0)',
-        'material, channel_material': "the stones ('%s'); the channel's (the kerb's)" % STONE,
+        'material, channel_material': "the stones (default '%s', photographed; the street's own '%s' still works by name); the channel's (default the kerb's)" % (STONE, OLD_STONE),
         'collection': "where the objects go (a new collection 'lay_kerb')",
     },
-    'materials': [STONE],
+    'materials': [STONE, OLD_STONE],
     'source': "`kerb_run` in the town street builder's '55 street - render_final.py' (line 229) and the second builder's "
               "kerb chips (line 1210), made into a tool: the builder's plain boxes now follow a curve, each stone tipped, "
               "settled and shaded on its own, and the chips cut into the road-side edge where wheels hit instead of "
               "denting every face of every stone with one noise",
     'trap': "the line is the kerb's road-side top edge, not its middle, and `road` must name the road's side or the kerb "
-            "is laid into the road; with channel stones, stop the setts `channel` metres short of the line; the stone "
-            "projects one big picture over the place, so call store.prepare_for_render(scene) once before drawing",
+            "is laid into the road (along a road laid on a line, take its edges from lay_cobbles.road_edges); with "
+            "channel stones, stop the setts `channel` metres short of the line; call store.prepare_for_render(scene) "
+            "once before drawing",
 }
 
 
@@ -267,11 +274,12 @@ class _Stones:
 
     def __init__(self):
         self.verts, self.faces, self.face_tone, self.face_number, self.vert_chip = [], [], [], [], []
+        self.face_piece = []
         self.count = 0
         self.chips = 0
 
     def stone(self, run, away_sign, s0, s1, profile, rng, tone, lean, chips=(), top_v=0.0, settle=(0.0, 0.0),
-              tip=0.0, shift=(0.0, 0.0)):
+              tip=0.0, shift=(0.0, 0.0), piece=0.0):
         n = len(profile)
         back_t = max(p[0] for p in profile)
         back_v = max(p[1] for p in profile)
@@ -312,6 +320,7 @@ class _Stones:
         added = (rings - 1) * n + 2
         self.face_tone.extend([tone] * added)
         self.face_number.extend([self.count] * added)
+        self.face_piece.extend([piece] * added)
         self.count += 1
         self.chips += len(chips)
 
@@ -321,6 +330,7 @@ class _Stones:
         mesh.from_pydata([tuple(Vector(v) - origin) for v in self.verts], [], self.faces)
         for attribute, kind, domain, values in (('stone_tone', 'FLOAT', 'FACE', self.face_tone),
                                                 ('stone_number', 'INT', 'FACE', self.face_number),
+                                                ('pp_piece', 'FLOAT', 'FACE', self.face_piece),
                                                 ('kerb_chip', 'FLOAT', 'POINT', self.vert_chip)):
             layer = mesh.attributes.new(attribute, kind, domain)
             if values:
@@ -395,6 +405,7 @@ def lay(line, road='left', height=0.13, width=0.30, depth=0.30, length=1.0, gap=
     runs = _runs(line, smooth)
     away_sign = 1.0 if road == 'left' else -1.0
     rng = random.Random(seed)
+    piece_rng = random.Random(seed * 7919 + 606)       # each stone its own part of the photographs; moves no stone
     if collection is None:
         collection = bpy.data.collections.new('lay_kerb')
         bpy.context.scene.collection.children.link(collection)
@@ -416,7 +427,7 @@ def lay(line, road='left', height=0.13, width=0.30, depth=0.30, length=1.0, gap=
             here, _ = run.frame(s0, away_sign)
             ground = here.z if ground is None else min(ground, here.z)
             kerb.stone(run, away_sign, s0, s1, profile, rng, rng.random(), lean, chips=found, top_v=height - 0.005,
-                       settle=settle, tip=tip, shift=shift)
+                       settle=settle, tip=tip, shift=shift, piece=piece_rng.random())
     if kerb.count == 0:
         raise ValueError('the line is too short for a single kerbstone')
     stone = _rough_stones.shaded(_material(material), shades)
@@ -424,6 +435,7 @@ def lay(line, road='left', height=0.13, width=0.30, depth=0.30, length=1.0, gap=
     made['kerb']['chips'] = kerb.chips
     if channel > 0:
         channel_rng = random.Random(seed * 7919 + 17)     # its own dice: asking for a channel moves no kerbstone
+        channel_piece = random.Random(seed * 7919 + 707)
         gutter = _Stones()
         cross = _channel_profile(channel, dish)
         for run in runs:
@@ -436,7 +448,7 @@ def lay(line, road='left', height=0.13, width=0.30, depth=0.30, length=1.0, gap=
                     continue
                 settle = (-lean * channel_rng.uniform(0.0, 0.006), -lean * channel_rng.uniform(0.0, 0.006))
                 gutter.stone(run, away_sign, s0, s1, cross, channel_rng, channel_rng.random(), lean, settle=settle,
-                             tip=math.radians(lean * channel_rng.uniform(-0.4, 0.4)))
+                             tip=math.radians(lean * channel_rng.uniform(-0.4, 0.4)), piece=channel_piece.random())
         gutter_material = _rough_stones.shaded(_material(channel_material if channel_material is not None else material), shades)
         made['channel'] = gutter.make('kerb channel', gutter_material, collection, ground)
     bpy.context.view_layer.update()

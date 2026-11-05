@@ -21,7 +21,7 @@ What this is: how a place is built for the series since decision 62 (3 November 
 
 ## The store
 
-`brief/store/` holds ready parts (things to place: a bell tent, a field gun, a timber hut, a gas lamp...), tools (code that makes a thing from a line, a point or an object the builder gives: a duckboard walkway along a line, setts on a road, lapped boards and eaves on a box, stonework on a wall, a puddle, stone grain, a dusk sky with a box of haze, a ribbon of smoke, an optional finish) and ready materials (the street's, the shelf's surfaces already darkened into the look, and a few made in code). Its catalogue is `brief/store/Store.md`. Nothing in it places itself; a builder may use it or not.
+`brief/store/` holds ready parts (things to place: a bell tent, a field gun, a timber hut, a gas lamp...), tools (code that makes a thing from a line, a point or an object the builder gives: a duckboard walkway along a line, setts on a road or along any curve with its flags and kerbs, bricks or stone blocks filling any plane, lapped boards and eaves on a box, stonework on a wall, a puddle, stone grain, a dusk sky with a box of haze, a ribbon of smoke, an optional finish) and ready materials (photographed stone and brick where each piece shows its own part of the photographs, the street's, the shelf's surfaces already darkened into the look, and a few made in code). Its catalogue is `brief/store/Store.md`. Nothing in it places itself; a builder may use it or not.
 
 To add to the store (a new set that used a tool, part or material the store lacks; the rule in the repository's rules file):
 

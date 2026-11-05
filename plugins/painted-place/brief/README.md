@@ -14,7 +14,7 @@ What this is: everything a builder gets to make one place for the film, and noth
 | `surfaces/` | A shelf of 26 photographed surfaces (Poly Haven, CC0) with their real sizes, for the builder to lay on as it chooses |
 | `Second pass.md` | The brief for a second builder that dresses a finished place: surfaces, wear, the things people left |
 | `Third pass.md` | The brief for a third builder, when the most detail is asked for: the buildings' faces and the middle distance |
-| `store/` | Ready parts (a tent, a gun, a lantern, a hut, a shop front, a chimney stack...), tools that make a thing from a line or a shape you give (a duckboard walkway, cobbles, a kerb, lapped boards, stonework, a slate roof with gutters, a downpipe, stains and weathering, a puddle, a dry-stone wall, a hedge, the ground and its tracks), ready materials (the street's 45, the shelf's 26, the made ones) and a finishing step; see `store/Store.md` |
+| `store/` | Ready parts (a tent, a gun, a lantern, a hut, a shop front, a chimney stack...), tools that make a thing from a line or a shape you give (a duckboard walkway, cobbles along any curve, a kerb, brick or stone walls filling a plane, lapped boards, stonework, a slate roof with gutters, a downpipe, stains and weathering, a puddle, a dry-stone wall, a hedge, the ground and its tracks), ready materials (photographed stone and brick, the street's 45, the shelf's 31, the made ones) and a finishing step; see `store/Store.md` |
 
 How lessons travel: a good new picture joins `reference/`; a fault joins `Traps.md`; a new kind of place gets a board; a new surface joins the shelf; a good new part, tool or material joins the store. No code that decides where things go is added anywhere.
 
