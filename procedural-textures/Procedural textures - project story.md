@@ -139,7 +139,13 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   tin patch; then the same farmyard by day under a photographed sunny sky, and the dusk picture at full size (folder
   `54 Barn on a farm - two builders, dusk and day/`). What they made for themselves is now in the store: eight parts, a
   dry-stone wall and a hedge along any curve, rough stone walls, moss, clearing under things, straw, hollow buildings; every
-  shelf surface now uses its normal picture.
+  shelf surface now uses its normal picture. You judged it: "It looks incredible." (decision 79).
+- **The town street once more, by three fresh builders (log 55, 5 November, plugin 0.9.0):** from your words "Now do the town
+  street one more time with as much careful detail." and the plugin alone: a northern tenement street at dusk after rain,
+  then its near ground dressed by a second builder, then its fronts by a third (soot and rain runs, hopper heads, blinds,
+  geraniums, a teapot sign, barrows), and the third pass at full size (folder `55 Town street - three builders/`). What they
+  made for themselves is now in the store: fourteen parts, kerbs, joint weeds, worn setts, slate roofs with gutters,
+  downpipes, weathering and four heavy stains. The third builder's report was lost when the machine restarted.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -165,7 +171,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 | The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
-| The painted-place plugin (`plugins/painted-place`, version 0.8.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
+| The painted-place plugin (`plugins/painted-place`, version 0.9.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
 
 ## Word list
 
@@ -180,6 +186,12 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   edge along its top. **Mangold:** a big orange-red root grown to feed cattle. **Skep:** a round woven willow basket.
   **Normal picture (log 53, used on every surface from log 54):** the photograph in a PBR set that says which way each tiny
   bit of the surface faces, so light catches its relief.
+- **Sett, kerb, channel (log 55):** a sett is one squared stone block of a paved road; the kerb is the row of long stones along
+  the pavement's edge; the channel is the row of flat stones along the kerb's foot that the rain runs down. **Close:** a narrow
+  passage between tenements, to a stair or a back court. **Hopper head:** the open iron box at the top of a downpipe that the
+  gutter's water falls into. **Eaves board:** the board along a roof's edge that the gutter hangs from. **Dormer:** a window
+  standing up out of a sloping roof, with its own small roof. **Coster barrow:** a street seller's two-wheeled hand cart.
+  **Sack barrow:** an upright hand truck on two small wheels, for moving sacks.
 - **Store (log 51):** the folder of ready things a builder may pick from: **parts** (things to place, such as a tent or a gas lamp),
   **tools** (code that makes a thing from a line, a point or an object the builder gives, such as a walkway along a line) and **ready
   materials** (Blender materials to put on an object). Nothing in it places itself. **Card:** a small picture of a part or material, drawn
@@ -1067,11 +1079,39 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     full-size drawing kept running. **Not done:** no independent check of 0.7.0 or 0.8.0 (the plugin's rule asks for one; it
     waits for your word, since you stopped the last); the day picture only at working size; leaves still made in code.
 
+55. **The town street once more, by three fresh builders; the store fed (5 November, 11:27 to 16:50).** Your words "It looks
+    incredible. Now do the town street one more time with as much careful detail." (decision 79) went word for word to fresh
+    builders with only the plugin, after a board of 10 real photographs was made for it (Edinburgh's closes and Cowgate, York's
+    Shambles, Glasgow, Liverpool and London streets, 1897 to 1920; two New York streets for the crowding of signs and barrows).
+    For "as much careful detail" a third pass was added after the usual two, given only to the building fronts and the middle
+    distance (`brief/Third pass.md`). **First builder (11:45 to 13:02, 19 minutes early):** a northern tenement street at dusk
+    after rain: thirteen stone tenements, a close, three shops with blank signs, gas lamps, a cart, setts and puddles mirroring
+    the lamps. **Second builder (13:10 to 14:08, about 20 minutes early):** the near ground: a relaid patch of setts, grit in the
+    joints, rocked and missing setts, silt in the gutter, straw, leaves, a newspaper, the road men's stack of setts with its
+    lantern, two ash bins. **Third builder (14:19 to about 15:20):** soot, damp and rust runs down the fronts, hopper heads,
+    blinds and nets, a boarded stair window, geraniums, the teapot sign, a coster barrow, a sack barrow, weathered stone. The
+    machine restarted at about 15:20 and stopped it 16 minutes before its clock ended; it could not be resumed, so its report is
+    lost. Its last picture (drawn 15:17 to 15:22, inside every band) is taken as its final, and its own list of what it added
+    stands in for the report. Every picture was sent as soon as it was drawn; the third pass was drawn at full size (34 minutes).
+    **Into the plugin (0.9.0):** fourteen parts by two helpers (a shop front with a real shop behind its glass, a dormer, blinds,
+    nets and curtains, a boarded window, a window box, a sign board, a lit stair door; an ash bin, a drain cover and grate, a
+    stack of setts, a newspaper, a chimney stack, a sack barrow, a coster barrow) and tools by two more (kerbstones and channel
+    stones along any line or curve, weeds in the joints, wear for the setts, a slate roof with eaves boards and gutters,
+    downpipes with their leak stains, weathered copies of stone and paint, stains set out past the stone blocks, four heavy
+    stains); builders now keep their notes on disk as they go; new traps (two faces in the same plane draw black squares; shiny
+    worn iron reads dark at night). **Tested:** all 112 test lines pass, among them all 48 parts built with every option and
+    nothing floating, the kerb round a corner with chips only on its road side, weeds never in a wheel line, the setts laid
+    exactly as before when no wear is asked, a relaid patch with no old sett left in it, a roof overhanging every side by what
+    was asked, a downpipe straight down the face from its hopper to its shoe, and every weathered material a new copy with the
+    store's own left as it was. **Not done:** no independent check of 0.7.0 to 0.9.0 (it waits for your word); the third
+    builder's own report; some cards show only a part's default (the ash bin with its lid on, the blind but not the nets); three
+    part files (shop front, stair door, chimney stack) are 14 MB each, because they carry the street's stone pictures inside them.
+
 ## Next step
 
-Your verdict on the barn (folder `54 Barn on a farm - two builders, dusk and day/`: first pass, second pass, by day, full
-size). Then, at your word, an independent check of the plugin (0.7.0 and 0.8.0) by a fresh checker; and your generated
-leaf sheet into the litter tool when it comes.
+Your verdict on the town street (folder `55 Town street - three builders/`: first, second and third pass side by side, and
+the third at full size). Then, at your word, an independent check of the plugin (0.7.0 to 0.9.0) by a fresh checker; and
+your generated leaf sheet into the litter tool when it comes.
 
 ## Traps
 

@@ -25,7 +25,7 @@ What this is: how a place is built for the series since decision 62 (3 November 
 
 To add to the store (a new set that used a tool, part or material the store lacks; the rule in the repository's rules file):
 
-- A part is one module in `store/parts/src/<name>.py` with a `CARD` and `build(collection, seed=0, **options)` that makes it at the origin: metres, foot at z = 0, front towards −Y. Check it from four sides (`python3 store/tools/card.py part <name> --views three,close,side,back`), then `store.save_part_file('<name>')`.
+- A part is one module in `store/parts/src/<name>.py` with a `CARD` and `build(collection, seed=0, **options)` that makes it at the origin: metres, foot at z = 0, front towards −Y. Check it from four sides (`python3 store/tools/card.py part <name> --views three,close,side,back`), then `store.save_part_file('<name>')`. In its `CARD`, write each option's default as `(default X)`, and in a choice option's text put only that option's own choices in single quotes: the parts test builds the part with every other quoted word, and reads an apostrophe as a quote mark (it tripped a helper in log 54 and again in log 55).
 - A tool is one script in `store/tools/<name>.py` with a `TOOL` dict, importable functions that work only on what the caller passes, and `--help`.
 - A material is added to `store/materials/src/` (`made.py` for code-made ones, `build_materials.py` for ones from the shelf's photographs); rebuild with `python3 store/materials/src/build_materials.py`, draw its card (`python3 store/tools/card.py material "<name>"`).
 - Then `python3 store/tools/catalogue.py` (writes the catalogue into `Store.md` from the items' own descriptions) and the tests: `bash ${CLAUDE_PLUGIN_ROOT}/tests/run_tests.sh`, which fails if any test fails. A change is finished when the tests pass and a fresh checker (an agent that has not seen the work) has read it.
@@ -42,4 +42,5 @@ To add to the store (a new set that used a tool, part or material the store lack
 - A builder stops early when the measure says "inside every band"; the brief says the bands are a floor, not the finish. If a builder still stops early, the fix goes into `brief/Traps.md`, not into the builder's request.
 - The store's parts and tools find the shelf and the materials by their place inside the brief folder: a copy without `surfaces/` draws the surface materials pink.
 - `import bpy` before `import bmesh` in every script run with the `bpy` module.
-- A long drawing left running in the background is lost if the machine restarts; draw finals in the foreground, one at a time.
+- A long drawing left running in the session's background is lost if the session restarts; one started as a detached process (`nohup ... &`) kept running through the restarts of logs 54 and 55. Either way, after any pause check that it is still running before saying it will arrive.
+- When several helpers add parts at the same time, run the whole parts test after the last one finishes: it stops at the first part that fails (another helper's part with no part file yet), and the parts after it go unchecked.

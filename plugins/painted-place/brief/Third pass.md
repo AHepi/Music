@@ -14,7 +14,7 @@ What this file is: the brief for a third builder, used when the owner asks for t
 >
 > What you have: a work folder WORK (write everything there), Blender 5.1.2 as the `bpy` module (`python3`), 2 processors, nobody else drawing.
 >
-> Rules: read nothing outside FOLDER, WORK and the earlier builders' folder; no internet, no image generation. Your clock ends at DEADLINE by this computer's clock; use all of it: draw, measure, look at full size, fix, draw again, and do not stop before the clock unless you can say what you would change and why you will not. Draw your final at 540 x 960 as WORK/final.png; leave render_final.py (python3 render_final.py WIDTH HEIGHT SAMPLES OUT.png) that draws the finished scene with all its finishing. End with a report in plain words: what you changed, every picture with its time and measures, what you checked and fixed, and what you did not do.
+> Rules: read nothing outside FOLDER, WORK and the earlier builders' folder; no internet, no image generation. Your clock ends at DEADLINE by this computer's clock; use all of it: draw, measure, look at full size, fix, draw again, and do not stop before the clock unless you can say what you would change and why you will not. Draw your final at 540 x 960 as WORK/final.png; leave render_final.py (python3 render_final.py WIDTH HEIGHT SAMPLES OUT.png) that draws the finished scene with all its finishing. End with a report in plain words: what you changed, every picture with its time and measures, what you checked and fixed, and what you did not do. Keep WORK/notes.md as you go (each picture with its time and measures, what you changed and fixed): this computer can stop without warning, and then that file is all that is left of your report.
 
 ## How it is run
 

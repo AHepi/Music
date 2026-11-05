@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-11-04, 21:30, for the painted-place plugin (log 53); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-05, 16:50, for the painted-place plugin (log 55); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -325,7 +325,7 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   Not fixed: the faint contour steps in the dark sky (invisible at normal contrast; filming again takes over an hour for nothing a viewer sees) and
   the plugin's and chapter 2's copies of the stage (outside this job).
 
-## The painted-place plugin (logs 38 to 51, 2 to 4 November 2026)
+## The painted-place plugin (logs 38 to 55, 2 to 5 November 2026)
 
 - `plugins/painted-place` 0.5.0: build a place in Blender, dress it in one call, light it in the series' blue-hour look, judge it blind
   (now on the look and on the request), fix once. Decisions 50 to 58.
@@ -365,7 +365,14 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   picture at full size (`procedural-textures/54 Barn on a farm - two builders, dusk and day/`). **Into the plugin (0.8.0):**
   eight parts, six tools and two tool additions (a dry-stone wall and a hedge along any curve, rough stone walls, moss, clearing
   under things, straw, hollow boarded buildings), two materials, the sunny sky, every shelf surface's normal picture, the
-  builders' traps. Pictures sent as each was drawn (decision 75).
+  builders' traps. Pictures sent as each was drawn (decision 75). You judged it: "It looks incredible." (decision 79).
+- **Log 55 (decision 79): the town street once more, "with as much careful detail"**, built by three fresh builders from the
+  plugin alone (a board of 10 real town street photographs made first): a northern tenement street at dusk after rain; the
+  second builder dressed its near ground; a third, new for this request, worked only on the fronts and the middle distance.
+  The machine restarted during the third pass, so its report is lost and its last picture stands as its final; the third pass
+  was drawn at full size (`procedural-textures/55 Town street - three builders/`). **Into the plugin (0.9.0):** fourteen parts,
+  five new tools (kerbs, joint weeds, slate roofs with gutters, downpipes, weathering), wear for the setts, four heavy stains,
+  builders' notes kept on disk, the builders' and helpers' traps. 112 test lines pass. Not yet: an independent check.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -378,9 +385,9 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your verdict on the barn: the dusk picture (first and second pass), the day picture and the full-size dusk picture (folder 54).
+- Your verdict on the town street: the three passes side by side and the third at full size (folder 55).
 - Your generated leaf sheet, when you have one (about 12 separate fallen leaves from straight above on white), for the litter tool.
-- Whether to run the independent check (a fresh checker) on 0.7.0 and 0.8.0: the plugin's rule asks for one; you stopped the
+- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.9.0: the plugin's rule asks for one; you stopped the
   last one, so it waits for your word.
 - Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line

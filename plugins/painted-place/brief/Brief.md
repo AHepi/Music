@@ -21,6 +21,7 @@ What this file is: the words a builder gets, with the request, the folder and th
 > - Your clock: your last picture must be finished by DEADLINE by this computer's clock (check with `date`). The clock ends the build, not the measures: inside every band is a floor, not the finish. Before the clock, keep going until all of these hold: every surface in your material list is laid; every thing in the frame can be named at full size; puddles have ragged edges, a wet rim and a ripple; buildings have eaves, an overhang and boards or stones in relief; nothing reads as a plain box. When they all hold and time is left, look at the picture at full size part by part and fix the weakest part, then the next.
 > - Your final picture is a tall frame for a vertical film. Draw it at 540 x 960, saved as WORK/final.png. It may be redrawn at 1080 x 1920 with 64 samples later, so also leave a script, render_final.py, that draws your final scene with all its finishing, run as: python3 render_final.py WIDTH HEIGHT SAMPLES OUT.png
 > - When you finish (or at DEADLINE), end with a report in plain words: what you built, how you lit and framed it, every picture you drew with how long it took, its measures, what you checked and fixed, and what you did not do. Your report is your last message.
+> - Keep WORK/notes.md as you go: each picture with its time and measures, what you changed and what you fixed. This computer can stop without warning, and then that file is all that is left of your report.
 
 ## How a place is built with this
 
@@ -40,4 +41,5 @@ What this file is: the words a builder gets, with the request, the folder and th
 
 - Every helper also sees the repository's rules file and the owner's saved preferences; that cannot be switched off from here. Keep both free of technique.
 - A builder cannot save files whose name begins with REPORT; its report comes back as text. Save it yourself.
+- The machine can restart in the middle of a build, and a long-running builder cannot always be resumed after it (log 55: the third builder's record was too large to load, and its report was lost). Its `notes.md`, its pictures and its scripts on disk are then all that is left; take its last finished picture, drawn by its last `render_final.py`, as its final.
 - Two builders given the same brief make different places. That is the method, not a fault; more reference pictures narrow it.

@@ -53,6 +53,20 @@ a photographed sunny sky whose sun casts the shadows (decision 76, the barn by d
 photographed set, normal picture included; a board of real barn and farmyard photographs; the builders' traps. Tests in
 `tests/test_store_farm_tools.py` and the parts test.
 
+## What 0.9 added
+
+What the town street's three builders made for themselves (log 55, decision 79), pulled into the store: fourteen parts
+(`shop_front` with a real shop behind its glass, `dormer`, `window_dressing` as blinds, nets or curtains, `boarded_window`,
+`window_box` of geraniums, `sign_board` on a forged bracket, `stair_door` lit from the stair, `ash_bin`, `drain` as a cover
+or a grate, `sett_stack`, `newspaper`, `chimney_stack`, `sack_barrow`, `coster_barrow`); tools: `lay_kerb` (kerbstones
+along any line or curve, with channel stones), `joint_weeds` (grass and weeds in the joints, out of the wheel lines),
+`lay_eaves` (a slate roof with its overhang, eaves boards, rafter ends and gutters), `downpipe` (from a gutter outlet to
+the ground, with its leak stains), `weathering` (weathered copies of stone and paint); wear for the setts in `lay_cobbles`
+(shades, two quarries, rocked and missing setts, a relaid patch, grit and moss in the joints), a distance, taper and
+unevenness for the stains and four heavy stains that show far down a street; a third builder for the building fronts when
+the owner asks for the most detail (`brief/Third pass.md`); a board of real town street photographs; the builders' traps.
+Tests in `tests/test_store_street_ground.py`, `tests/test_store_street_fronts.py` and the parts test.
+
 ## What was retired, and why
 
 Until version 0.5 the plugin built the look itself: a **dressing** (`materials/apply_by_role.py` and the `lay_*.py` files) gave every object a material by the words in its name and laid details where its own survey of the camera's view said they belonged; a **look stage** (`stage/`) lit and drew the place; a **blind judge** (`look/judge.py`, `agents/blind-judge.md`) said what to fix. The owner judged a builder given only pictures and a page against builders using the dressing, and the pictures-only builders' places were better ("Pictures only is better"): the dressing's placement logic was faulty and its objects did not make sense (decision 62). The owner then asked to keep the good parts as things to pick from: the footpath as a tool on a line, the detailed things builders had made as parts, the textures as "pick and choose" shaders (decision 65). So in 0.6:

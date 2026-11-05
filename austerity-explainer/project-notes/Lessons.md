@@ -778,6 +778,31 @@ Only failures in doing the work belong here. Newest at the bottom.
      turned into world space. A check renders each of a box's six sides and compares the normal picture's slopes with the
      height picture's: 0.70 to 0.81 on every side for stone, brick and planks, and 0.36 when the picture is deliberately mirrored,
      so the check catches a wrongly turned side.
+231. **The third builder was lost to a restart** (log 55, about 15:20): the session's machine restarted 62 minutes into the
+     third builder's 80, before it wrote its report, and it could not be resumed (its record was too large to load; a second
+     try at 16:45 failed the same way). Its last finished picture, the script that drew it and its own list of what it added
+     were on disk and stand in for the report. All three builder texts now ask a builder to keep `notes.md` as it goes.
+232. **The picture watcher sent a builder's working pictures as finished ones** (log 55): crops, side-by-side comparisons,
+     close-up checks and small test pictures were reported as new pictures. It now reports only tall frames at least 250 dots
+     wide and skips names starting with crop, zoom, compare, diag or z_.
+233. **The card watcher listed about a hundred unchanged cards as new** (log 55): after the restart, the material cards' file
+     times no longer matched its saved list, though their pictures had not changed. Compared with the repository, only four
+     cards were new, and only those were sent.
+234. **The shop and windows helper's fixes** (log 55, from its report): black squares wherever two timbers crossed (two faces
+     in exactly the same plane), the shop's lit back wall showing through its back, a dormer that would have failed the parts
+     test's centring check (its own checker lacked that check), a dormer light three times too strong, an edit script that
+     stopped before writing so a redraw used the old file, geranium leaves like paper discs, an option text the parts test
+     could not read (an apostrophe again, as in lesson 228), peeling that showed only as flecks.
+235. **The street things helper's fixes** (log 55, from its report): heaped ash through the closed lid, a lid handle flat the
+     wrong way, a leaning lid hiding the bin, a drain's rings built as solid discs and its frame flickering at the road's level,
+     worn iron reading dark (shiny iron mirrors the dark sky), sett chamfers 7 mm under the ground, a newspaper corner facing
+     down, chimney soot that never went black (and time lost on a fault that was really the close card cutting off the pots).
+     Its parts test stopped at another helper's part that had no file yet, so the parts after it went unchecked until the
+     session's full run.
+236. **The fronts tools helper's fixes** (log 55, from its report): a loop variable overwrote the wall's direction (a crash);
+     the hopper's lip and the holdfasts' arms poked 5 mm into the wall (its test caught it); lean-to and flat roofs got a gutter
+     on their high side too; two wrong test thresholds; the examples gave a world height where the downpipe wanted a height up
+     the wall (it now takes both from a gutter outlet).
 
 ## Traps
 
@@ -830,3 +855,6 @@ Only failures in doing the work belong here. Newest at the bottom.
   and no flattening of either (lesson 219). Turn a normal picture with the projection that lays its colour, and check every side
   against the height picture, including a deliberately wrong one (lesson 230).
 - Never stop a process by a name that also appears in the command doing the stopping (lesson 222).
+- A long-running builder may not resume after a restart: have it keep its notes on disk as it goes (lesson 231).
+- Judge whether a picture is new by its content or the repository, never by its file time (lesson 233).
+- When several helpers add to the store at once, run the whole test suite after the last one finishes (lesson 235).

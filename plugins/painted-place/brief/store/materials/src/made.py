@@ -1,16 +1,17 @@
 """
 What this file does: the store's made materials, built in code (no photograph): old brass, old copper, glazed china,
 weathered boards with peeling paint, wet bark, puddle water, a wet-ground film, rusty nail heads, a rust stain, rail steel,
-smoke for a ribbon, six see-through stains (soot, damp, rust, mud, coal dust, ash), a slate roof, stove ash, trodden
-straw (the litter tool's straw layer) and hedge leaves (the hedge tool). build_materials.py calls build_all().
+smoke for a ribbon, six see-through stains (soot, damp, rust, mud, coal dust, ash) and four heavy ones for fronts seen
+from 15 to 35 m (heavy soot, far soot, heavy damp with a salt line, leak), a slate roof, stove ash, trodden straw (the
+litter tool's straw layer) and hedge leaves (the hedge tool). build_materials.py calls build_all().
 
 Some of them read a number a tool writes on its meshes:
   - MADE • puddle water: 'shallow' on each point, 0 in the deep middle, 1 at the rim; where it is 1 the water is clear
     and the ground shows through. A mesh without it is deep water all over.
   - MADE • wet ground film: 'dry' on each point, 0 against the water, 1 at the film's outer edge; where it is 1 the film
     is gone. A mesh without it is wet all over.
-  - MADE • rust stain and the six MADE • stain ...: 'fade' on each point, 0 where the stain is strongest, 1 where it is
-    gone (the walkway, stain and railing tools write it). A mesh without it is stained all over.
+  - MADE • rust stain and the ten MADE • stain ...: 'fade' on each point, 0 where the stain is strongest, 1 where it is
+    gone (the walkway, stain, railing and downpipe tools write it). A mesh without it is stained all over.
   - MADE • straw: 'strand_random' and 'straw_shade' on the clump shapes, 'litter_tone', 'litter_mud' and 'wetness' on
     the points that lay them or on the draped straw itself (the litter tool writes them all). Without them every strand
     is a dark gold, dry and clean.
@@ -397,6 +398,59 @@ def stain(name, kind):
     return material
 
 
+HEAVY_STAINS = {
+    # kind: colour (linear), roughness, where the stain starts and where it is full (in 1 - fade, with the ragged edge
+    # added), how ragged its edge is, the streaks' stretch (across, across, up), how much the streaks break it, strongest
+    'heavy soot': ((0.010, 0.0085, 0.0075), 0.92, 0.02, 0.50, 0.30, (6.0, 6.0, 0.42), 0.62, 0.95),
+    'far soot': ((0.009, 0.008, 0.007), 0.92, 0.00, 0.38, 0.30, (3.0, 3.0, 0.38), 0.50, 1.00),
+    'heavy damp': ((0.016, 0.021, 0.013), 0.42, 0.22, 0.40, 0.42, (6.0, 6.0, 0.80), 0.35, 0.86),
+    'leak': ((0.013, 0.019, 0.011), 0.38, 0.05, 0.55, 0.25, (6.0, 6.0, 0.40), 0.60, 0.90),
+}
+SALT = (0.20, 0.19, 0.165)
+
+
+def heavy_stain(name, kind):
+    """A see-through stain pushed hard enough to show on a front 15 to 35 m away: its alpha is the mesh number 'fade'
+    (0 strongest, 1 gone) cut at a ragged edge, so the stain holds nearly full strength and then stops along a broken
+    line instead of fading out, and broken by runs stretched up and down. 'far soot' has broader runs, for fronts 25 m
+    and more away; 'heavy damp' carries a pale salt line along its edge (the tide line of rising damp); 'leak' is the
+    green-black of water overflowing a gutter or a downpipe's socket. From `wear_mat` in the third street builder's
+    script (log 55), on the world's coordinates so no two planes share one pattern."""
+    colour, roughness, low, high, ragged, stretch, streak_amount, strongest = HEAVY_STAINS[kind]
+    material = fresh_material(name)
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    position = nodes.new('ShaderNodeNewGeometry').outputs['Position']
+    fade = nodes.new('ShaderNodeAttribute')
+    fade.attribute_type = 'GEOMETRY'
+    fade.attribute_name = 'fade'
+    held = math(nodes, links, 'SUBTRACT', 1.0, fade.outputs['Fac'])
+    runs = map_range(nodes, links, noise(nodes, links, stretched(nodes, links, position, stretch), 1.0, detail=5.0, roughness=0.62), 0.34, 0.66)
+    runs = math(nodes, links, 'MULTIPLY_ADD', runs, streak_amount, 1.0 - streak_amount)
+    edge = noise(nodes, links, stretched(nodes, links, position, (3.2, 3.2, 2.2)), 1.0, detail=6.0, roughness=0.7)
+    reach = math(nodes, links, 'ADD', held, math(nodes, links, 'MULTIPLY_ADD', edge, ragged, -0.5 * ragged))
+    dark = math(nodes, links, 'MULTIPLY', map_range(nodes, links, reach, low, high, 0.0, strongest), runs, clamp=True)
+    grain = noise(nodes, links, position, 40.0, detail=3.0)
+    stained = mix(nodes, links, map_range(nodes, links, grain, 0.3, 0.7, 0.0, 0.5), colour, tuple(c * 0.6 for c in colour))
+    if kind == 'heavy damp':
+        # salt dried out along the tide line: a pale band just outside the dark, where the reach is a little short of it
+        band = math(nodes, links, 'MULTIPLY', map_range(nodes, links, reach, low - 0.09, low - 0.035),
+                    map_range(nodes, links, reach, low - 0.035, low + 0.02, 1.0, 0.0))
+        salt = math(nodes, links, 'MULTIPLY', band, map_range(nodes, links, grain, 0.25, 0.65, 0.25, 0.55))
+        alpha = math(nodes, links, 'ADD', dark, math(nodes, links, 'MULTIPLY', salt, math(nodes, links, 'SUBTRACT', 1.0, dark)), clamp=True)
+        share = math(nodes, links, 'DIVIDE', dark, math(nodes, links, 'MAXIMUM', alpha, 0.0001), clamp=True)
+        stained = mix(nodes, links, share, SALT, stained)
+    else:
+        alpha = dark
+    links.new(alpha, principled.inputs['Alpha'])
+    links.new(stained, principled.inputs['Base Color'])
+    links.new(map_range(nodes, links, grain, 0.3, 0.7, roughness - 0.06, roughness + 0.06), principled.inputs['Roughness'])
+    principled.inputs['Specular IOR Level'].default_value = 0.3 if roughness > 0.6 else 0.5
+    material.surface_render_method = 'DITHERED'
+    material.diffuse_color = (*colour, 1)
+    return material
+
+
 def _real_sized_coordinates(nodes, links):
     """The object's own coordinates with its unapplied scale undone: multiplied by the object number 'pp_scale'
     (store.prepare_for_render records it; where none was recorded the scale is taken as 1). The same logic as
@@ -620,6 +674,10 @@ MADE = {
     'MADE • stain mud': (lambda n: stain(n, 'mud'), "a see-through smear of trodden mud, dark brown, a little glossy, blotched (mesh number 'fade'; the stain tool writes it)"),
     'MADE • stain coal dust': (lambda n: stain(n, 'coal dust'), "a see-through smear of coal dust, black, a little glossy, blotched (mesh number 'fade'; the stain tool writes it)"),
     'MADE • stain ash': (lambda n: stain(n, 'ash'), "a see-through smear of ash carried on boots, pale grey, matte, blotched (mesh number 'fade'; the stain tool writes it)"),
+    'MADE • stain heavy soot': (lambda n: heavy_stain(n, 'heavy soot'), "a heavy soot stain that shows on a front 15 to 25 m away: near-black brown, held nearly full and stopped at a ragged edge, broken into runs (mesh number 'fade'; the stain tool writes it)"),
+    'MADE • stain far soot': (lambda n: heavy_stain(n, 'far soot'), "the heavy soot with broader runs and darker, for fronts 25 to 35 m away (mesh number 'fade'; the stain tool writes it)"),
+    'MADE • stain heavy damp': (lambda n: heavy_stain(n, 'heavy damp'), "heavy rising damp: green-black, a little glossy, a ragged tide line with a pale salt line along it (mesh number 'fade'; the stain tool writes it)"),
+    'MADE • stain leak': (lambda n: heavy_stain(n, 'leak'), "a leak run: green-black water streaks down a wall from a gutter's joint or a downpipe's socket (mesh number 'fade'; the stain and downpipe tools write it)"),
     'MADE • slate roof': (slate_roof, "a slate roof in courses: dark blue-grey slates, lap lines in relief, wet sheen; in the object's own axes, slates along X, courses climbing Y"),
     'MADE • ash': (ash, 'grey stove ash with dark clinker lumps, matte, for heaps and spills'),
     'MADE • straw': (straw, "dropped and trodden straw for the litter tool's straw layer: dull gold to grey-brown strands, the outer ones "
