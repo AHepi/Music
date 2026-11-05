@@ -741,6 +741,43 @@ Only failures in doing the work belong here. Newest at the bottom.
      Blender; points cleared before their numbers were written (caught before it ran); two sizes of stone mirroring each other's
      places from one random stream; a test asking four rocks for a wide spread of wetness; counts that fell as the amount rose
      because each amount was a separate draw (a bigger amount now keeps the stones of a smaller one).
+221. **The stereograph cropper cut the wrong patch on both cards** (log 54, the barn board): looking for the busiest stretch of
+     each card, it cut a 161 x 158 corner of one and a thin strip of the other. Both crops were then set by hand from a pixel
+     ruler drawn on the cards, and each crop was looked at before it went on the board.
+222. **A clean-up command stopped itself** (log 54): `pkill -f watch_pictures.py` matched the shell running it, which died
+     (exit 144) before the rest of the command ran. A name to stop is now matched with a bracket (`[w]atch_pictures`), which the
+     shell's own command line does not match.
+223. **The sun of a photographed sky was placed half a turn wrong** (log 54, the barn by day): the first day test put the sun
+     behind the barn and drew its front black. Blender lays a sky photograph with its middle looking along +X (bearing =
+     (0.5 - u) x 360 degrees), not along -X as first worked out. The rule and the turn for a wanted bearing are in the skies'
+     README.
+224. **By day the open barn was a black hole, then lit gold** (log 54): daylight through a door is too little to show the
+     inside; a soft cool light just inside the door fixed it at 110 W, where 260 W read as a lamp-lit inside.
+225. **The session restarted in the middle of the store work** (log 54, about 09:00): both helpers stopped after eight or nine
+     minutes, before saving anything, and were resumed from their transcripts; the full-size drawing, started as a detached
+     process, kept running and finished.
+226. **A test picture made inside Blender came out black** (log 54, measuring how the box projection lays a picture):
+     assigning a numpy array to a new picture's pixels left them empty, so every reading was zero. The gradient picture is now
+     made outside Blender and loaded from a file.
+227. **The barn builders' fixes** (log 54, from their reports): the first builder's lamps showed as balls through the door,
+     the inside read as an empty white room, haze inside the barn turned the hay to fog, straw read as asterisks, five cart
+     passes dug trenches, a lamp inside the cow house lit nothing, the gate hid behind the wall, the hedge read as balloons and
+     the wall's top as a picket fence; the second builder's roots read as peaches, a sack as a boulder and the tin patch as a
+     shutter. Each was fixed in the build; the ones the next builder would meet are now traps.
+228. **The parts helper's four fixes** (log 54, from its report): a number layer added to a mesh after its points broke them;
+     an option's default written with a colon could not be read by the parts test (it reads up to a semicolon); an apostrophe in
+     a choice option's text was read as a choice; wide doors' braces stuck out past the door's edges.
+229. **The tools helper's fixes** (log 54, from its report): straw clumps laid flat at their middle's height sank into the
+     ground's bumps (each strand is now draped onto the ground); the wall's core ran straight past a corner and out through both
+     faces (found by painting the core red); corner stones cut square left a wedge at a 78-degree corner; end stones bulged into
+     the gateway; on a cross slope the downhill face floated (each face now follows the ground under it); the hedge's core showed
+     as a grey slab; a hedge spray leaked into a gap and rubble stones under a slope were cut to slivers; a slip in the moss
+     tool's maths.
+230. **The shelf's surfaces were still half used** (log 54, your question "Does that hut made of brick use PBR?"): only the
+     soils had their normal pictures. All 26 sets now have them, read through the same box projection as their colour and
+     turned into world space. A check renders each of a box's six sides and compares the normal picture's slopes with the
+     height picture's: 0.70 to 0.81 on every side for stone, brick and planks, and 0.36 when the picture is deliberately mirrored,
+     so the check catches a wrongly turned side.
 
 ## Traps
 
@@ -790,4 +827,6 @@ Only failures in doing the work belong here. Newest at the bottom.
 - A long run can lose its helpers' reports if the machine stops: keep what they make on disk and check it there (log 51).
 - Judge wet ground under the light the place will have: a low sun straight ahead makes any wet surface glare (lesson 211).
 - Use photographed surface sets whole: the height picture to move the surface near the camera, the normal picture for the light,
-  and no flattening of either (lesson 219).
+  and no flattening of either (lesson 219). Turn a normal picture with the projection that lays its colour, and check every side
+  against the height picture, including a deliberately wrong one (lesson 230).
+- Never stop a process by a name that also appears in the command doing the stopping (lesson 222).

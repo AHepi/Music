@@ -33,8 +33,8 @@ SETS = {
     'brown_mud_03': 'brown mud, damp, with footprints',
     'brown_mud_leaves_01': 'brown mud with fallen leaves, moss and a little grass',
 }
-# the sets the ground tools' soils use also get their normal picture
-WITH_NORMALS = ('brown_mud', 'mud_forest', 'gravel_road', 'aerial_mud_1', 'brown_mud_03', 'brown_mud_leaves_01')
+# every set gets its normal picture too (log 54: use photographed sets whole; the soils had theirs from log 53)
+WITH_NORMALS = tuple(SETS)
 
 
 def fetch(url, path):
@@ -74,7 +74,26 @@ def main():
         })
         manifest[set_id].setdefault('pixels', [2048, 2048])
         print(set_id, maps, manifest[set_id]['size_m'], file=sys.stderr)
+    add_normals(manifest)
     json.dump(manifest, open(manifest_path, 'w'), indent=1)
+
+
+def add_normals(manifest):
+    """Every set on the shelf gets its normal picture, those fetched by earlier scripts too (log 54)."""
+    for set_id, entry in sorted(manifest.items()):
+        if 'normal' in entry.get('maps', {}):
+            continue
+        files = json.loads(subprocess.run(['curl', '-sS', '-m', '60', 'https://api.polyhaven.com/files/' + set_id], capture_output=True, text=True, check=True).stdout)
+        if 'nor_gl' not in files or '2k' not in files['nor_gl'] or 'jpg' not in files['nor_gl']['2k']:
+            print(set_id, 'has no normal picture at Poly Haven', file=sys.stderr)
+            continue
+        url = files['nor_gl']['2k']['jpg']['url']
+        name = os.path.basename(url)
+        folder = os.path.join(HERE, set_id)
+        os.makedirs(folder, exist_ok=True)
+        fetch(url, os.path.join(folder, name))
+        entry.setdefault('maps', {})['normal'] = name
+        print(set_id, 'normal picture', name, file=sys.stderr)
 
 
 if __name__ == '__main__':

@@ -133,9 +133,11 @@ def box_coordinates_group():
     return group
 
 
-def weather_group():
-    """Darken, mud from the ground up, grime in hollows, worn edges, wetness and relief, for any photographed surface."""
-    group = bpy.data.node_groups.new('STORE • weather', 'ShaderNodeTree')
+def weather_group(with_normal=False):
+    """Darken, mud from the ground up, grime in hollows, worn edges, wetness and relief, for any photographed surface.
+    with_normal: the group takes a Normal (the set's normal picture, already turned into world space) and lays the
+    height picture's relief over it."""
+    group = bpy.data.node_groups.new('STORE • weather with normal picture' if with_normal else 'STORE • weather', 'ShaderNodeTree')
     _socket(group, 'Color', 'NodeSocketColor', 'INPUT', (0.5, 0.5, 0.5, 1.0))
     _socket(group, 'Roughness', 'NodeSocketFloat', 'INPUT', 0.7, 0.0, 1.0)
     _socket(group, 'Height', 'NodeSocketFloat', 'INPUT', 0.5, 0.0, 1.0)
@@ -146,6 +148,8 @@ def weather_group():
     _socket(group, 'Mud color', 'NodeSocketColor', 'INPUT', (0.034, 0.028, 0.020, 1.0))
     _socket(group, 'Edge wear', 'NodeSocketFloat', 'INPUT', 0.0, 0.0, 1.0)
     _socket(group, 'Bump', 'NodeSocketFloat', 'INPUT', 0.3, 0.0, 2.0)
+    if with_normal:
+        _socket(group, 'Normal', 'NodeSocketVector', 'INPUT', (0.0, 0.0, 1.0))
     _socket(group, 'Base Color', 'NodeSocketColor', 'OUTPUT')
     _socket(group, 'Roughness', 'NodeSocketFloat', 'OUTPUT')
     _socket(group, 'Normal', 'NodeSocketVector', 'OUTPUT')
@@ -217,7 +221,83 @@ def weather_group():
     bump.inputs['Distance'].default_value = 0.02
     links.new(g_in.outputs['Bump'], bump.inputs['Strength'])
     links.new(g_in.outputs['Height'], bump.inputs['Height'])
+    if with_normal:
+        links.new(g_in.outputs['Normal'], bump.inputs['Normal'])
     links.new(bump.outputs['Normal'], g_out.inputs['Normal'])
+    return group
+
+
+# Blender's BOX projection lays a picture on each side of the box like this (measured in log 54: for each side, the
+# object axis along which the picture's u grows, and the one along which its v grows):
+#   +X: u along +Y, v along +Z    -X: u along -Y, v along +Z
+#   +Y: u along -X, v along +Z    -Y: u along +X, v along +Z
+#   +Z: u along -Y, v along +X    -Z: u along +Y, v along +X
+def box_normal_group():
+    """A photographed set's normal picture (OpenGL, green up), read through the same BOX projection as its colour, turned
+    into a world-space normal: on each side of the box its x runs along the way the picture's u grows there, its y along
+    the way v grows, its z out of that side (the table above); between sides the three are blended by how squarely the
+    surface faces each. Strength 0 gives the plain surface, 1 the picture's full relief."""
+    group = bpy.data.node_groups.new('STORE • box normal picture', 'ShaderNodeTree')
+    _socket(group, 'Color', 'NodeSocketColor', 'INPUT', (0.5, 0.5, 1.0, 1.0))
+    _socket(group, 'Strength', 'NodeSocketFloat', 'INPUT', 1.0, 0.0, 2.0)
+    _socket(group, 'Normal', 'NodeSocketVector', 'OUTPUT')
+    nodes, links = group.nodes, group.links
+    g_in, g_out = nodes.new('NodeGroupInput'), nodes.new('NodeGroupOutput')
+    coordinates = nodes.new('ShaderNodeTexCoord')
+
+    def plug(socket, value):
+        if isinstance(value, bpy.types.NodeSocket):
+            links.new(value, socket)
+        else:
+            socket.default_value = value
+
+    def vmath(operation, a, b=None, c=None, scale=None):
+        node = nodes.new('ShaderNodeVectorMath')
+        node.operation = operation
+        if operation == 'SCALE':
+            plug(node.inputs[0], a)
+            plug(node.inputs['Scale'], scale)
+        else:
+            for socket, value in zip(node.inputs, (a, b, c)):
+                if value is not None:
+                    plug(socket, value)
+        return node.outputs['Vector']
+
+    def separate(vector):
+        node = nodes.new('ShaderNodeSeparateXYZ')
+        links.new(vector, node.inputs['Vector'])
+        return node.outputs['X'], node.outputs['Y'], node.outputs['Z']
+
+    def combine(x, y, z):
+        node = nodes.new('ShaderNodeCombineXYZ')
+        for socket, value in zip(node.inputs, (x, y, z)):
+            plug(socket, value)
+        return node.outputs['Vector']
+
+    def times(a, b):
+        return math(nodes, links, 'MULTIPLY', a, b)
+
+    x, y, z = separate(vmath('MULTIPLY_ADD', g_in.outputs['Color'], (2.0, 2.0, 2.0), (-1.0, -1.0, -1.0)))   # 0..1 to -1..1
+    facing = vmath('NORMALIZE', coordinates.outputs['Normal'])                                                  # object space
+    fx, fy, fz = separate(facing)
+    sx, sy, sz = (math(nodes, links, 'SIGN', f) for f in (fx, fy, fz))
+    # the picture as each side reads it, in object space (u direction * x + v direction * y + the side's outward * z)
+    on_x = combine(times(z, sx), times(x, sx), y)
+    on_y = combine(times(times(x, sy), -1.0), times(z, sy), y)
+    on_z = combine(y, times(times(x, sz), -1.0), times(z, sz))
+    # how squarely the surface faces each side, sharp as the BOX projection's own blend
+    wx, wy, wz = separate(vmath('POWER', vmath('ABSOLUTE', facing), (8.0, 8.0, 8.0)))
+    total = math(nodes, links, 'ADD', math(nodes, links, 'ADD', wx, wy), wz)
+    blended = vmath('ADD', vmath('ADD', vmath('SCALE', on_x, scale=wx), vmath('SCALE', on_y, scale=wy)), vmath('SCALE', on_z, scale=wz))
+    blended = vmath('SCALE', blended, scale=math(nodes, links, 'DIVIDE', 1.0, math(nodes, links, 'MAXIMUM', total, 1e-6)))
+    # strength: from the plain surface (0) to the picture's relief (1)
+    mixed = vmath('ADD', facing, vmath('SCALE', vmath('SUBTRACT', blended, facing), scale=g_in.outputs['Strength']))
+    to_world = nodes.new('ShaderNodeVectorTransform')
+    to_world.vector_type = 'NORMAL'
+    to_world.convert_from = 'OBJECT'
+    to_world.convert_to = 'WORLD'
+    links.new(vmath('NORMALIZE', mixed), to_world.inputs['Vector'])
+    links.new(vmath('NORMALIZE', to_world.outputs['Vector']), g_out.inputs['Normal'])
     return group
 
 
@@ -343,7 +423,10 @@ def linear_mean(path):
     return float((linear @ numpy.array([0.2126, 0.7152, 0.0722])).mean()), [float(v) for v in linear.reshape(-1, 3).mean(0)]
 
 
-def surface_material(set_id, entry, box_group, weather):
+def surface_material(set_id, entry, box_group, weather, weather_normal=None, normal_group=None):
+    """SURFACE • <set>: the shelf set's colour, roughness and height pictures laid from three sides (BOX) at the
+    photograph's real size, with the weather dials; a set with a normal picture also has it, read the same way and turned
+    into world space (normal_group), with the height picture's relief laid lightly over it."""
     material = fresh_material('SURFACE • ' + set_id)
     nodes, links = material.node_tree.nodes, material.node_tree.links
     principled = nodes.get('Principled BSDF')
@@ -354,7 +437,10 @@ def surface_material(set_id, entry, box_group, weather):
     coordinates.inputs['Size'].default_value = (size_x, size_x, size_y)
     coordinates.location = (-900, 0)
     pictures = {}
-    for index, (role, colour_space) in enumerate((('diff', 'sRGB'), ('rough', 'Non-Color'), ('disp', 'Non-Color'))):
+    roles = [('diff', 'sRGB'), ('rough', 'Non-Color'), ('disp', 'Non-Color')]
+    if normal_group is not None and 'normal' in entry['maps']:
+        roles.append(('normal', 'Non-Color'))
+    for index, (role, colour_space) in enumerate(roles):
         if role not in entry['maps']:
             continue
         path = os.path.join(SHELF, set_id, entry['maps'][role])
@@ -368,10 +454,18 @@ def surface_material(set_id, entry, box_group, weather):
         links.new(coordinates.outputs['Vector'], node.inputs['Vector'])
         pictures[role] = node
     dials = nodes.new('ShaderNodeGroup')
-    dials.node_tree = weather
+    dials.node_tree = weather_normal if 'normal' in pictures else weather
     dials.name = dials.label = 'Weather'
     dials.location = (-200, 0)
     links.new(pictures['diff'].outputs['Color'], dials.inputs['Color'])
+    if 'normal' in pictures:
+        turned = nodes.new('ShaderNodeGroup')
+        turned.node_tree = normal_group
+        turned.name = turned.label = 'Normal picture'
+        turned.location = (-400, -600)
+        links.new(pictures['normal'].outputs['Color'], turned.inputs['Color'])
+        links.new(turned.outputs['Normal'], dials.inputs['Normal'])
+        dials.inputs['Bump'].default_value = 0.15      # the normal picture carries the fine relief; the height adds a little
     if 'rough' in pictures:
         links.new(pictures['rough'].outputs['Color'], dials.inputs['Roughness'])
     if 'disp' in pictures:
@@ -406,9 +500,10 @@ def main():
             material['store_what'] = what
             material.use_fake_user = True
     box_group, weather = box_coordinates_group(), weather_group()
+    weather_normal, normal_group = weather_group(with_normal=True), box_normal_group()
     manifest = json.load(open(os.path.join(SHELF, 'manifest.json')))
     for set_id, entry in sorted(manifest.items()):
-        surface_material(set_id, entry, box_group, weather).use_fake_user = True
+        surface_material(set_id, entry, box_group, weather, weather_normal, normal_group).use_fake_user = True
     for material in made.build_all().values():
         material.use_fake_user = True
     walkway_boards(manifest['rough_wood'], box_group, weather).use_fake_user = True

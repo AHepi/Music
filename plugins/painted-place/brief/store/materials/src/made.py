@@ -1,8 +1,8 @@
 """
 What this file does: the store's made materials, built in code (no photograph): old brass, old copper, glazed china,
 weathered boards with peeling paint, wet bark, puddle water, a wet-ground film, rusty nail heads, a rust stain, rail steel,
-smoke for a ribbon, six see-through stains (soot, damp, rust, mud, coal dust, ash), a slate roof and stove ash.
-build_materials.py calls build_all().
+smoke for a ribbon, six see-through stains (soot, damp, rust, mud, coal dust, ash), a slate roof, stove ash, trodden
+straw (the litter tool's straw layer) and hedge leaves (the hedge tool). build_materials.py calls build_all().
 
 Some of them read a number a tool writes on its meshes:
   - MADE • puddle water: 'shallow' on each point, 0 in the deep middle, 1 at the rim; where it is 1 the water is clear
@@ -11,6 +11,11 @@ Some of them read a number a tool writes on its meshes:
     is gone. A mesh without it is wet all over.
   - MADE • rust stain and the six MADE • stain ...: 'fade' on each point, 0 where the stain is strongest, 1 where it is
     gone (the walkway, stain and railing tools write it). A mesh without it is stained all over.
+  - MADE • straw: 'strand_random' and 'straw_shade' on the clump shapes, 'litter_tone', 'litter_mud' and 'wetness' on
+    the points that lay them or on the draped straw itself (the litter tool writes them all). Without them every strand
+    is a dark gold, dry and clean.
+  - MADE • hedge leaves: 'leaf_random' on the spray shapes, 'hedge_tone', 'hedge_dry' and 'hedge_inner' on the points
+    that place them (the hedge tool writes them all). Without them the leaves are near-black green.
 """
 
 import bpy
@@ -514,6 +519,89 @@ def ash(name):
     return material
 
 
+def _attribute(nodes, name, kind='GEOMETRY'):
+    node = nodes.new('ShaderNodeAttribute')
+    node.attribute_type = kind
+    node.attribute_name = name
+    return node.outputs['Fac']
+
+
+def straw(name):
+    """Dropped and trodden straw for the litter tool's 'straw' layer: dull gold to grey-brown strands, kept in the look's
+    range (pale straw in a dusk picture reads as stars); each strand its own shade ('strand_random' on the clump shape),
+    the outer and lower strands of a clump darker ('straw_shade', 0 dark to 1 light, on the shape); trodden into the mud
+    muddy and dark ('litter_mud' from the point that lays the clump), dark and a little glossy when wet ('wetness');
+    each clump its own tone ('litter_tone'). From the barn builders' 'dropped straw' (log 54), toned down."""
+    material = fresh_material(name)
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    output = nodes.get('Material Output')
+    strand = _attribute(nodes, 'strand_random')
+    shade = _attribute(nodes, 'straw_shade')
+    # the litter tool drapes the straw onto the ground (its copies made real), so the clump's numbers come on the
+    # straw's own points; read from the point that places a copy as well, for straw laid as live copies
+    tone = math(nodes, links, 'ADD', _attribute(nodes, 'litter_tone'), _attribute(nodes, 'litter_tone', 'INSTANCER'))
+    mud = math(nodes, links, 'ADD', _attribute(nodes, 'litter_mud'), _attribute(nodes, 'litter_mud', 'INSTANCER'))
+    wet = math(nodes, links, 'MAXIMUM', _attribute(nodes, 'wetness'), _attribute(nodes, 'wetness', 'INSTANCER'))
+    golds = ramp(nodes, [(0.0, (0.085, 0.064, 0.03)), (0.45, (0.15, 0.113, 0.052)), (0.8, (0.2, 0.155, 0.072)),
+                         (1.0, (0.23, 0.18, 0.088))])
+    links.new(math(nodes, links, 'MULTIPLY_ADD', strand, 0.65, math(nodes, links, 'MULTIPLY', tone, 0.35)), golds.inputs[0])
+    darker = map_range(nodes, links, shade, 0.0, 1.0, 0.35, 1.0)
+    colour = mix(nodes, links, 1.0, golds.outputs['Color'], darker, 'MULTIPLY')
+    muddy = math(nodes, links, 'MULTIPLY', mud, map_range(nodes, links, shade, 0.0, 1.0, 0.95, 0.55))
+    colour = mix(nodes, links, muddy, colour, (0.032, 0.023, 0.014))
+    colour = mix(nodes, links, 1.0, colour, math(nodes, links, 'MULTIPLY_ADD', wet, -0.3, 1.0), 'MULTIPLY')
+    links.new(colour, principled.inputs['Base Color'])
+    principled.inputs['Roughness'].default_value = 0.6
+    principled.inputs['Specular IOR Level'].default_value = 0.25
+    links.new(math(nodes, links, 'MULTIPLY', map_range(nodes, links, wet, 0.3, 0.8), 0.15), principled.inputs['Coat Weight'])
+    principled.inputs['Coat Roughness'].default_value = 0.2
+    through = nodes.new('ShaderNodeBsdfTranslucent')
+    links.new(mix(nodes, links, 1.0, colour, (1.3, 1.3, 1.3), 'MULTIPLY'), through.inputs['Color'])
+    both = nodes.new('ShaderNodeMixShader')
+    both.inputs['Fac'].default_value = 0.15
+    links.new(principled.outputs['BSDF'], both.inputs[1])
+    links.new(through.outputs['BSDF'], both.inputs[2])
+    links.new(both.outputs['Shader'], output.inputs['Surface'])
+    material.diffuse_color = (0.14, 0.105, 0.05, 1.0)
+    return material
+
+
+def hedge_leaves(name):
+    """Leaves for the hedge tool: hawthorn and hazel greens from near-black to olive, some turned russet brown; each
+    leaf its own shade ('leaf_random' on the spray), each spray its own ('hedge_tone'), browner where the hedge tool says
+    it is turning ('hedge_dry'), darker deep inside the hedge where little light gets in ('hedge_inner', 0 at its skin
+    to 1 deep in); lit through a little from behind. The barn builder's hedge was one dark green."""
+    material = fresh_material(name)
+    nodes, links = material.node_tree.nodes, material.node_tree.links
+    principled = nodes.get('Principled BSDF')
+    output = nodes.get('Material Output')
+    leaf = _attribute(nodes, 'leaf_random')
+    tone = _attribute(nodes, 'hedge_tone', 'INSTANCER')
+    dry = _attribute(nodes, 'hedge_dry', 'INSTANCER')
+    inner = _attribute(nodes, 'hedge_inner', 'INSTANCER')
+    greens = ramp(nodes, [(0.0, (0.011, 0.02, 0.008)), (0.4, (0.024, 0.038, 0.012)), (0.75, (0.042, 0.056, 0.017)),
+                          (1.0, (0.058, 0.066, 0.021))])
+    links.new(math(nodes, links, 'MULTIPLY_ADD', tone, 0.7, math(nodes, links, 'MULTIPLY', leaf, 0.3)), greens.inputs[0])
+    browns = ramp(nodes, [(0.0, (0.045, 0.026, 0.011)), (0.6, (0.085, 0.052, 0.02)), (1.0, (0.115, 0.075, 0.028))])
+    links.new(leaf, browns.inputs[0])
+    turning = map_range(nodes, links, math(nodes, links, 'ADD', dry, math(nodes, links, 'MULTIPLY_ADD', leaf, 0.5, -0.25)), 0.45, 0.7)
+    colour = mix(nodes, links, turning, greens.outputs['Color'], browns.outputs['Color'])
+    colour = mix(nodes, links, 1.0, colour, math(nodes, links, 'MULTIPLY_ADD', inner, -0.65, 1.0), 'MULTIPLY')
+    links.new(colour, principled.inputs['Base Color'])
+    principled.inputs['Roughness'].default_value = 0.5
+    principled.inputs['Specular IOR Level'].default_value = 0.4
+    through = nodes.new('ShaderNodeBsdfTranslucent')
+    links.new(mix(nodes, links, 1.0, colour, (1.5, 1.5, 1.5), 'MULTIPLY'), through.inputs['Color'])
+    both = nodes.new('ShaderNodeMixShader')
+    both.inputs['Fac'].default_value = 0.3
+    links.new(principled.outputs['BSDF'], both.inputs[1])
+    links.new(through.outputs['BSDF'], both.inputs[2])
+    links.new(both.outputs['Shader'], output.inputs['Surface'])
+    material.diffuse_color = (0.03, 0.045, 0.015, 1.0)
+    return material
+
+
 MADE = {
     'MADE • old brass': (lambda n: old_metal(n, copper=False), 'old brass: polished where handled, tarnished in patches and every hollow (urns, lamps, shell cases, fittings)'),
     'MADE • old copper': (lambda n: old_metal(n, copper=True), 'old copper: as brass, warmer, blue-green verdigris in the hollows (kettles, pipes, boilers)'),
@@ -534,6 +622,10 @@ MADE = {
     'MADE • stain ash': (lambda n: stain(n, 'ash'), "a see-through smear of ash carried on boots, pale grey, matte, blotched (mesh number 'fade'; the stain tool writes it)"),
     'MADE • slate roof': (slate_roof, "a slate roof in courses: dark blue-grey slates, lap lines in relief, wet sheen; in the object's own axes, slates along X, courses climbing Y"),
     'MADE • ash': (ash, 'grey stove ash with dark clinker lumps, matte, for heaps and spills'),
+    'MADE • straw': (straw, "dropped and trodden straw for the litter tool's straw layer: dull gold to grey-brown strands, the outer ones "
+                            "of a clump darker, muddy where trodden, dark and a little glossy when wet (reads the litter tool's numbers)"),
+    'MADE • hedge leaves': (hedge_leaves, "hedge leaves for the hedge tool: near-black to olive greens, some russet brown, each spray and "
+                                          "leaf its own shade, darker deep inside the hedge (reads the hedge tool's numbers)"),
 }
 
 

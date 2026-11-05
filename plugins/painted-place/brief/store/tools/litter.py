@@ -2,9 +2,12 @@
 What this file does: lays fallen leaves and twigs on a ground the ground tool made, within an area you give. Leaves are
 cupped and curled, ochre, rust, brown and a few still green, lying flat on the slope under them; they gather in the dips
 and at the water's edge, float flat on standing water, and are trodden dark into the mud of a rut or path. Twigs are
-thin, bent and forked, half sunk in the soil. Both are dark and shining when wet. It decides nothing about where they
-lie: the area and the amount are yours; the ground's own dips, water and tracks decide only where more or fewer gather
-within it.
+thin, bent and forked, half sunk in the soil. Both are dark and shining when wet. Asked for straw, it drops clumps of
+it, as forkfuls fall from a barrow or a cart: tangled strands spread over each clump's lumpy outline (never fanned out
+from one middle point), most lying one way, the middle loose and the edge flat, the outer and lower strands darker;
+pressed flat and muddy where the ground is trodden (a path, a rut), floating flat on standing water. It decides nothing
+about where they lie: the area and the amount are yours; the ground's own dips, water and tracks decide only where
+more or fewer gather within it.
 
 From your own script, after the tracks (litter rests on the carved ground) and after ground.wet():
 
@@ -12,6 +15,7 @@ From your own script, after the tracks (litter rests on the carved ground) and a
     import ground, litter
     litter.scatter(yard)                                              # leaves and twigs everywhere on the ground
     litter.scatter(yard, area=(-2, 0, 2, 12), kinds=('leaves',), amount=2.0, seed=3)     # a drift of leaves in a rectangle
+    litter.scatter(yard, area=my_trail, kinds=('straw',), amount=1.5, seed=4)            # forkfuls dropped along a trail
 
     python3 litter.py --help
     python3 litter.py --blend IN.blend --ground ground --out OUT.blend [--area x0 y0 x1 y1] [--kinds leaves twigs] [--amount 1]
@@ -19,16 +23,19 @@ From your own script, after the tracks (litter rests on the carved ground) and a
 Options:
     area        where litter may lie: None (the whole ground), a rectangle (x0, y0, x1, y1), a polygon [(x, y), ...], or
                 a function taking an (n, 2) array of points and giving each a weight 0 to 1 (None)
-    kinds       'leaves' (4 to 9 cm, about 12 a square metre at amount 1), 'twigs' (8 to 40 cm, about 1 a square metre)
-                (both)
+    kinds       'leaves' (4 to 9 cm, about 12 a square metre at amount 1), 'twigs' (8 to 40 cm, about 1 a square metre),
+                'straw' (clumps 30 to 75 cm across, about 0.6 a square metre; laid only when asked for)
+                (leaves and twigs)
     amount      1 is a scattering after an autumn wind; 3 a thick fall (1.0)
     seed        the same seed lays the same litter (0)
     collection  where the litter objects go (a new collection 'litter')
 
-What it makes: one object per kind, 'litter leaves', 'litter twigs': a cloud of points, one per leaf or twig, carrying
-its size, turn and shape, its shade ('litter_tone'), how trodden into the mud it is ('litter_mud') and the wetness of
-the ground under it ('wetness'); a Geometry Nodes modifier puts a live copy of one of a dozen shapes on each point.
-obj['pieces'] is the count. The ground's numbers it reads: 'hollow', 'wetness', 'water', 'bare', 'wear'.
+What it makes: one object per kind, 'litter leaves', 'litter twigs', 'litter straw': a cloud of points, one per leaf,
+twig or clump of straw, carrying its size, turn and shape, its shade ('litter_tone'), how trodden into the mud it is
+('litter_mud') and the wetness of the ground under it ('wetness'); a Geometry Nodes modifier puts a live copy of one of
+a dozen shapes on each point. A straw clump's height is pressed down where the ground is trodden (its 'litter_scale'
+z), and the ground's height is read once per clump. obj['pieces'] is the count. The ground's numbers it reads:
+'hollow', 'wetness', 'water', 'bare', 'wear'.
 """
 
 import argparse
@@ -51,28 +58,36 @@ import stones  # noqa: E402
 import _noise  # noqa: E402
 
 SHAPE_COUNT = 12
-ORDER = ('leaves', 'twigs')
+ORDER = ('leaves', 'twigs', 'straw')
+DEFAULT_KINDS = ('leaves', 'twigs')          # straw is laid only when asked for
+STRAND_POINTS = 6                            # points along each straw strand (two corners at each)
 KINDS = {
     'leaves': {'sizes': (0.04, 0.09), 'density': 12.0, 'material': 'MADE • fallen leaves'},
     'twigs': {'sizes': (0.08, 0.4), 'density': 1.0, 'material': 'MADE • wet bark'},
+    'straw': {'sizes': (0.3, 0.75), 'density': 0.6, 'material': 'MADE • straw'},
 }
 
 TOOL = {
     'name': 'litter',
     'what': 'lays fallen leaves and twigs within an area you give: leaves gather in the dips and at the water\'s edge, '
-            'float on standing water and are trodden into ruts; twigs half sunk; dark and shining when wet',
-    'call': "litter.scatter(yard, area=my_verges, kinds=('leaves', 'twigs'), amount=1.0, seed=3)",
+            'float on standing water and are trodden into ruts; twigs half sunk; dark and shining when wet; and, when asked, '
+            'dropped straw: tangled clumps of strands, the outer ones darker, pressed flat and muddy where trodden',
+    'call': "litter.scatter(yard, area=my_verges, kinds=('leaves', 'twigs'), amount=1.0, seed=3);  litter.scatter(yard, area=my_trail, kinds=('straw',), seed=4)",
     'options': {
         'area': 'None (the whole ground), a rectangle (x0, y0, x1, y1), a polygon [(x, y), ...], or a function of an (n, 2) '
                 'array of points giving weights 0..1 (None)',
-        'kinds': "'leaves' (4 to 9 cm), 'twigs' (8 to 40 cm) (both)",
+        'kinds': "'leaves' (4 to 9 cm), 'twigs' (8 to 40 cm), 'straw' (clumps 30 to 75 cm across, about 0.6 a square metre; "
+                 "only when asked) (leaves and twigs)",
         'amount': '1 a scattering after a wind, 3 a thick fall (1.0)',
         'seed': 'the same seed lays the same litter (0)',
     },
-    'materials': ['MADE • fallen leaves', 'MADE • wet bark'],
-    'source': 'made for the store (log 53), after the owner\'s picture of a wet field track with leaves and twigs in the mud',
+    'materials': ['MADE • fallen leaves', 'MADE • wet bark', 'MADE • straw'],
+    'source': 'made for the store (log 53), after the owner\'s picture of a wet field track with leaves and twigs in the mud; '
+              "the straw from `straw_clump` in the barn builders' '54 barn' scripts (strands from one middle point read as "
+              'asterisks, pale ones as stars, straight ones as matchsticks; asking the ground once per strand took 90 s)',
     'trap': 'a leaf is a few centimetres: from eye height at 10 m it is a speck; lay litter where the camera is near, '
-            'and big enough to be named (Traps: a thing nobody can name is noise)',
+            'and big enough to be named (Traps: a thing nobody can name is noise); pale straw near the eye reads as stars: '
+            'give a trodden trail\'s area through the trodden ground, where it lies flat and dark',
 }
 
 
@@ -158,6 +173,74 @@ def _twig_mesh(name, index):
     return mesh
 
 
+def _straw_mesh(name, index):
+    """One clump of dropped straw 1 m across, lying at the origin: 170 to 240 strands, each a thin flat ribbon bending as
+    it goes, spread evenly over a lumpy outline (two to four overlapping ovals, a few strays outside it), most lying
+    roughly one way (a forkful has a grain) and some across, never fanned out from one middle point. The middle stands
+    up loosely, the edge lies flat. Each strand carries 'strand_random' (its own shade) and 'straw_shade' (0 dark to 1
+    light: the outer and lower strands darker, strays pressed into the mud darkest)."""
+    pick = random.Random(9800 + index)
+    bm = bmesh.new()
+    shade_layer = bm.verts.layers.float.new('straw_shade')
+    random_layer = bm.verts.layers.float.new('strand_random')
+    lift_layer = bm.verts.layers.float.new('straw_lift')
+    blobs = [(pick.uniform(-0.17, 0.17), pick.uniform(-0.12, 0.12), pick.uniform(0.17, 0.3), pick.uniform(0.11, 0.22),
+              pick.uniform(0.0, math.pi)) for _ in range(pick.randint(2, 4))]
+
+    def inside(x, y):
+        best = -1.0
+        for cx, cy, rx, ry, turn in blobs:
+            dx, dy = x - cx, y - cy
+            a = (dx * math.cos(turn) + dy * math.sin(turn)) / rx
+            b = (-dx * math.sin(turn) + dy * math.cos(turn)) / ry
+            best = max(best, 1.0 - math.sqrt(a * a + b * b))
+        return best
+
+    grain = pick.uniform(0.0, math.pi)
+    for _strand in range(pick.randint(170, 240)):
+        for _try in range(40):
+            x, y = pick.uniform(-0.5, 0.5), pick.uniform(-0.42, 0.42)
+            depth = inside(x, y)
+            if depth > 0.0 or (depth > -0.35 and pick.random() < 0.06):
+                break
+        heading = grain + pick.gauss(0.0, 0.5) if pick.random() < 0.72 else pick.uniform(0.0, math.pi)
+        length = pick.uniform(0.2, 0.5)
+        width = pick.uniform(0.006, 0.011)
+        loft = 0.09 * max(depth, 0.0) ** 0.8 * pick.uniform(0.15, 1.0)          # how high it lies on the others
+        bend = pick.gauss(0.0, 1.6)
+        twist = pick.uniform(-0.8, 0.8)
+        value = pick.random()
+        shade = min(1.0, max(0.0, 0.18 + 1.25 * max(depth, 0.0))) * (0.55 + 0.45 * loft / 0.09) * pick.uniform(0.75, 1.0)
+        if depth <= 0.0:
+            shade = pick.uniform(0.03, 0.15)                                      # a stray, pressed into the mud
+        angle = heading - bend * length / 2.0
+        point = Vector((x, y, 0.0)) - Vector((math.cos(heading), math.sin(heading), 0.0)) * (length / 2.0)
+        corners = []
+        for k in range(STRAND_POINTS):
+            t = k / (STRAND_POINTS - 1)
+            z = 0.002 + loft * (1.0 - 0.7 * (2.0 * t - 1.0) ** 2)                 # draped: its ends lower than its middle
+            ahead = Vector((math.cos(angle), math.sin(angle), 0.0))
+            across = Vector((-ahead.y, ahead.x, 0.0))
+            roll = twist * (t - 0.5)
+            half = width * (0.5 + 0.5 * math.sin(math.pi * min(max(t, 0.08), 0.92))) / 2.0
+            edge = across * math.cos(roll) * half + Vector((0.0, 0.0, math.sin(roll) * half))
+            centre = Vector((point.x, point.y, z))
+            for sign in (-1.0, 1.0):
+                vertex = bm.verts.new(centre + edge * sign)
+                vertex[shade_layer] = shade
+                vertex[random_layer] = value
+                vertex[lift_layer] = vertex.co.z
+                corners.append(vertex)
+            point = point + ahead * (length / (STRAND_POINTS - 1))
+            angle += bend * length / (STRAND_POINTS - 1)
+        for k in range(STRAND_POINTS - 1):
+            bm.faces.new((corners[2 * k], corners[2 * k + 1], corners[2 * k + 3], corners[2 * k + 2]))
+    mesh = bpy.data.meshes.new(name)
+    bm.to_mesh(mesh)
+    bm.free()
+    return mesh
+
+
 def _shapes(kind, material, collection):
     name = 'litter shapes • %s • %s' % (kind, material.name)
     shapes = bpy.data.collections.get(name)
@@ -168,14 +251,18 @@ def _shapes(kind, material, collection):
     shapes.hide_render = True
     shapes.hide_viewport = True
     for index in range(len(shapes.objects), SHAPE_COUNT):
-        shape_name = '%s %02d' % (kind[:-1] if kind == 'twigs' else 'leaf', index)
-        mesh = _leaf_mesh(shape_name, index) if kind == 'leaves' else _twig_mesh(shape_name, index)
+        shape_name = '%s %02d' % ({'twigs': 'twig', 'straw': 'straw clump'}.get(kind, 'leaf'), index)
+        mesh = {'leaves': _leaf_mesh, 'twigs': _twig_mesh, 'straw': _straw_mesh}[kind](shape_name, index)
         mesh.materials.append(material)
         shapes.objects.link(bpy.data.objects.new(shape_name, mesh))
     return shapes
 
 
-def _live_copies(obj, shapes):
+def _live_copies(obj, shapes, drape=None):
+    """Geometry Nodes put a live copy of the shape each point names on the point. With `drape` (the ground object),
+    the copies are made real and every point of them is laid onto the ground straight below it, kept its own height
+    above its clump ('straw_lift' times the clump's height): so a clump of straw follows every bump of the ground,
+    the ground read by a ray per point in Geometry Nodes, not by Python. Points marked 'litter_float' stay as laid."""
     group = bpy.data.node_groups.new(obj.name + ' • live copies', 'GeometryNodeTree')
     group.interface.new_socket(name='Geometry', in_out='INPUT', socket_type='NodeSocketGeometry')
     group.interface.new_socket(name='Geometry', in_out='OUTPUT', socket_type='NodeSocketGeometry')
@@ -196,7 +283,66 @@ def _live_copies(obj, shapes):
         named.data_type = kind
         named.inputs['Name'].default_value = attribute
         links.new(named.outputs['Attribute'], instance.inputs[socket])
-    links.new(instance.outputs['Instances'], group_out.inputs['Geometry'])
+    if drape is None:
+        links.new(instance.outputs['Instances'], group_out.inputs['Geometry'])
+    else:
+        real = nodes.new('GeometryNodeRealizeInstances')
+        links.new(instance.outputs['Instances'], real.inputs['Geometry'])
+        ground_info = nodes.new('GeometryNodeObjectInfo')
+        ground_info.transform_space = 'RELATIVE'
+        ground_info.inputs['Object'].default_value = drape
+        position = nodes.new('GeometryNodeInputPosition')
+        above = nodes.new('ShaderNodeVectorMath')
+        above.operation = 'ADD'
+        above.inputs[1].default_value = (0.0, 0.0, 0.5)
+        links.new(position.outputs['Position'], above.inputs[0])
+        ray = nodes.new('GeometryNodeRaycast')
+        links.new(ground_info.outputs['Geometry'], ray.inputs['Target Geometry'])
+        links.new(above.outputs['Vector'], ray.inputs['Source Position'])
+        ray.inputs['Ray Direction'].default_value = (0.0, 0.0, -1.0)
+        ray.inputs['Ray Length'].default_value = 2.0
+        lift = nodes.new('GeometryNodeInputNamedAttribute')
+        lift.data_type = 'FLOAT'
+        lift.inputs['Name'].default_value = 'straw_lift'
+        size = nodes.new('GeometryNodeInputNamedAttribute')
+        size.data_type = 'FLOAT_VECTOR'
+        size.inputs['Name'].default_value = 'litter_scale'
+        size_z = nodes.new('ShaderNodeSeparateXYZ')
+        links.new(size.outputs['Attribute'], size_z.inputs['Vector'])
+        height = nodes.new('ShaderNodeMath')
+        height.operation = 'MULTIPLY_ADD'
+        links.new(lift.outputs['Attribute'], height.inputs[0])
+        links.new(size_z.outputs['Z'], height.inputs[1])
+        height.inputs[2].default_value = 0.0015
+        hit = nodes.new('ShaderNodeSeparateXYZ')
+        links.new(ray.outputs['Hit Position'], hit.inputs['Vector'])
+        here = nodes.new('ShaderNodeSeparateXYZ')
+        links.new(position.outputs['Position'], here.inputs['Vector'])
+        new_z = nodes.new('ShaderNodeMath')
+        new_z.operation = 'ADD'
+        links.new(hit.outputs['Z'], new_z.inputs[0])
+        links.new(height.outputs['Value'], new_z.inputs[1])
+        placed = nodes.new('ShaderNodeCombineXYZ')
+        links.new(here.outputs['X'], placed.inputs['X'])
+        links.new(here.outputs['Y'], placed.inputs['Y'])
+        links.new(new_z.outputs['Value'], placed.inputs['Z'])
+        afloat = nodes.new('GeometryNodeInputNamedAttribute')
+        afloat.data_type = 'FLOAT'
+        afloat.inputs['Name'].default_value = 'litter_float'
+        on_ground = nodes.new('FunctionNodeCompare')
+        on_ground.data_type = 'FLOAT'
+        on_ground.operation = 'LESS_THAN'
+        links.new(afloat.outputs['Attribute'], on_ground.inputs[0])
+        on_ground.inputs[1].default_value = 0.5
+        both = nodes.new('FunctionNodeBooleanMath')
+        both.operation = 'AND'
+        links.new(ray.outputs['Is Hit'], both.inputs[0])
+        links.new(on_ground.outputs['Result'], both.inputs[1])
+        laid = nodes.new('GeometryNodeSetPosition')
+        links.new(real.outputs['Geometry'], laid.inputs['Geometry'])
+        links.new(both.outputs['Boolean'], laid.inputs['Selection'])
+        links.new(placed.outputs['Vector'], laid.inputs['Position'])
+        links.new(laid.outputs['Geometry'], group_out.inputs['Geometry'])
     modifier = obj.modifiers.new('live litter', 'NODES')
     modifier.node_group = group
     return modifier
@@ -204,9 +350,9 @@ def _live_copies(obj, shapes):
 
 # ----------------------------------------------------------------------------------------------- scattering
 
-def scatter(ground, area=None, kinds=ORDER, amount=1.0, seed=0, collection=None):
-    """Lay leaves and twigs on the ground within the area (see the note at the top). Returns {'leaves': obj, 'twigs':
-    obj}, only the kinds asked for; each object's obj['pieces'] is its count."""
+def scatter(ground, area=None, kinds=DEFAULT_KINDS, amount=1.0, seed=0, collection=None):
+    """Lay leaves and twigs (and straw, when asked) on the ground within the area (see the note at the top). Returns
+    {'leaves': obj, 'twigs': obj, 'straw': obj}, only the kinds asked for; each object's obj['pieces'] is its count."""
     kinds = (kinds,) if isinstance(kinds, str) else tuple(kinds)
     unknown = [kind for kind in kinds if kind not in KINDS]
     if unknown:
@@ -235,6 +381,8 @@ def scatter(ground, area=None, kinds=ORDER, amount=1.0, seed=0, collection=None)
         if kind == 'leaves':
             afloat = numbers['water'] > 0.004                  # fewer settle on open water than at its edge
             gather = (0.35 + 1.3 * numpy.clip(numbers['hollow'], 0.0, 1.0) + 0.8 * near_water) * (0.3 + 1.4 * drifts) * numpy.where(afloat, 0.3, 1.0)
+        elif kind == 'straw':                                  # dropped where it falls, not drifted by the wind into dips
+            gather = (0.5 + 0.9 * drifts) * numpy.where(numbers['water'] > 0.004, 0.25, 1.0)
         else:
             gather = 0.6 + 0.8 * drifts
         density = spec['density'] * gather
@@ -262,6 +410,13 @@ def scatter(ground, area=None, kinds=ORDER, amount=1.0, seed=0, collection=None)
             tip = numpy.radians(10.0) * choices['tilt']        # a little this way and that
             turn = upright @ stones._turns('z', choices['turn']) @ stones._turns('x', tip[:, 0] * 0.6) @ stones._turns('y', tip[:, 1] * 0.6)
             mud = trodden * (1.0 - floating) * (choices['narrow'] - 0.78) / 0.22 * 0.7      # some trodden in, most only splashed
+        elif kind == 'straw':
+            # one height per clump (the clump's shape lies on the slope there); trodden clumps pressed flat and muddy
+            positions[:, 2] = numpy.where(floating, numpy.where(floating, level, 0.0) + 0.001, positions[:, 2] - 0.003)
+            normals[floating] = (0.0, 0.0, 1.0)
+            upright = stones._upright_to(normals)
+            turn = upright @ stones._turns('z', choices['turn'])
+            mud = numpy.clip(trodden * 0.9 * (0.8 + 0.4 * (choices['narrow'] - 0.78) / 0.22), 0.0, 1.0) * (1.0 - floating)
         else:
             sunk = (0.004 + 0.006 * choices['thick']) * sizes / 0.2
             positions[:, 2] = numpy.where(floating, numpy.where(floating, level, 0.0) - 0.002, positions[:, 2] - 0.3 * sunk)
@@ -276,14 +431,19 @@ def scatter(ground, area=None, kinds=ORDER, amount=1.0, seed=0, collection=None)
                                    turn_to_x=True)
         if shapes is None:
             shapes = _shapes(kind, store.material(spec['material']), target)
+        scale = numpy.repeat(sizes[:, None], 3, axis=1)
+        if kind == 'straw':                                    # pressed flat where trodden, flatter still afloat
+            scale[:, 2] *= numpy.where(floating, 0.2, 1.0 - 0.75 * trodden)
         columns = {
-            'litter_scale': ('FLOAT_VECTOR', numpy.repeat(sizes[:, None], 3, axis=1)),
+            'litter_scale': ('FLOAT_VECTOR', scale),
             'litter_rotation': ('FLOAT_VECTOR', rotation),
             'litter_shape': ('INT', choices['shape'] % len(shapes.objects)),
             'litter_tone': ('FLOAT', (choices['sink'] - 0.65) / 0.7),
             'litter_mud': ('FLOAT', mud),
             'wetness': ('FLOAT', numpy.maximum(wet, floating * 1.0)),
         }
+        if kind == 'straw':
+            columns['litter_float'] = ('FLOAT', floating * 1.0)
         obj_mesh = bpy.data.meshes.new('litter ' + kind)
         obj_mesh.vertices.add(count)
         if count:
@@ -293,7 +453,7 @@ def scatter(ground, area=None, kinds=ORDER, amount=1.0, seed=0, collection=None)
             stones._write(obj_mesh, column, data_kind, values)
         obj = bpy.data.objects.new('litter ' + kind, obj_mesh)
         target.objects.link(obj)
-        _live_copies(obj, shapes)
+        _live_copies(obj, shapes, drape=ground if kind == 'straw' else None)
         obj['pieces'] = count
         store.mark(obj)
         made[kind] = obj
@@ -308,7 +468,7 @@ def main():
     parser.add_argument('--blend', help='the .blend file holding the ground')
     parser.add_argument('--ground', default='ground', help="the ground object's name; default 'ground'")
     parser.add_argument('--area', type=float, nargs=4, metavar=('X0', 'Y0', 'X1', 'Y1'), help='a rectangle to lay them in (default: everywhere)')
-    parser.add_argument('--kinds', nargs='+', default=list(ORDER), help='leaves, twigs; default both')
+    parser.add_argument('--kinds', nargs='+', default=list(DEFAULT_KINDS), help='leaves, twigs, straw; default leaves and twigs')
     parser.add_argument('--amount', type=float, default=1.0, help='1 a scattering; default 1')
     parser.add_argument('--seed', type=int, default=0, help='the same seed lays the same litter; default 0')
     parser.add_argument('--out', help='save the result here')

@@ -133,6 +133,13 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   grass, and leaves and twigs, using Poly Haven's scanned grass, photographed mud with real lumps near the eye, and a
   photographed rain sky. Two worked examples, a cart track after rain and deep ruts in a wet field like your picture, are in
   `53 Ground tools - wet ground, ruts, grass/`; you judged them: "Those look like a Hollywood film. Holy crap 😅" (decision 73).
+- **A barn on a farm, by two fresh builders (log 54, 5 November, plugin 0.8.0):** from your line "A barn on a farm" and the
+  plugin alone: a weatherboarded barn at dusk after rain, doors open on lit hay and a cart, cart ruts full of water, a
+  dry-stone wall and gate, a limewashed cow house, and from the second builder a heap of mangolds, a willow basket, moss and a
+  tin patch; then the same farmyard by day under a photographed sunny sky, and the dusk picture at full size (folder
+  `54 Barn on a farm - two builders, dusk and day/`). What they made for themselves is now in the store: eight parts, a
+  dry-stone wall and a hedge along any curve, rough stone walls, moss, clearing under things, straw, hollow buildings; every
+  shelf surface now uses its normal picture.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -158,7 +165,7 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 | Pay-per-second render route (scratch folder `runpod/`, not in the repository) | A RunPod endpoint whose cards start only when a job waits; the client `render_client_serverless.py` sends files, runs Blender and fetches pictures | Pictures drawn on an RTX 4090, billed per second |
 | `garden/character/` | The garden character job: concept images and the style note (`concept/`), direction and briefs (`direction/`), one folder per builder (`wood/`, `roof/`, `ground/`, `pond/`), the combining step (`final/`) and the fixers (`fix/`) | Stage scripts that change the garden scene; sheets in `31 Japanese garden character - pictures/` |
 | The film plugin (`/home/user/Music/plugins/explainer-film`, version 1.5.0) | Everything learned, for any model: the surface-and-wear skill, the place kit (`explainer-film-place`: finish, audit, variations, card-time, roads), a preflight check for places, the build-a-place workflow | A model given only the plugin builds a believable place |
-| The painted-place plugin (`plugins/painted-place`, version 0.7.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
+| The painted-place plugin (`plugins/painted-place`, version 0.8.0) | The brief kit (`brief/`: the words a builder gets, the look page and reference pictures, traps, the measure tool, boards of real photographs per kind of place, a shelf of photographed surfaces) and its store (`brief/store/`): parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with cards and a catalogue; the skill that runs one fresh builder; tests that fail when one fails | A copy of `brief/` for one fresh builder, who decides everything about the place; the owner judges the picture |
 
 ## Word list
 
@@ -169,6 +176,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   branch photographed and measured into a 3D model (Poly Haven's are free).
 - **Rut, lip, pothole (log 53):** a rut is the groove a wheel cuts; the lip is the soil pushed up beside it in soft ground;
   a pothole is a hole pounded out where water stood in a rut.
+- **Dry-stone wall, coping (log 54):** a field wall of flat stones laid without mortar; the coping is the row of stones set on
+  edge along its top. **Mangold:** a big orange-red root grown to feed cattle. **Skep:** a round woven willow basket.
+  **Normal picture (log 53, used on every surface from log 54):** the photograph in a PBR set that says which way each tiny
+  bit of the surface faces, so light catches its relief.
 - **Store (log 51):** the folder of ready things a builder may pick from: **parts** (things to place, such as a tent or a gas lamp),
   **tools** (code that makes a thing from a line, a point or an object the builder gives, such as a walkway along a line) and **ready
   materials** (Blender materials to put on an object). Nothing in it places itself. **Card:** a small picture of a part or material, drawn
@@ -1032,12 +1043,35 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     **Not done:** the fresh checker was stopped before it reported, so no independent check of this work yet; leaves are still
     made in code (your generated leaf sheet would replace them); the stones are made in code (Poly Haven's scanned rocks are not
     used yet); no fresh builder has used the ground tools yet.
+
+54. **A barn on a farm, by two fresh builders; the farmyard by day; the store fed (5 November, 05:24 to 11:15).** Your words
+    "A barn on a farm" (decision 74) went to a fresh builder with only the plugin, after a board of 12 real photographs was made
+    for it (seven British and Irish, 1892 to 1943: a tithe barn's timbers and carts, a stone cart shed, a horse and cart in 1915,
+    a muddy Irish yard; five American for boards, stone and mud). **First builder (05:41 to 07:02, 19 minutes early):** a
+    weatherboarded barn on a brick base under slate, its cart doors open on lit hay and a cart, cart ruts full of water with hoof
+    prints, a dry-stone wall and a five-bar gate, a limewashed cow house with churns, a bare tree at dusk; it used the ground
+    tools for the ruts, prints, grass, leaves and puddles. **Second builder (07:12 to 08:19, 13 minutes early):** a heap of
+    mangolds against the wall with a willow basket and a fork, moss on the wall, a rusty tin patch on the barn, damp runs. At
+    your word every picture was sent as soon as it was drawn (decision 75). **By day (your request, decision 76):** the dressed
+    farmyard under a new photographed sunny sky (Poly Haven, now in the store), the sun turned to rake across the boards from
+    the right, the lanterns unlit, daylight let in through the door; and the dusk picture at full size (31 minutes). **Into the
+    plugin (0.8.0):** eight parts (plank door, ladder, fork, skep, mangold heap, hay, bare tree, corrugated sheet) by one helper;
+    a dry-stone wall and a hedge along any line or curve (your question, decision 77), rough stone walls with openings and a
+    sloping top, moss, clearing under things set down, straw, hollow boarded buildings, and two materials by another; the
+    builders' traps (ten lines). **Your question "Does that hut made of brick use PBR?"** (decision 78) found the shelf's surfaces
+    still without their normal pictures: all 26 sets now have them, turned the right way on every side of a box (checked against
+    the height pictures, with a deliberately wrong control). **Tested:** all 83 test lines pass, among them every new part built
+    with every option and nothing floating, the wall on an S-bend turning 247 degrees and climbing, the hedge as thick on the
+    outside of a bend as inside, straw never spread like stars, clearing that takes only what it is given, and a hollow barn
+    whose doorway shows its inside. **Interruptions:** the session restarted at about 09:00; both helpers were resumed and the
+    full-size drawing kept running. **Not done:** no independent check of 0.7.0 or 0.8.0 (the plugin's rule asks for one; it
+    waits for your word, since you stopped the last); the day picture only at working size; leaves still made in code.
+
 ## Next step
 
-The three pictures hold (decision 73). Next: a fresh builder makes a place with this kind of ground from your plain one-line
-request, using only the plugin, in two passes: the test of whether the ground tools work in hands that did not make them. When
-your generated leaf sheet comes, its leaves go into the litter tool. Still owed: the independent check of 0.7.0 (it was stopped;
-it restarts only at your word).
+Your verdict on the barn (folder `54 Barn on a farm - two builders, dusk and day/`: first pass, second pass, by day, full
+size). Then, at your word, an independent check of the plugin (0.7.0 and 0.8.0) by a fresh checker; and your generated
+leaf sheet into the litter tool when it comes.
 
 ## Traps
 

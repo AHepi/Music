@@ -7,7 +7,10 @@ a drip cap and a sill round the windows and doors you give it, with a sash and g
 door in each door. With `eaves` it also puts a roof over the box: overhanging every side (0.35 m by default), pitched
 with the ridge along the long side or a lean-to, with fascia and barge boards, rafter tails and a boarded underside that
 throws its shadow on the wall; the gable (or the lean-to's sides) is boarded up to the roof. Your hut itself becomes the
-dark seen between boards. Nothing is moved or cut, and nothing is placed anywhere you did not say.
+dark seen between boards. With `hollow` your hut's solid box becomes a hollow shell instead (walls, floor and ceiling,
+their inside faces in a plain dark material you may choose) with its door and window openings cut open into it and the
+doors left open, so a light inside lights it and the inside shows through an open door. Nothing is moved, and nothing
+is placed anywhere you did not say.
 
 From your own Blender script:
 
@@ -47,9 +50,14 @@ Options:
     backing_material your hut becomes this, the dark between boards; default 'RECESSES • near-black blue' (None: leave it)
     nails           nail lines on the studs; default True
     fill            glass and a sash in each window, a plank door in each door (False: leave them for your own); default True
+    hollow          False: your hut stays a solid box; True: it becomes a hollow shell 0.1 m thick with its openings cut
+                    open into it (doors left without a door: hang your own, open), a floor and a ceiling; default False
+    inside_material the shell's inside faces (walls, floor, ceiling, the openings' sides) when hollow; default
+                    'RECESSES • near-black blue' (a lit inside reads better in planks: e.g. 'SURFACE • old_planks_02')
 
 The boards stand 0.008 to 0.03 m out from the hut's faces (corner boards and casings to 0.06 m). Every face of the
 boards object carries the number 'board_tone' (0..1, one value per board) that the weathered-boards material reads.
+Hollow, the result also holds 'shell': your hut object, its mesh now the shell (obj['hollow'] is True).
 """
 
 import argparse
@@ -100,6 +108,8 @@ TOOL = {
         'backing_material': "the hut becomes this, seen between boards; default '%s' (None leaves it)" % BACKING_MATERIAL,
         'nails': 'nail lines on the studs; default True',
         'fill': 'glass and sash in windows, a plank door in doors; default True',
+        'hollow': 'the hut becomes a hollow shell with its openings cut open into it and its doors left open, so a lit inside shows; default False',
+        'inside_material': "the shell's inside faces when hollow; default '%s' (planks read better lit)" % BACKING_MATERIAL,
     },
     'materials': [BOARDS_MATERIAL, TRIM_MATERIAL, IRON_MATERIAL, RUST_MATERIAL, GLASS_MATERIAL, BACKING_MATERIAL, ROOF_MATERIAL],
     'source': 'plugins/painted-place/materials/lay_timber.py: BoardMesh, lap_face, _board_tone, vary_boards; lay_facade.py: window_joinery, _free_segments, oriented_faces',
@@ -374,9 +384,9 @@ def window_joinery(box, window, front, rng, *, casing=True, sill=True, sash=True
     return blocks
 
 
-def lap_side(mesh, side, openings, shared, rng, nails=True, fill=True):
+def lap_side(mesh, side, openings, shared, rng, nails=True, fill=True, doors_open=False):
     """Overlapping boards up one side, stopping at its openings and at its upper outline, with casings, corner boards,
-    nails and the openings' fills. Returns counts."""
+    nails and the openings' fills (with doors_open, no door in a doorway). Returns counts."""
     mesh.side = side
     u0, u1, z0 = side['u0'], side['u1'], side['z0']
     top = side['top']
@@ -470,7 +480,7 @@ def lap_side(mesh, side, openings, shared, rng, nails=True, fill=True):
         for side_u in (du0 - 0.05, du1 + 0.05):
             mesh.box(side_u, 0.042, (dz0 + dz1) / 2, 0.10, 0.03, dz1 - dz0, CASING)
         mesh.box((du0 + du1) / 2, 0.042, dz1 + 0.05, du1 - du0 + 0.20, 0.03, 0.10, CASING)
-        if fill:
+        if fill and not doors_open:
             # a ledged and braced door of upright planks, its ledges and brace outside, an iron latch
             planks = max(3, int(round((du1 - du0) / 0.14)))
             plank = (du1 - du0) / planks
@@ -635,8 +645,10 @@ def _material(value):
 
 def lay(hut, openings=(), seed=0, sides='all', collection=None, eaves=None, overhang=0.35, pitch=None, high_side='back',
         roof_material=ROOF_MATERIAL, boards_material=BOARDS_MATERIAL, trim_material=TRIM_MATERIAL, iron_material=IRON_MATERIAL,
-        rust_material=RUST_MATERIAL, glass_material=GLASS_MATERIAL, backing_material=BACKING_MATERIAL, nails=True, fill=True):
-    """Clad the hut's sides in lapped boards (and, with eaves, roof it). Returns {'boards': object, 'roof': object or None}."""
+        rust_material=RUST_MATERIAL, glass_material=GLASS_MATERIAL, backing_material=BACKING_MATERIAL, nails=True, fill=True,
+        hollow=False, inside_material=BACKING_MATERIAL):
+    """Clad the hut's sides in lapped boards (and, with eaves, roof it). Returns {'boards': object, 'roof': object or None},
+    and with hollow also 'shell' (the hut, now a hollow shell)."""
     if hut is None or hut.type != 'MESH':
         raise ValueError('lay_boards needs a mesh object (the wall or hut)')
     if eaves not in (None, 'pitched', 'lean-to'):
@@ -701,7 +713,7 @@ def lay(hut, openings=(), seed=0, sides='all', collection=None, eaves=None, over
     totals = {'boards': 0, 'nails': 0, 'rust streaks': 0, 'windows': 0, 'doors': 0, 'sides': 0, 'backing sheets': 0}
     for side in clad:
         mine = [o for o in every_opening if o['side'] == side['name']]
-        counts = lap_side(boards_mesh, side, mine, shared[id(side)], rng, nails=nails, fill=fill)
+        counts = lap_side(boards_mesh, side, mine, shared[id(side)], rng, nails=nails, fill=fill, doors_open=bool(hollow))
         totals['backing sheets'] += _backing(boards_mesh, side, box_top)
         for key, value in counts.items():
             totals[key] += value
@@ -712,9 +724,77 @@ def lay(hut, openings=(), seed=0, sides='all', collection=None, eaves=None, over
     store.mark(boards, ground=location.z + low.z)
     for key, value in totals.items():
         boards[key] = value
+    if hollow:
+        _hollow_shell(hut, hut_frame, low, high, every_opening, _material(inside_material),
+                      _material(backing_material) if backing_material is not None else _material(inside_material))
+        store.mark(hut, ground=location.z + low.z)
+        return {'boards': boards, 'roof': roof, 'shell': hut}
     if backing_material is not None:
         store.use_material(hut, _material(backing_material), ground=location.z + low.z)
     return {'boards': boards, 'roof': roof}
+
+
+def _hollow_shell(hut, hut_frame, low, high, openings, inside, outside, wall=0.1, floor=0.03, ceiling=0.08):
+    """The hut's solid box made a hollow shell: four walls `wall` thick inside its faces, each with its openings cut
+    out, a floor and a ceiling; the walls' outer faces (seen between the boards) in `outside`, every other face in
+    `inside`. The hut keeps its place; only its mesh changes."""
+    to_local = hut.matrix_world.inverted()
+    verts, faces, slots = [], [], []
+
+    def block(corners, outer_face=None):
+        start = len(verts)
+        verts.extend(tuple(to_local @ c) for c in corners)
+        for k, f in enumerate(((0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7))):
+            faces.append(tuple(start + i for i in f))
+            slots.append(1 if k == outer_face else 0)
+
+    up = Vector((0.0, 0.0, 1.0))
+    for side in upright_sides(hut):
+        u0, u1, z0, z1 = side['u0'], side['u1'], side['z0'], side['z1']
+        holes = []
+        for o in openings:
+            if o['side'] != side['name']:
+                continue
+            a = max(u0, u0 + o['left'])
+            b = min(u1, a + o['width'])
+            c = max(z0, z0 + o['bottom'])
+            e = min(z1, c + o['height'])
+            if b - a > 1e-3 and e - c > 1e-3:
+                holes.append((a, b, c, e))
+        edges = sorted(set([u0, u1] + [v for a, b, c, e in holes for v in (a, b)]))
+        for a, b in zip(edges, edges[1:]):
+            if b - a < 1e-4:
+                continue
+            spans = [(z0, z1)]
+            for ha, hb, hc, he in holes:
+                if ha <= a + 1e-6 and hb >= b - 1e-6:
+                    spans = [piece for lo, hi in spans for piece in ((lo, min(hi, hc)), (max(lo, he), hi)) if piece[1] - piece[0] > 1e-4]
+            for lo, hi in spans:
+                corners = []
+                for z in (lo, hi):
+                    for u, d in ((a, -wall), (b, -wall), (b, 0.0), (a, 0.0)):
+                        corners.append(side['origin'] + side['along'] * u + side['normal'] * d + up * z)
+                block(corners, outer_face=4)          # the face at d = 0, looking out
+    for z_low, z_high, inset in ((low.z, low.z + floor, wall), (high.z - ceiling, high.z, 0.0)):
+        corners = []
+        for z in (z_low, z_high):
+            for x, y in ((low.x + inset, low.y + inset), (high.x - inset, low.y + inset), (high.x - inset, high.y - inset), (low.x + inset, high.y - inset)):
+                corners.append(hut_frame @ Vector((x, y, z)))
+        block(corners)
+    mesh = bpy.data.meshes.new('%s shell' % hut.name)
+    mesh.from_pydata(verts, [], faces)
+    mesh.materials.append(inside)
+    mesh.materials.append(outside)
+    mesh.polygons.foreach_set('material_index', slots)
+    tool = bmesh.new()
+    tool.from_mesh(mesh)
+    bmesh.ops.recalc_face_normals(tool, faces=tool.faces[:])
+    tool.to_mesh(mesh)
+    tool.free()
+    mesh.update()
+    hut.data = mesh
+    hut['hollow'] = True
+    return hut
 
 
 def vary_boards(obj, seed=0):
@@ -763,6 +843,8 @@ def main(argv=None):
     parser.add_argument('--roof-material', default=ROOF_MATERIAL)
     parser.add_argument('--no-nails', action='store_true', help='no nail lines')
     parser.add_argument('--no-fill', action='store_true', help='leave the openings empty (no glass, sash or door)')
+    parser.add_argument('--hollow', action='store_true', help='make the hut a hollow shell with its openings cut open into it')
+    parser.add_argument('--inside-material', default=BACKING_MATERIAL, help="the shell's inside faces when hollow; default '%s'" % BACKING_MATERIAL)
     args = parser.parse_args(argv)
     if not (args.blend and args.object and args.out):
         parser.error('--blend, --object and --out are needed to lay boards')
@@ -778,7 +860,8 @@ def main(argv=None):
         parser.error('no object %r in %s' % (args.object, args.blend))
     made = lay(hut, openings=openings, seed=args.seed, sides='all' if args.sides == 'all' else [s.strip() for s in args.sides.split(',')],
                eaves=None if args.eaves == 'none' else args.eaves, overhang=args.overhang, pitch=args.pitch, high_side=args.high_side,
-               roof_material=args.roof_material, nails=not args.no_nails, fill=not args.no_fill)
+               roof_material=args.roof_material, nails=not args.no_nails, fill=not args.no_fill, hollow=args.hollow,
+               inside_material=args.inside_material)
     bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.out))
     print('boards: %d boards, %d nails on %d sides%s; saved %s' % (made['boards']['boards'], made['boards']['nails'], made['boards']['sides'],
                                                                   ', with a roof' if made['roof'] else '', args.out))

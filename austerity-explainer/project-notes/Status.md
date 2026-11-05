@@ -357,7 +357,15 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   paths, footprints, potholes; an age dial), stones, grass and litter, using Poly Haven's scanned grass, mud photographs with
   normal pictures, and photographed skies. Two worked examples drew three pictures (`procedural-textures/53 Ground tools - wet
   ground, ruts, grass/`); you judged them: "Those look like a Hollywood film. Holy crap 😅" (decision 73). 64 test lines pass. Not yet: an independent check (the checker was stopped),
-  leaves from photographs, scanned rocks, a fresh builder using the tools.
+  leaves from photographs, scanned rocks.
+- **Log 54 (decisions 74 to 78): "A barn on a farm"**, built by two fresh builders from the plugin alone (a board of 12 real barn
+  and farmyard photographs made first): a weatherboarded barn at dusk after rain, its doors open on lit hay and a cart, cart
+  ruts full of water, a dry-stone wall and gate, a limewashed cow house; the second builder added a heap of mangolds, a willow
+  basket, moss and a tin patch. Then the same farmyard by day (your request) under a new photographed sunny sky, and the dusk
+  picture at full size (`procedural-textures/54 Barn on a farm - two builders, dusk and day/`). **Into the plugin (0.8.0):**
+  eight parts, six tools and two tool additions (a dry-stone wall and a hedge along any curve, rough stone walls, moss, clearing
+  under things, straw, hollow boarded buildings), two materials, the sunny sky, every shelf surface's normal picture, the
+  builders' traps. Pictures sent as each was drawn (decision 75).
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -370,8 +378,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- A plain one-line request for the next place, built by a fresh builder with the ground tools (only the plugin, two passes).
+- Your verdict on the barn: the dusk picture (first and second pass), the day picture and the full-size dusk picture (folder 54).
 - Your generated leaf sheet, when you have one (about 12 separate fallen leaves from straight above on white), for the litter tool.
+- Whether to run the independent check (a fresh checker) on 0.7.0 and 0.8.0: the plugin's rule asks for one; you stopped the
+  last one, so it waits for your word.
 - Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
   (`Workflows.md`, "The lockout shot: wet street or dry street").

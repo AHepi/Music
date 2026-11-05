@@ -1,6 +1,6 @@
 # Surfaces
 
-What this folder is: a shelf of photographed surfaces a builder may use, free (Poly Haven, CC0, public domain; the authors are in `manifest.json`). Each set has a colour picture (`diff`), a roughness picture (`rough`: white is rough, black is glossy) and a height picture (`disp`: white is high), all repeating without a seam; the sets the store's ground soils use also have a normal picture (`nor_gl`: which way each tiny bit of the surface faces). `size_m` in the manifest is the real size one copy of the picture covers, so a 2 m brick picture laid on a 6 m wall repeats three times.
+What this folder is: a shelf of photographed surfaces a builder may use, free (Poly Haven, CC0, public domain; the authors are in `manifest.json`). Each set has a colour picture (`diff`), a roughness picture (`rough`: white is rough, black is glossy) and a height picture (`disp`: white is high), all repeating without a seam; every set also has a normal picture (`nor_gl`: which way each tiny bit of the surface faces; the soils' since log 53, the rest since log 54), and the store's `SURFACE` materials use all four. `size_m` in the manifest is the real size one copy of the picture covers, so a 2 m brick picture laid on a 6 m wall repeats three times.
 
 Using one is the builder's choice; nothing here says where a surface goes. The pictures carry their own wear, but the wear of the place (where water ran, what hands rubbed, what the setting did) is still the builder's to add on top.
 

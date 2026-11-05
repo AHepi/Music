@@ -954,6 +954,19 @@ overturn any of them in one line. Changes to the project must follow this file.
     through the open barn door. Asked just before (08:14): "It looks like new textures have been added. Will they go in to tools
     or a library?" Answered: into the store, as parts, tools and materials (decision 68).
 
+
+77. **The dry-stone wall follows any curve** (5 November 2026, 10:07), your words, on seeing the wall tool's first card: "Can we
+    make that wall a tool like the other? On a curve that generates it any direction the curve goes?" The wall tool already
+    read a curve; it now also smooths a few points into a curve as the walkway tool does, is tested on an S-bend that turns
+    right round and climbs, and its card shows it on that bend. The hedge tool the same.
+
+
+78. **Every shelf surface uses its whole photographed set** (5 November 2026, 10:35), your words, on the rough stone hut's card:
+    "Excellent. Does that hut made of brick use PBR?" The answer was partly: colour, roughness and height, but no normal picture
+    on the shelf's surfaces (only the soils had theirs). Taken with your earlier "Are you using PBR? They're significantly
+    better with textures" (log 53) as the rule to use photographed sets whole: all 26 sets now have their normal pictures and
+    the store's surfaces use them.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

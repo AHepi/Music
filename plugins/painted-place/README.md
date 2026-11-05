@@ -9,7 +9,7 @@ How a place is built now: one fresh builder gets the **brief kit** (`brief/`) an
 | Thing | Where | What it is |
 |---|---|---|
 | The brief kit | `brief/` | The words a builder gets (`Brief.md`), the look in words and numbers (`The look.md`) and in pictures (`reference/`), what went wrong for builders before (`Traps.md`), a measure tool (`measure.py`), what to do before building (`Before you build.md`), boards of real photographs per kind of place (`boards/`), a shelf of 26 photographed surfaces (`surfaces/`), the brief for a second builder that dresses a finished place (`Second pass.md`); see `brief/README.md` |
-| The store | `brief/store/` | Ready parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with a card picture of each; nothing in it places itself. Since 0.7 it has ground tools: a ground with its wetness and water, ruts (a horse and cart, a car, a lorry, a tractor), paths, footprints and potholes, stones, grass, leaves and twigs, with two worked examples in `brief/store/examples/`. Catalogue: `brief/store/Store.md` |
+| The store | `brief/store/` | Ready parts (things to place), tools (code that makes a thing from a line, a point or an object the builder gives) and ready materials, with a card picture of each; nothing in it places itself. Since 0.8 it has farm things (a plank door, hay, a dry-stone wall along any curve, a hedge, rough stone walls, moss). Since 0.7 it has ground tools: a ground with its wetness and water, ruts (a horse and cart, a car, a lorry, a tractor), paths, footprints and potholes, stones, grass, leaves and twigs, with two worked examples in `brief/store/examples/`. Catalogue: `brief/store/Store.md` |
 | The skill | `skills/make-a-painted-place/SKILL.md` | How to run a build: the board, the copy, the words, one fresh builder, its report, the owner's judgment |
 | The tests | `tests/run_tests.sh` | The measure tool on the reference pictures; every material, part and tool in the store; the store's rule that nothing places itself; the catalogue up to date. Fails if any test fails |
 | Records | `examples/` | Pictures and notes from the plugin's earlier versions (0.2 to 0.5), kept as a record; the code they used is retired (below) |
@@ -39,6 +39,19 @@ Keep your own files out of `brief/`: a builder gets a copy of it, and what is wr
 ## What 0.7 added
 
 The ground tools (plan 53 and the owner's decisions 71 and 72): `ground` (the sheet a place stands on, a road's camber, its wetness by height, water as sheets cut from the ground itself, rain rings), `tracks` (ruts carved along a line for a horse and cart with its hoof prints, a car, a lorry or a tractor whose tread ridges hold water; a trodden path; footprints; potholes; one age dial), `stones` (rocks, pebbles and grit), `grass` (turf, tussocks, tall weeds, kept out of ruts and water) and `litter` (fallen leaves and twigs); soil, pebble, grass and leaf materials; two worked examples, a cart track after rain and deep motor ruts in a wet field; their tests in `tests/test_store_ground.py`.
+
+## What 0.8 added
+
+What the barn on a farm's two builders made for themselves (log 54, decision 74), pulled into the store, and more:
+eight parts (`plank_door` with strap hinges that swings open, `ladder`, `fork` as a pitch fork or a root fork with a D
+handle, `skep` the woven willow basket, `mangold_heap`, `hay` stacked in a bay or heaped, `bare_tree`, `corrugated_sheet`);
+tools: `dry_wall` (a dry-stone wall along any line or curve, with gateways; decision 77), `hedge` (a ragged hedge along a
+line or curve), `lay_rubble` (rough stone on a wall with its doors and windows and a sloping top), `moss` (moss on the faces
+of a material that look up), `clear_under` (takes scattered grass, stones and litter from under anything set down), straw
+in `litter`, a hollow building in `lay_boards` so an open door shows the inside; `MADE • straw` and `MADE • hedge leaves`;
+a photographed sunny sky whose sun casts the shadows (decision 76, the barn by day); every shelf surface now uses its whole
+photographed set, normal picture included; a board of real barn and farmyard photographs; the builders' traps. Tests in
+`tests/test_store_farm_tools.py` and the parts test.
 
 ## What was retired, and why
 
