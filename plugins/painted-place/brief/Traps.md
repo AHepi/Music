@@ -36,4 +36,11 @@ What this file is: the faults builders working from this brief have run into so 
 - **Root crops drawn round, pale and pink read as peaches.** Mangolds are long and tapering, dull orange to red, with soil caked on their tails.
 - **A sack seen small reads as a boulder.** Give it a tied neck and folds, or leave it out.
 - **Stains, damp runs and rust streaks on a building 19 m away do not show** at 540 x 960. Make them big and strong, or put them on things near the eye.
+- **A lit lamp near the eye steals the picture from the hero.** A town street builder left the nearest lamp unlit (the lamplighter has not reached it yet) and lit the setts from a lamp out of frame.
+- **A light in front of a lit shop window draws as a white slab; a lamp post next to thin gutter water draws as a black cut-out in it.** Hide the light from the eye; move the water or the post.
+- **Small puddles near the eye mirror the dark fronts, not the sky, and read as black blots.** Near the eye a puddle must lie where it mirrors a light, or go.
+- **Where a taller building rises above a lower neighbour, its side wall shows above the roof as a plain slab.** Give that wall stone, a chimney stack or a gable too.
+- **Stains on a relief stone front must stand out past the stones** (the store's stone blocks stand about 0.23 m out); stains laid close to the wall are cut off behind the blocks.
+- **On the side fronts of a street, flat things are seen edge-on.** What stands out from a wall (signs on brackets, pots on sills, downpipes) reads there; flat things (stains, blinds) read on the fronts that face the eye, and must be broad on the side ones.
+- **Measure the ground's height before anything is set down on it:** a ray from above finds the top of whatever already stands there (a street builder's dirt floated 40 cm up on a stack of setts until it did).
 - **By day an open doorway reads as a black hole.** The sky's light through a door is too little to show the inside; a soft cool light just inside the door, facing in and hidden from the eye, shows it dimmer than the sunlit outside. Lanterns are unlit by day.
