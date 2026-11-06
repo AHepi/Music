@@ -167,6 +167,10 @@ end goal, but it is required for this first step." Then: keep colour and fading,
 - **The garden's rocks, made by rules (log 59, 6 November, plugin 0.13.0):** a store tool now makes rocks from rules,
   each its own shape, scatters them with Blender's particle system and covers them in photographed rock; a fresh
   builder redid every rock in the garden with it (folder `59 Garden rocks/`).
+- **Real moss and see-through pools (log 60, 6 November, plugin 0.14.0; paused at your word):** the store grows real
+  moss (cushions with thickness, a pile of tufts, lichen, plants at the rocks' feet) and makes see-through water; a
+  fresh builder put both on the garden (folder `60 Garden moss/`). The final full-size render ran out of memory and
+  waits for your word.
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -1260,11 +1264,34 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     before), among them the rocks test's ten groups. **Not done:** the stepping stones and path slabs stay as they were
     (they are the path, not the rocks); the rocks are not as big as your picture's (the set keeps its size); no
     independent check of 0.7.0 to 0.13.0 (it waits for your word).
+60. **Real moss on the mossy rocks, see-through pools; paused (6 November, 11:39 to 15:20).** Your words (decision 90):
+    "Ok. I meant the rocks with moss. Not the pavement lol. Those are still lacking a lot of detail". **The moss
+    (11:43 to 12:52):** a helper gave the store real moss: soft rounded cushions with thickness, rising from nothing at
+    frayed edges and creeping over rims, a fine pile of tufts laid by the particle system, several greens, lichen on the
+    bare stone, moss tufts, grass and ferns at the rocks' feet, over a new photographed moss set (`forest_leaves_02`).
+    Its first cushions read as blocky foam slabs (sent to you as drawn); after the session's notes they became soft
+    mounds. The rocks tool now grows this moss by default; mossy rocks draw about a fifth slower. **The garden (12:55 to
+    14:28):** a fresh builder put it on every mossy rock and the basin, darker and more olive (the store's read as lime
+    felt at dusk), with ferns behind the rocks. Your words at 13:31 to 13:33 (decision 91): "Is Eevee rendering faster?"
+    (no: slower here, with no graphics card), "The pools of water on the pavement also need to be semi transparent. Right
+    now, it looks like a liquid mirror" (the builder took it on, its clock moved to 14:45: the pools now show the stone
+    under the water, fading at their edges), "Once done, do one final render in Cycles.", "Also, are the rocks using PBR?
+    That should be the standard for textures." (yes: photographed rock and moss sets; your words are now in the builders'
+    instructions). Its two pictures (540 x 960, Cycles) sit inside every band. **Into the plugin (0.14.0):** the real
+    moss; then a helper (14:34 to 14:59) pulled the builder's hand work in: see-through water for the slab path by
+    default and for the puddle tool as an option, moss on open shapes, ferns kept off paths, the olive moss by default.
+    **The final full-size render** (started 14:33) was killed by the machine's memory limit (5.3 GB of 8 GB, with the
+    helper drawing at the same time) and left no picture; at 15:04 you wrote "That's enough for now. When you can, pause
+    everything", so it was not drawn again. **Tested:** the moss, rocks, materials, photographed, copy and rules tests
+    passed after the moss helper; the water helper's own runs of its tests passed; the rules test passed on the final
+    state. **Not done (paused):** the final full-size render; the whole test run on the final state; the rocks tool's card
+    still shows the first lime moss; no independent check of 0.7.0 to 0.14.0.
 
 ## Next step
 
-Your verdict on the garden's new rocks (folder `59 Garden rocks/`: the full size and the close view of the path).
-Then, at your word, an independent check of the plugin (0.7.0 to 0.13.0) by a fresh checker;
+Paused at your word. When you pick it up: the final full-size render of the mossy garden in Cycles, drawn alone on the
+machine (about 25 minutes), and the whole test run; then your verdict on the moss and the pools (folder `60 Garden
+moss/`). Then, at your word, an independent check of the plugin (0.7.0 to 0.14.0) by a fresh checker;
 Poliigon sets if you attach any; and your generated leaf sheet into the litter tool when it comes.
 
 ## Traps

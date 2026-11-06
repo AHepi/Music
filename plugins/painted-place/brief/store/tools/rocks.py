@@ -85,6 +85,14 @@ Options of scatter(), with their defaults:
     moss_spread each rock its own amount of moss: the moss times a number between these two, by each rock's own random
                 number, as shaded and open rocks differ, such as (0.35, 1.4) (None: every rock the same). Not for a
                 material you give one big object of your own (a carved basin): its one number thins or thickens it all
+    moss_style  'cushions': real moss with thickness (thick on the tops and in the hollows, thinning at the edges,
+                spilling over the rims), a pile of tiny tufts laid by the particle system, the stone under and round it
+                green, pale lichen on the bare stone: the moss tool's cushions, grown inside each shape so the particle
+                copies carry them; 'paint': the moss as a colour on the stone only, as before 6 November 2026
+                (None: 'cushions')
+    moss_thickness  the cushions' depth in the middle, metres; on small rocks at most 0.08 of their size (0.03)
+    moss_pile   the cushions' tufts: 1 about 16,000 a square metre of cushion, 0 none, up to 3 (1.0)
+    lichen      pale lichen crusts on the bare stone, 0 none to 1.5 (None: 0.6 on rocks with cushions, else 0)
     normal_strength  how strongly the photograph's normal picture shows its relief: 0 plain, 1 its full relief, up to
                 2 (None: the set's own, 1)
     water       the height of the water's surface, metres, where rocks stand in a pond: a dark wet band from
@@ -135,10 +143,13 @@ size, and gives back each spot's soil line and the height its top reached ('spot
 cannot find a particle copy, so stand a lantern on a seat by that height. place() makes one object per rock
 ('rock <kind> <n>'). The materials are copies named 'rocks • <set> • ...'; the store's own materials are left as they
 were. In a material, the nodes 'Moss amount', 'Moss spread', 'Water line' and 'Wet feet' are named, so a script can
-find them by name; never by their values, as two of them may hold the same number.
+find them by name; never by their values, as two of them may hold the same number. With cushions, each shape (and each
+rock set singly) also carries the cushions as faces in the material 'moss • cushions' and a particle system 'moss pile'
+copying the tufts (collection 'moss • tufts • ...'); each shape gets its own amount of moss by moss_spread.
 """
 
 import argparse
+import json
 import math
 import os
 import random
@@ -190,7 +201,8 @@ TOOL = {
             'as many as fit), laid as particle copies on spots you give (each its own shape at its own size, its top as '
             'high as you ask, never floating on dry ground), or set singly at points you give with real bumps; covered '
             'with photographed rock (PBR), each rock its own part, wet and dark at the feet, moss on top if asked (each '
-            'rock its own amount if asked), a dark wet water line where they stand in a pond',
+            'rock its own amount if asked): real moss cushions with thickness and a pile of tufts (the moss tool), pale '
+            'lichen on the bare stone, or the moss as a colour only; a dark wet water line where they stand in a pond',
     'call': "laid = rocks.scatter(yard, kind='boulder', count=24, sizes=(0.15, 0.9), area=(-3, -3, 3, 0), seed=2);  "
             "seat = rocks.at_spots([(2.2, -2.0)], kind='flat', size=0.7, top=0.12, ground=yard, tilt=0.0, moss=0.9, water=0.0, seed=7);  "
             "big = rocks.place([(1.0, 2.0)], kind='boulder', size=1.4, ground=yard, moss=0.7, seed=5)",
@@ -223,7 +235,13 @@ TOOL = {
         'tilt': 'how far each rock tips from square on the ground, 0 to 0.3 (None: the kind\'s own, about 0.05)',
         'shapes': 'scatter: how many shapes each size band is copied from (8)',
         'surface': "the photographed rock set (None: boulder and flat 'lichen_rock', angular 'rock_wall_02', river 'seaside_rock')",
-        'moss': 'moss on their tops: 0 none, 1 thick (0.0)',
+        'moss': 'moss on their tops: 0 none, 1 thick (0.0); real cushions with tufts unless moss_style=\'paint\'',
+        'moss_style': "'cushions': real moss with thickness, spilling over the rims, a pile of tufts laid by the particle "
+                      "system, the stone under and round it green, pale lichen on the bare stone (the moss tool); 'paint': the "
+                      "moss as a colour on the stone only, as before 6 November 2026 (None: 'cushions')",
+        'moss_thickness': 'the cushions\' depth in the middle, metres; on small rocks at most 0.08 of their size (0.03)',
+        'moss_pile': 'the cushions\' tufts: 1 about 16,000 a square metre of cushion, 0 none, up to 3 (1.0)',
+        'lichen': 'pale lichen crusts on the bare stone, 0 none to 1.5 (None: 0.6 on rocks with cushions, else 0)',
         'moss_colour': "the moss's darkest green, (red, green, blue), linear (None: the brighter green of the owner's "
                        "garden picture, (0.07, 0.105, 0.02); rocks.MOSS_DARK is the first, darker one)",
         'moss_spread': 'each rock its own amount of moss: the moss times a number between these two, by each rock\'s own '
@@ -253,7 +271,9 @@ TOOL = {
               "from its 0.35 to 1.4 times by each rock's own random number (lines 2144-2163); the brighter moss green "
               "(0.07, 0.105, 0.02) it put in by hand (lines 2100-2112), now the default; normal_strength for its "
               "photograph relief at 1.0 (line 2107); the water line from its dark wet band above the pond (lines "
-              "2113-2143); flat stones in lichen_rock as it put every rock (line 1954)",
+              "2113-2143); flat stones in lichen_rock as it put every rock (line 1954). The real moss cushions, their tufts "
+              "and the lichen from the moss tool, after the owner's word on seeing that pass (\"Ok. I meant the rocks with "
+              "moss. Not the pavement lol. Those are still lacking a lot of detail\")",
     'trap': 'the particle copies are drawn only when the picture is drawn (a ray from above cannot find them, so measure '
             'ground heights before scattering, and stand things on an at_spots rock by the top it gives back); real '
             'bumps come only on rocks set with place() or at_spots(relief=), at a cost in drawing time and memory (about '
@@ -264,7 +284,9 @@ TOOL = {
             'to stand high in a deep pond down towards its bed (give the water\'s height); the water line goes by height '
             'alone, so every rock lower than the water darkens; moss_spread thins or thickens the moss of a single big '
             'object of your own as a whole; with a low sun ahead of the camera every rock is a dark lump: light them '
-            'from the side',
+            'from the side; with moss the rocks carry real cushions and their tufts by default: a rock\'s highest point '
+            '(at_spots\' top) is then on its moss, its faces grow by about a quarter and a scatter of mossy rocks draws a '
+            'little slower (moss_style=\'paint\' for the colour only); scattered copies share their shapes\' cushions',
 }
 
 
@@ -409,6 +431,13 @@ def _shapes(kind, seeds, size, buried, material, detail):
         obj = bpy.data.objects.new(mesh.name, mesh)
         obj.track_axis = 'POS_Z'           # the particle system stands the shape's up (Z) on the ground's normal
         obj.up_axis = 'Y'
+        if material.get('rocks_cushions'):
+            _grow_cushions(obj, mesh, material, seed, size)
+            if material.get('rocks_relief', 0.0) > 0:       # real bumps need a finer skin (after the pile)
+                finer = obj.modifiers.new('finer for the bumps', 'SUBSURF')
+                finer.subdivision_type = 'SIMPLE'
+                finer.levels = 0
+                finer.render_levels = 2
         shapes.objects.link(obj)
     return shapes
 
@@ -483,6 +512,49 @@ def _new_options(moss_colour, moss_spread, normal_strength, water, water_band):
     return colour, spread, normal_strength, water, water_band
 
 
+MOSS_STYLES = ('cushions', 'paint')
+
+
+def _moss_options(moss, moss_style, moss_thickness, moss_pile, lichen):
+    """The moss's style and its cushions' options checked: (style, thickness, pile, lichen). 'cushions' (the default):
+    real moss with thickness and a pile of tufts, the moss tool's cushions; 'paint': the moss as a colour on the stone
+    only, as before 6 November 2026."""
+    style = 'cushions' if moss_style is None else moss_style
+    if style not in MOSS_STYLES:
+        raise ValueError("moss_style is 'cushions' (real moss with thickness and tufts) or 'paint' (a colour only), not %r" % (moss_style,))
+    moss_thickness, moss_pile = float(moss_thickness), float(moss_pile)
+    if not 0.002 <= moss_thickness <= 0.15:
+        raise ValueError('moss_thickness is 0.002 to 0.15 m (3 cm: 0.03), not %r' % (moss_thickness,))
+    if not 0.0 <= moss_pile <= 3.0:
+        raise ValueError('moss_pile is 0 (no tufts) to 3, not %r' % (moss_pile,))
+    lichen = (0.6 if style == 'cushions' and float(moss) > 0 else 0.0) if lichen is None else float(lichen)
+    if not 0.0 <= lichen <= 1.5:
+        raise ValueError('lichen is 0 (none) to 1.5, not %r' % (lichen,))
+    return style, moss_thickness, moss_pile, lichen
+
+
+def _grow_cushions(obj, mesh, material, seed, size):
+    """Real moss on a rock made with a cushions material (its 'rocks_cushions'): cushions with thickness in the rock's
+    own mesh (a second material, so the particle copies carry them) and the pile of tufts on the object (a hair particle
+    system copying tufts); a rock with real bumps also gets its finer skin here, after the pile."""
+    settings = material.get('rocks_cushions') if material is not None else None
+    if not settings:
+        return 0.0
+    import moss as moss_tool
+    c = json.loads(settings)
+    pick = random.Random(7717 + int(seed))
+    lo, hi = c.get('spread', [1.0, 1.0])
+    amount = min(1.5, c['amount'] * pick.uniform(lo, hi))         # each shape its own amount of moss, as moss_spread asks
+    area = moss_tool.on_mesh(mesh, amount=amount, thickness=min(c['thickness'], 0.08 * size), colour=c['colour'],
+                             wet=c['wet'], seed=int(seed), base=0.5 * c['relief'] + 0.002, patch=min(0.16, 0.3 * size))
+    if obj is not None:
+        if obj.vertex_groups.get('moss pile') is None:
+            obj.vertex_groups.new(name='moss pile')
+        if c['pile'] > 0:
+            moss_tool.pile(obj, area, c['pile'], 0.015, c['colour'], c['wet'], int(seed))
+    return area
+
+
 def _moss_each_its_own(copy, amount_node, spread):
     """Each rock its own amount of moss: the moss amount times a number between spread[0] and spread[1], by the rock's
     own random number (each particle copy has its own, and so has each rock set singly); shuffled first, so the amount
@@ -548,7 +620,8 @@ def _water_line(copy, water, band):
 
 
 def material(kind='boulder', surface=None, moss=0.0, wet_feet=0.7, rain=0.3, relief=0.0, grey=None, tint=None,
-             moss_colour=None, moss_spread=None, normal_strength=None, water=None, water_band=0.07):
+             moss_colour=None, moss_spread=None, normal_strength=None, water=None, water_band=0.07, moss_style=None,
+             moss_thickness=0.03, moss_pile=1.0, lichen=None):
     """The rocks' material: a copy of a photographed rock SURFACE with each rock its own part of the picture, wet dark
     feet where the ground under it is wet (read through the UV the scatter or place writes: u is the ground's wetness),
     wet all over by `rain`, moss on top by `moss` (in `moss_colour`, each rock its own amount by `moss_spread`), the
@@ -567,9 +640,11 @@ def material(kind='boulder', surface=None, moss=0.0, wet_feet=0.7, rain=0.3, rel
         if not 0.0 <= value <= high:
             raise ValueError('%s is 0 to %s, not %r' % (label, high, value))
     colour, spread, normal_strength, water, water_band = _new_options(moss_colour, moss_spread, normal_strength, water, water_band)
-    name = '%s%s • %s%s%s%s' % (MATERIAL_PREFIX, source.name.replace('SURFACE • ', ''), kind,
-                                ' • moss %.2f' % moss if moss > 0 else '', ' • bumps %.3f m' % relief if relief > 0 else '',
-                                ' • water %.2f m' % water if water is not None else '')
+    style, moss_thickness, moss_pile, lichen = _moss_options(moss, moss_style, moss_thickness, moss_pile, lichen)
+    name = '%s%s • %s%s%s%s%s' % (MATERIAL_PREFIX, source.name.replace('SURFACE • ', ''), kind,
+                                  ' • moss %.2f' % moss if moss > 0 else '', ' • bumps %.3f m' % relief if relief > 0 else '',
+                                  ' • water %.2f m' % water if water is not None else '',
+                                  ' • cushions' if style == 'cushions' and moss > 0 else '')
     key = '%s|%.3f|%.3f|%.3f|%.3f|%.3f|%.3f,%.3f,%.3f' % (source.name, moss, wet_feet, rain, relief, grey, *tint)
     if moss > 0:
         key += '|moss %.4f,%.4f,%.4f|%.3f-%.3f' % (*colour, *spread)
@@ -577,6 +652,10 @@ def material(kind='boulder', surface=None, moss=0.0, wet_feet=0.7, rain=0.3, rel
         key += '|normal %.3f' % normal_strength
     if water is not None:
         key += '|water %.4f %.4f' % (water, water_band)
+    if moss > 0 and style == 'cushions':
+        key += '|cushions %.4f %.3f' % (moss_thickness, moss_pile)
+    if lichen > 0:
+        key += '|lichen %.3f' % lichen
     found = bpy.data.materials.get(name)
     if found is None or found.get('rocks_key') != key:
         found = next((m for m in bpy.data.materials if m.name.startswith(name) and m.get('rocks_key') == key), found)
@@ -681,13 +760,19 @@ def material(kind='boulder', surface=None, moss=0.0, wet_feet=0.7, rain=0.3, rel
                 copy.cycles.displacement_method = 'BOTH'
     if wet_feet > 0:
         amount.name = amount.label = 'Wet feet'
-    if moss > 0:
+    if moss > 0 or lichen > 0:
         import moss as moss_tool
         before_moss = {n.name for n in copy.node_tree.nodes}
-        mossy = moss_tool.add(copy, amount=moss, foot=0.0, facing=(0.3, 0.9), scale=4.0, colour=colour)
+        if style == 'cushions':
+            # the stone under and round the real cushions green (it follows them), in its cracks, pale lichen on the rest
+            mossy = moss_tool.add(copy, amount=moss, foot=0.0, facing=(0.3, 0.9), scale=4.0, colour=colour, lichen=lichen,
+                                  hollows=0.8)
+        else:
+            mossy = moss_tool.add(copy, amount=moss, foot=0.0, facing=(0.3, 0.9), scale=4.0, colour=colour, lichen=lichen)
         bpy.data.materials.remove(copy)
         mossy.name = name
         copy = mossy
+    if moss > 0:
         # the moss tool's amount: the one clamped multiply it adds (named here, so a script can find it by its name)
         amount_node = next((n for n in copy.node_tree.nodes if n.name not in before_moss and n.type == 'MATH'
                             and n.operation == 'MULTIPLY' and n.use_clamp and not n.inputs[1].is_linked
@@ -700,6 +785,12 @@ def material(kind='boulder', surface=None, moss=0.0, wet_feet=0.7, rain=0.3, rel
             raise RuntimeError('the moss tool\'s amount was not found, so each rock cannot have its own moss')
     if water is not None:
         _water_line(copy, water, water_band)
+    if moss > 0 and style == 'cushions':
+        # what the shapes made with this material grow on their tops: real cushions with a pile of tufts (moss.on_mesh)
+        copy['rocks_cushions'] = json.dumps({'amount': moss, 'thickness': moss_thickness, 'pile': moss_pile,
+                                             'colour': list(colour), 'wet': max(0.3, rain), 'relief': relief,
+                                             'spread': list(spread)})
+    copy['rocks_relief'] = relief
     copy['rocks_key'] = key
     copy['store_what'] = 'rocks (%s) in %s' % (kind, source.name)
     return copy
@@ -908,7 +999,8 @@ def _collection(collection):
 
 def scatter(ground, kind='boulder', count=30, sizes=(0.15, 0.9), fall=2.0, area=None, spacing=1.0, gather=0.0,
             buried=None, tilt=None, shapes=8, surface=None, moss=0.0, wet_feet=0.7, rain=0.3, grey=None, tint=None, seed=0,
-            collection=None, moss_colour=None, moss_spread=None, normal_strength=None, water=None, water_band=0.07):
+            collection=None, moss_colour=None, moss_spread=None, normal_strength=None, water=None, water_band=0.07,
+            moss_style=None, moss_thickness=0.03, moss_pile=1.0, lichen=None):
     """Rocks of one kind over the ground, within the area, by Blender's particle system (see the note at the top).
     Returns {'objects': the sheets (one per size band), 'placed': how many, 'asked': count, 'bands': [(from, to, laid)],
     'spots': [(x, y, z, size_from, size_to)], 'material': the material, 'shapes': the shape collections}."""
@@ -946,7 +1038,8 @@ def scatter(ground, kind='boulder', count=30, sizes=(0.15, 0.9), fall=2.0, area=
     cell = max(0.82 * bands[-1][1] * float(spacing), 1e-3)     # a grid of cells as wide as the biggest rocks' reach, twice
     grid = {}
     material_made = material(kind, surface, moss, wet_feet, rain, 0.0, grey, tint, moss_colour=moss_colour,
-                             moss_spread=moss_spread, normal_strength=normal_strength, water=water, water_band=water_band)
+                             moss_spread=moss_spread, normal_strength=normal_strength, water=water, water_band=water_band,
+                             moss_style=moss_style, moss_thickness=moss_thickness, moss_pile=moss_pile, lichen=lichen)
     collection = _collection(collection)
     result = {'objects': [], 'placed': 0, 'asked': count, 'bands': [], 'spots': [], 'material': material_made, 'shapes': []}
     reached = []                                             # the triangles the area reaches, found when first needed
@@ -1076,7 +1169,8 @@ def _per_point(value, n, label):
 
 def place(points, kind='boulder', size=1.0, ground=None, turn=None, buried=None, tilt=None, surface=None, moss=0.0,
           wet_feet=0.7, rain=0.3, relief=0.04, detail=2, grey=None, tint=None, seed=0, collection=None, moss_colour=None,
-          moss_spread=None, normal_strength=None, water=None, water_band=0.07):
+          moss_spread=None, normal_strength=None, water=None, water_band=0.07, moss_style=None, moss_thickness=0.03,
+          moss_pile=1.0, lichen=None):
     """Single rocks at the points you give (see the note at the top). Returns the rock objects, in the points' order."""
     spec = _check_kind(kind)
     points = [tuple(float(c) for c in p) for p in points]
@@ -1095,7 +1189,8 @@ def place(points, kind='boulder', size=1.0, ground=None, turn=None, buried=None,
         raise ValueError('detail is 1, 2 or 3, not %r' % (detail,))
     surface_ground = _Ground(ground) if ground is not None else None
     made_material = material(kind, surface, moss, wet_feet, rain, relief, grey, tint, moss_colour=moss_colour,
-                             moss_spread=moss_spread, normal_strength=normal_strength, water=water, water_band=water_band)
+                             moss_spread=moss_spread, normal_strength=normal_strength, water=water, water_band=water_band,
+                             moss_style=moss_style, moss_thickness=moss_thickness, moss_pile=moss_pile, lichen=lichen)
     collection = _collection(collection)
     pick = random.Random(31337 + 101 * int(seed) + ORDER.index(kind))
     rocks_made = []
@@ -1112,10 +1207,19 @@ def place(points, kind='boulder', size=1.0, ground=None, turn=None, buried=None,
         mesh = rock_mesh(kind, rock_seed, float(rock_size), buried, 64 if rock_size >= 0.5 else 44,
                          name='rock %s %d' % (kind, rock_seed))
         mesh.materials.append(made_material)
+        cushioned = bool(made_material.get('rocks_cushions'))
+        if cushioned:
+            _grow_cushions(None, mesh, made_material, rock_seed, float(rock_size))
         layer = mesh.uv_layers.new(name='UVMap')
         layer.data.foreach_set('uv', [c for _ in range(len(mesh.loops)) for c in (wet, 0.5)])
         obj = bpy.data.objects.new('rock %s %d' % (kind, number), mesh)
         collection.objects.link(obj)
+        if cushioned:
+            obj.vertex_groups.new(name='moss pile')
+            c = json.loads(made_material['rocks_cushions'])
+            if c['pile'] > 0:
+                import moss as moss_tool
+                moss_tool.pile(obj, None, c['pile'], 0.015, c['colour'], c['wet'], rock_seed)
         angle = math.radians(float(rock_turn)) if rock_turn is not None else pick.uniform(0.0, 2.0 * math.pi)
         lean = Vector((pick.gauss(0.0, 1.0), pick.gauss(0.0, 1.0), 0.0)) * tilt * 0.6
         upright = (up + lean).normalized()
@@ -1156,7 +1260,8 @@ def _per_spot_facing(facing, n):
 
 def at_spots(spots, kind='boulder', size=1.0, top=None, ground=None, facing=None, buried=None, tilt=None, surface=None,
              moss=0.0, wet_feet=0.7, rain=0.3, relief=0.0, detail=2, grey=None, tint=None, moss_colour=None,
-             moss_spread=None, normal_strength=None, water=None, water_band=0.07, seed=0, collection=None, name=None):
+             moss_spread=None, normal_strength=None, water=None, water_band=0.07, seed=0, collection=None, name=None,
+             moss_style=None, moss_thickness=0.03, moss_pile=1.0, lichen=None):
     """Rocks of one kind on spots you give, each a particle copy of its own rule-made shape made at its own size (one
     tiny face on a hidden sheet per rock, and a particle system that copies the shape onto it): rocks with a set place
     (a lantern's seat, a basin's front stone, the rocks a picture puts somewhere) laid by the particle system like the
@@ -1211,15 +1316,18 @@ def at_spots(spots, kind='boulder', size=1.0, top=None, ground=None, facing=None
         if key not in materials:
             materials[key] = material(kind, surface, moss, wet_feet, rain, bumps, grey, tint, moss_colour=moss_colour,
                                       moss_spread=moss_spread, normal_strength=normal_strength, water=water,
-                                      water_band=water_band)
+                                      water_band=water_band, moss_style=moss_style, moss_thickness=moss_thickness,
+                                      moss_pile=moss_pile, lichen=lichen)
         made_material = materials[key]
         shape_detail = 64 if across >= 0.6 else (44 if across >= 0.25 else 30)
         shapes = _shapes(kind, [int(seed) * 1000 + number], across, buried, made_material, shape_detail)
         shape = shapes.objects[0]
-        if bumps > 0 and not shape.modifiers:
+        finer = shape.modifiers.get('finer for the bumps')
+        if bumps > 0 and finer is None:
             finer = shape.modifiers.new('finer for the bumps', 'SUBSURF')      # real bumps need a finer skin
             finer.subdivision_type = 'SIMPLE'
             finer.levels = 0
+        if finer is not None:
             finer.render_levels = int(detail)
         shape_top = max(v.co.z for v in shape.data.vertices)                   # its highest point above its soil line
         soil = z
@@ -1289,6 +1397,10 @@ def main(argv=None):
     parser.add_argument('--normal-strength', type=float, help="the photograph's relief, 0 plain to 2; default the set's own (1)")
     parser.add_argument('--water', type=float, help="the water's height, for a dark wet water line on rocks standing in it; default none")
     parser.add_argument('--water-band', type=float, default=0.07, help='how high the wet band climbs above the water, metres; default 0.07')
+    parser.add_argument('--moss-style', choices=MOSS_STYLES, help="'cushions' real moss with tufts (default) or 'paint' a colour only")
+    parser.add_argument('--moss-thickness', type=float, default=0.03, help="the cushions' depth, metres; default 0.03")
+    parser.add_argument('--moss-pile', type=float, default=1.0, help="the cushions' tufts, 0 none to 3; default 1")
+    parser.add_argument('--lichen', type=float, help='pale lichen on the bare stone, 0 to 1.5; default 0.6 with cushions')
     parser.add_argument('--seed', type=int, default=0, help='the same seed, the same rocks; default 0')
     args = parser.parse_args(argv)
     if not (args.blend and args.ground and args.out):
@@ -1298,7 +1410,8 @@ def main(argv=None):
     laid = scatter(ground, kind=args.kind, count=args.count, sizes=tuple(args.sizes), area=tuple(args.area) if args.area else None,
                    gather=args.gather, moss=args.moss, seed=args.seed, moss_colour=args.moss_colour,
                    moss_spread=args.moss_spread, normal_strength=args.normal_strength, water=args.water,
-                   water_band=args.water_band)
+                   water_band=args.water_band, moss_style=args.moss_style, moss_thickness=args.moss_thickness,
+                   moss_pile=args.moss_pile, lichen=args.lichen)
     print('rocks: %d of %d laid in %d size bands' % (laid['placed'], laid['asked'], len(laid['objects'])))
     bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.out))
 

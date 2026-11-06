@@ -48,6 +48,14 @@ def mesh_points(mesh):
     return co.reshape(-1, 3)
 
 
+def stone_points(mesh):
+    """The points of the rock itself, without its moss cushions (the faces of its first material)."""
+    index = numpy.zeros(len(mesh.polygons), dtype=numpy.int64)
+    mesh.polygons.foreach_get('material_index', index)
+    used = sorted({v for p, i in zip(mesh.polygons, index) if i == 0 for v in p.vertices})
+    return mesh_points(mesh)[used]
+
+
 def sharp_share(mesh):
     """The share of edges where the faces meet at more than 35 degrees (a broken stone's edges)."""
     import bmesh
@@ -229,7 +237,7 @@ def main():
     for obj, (x, y), size in zip(big, points, (1.4, 0.9, 0.6)):
         under = surface.under(x, y)
         check((obj.matrix_world.translation - Vector(under[0])).length < 0.01, '%s is not on the ground under its point' % obj.name)
-        span = mesh_points(obj.data).max(axis=0) - mesh_points(obj.data).min(axis=0)
+        span = stone_points(obj.data).max(axis=0) - stone_points(obj.data).min(axis=0)
         check(abs(max(span[0], span[1]) - size) < 0.02, '%s is %.2f m across, asked %.2f' % (obj.name, max(span[0], span[1]), size))
         subdivision = [m for m in obj.modifiers if m.type == 'SUBSURF']
         check(subdivision and subdivision[0].render_levels == 2 and subdivision[0].subdivision_type == 'SIMPLE',
@@ -259,7 +267,8 @@ def main():
 
     def copy_of(sheet):
         for instance in depsgraph.object_instances:
-            if instance.is_instance and instance.parent is not None and instance.parent.original.name == sheet.name:
+            if instance.is_instance and instance.parent is not None and instance.parent.original.name == sheet.name \
+                    and not instance.object.original.name.startswith('moss tuft'):         # the rock, not its moss's tufts
                 return instance.object.original, instance.matrix_world.copy()
         return None, None
     shapes_seen = set()
@@ -272,7 +281,7 @@ def main():
         position = matrix.translation
         check(abs(position.x - spots[k][0]) < 0.01 and abs(position.y - spots[k][1]) < 0.01, 'at_spots rock %d is not on its spot' % k)
         points = numpy.array([tuple(matrix @ Vector(p)) for p in mesh_points(shape.data)])
-        span = mesh_points(shape.data).max(axis=0) - mesh_points(shape.data).min(axis=0)
+        span = stone_points(shape.data).max(axis=0) - stone_points(shape.data).min(axis=0)
         check(abs(max(span[0], span[1]) - across[k]) < 0.02, 'at_spots rock %d is %.2f m across, asked %.2f' % (k, max(span[0], span[1]), across[k]))
         reached = set_rocks['spots'][k][4]
         check(abs(points[:, 2].max() - reached) < 0.04, 'at_spots rock %d tops at %.3f, it says %.3f' % (k, points[:, 2].max(), reached))

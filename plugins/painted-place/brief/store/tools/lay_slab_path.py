@@ -6,8 +6,10 @@ edges that wander and here and there a bite out of them, as split stone breaks. 
 and one or two shallow hollows; its edges are worn round; it is set a little in or out of level, tipped this way and
 that. After rain, water stands in the hollows of some slabs: each puddle lies inside its own slab, flat at a level a
 little under the stone round it, so the stone's own high parts stand out of it and its edge is as ragged as the stone;
-the water is clear, as rain water on stone is: the wet stone shows through it a little darker and the sky is mirrored
-on it more strongly than plain water would show it (so it never reads as a black hole), with a faint ripple. The joints are filled
+the water is semi transparent, as rain water on stone is: looking straight down, half of the wet stone under it shows
+through, darker, and the other half is the water's mirror (more mirror at a glancing look, fading out towards each
+pool's shallow edge), so it reads neither as a black hole nor as a liquid mirror, with a faint ripple; the lamps light
+the stone under it (`see_through=0` gives the old clear water, which mirrors far less). The joints are filled
 with gravel and moss from the photographed sets, a little below the slabs' tops. Each slab shows its own part of a
 photographed dark stone (the number 'pp_piece') and is a little lighter or darker than the next. Nothing here chooses
 where the path goes: the line, its width and how much water stands on it are yours.
@@ -38,6 +40,10 @@ Options, with their defaults:
     water        0.35      the share of the slabs that hold water in their hollows, 0 dry to 1 every slab that can
     mirror       0.5       how strongly the water mirrors the sky, 0 plain puddle water to 1 a strong mirror (water seen
                            from above at dusk mirrors only a little of the sky and reads as black: 0.5 to 0.8 shows it)
+    see_through  0.5       how much of the stone under the water shows through it looking straight down; the rest is
+                           the water's mirror (`mirror` sets how strong): 0.5 for the store's water, 0 for a water material
+                           of your own; 0 with the store's water gives the old clear water ('• clear on stone'), which
+                           shows the stone by bending the light and mirrors far less
     rough        1.0       how rough the tops are and how broken the outlines: 0 sawn flags, 1 split stone, up to 2
     lean         1.0       how far each slab is set out of level (tipped, raised or sunk a few millimetres); 0 laid true
     wear         1.0       how round the slabs' edges are worn; 0 sharp
@@ -51,8 +57,9 @@ Options, with their defaults:
     seed         0         the same seed lays the same path
     material     'SURFACE • dark_rock_02'   the slabs (photographed; each slab its own part by 'pp_piece')
     joint_material  'SURFACE • gravel_road' the joints' bed (photographed; moss is laid over it as `joints` asks)
-    water_material  'MADE • puddle water'   the water: the store's puddle water is given as a clear copy on the stone,
-                           '<material> • clear on stone 0.50'; another material is used as it is (mirror raised by `mirror`)
+    water_material  'MADE • puddle water'   the water: the store's puddle water is given as a see-through copy,
+                           '<material> • mirror 0.50 • see-through 0.50'; another material is used as it is (mirror raised
+                           by `mirror`; made see-through only if you give see_through)
     collection   none      where the objects go (a new collection 'lay_slab_path')
 
 What it makes: 'slab path' (obj['slabs'] the count, obj['wet_slabs'] how many hold water), 'slab path water' (when any
@@ -115,6 +122,11 @@ TOOL = {
         'ground, rise': 'a mesh object the slabs stand on, following its slope, their tops `rise` above it (none, 0.04 m)',
         'smooth': 'a smooth curve through your points; a curve object keeps its own shape (True); False: straight runs',
         'seed': 'the same seed lays the same path (0)',
+        'see_through': "how much of the stone under the water shows through it, looking straight down; the rest is the "
+                       "water's mirror, more of it at a glancing look, fading out at each pool's shallow edge; the lamps "
+                       "still light the stone under it (0.5 for the store's water, 0 for a water material of your own; 0 "
+                       "with the store's water: the old clear water, '<material> • clear on stone 0.50', which shows the "
+                       "stone by bending the light and mirrors far less)",
         'material, joint_material, water_material': "the slabs ('%s'), the joints' bed ('%s'), the water ('%s')" % (STONE, JOINT, WATER),
         'collection': "where the objects go (a new collection 'lay_slab_path')",
         'top_at(made, x, y)': "the stone's height at a point, or None off the slabs",
@@ -125,10 +137,19 @@ TOOL = {
               "and 787-810), after the owner's second picture (a wet path of rough dark slabs, water in their hollows), "
               "made into a tool: the slabs now follow a line or curve, their outlines are broken by knocked-off corners "
               "and bites instead of pulled grid corners, and the water is a flat sheet cut by the stone's own relief "
-              "(the builder's water was an oval laid on each slab)",
+              "(the builder's water was an oval laid on each slab). The see-through water (see_through, puddle.see_through) "
+              "from the garden builder's water pass ('/home/claude/build-57-garden/moss/render_final.py', "
+              "see_through_water(), lines 872-957), after the owner's words \"The pools of water on the pavement also "
+              "need to be semi transparent. Right now, it looks like a liquid mirror\": half mirror looking down, more at "
+              "a glance, each pool fading out towards its shallow edge, the stone under it lit (here the fade reads the "
+              "water's own 'shallow', its depth, instead of the builder's distance from each pool's middle)",
     'trap': "the line's z is the slabs' tops, not the ground: on your own ground give ground= (or the slabs float or sink); "
             "joints and water need store.prepare_for_render(scene) once before drawing; water mirrors the sky only where "
-            'the sky is in its mirror: under an eave it mirrors the eave and reads black (put the wet slabs out in the open)',
+            'the sky is in its mirror: under an eave it mirrors the eave and reads black (put the wet slabs out in the open); '
+            'the see-through water lets less bright sky into a close view looking down on the pools than a mirror would: a '
+            'close view whose warm light was a lamp mirrored in a pool gets darker (the garden builder raised its exposure '
+            'from 4.4 to 4.8); with see_through=0 the old clear water bends the light, and water that bends the light and '
+            'casts shadow leaves the stone under it unlit (caustics are off): the tool\'s water casts none',
 }
 
 
@@ -538,16 +559,25 @@ def _joint_copy(material, joints):
 
 # ------------------------------------------------------------------------------------------------ laying
 
+SEE_THROUGH = 0.5                    # the store's water on the slabs: half of the stone under it shows through, looking down
+
+
 def lay(line, width=1.2, slab=0.55, joint=0.035, water=0.35, mirror=0.5, rough=1.0, lean=1.0, wear=1.0, wet=0.7,
         joints='gravel and moss', shades=0.25, ground=None, rise=0.04, smooth=True, seed=0, material=STONE,
-        joint_material=JOINT, water_material=WATER, collection=None):
-    """Lay the path (see the note at the top). Returns {'slabs': obj, 'water': obj or None, 'bed': obj or None}."""
+        joint_material=JOINT, water_material=WATER, collection=None, see_through=None):
+    """Lay the path (see the note at the top). Returns {'slabs': obj, 'water': obj or None, 'bed': obj or None}.
+    `see_through` (0 to 1): how much of the stone under the water shows through it looking straight down, the rest the
+    water's mirror (puddle.see_through); None: 0.5 for the store's puddle water, 0 for a water material of your own;
+    0 with the store's water: the old clear water, which shows the stone by bending the light (clear_water)."""
     width, slab, joint = float(width), float(slab), float(joint)
     water, mirror, rough, lean, wear, wet, shades = (float(v) for v in (water, mirror, rough, lean, wear, wet, shades))
+    if see_through is None:
+        see_through = SEE_THROUGH if water_material == WATER else 0.0
+    see_through = float(see_through)
     if width < 0.3 or slab < 0.15:
         raise ValueError('width is at least 0.3 m and slab at least 0.15 m, not %r and %r' % (width, slab))
-    if not 0.0 <= water <= 1.0 or not 0.0 <= mirror <= 1.0:
-        raise ValueError('water and mirror are 0 to 1, not %r and %r' % (water, mirror))
+    if not 0.0 <= water <= 1.0 or not 0.0 <= mirror <= 1.0 or not 0.0 <= see_through <= 1.0:
+        raise ValueError('water, mirror and see_through are 0 to 1, not %r, %r and %r' % (water, mirror, see_through))
     if not 0.0 <= rough <= 2.0:
         raise ValueError('rough is 0 to 2, not %r' % (rough,))
     if not 0.0 <= shades <= 0.9:
@@ -598,7 +628,10 @@ def lay(line, width=1.2, slab=0.55, joint=0.035, water=0.35, mirror=0.5, rough=1
     stone = _rough_stones.shaded(_wet_copy(_material(material), wet), shades)
     made = {'slabs': slabs.make('slab path', stone, collection, ground_z)}
     water_mat = _material(water_material)
-    if water_material == WATER:                                       # the store's puddle water, made clear on the stone
+    if see_through > 0:                                               # half mirror, half the stone seen through it
+        import puddle
+        water_mat = puddle.see_through(puddle.strong_mirror(water_mat, mirror) if mirror > 0 else water_mat, see_through)
+    elif water_material == WATER:                                     # the old way: the store's water clear on the stone
         water_mat = clear_water(water_mat, mirror)
     elif mirror > 0:
         import puddle
@@ -663,6 +696,7 @@ def main():
                                      ('joint', 0.035, 'about how wide the joints are, metres'),
                                      ('water', 0.35, 'the share of the slabs holding water, 0 to 1'),
                                      ('mirror', 0.5, 'how strongly the water mirrors the sky, 0 to 1'),
+                                     ('see_through', 0.5, 'how much of the stone shows through the water looking down, 0 to 1 (0: the old clear water)'),
                                      ('rough', 1.0, 'how rough and broken, 0 to 2'), ('lean', 1.0, 'how far out of level'),
                                      ('wear', 1.0, 'how round the edges are worn'), ('wet', 0.7, 'how wet the stone is, 0 to 1'),
                                      ('shades', 0.25, 'how much one slab is lighter or darker than the next'),
@@ -688,7 +722,7 @@ def main():
     else:
         parser.error('give the line: --points, --points-json or --blend with --line')
     ground = bpy.data.objects.get(args.ground) if args.ground else None
-    made = lay(line, width=args.width, slab=args.slab, joint=args.joint, water=args.water, mirror=args.mirror, rough=args.rough,
+    made = lay(line, width=args.width, slab=args.slab, joint=args.joint, water=args.water, mirror=args.mirror, see_through=args.see_through, rough=args.rough,
                lean=args.lean, wear=args.wear, wet=args.wet, joints=args.joints, shades=args.shades, ground=ground, rise=args.rise,
                smooth=not args.straight, seed=args.seed)
     print('laid %d slabs, %d holding water' % (made['slabs']['slabs'], made['slabs']['wet_slabs']))

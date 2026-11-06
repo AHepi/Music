@@ -44,6 +44,12 @@ Options:
     no_ring         True: the wet film darkens the ground round the water without the broad glossy shine that draws a
                     pale ring round the water under a lamp (it wears a copy of its material, '<material> • no ring'),
                     and the water's clear rim is kept narrow (shallow_band 0.04 unless you give one); default False
+    see_through     how much of the stone or ground under the water shows through it, looking straight down: 0 the
+                    water as it always was; 0.5 half, the rest its mirror (more mirror at a glancing look, the mirror
+                    fading out at the shallow edge); the lamps still light what is under it. For a puddle on stone
+                    paving, which reads as a liquid mirror otherwise. The water wears a copy of its material,
+                    '<material> • see-through 0.50'; puddle.see_through(material, 0.5) makes one for water of your own
+                    (it reads 'shallow' for the edge, if your mesh has it); default 0
 
 The water writes the number 'shallow' on each point (0 in the deep middle, rising to 1 at the rim, also 1 where a bump
 rises to the surface); the film writes 'dry' (0 against the water and under it, rising to 1 at its outer edge). The two
@@ -91,10 +97,25 @@ TOOL = {
                   'plain water reads black: 0.5 to 0.8 shows the sky); default 0',
         'no_ring': 'True: the wet film darkens the ground round the water without the glossy shine that draws a pale ring '
                    'round it under a lamp, and the clear rim is kept narrow; default False',
+        'see_through': 'how much of the stone or ground under the water shows through it, looking straight down: 0 the '
+                       'water as it always was (dark, the ground showing only at its clear rim), 0.5 half (the rest its '
+                       'mirror, more mirror at a glancing look, fading out at its shallow edge; the lamps still light what '
+                       'is under it): for a puddle on stone paving, which otherwise reads as a liquid mirror; the water '
+                       "then wears a copy of its material, '<material> • see-through 0.50' (puddle.see_through(material, "
+                       'see) makes one for water of your own); default 0',
     },
     'materials': [WATER_MATERIAL, FILM_MATERIAL],
-    'source': 'plugins/painted-place/materials/lay_details.py: puddles; lay_shore.py: wet_ground (rebuilt: ragged outline, shallow rim, wet film)',
-    'trap': "the materials need the numbers this tool writes ('shallow', 'dry'): on your own mesh the water is deep all over",
+    'source': 'plugins/painted-place/materials/lay_details.py: puddles; lay_shore.py: wet_ground (rebuilt: ragged outline, shallow rim, wet film); '
+              "see_through from the garden builder's water pass ('/home/claude/build-57-garden/moss/render_final.py', "
+              "see_through_water(), lines 872-957, and the puddle on the path, lines 1920-1934), after the owner's words "
+              '"The pools of water on the pavement also need to be semi transparent. Right now, it looks like a liquid '
+              'mirror": its mix of the water with a see-through surface (half mirror looking down, a Fresnel share of '
+              'IOR 1.7 at a glance, the stone under it tinted 0.62, 0.60, 0.56), its fade towards each pool\'s edge '
+              "(here by the puddle's own 'shallow')",
+    'trap': "the materials need the numbers this tool writes ('shallow', 'dry'): on your own mesh the water is deep all over; "
+            'see-through water lets less bright sky into a close view than mirror water: a close view whose warm light '
+            'came from a lamp mirrored in the water gets darker (the garden builder raised that view\'s exposure from '
+            '4.4 to 4.8), so give the one puddle that mirrors a lamp less see_through',
 }
 
 def strong_mirror(material, mirror=0.6):
@@ -128,6 +149,73 @@ def strong_mirror(material, mirror=0.6):
                 elif not rough.links:
                     rough.default_value *= 1.0 - 0.6 * mirror
     return copy
+
+
+SEE_TINT = (0.62, 0.60, 0.56)      # the stone seen through the water: darker and a little warmer than the dry stone
+SEE_GLANCE = 1.7                   # how fast the mirror grows at a glancing look (a Fresnel IOR; water's own is 1.333)
+
+
+def see_through(material, see=0.5, glance=SEE_GLANCE, tint=SEE_TINT, edge=True):
+    """A copy of a water material made semi transparent, as the garden builder made its pools on the stone path (6
+    November 2026, after the owner's words "The pools of water on the pavement also need to be semi transparent. Right
+    now, it looks like a liquid mirror"): the water's own surface (its mirror) mixed with a see-through surface. Looking
+    straight down, `see` of what is under the water shows through (0.5: half) and the rest is the water's mirror; at a
+    glancing look the mirror grows towards all of it (a Fresnel share, IOR `glance`); with `edge`, the mirror fades out
+    where the water is shallow (the mesh number 'shallow', 1 at the edge), so no cut edge of mirror is left. The
+    see-through surface does not bend the light, so the lamps still light the stone under the water, which shows
+    through darker by `tint`. Named '<material> • see-through 0.50'; made once, then shared; see 0 returns the material
+    itself."""
+    material = store.material(material) if isinstance(material, str) else material
+    see = min(max(float(see), 0.0), 1.0)
+    if see <= 0:
+        return material
+    name = '%s • see-through %.2f' % (material.name, see)
+    existing = bpy.data.materials.get(name)
+    if existing is not None and existing.get('pp_see_through_of') == material.name:
+        return existing
+    copy = material.copy()
+    copy.name = name
+    copy['pp_see_through_of'] = material.name
+    copy['pp_see_through'] = see
+    nodes, links = copy.node_tree.nodes, copy.node_tree.links
+    out = next(n for n in nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output)
+    shader = out.inputs['Surface'].links[0].from_socket
+    clear = nodes.new('ShaderNodeBsdfTransparent')
+    clear.inputs['Color'].default_value = (*[float(c) for c in tint], 1.0)
+    fresnel = nodes.new('ShaderNodeFresnel')
+    fresnel.inputs['IOR'].default_value = float(glance)
+    share = nodes.new('ShaderNodeMath')               # the mirror's share: 1 - see looking down, rising at a glance
+    share.operation = 'MULTIPLY_ADD'
+    share.use_clamp = True
+    links.new(fresnel.outputs['Fac'], share.inputs[0])
+    share.inputs[1].default_value = see
+    share.inputs[2].default_value = 1.0 - see
+    fac = share.outputs[0]
+    if edge:
+        shallow = nodes.new('ShaderNodeAttribute')
+        shallow.attribute_type = 'GEOMETRY'
+        shallow.attribute_name = 'shallow'
+        fade = nodes.new('ShaderNodeMapRange')          # the mirror fades out over the shallow edge, keeping a little
+        fade.inputs['From Min'].default_value = 0.35
+        fade.inputs['From Max'].default_value = 1.0
+        fade.inputs['To Min'].default_value = 1.0
+        fade.inputs['To Max'].default_value = 0.12
+        links.new(shallow.outputs['Fac'], fade.inputs['Value'])
+        times = nodes.new('ShaderNodeMath')
+        times.operation = 'MULTIPLY'
+        links.new(fac, times.inputs[0])
+        links.new(fade.outputs['Result'], times.inputs[1])
+        fac = times.outputs[0]
+    mix = nodes.new('ShaderNodeMixShader')
+    mix.name = mix.label = 'See through'
+    links.new(fac, mix.inputs['Fac'])
+    links.new(clear.outputs['BSDF'], mix.inputs[1])
+    links.new(shader, mix.inputs[2])
+    links.new(mix.outputs['Shader'], out.inputs['Surface'])
+    return copy
+
+
+see_through_copy = see_through      # make()'s option of the same name hides the function inside make()
 
 
 def no_ring_film(material):
@@ -309,13 +397,19 @@ def _rings_mesh(name, rings_xyz, values, attribute, centre_point=None, centre_va
 
 def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=None, water_material=WATER_MATERIAL,
          film_material=FILM_MATERIAL, lift=0.004, film_reach=None, raggedness=1.0, shallow_band=None, level=None, film=True,
-         mirror=0.0, no_ring=False):
+         mirror=0.0, no_ring=False, see_through=0.0):
     """Make one puddle with its middle at `location`. Returns (water, film): the objects 'puddle water' and
     'puddle wet film' (film is None with film=False: the ground tool's soil wets its own ground round the water). With `level` (a height in metres), the water lies flat at that height instead of on the ground:
     for a puddle among setts, give level about 2 mm above the stones' tops (the setts object's 'top_height'): the water covers
     most stones and the highest stand out of it; a centimetre lower, water shows only in the joints. `mirror` (0 to 1) gives the
     water a copy of its material that mirrors the sky more strongly; `no_ring` gives the film a matte copy that draws no pale
-    ring round the water under a lamp and keeps the clear rim narrow. Both are off by default: the puddle is as it always was."""
+    ring round the water under a lamp and keeps the clear rim narrow. `see_through` (0 to 1) makes the water semi
+    transparent, the stone or ground under it showing through (0.5: half, looking straight down; more mirror at a
+    glancing look; the lamps still light what is under it): for a puddle on stone paving. All three are off by default:
+    the puddle is as it always was."""
+    see_through = float(see_through)
+    if not 0.0 <= see_through <= 1.0:
+        raise ValueError('see_through is 0 (the water as it always was) to 1 (all see-through), not %r' % (see_through,))
     length, width = float(size[0]), float(size[1])
     if length < width:
         length, width, turn = width, length, turn + 90.0
@@ -410,6 +504,8 @@ def make(location, size=(1.2, 1.0), turn=0.0, ground=None, seed=0, collection=No
     made = []
     if mirror and float(mirror) > 0:
         water_material = strong_mirror(water_material, mirror)
+    if see_through > 0:
+        water_material = see_through_copy(water_material, see_through)
     if no_ring:
         film_material = no_ring_film(film_material)
     sheets = ((water_mesh, water_material), (film_mesh, film_material)) if film else ((water_mesh, water_material),)
@@ -445,6 +541,7 @@ def main(argv=None):
     parser.add_argument('--raggedness', type=float, default=1.0, help='0 smooth, 1 normal, 2 very broken; default 1')
     parser.add_argument('--mirror', type=float, default=0.0, help='how strongly the water mirrors the sky, 0 (as always) to 1; default 0')
     parser.add_argument('--no-ring', action='store_true', help='a matte wet film and a narrow clear rim: no pale ring round the water under a lamp')
+    parser.add_argument('--see-through', type=float, default=0.0, help='how much of the ground under the water shows through, 0 (as always) to 1; 0.5 for a puddle on stone paving; default 0')
     parser.add_argument('--water-material', default=WATER_MATERIAL)
     parser.add_argument('--film-material', default=FILM_MATERIAL)
     parser.add_argument('--out', help='where to save the result (.blend)')
@@ -460,7 +557,7 @@ def main(argv=None):
     water, film = make(args.at, size=args.size, turn=args.turn, ground=ground, seed=args.seed, lift=args.lift, level=args.level,
                        shallow_band=args.shallow_band,
                        film_reach=args.film_reach, raggedness=args.raggedness, water_material=args.water_material,
-                       film_material=args.film_material, mirror=args.mirror, no_ring=args.no_ring)
+                       film_material=args.film_material, mirror=args.mirror, no_ring=args.no_ring, see_through=args.see_through)
     bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.out))
     print('made %s and %s, saved %s' % (water.name, film.name, args.out))
 

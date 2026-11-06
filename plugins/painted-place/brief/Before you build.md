@@ -30,7 +30,7 @@ Before the last picture, squint at it. The big shapes should be the place (huts,
 
 ## 5. Photographed surfaces wherever they can carry the detail
 
-The owner's words to every builder (decision 84): "Please remind the builders to use PBR wherever possible. It save in space and compute." PBR here means the photographed surface sets: their colour, roughness, normal and height pictures used together, as on the shelf (`surfaces/`) and in the store's `SURFACE`, `BRICK` and `ASHLAR` materials. Let the pictures carry fine relief, grain, cracks and wear; build a shape only where its outline or its shadow must show (a step, a lip, a sett's edge, a beam's end).
+The owner's words to every builder (decision 84): "Please remind the builders to use PBR wherever possible. It save in space and compute." And later (decision 91): "That should be the standard for textures." PBR here means the photographed surface sets: their colour, roughness, normal and height pictures used together, as on the shelf (`surfaces/`) and in the store's `SURFACE`, `BRICK` and `ASHLAR` materials. Let the pictures carry fine relief, grain, cracks and wear; build a shape only where its outline or its shadow must show (a step, a lip, a sett's edge, a beam's end).
 
 ## Traps
 

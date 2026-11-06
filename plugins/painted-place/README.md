@@ -122,6 +122,19 @@ when the owner asks for one particular change to a finished place; its first run
 garden (log 59). A trap for builders: a picture's sizes are hard to judge by eye (decision 88). Tests in
 `tests/test_store_rocks.py`.
 
+## What 0.14 added
+
+At the owner's word (decision 90), real moss: the `moss` tool grows soft rounded cushions with thickness on stone
+(thick on tops and in hollows, rising from nothing at frayed edges, creeping over rims), a fine pile of tufts laid by
+Blender's particle system, several greens, pale lichen on bare stone, and moss tufts, grass and ferns where rocks meet
+the soil (`moss.grow`, `moss.feet`, `moss.add(..., lichen=)`); the `rocks` tool's moss is now this real moss by default
+(`moss_style='paint'` for the old colour-only moss). A new photographed set on the shelf, `forest_leaves_02` (CC0, Poly
+Haven), lies under the moss. Mossy rocks draw about a fifth slower. Then, from the garden's moss builder: darker olive
+moss with a low sheen by default (it read as lime felt at dusk), `moss.grow` on open shapes, `moss.feet(..., keep_out=)`
+to keep ferns off a path; and, at the owner's word (decision 91), see-through water: the slab path's pools are half
+see-through by default, the stone under them showing, and `puddle.make(..., see_through=0.5)` for a puddle on stone.
+Tests in `tests/test_store_moss.py` and `tests/test_store_garden_ground.py`.
+
 ## What was retired, and why
 
 Until version 0.5 the plugin built the look itself: a **dressing** (`materials/apply_by_role.py` and the `lay_*.py` files) gave every object a material by the words in its name and laid details where its own survey of the camera's view said they belonged; a **look stage** (`stage/`) lit and drew the place; a **blind judge** (`look/judge.py`, `agents/blind-judge.md`) said what to fix. The owner judged a builder given only pictures and a page against builders using the dressing, and the pictures-only builders' places were better ("Pictures only is better"): the dressing's placement logic was faulty and its objects did not make sense (decision 62). The owner then asked to keep the good parts as things to pick from: the footpath as a tool on a line, the detailed things builders had made as parts, the textures as "pick and choose" shaders (decision 65). So in 0.6:

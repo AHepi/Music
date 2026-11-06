@@ -924,6 +924,33 @@ Only failures in doing the work belong here. Newest at the bottom.
      again compressed brought it back to 14.8 MB, and a check of all 115 materials against the rocks helper's record
      found only the corrected one changed.
 
+## 2026-11-06 (the mossy rocks; log 60)
+
+260. **The moss helper's fixes** (log 60, from its report): its first cushions covered whole rocks; then they read as
+     blocky foam slabs with stepped edges and the moss at the rocks' feet as cut-out squares (seen by the session at full
+     size; the cushions now rise from nothing and fray, and the feet get tufts on the soil); the moss had round holes like
+     a cheese; twigs in the moss photograph drew wrinkles; its warm-sky tries turned the scene orange; its first far view
+     showed the ground's edge; four faults its tests caught (moss painted over a mesh with no material, a rock-name check
+     broken by the word "cushions", rock sizes measured with their moss, its own too-strict tuft sizes).
+261. **The moss builder's fixes** (log 60, from its report): the fresh kit had already changed the earlier script, because
+     the store's rocks now grow real moss by default (bright lime cushions the owner never saw; its script now sets every
+     moss choice itself); the store's `moss.grow` grew almost nothing on the stone basin, which is open underneath (it
+     grows on a hidden closed copy); `moss.feet` put a fern on the path twice (ferns set by hand); the moss read as lime
+     felt at dusk; its first see-through pools read as pale dry patches; the close view's warm light fell under its band
+     once the pools stopped mirroring the bright sky (its exposure raised from 4.4 to 4.8, tried on the saved raw picture).
+262. **A change of a store default changed an earlier place drawn with a fresh kit** (log 60): making real moss the rocks
+     tool's default (decision 90) changed what the rocks pass's script draws today. The builder's brief already tells it to
+     draw the earlier script with the fresh kit first, which is how it was found.
+263. **The water and moss helper's fixes** (log 60, from its report): its new darker shadows between the moss's tufts did
+     not take at first, because the moss code already used the name `greens` for one of its own parts (its test caught it;
+     the card drawn with the fault was redrawn); its first picture of all the changes was too dark and too far to judge;
+     and it found that a trap the builder gave was only half true: water that bends the light leaves the stone under it
+     unlit only when the water also casts a shadow (0.09 against 0.43 without, dry stone 0.57).
+264. **The final full-size garden ran out of memory** (log 60, started 14:33): the 1080 x 1920 drawing of the mossy garden
+     was killed by the machine's memory limit at 5.3 GB of the 8 GB, while the water helper was drawing too, and wrote
+     no picture; the session found it only when it looked at 15:14. The owner then paused the work, so it was not drawn
+     again. Draw a full size with real moss alone on the machine, and check that it is still running.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.

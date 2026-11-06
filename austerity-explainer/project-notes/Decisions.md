@@ -1046,6 +1046,20 @@ overturn any of them in one line. Changes to the project must follow this file.
     Blender's particle system instead of being shaped and placed one by one as the builders did, and covered in better
     photographed rock surfaces (PBR, decision 84). Into the store first, so every builder has them; then a fresh builder
     redoes the garden's rocks with the plugin alone and your words.
+90. **The mossy rocks need far more detail** (6 November 2026, 11:39), your words, on the rocks pass: "Ok. I meant the
+    rocks with moss. Not the pavement lol. Those are still lacking a lot of detail". Read as: the rocks you meant are the
+    mossy ones (round the pond, by the basin, under the lantern), not the path; their moss reads as flat green paint on
+    smooth stone. Next: real moss with detail you can see (cushions with thickness, fine tufts catching the light, several
+    greens, moss in the cracks and spilling over edges, lichen on the bare stone, small plants at their feet), PBR where it
+    can carry the detail (decision 84); into the store first, then a fresh builder redoes the garden's mossy rocks with it.
+91. **Semi-transparent puddles, PBR the standard, one final render in Cycles** (6 November 2026, 13:31 to 13:33), your
+    words, in order: "Is Eevee rendering faster?" "The pools of water on the pavement also need to be semi transparent.
+    Right now, it looks like a liquid mirror" "Once done, do one final render in Cycles." "Also, are the rocks using PBR?
+    That should be the standard for textures." Read as: Eevee is not faster on this machine (no graphics card), so
+    pictures stay in Cycles; the path's puddles show the stone under the water as well as the sky, not a mirror; PBR is the
+    standard for every texture (decision 84, now in those words in `Before you build.md`); and once the moss and the
+    puddles are done, one final full-size picture drawn in Cycles. The moss builder took the puddles on too, with its
+    clock moved from 14:15 to 14:45.
 
 ## Traps
 

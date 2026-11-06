@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-11-06, 11:30, for the painted-place plugin (log 59); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-06, 15:20, for the painted-place plugin (log 60; paused at the owner's word); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -405,6 +405,11 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   rock in the garden with it (`procedural-textures/59 Garden rocks/`); the full size sits inside every band. **Plugin
   0.13.0:** the rocks tool (with the builder's hand work pulled in), a brief for one change the owner asks for, the size
   trap. All 240 test lines pass. Not yet: an independent check.
+- **Log 60 (decisions 90 and 91): real moss and see-through pools; paused.** The store grows real moss on rocks and
+  stone (cushions with thickness, tufts by the particle system, lichen, plants at the feet) and makes see-through water;
+  a fresh builder put both on the garden (`procedural-textures/60 Garden moss/`). **Plugin 0.14.0.** At 15:04 the owner
+  wrote "That's enough for now. When you can, pause everything": nothing is running. Waiting: the final full-size
+  render (the first was killed by the memory limit), the whole test run on the final state, a redrawn rocks card.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -417,10 +422,11 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your verdict on the garden's new rocks: the full size and the close view of the path (folder 59).
+- Your word to pick the work up again: then the final full-size render in Cycles and the whole test run (log 60).
+- Your verdict on the mossy rocks and the see-through pools (folder 60; the builder's 540 x 960 pictures).
 - Any Poliigon sets you want the builders to have: download them and attach them here (they stay on this machine).
 - Your generated leaf sheet, when you have one (about 12 separate fallen leaves from straight above on white), for the litter tool.
-- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.13.0: the plugin's rule asks for one; you stopped the
+- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.14.0: the plugin's rule asks for one; you stopped the
   last one, so it waits for your word.
 - Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line

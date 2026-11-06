@@ -9,7 +9,7 @@ measured from the ground, new canes when asked. The water lilies: only in the ar
 keep clear of, floating at the level given, flowers as asked. The far hills: their layers one behind the other, paler
 with distance, turned the way asked. The litter's maple leaves: lying on the slab path's tops or floating on its water,
 matte; a swept heap where asked; the litter tool's old kinds exactly as before. The puddle: exactly as before unless
-asked, a stronger mirror and a matte film on copies of its materials when asked. All of them answer --help.
+asked, a stronger mirror, a matte film and see-through water on copies of its materials when asked. All of them answer --help.
     python3 tests/test_store_garden_ground.py
 """
 import math
@@ -139,16 +139,39 @@ def test_slab_path():
     check(abs(bed_z.max() - (0.08 - lay_slab_path.BED_BELOW)) < 0.02 and bed_z.min() > 0.05 - lay_slab_path.BED_BELOW - 0.02,
           'the joints\' bed lies at %.3f to %.3f, not about %.2f under the slabs\' tops' % (bed_z.min(), bed_z.max(), lay_slab_path.BED_BELOW))
     water_material = made['water'].active_material
-    clear = next(n for n in water_material.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
-    check(water_material.name.startswith(lay_slab_path.WATER) and 'clear on stone' in water_material.name
-          and clear.inputs['Transmission Weight'].default_value == 1.0 and clear.inputs['IOR'].default_value > 1.6,
-          'the water is not clear with the stronger mirror: %s' % water_material.name)
+    mix = water_material.node_tree.nodes.get('See through')
+    principled = next(n for n in water_material.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
+    check(water_material.name == lay_slab_path.WATER + ' • mirror 0.50 • see-through 0.50' and mix is not None
+          and mix.inputs[1].links[0].from_node.type == 'BSDF_TRANSPARENT' and principled.inputs['IOR'].default_value > 1.6
+          and principled.inputs['Transmission Weight'].default_value == 0.0,
+          'the water is not see-through by default (half the stone under it, the stronger mirror): %s' % water_material.name)
+    fade = [n for n in water_material.node_tree.nodes if n.type == 'ATTRIBUTE' and n.attribute_name == 'shallow']
+    check(len(fade) >= 2, 'the see-through water does not fade out at the pools\' shallow edge')
+    # the old clear water, by see_through=0
+    old = lay_slab_path.lay(line, width=1.25, water=0.5, seed=3, see_through=0.0)
+    old_material = old['water'].active_material
+    clear = next(n for n in old_material.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
+    check(old_material.name.startswith(lay_slab_path.WATER) and 'clear on stone' in old_material.name
+          and clear.inputs['Transmission Weight'].default_value == 1.0 and clear.inputs['IOR'].default_value > 1.6
+          and old_material.node_tree.nodes.get('See through') is None,
+          'see_through=0 does not give the old clear water with the stronger mirror: %s' % old_material.name)
+    check(numpy.allclose(points(old['water']), points(water)), 'see_through changed the water\'s shape')
+    # a water material of your own is used as it was unless see_through is given
+    import puddle
+    own = bpy.data.materials.new('my own water')
+    own.use_nodes = True
+    mine = lay_slab_path.lay(line, width=1.25, water=0.5, seed=3, water_material=own, mirror=0.0)
+    check(mine['water'].active_material is own, 'a water material of your own was not used as it is: %s' % mine['water'].active_material.name)
+    mine = lay_slab_path.lay(line, width=1.25, water=0.5, seed=3, water_material=own, mirror=0.0, see_through=0.3)
+    check(mine['water'].active_material.name == 'my own water • see-through 0.30', 'see_through=0.3 did not make your own water see-through')
+    check(refused(lambda: lay_slab_path.lay(line, see_through=1.5)), 'see_through=1.5 was not refused')
     top = lay_slab_path.top_at(made, *numpy.mean(outlines[2][:, :2], axis=0))
     check(top is not None and abs(top - 0.05) < 0.04, 'top_at found %r on a slab, not about 0.05' % top)
     check(lay_slab_path.top_at(made, 5.0, 5.0) is None, 'top_at found a slab off the path')
     print('PASS lay_slab_path: %d slabs within the path\'s width, none overlapping, each its own part of the photograph; '
           'water in %d of them, each puddle inside its own slab with stone standing out of it, deep in the middle and '
-          'shallow at its edge, clear on the stone with the stronger mirror; the joints\' bed under the tops' % (slabs['slabs'], len(wet_slabs)))
+          'shallow at its edge, see-through (half the stone under it, the rest a stronger mirror, fading at the edge), '
+          'the old clear water by see_through=0, your own water as it is; the joints\' bed under the tops' % (slabs['slabs'], len(wet_slabs)))
     # water asked for: none, every slab that can
     dry = lay_slab_path.lay(line, water=0.0, seed=3, joints='none')
     check(dry['water'] is None and dry['bed'] is None and dry['slabs']['wet_slabs'] == 0, 'water=0 and joints=none still made water or a bed')
@@ -346,8 +369,21 @@ def test_puddle():
           and not film_bsdf.inputs['Roughness'].links, 'no_ring did not give the film a matte copy')
     shallow = numbers(strong, 'shallow')
     check((shallow > 0.99).mean() < 0.35, 'no_ring did not keep the clear rim narrow')
-    print('PASS puddle: exactly as before unless asked; mirror and no_ring give copies of its materials (a stronger mirror, '
-          'a matte film, a narrow clear rim) and leave the store\'s own as they were')
+    # see_through: a copy of the water, half the stone under it showing through, the rest its mirror; same shape
+    clear_water, _ = puddle.make((2.0, 1.0, 0.0), size=(1.2, 0.8), turn=20, seed=2, see_through=0.5)
+    see_mat = clear_water.active_material
+    mix = see_mat.node_tree.nodes.get('See through')
+    check(see_mat.name == puddle.WATER_MATERIAL + ' • see-through 0.50' and mix is not None
+          and mix.inputs[1].links[0].from_node.type == 'BSDF_TRANSPARENT' and see_mat['pp_see_through'] == 0.5,
+          'see_through=0.5 did not give the water a see-through copy: %s' % see_mat.name)
+    check(same(fingerprint(_local(clear_water)), BEFORE['puddle flat water']), 'see_through changed the puddle\'s shape')
+    check(store_water.node_tree.nodes.get('See through') is None, 'see_through changed the store\'s own puddle water')
+    both, _ = puddle.make((4.0, 1.0, 0.0), seed=5, mirror=0.6, see_through=0.4)
+    check(both.active_material.name == puddle.WATER_MATERIAL + ' • mirror 0.60 • see-through 0.40', 'mirror and see_through together: %s' % both.active_material.name)
+    check(puddle.see_through(puddle.WATER_MATERIAL, 0.0) is store_water, 'see_through 0 did not leave the water as it was')
+    check(refused(lambda: puddle.make((0, 0, 0), see_through=1.5)), 'see_through=1.5 was not refused')
+    print('PASS puddle: exactly as before unless asked; mirror, no_ring and see_through give copies of its materials (a stronger mirror, '
+          'a matte film, a narrow clear rim, water half see-through) and leave the store\'s own as they were')
 
 
 def _local(obj):
