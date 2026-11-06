@@ -896,6 +896,34 @@ Only failures in doing the work belong here. Newest at the bottom.
      sent to the owner had it); the dome stood 4.6 cm under the ground; a shape the caller gives was added to its
      collection twice (an error); its first garden picture was too dark, the lantern facing away.
 
+## 2026-11-06 (the rocks; log 59)
+
+255. **The rocks helper's fixes** (log 59, from its report): it first dug its test pond 5 m from where it meant, because
+     the ground tool moves its sheet into place (it now uses world positions); the gravel drew as moss, because the
+     ground kept the ground tool's material in its first slot; the card's floor showed through dips in its patch; its
+     first light measured outside the bands (brightness 0.10, warm 49%); an unknown surface name crashed instead of being
+     refused; a hard dark seam crossed its boulders, because the store's per-piece picture turn turns about whichever way
+     a face looks most, which keeps changing round a rock (rocks now only shift their part of the picture); and, after
+     the session's notes on its first pair, it set more rocks along the bank, deeper, greyer and mossier.
+256. **Blender's particle system could not do three things the rocks needed** (log 59, from the rocks helper's report):
+     keep rocks apart (the tool picks each spot itself and gives the particle system one tiny hidden face per spot), make
+     big rocks fewer than small ones (one particle system per size group), and give copies their own bumps (big rocks
+     near the eye are set one by one with `rocks.place`).
+257. **The rocks builder's fixes** (log 59, from its report): its own check against rocks floating on land pulled the
+     pond's rocks down to its bottom and left the stone lantern floating (the check now applies on land only); the
+     scatter's area, wider than the earlier gaps, put a big boulder in the near shore the last pass had opened; most bank
+     rocks were too small to see from the camera; the tool's flat stones, in a dark smooth sea rock, drew the basin's
+     front stone as a black patch in shade (every rock now wears the lichen rock); the moss read grey-olive; its first try
+     at varying the moss rock by rock found the setting by its number and changed the wet feet's instead (caught before it
+     drew); varying the moss thinned the basin's too.
+258. **The second rocks helper's fixes** (log 59, from its report): its first test picture was too far and too dark to
+     judge; one rock's shadow fell on the other in a side-light test; one new test check looked for a setting by the wrong
+     kind of name; the tool's own example asked a 0.7 m flat stone to reach 0.42 m, which it cannot without floating.
+259. **The session saved the materials file uncompressed** (log 59, 11:11): correcting one material's description, a
+     plain save doubled `Materials.blend` from 14.8 to 28.4 MB, because the file had been saved compressed; saving it
+     again compressed brought it back to 14.8 MB, and a check of all 115 materials against the rocks helper's record
+     found only the corrected one changed.
+
 ## Traps
 
 - Check for shadows with the lamp alone: a scene can look fine while casting no shadows at all.

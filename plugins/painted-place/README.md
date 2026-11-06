@@ -110,6 +110,18 @@ four PBR pictures with its height as real bumps: the baked azalea reads as the b
 faster, but saves file space only with small pictures. Tests in `tests/test_store_garden_closer.py`,
 `tests/test_store_sky_hills.py` and `tests/test_store_bake.py`.
 
+## What 0.13 added
+
+At the owner's word (decision 89), a `rocks` tool: rock shapes made by rules (broken along a few faces, rounded by
+weather, pitted, each its own from its seed) in four kinds (weathered boulders, broken angular stone, flat stones, smooth
+river stones), scattered by Blender's particle system over a ground you give, big ones fewer, sunk into the soil, kept
+apart, or set on spots you give; covered in three new photographed rock sets on the shelf (`lichen_rock`, `rock_wall_02`,
+`seaside_rock`, CC0 from Poly Haven), each rock its own part of the photograph, greyed, wet at the feet, moss on top, a wet
+band at the water's line. A new brief, `brief/A change the owner asks for.md` (the skill's step 7c), for one more builder
+when the owner asks for one particular change to a finished place; its first run redid every rock in the Japanese
+garden (log 59). A trap for builders: a picture's sizes are hard to judge by eye (decision 88). Tests in
+`tests/test_store_rocks.py`.
+
 ## What was retired, and why
 
 Until version 0.5 the plugin built the look itself: a **dressing** (`materials/apply_by_role.py` and the `lay_*.py` files) gave every object a material by the words in its name and laid details where its own survey of the camera's view said they belonged; a **look stage** (`stage/`) lit and drew the place; a **blind judge** (`look/judge.py`, `agents/blind-judge.md`) said what to fix. The owner judged a builder given only pictures and a page against builders using the dressing, and the pictures-only builders' places were better ("Pictures only is better"): the dressing's placement logic was faulty and its objects did not make sense (decision 62). The owner then asked to keep the good parts as things to pick from: the footpath as a tool on a line, the detailed things builders had made as parts, the textures as "pick and choose" shaders (decision 65). So in 0.6:

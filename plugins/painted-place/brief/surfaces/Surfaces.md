@@ -2,7 +2,7 @@
 
 What this folder is: a shelf of photographed surfaces a builder may use, free (Poly Haven, CC0, public domain; the authors are in `manifest.json`). Each set has a colour picture (`diff`), a roughness picture (`rough`: white is rough, black is glossy) and a height picture (`disp`: white is high), all repeating without a seam; every set also has a normal picture (`nor_gl`: which way each tiny bit of the surface faces; the soils' since log 53, the rest since log 54), and the store's `SURFACE` materials use all four. `size_m` in the manifest is the real size one copy of the picture covers, so a 2 m brick picture laid on a 6 m wall repeats three times.
 
-The last five sets (decision 80) were chosen for the town street made photographed: which material is meant for setts, flags, kerbs, bricks, blocks and mortar is in `store/materials/Photographed.md`, and the whole bricks and blocks found in the wall photographs are in `store/materials/atlas/`.
+The last three sets (`lichen_rock`, `seaside_rock`, `rock_wall_02`, 6 November 2026) were chosen for the store's rocks tool: garden boulders and flat stones, river stones, broken stone; their height pictures are at 2K. The five sets before them (decision 80) were chosen for the town street made photographed: which material is meant for setts, flags, kerbs, bricks, blocks and mortar is in `store/materials/Photographed.md`, and the whole bricks and blocks found in the wall photographs are in `store/materials/atlas/`.
 
 Using one is the builder's choice; nothing here says where a surface goes. The pictures carry their own wear, but the wear of the place (where water ran, what hands rubbed, what the setting did) is still the builder's to add on top.
 
@@ -39,6 +39,9 @@ Using one is the builder's choice; nothing here says where a surface goes. The p
 | `rough_plasterbrick_05/` | grey gritty lime render with no joints: for mortar in the joints of bricks and blocks | 1.50 x 1.50 m | rough_plasterbrick_05_diff_2k.jpg, rough_plasterbrick_05_rough_2k.jpg, rough_plasterbrick_05_disp_2k.jpg, rough_plasterbrick_05_nor_gl_2k.jpg |
 | `sandstone_blocks_05/` | a wall of honey sandstone blocks in courses, their faces rough-tooled: the stone-block atlas (ASHLAR) | 3.00 x 3.00 m | sandstone_blocks_05_diff_2k.jpg, sandstone_blocks_05_rough_2k.jpg, sandstone_blocks_05_disp_2k.jpg, sandstone_blocks_05_nor_gl_2k.jpg |
 | `brick_wall_10/` | dark sooty brick in stretcher bond, pale mortar: the dark brick atlas (BRICK) | 1.90 x 1.90 m | brick_wall_10_diff_2k.jpg, brick_wall_10_rough_2k.jpg, brick_wall_10_disp_2k.jpg, brick_wall_10_nor_gl_2k.jpg |
+| `lichen_rock/` | dark grey weathered rock with pale lichen and fine cracks: for old weathered boulders (the rocks tool) | 2.00 x 2.00 m | lichen_rock_diff_2k.jpg, lichen_rock_rough_2k.jpg, lichen_rock_disp_2k.jpg, lichen_rock_nor_gl_2k.jpg |
+| `seaside_rock/` | dark grey fine-grained rock worn smooth by water: for river stones (the rocks tool; its flat stones wear lichen_rock, as this drew black in shade) | 2.00 x 2.00 m | seaside_rock_diff_2k.jpg, seaside_rock_rough_2k.jpg, seaside_rock_disp_2k.jpg, seaside_rock_nor_gl_2k.jpg |
+| `rock_wall_02/` | grey-brown natural rock face broken into small facets: for broken angular stone (the rocks tool) | 2.00 x 2.00 m | rock_wall_02_diff_2k.jpg, rock_wall_02_rough_2k.jpg, rock_wall_02_disp_2k.jpg, rock_wall_02_nor_gl_2k.jpg |
 
 ## Traps
 

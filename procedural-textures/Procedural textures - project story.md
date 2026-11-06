@@ -164,6 +164,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   The store gained the azalea, flowering hedges, the low sun, the mist's own light, true-height hills and lantern
   options; and a tool that bakes any detailed part into four PBR pictures on a simple dome, which reads as the built
   azalea from about 3 m on.
+- **The garden's rocks, made by rules (log 59, 6 November, plugin 0.13.0):** a store tool now makes rocks from rules,
+  each its own shape, scatters them with Blender's particle system and covers them in photographed rock; a fresh
+  builder redid every rock in the garden with it (folder `59 Garden rocks/`).
 - **Three places by pictures-only builders (log 46):** a suburban townhouse, a desert mine and a military base, each by a fresh builder with
   only the five pictures, the look page and Blender (`46 Pictures-only builders - three places/`). All three finished early.
 - **Brushstrokes tried (log 45):** your next hint, the Blender Studio's Brushstroke Tools add-on. The tea house picture painted six ways
@@ -204,6 +207,9 @@ end goal, but it is required for this first step." Then: keep colour and fading,
   edge along its top. **Mangold:** a big orange-red root grown to feed cattle. **Skep:** a round woven willow basket.
   **Normal picture (log 53, used on every surface from log 54):** the photograph in a PBR set that says which way each tiny
   bit of the surface faces, so light catches its relief.
+- **Particle system (log 59):** Blender's way of copying one or a few shapes onto many places at once, each copy turned and
+  sized on its own, instead of making every copy by hand. **Made by rules (procedural):** a shape the computer builds from a
+  recipe and a number (its seed), so each number gives a different rock and none is shaped by hand.
 - **Bake, baked stand-in (log 58):** to bake is to photograph a detailed thing onto a simple shape: every leaf and flower of
   the bush is turned into four PBR pictures (colour, relief, shine, height) laid on a plain dome, which is then drawn instead
   of the thousands of leaves. The dome with its pictures is the baked stand-in. **Eevee, Cycles:** Blender's two ways of
@@ -1229,11 +1235,36 @@ end goal, but it is required for this first step." Then: keep colour and fading,
     tests. **Not done:** no independent check of
     0.7.0 to 0.12.0 (it waits for your word); the azalea part has no baked option of its own (a builder bakes it with
     the tool, in about 9 seconds at 256 pictures).
+59. **The garden's rocks made by rules and scattered by a particle system (6 November, 08:25 to 11:30).** Your words
+    on the full size (decisions 88 and 89): "I just realised you can't see perspective. The whole scene is about 7x
+    larger than the set. But that's ok. My bad. The next thing to work on is the rocks. They need to be procedurally
+    generated in a particle system. And better textured". The garden keeps its size; builders now get a trap telling
+    them to measure a picture's sizes from things of known size before laying a place out. **The rocks tool (08:27 to
+    09:28):** a helper made `rocks`: each rock's shape made by rules from its seed (a lump broken along a few faces,
+    edges rounded by weather, skin pitted), in four kinds (weathered boulders, broken stone, flat stones, river stones),
+    scattered by Blender's particle system over a ground (big ones fewer, sunk, tilted, kept apart), in three new
+    photographed rock sets on the shelf (a lichen rock, a broken rock face, a water-worn rock; free from Poly Haven).
+    The particle system could not keep rocks apart, make big ones fewer or give copies bumps of their own, so the tool
+    picks each spot itself, runs one particle system per size, and sets the few big rocks near the eye one by one. Its
+    test, the builders' blobs beside the new rocks in one pond corner, went to you as drawn; after the session's notes
+    (too few, reddish, little moss) the bank got more rocks, set deeper, greyer and mossier. **The garden's rocks
+    (09:30 to 10:39):** a fresh builder, given only the plugin, your words and a new brief for one change, `A change the
+    owner asks for.md`, found the tool and replaced every rock: 120 boulders along the pond and the channel, the
+    lantern's seat and mound, the single boulders, the basin's stones and 18 post pads, each a particle copy of its own
+    rule-made shape where the earlier rock stood; all in the lichen rock, each with its own amount of moss, a wet band
+    at the water, real bumps on the four nearest the eye; the stone basin in the same stone. The full size took 21
+    minutes and sits inside every band (brightness 0.22, warm 34%, blue 33%). **Into the plugin (0.13.0):** the rocks
+    tool and its shelf sets; then a second helper (10:47 to 11:10) pulled the builder's hand work into the tool: rocks
+    on spots you give, narrow banks filled, moss rock by rock, a brighter moss green, a water line, and flat stones in
+    the lichen rock (the sea rock drew black in shade). **Tested:** the full test run passes, all 240 test lines (230
+    before), among them the rocks test's ten groups. **Not done:** the stepping stones and path slabs stay as they were
+    (they are the path, not the rocks); the rocks are not as big as your picture's (the set keeps its size); no
+    independent check of 0.7.0 to 0.13.0 (it waits for your word).
 
 ## Next step
 
-Your verdict on the garden brought closer to your picture (folder `58 Garden closer to the picture/`: the full size and
-the close view of the path). Then, at your word, an independent check of the plugin (0.7.0 to 0.12.0) by a fresh checker;
+Your verdict on the garden's new rocks (folder `59 Garden rocks/`: the full size and the close view of the path).
+Then, at your word, an independent check of the plugin (0.7.0 to 0.13.0) by a fresh checker;
 Poliigon sets if you attach any; and your generated leaf sheet into the litter tool when it comes.
 
 ## Traps

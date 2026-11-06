@@ -1035,6 +1035,18 @@ overturn any of them in one line. Changes to the project must follow this file.
     the faster (it was Cycles: this machine has no graphics card). On the pictures, at 07:48: "If the right one in these
     new pictures is PCR, it looks great" (the right one was the PBR bush).
 
+88. **The garden's size left as it is** (6 November 2026, 08:25), your words: "I just realised you can't see
+    perspective. The whole scene is about 7x larger than the set. But that's ok. My bad." Read as: the place in your
+    picture is about seven times bigger than the set the builders made from it; the set stays as it is. The builders judge
+    a picture's sizes by eye and got them wrong, so the plugin now tells them to measure a picture's sizes from things of
+    known size before laying out (a trap in `Traps.md` and `Closer to the picture.md`).
+89. **The rocks next: made by rules, scattered by a particle system, better surfaces** (6 November 2026, 08:25), your
+    words: "The next thing to work on is the rocks. They need to be procedurally generated in a particle system. And better
+    textured". Read as: rocks whose shapes the computer makes from rules, each one different, scattered and sized by
+    Blender's particle system instead of being shaped and placed one by one as the builders did, and covered in better
+    photographed rock surfaces (PBR, decision 84). Into the store first, so every builder has them; then a fresh builder
+    redoes the garden's rocks with the plugin alone and your words.
+
 ## Traps
 
 - Your words in this file are quoted exactly, spelling included ("Clara Matteo", "a explainer").

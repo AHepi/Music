@@ -2,7 +2,7 @@
 
 What this file is: where the austerity explainer stands right now. Updated after every change.
 
-**As of 2026-11-06, 08:10, for the painted-place plugin (log 58); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
+**As of 2026-11-06, 11:30, for the painted-place plugin (log 59); 2026-10-21 for the lockout shot (logs 37 and 38); everything else as of 2026-10-15, afternoon.**
 Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Done
@@ -399,6 +399,12 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
   low sun, the mist's own light, hills that reach the height asked, and `bake_to_pbr`, which bakes a detailed part into
   four PBR pictures on a simple dome: the baked azalea reads as the built one from about 3 m on and draws faster, but is
   smaller only with small pictures; Eevee was slower than Cycles here. All 230 test lines pass. Not yet: an independent check.
+- **Log 59 (decisions 88 and 89): the garden's rocks made by rules.** The garden keeps its size ("But that's ok"); a
+  trap now tells builders to measure a picture's sizes. A store tool makes rocks from rules, each its own shape, scatters
+  them with Blender's particle system and covers them in three new photographed rock sets; a fresh builder redid every
+  rock in the garden with it (`procedural-textures/59 Garden rocks/`); the full size sits inside every band. **Plugin
+  0.13.0:** the rocks tool (with the builder's hand work pulled in), a brief for one change the owner asks for, the size
+  trap. All 240 test lines pass. Not yet: an independent check.
 
 ## Later (not started): the full set, an immersive camera, light that reacts to characters (decision 43)
 
@@ -411,10 +417,10 @@ Source for the story: Clara E. Mattei, *The Capital Order* (2022).
 
 ## Waiting on you
 
-- Your verdict on the garden brought closer to your picture: the full size and the close view of the path (folder 58).
+- Your verdict on the garden's new rocks: the full size and the close view of the path (folder 59).
 - Any Poliigon sets you want the builders to have: download them and attach them here (they stay on this machine).
 - Your generated leaf sheet, when you have one (about 12 separate fallen leaves from straight above on white), for the litter tool.
-- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.12.0: the plugin's rule asks for one; you stopped the
+- Whether to run the independent check (a fresh checker) on 0.7.0 to 0.13.0: the plugin's rule asks for one; you stopped the
   last one, so it waits for your word.
 - Your verdict on the chapel, first pass beside second pass (folder 51).
 - The wet lockout clip (log 37): watch it. If you want the dry street back, swap the wet pair of paintings for the dry pair (four renames) and change one look line
